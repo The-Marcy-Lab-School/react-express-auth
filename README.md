@@ -2,7 +2,12 @@
 
 This repo can be used to start a React+Express project fully equipped with Auth for user creation and login.
 
-# Setup
+**Table of Contents**
+
+- [Setup](#setup)
+- [Understanding the Code](#understanding-the-code)
+
+## Setup
 
 - Fork this template repo
 - Copy the `.env.template` and name it `.env`
@@ -13,6 +18,12 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - `npm run migrate` - runs `knex migrate:latest` which will run the provided migration file (look in the `src/db/migrations` folder)
   - `npm run seed` - runs `knex seed:run` which will run the provided seed file (look in `src/db/seeds` folder)
   - `npm run start` - runs `node src/index.js`, starting your server.
+
+The provided migration and seeds file will create a `users` table with `id`, `username`, and `password_hash` columns.
+
+- For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
+- If you need to update these columns, consider looking into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
+- If creating a new table, look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
 
 ## Running your application
 
@@ -30,7 +41,11 @@ If you would like to work on the frontend without having to constantly rebuild t
 
 If you look in the `vite.config.js` file, you will see that we've already configured the dev server to proxy any reqeusts made to `/api` to the back-end server.
 
-## Backend API
+---
+
+## Understanding the Code
+
+### Backend API
 
 The provided backend exposes the following API endpoints defined in `src/routes.js`:
 
@@ -44,7 +59,7 @@ The provided backend exposes the following API endpoints defined in `src/routes.
 | PATCH  | /users/:id | Update the username of a specific user by id       |
 | DELETE | /logout    | Log the current user out                           |
 
-## Middleware
+### Middleware
 
 In `src/server.js` and in `src/routes.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `src/middleware/` folder
 
@@ -89,23 +104,31 @@ Router.patch("/users/:id", checkAuthentication, userController.update);
 - `checkAuthentication` verifies that the current user is logged in before processing the request. (see `src/middleware/check-authentication`)
 - Here, we specify middleware for a singular route. Only logged-in users should be able to hit this endpoint.
 
-## Creating New Migrations & Seeds Files
+### Authentication & Authorization
 
-For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
+- **authenticated** means "We have confirmed this person is who they say they are"
 
-The provided migration and seeds file will create a `users` table with `id`, `username`, and `password_hash` columns. If you need to update these columns, consider looking into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
+- **authorized** means "This person is who they say they are AND they are allowed to be here."
 
-For creating a new table, look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
+So if we just want a user to be logged into the site to show content, we just check if they're _authenticated_.
 
-# Authentication vs Authorization
+However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
 
-Remember, `authenticated` means "We have confirmed this person is who they say they are" and `authorized` means "This person is who they say they are AND they are allowed to be here." So if we just want a user to be logged into the site to show content, we just check if they're `authenticated`. However, if they wanted to update their profile info, we'd need to make sure they were `authorized` to do that (e.g. the profile they're updating is their own).
+#### Cookies
 
-What's _super_ annoying is if a user has missing or malformed credentials (they are not authenticated)...the 401 error we throw says "unauthorized." And when a user _is_ authenticated but not authorized, the 403 you throw says "Forbidden." Sometimes the internet is just weird.
+In the context of computing and the internet, a **acookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
 
-### Cookie Session
+**Cookies contain information about your preferences and interactions with the website**, such as login information, shopping cart contents, or browsing history.
 
-While more limited in size (4kb is the absolute max amount of info), [cookie sessions](https://expressjs.com/en/resources/middleware/cookie-session.html) are much easier to understand.
+When you visit the website again, the server retrieves the information from the cookie to personalize your experience and provide you with relevant content.
+
+#### Storing User IDs on the Cookie for Authentication
+
+In our application, we are using cookies to store the `userId` of the currently logged-in user on the `req.session` object. This will allow us to implement **authentication** (confirm that the user is logged in).
+
+The flow of cookie data looks like this:
+
+![](readme-img/cookies-session-userid-diagram.svg)
 
 1. When a request comes in for signup/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
 2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
