@@ -44,6 +44,51 @@ The provided backend exposes the following API endpoints defined in `src/routes.
 | PATCH  | /users/:id | Update the username of a specific user by id       |
 | DELETE | /logout    | Log the current user out                           |
 
+## Middleware
+
+In `src/server.js` and in `src/routes.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `src/middleware/` folder
+
+**Express Middleware**
+
+```js
+app.use(express.json());
+```
+
+- We are telling Express to parse incoming data as JSON
+
+```js
+app.use(express.static(path.join(__dirname, "..", "public")));
+```
+
+- We are telling Express to serve static assets from the `public/` folder
+
+```js
+app.use("/api", routes);
+```
+
+- `routes` is the Router exported from `src/routes.js`. We are telling Express to send any requests starting with `/api` to that Router.
+
+**Custom Middlware**
+
+```js
+app.use(handleCookieSessions);
+```
+
+- `handleCookieSessions` adds a `req.session` object to every `req` coming into the server. (see `src/middleware/handle-cookie-sessions`)
+
+```js
+Router.use(addModels);
+```
+
+- `addModels` adds a `req.db` property to all incoming requests. This is an object containing the models imported from the `db/models/` folder (see `src/middleware/add-model`)
+
+```js
+Router.patch("/users/:id", checkAuthentication, userController.update);
+```
+
+- `checkAuthentication` verifies that the current user is logged in before processing the request. (see `src/middleware/check-authentication`)
+- Here, we specify middleware for a singular route. Only logged-in users should be able to hit this endpoint.
+
 ## Creating New Migrations & Seeds Files
 
 For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
