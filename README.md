@@ -14,10 +14,12 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 - Create a database called `react_auth_example` database (or update your new `.env` to whatever database you are using)
 - Double check that the `.env` variables are all correct (username, password, database name)
 - `npm run kickstart` (`npm run dev` or `npm start` afterwards). This will do the following commands all together:
+  - `cd frontend && npm i && cd ..` - installs front end dependencies
   - `npm i` - installs all dependencies
   - `npm run migrate` - runs `knex migrate:latest` which will run the provided migration file (look in the `src/db/migrations` folder)
   - `npm run seed` - runs `knex seed:run` which will run the provided seed file (look in `src/db/seeds` folder)
   - `npm run start` - runs `node src/index.js`, starting your server.
+- Then, open a new terminal and `cd` into `frontend`. Then run `npm run dev` to start your Vite development server.
 
 The provided migration and seeds file will create a `users` table with `id`, `username`, and `password_hash` columns.
 
