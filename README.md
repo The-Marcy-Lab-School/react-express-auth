@@ -1,160 +1,57 @@
-# A React+Express with Auth Template
+**RecyClique**
 
-This repo can be used to start a React+Express project fully equipped with Auth for user creation and login.
+**Mission Statement**
 
-**Table of Contents**
+Our mission is to connect and empower young individuals who are passionate about environmental preservation, by providing them with resources, information, and a platform to take action towards creating a cleaner and more sustainable world. Youth is our future, and we want our future to be clean and green. We believe young people have the motivation and the reason to fight for a more sustainable world, and what we want to deliver are resources to do just that.
 
-- [Setup](#setup)
-- [Understanding the Code](#understanding-the-code)
+**Who We Serve**
 
-## Setup
+We aim to serve youth, as well as all individuals between young adults and the working class, who are environmentally conscious, eco-friendly, or aspire to be more so who live in any of the five boroughs of NYC. Our target audience includes academics, activists, and anyone who wants to make a positive impact on the environment, while connecting with their community in a fun way.
 
-- Fork this template repo
-- Copy the `.env.template` and name it `.env`
-- Create a database called `react_auth_example` database (or update your new `.env` to whatever database you are using)
-- Double check that the `.env` variables are all correct (username, password, database name)
-- `npm run kickstart` (`npm run dev` or `npm start` afterwards). This will do the following commands all together:
-  - `cd frontend && npm i && cd ..` - installs front end dependencies
-  - `npm i` - installs all dependencies
-  - `npm run migrate` - runs `knex migrate:latest` which will run the provided migration file (look in the `src/db/migrations` folder)
-  - `npm run seed` - runs `knex seed:run` which will run the provided seed file (look in `src/db/seeds` folder)
-  - `npm run start` - runs `node src/index.js`, starting your server.
-- Then, open a new terminal and `cd` into `frontend`. Then run `npm run dev` to start your Vite development server.
+**Product Overview**
 
-The provided migration and seeds file will create a `users` table with `id`, `username`, and `password_hash` columns.
+Our application RecyClique is a platform dedicated to fostering environmental activism through recycling-focused events. It empowers users to create or join events centered around recycling like clothing and item exchange or clean-ups, where participants come together to make a positive impact on the environment. By organizing or participating in these events, users earn special badges that showcase their commitment to sustainability on their profile page. We plan on keeping our users engaged through the events that bring them together with their community by giving a virtual incentive to revisit us such as badges/medals or updates to their user experience.
 
-- For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
-- If you need to update these columns, consider looking into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
-- If creating a new table, look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
+**Summary**
 
-## Running your application
+The problem of plastic and carbon pollution, coupled with global warming, dirty oceans, tons of waste in landfills, and other crises, all impact life on Earth. This directly affects humans by compromising air quality, degrading ecosystems, and disrupting the delicate balance of our planet, leading to adverse health effects, loss of biodiversity, and increased vulnerability to extreme weather events. Recyclique is an application that aims to raise awareness about environmental issues and engage young individuals in the fight against rapid climate change. We do this by engaging people to work within their own communities. Some of the recycling-themed events our users can join are organized clean-ups, clothing swaps, furniture giveaways, and more. Through resource sharing, information dissemination, and community building, our app empowers users to make a difference and contribute to a cleaner and greener world. They are also able to browse the newest articles on global warming and the environment, as well as stay on top of the news in regards to what they can do to further their environmental activism.
 
-Run the `npm run dev` command from the root directory to start your Express server.
+**The Problem**
 
-#### Rebuilding the static assets
+The problem we aim to address is the widespread ignorance and lack of awareness regarding climate change, pollution, and the detrimental impact of industries such as the oil and gas, fish, meat, and dairy industries. This problem is prevalent in our communities and is often perpetuated by those who benefit from the public's lack of knowledge. New York is a city with millions of people, not enough space, and too much garbage. This is a problem that can only be solved by communities coming together to do their part in keeping our city clean. We want people to reduce, reuse, and recycle by making work fun. Young people often enjoy doing things with their friends and they can do this with the help of our platform by having a place where they can exchange items, get rid of trash, or join a group clean-up.
 
-The Express server is configured to serve static assets from the `public/` folder. Those static assets are the current **build** of the React frontend found in the `frontend/` folder. You can see the built version of the React frontend by going to the server's address: http://127.0.0.1:3000/
+**Solution**
 
-In order to update this built version of your React application, you will need to run the `npm run build` command _from the `frontend/` folder_.
+Recyclique is a platform that tackles the challenges of limited community engagement and lack of awareness around recycling and environmental issues. It provides a user-friendly interface where individuals can connect, organize, and participate in recycling events while earning badges as a testament to their dedication. With educational resources, a curated news feed, Recyclique empowers users to make a positive impact, fostering a sense of community and promoting sustainable practices for a brighter future.
 
-#### Working with a dev server
+**User Story**
 
-If you would like to work on the frontend without having to constantly rebuild the project, start a Vite dev server by running the `npm run dev` command _from the `frontend/` folder_.
+- As a new user, they should be able to access the landing page of the app.
+- As a new user, they should have the option to log in or sign up for an account.
+- Once logged in, they can maintain their dashboard that displays the events they have joined and created, including current and past events.
+- The app should provide a navbar with dedicated buttons for events, the news feed, and their dashboard.
+- Clicking on the events button should redirect them to the events page, where they can browse upcoming events, and have an option of creating one.
+- They should have the ability to create a new event by providing relevant details such as the event borough, type, date, time and location, as well as a 'Learn More' option that is a button and would describe the event in greater detail.
+- Users can choose the option of creating several different event types, as well as creating their own. Some would include a clothing swap meet up, furniture give-aways, organized park/beach clean ups, vintage flea markets, and others.
+- After creating or joining an event, the app should save this information in their personal dashboard for future reference.
+- They should be able to update or cancel their participation in an event.
+- When visiting the News Feed, they should have the option of filtering different media outlets and browsing various articles on the topic of environmentalism.
 
-If you look in the `vite.config.js` file, you will see that we've already configured the dev server to proxy any reqeusts made to `/api` to the back-end server.
+**Key Technical Challenges**
 
----
+- Data Integration: Integrating and aggregating data from various sources, such as recycling centers, environmental news platforms, and policy databases, to provide accurate and up-to-date information to users.
+- EPA Envirofacts API and OpenAQ API: These APIs can provide environmental data that could be relevant for your users. For example, they could be used to inform users about the air quality in the area where an event is taking place.
+- Earth911 Search API: This API provides information about recycling centers. This could potentially be used to help users find nearby recycling centers or to provide information about recycling options for different types of materials.
+- GNews API and ContextualWeb News API: These APIs can be used to provide news articles related to environmental topics. This aligns with your goal of informing users about environmental issues and what they can do to help.
+- OpenWeatherMap API: Weather data could be relevant for planning or participating in outdoor events, which seems to be a significant part of your app's functionality.
 
-## Understanding the Code
+**Extension Opportunities**
 
-### Backend API
+- Gamification: Introducing gamification elements, such as challenges, badges, and rewards, to incentivize users to engage more actively in environmental initiatives/events and recycling efforts.
+- Partnerships with Businesses: Collaborating with local businesses and organizations to promote sustainable practices, offer exclusive discounts on eco-friendly products, and facilitate product exchange programs within communities.
 
-The provided backend exposes the following API endpoints defined in `src/routes.js`:
+**Sources**
 
-| Method | Path       | Description                                        |
-| ------ | ---------- | -------------------------------------------------- |
-| GET    | /users     | Get the list of all users                          |
-| GET    | /me        | Get the current logged in user based on the cookie |
-| GET    | /users/:id | Get a specific user by id                          |
-| POST   | /users     | Create a new user                                  |
-| POST   | /login     | Log in to an existing user                         |
-| PATCH  | /users/:id | Update the username of a specific user by id       |
-| DELETE | /logout    | Log the current user out                           |
-
-### Middleware
-
-In `src/server.js` and in `src/routes.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `src/middleware/` folder
-
-**Express Middleware**
-
-```js
-app.use(express.json());
-```
-
-- We are telling Express to parse incoming data as JSON
-
-```js
-app.use(express.static(path.join(__dirname, "..", "public")));
-```
-
-- We are telling Express to serve static assets from the `public/` folder
-
-```js
-app.use("/api", routes);
-```
-
-- `routes` is the Router exported from `src/routes.js`. We are telling Express to send any requests starting with `/api` to that Router.
-
-**Custom Middlware**
-
-```js
-app.use(handleCookieSessions);
-```
-
-- `handleCookieSessions` adds a `req.session` object to every `req` coming into the server. (see `src/middleware/handle-cookie-sessions`)
-
-```js
-Router.use(addModels);
-```
-
-- `addModels` adds a `req.db` property to all incoming requests. This is an object containing the models imported from the `db/models/` folder (see `src/middleware/add-model`)
-
-```js
-Router.patch("/users/:id", checkAuthentication, userController.update);
-```
-
-- `checkAuthentication` verifies that the current user is logged in before processing the request. (see `src/middleware/check-authentication`)
-- Here, we specify middleware for a singular route. Only logged-in users should be able to hit this endpoint.
-
-### Authentication & Authorization
-
-- **authenticated** means "We have confirmed this person is who they say they are"
-
-- **authorized** means "This person is who they say they are AND they are allowed to be here."
-
-So if we just want a user to be logged into the site to show content, we just check if they're _authenticated_.
-
-However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
-
-#### Cookies
-
-In the context of computing and the internet, a **acookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
-
-**Cookies contain information about your preferences and interactions with the website**, such as login information, shopping cart contents, or browsing history.
-
-When you visit the website again, the server retrieves the information from the cookie to personalize your experience and provide you with relevant content.
-
-#### Storing User IDs on the Cookie for Authentication
-
-In our application, we are using cookies to store the `userId` of the currently logged-in user on the `req.session` object. This will allow us to implement **authentication** (confirm that the user is logged in).
-
-The flow of cookie data looks like this:
-
-![](readme-img/cookies-session-userid-diagram.svg)
-
-1. When a request comes in for signup/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
-2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
-3. When we get the `User` back from the model, we store the `user.id` in that cookie (`session.userId = user.id`)
-4. Now, that cookie lives with every request made by that user (`req.session`) and the client can check if it is logged in using the `/api/me` endpoint (see below).
-
-## /api/me
-
-In order to keep source of truth simple, we're going to track who is logged in with that `GET /api/me` convention.
-
-- Each time a page is loaded, we quickly hit `GET /api/me`.
-- If there is a logged in user, we'll see that in the json.
-
-The reason this route is used instead of `GET /api/users/:id` is two fold.
-
-1. We don't know the user's `id` on load, so how could we know which `id` to provide in the URL?
-2. `GET` REST routes are supposed to be **idempotent** (eye-dem-PO-tent) which means "don't change." `GET /api/me` will change depending on the auth cookie. So, this little example app also has a `GET /api/users/:id` route because `GET /api/me` is not a replacement for it. `GET /api/users:id` isn't used in the client yet but your projects might in the future if you ever want to find a particular user by id (or username)!
-
-# Advice
-
-## Do not trust the front end
-
-Remember, **DO NOT TRUST THE FRONTEND**. Validate everything on the server. Just because you block a form in the GUI doesn't mean a nefarious actor couldn't just pop open a console and make a `fetch` request. Also, the frontend can be buggy and mistakes can happen.
-
-## Be wary of errors
-
-Given time constraints, this project is handling barely any errors. The model is very brittle right now, the server and sql errors should be handled like we've done before. We're also only handling the most basic of flows and errors on the client. Things like handling attempted recreations of users who already exist or even wrong passwords can be handled much more delicately.
+- United Nations Environment Programme. (2020). Emissions Gap Report 2020 [Link](https://www.unep.org/emissions-gap-report-2020)
+- Environmental Protection Agency. (2020). Climate Change Indicators in the United States [Link](https://www.epa.gov/climate-indicators)
+- World Wildlife Fund. (2021). Plastic Pollution [Link](https://www.worldwildlife.org/threats/plastic-pollution)
