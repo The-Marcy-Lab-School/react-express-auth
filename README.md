@@ -1,4 +1,4 @@
-# A React+Express with Auth Template
+# A React+Express with Auth Template .
 
 This repo can be used to start a React+Express project fully equipped with Auth for user creation and login.
 
