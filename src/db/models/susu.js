@@ -23,17 +23,17 @@ class Susu{
             return null
         }
     }
-    // static async list(user_id){
-    //     try{
-    //         const {rows} = await knex.raw('SELECT * from Susu WHERE susu.id= ')
+    static async list(user_id){
+        try{
+            const {rows} = await knex.raw('SELECT * from Susu WHERE susu.id= ')
 
-    //         return rows.map((post) => new Posts(post));
-    //     }
-    //     catch(error){
-    //         console.log(error);
-    //         return null
-    //     }
-    // }
+            return rows.map((post) => new Posts(post));
+        }
+        catch(error){
+            console.log(error);
+            return null
+        }
+    }
     static async create(name, password_hash, owner, payment_amount, next_payment){
         try{
             const susu = await knex.raw('INSERT INTO susu (name, password_hash, owner, payment_amount, next_payment) VALUES(?,?,?,?,?) RETURNING *',[name, password_hash, owner, payment_amount, next_payment])
