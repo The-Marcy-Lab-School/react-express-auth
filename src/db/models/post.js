@@ -14,7 +14,7 @@ class Post {
         try {
           const query = `INSERT INTO post (user_id, img_url, description, header)
             VALUES (?, ?, ?, ?) RETURNING *`;
-          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description,header]);
+          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, header]);
           return post ? new Post(post) : null;
         } catch (err) {
           console.error(err);
