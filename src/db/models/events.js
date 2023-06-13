@@ -1,21 +1,22 @@
 const knex = require('../knex');
 
 class Events {
-    constructor({event_id, user_id, img_url, description, date, time }){
+    constructor({event_id, user_id, img_url, description, date, time, header }){
         this.event_id = event_id
         this.user_id = user_id
         this.img_url = img_url
         this.description = description
         this.date = date
         this.time = time
+        this.header = header
 
     }
 
-    static async create (user_id, img_url, description, date, time) {
+    static async create (user_id, img_url, description, date, time, header) {
         try {
-          const query = `INSERT INTO events (user_id, img_url, description, date, time)
-            VALUES (?, ?, ?, ?, ?) RETURNING *`;
-          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time]);
+          const query = `INSERT INTO events (user_id, img_url, description, date, time, header)
+            VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
+          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time, header]);
           return post ? new Post(post) : null;
         } catch (err) {
           console.error(err);
