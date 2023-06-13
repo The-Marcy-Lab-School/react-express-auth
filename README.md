@@ -37,7 +37,7 @@ Recycliqe is a platform that tackles the challenges of limited community engagem
 
 **Key Technical Challenges**
 
-**1)** Data Integration: Integrating and aggregating data from various sources, such as recycling centers, environmental news platforms, and policy databases, to provide accurate and up-to-date information to users.
+1) Data Integration: Integrating and aggregating data from various sources, such as recycling centers, environmental news platforms, and policy databases, to provide accurate and up-to-date information to users.
 
 EPA Envirofacts API and OpenAQ API: These APIs can provide environmental data that could be relevant for your users. For example, they could be used to inform users about the air quality in the area where an event is taking place.
 
@@ -46,9 +46,9 @@ Earth911 Search API: This API provides information about recycling centers. This
 GNews API and ContextualWeb News API: These APIs can be used to provide news articles related to environmental topics. This aligns with your goal of informing users about environmental issues and what they can do to help.
 
 OpenWeatherMap API: Weather data could be relevant for planning or participating in outdoor events, which seems to be a significant part of your app's functionality.
-EPA Envirofacts Data Service API: Envirofacts provides a single point of access to U.S. EPA environmental data contained in U.S. EPA databases. https://www.epa.gov/enviro/envirofacts-data-service-api
+EPA Envirofacts Data Service API: Envirofacts provides a single point of access to U.S. EPA environmental data contained in U.S. EPA databases.
 
-**2)** A possible challenge can be developing a robust ranking system that accurately credits users, measures their performance, and rewards them based on fair rules. The critical aspect lies in ensuring the algorithm's reliability, impartiality, and consistent application to all users to maintain a sense of fairness. This requires meticulous development and testing to establish a ranking system that accurately assesses user contributions, avoids biases, and guarantees equitable rewards for everyone involved.
+2) A possible challenge can be developing a robust ranking system that accurately credits users, measures their performance, and rewards them based on fair rules. The critical aspect lies in ensuring the algorithm's reliability, impartiality, and consistent application to all users to maintain a sense of fairness. This requires meticulous development and testing to establish a ranking system that accurately assesses user contributions, avoids biases, and guarantees equitable rewards for everyone involved.
 
 **Extension Opportunities**
 
