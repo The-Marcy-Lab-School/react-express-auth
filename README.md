@@ -46,11 +46,11 @@ From within the root directory:
 View the project roadmap [here](LINK_TO_PROJECTS_TAB).
 
 
-## Contributing
+### Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 
-## Style Guide
+### Style Guide
 
 This project adheres to the [Airbnb Style Guide](https://github.com/airbnb/javascript).
