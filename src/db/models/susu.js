@@ -55,7 +55,11 @@ class Susu{
     }
     static async destroy(id){
         try{
-
+            const foundSusu = await Susu.find(id)
+            if(!foundSusu) return null;
+            await knex.raw('DELETE FROM susu WHERE susu.id = ?', [id])
+            const deletedpost =  await knex.raw('DELETE FROM posts WHERE id= ? RETURNING *', [id])
+            return deletedpost.rows[0]
         }
         catch(error){
             console.log(error);
