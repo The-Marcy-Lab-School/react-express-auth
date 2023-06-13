@@ -1,25 +1,79 @@
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
-
-  return <header>
-    <a id='logo' href='/'>React/Express Auth</a>
-    <nav>
-      <ul>
-        <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/users' end={true}>Users</NavLink></li>
-        {
-          currentUser
-            ? <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
-            : <>
-              <li><NavLink to='/login'>Login</NavLink></li>
-              <li><NavLink to='/sign-up'>Sign Up</NavLink></li>
-            </>
-        }
-      </ul>
+  const [isBurgerToggled, setIsBurgerToggled] = useState(false);
+  const burgerToggle = () => {
+    setIsBurgerToggled(!isBurgerToggled)
+  }
+  return (
+    <nav className="navbar" role="navigation" aria-label="main navigation">
+      <div className='navbar-start'>
+        <div className="navbar-brand">
+          <Link to='/'>
+          
+            <a className="navbar-item my-4">
+              <img src="./src/assets/rlogo.png" alt="Recy-clique" ></img>
+            </a>
+            
+          </Link>
+          <a role="button" className='navbar-burger' onClick={burgerToggle} aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+      <div className={isBurgerToggled ? 'is-active navbar-menu' : 'navbar-menu'}>
+        <div className='navbar-end'>
+          {!currentUser? 
+          <>
+          <Link to='/login' className="navbar-item">
+            Log in
+          </Link>
+          <Link to='sign-up' className="navbar-item">
+            Sign Up
+          </Link>
+          </>: null}
+          <Link to='/about' className="navbar-item">
+            About Us
+          </Link>
+          <Link to='/newsFeed' className="navbar-item">
+            News Feed
+          </Link>
+          <Link to='/events' className="navbar-item">
+            Events
+          </Link>
+          <Link to='/dashboard' className="navbar-item">
+            Dashboard
+          </Link>
+        </div>
+      </div>
     </nav>
-  </header>;
+  )
+
+  // return <header>
+  //   <a id='logo' href='/'>React/Express Auth</a>
+  //   <nav>
+  //     <ul>
+  //       <li><NavLink to='/'>Home</NavLink></li>
+  //       <li><NavLink to='/users' end={true}>Users</NavLink></li>
+  //       <li><NavLink to='/about'>About Us</NavLink></li>
+  //       <li><NavLink to='/newsFeed'>News Feed</NavLink></li>
+  //       <li><NavLink to='/events'>Events</NavLink></li>
+  //       <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+
+  //       {
+  //         currentUser
+  //           ? <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
+  //           : <>
+  //             <li><NavLink to='/login'>Login</NavLink></li>
+  //             <li><NavLink to='/sign-up'>Sign Up</NavLink></li>
+  //           </>
+  //       }
+  //     </ul>
+  //   </nav>
+  // </header>;
 }
