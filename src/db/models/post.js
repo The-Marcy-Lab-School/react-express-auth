@@ -22,33 +22,35 @@ class Post {
         }
       }
 
-    static async delete (post_id)  {
-        try {
-          const query = `DELETE FROM posts WHERE post_id = ? RETURNING *`;
-          const { rows: [post] } = await knex.raw(query, [post_id]);
-        //   console.log(post)
-          return post;
-        } catch (err) {
-          console.error(err);
-          return null;
-        }
-      }
+    // static async delete (post_id)  {
+    //     try {
+    //       const query = `DELETE FROM posts WHERE post_id = ? RETURNING *`;
+    //       const { rows: [post] } = await knex.raw(query, [post_id]);
+    //     //   console.log(post)
+    //       return post;
+    //     } catch (err) {
+    //       console.error(err);
+    //       return null;
+    //     }
+    //   }
 
-      static async listMyPost(user_id) {
-        try {
-          const query = 'SELECT * FROM posts WHERE user_id = ?';
-          const { rows } = await knex.raw(query, [user_id]);
-          return rows.map((post) => new Post(post));
-        } catch (err) {
-          console.error(err);
-          return null;
-        }
-    }
-
-
-
+    //   static async listMyPost(user_id) {
+    //     try {
+    //       const query = 'SELECT * FROM posts WHERE user_id = ?';
+    //       const { rows } = await knex.raw(query, [user_id]);
+    //       return rows.map((post) => new Post(post));
+    //     } catch (err) {
+    //       console.error(err);
+    //       return null;
+    //     }
+    // }
 
 
 }
+const test = async () => {
+  const postObj = await Post.create('dog.png',1)
+  console.log(postObj)
+}
+test()
 
-module.exports = Post
+//module.exports = Post
