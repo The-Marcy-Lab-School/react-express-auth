@@ -12,7 +12,7 @@ Our application RecyClique is a platform dedicated to fostering environmental ac
 
 **Summary**
 
-The problem of plastic and carbon pollution, coupled with global warming, dirty oceans, tons of waste in landfills, and other crises, all impact life on Earth. This directly affects humans by compromising air quality, degrading ecosystems, and disrupting the delicate balance of our planet, leading to adverse health effects, loss of biodiversity, and increased vulnerability to extreme weather events. 
+The problem of plastic and carbon pollution, coupled with global warming, dirty oceans, tons of waste in landfills, and other crises, all impact life on Earth. This directly affects humans by compromising air quality, degrading ecosystems, and disrupting the delicate balance of our planet, leading to adverse health effects, loss of biodiversity, and increased vulnerability to extreme weather events. The Emissions Gap Report (EGR) 2020 finds that, despite a brief dip in carbon dioxide emissions caused by the COVID-19 pandemic, the world is still heading for a temperature rise in excess of 3°C this century – far beyond the Paris Agreement goals of limiting global warming to well below 2°C and pursuing 1.5°C.
 
 **The Problem**
 
