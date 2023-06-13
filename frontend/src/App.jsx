@@ -13,6 +13,7 @@ import AboutUsPage from './pages/AboutUs';
 import NewsFeed from './pages/NewsFeed';
 import Events from './pages/Events';
 import Dashboard from './pages/Dashboard';
+import Footer from './components/Footer';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -31,10 +32,11 @@ export default function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/users' element={<UsersPage />} />
-        <Route path='/users/:id' element={<UserPage />} />
+        {/* <Route path='/users' element={<UsersPage />} />
+        <Route path='/users/:id' element={<UserPage />} /> */}
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </main>
+    <Footer />
   </>;
 }
