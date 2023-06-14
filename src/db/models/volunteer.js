@@ -22,7 +22,7 @@ class Volunteer {
       static async allVolunteers (event_id) {
         try {
           const query = `SELECT * FROM volunteer WHERE event_id = ?`;
-          const { rows: [rows] } = await knex.raw(query, [volunteer_id, user_id, event_id]);
+          const { rows: [rows] } = await knex.raw(query, [event_id]);
           return rows.map((row) => new Volunteer(row));
         } catch (err) {
           console.error(err);

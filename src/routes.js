@@ -3,6 +3,9 @@ const userController = require('./controllers/user');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 const postController = require('./controllers/post')
+const volunteerController = require('./controllers/volunteer')
+
+
 
 const Router = express.Router();
 Router.use(addModels);
@@ -21,7 +24,13 @@ Router.get('/me', userController.showMe);
 // POST ROUTE
 
 Router.post('/post', postController.create)
+Router.get('/post', postController.list)
 
+
+// VOLUNTEER
+
+Router.post('/volunteer', volunteerController.volunteer)
+Router.post('/volunteer', volunteerController.allVolunteer)
 
 
 
