@@ -34,7 +34,7 @@ class Susu{
             return null
         }
     }
-    static async create(name, password_hash, owner, payment_amount, next_payment){
+    static async create(name, password_hash, owner, payment_amount, next_payment){//possibly need id
         try{
             const susu = await knex.raw('INSERT INTO susu (name, password_hash, owner, payment_amount, next_payment) VALUES(?,?,?,?,?) RETURNING *',[name, password_hash, owner, payment_amount, next_payment])
             return new Susu(susu.rows[0])
@@ -57,8 +57,8 @@ class Susu{
         try{
             const foundSusu = await Susu.find(id)
             if(!foundSusu) return null;
-            await knex.raw('DELETE FROM susu WHERE susu.id = ?', [id])
-            const deletedpost =  await knex.raw('DELETE FROM posts WHERE id= ? RETURNING *', [id])
+            // await knex.raw('DELETE FROM susu WHERE susu.id = ?', [id])
+            const deletedpost =  await knex.raw('DELETE FROM susu WHERE id= ? RETURNING *', [id])
             return deletedpost.rows[0]
         }
         catch(error){
