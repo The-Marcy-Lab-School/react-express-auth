@@ -53,7 +53,7 @@ class User {
   }
 
   static async deleteAll() {
-    return knex.raw("TRUNCATE users;");
+    return knex.raw("TRUNCATE users RESTART IDENTITY CASCADE;");
   }
 
   update = async (first_name, last_name, username, email) => {
