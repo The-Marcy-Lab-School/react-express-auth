@@ -2,6 +2,8 @@ import { useContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUpPage from './pages/SignUp';
+import Susu from './pages/Susu';
+import CreateSusu from './pages/Create-Susu';
 import LoginPage from './pages/Login';
 import SiteHeadingAndNav from './components/SiteHeadingAndNav';
 import NotFoundPage from './pages/NotFound';
@@ -21,6 +23,8 @@ export default function App() {
     <main>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/susu' element={<Susu />} />
+        <Route path='/createSusu' element={<CreateSusu />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/users' element={<UsersPage />} />
