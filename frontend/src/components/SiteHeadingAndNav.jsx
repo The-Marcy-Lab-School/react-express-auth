@@ -27,11 +27,11 @@ export default function SiteHeadingAndNav() {
             </a>
 
           </Link>
-          <a role="button" className='navbar-burger' onClick={burgerToggle} aria-label="menu" aria-expanded="false">
+          <div role="button" className='navbar-burger' onClick={burgerToggle} aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
+          </div>
         </div>
       </div>
       <div className={isBurgerToggled ? 'is-active navbar-menu' : 'navbar-menu'}>
@@ -45,7 +45,7 @@ export default function SiteHeadingAndNav() {
                 Sign Up
               </Link>
             </> : <>
-            <a className="navbar-item" onClick={handleLogout}>Log Out</a>
+            <p className="navbar-item" onClick={handleLogout}>Log Out</p>
             <Link to='/dashboard' className="navbar-item">
               Dashboard
             </Link>
@@ -59,7 +59,6 @@ export default function SiteHeadingAndNav() {
           <Link to='/events' className="navbar-item">
             Events
           </Link>
-          
         </div>
       </div>
     </nav>
