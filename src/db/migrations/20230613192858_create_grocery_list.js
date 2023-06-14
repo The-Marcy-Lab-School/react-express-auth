@@ -7,7 +7,7 @@ exports.up = (knex) => {
         table.increments("id").primary();
         table.integer("nova_rate");
         table.integer("nutri_score");
-
+        
     })
 };
 /**
