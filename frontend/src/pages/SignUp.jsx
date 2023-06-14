@@ -38,6 +38,33 @@ export default function SignUpPage() {
   return <>
     <h1>Sign Up</h1>
     <form onSubmit={handleSubmit} onChange={handleChange}>
+      <label htmlFor="firstName">First Name</label>
+      <input
+        autoComplete="off"
+        type="text"
+        id="firstName"
+        name="firstName"
+      // onChange={handleChange}
+      // value={username}
+      />
+      <label htmlFor="lastName">Last Name</label>
+    <input
+      autoComplete="off"
+      type="text"
+      id="lastName"
+      name="lastName"
+      // onChange={handleChange}
+      // value={username}
+    />
+    <label htmlFor="email">Email</label>
+    <input
+      autoComplete="off"
+      type="email "
+      id="email"
+      name="email"
+      // onChange={handleChange}
+      // value={username}
+    />
       <label htmlFor="username">Username</label>
       <input
         autoComplete="off"
@@ -65,7 +92,7 @@ export default function SignUpPage() {
 
       <button>Sign Up Now!</button>
     </form>
-    { !!errorText && <p>{errorText}</p> }
+    {!!errorText && <p>{errorText}</p>}
     <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
   </>;
 }
