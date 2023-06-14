@@ -4,7 +4,8 @@ body {
   min-height: 100vh;
 }
 
-input, label {
+input,
+label {
   display: block;
 }
 
@@ -53,36 +54,71 @@ form {
   font-weight: bold;
   font-style: italic;
 }
+
 .hrStyle {
   width: '80%';
   margin: '0 auto';
   border-top: '1px solid #dbdbdb';
 }
+
 .figureStyle {
   display: 'flex';
   flex-direction: 'column';
   align-items: 'center';
 }
-#footer{
+
+#footer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.footerSec{
+.footerSec {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.footerSec p{
+
+.footerSec p {
   color: black;
 }
-#newsLetterForm{
+
+#newsLetterForm {
   border: 0;
 }
 
-#newsLetterDiv{
+#newsLetterDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#landingSection1 {
+  display: flex;
+  align-items: center;
+  height: 70vh;
+  width: 100vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('https://cdn.pixabay.com/photo/2022/11/26/08/27/plastic-waste-7617451_1280.jpg');
+}
+
+#landingSection1 h1,
+#landingSection2 h1,
+#landingSection2 p {
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+}
+
+#landingSection2 {
+  background-color: #243551;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#landingCreateButton {
+  width: 150px;
 }
