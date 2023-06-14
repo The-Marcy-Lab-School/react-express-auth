@@ -43,8 +43,20 @@ class Post {
           console.error(err);
           return null;
         }
+
     }
 
+        static async listAll() {
+        try {
+          const query = 'SELECT * FROM post';
+          const { rows } = await knex.raw(query);
+          return rows
+        } catch (err) {
+          console.error(err);
+          return null;
+        }
+
+        }
 
 
 

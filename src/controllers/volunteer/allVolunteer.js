@@ -1,7 +1,7 @@
 const allVolunteers = async (req, res) => {
     const {
         session,
-        db: { Post },
+        db: { Volunteer },
         body: { event_id }
     } = req
     // const user_id = session.user_id;
