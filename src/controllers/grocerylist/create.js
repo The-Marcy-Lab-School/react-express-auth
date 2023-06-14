@@ -1,15 +1,13 @@
-const createUser = async (req, res) => {
+const createGrocery = async (req, res) => {
   const {
-    session,
-    db: { User },
-    body: { username, password },
+    db: { Grocery_list },
+    body: { nova_rate, nutri_score },
   } = req;
 
-  // TODO: check if username is taken, what should you return?
-  const user = await User.create(username, password);
-  session.userId = user.id;
+  const Grocery = await Grocery_list.create( nova_rate, nutri_score);
+  // session.userId = user.id;
 
-  res.send(user);
+  res.send( Grocery );
 };
 
-module.exports = createUser;
+module.exports = createGrocery;
