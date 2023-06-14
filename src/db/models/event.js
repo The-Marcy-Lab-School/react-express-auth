@@ -1,38 +1,13 @@
 const knex = require("../knex");
 
 class Event {
-  constructor({
-    id,
-    organizer_id,
-    type,
-    title,
-    start_date,
-    end_date,
-    start_time,
-    end_time,
-    location,
-    borough,
-    description,
-    image,
-  }) {
-    this.id = id;
-    this.organizer_id = organizer_id;
-    this.type = type;
-    this.title = title;
-    this.start_date = start_date;
-    this.end_date = end_date;
-    this.start_time = start_time;
-    this.end_time = end_time;
-    this.location = location;
-    this.borough = borough;
-    this.description = description;
-    this.image = image;
-  }
-
   static async list() {
-    const query = "SELECT * FROM events";
+    const query = `SELECT events.*, username 
+    FROM events 
+    JOIN users on events.organizer_id = users.id`;
     const { rows } = await knex.raw(query);
-    return rows.map((event) => new Event(event));
+    console.log(rows)
+    return rows
   }
 
   static async find(id) {
