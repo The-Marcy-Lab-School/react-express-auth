@@ -27,7 +27,7 @@ class Events {
     static async delete (event_id)  {
         try {
           const query = `DELETE FROM events WHERE event_id = ? RETURNING *`;
-          const { rows: [post] } = await knex.raw(query, [event_id]);
+          const { rows: [post]} = await knex.raw(query, [event_id]);
           return post;
         } catch (err) {
           console.error(err);
@@ -45,11 +45,6 @@ class Events {
           return null;
         }
     }
-
-
-
-
-
 }
 
 module.exports = Events
