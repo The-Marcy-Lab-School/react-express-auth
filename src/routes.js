@@ -5,8 +5,12 @@ const checkAuthentication = require('./middleware/check-authentication');
 const postController = require('./controllers/post')
 const eventsController = require('./controllers/events')
 
+
 const Router = express.Router();
 Router.use(addModels);
+
+//events
+Router.get('/events/list', eventsController.list)
 
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);

@@ -35,11 +35,11 @@ class Events {
         }
       }
 
-      static async listMyPost(user_id) {
+      static async list(user_id) {
         try {
           const query = 'SELECT * FROM events WHERE user_id = ?';
           const { rows } = await knex.raw(query, [user_id]);
-          return rows.map((post) => new Post(post));
+          return rows.map((post) => new Events(post));
         } catch (err) {
           console.error(err);
           return null;
