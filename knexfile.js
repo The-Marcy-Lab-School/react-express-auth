@@ -8,8 +8,8 @@ module.exports = {
       host: process.env.PG_HOST || '127.0.0.1',
       port: process.env.PG_PORT || 5432,
       user: process.env.PG_USER || 'postgres',
-      password: process.env.PG_PASS || 'postgres',
-      database: process.env.PG_DB || 'react_auth_example',
+      password: process.env.PG_PASS || '',
+      database: process.env.PG_DB || 'urban-unblemished',
     },
     migrations: {
       directory: path.join(__dirname, 'src', 'db', 'migrations'),

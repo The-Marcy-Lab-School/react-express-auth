@@ -6,7 +6,7 @@ const allVolunteers = async (req, res) => {
     } = req
     // const user_id = session.user_id;
     console.log(event_id)
-    const user = await user.listMyPost(event_id); 
+    const user = await Volunteer.allVolunteers(event_id); 
     res.send(user);
     
     
