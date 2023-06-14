@@ -9,9 +9,9 @@ class Grocery_list{
 
       //adding items to grocery list 
       static async create(id, nova_rate, nutri_score) {
-        const query = `INSERT INTO Grocery_list (id,nova_rate, nutri_score)
-          VALUES (?, ?,?) RETURNING *`;
-        const { rows: [rate] } = await knex.raw(query, [id,nova_rate, nutri_score]);
+        const query = `INSERT INTO Grocery_list (nova_rate, nutri_score)
+          VALUES (?,?) RETURNING *`;
+        const { rows: [rate] } = await knex.raw(query, [nova_rate, nutri_score]);
         return new Grocery_list(rate);
       }
        
