@@ -43,6 +43,7 @@ Router.post('/events', eventsController.create)
 
 
 
+
 Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
 });
