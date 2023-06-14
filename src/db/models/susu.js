@@ -25,7 +25,7 @@ class Susu{
     }
     static async list(user_id){
         try{
-            const {rows} = await knex.raw('SELECT * from Susu WHERE susu.id= ')
+            const {rows} = await knex.raw('SELECT * FROM users_susu WHERE users_susu.user_id=?'[user_id])
 
             return rows.map((post) => new Posts(post));
         }
