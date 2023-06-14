@@ -1,4 +1,8 @@
+import { fetchHandler } from "../utils";
+
 export default function HomePage() {
+  const [content, err] = fetchHandler("http://127.0.0.1:3000/api/susu")
+  console.log(content)
   return <>
     <h1>Home</h1>
     <h2>Mission Statement</h2>
