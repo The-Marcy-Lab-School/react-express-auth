@@ -8,6 +8,7 @@ class User {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
+    
   }
 
   static async list() {
@@ -15,6 +16,7 @@ class User {
     const { rows } = await knex.raw(query);
     return rows.map((user) => new User(user));
   }
+
 
   static async find(id) {
     const query = 'SELECT * FROM users WHERE id = ?';
