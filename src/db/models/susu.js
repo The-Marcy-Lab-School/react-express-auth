@@ -23,17 +23,17 @@ class Susu{
             return null
         }
     }
-    // static async list(user_id){
-    //     try{
-    //         const {rows} = await knex.raw('SELECT * from Susu WHERE susu.id= ')
+    static async list(user_id){
+        try{
+            const {rows} = await knex.raw('SELECT * FROM users_susu WHERE users_susu.user_id=?'[user_id])
 
-    //         return rows.map((post) => new Posts(post));
-    //     }
-    //     catch(error){
-    //         console.log(error);
-    //         return null
-    //     }
-    // }
+            return rows.map((post) => new Posts(post));
+        }
+        catch(error){
+            console.log(error);
+            return null
+        }
+    }
     static async create(name, password_hash, owner, payment_amount, next_payment){
         try{
             const susu = await knex.raw('INSERT INTO susu (name, password_hash, owner, payment_amount, next_payment) VALUES(?,?,?,?,?) RETURNING *',[name, password_hash, owner, payment_amount, next_payment])
@@ -55,7 +55,11 @@ class Susu{
     }
     static async destroy(id){
         try{
-
+            const foundSusu = await Susu.find(id)
+            if(!foundSusu) return null;
+            await knex.raw('DELETE FROM susu WHERE susu.id = ?', [id])
+            const deletedpost =  await knex.raw('DELETE FROM posts WHERE id= ? RETURNING *', [id])
+            return deletedpost.rows[0]
         }
         catch(error){
             console.log(error);
