@@ -1,12 +1,12 @@
 const User = require('../db/models/user');
 const Post = require('../db/models/post')
-const Volunteer = require('../db/models/volunteer')
+const Events = require('../db/models/events')
 
 const addModels = (req, res, next) => {
   req.db = {
     User,
     Post,
-    Volunteer
+    Events,
   };
   next();
 };

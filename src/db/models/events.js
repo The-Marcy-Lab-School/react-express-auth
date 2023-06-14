@@ -17,7 +17,7 @@ class Events {
           const query = `INSERT INTO events (user_id, img_url, description, date, time, header)
             VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
           const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time, header]);
-          return post ? new Post(post) : null;
+          return post ? new Events(post) : null;
         } catch (err) {
           console.error(err);
           return null;
