@@ -20,4 +20,9 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
 });
 
+// Reviews
+
+Router.get('/reviews', reviewController.list);
+Router.post('/reviews', reviewController.create);
+
 module.exports = Router;
