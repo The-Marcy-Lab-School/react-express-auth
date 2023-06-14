@@ -2,7 +2,7 @@ const listMyPost = async (req, res) => {
     const {
         session,
         db: { Post },
-        body: { user_id }
+        params: { user_id }
     } = req
     // const user_id = session.user_id;
     console.log(user_id)

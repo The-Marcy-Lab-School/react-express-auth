@@ -11,7 +11,7 @@ const Router = express.Router();
 Router.use(addModels);
 
 //events
-Router.get('/events/list', eventsController.list)
+
 
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
@@ -27,16 +27,18 @@ Router.get('/me', userController.showMe);
 // POST ROUTE
 
 Router.post('/post', postController.create)
-Router.get('/post', postController.list)
+Router.get('/post/:user_id', postController.list)
+Router.get('/post', postController.listAll)
 
 //VOLUNTEER 
 
 Router.post('/volunteer', volunteerController.volunteer)
-// Router.get('/volunteer', volunteerController.allVolunteer)
+Router.get('/volunteer', volunteerController.allVolunteer)
 
 
 //EVENT 
 Router.post('/events', eventsController.create)
+Router.get('/events/list', eventsController.list)
 
 
 
