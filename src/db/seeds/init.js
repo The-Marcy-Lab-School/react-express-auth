@@ -4,8 +4,12 @@ const User = require('../models/user');
  * @returns { Promise<void> }
  */
 exports.seed = async (knex) => {
-  await User.deleteAll();
-  await User.create('cool_cat', '1234');
-  await User.create('l33t-guy', '1234');
-  await User.create('wowow', '1234');
+  // Users
+  await User.create("Jason", "Paulino", "jasonpaulino", "jasonp0830@gmail.com", "123");
+  await User.create("Randy", "Pichardo", "randypichardo", "randypichardo1987@gmail.com", "123");
+  await User.create("Staceyann", "King", "staceyannking", "staceyannking01@gmail.com", "123");
+  await User.create("Magdalena", "Gero", "magdalenagero", "magdalenamgero@gmail.com", "123");
+  await User.create("Shaina", "Guzman", "shainaguzman", "shainaguzman0624@gmail.com", "123");
+
+  // Events
 };
