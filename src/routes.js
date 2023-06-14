@@ -9,6 +9,7 @@ Router.use(addModels);
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);
+
 // We can use middleware slotted in between the route and the controller as well
 Router.patch('/users/:id', checkAuthentication, userController.update);
 

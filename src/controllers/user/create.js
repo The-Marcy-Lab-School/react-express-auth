@@ -2,11 +2,17 @@ const createUser = async (req, res) => {
   const {
     session,
     db: { User },
-    body: { username, password },
+    body: { first_name, last_name, username, email, password },
   } = req;
 
-  // TODO: check if username is taken, what should you return?
-  const user = await User.create(username, password);
+  // TODO: check if username or email is taken, what should you return?
+  const user = await User.create(
+    first_name,
+    last_name,
+    username,
+    email,
+    password,
+  );
   session.userId = user.id;
 
   res.send(user);
