@@ -20,9 +20,9 @@ export default function LoginPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  return <>
-    <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
+  return <body class='sign-bg'>
+    <form class='user-form' onSubmit={handleSubmit}>
+      <h1>Login</h1>
       <label htmlFor="username">Username</label>
       <input type="text" autoComplete="username" id="username" name="username" />
 
@@ -32,5 +32,5 @@ export default function LoginPage() {
       <button>Log in!</button>
     </form>
     { !!errorText && <p>{errorText}</p> }
-  </>;
+  </body>;
 }

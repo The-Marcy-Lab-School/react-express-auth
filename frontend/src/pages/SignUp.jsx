@@ -35,9 +35,9 @@ export default function SignUpPage() {
     if (name === 'password') setPassword(value);
   };
 
-  return <>
-    <h1>Sign Up</h1>
-    <form onSubmit={handleSubmit} onChange={handleChange}>
+  return <body class='sign-bg'>
+    <form class='user-form' onSubmit={handleSubmit} onChange={handleChange}>
+      <h1>Sign Up</h1>
       <label htmlFor="username">Username</label>
       <input
         autoComplete="off"
@@ -67,5 +67,5 @@ export default function SignUpPage() {
     </form>
     { !!errorText && <p>{errorText}</p> }
     <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
-  </>;
+  </body>;
 }

@@ -1,6 +1,7 @@
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
+  overflow: hidden;
 }
 
 input, label {
@@ -40,6 +41,7 @@ nav ul {
   color:white;
   display: flex;
   background-image: url('./media/yellow.png');
+  background-size: cover;
   gap: 4.5rem;
   padding: 20px 40px;
   margin: 0;
@@ -65,4 +67,55 @@ form {
   color: black;
   font-weight: bold;
   font-style: italic;
+}
+main{
+  /* border: #CCC 1px solid; */
+  height: 95vh ;
+}
+.sign-bg{
+  margin-top: 0px;
+  height: 100%;
+  width: auto;
+  background-image: url('./media/bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+
+#moto-div{
+  background-color: linen;
+  opacity:60%;
+  width: auto;
+  border-radius: 15px;
+  width: 400px;
+  padding: 30px 0px 10px 40px;
+  margin: 100px 0px 50px 50px;
+}
+
+p{
+  font-weight: 700;
+}
+
+#story-div{
+  background-color: linen;
+  opacity:60%;
+  width: auto;
+  border-radius: 15px;
+  width: 400px;
+  padding: 10px 10px 10px 40px;
+  margin: 0px 0px 50px 50px;
+}
+
+.moto-text{
+  margin-top: 0px;
+}
+
+.user-form{
+  margin-top: 200px;
+  background-image: url('./media/white.png');
+  background-size: cover;
+  border: 5px rgb(231, 203, 174) solid;
+  /* border-image: url('./media/black.png'); */
+  border-radius: 5px;
 }
