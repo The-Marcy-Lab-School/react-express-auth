@@ -2,13 +2,18 @@ import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 
-
+import black from '../media/black.png'
+import white from '../media/white.png'
+import green from '../media/green.png'
+import brown from '../media/brown.png'
+import logo from '../media/logo.png'
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
 
   return <header>
-    <a id='logo' href='/'>React/Express Auth</a>
+    <img src={logo} id='logo' />
+    <a id='title' href='/'>IQ FOOD</a>
     <nav>
       <ul>
         <li><NavLink to='/'>Home</NavLink></li>

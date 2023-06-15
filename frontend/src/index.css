@@ -16,10 +16,14 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #000;
+  background-image:  url("./media/black.png") ;
 }
 
-#logo {
+#logo{
+  height:100px;
+}
+
+#title {
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
