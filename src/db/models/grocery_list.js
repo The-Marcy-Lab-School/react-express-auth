@@ -9,11 +9,16 @@ class Grocery_list{
 
       //adding items to grocery list 
       static async create(nova_rate, nutri_score) {
+        try{
         const query = `INSERT INTO grocery_list (nova_rate, nutri_score)
           VALUES (?,?) RETURNING *`;
         const { rows: [rate] } = await knex.raw(query, [nova_rate, nutri_score]);
         return new Grocery_list(rate);
+      } catch (err) {
+        console.error(err);
+        return null;
       }
+    }
       static async find(id) {
         try {
           const query = 'SELECT * FROM grocery_list WHERE id = ?';
@@ -52,10 +57,6 @@ class Grocery_list{
       }
       //deleting all information/data
       static async destroyAll() {
-        // await knex.raw(`DELETE FROM comments WHERE post_id = ? RETURNING *;`,[ id ])
-        // await knex.raw(`DELETE FROM likes WHERE post_id = ? RETURNING *;`,[ id ])
-        // const deleted = await knex.raw(`DELETE FROM posts WHERE id = ? RETURNING *;`,[ id ])
-        // return deleted.rowCount
         await knex.raw('DELETE FROM grocery_items_table;');
         await knex.raw('DELETE FROM user_groceries;');
         const deleted = await knex.raw('DELETE FROM grocery_list;');
