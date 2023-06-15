@@ -10,7 +10,8 @@ export default function SiteHeadingAndNav() {
     <nav>
       <ul>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/users' end={true}>Details</NavLink></li>
+        <li><NavLink to='/createSusu' end={true}>Create A Susu</NavLink></li>
+        <li><NavLink to='/details' end={true}>Details</NavLink></li>
         {
           currentUser
             ? <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>

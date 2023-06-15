@@ -3,11 +3,13 @@ const create = require('./create');
 const show = require('./show');
 const update = require('./update');
 const destroy = require('./destroy');
+const all = require('./all')
 
 module.exports = {
   list,
   create,
   show,
   update,
-  destroy
+  destroy,
+  all
 };
