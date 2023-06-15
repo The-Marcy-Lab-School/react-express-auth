@@ -22,5 +22,7 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 });
 
 Router.post('/grocerylist', groceryController.create);
+Router.get('/grocerylist', groceryController.list);
+Router.delete('/grocerylist', groceryController.destroyAll);
 
 module.exports = Router;

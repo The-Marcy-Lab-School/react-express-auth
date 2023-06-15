@@ -37,8 +37,15 @@ class Grocery_list{
         }
       }
       //deleting all information/data
-      static async deleteAll() {
-        return knex.raw('TRUNCATE grocery_list;');
+      static async destroyAll() {
+        // await knex.raw(`DELETE FROM comments WHERE post_id = ? RETURNING *;`,[ id ])
+        // await knex.raw(`DELETE FROM likes WHERE post_id = ? RETURNING *;`,[ id ])
+        // const deleted = await knex.raw(`DELETE FROM posts WHERE id = ? RETURNING *;`,[ id ])
+        // return deleted.rowCount
+        await knex.raw('DELETE FROM grocery_items_table;');
+        await knex.raw('DELETE FROM user_groceries;');
+        const deleted = await knex.raw('DELETE FROM grocery_list;');
+        return deleted
       }
       //deleting/removing an item from list
          deleteRate = async (nova_rate, nutri_score) => {
