@@ -56,42 +56,11 @@ class Event {
   }
 
   static async update(id, updatedEvent) {
-    const {
-      organizer_id,
-      type,
-      title,
-      start_date,
-      end_date,
-      start_time,
-      end_time,
-      location,
-      borough,
-      description,
-      image,
-    } = updatedEvent;
-    const query = `
-      UPDATE events
-      SET organizer_id = ?, type = ?, title = ?, start_date = ?, end_date = ?, start_time = ?, end_time = ?, location = ?, borough = ?, description = ?, image = ?
-      WHERE id = ?
-      RETURNING *
-    `;
-    const {
-      rows: [event],
-    } = await knex.raw(query, [
-      organizer_id,
-      type,
-      title,
-      start_date,
-      end_date,
-      start_time,
-      end_time,
-      location,
-      borough,
-      description,
-      image,
-      id,
-    ]);
-    return event ? new Event(event) : null;
+    const [updated] = await knex("events")
+      .where({ id })
+      .update(updatedEvent, ["*"]);
+
+    return updated ? new Event(updated) : null;
   }
 
   static async delete(id) {
