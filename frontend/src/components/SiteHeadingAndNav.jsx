@@ -19,15 +19,16 @@ export default function SiteHeadingAndNav() {
     </brand>
 
     <nav>
-      <ul id='nav-options' >
-        <li><NavLink to='/'>Home</NavLink></li>
+      <ul>
         {
           currentUser
             ? <>
+              <li><NavLink to='/users/search'>Home</NavLink></li>
               <li><NavLink to={`/users/${currentUser.id}`}>DashBoard</NavLink></li> 
               <li><NavLink to='/users' end={true}>Article</NavLink></li>
             </>
             : <>
+              <li><NavLink to='/'>Home</NavLink></li>
               <li><NavLink to='/login'>Login</NavLink></li>
               <li><NavLink to='/sign-up'>Sign Up</NavLink></li>
             </>
