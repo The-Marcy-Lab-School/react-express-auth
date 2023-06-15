@@ -1,6 +1,6 @@
 const express = require('express');
 const userController = require('./controllers/user');
-const eventController = require('./controllers/events');
+const eventController = require('./controllers/event');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
