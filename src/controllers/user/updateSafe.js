@@ -12,11 +12,9 @@ const updateUser = async (req, res) => {
   
 
   const user = await User.updateSafe(session.userId);
-//   console.log(user)
-//   if (!user) return res.sendStatus(404);
-
-//   const updatedUser = await user.update(username);
-//   res.send(updatedUser);
+  console.log(user)
+  if (!user) return res.sendStatus(404);
+  return res.send(user).status(200).end();
 };
 
 module.exports = updateUser;

@@ -39,9 +39,8 @@ class User {
     END
     WHERE id = ?
     RETURNING *;`;
-    const { rows } = await knex.raw(query, [id]);
-    console.log(rows)
-    // return user ? new User(user) : null;
+    const { rows: [user] } = await knex.raw(query, [id]);
+    return user ? new User(user) : null;
   }
 
   static async create(username, password) {
