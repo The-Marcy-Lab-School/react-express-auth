@@ -19,23 +19,32 @@ header {
   background-image:  url("./media/black.png") ;
 }
 
+brand{
+  display: flex;
+  align-items: center;
+}
+
 #logo{
   height:100px;
 }
 
 #title {
-  font-size: 1.5rem;
+  font-size: 4.5rem;
   font-weight: bold;
+  font-style: normal;
   text-decoration: none;
   color: #FFF;
 }
 
 nav ul {
+  color:white;
   display: flex;
-  gap: 1rem;
-  padding: 0;
+  background-image: url('./media/yellow.png');
+  gap: 4.5rem;
+  padding: 20px 40px;
   margin: 0;
   list-style: none;
+  border-radius: 15px;
 }
 
 nav a {
@@ -46,13 +55,14 @@ nav a {
 form {
   padding: 1rem;
   border: 1px solid #CCC;
-  width: 15rem;
+  width: 30rem;
+  height: 15rem;
   margin: 1rem auto;
 }
 
 /* automatically added by NavLink component */
 .active {
-  color: #EEBC32;
+  color: black;
   font-weight: bold;
   font-style: italic;
 }

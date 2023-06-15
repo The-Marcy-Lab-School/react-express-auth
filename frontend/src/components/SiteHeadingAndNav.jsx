@@ -6,16 +6,20 @@ import black from '../media/black.png'
 import white from '../media/white.png'
 import green from '../media/green.png'
 import brown from '../media/brown.png'
+import yellow from '../media/yellow.png'
 import logo from '../media/logo.png'
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
 
   return <header>
-    <img src={logo} id='logo' />
-    <a id='title' href='/'>IQ FOOD</a>
+    <brand>
+      <img src={logo} id='logo' />
+      <a id='title' href='/'>IQ FOOD</a>
+    </brand>
+
     <nav>
-      <ul>
+      <ul id='nav-options' >
         <li><NavLink to='/'>Home</NavLink></li>
         {
           currentUser
