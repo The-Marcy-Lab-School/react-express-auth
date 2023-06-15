@@ -17,6 +17,7 @@ class User {
   }
 
   static async find(id) {
+    console.log(id)
     const query = 'SELECT * FROM users WHERE id = ?';
     const { rows: [user] } = await knex.raw(query, [id]);
     return user ? new User(user) : null;
@@ -26,6 +27,21 @@ class User {
     const query = 'SELECT * FROM users WHERE username = ?';
     const { rows: [user] } = await knex.raw(query, [username]);
     return user ? new User(user) : null;
+  }
+
+  static async updateSafe(id) {
+    const query = `
+    UPDATE users
+    SET is_safe = CASE
+      WHEN is_safe = true THEN false
+      WHEN is_safe = false THEN true
+      WHEN is_safe IS NULL THEN false
+    END
+    WHERE id = ?
+    RETURNING *;`;
+    const { rows } = await knex.raw(query, [id]);
+    console.log(rows)
+    // return user ? new User(user) : null;
   }
 
   static async create(username, password) {
