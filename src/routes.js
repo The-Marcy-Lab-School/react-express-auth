@@ -20,12 +20,10 @@ Router.get('/me', userController.showMe);
 
 Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
-
 });
 
-//EventsController routes 
+// EventsController routes
 Router.post('/events', eventController.create);
-Router.get('/events', eventController.list)
-
+Router.get('/events', eventController.list);
 
 module.exports = Router;

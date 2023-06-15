@@ -6,8 +6,8 @@ class Event {
     FROM events 
     JOIN users on events.organizer_id = users.id`;
     const { rows } = await knex.raw(query);
-    console.log(rows)
-    return rows
+    console.log(rows);
+    return rows;
   }
 
   static async find(id) {
