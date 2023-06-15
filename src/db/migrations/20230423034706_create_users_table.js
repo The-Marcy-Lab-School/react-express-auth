@@ -8,7 +8,7 @@ exports.up = (knex) => knex.schema.createTable('users', (table) => {
   table.string('password_hash').notNullable();
   table.string('city');
   table.string('state');
-  table.boolean('isSafe');
+  table.boolean('is_safe');
   table.timestamps(true, true);
 });
 
