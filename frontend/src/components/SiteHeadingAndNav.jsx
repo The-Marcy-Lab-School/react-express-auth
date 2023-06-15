@@ -16,14 +16,15 @@ export default function SiteHeadingAndNav() {
     <a id='title' href='/'>IQ FOOD</a>
     <nav>
       <ul>
-        <li><NavLink to='/'>Home</NavLink></li>
         {
           currentUser
             ? <>
+              <li><NavLink to='/users/search'>Home</NavLink></li>
               <li><NavLink to={`/users/${currentUser.id}`}>DashBoard</NavLink></li> 
               <li><NavLink to='/users' end={true}>Article</NavLink></li>
             </>
             : <>
+              <li><NavLink to='/'>Home</NavLink></li>
               <li><NavLink to='/login'>Login</NavLink></li>
               <li><NavLink to='/sign-up'>Sign Up</NavLink></li>
             </>
