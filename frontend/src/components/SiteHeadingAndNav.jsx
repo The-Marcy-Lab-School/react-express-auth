@@ -45,7 +45,7 @@ export default function SiteHeadingAndNav() {
                 Sign Up
               </Link>
             </> : <>
-            <p className="navbar-item" onClick={handleLogout}>Log Out</p>
+            <a className="navbar-item" onClick={handleLogout}>Log Out</a>
             <Link to='/dashboard' className="navbar-item">
               Dashboard
             </Link>
