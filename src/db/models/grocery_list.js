@@ -68,7 +68,7 @@ class Grocery_list{
           .where({ nova_rate, nutri_score })
           .del();
         
-        return deletedRate > 0 ? "Record deleted successfully." : "No records deleted.";
+        return deletedRate > 0 ? "Rates deleted successfully." : "No rates deleted.";
       };
       
 
