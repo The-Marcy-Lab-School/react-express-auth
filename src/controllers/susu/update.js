@@ -8,12 +8,13 @@ const updateSusu = async (req, res) => {
     body: { name, password, owner, paymentAmount, nextPayment },
   } = req;
 
-  if (!isAuthorized(id, session)) return res.sendStatus(403);
+  // if (!isAuthorized(id, session)) return res.sendStatus(403);
 
-  const susu = await Susu.find(id);
+  const susu = await Susu.show(id);
   if (!susu) return res.sendStatus(404);
 
-  const updatedSusu = await susu.update(id, name, password, owner, paymentAmount, nextPayment);
+  const updatedSusu = await Susu.update(id, name, password, owner, paymentAmount, nextPayment);
+  console.log(id, name, password, owner, paymentAmount, nextPayment)
   res.send(updatedSusu);
 };
 

@@ -2,10 +2,12 @@ const showSusu = async (req, res) => {
   const {
     db: { Susu },
     params: { id },
+    // body: {id}
   } = req;
 
-  const susu = await Susu.find(id);
-  if (!susu) return res.status(404).send('Susu not found');
+  const susu = await Susu.show(id);
+  
+  if (!susu) return res.sendStatus(404)
   res.send(susu);
 };
 
