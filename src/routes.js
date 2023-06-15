@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('./controllers/user');
+const groceryController = require('./controllers/grocerylist');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -19,5 +20,10 @@ Router.get('/me', userController.showMe);
 Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
 });
+
+Router.post('/grocerylist', groceryController.create);
+Router.get('/grocerylist', groceryController.list);
+Router.delete('/grocerylist', groceryController.destroyAll);
+Router.patch('/grocerylist/:id',groceryController.update );
 
 module.exports = Router;

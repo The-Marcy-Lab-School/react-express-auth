@@ -5,7 +5,7 @@
 exports.up = (knex) => {
     return knex.schema.createTable("grocery_list", (table) => {
         table.increments("id").primary();
-        table.integer("nova_rate");
+        table.string("nova_rate");
         table.integer("nutri_score");
         
     })
