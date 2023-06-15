@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-const NewsFeed = () => {
+const Article = ({ article }) => {
+  const handleClick = () => {
+    window.open(article.web_url, '_blank');
+  };
+  return (
+    <div onClick={handleClick}>
+      <h2>{article.headline.main}</h2>
+      <p>{article.abstract}</p>
+    </div>
+  );
+};
+
+const ArticleList = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
@@ -23,16 +35,16 @@ const NewsFeed = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100vh' }}>
       <h1>NewsFeed</h1>
-      {articles.map(article => (
-        <div key={article._id}>
-          <h2>{article.headline.main}</h2>
-          <p>{article.abstract}</p>
-        </div>
-      ))}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {articles.map(article => (
+          <Article key={article._id} article={article} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default NewsFeed;
+export default ArticleList;
+
