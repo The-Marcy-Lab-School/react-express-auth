@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = (knex) =>knex.schema.createTable('users_susu', (table) => {
-  table.increments();
+  table.increments('id').primary();
   table.integer('user_id').references('id').inTable('users');
   table.integer('susu_id').references('id').inTable('susu');
   table.string('make_payments');
