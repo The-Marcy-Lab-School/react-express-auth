@@ -84,7 +84,7 @@ main{
 }
 
 #moto-div{
-  background-color: linen;
+  background-color: whitesmoke;
   opacity:60%;
   border-radius: 15px;
   width: 400px;
@@ -92,12 +92,9 @@ main{
   margin: 100px 0px 50px 50px;
 }
 
-p{
-  font-weight: 700;
-}
 
 #story-div{
-  background-color: linen;
+  background-color: whitesmoke;
   opacity:60%;
   border-radius: 15px;
   width: 400px;
@@ -108,6 +105,11 @@ p{
 .moto-text{
   margin-top: 0px;
 }
+
+p{
+  font-weight: 700;
+}
+
 
 .user-form{
   margin-top: 200px;
