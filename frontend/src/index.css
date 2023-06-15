@@ -1,7 +1,82 @@
-body {
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  margin: 0;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
+
+#map {
+  display: flex;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  width: 65%;
+}
+.home-section {    
+  display: flex;
+  justify-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;}
+
+body {
+  margin: 0;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+.eventList {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+}
+
+ .eventList li {
+  flex: 1;
+} 
+
+.eventList li a {
+  display: block;
+  /* text-align: center; */
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #d6d0d0;
+  text-decoration: none;
+}
+
+.eventList li a:hover {
+  background-color: #464141;
+} */
+ h1{
+  size: 90px;
+ }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
 
 input, label {
   display: block;
