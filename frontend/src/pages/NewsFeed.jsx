@@ -41,11 +41,11 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100vh', overflow: 'auto'}}>
-      <h1>NewsFeed</h1>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', overflow: 'auto', marginTop: '30px', marginBottom: '20px'}}>
+      <h1 style={{ margin: '20px' }} >NewsFeed</h1>
+      <div style={{ display: 'flex', flexDirection: 'column'}}>
         {articles.map(article => (
-          <Article key={article._id} article={article} />
+          <Article key={article._id} article={article}/>
         ))}
       </div>
     </div>
