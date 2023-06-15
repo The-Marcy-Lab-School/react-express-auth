@@ -116,6 +116,9 @@ p{
   border: 5px rgb(231, 203, 174) solid;
   /* border-image: url('./media/black.png'); */
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #login-suggest{

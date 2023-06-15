@@ -63,7 +63,7 @@ export default function SignUpPage() {
         <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
       */}
 
-      <button>Sign Up Now!</button>
+      <button>Sign Up!</button>
       <p id='login-suggest' >Already have an account with us? <Link to="/login">Log in!</Link></p>
     </form>
     { !!errorText && <p>{errorText}</p> }
