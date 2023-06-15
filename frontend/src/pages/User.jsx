@@ -32,19 +32,27 @@ export default function UserPage() {
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
 
-  // What parts of state would change if we altered our currentUser context?
-  // Ideally, this would update if we mutated it
-  // But we also have to consider that we may NOT be on the current users page
-  const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
+  // Extract the necessary information from the userProfile or currentUser object
+  const { profilePicture, name, bio } = isCurrentUserProfile ? currentUser : userProfile;
 
-  return <>
-    <h1>{profileUsername}</h1>
-    { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-    <p>If the user had any data, here it would be</p>
-    <p>Fake Bio or something</p>
-    {
-      !!isCurrentUserProfile
-        && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-    }
-  </>;
+  return (
+    <>
+      <div>
+        {profilePicture && <img src={profilePicture} alt="Profile" />}
+        <h1>{name}</h1>
+      </div>
+      {isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
+      <p>{bio || "No bio available"}</p>
+      <h2>What I'm Looking For:</h2>
+      <div>
+        <p>Posting 1: Looking for a job in XYZ field.</p>
+        <p>Posting 2: Searching for a roommate in ABC city.</p>
+        <p>Posting 3: Interested in joining a book club.</p>
+        <p>Posting 4: Seeking advice on starting a small business.</p>
+      </div>
+      {isCurrentUserProfile && (
+        <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      )}
+    </>
+  );
 }
