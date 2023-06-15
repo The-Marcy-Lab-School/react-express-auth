@@ -4,11 +4,11 @@
  */
 exports.up = (knex) => knex.schema.createTable('events', (table) =>{
   table.increments();
-  table.integer('geolocation');
+  table.string('geolocation');
   table.string('description');
   table.string('title');
   table.string('type');
-  table.string('imgUrl');
+  table.string('img_url');
 })
 
 /**
