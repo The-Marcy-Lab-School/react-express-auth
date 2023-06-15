@@ -9,14 +9,14 @@ class Grocery_list{
 
       //adding items to grocery list 
       static async create(id, nova_rate, nutri_score) {
-        const query = `INSERT INTO Grocery_list (id,nova_rate, nutri_score)
+        const query = `INSERT INTO grocery_list (id,nova_rate, nutri_score)
           VALUES (?, ?,?) RETURNING *`;
         const { rows: [rate] } = await knex.raw(query, [id,nova_rate, nutri_score]);
         return new Grocery_list(rate);
       }
        
       // updating the nova rate and nutri score 
-      update = async (nova_rate,nutri_score) => { 
+      static async update (nova_rate,nutri_score){ 
         const [updatedRate] = await knex('grocery_list')
           .where({ nova_rate: this.nova_rate, nutri_score:this.nutri_score
         })
@@ -25,7 +25,17 @@ class Grocery_list{
         return updatedRate ? new Grocery_list(updatedRate) : null;
       };
       
-
+      static async list () {
+        try{
+          const result = await knex.raw(`
+          SELECT * FROM grocery_list;
+          `,[])
+          return result.rows;
+        }catch(err){
+          console.log(err);
+          return null;
+        }
+      }
       //deleting all information/data
       static async deleteAll() {
         return knex.raw('TRUNCATE grocery_list;');
