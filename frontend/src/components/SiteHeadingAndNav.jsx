@@ -23,15 +23,15 @@ export default function SiteHeadingAndNav() {
           <Link to='/'>
 
             <a className="navbar-item my-4">
-              <img src="./src/assets/logo.png" alt="Recy-clique" ></img>
+              <img src="./src/assets/newLogo.png" alt="Recy-clique" ></img>
             </a>
 
           </Link>
-          <a role="button" className='navbar-burger' onClick={burgerToggle} aria-label="menu" aria-expanded="false">
+          <div role="button" className='navbar-burger' onClick={burgerToggle} aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
+          </div>
         </div>
       </div>
       <div className={isBurgerToggled ? 'is-active navbar-menu' : 'navbar-menu'}>
@@ -59,7 +59,6 @@ export default function SiteHeadingAndNav() {
           <Link to='/events' className="navbar-item">
             Events
           </Link>
-          
         </div>
       </div>
     </nav>

@@ -86,6 +86,10 @@ form {
 #newsLetterForm {
   border: 0;
 }
+#eventForm{
+  border: 0;
+  width:80%;
+}
 
 #newsLetterDiv {
   display: flex;
@@ -121,4 +125,25 @@ form {
 
 #landingCreateButton {
   width: 150px;
+}
+
+.eventBox{
+  width:80%;
+  margin: 0 auto;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.cardSec2{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutImg{
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 0 auto;
 }

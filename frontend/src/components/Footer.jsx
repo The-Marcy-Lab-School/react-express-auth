@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
-        <div className='footer' id='footer'>
+        <div className='footer mt-5' id='footer'>
             <div className='footerSec'>
                 <h1 className='pb-3'>LINKS</h1>
                 <Link to='/about'>
@@ -17,7 +17,7 @@ const Footer = () => {
             <div className='footerSec'>
                 <form id='newsLetterForm'>
                     <div className='field' id='newsLetterDiv'>
-                        <label for='newsLetter' className='has-text-centered mb-3'>NEWSLETTER</label>
+                        <label htmlFor='newsLetter' className='has-text-centered mb-3'>NEWSLETTER</label>
                         <input type='email' className='input' id='newsLetter' placeholder='EMAIL'></input>
                         <button className='button' type='submit'>SUBSCRIBE</button>
                     </div>
