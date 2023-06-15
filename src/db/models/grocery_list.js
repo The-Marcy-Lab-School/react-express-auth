@@ -14,16 +14,30 @@ class Grocery_list{
         const { rows: [rate] } = await knex.raw(query, [nova_rate, nutri_score]);
         return new Grocery_list(rate);
       }
-       
+      static async find(id) {
+        try {
+          const query = 'SELECT * FROM grocery_list WHERE id = ?';
+          const { rows: [grocery_list] } = await knex.raw(query, [id]);
+          return grocery_list ? new Grocery_list(grocery_list) : null;
+        } catch (err) {
+          console.error(err);
+          return null;
+        }
+      }
       // updating the nova rate and nutri score 
-      static async update (nova_rate,nutri_score){ 
-        const [updatedRate] = await knex('grocery_list')
-          .where({ nova_rate: this.nova_rate, nutri_score:this.nutri_score
-        })
-          .update({ nova_rate, nutri_score})
-          .returning('*');  
-        return updatedRate ? new Grocery_list(updatedRate) : null;
-      };
+      static async update(id, nova_rate, nutri_score) {
+        try {
+          const [updatedRate] = await knex('grocery_list')
+            .where({ id: id })
+            .update({ nova_rate: nova_rate, nutri_score: nutri_score })
+            .returning('*');
+            
+          return updatedRate ? new Grocery_list(updatedRate) : null;
+        } catch (err) {
+          console.error(err);
+          return null;
+        }
+      }      
       
       static async list () {
         try{
