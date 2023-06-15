@@ -17,7 +17,7 @@ const Footer = () => {
             <div className='footerSec'>
                 <form id='newsLetterForm'>
                     <div className='field' id='newsLetterDiv'>
-                        <label for='newsLetter' className='has-text-centered mb-3'>NEWSLETTER</label>
+                        <label htmlFor='newsLetter' className='has-text-centered mb-3'>NEWSLETTER</label>
                         <input type='email' className='input' id='newsLetter' placeholder='EMAIL'></input>
                         <button className='button' type='submit'>SUBSCRIBE</button>
                     </div>
