@@ -14,6 +14,6 @@
             // Deletes ALL existing entries
           
             await knex("items").insert([
-              { id: 1, name: "apple", food_rating: 10, nutri_score_quality: 10, ingredients: "apple", addivites: "none", nova_score: 10, eco_score: 10 },
+              { name: "apple", food_rating: 10, nutri_score_quality: 10, ingredients: "apple", addivites: "none", nova_score: 10, eco_score: 10 },
             ]);
           };
