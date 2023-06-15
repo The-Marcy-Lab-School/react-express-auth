@@ -64,8 +64,9 @@ export default function SignUpPage() {
       */}
 
       <button>Sign Up Now!</button>
+      <p id='login-suggest' >Already have an account with us? <Link to="/login">Log in!</Link></p>
     </form>
     { !!errorText && <p>{errorText}</p> }
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
+    
   </body>;
 }
