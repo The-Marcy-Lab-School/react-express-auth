@@ -2,9 +2,11 @@ const knex = require("../knex");
 
 class Event {
   static async list() {
-    const query = `SELECT events.*, username 
-    FROM events 
-    JOIN users on events.organizer_id = users.id`;
+    const query = `
+      SELECT events.*, username 
+      FROM events 
+      JOIN users on events.organizer_id = users.id
+    `;
     const { rows } = await knex.raw(query);
     console.log(rows);
     return rows;

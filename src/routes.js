@@ -26,4 +26,6 @@ Router.post('/events', eventController.create);
 Router.patch('/events/:id', eventController.update);
 Router.delete('/events/:id', eventController.deleteEvent);
 
+// User event routes
+
 module.exports = Router;
