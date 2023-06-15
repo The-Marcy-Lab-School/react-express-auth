@@ -6,6 +6,8 @@ const checkAuthentication = require('./middleware/check-authentication');
 const Router = express.Router();
 Router.use(addModels);
 
+///problem is that we need to figure out how to get the information from the routes, either from params or the body
+
 Router.get('susu/:id', susuController.show);
 Router.get('/susu', susuController.list);
 
