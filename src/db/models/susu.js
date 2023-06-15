@@ -2,21 +2,12 @@ const knex = require('../knex');
 const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 
 class Susu{
-    constructor({id, name, password_hash, owner, payment_amount, next_payment}){
-        this.id = id;
-        this.name = name;
-        this.password_hash = password_hash;
-        this.owner = owner;
-        this.payment_amount = payment_amount;
-        this.next_payment = next_payment
-    }
+
     static async show(id){
         try{
-            const findSusu = await knex.raw('SELECT * FROM susu WHERE id =?', [id]);
-            if(!findSusu){
-                return null;
-            }
-            return new Susu(findSusu.rows[0]);
+            const { rows }= await knex.raw('SELECT * FROM susu WHERE id =?', [id]);
+            if (!rows) return null 
+            return rows[0]
         }
         catch(error){
             console.log(error);
@@ -25,7 +16,7 @@ class Susu{
     }
     static async list(user_id){
         try{
-            const {rows} = await knex.raw('SELECT * FROM users_susu WHERE users_susu.user_id=?'[user_id])
+            const {rows} = await knex.raw('SELECT * FROM users_susu WHERE users_susu.user_id=?',[user_id])
 
             return rows.map((post) => new Susu(post));
         }
@@ -53,9 +44,20 @@ class Susu{
             return null
         }
     }
+    static async all(){
+        try{
+            let {rows} = await knex.raw('SELECT * from susu')
+            return rows 
+        }
+        catch(error){
+            console.log(error)
+            return null
+        }
+        
+    }
     static async destroy(id){
         try{
-            const foundSusu = await Susu.find(id)
+            const foundSusu = await Susu.show(id)
             if(!foundSusu) return null;
             // await knex.raw('DELETE FROM susu WHERE susu.id = ?', [id])
             const deletedpost =  await knex.raw('DELETE FROM susu WHERE id= ? RETURNING *', [id])
