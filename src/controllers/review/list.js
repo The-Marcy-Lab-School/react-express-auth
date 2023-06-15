@@ -1,6 +1,6 @@
 const listReviews = async (req, res) => {
-    const { Review } = req.db;
-    const reviews = await Review.list();
+    const { Reviews } = req.db;
+    const reviews = await Reviews.list();
     res.send(reviews);
   };
   

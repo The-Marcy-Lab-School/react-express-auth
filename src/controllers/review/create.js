@@ -1,12 +1,11 @@
 const createReview = async (req, res) => {
     const {
-        session,
-        db: { Review },
-        body: { user_id, ethnicity, age, gender, review_body, ratings },
+        db: { Reviews },
+        body: {user_id, ethnicity, age, gender, review_body, rating },
     } = req;
 
     // TODO: check if username is taken, what should you return?
-    const review = await Review.create(user_id, ethnicity, age, gender, review_body, ratings);
+    const review = await Reviews.create(user_id, ethnicity, age, gender, review_body, rating);
     res.send(review);
 };
 

@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('./controllers/user');
+const reviewController = require('./controllers/review');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
