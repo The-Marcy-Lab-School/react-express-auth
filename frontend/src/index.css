@@ -139,3 +139,11 @@ form {
   justify-content: center;
   align-items: center;
 }
+
+.aboutImg{
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 0 auto;
+}

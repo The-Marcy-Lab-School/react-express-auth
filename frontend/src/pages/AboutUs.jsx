@@ -10,31 +10,31 @@ export default function AboutUsPage() {
         <div className="columns mb-6">
             <div className="column">
                 <figure className='figureStyle'>
-                    <img src='./src/assets/Mag.jpg'></img>
+                    <img className='aboutImg' src='./src/assets/Mag.jpg'></img>
                     <p className='has-text-centered is-size-4 my-3'>Magdalena</p>
                 </figure>
             </div>
             <div className="column">
                 <figure className='figureStyle'>
-                    <img src='./src/assets/Randy.jpg'></img>
+                    <img className='aboutImg' src='./src/assets/Randy.jpg'></img>
                     <p className='has-text-centered is-size-4 my-3'>Randy</p>
                 </figure>
             </div>
             <div className="column">
                 <figure className='figureStyle'>
-                    <img src='./src/assets/Shaina.jpeg'></img>
+                    <img className='aboutImg' src='./src/assets/Shaina.jpeg'></img>
                     <p className='has-text-centered is-size-4 my-3'>Shaina</p>
                 </figure>
             </div>
             <div className="column">
                 <figure className='figureStyle'>
-                    <img src='./src/assets/Jason.jpg'></img>
+                    <img className='aboutImg' src='./src/assets/Jason.jpg'></img>
                     <p className='has-text-centered is-size-4 my-3'>Jason</p>
                 </figure>
             </div>
             <div className="column">
                 <figure className='figureStyle'>
-                    <img src='./src/assets/Stacey.jpg'></img>
+                    <img className='aboutImg' src='./src/assets/Stacey.jpg'></img>
                     <p className='has-text-centered is-size-4 my-3'>Staceyann</p>
                 </figure>
             </div>
