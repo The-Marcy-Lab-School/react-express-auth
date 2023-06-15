@@ -126,3 +126,16 @@ form {
 #landingCreateButton {
   width: 150px;
 }
+
+.eventBox{
+  width:80%;
+  margin: 0 auto;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.cardSec2{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
