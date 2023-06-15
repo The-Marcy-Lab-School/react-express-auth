@@ -23,7 +23,7 @@ export default function SiteHeadingAndNav() {
           <Link to='/'>
 
             <a className="navbar-item my-4">
-              <img src="./src/assets/rlogo.png" alt="Recy-clique" ></img>
+              <img src="./src/assets/newLogo.png" alt="Recy-clique" ></img>
             </a>
 
           </Link>
