@@ -6,8 +6,10 @@ exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('susu').del()
   await knex('susu').insert([
-    {id: 1, name: 'rowValue1', password_hash :'123'},
-    {id: 2, name: 'rowValue2', password_hash :'123'},
-    {id: 3, name: 'rowValue3', password_hash :'123'}
+    {id: 1, name: 'Mueller Group', password_hash :'mueller', owner: 2},
+    {id: 2, name: 'Hoeger Group', password_hash :'hoeger', owner: 4},
+    {id: 3, name: 'Hickle and Sons', password_hash :'hickle', owner: 1},
+    {id: 4, name: 'Schuster Inc', password_hash :'schuster', owner: 3}
+    
   ]);
 };
