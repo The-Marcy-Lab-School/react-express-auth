@@ -18,7 +18,7 @@ class Susu{
         try{
             const {rows} = await knex.raw('SELECT * FROM users_susu WHERE users_susu.user_id=?',[user_id])
 
-            return rows.map((post) => new Susu(post));
+            return rows
         }
         catch(error){
             console.log(error);
