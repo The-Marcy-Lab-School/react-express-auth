@@ -20,7 +20,7 @@ header {
   background-image:  url("./media/black.png") ;
 }
 
-brand{
+.brand{
   display: flex;
   align-items: center;
 }
