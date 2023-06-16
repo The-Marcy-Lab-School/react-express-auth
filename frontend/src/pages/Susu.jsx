@@ -1,12 +1,18 @@
-import '../Card.css';
+import { useState, useEffect, useContext } from 'react';
+import CurrentSusuContext from '../contexts/susu-context';
+import SusuCard from '../components/SusuCard';
 
 export default function Susu() {
-    return(     <div>
-      <h1>Susu Page</h1>
-      <div className="card">
-        <img className="card-image" src="https://susupay.app/static/media/edited-logo.9da11c10679ce69c07b872082cf17208.svg" alt="Card" />
-        <h2 className="card-title">Susu Title</h2>
-        <p className="card-description">Susu description</p>
-      </div>
-    </div>)
+  const { currentSusulist, setCurrentSusulist } = useContext(CurrentSusuContext);
+
+  console.log(currentSusulist);
+  
+  return (
+    <>
+      {currentSusulist.map((susu) => (
+        // console.log(susu)
+        <SusuCard key={susu.id} susu={susu} />
+      ))}
+    </>
+  );
 }
