@@ -155,3 +155,12 @@ form {
   display: flex;
   align-items:center;
 }
+
+#newsCard{
+  transition-duration: .5s;
+}
+
+#newsCard:hover{
+  cursor: pointer;
+  transform: scale(1.03);
+}
