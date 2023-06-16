@@ -1,7 +1,7 @@
 import { fetchHandler } from "../utils";
 
 export default function HomePage() {
-  const content = fetchHandler("http://127.0.0.1:3000/api/susu")
+  const content = fetchHandler("/api/susu")
   console.log(content)
   return (<>
     <h1>Home</h1>
@@ -12,7 +12,7 @@ export default function HomePage() {
       <p>Susu is a traditional savings system where a group of people pool their money together regularly. Each member contributes a fixed amount, and the total amount is given to one member at each cycle until everyone has received their share. It's a way to save money, support each other, and reach financial goals as a community.  
       </p>
     <h2>Rules</h2>
-      <p>
+      <>
         <ul>
           <li>Rule 1: Members contribute a fixed amount of money regularly.</li>
           <li>Rule 2: A rotation schedule determines who receives the pooled funds.</li>
@@ -20,6 +20,6 @@ export default function HomePage() {
           <li>Rule 4: Members must commit to consistent contributions.</li>
           <li>Rule 5: The susu continues until each member has received their share.</li>
         </ul>
-      </p>
+      </>
   </>);
 }
