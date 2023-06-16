@@ -1,33 +1,18 @@
-import SusuCard from "../components/susu-card"
-import { useState, useEffect } from "react";
-// { filter.map(robot => { return <BotCard key={robot.id} bot={robot}/>}) }
-function Susu() {
-  const [susuList, setSusuList] = useState([]);
- 
-  useEffect(()=>{
-    const handleFetch = async () => {
-      try {
-          // const r = await fetch(`api/me`);
-          // const data = await r.json();
-          // console.log(data)
-          const suRes = await fetch(`/api/susus/${data.id}`);
-          const suData = await suRes.json();
-          setSusuList(suData)
-      } catch (err) {
-          console.error(err);
-          return null;
-      }
-    }
-    handleFetch()
+import { useState, useEffect, useContext } from 'react';
+import CurrentSusuContext from '../contexts/susu-context';
+import SusuCard from '../components/SusuCard';
 
-    },[])
-    console.log(susuList)
+export default function Susu() {
+  const { currentSusulist, setCurrentSusulist } = useContext(CurrentSusuContext);
 
-    return(     
-    <div>
-      { filter.map(robot => { return <SusuCard key={robot.id} bot={robot}/>}) }
-      <SusuCard></SusuCard>
-    </div>
-    )
+  console.log(currentSusulist);
+  
+  return (
+    <>
+      {currentSusulist.map((susu) => (
+        // console.log(susu)
+        <SusuCard key={susu.id} susu={susu} />
+      ))}
+    </>
+  );
 }
-export default Susu;
