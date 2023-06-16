@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import {createEvent} from "../adapters/events-adapter";
+import CurrentUserContext from "../contexts/current-user-context"
 const EventForm = ({ isOpen, onClose }) => {
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const {currentUser} = useContext(CurrentUserContext)
+    const handleSubmit = async (e) => {
+        // e.preventDefault()
         const formData = new FormData(e.target);
         const postData = {};
         for (let [key, value] of formData.entries()) {
@@ -8,8 +12,26 @@ const EventForm = ({ isOpen, onClose }) => {
         }
         e.target.reset()
         onClose()
-        console.log(postData)
+        // console.log(postData)
+
+
+        const dataObject = {
+            organizer_id: currentUser.id,
+            type: postData.type,
+            title: postData.title,
+            start_date: postData.start_date,
+            end_date: postData.end_date,
+            start_time: postData.start_time,
+            end_time: postData.end_time,
+            location: postData.location,
+            borough: postData.borough,
+            description: postData.description,
+            image: postData.image || ''
+        }
+        const result = await createEvent(dataObject);
+        console.log("result", result)
     }
+
     return (
         <div className={`modal ${isOpen ? 'is-active' : ''}`}>
             <div className="modal-background" onClick={onClose}></div>
@@ -33,22 +55,22 @@ const EventForm = ({ isOpen, onClose }) => {
                             <input className="input" name='title' id='eventFormTitle' type="text" required></input>
                             <label htmlFor='description'>Description</label>
                             <textarea className="textarea" id='description' name='description' placeholder="e.g. This is my event and why it is happening" required></textarea>
-                            <label htmlFor="startDate">Select ending date:</label>
-                            <input type="date" id="startDate" name="startDate" required></input>
-                            <label htmlFor="startTime">Select a starting time:</label>
-                            <input type="time" id="startTime" name="startTime" required></input>
-                            <label htmlFor="startDate">Select ending date:</label>
-                            <input type="date" id="endDate" name="endDate" required></input>
-                            <label htmlFor="startTime">Select a ending time:</label>
-                            <input type="time" id="endTime" name="endTime" required></input>
+                            <label htmlFor="start_date">Select ending date:</label>
+                            <input type="date" id="startDate" name="start_date" required></input>
+                            <label htmlFor="start_time">Select a starting time:</label>
+                            <input type="time" id="startTime" name="start_time" required></input>
+                            <label htmlFor="start_date">Select ending date:</label>
+                            <input type="date" id="endDate" name="end_date" required></input>
+                            <label htmlFor="start_time">Select a ending time:</label>
+                            <input type="time" id="endTime" name="end_time" required></input>
                             <label htmlFor='eventFormTitle'>Address</label>
-                            <input className="input" name='address' id='eventFormTitle' type="text" placeholder="123 Address str 12345" required></input>
+                            <input className="input" name='location' id='eventFormTitle' type="text" placeholder="123 Address str 12345" required></input>
                             <label htmlFor='borough'>Borough</label>
                             <div className="select">
                                 <select name='borough' id='borough' required>
                                     <option>Manhattan</option>
                                     <option>Brooklyn</option>
-                                    <option>Bronx</option>
+                                    <option>The Bronx</option>
                                     <option>Queens</option>
                                     <option>Staten Island</option>
                                 </select>

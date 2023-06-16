@@ -5,9 +5,9 @@ const Article = ({ article }) => {
     window.open(article.web_url, '_blank');
   };
   return (
-    <div className="card">
-      <div className="card-content">
-        <div className="content">
+    <div class="card mb-4" id='newsCard'>
+      <div class="card-content">
+        <div class="content">
           <div onClick={handleClick}>
             <h2>{article.headline.main}</h2>
             <p>{article.abstract}</p>
@@ -60,25 +60,13 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        overflow: 'auto',
-        marginTop: '30px',
-      }}>
-      <h1 style={{ margin: '20px' }}>NewsFeed</h1>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {articles.map((article) => (
-            <Article key={article._id} article={article} />
-          ))}
-        </div>
-      )}
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', overflow: 'auto', marginTop: '30px', marginBottom: '20px' }}>
+      <h1 style={{ margin: '25px' }} className='title'>NewsFeed</h1>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {articles.map(article => (
+          <Article key={article._id} article={article} />
+        ))}
+      </div>
     </div>
   );
 };
