@@ -39,6 +39,7 @@ Router.get('/volunteer', volunteerController.allVolunteer)
 //EVENT 
 Router.post('/events', eventsController.create)
 Router.get('/events/list', eventsController.list)
+Router.delete('/events', eventsController.destroy)
 
 
 

@@ -12,11 +12,11 @@ class Events {
 
     }
 
-    static async create (user_id, img_url, description, date, time, header) {
+    static async create (user_id, img_url, description, date, time, header,location) {
         try {
-          const query = `INSERT INTO events (user_id, img_url, description, date, time, header)
-            VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
-          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time, header]);
+          const query = `INSERT INTO events (user_id, img_url, description, date, time, header,location)
+            VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time, header,location]);
           return post ? new Events(post) : null;
         } catch (err) {
           console.error(err);
@@ -25,6 +25,7 @@ class Events {
       }
 
     static async delete (event_id)  {
+      console.log(event_id)
         try {
           const query = `DELETE FROM events WHERE event_id = ? RETURNING *`;
           const { rows: [post]} = await knex.raw(query, [event_id]);

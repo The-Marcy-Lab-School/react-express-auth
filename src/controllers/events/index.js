@@ -1,8 +1,9 @@
 const create = require('./create');
 const list = require('./list');
-// const delete = require('./delete');
+const destroy = require('./destroy');
 module.exports = {
   create,
   list,
-  // delete
+  destroy
+  //delete
 };
