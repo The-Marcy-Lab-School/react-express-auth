@@ -8,7 +8,6 @@ exports.up = (knex) =>knex.schema.createTable('users_susu', (table) => {
   table.integer('susu_id').references('id').inTable('susu');
   table.string('make_payments');
   table.timestamps(true, true);
-
 });
 
 /**

@@ -2,21 +2,21 @@ import { Link } from "react-router-dom";
 
 export default function detailsLink() {
     return (
-        <div class = "payment-details">
+        <div className = "payment-details">
           <label>
-            <span class = "name">Amanda</span>
+            <span className = "name">Amanda</span>
             <input type="checkbox" />
           </label>
           <label>
-            <span class = "name">Ashley</span>
+            <span className = "name">Ashley</span>
             <input type="checkbox" />
           </label>
           <label>
-            <span class = "name">Casterly</span>
+            <span className = "name">Casterly</span>
             <input type="checkbox" />
           </label>
           <label>
-            <span class = "name">Luis</span>
+            <span className = "name">Luis</span>
             <input type="checkbox" />
           </label>
         </div>

@@ -24,6 +24,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/susu' element={<Susu />} />
+        <Route path='/susu/:id' element={<UsersPage />} />
         <Route path='/createSusu' element={<CreateSusu />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
