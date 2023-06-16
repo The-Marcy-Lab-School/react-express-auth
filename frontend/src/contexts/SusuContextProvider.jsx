@@ -9,6 +9,7 @@ export default function CurrentSusuContextProvider({ children }) {
       try {
           const r = await fetch(`api/me`);
           const data = await r.json();
+          console.log(data)
           const suRes = await fetch(`/api/susus/${data.id}`);
           const suData = await suRes.json();
           setCurrentSusulist(suData)
