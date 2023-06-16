@@ -21,13 +21,37 @@ class Reviews {
           return null;
         }
       }
-
+      static async find(id) {
+        const query = 'SELECT * FROM reviews WHERE id = ?';
+        const { rows: [review] } = await knex.raw(query, [id]);
+        return review ? new Reviews(review) : null;
+      }
       static async list() {
         const query = 'SELECT * FROM reviews';
         const { rows } = await knex.raw(query);
         return rows.map((reviews) => new Reviews(reviews));
       }
+      static async delete(id) {
+        try {
+          await knex.raw(`DELETE FROM reviews WHERE id = ?`, [Number(id)])
+          const query = `DELETE FROM reviews WHERE id = ? RETURNING *;`
+          const res = await knex.raw(query, [Number(id)]);
+          return res.rows[0];
+        } catch (err) {
+          console.error(err);
+          return null;
+        }
+      }
 
-}
+      update = async (review_body, rating) => { // dynamic queries are easier if you add more properties
+        const [updatedReview] = await knex('reviews')
+          .where({ id: this.id })
+          .update({ review_body, rating})
+          .returning('*');
+        return updatedReview ? new  Reviews(updatedReview) : null;
+      };
+    
+
+    }
 
 module.exports = Reviews;
