@@ -20,37 +20,18 @@ const Article = ({ article }) => {
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = fetch(
-          'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=environment&api-key=jpOGZTJ7dvp2jenrZozAWBi37rXc0sJo'
-        );
-        const response2 = fetch(
-          'https://newsdata.io/api/1/news?apikey=pub_24581aea2419d64bc1af13fab0cfa12222033&q=environment&language=en&category=environment'
-        );
+        const response = await fetch('https://api.nytimes.com/svc/search/v2/articlesearch.json?q=environment&api-key=jpOGZTJ7dvp2jenrZozAWBi37rXc0sJo');
 
-        const [data1, data2] = await Promise.all([response1, response2]);
-
-        if (!data1.ok || !data2.ok) {
+        if (!response.ok) {
           throw new Error('Error fetching articles');
         }
 
-        const articles1 = await data1.json();
-        const articles2 = await data2.json();
-
-        const articlesFromSecondAPI = articles2.data.results;
-
-        // Combine articles from both APIs
-        const combinedArticles = [
-          ...articles1.response.docs,
-          ...articlesFromSecondAPI,
-        ];
-
-        setArticles(combinedArticles);
-        setIsLoading(false);
+        const data = await response.json();
+        setArticles(data.response.docs);
       } catch (error) {
         console.log(error);
       }
@@ -70,6 +51,5 @@ const ArticleList = () => {
     </div>
   );
 };
-
 
 export default ArticleList;
