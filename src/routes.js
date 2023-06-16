@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const groceryController = require('./controllers/grocerylist');
+const itemsController = require('./controllers/itemslist');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -25,5 +26,10 @@ Router.post('/grocerylist', groceryController.create);
 Router.get('/grocerylist', groceryController.list);
 Router.delete('/grocerylist', groceryController.destroyAll);
 Router.patch('/grocerylist/:id',groceryController.update );
+
+Router.post('/itemslist', itemsController.create);
+Router.get('/itemslist', itemsController.list);
+Router.delete('/itemslist', itemsController.destroyAll);
+Router.patch('/itemslist/:id',itemsController.update );
 
 module.exports = Router;
