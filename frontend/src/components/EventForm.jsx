@@ -33,13 +33,13 @@ const EventForm = ({ isOpen, onClose }) => {
                             <input className="input" name='title' id='eventFormTitle' type="text" required></input>
                             <label htmlFor='description'>Description</label>
                             <textarea className="textarea" id='description' name='description' placeholder="e.g. This is my event and why it is happening" required></textarea>
-                            <label htmlFor="startDate">Select ending date:</label>
+                            <label htmlFor="startDate">Select start date:</label>
                             <input type="date" id="startDate" name="startDate" required></input>
-                            <label htmlFor="startTime">Select a starting time:</label>
+                            <label htmlFor="startTime">Select start time:</label>
                             <input type="time" id="startTime" name="startTime" required></input>
-                            <label htmlFor="startDate">Select ending date:</label>
+                            <label htmlFor="startDate">Select end date:</label>
                             <input type="date" id="endDate" name="endDate" required></input>
-                            <label htmlFor="startTime">Select a ending time:</label>
+                            <label htmlFor="startTime">Select end time:</label>
                             <input type="time" id="endTime" name="endTime" required></input>
                             <label htmlFor='eventFormTitle'>Address</label>
                             <input className="input" name='address' id='eventFormTitle' type="text" placeholder="123 Address str 12345" required></input>

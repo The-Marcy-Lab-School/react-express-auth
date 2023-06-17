@@ -21,8 +21,8 @@ export default function LoginPage() {
   if (currentUser) return <Navigate to="/" />;
 
   return <>
-    <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
+    <h1 id="signUpText" style={{ fontWeight: 'bolder', fontSize: '1.5em'}}>Login</h1>
+    <form id="form" onSubmit={handleSubmit}>
       <label htmlFor="username">Username</label>
       <input type="text" autoComplete="username" id="username" name="username" />
 

@@ -36,8 +36,8 @@ export default function SignUpPage() {
   };
 
   return <>
-    <h1>Sign Up</h1>
-    <form onSubmit={handleSubmit} onChange={handleChange}>
+    <h1 id="signUpText" style={{ fontWeight: 'bolder', fontSize: '1.5em'}}>Sign Up</h1>
+    <form id="form" onSubmit={handleSubmit} onChange={handleChange}>
       <label htmlFor="firstName">First Name</label>
       <input
         autoComplete="off"
@@ -93,6 +93,6 @@ export default function SignUpPage() {
       <button>Sign Up Now!</button>
     </form>
     {!!errorText && <p>{errorText}</p>}
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
+    <p id="signUpText">Already have an account with us?</p> <p id="signUpText"><Link to ="/login">Log in!</Link></p>
   </>;
 }

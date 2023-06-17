@@ -100,31 +100,53 @@ form {
 #landingSection1 {
   display: flex;
   align-items: center;
-  height: 70vh;
+  height: 60vh;
   width: 100vw;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  /* background-image: url('https://www.thenewatlantis.com/wp-content/uploads/2010/09/TNA28-Garreau-banner.jpg'); */
+  /* background-color: #1A759F; */
   background-image: url('https://cdn.pixabay.com/photo/2022/11/26/08/27/plastic-waste-7617451_1280.jpg');
 }
 
 #landingSection1 h1,
 #landingSection2 h1,
-#landingSection2 p {
+#landingSection3 h1 {
   color: white;
-  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+  text-shadow: 1px 1px 1px black, 0 0 1em black, 0 0 0.2em black;
+}
+
+#landingSection3 h2,
+#landingSection2 p  {
+  color: white;
+  text-shadow: 0.9px 0.9px 0.9px black, 0 0 1em black, 0 0 0.2em black;
 }
 
 #landingSection2 {
-  background-color: #243551;
+  background-color: #F2FFFB;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 5em;
+}
+
+#landingSection3 {
+  background-color: #34A0A4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5em;
+  height: 50vh;
+  width: 100vw;
 }
 
 #landingCreateButton {
   width: 150px;
+  margin-top: 3em;
+  margin-bottom: 0em;
 }
 
 .eventBox{
@@ -146,4 +168,14 @@ form {
   object-fit: cover;
   overflow: hidden;
   margin: 0 auto;
+}
+
+#form {
+  background-color: #DBFFF5;
+}
+
+#signUpText {
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
