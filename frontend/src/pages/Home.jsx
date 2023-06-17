@@ -1,43 +1,27 @@
-const reviews = [
-  {
-    name: 'Doctor Quan',
-    content: 'Best Doctor!',
-    rating: 5,
-    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.theabfm.org%2Fabout%2Fexecutives%2Fmartin-quan-md&psig=AOvVaw1SgkJPge6AUs3Quq2wFy3_&ust=1686944675771000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNC_9OKExv8CFQAAAAAdAAAAABAE', 
-  },
-  {
-    name: 'Bon Secours',
-    content: "They can't do anything",
-    rating: 0,
-    image:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.theabfm.org%2Fabout%2Fexecutives%2Fmartin-quan-md&psig=AOvVaw1SgkJPge6AUs3Quq2wFy3_&ust=1686944675771000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNC_9OKExv8CFQAAAAAdAAAAABAE', 
-  },
-  {
-    name: 'City MD',
-    content: "Sometimes good, sometimes bad",
-    rating: 3.5,
-    image:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.theabfm.org%2Fabout%2Fexecutives%2Fmartin-quan-md&psig=AOvVaw1SgkJPge6AUs3Quq2wFy3_&ust=1686944675771000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNC_9OKExv8CFQAAAAAdAAAAABAE', 
-  },// Add more reviews as needed
-];
+import { useContext, useEffect, useState } from 'react';
+// import { useNavigte, useParams } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
+import { getUser } from '../adapters/user-adapter';
+import { logUserOut } from '../adapters/auth-adapter';
+import DoctorCard from "../components/DoctorCard";
+import { doctors } from '../doctorsAndReview';
+import { reviews } from '../doctorsAndReview';
 
-const ListOfReviews = () => {
-  const handleReviewClick = (review) => {
-    console.log(`Clicked review: ${review.name}`);
-  };
 
-  return (
-    <div>
-      <h1>Home</h1>
-      <p>This is the page the user sees once they are signed in</p>
-      {reviews.map((review, index) => (
-        <div className="card" key={index} onClick={() => handleReviewClick(review)}>
-            <img src={review.image} alt={review.name} className="review-image" />
-          <h3>{review.name}</h3>
-          <p>{review.content}</p>
-          <p>Rating: {review.rating}</p>
+ export default function DoctorsList(){
+  console.log(reviews)
+  const { pageId, id } = useParams();
+      return (
+        <>
+         <h4>
+          <NavLink to="/create-post">Cant Find a Doctor? Add One Here</NavLink>
+          </h4>
+        <div className="ui centered cards" >
+            {doctors.map(doctor => { return <DoctorCard key={doctor.id} doctor={doctor} reviews={reviews}/>})}
         </div>
-      ))}
-    </div>
-  );
-};
+        </>
+      )      
+    
+}
 
-export default ListOfReviews;

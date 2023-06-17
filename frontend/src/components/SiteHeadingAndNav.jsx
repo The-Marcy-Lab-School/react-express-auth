@@ -1,26 +1,56 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
+  const [searchValue, setSearchvValue] = useState('')
 
-  return <header>
-    <a id='logo' href='/'>CareCompanion</a>
-    <nav>
-      <ul>
-      <li><NavLink to='/users' end={true}>Welcome</NavLink></li>
-        <li><NavLink to='/'>Home</NavLink></li>
-        {
-          currentUser
-            ? <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
-            : <>
-              {/* <li><NavLink to='/login'>Login</NavLink></li> */}
-              <li><NavLink to='/sign-up'>Sign Up</NavLink></li>
-              <li><NavLink to='/NotFound'>Add Doctor/Facility Here</NavLink></li>
+  const handleSearchValue = (e) => {
+    setSearchvValue(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(searchValue)
+    setSearchvValue('')
+  }
+
+  return (
+    <header>
+      <a id="logo" href="/">
+        Care Companion
+      </a>
+      {currentUser && <input  onSubmit={handleSubmit} type="text" placeholder="Search.." value={searchValue} onChange={handleSearchValue} />}
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/">Mission</NavLink>
+          </li>
+          {/* <li>
+            <NavLink to="/users" end={true}>
+              Users
+            </NavLink>
+          </li> */}
+          {currentUser ? (
+            <>
+            <li>
+                <NavLink to="/home">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to={`/users/${currentUser.id}`}>
+                  {currentUser.username}
+                </NavLink>
+              </li>
+              
             </>
-        }
-      </ul>
-    </nav>
-  </header>;
+          ) : (
+            <li>
+              <NavLink to="/signuplogin">Sign Up / Login</NavLink>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </header>
+  );
 }
