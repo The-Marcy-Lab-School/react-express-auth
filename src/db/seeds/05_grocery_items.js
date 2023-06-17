@@ -10,5 +10,7 @@
           
             await knex("grocery_items_table").insert([
               { grocery_list_id: 1, item_id: 1 },
+              { grocery_list_id: 3, item_id: 1 },
+              { grocery_list_id: 2, item_id: 1 },
             ]);
           };

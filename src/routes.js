@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const groceryController = require('./controllers/grocerylist');
+const itemsController = require('./controllers/itemslist');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -23,7 +24,12 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 //grocery routes
 Router.post('/grocerylist', groceryController.create);
 Router.get('/grocerylist', groceryController.list);
-Router.delete('/grocerylist', groceryController.destroyAll);
+Router.delete('/grocerylist/:id', groceryController.destroy);
 Router.patch('/grocerylist/:id',groceryController.update );
+
+Router.post('/itemslist', itemsController.create);
+Router.get('/itemslist', itemsController.list);
+Router.delete('/itemslist/:id', itemsController.destroy);
+Router.patch('/itemslist/:id',itemsController.update );
 
 module.exports = Router;
