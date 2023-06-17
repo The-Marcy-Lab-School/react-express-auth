@@ -7,7 +7,9 @@ export default function HomePage() {
 
     <section className='section is-medium has-text-centered' id='landingSection2'>
       <h1 className='is-size-3 has-text-weight-bold'>Discover and join fun community events in any NYC borough! This feature brings you the opportunity to join cleanups, exchanges and more, right at your fingertips.</h1>
-      <p className='is-size-4 py-5 pb-5'> Browse curated events, filter by borough or event type, and easily join to make a positive impact in your own neighborhood! Connect with like-minded people, and even organize your own exchange or cleanup event.
+      <p className='is-size-4 py-5 pb-5'> Browse events, and easily join to make a positive impact in your own neighborhood!
+      <br></br>
+       Connect with like-minded people, and even organize your own event.
       <br></br>
       Join now and become an agent of change in our beloved NYC!</p>
       <Link to='/events'>

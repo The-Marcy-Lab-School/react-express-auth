@@ -118,7 +118,9 @@ form {
 }
 
 #landingSection3 h2,
-#landingSection2 p  {
+#landingSection2 p,
+#landingSection3 h1,
+#landingSection3 h2 {
   color: white;
   text-shadow: 0.9px 0.9px 0.9px black, 0 0 1em black, 0 0 0.2em black;
 }
@@ -138,9 +140,10 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   padding: 5em;
-  height: 50vh;
-  width: 100vw;
+  /* height: 50vh;
+  width: 100vw; */
 }
 
 #landingCreateButton {
@@ -171,7 +174,7 @@ form {
 }
 
 #form {
-  background-color: #DBFFF5;
+  background-color: #EAFDFF;
 }
 
 #signUpText {
