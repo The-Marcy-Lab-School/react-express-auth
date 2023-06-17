@@ -14,6 +14,6 @@
             // Deletes ALL existing entries
           
             await knex("items").insert([
-              {product_name: "apple", ecoscore_grade: "good", ingredients_text: "apple", additives_original_tags: "404", image_front_thumb_url: "hi.png", stores: "cvs", nutriscore_grade: "hi", nova_group: "10",product_id: "24"},
+              {"id": "44", product_name: "apple", ecoscore_grade: "good", ingredients_text: "apple", additives_original_tags: "404", image_front_thumb_url: "hi.png", stores: "cvs", nutriscore_grade: "hi", nova_group: "10"},
             ]);
           };

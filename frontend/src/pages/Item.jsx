@@ -22,42 +22,35 @@ export default function Item() {
   const [nova, setNova] = useState(null);
   const [ID, setId] = useState(null);
 
-  // nameBrand()
 
   useEffect(() => {
-    const setAll = async() => {
-        await setName(`${product.product_name}-${product.quantity}`);
-        
-        product.ecoscore_grade !== "not-applicable" ? 
-        await setEco(product.ecoscore_grade) : null;
+    const setAll = async () => {
+      await setName(`${product.product_name}-${product.quantity}`);
 
-        await setIngredients(product.ingredients_text);
+      product.ecoscore_grade !== "not-applicable"
+        ? await setEco(product.ecoscore_grade)
+        : null;
 
-        product.additives_original_tags.length !== 0 ?
-            await setAdditives(product.additives_original_tags) : null;
-        
-        await setImg(product.image_front_thumb_url);
-        await setStores(product.stores);
-        await setNutri(product.nutriscore_grade);
-        await setNova(product.nova_group);
-        await setId(product._id);
+      await setIngredients(product.ingredients_text);
+
+      product.additives_original_tags.length !== 0
+        ? await setAdditives(product.additives_original_tags)
+        : null;
+
+      await setImg(product.image_front_thumb_url);
+      await setStores(product.stores);
+      await setNutri(product.nutriscore_grade);
+      await setNova(product.nova_group);
+      await setId(product._id);
     };
     setAll();
-    // scoreEco();
-    // ingSet();
-    // addSet();
-    // imgSet();
-    // storesSet();
-    // nutriSet();
-    // novaSet();
-    // idSet();
   }, []);
 
   if (!product) return <Page404 />;
   const handlerAddButton = async () => {
     console.log(name);
-    // const doFetch = async () => {
     const newItem = {
+      id: ID,
       product_name: name,
       ecoscore_grade: ecoscore,
       ingredients_text: ingredient,
@@ -66,7 +59,6 @@ export default function Item() {
       stores: store,
       nutriscore_grade: nutri,
       nova_group: nova,
-      product_id: ID,
     };
     await fetchHandler(`/api/itemslist`, {
       method: "POST",
@@ -75,22 +67,14 @@ export default function Item() {
       },
       body: JSON.stringify(newItem),
     });
-    // };
-    // nameBrand();
     console.log(name);
-    // doFetch();
   };
-  const handlerRemoveButton = async (id) => {
-    const itemDelete = {
-        "product_id": id
-    };
+  const handlerRemoveButton = async () => {
     await fetchHandler(`/api/itemslist/${id}`, {
-        method: 'DELETE',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(itemDelete),
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   };
   console.log(product.product_name);
@@ -104,7 +88,7 @@ export default function Item() {
   console.log("Nova", nova);
   console.log("Id", ID);
   //   console.log(product);
-    console.log("Quantity:", product.quantity)
+  console.log("Quantity:", product.quantity);
   //   console.log(typeof product.product_name);
   //   console.log(typeof product.ecoscore_grade);
   //   console.log(product.ingredients_text); text
@@ -178,7 +162,9 @@ export default function Item() {
               <button className="ui button fluid" onClick={handlerAddButton}>
                 Add
               </button>
-              <button className="ui button fluid" onClick={handlerRemoveButton}>Remove</button>
+              <button className="ui button fluid" onClick={handlerRemoveButton}>
+                Remove
+              </button>
             </div>
           </div>
         </div>
