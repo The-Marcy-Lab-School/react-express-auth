@@ -25,5 +25,8 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 
 Router.get('/reviews', reviewController.list);
 Router.post('/reviews', reviewController.create);
+Router.get('/reviews/:id', reviewController.show);
+Router.delete('/reviews/:id', reviewController.destroy);
+Router.patch('/reviews/:id', reviewController.update);
 
 module.exports = Router;
