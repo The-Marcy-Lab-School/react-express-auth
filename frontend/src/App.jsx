@@ -10,6 +10,7 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 
+
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {

@@ -16,7 +16,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #000;
+  background: #26c4dc;
 }
 
 #logo {
@@ -51,4 +51,34 @@ form {
   color: #EEBC32;
   font-weight: bold;
   font-style: italic;
+}
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #beeae7;
+
+}
+
+.card:hover {
+  background-color: #f0f0f0;
+}
+
+.card h3 {
+  font-size: 18px;
+  color: #333;
+}
+
+.card p {
+  margin-bottom: 5px;
+}
+
+.card p.rating {
+  font-weight: bold;
+} 
+.box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
 }
