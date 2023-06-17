@@ -23,15 +23,15 @@ export default function Item() {
 
   console.log(product);
   console.log(product.quantity)
-//   console.log(typeof product.product_name);
-//   console.log(typeof product.ecoscore_grade);
-//   console.log(product.ingredients_text); text
-//   console.log(product.additives_original_tags); Array
-//   console.log(typeof product.image_front_thumb_url);
-//   console.log(typeof product.stores)
-//   console.log(typeof product.nutriscore_grade)
-//   console.log(typeof product.nova_group);
-//   console.log(Number(product._id));
+//   console.log(typeof product.product_name); string
+//   console.log(product.ecoscore_grade);   not-applicable  string
+//   console.log(product.ingredients_text); string
+//   console.log(typeof product.additives_original_tags.join(" ")); string
+//   console.log(typeof product.image_front_thumb_url); string
+//   console.log(typeof product.stores); string
+//   console.log(typeof product.nutriscore_grade) string
+//   console.log(typeof product.nova_group); number
+//   console.log(Number(product._id)); number
 
 
   return (
