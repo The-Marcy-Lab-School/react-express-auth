@@ -1,6 +1,6 @@
 const knex = require('../knex');
 class Items{
-    constructor({id,product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group}){
+    constructor({id,product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group,product_id}){
         this.id = id;
         this.product_name = product_name;
         this.ecoscore_grade = ecoscore_grade;
@@ -10,12 +10,13 @@ class Items{
         this.stores = stores;
         this.nutriscore_grade = nutriscore_grade;
         this.nova_group = nova_group;
+        this.product_id = product_id
     }
     //creating items for item list
-    static async create(product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group) {
-        const query = `INSERT INTO Items (product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group)
-          VALUES (?,?,?,?,?,?,?,?) RETURNING *`;
-        const { rows: [item] } = await knex.raw(query, [product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group]);
+    static async create(product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group,product_id) {
+        const query = `INSERT INTO Items (product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group,product_id)
+          VALUES (?,?,?,?,?,?,?,?,?) RETURNING *`;
+        const { rows: [item] } = await knex.raw(query, [product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group,product_id]);
         return new Items(item);
       }
       //finding an item 
@@ -31,7 +32,7 @@ class Items{
       }
 
       //Updating information on an item
-      static async update(id,product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group) {
+      static async update(id,product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group,product_id) {
         try {
           const [updatedItem] = await knex('items')
             .where({ id: id })
@@ -41,7 +42,8 @@ class Items{
               image_front_thumb_url:image_front_thumb_url,
               stores: stores,
               nutriscore_grade: nutriscore_grade,
-              nova_group: nova_group })
+              nova_group: nova_group,
+              product_id: product_id })
             .returning('*');
             
           return updatedItem ? new Grocery_list(updatedItem) : null;

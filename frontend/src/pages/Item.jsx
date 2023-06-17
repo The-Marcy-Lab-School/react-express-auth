@@ -1,7 +1,8 @@
 import Page404 from "./Page404";
 import { useNavigate, useParams } from "react-router-dom";
-import { useContext , useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
+import { fetchHandler } from "../utils";
 
 export default function Item() {
   const { id } = useParams();
@@ -10,29 +11,109 @@ export default function Item() {
   const product = products.find(
     (product) => parseInt(product._id) === parseInt(id)
   );
-  const [name, setName] = useState('');
+
+  const [name, setName] = useState(null);
+  const [ecoscore, setEco] = useState(null);
+  const [ingredient, setIngredients] = useState(null);
+  const [additives, setAdditives] = useState(null);
+  const [img, setImg] = useState(null);
+  const [store, setStores] = useState(null);
+  const [nutri, setNutri] = useState(null);
+  const [nova, setNova] = useState(null);
+  const [ID, setId] = useState(null);
+
+  // nameBrand()
+
+  useEffect(() => {
+    const setAll = async() => {
+        await setName(`${product.product_name}-${product.quantity}`);
+        
+        product.ecoscore_grade !== "not-applicable" ? 
+        await setEco(product.ecoscore_grade) : null;
+
+        await setIngredients(product.ingredients_text);
+
+        product.additives_original_tags.length !== 0 ?
+            await setAdditives(product.additives_original_tags) : null;
+        
+        await setImg(product.image_front_thumb_url);
+        await setStores(product.stores);
+        await setNutri(product.nutriscore_grade);
+        await setNova(product.nova_group);
+        await setId(product._id);
+    };
+    setAll();
+    // scoreEco();
+    // ingSet();
+    // addSet();
+    // imgSet();
+    // storesSet();
+    // nutriSet();
+    // novaSet();
+    // idSet();
+  }, []);
 
   if (!product) return <Page404 />;
-  const handlerAddButton = () =>{
-    const nameHandler = () => setName(`${product.product_name}-${product.quantity}`);
+  const handlerAddButton = async () => {
+    console.log(name);
+    // const doFetch = async () => {
     const newItem = {
-        name,
-        
-    }
-  }
-
-  console.log(product);
-  console.log(product.quantity)
-//   console.log(typeof product.product_name); string
-//   console.log(product.ecoscore_grade);   not-applicable  string
-//   console.log(product.ingredients_text); string
-//   console.log(typeof product.additives_original_tags.join(" ")); string
-//   console.log(typeof product.image_front_thumb_url); string
-//   console.log(typeof product.stores); string
-//   console.log(typeof product.nutriscore_grade) string
-//   console.log(typeof product.nova_group); number
-//   console.log(Number(product._id)); number
-
+      product_name: name,
+      ecoscore_grade: ecoscore,
+      ingredients_text: ingredient,
+      additives_original_tags: additives,
+      image_front_thumb_url: img,
+      stores: store,
+      nutriscore_grade: nutri,
+      nova_group: nova,
+      product_id: ID,
+    };
+    await fetchHandler(`/api/itemslist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    });
+    // };
+    // nameBrand();
+    console.log(name);
+    // doFetch();
+  };
+  const handlerRemoveButton = async (id) => {
+    const itemDelete = {
+        "product_id": id
+    };
+    await fetchHandler(`/api/itemslist/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(itemDelete),
+    });
+  };
+  console.log(product.product_name);
+  console.log("Name:", name);
+  console.log("EcoScore", ecoscore);
+  console.log("Ingredients:", ingredient);
+  console.log("Additives:", additives);
+  console.log("Img:", img);
+  console.log("Store:", store);
+  console.log("Nutri", nutri);
+  console.log("Nova", nova);
+  console.log("Id", ID);
+  //   console.log(product);
+    console.log("Quantity:", product.quantity)
+  //   console.log(typeof product.product_name);
+  //   console.log(typeof product.ecoscore_grade);
+  //   console.log(product.ingredients_text); text
+  //   console.log(product.additives_original_tags); Array
+  //   console.log(typeof product.image_front_thumb_url);
+  //   console.log(typeof product.stores)
+  //   console.log(typeof product.nutriscore_grade)
+  //   console.log(typeof product.nova_group); number
+  //   console.log(Number(product._id));
 
   return (
     <>
@@ -59,13 +140,13 @@ export default function Item() {
                 {product.ingredients_text}
               </p>
               {/* TRY TO ADD WHERE IF NO ADDITIVES DO SHOW ATTRIBUTE */}
-              {
-              product.additives_original_tags.length !== 0 && <p>
-                <strong>Additives: </strong>
-                {product.additives_original_tags.join(" ").toUpperCase()}
-              </p>
-              }
-             
+              {product.additives_original_tags.length !== 0 && (
+                <p>
+                  <strong>Additives: </strong>
+                  {product.additives_original_tags.join(" ").toUpperCase()}
+                </p>
+              )}
+
               <br />
               <div className="row">
                 <div className="ui segment">
@@ -94,8 +175,10 @@ export default function Item() {
               >
                 Go Back
               </button>
-              <button className="ui button fluid">Add</button>
-              <button className="ui button fluid">Remove</button>
+              <button className="ui button fluid" onClick={handlerAddButton}>
+                Add
+              </button>
+              <button className="ui button fluid" onClick={handlerRemoveButton}>Remove</button>
             </div>
           </div>
         </div>
