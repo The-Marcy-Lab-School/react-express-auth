@@ -1,6 +1,7 @@
-export default function reviewCard (){
+export default function ReviewCard ({ review }){
     return <>
-    <article>{reviews}</article>
+    <h4>{review.rating}</h4>
+    <article>{review.review}</article>
     
     </>
 }

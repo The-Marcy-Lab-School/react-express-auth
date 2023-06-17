@@ -1,63 +1,27 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from 'react';
+// import { useNavigte, useParams } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
+import { getUser } from '../adapters/user-adapter';
+import { logUserOut } from '../adapters/auth-adapter';
 import DoctorCard from "../components/DoctorCard";
-import DoctorContext from "../contexts/DoctorContext";
+import { doctors } from '../doctorsAndReview';
+import { reviews } from '../doctorsAndReview';
 
-const doctors = [
-  {
-    id:0,
-    name: "dr.a",
-    specialty: "cardiology",
-    location: "123 Brooklyn NY",
-    overallrating: "5/5",
-    picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ7BZRI5Ga1aBYWfiUPF4JDk5XG_kRghK5Dw&usqp=CAU'
-  },
-  {
-    id:1,
-    name: "dr.b",
-    specialty: "Pediatrics",
-    location: "123 Brooklyn NY",
-    overallrating: "3/5",
-    picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ7BZRI5Ga1aBYWfiUPF4JDk5XG_kRghK5Dw&usqp=CAU'
-  },
-  {
-    id:2,
-    name: "dr.c",
-    specialty: "Dermatology",
-    location: "123 Brooklyn NY",
-    overallrating: "2/5",
-    picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ7BZRI5Ga1aBYWfiUPF4JDk5XG_kRghK5Dw&usqp=CAU'
-  },
-  {
-    id: 3,
-    name: "dr.d",
-    specialty: "Psychiatry",
-    location: "123 Brooklyn NY",
-    overallrating: "1/5",
-    picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ7BZRI5Ga1aBYWfiUPF4JDk5XG_kRghK5Dw&usqp=CAU'
-  },
-  {
-    id: 4,
-    name: "dr.e",
-    specialty: "Orthopedic Surgery",
-    location: "123 Brooklyn NY",
-    overallrating: "0/5",
-    picture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ7BZRI5Ga1aBYWfiUPF4JDk5XG_kRghK5Dw&usqp=CAU'
-  },
-];
 
  export default function DoctorsList(){
-  
-    
-      console.log(doctors)
-
-        
-      
+  console.log(reviews)
+  const { pageId, id } = useParams();
       return (
+        <>
+         <h4>
+          <NavLink to="/create-post">Cant Find a Doctor? Add One Here</NavLink>
+          </h4>
         <div className="ui centered cards" >
-            {doctors.map(doctor => { return <DoctorCard key={doctor.id} doctor={doctor} />})}
+            {doctors.map(doctor => { return <DoctorCard key={doctor.id} doctor={doctor} reviews={reviews}/>})}
         </div>
-
+        </>
       )      
     
 }
-export { doctors };
+

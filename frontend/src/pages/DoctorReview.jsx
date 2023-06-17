@@ -1,15 +1,17 @@
 import { Link, useParams} from 'react-router-dom';
 import ReviewModal from '../components/ReviewModal';
-import { doctors } from './Home';
+import { doctors } from '../doctorsAndReview';
+import ReviewCard from '../components/ReviewCard';
+import { reviews } from '../doctorsAndReview';
 
 
-export default function DoctorReview ( ){
+export default function DoctorReview (){
    
-    console.log({ doctors })
     let { id } = useParams();
     const doctor = doctors.find((doctor) => doctor.id === parseInt(id))
-
-    console.log(id);
+    const filteredReviews = reviews.filter(
+        (review) => review.pageId === doctor.id );
+      console.log(filteredReviews)
 
 
     return <>
@@ -24,6 +26,14 @@ export default function DoctorReview ( ){
             <h2 className="name"> {doctor.name} </h2>
             <div className="overallrating">{ doctor.overallrating }</div>
         </div>
+        <div>
+        {filteredReviews.length > 0 ? (
+            filteredReviews.map((review) => <ReviewCard review={review} key={review.userId} />)
+          ) : (
+            <p>No reviews available.</p>
+          )}
+        </div>
+
         <ReviewModal />
 
     </article>

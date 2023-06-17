@@ -10,7 +10,6 @@ exports.up = (knex) => {
     table.string('description');
     table.string('address');
     table.integer('overall_rating');
-    
     table.timestamps(true, true);
   });
   };

@@ -5,11 +5,15 @@
 exports.up = (knex) => { 
   return knex.schema.createTable('users', (table) => {
   table.increments();
-  table.string('first_name').notNullable();
-  table.string('last_name').notNullable();
-  table.string('username').notNullable().unique();
-  table.string('password_hash').notNullable();
-  table.string('email').notNullable();
+  table.string('first_name');
+  table.string('last_name');
+  table.integer('age');
+  table.string('gender');
+  table.string('race');
+  table.string('ethnicity');
+  table.string('username').unique();
+  table.string('password_hash');
+  table.string('email').unique();
   table.timestamps(true, true);
 });
 };
