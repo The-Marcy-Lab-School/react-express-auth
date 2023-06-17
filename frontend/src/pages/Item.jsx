@@ -23,14 +23,14 @@ export default function Item() {
 
   console.log(product);
   console.log(product.quantity)
-//   product.product_name
-//   product.ecoscore_grade
+//   console.log(typeof product.product_name);
+//   console.log(typeof product.ecoscore_grade);
 //   console.log(product.ingredients_text); text
 //   console.log(product.additives_original_tags); Array
-//   product.image_front_thumb_url
-//   product.stores
-//   product.nutriscore_grade
-//   product.nova_group
+//   console.log(typeof product.image_front_thumb_url);
+//   console.log(typeof product.stores)
+//   console.log(typeof product.nutriscore_grade)
+//   console.log(typeof product.nova_group);
 //   console.log(Number(product._id));
 
 
