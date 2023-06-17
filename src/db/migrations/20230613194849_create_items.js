@@ -14,7 +14,7 @@ exports.up = (knex) => {
         table.string("stores");
         table.string("nutriscore_grade");
         table.integer("nova_group");
-        table.integer("product_id");
+        table.string("product_id").unique();
     })
     };
     /**
