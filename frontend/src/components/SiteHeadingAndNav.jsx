@@ -44,11 +44,17 @@ export default function SiteHeadingAndNav() {
               <Link to='sign-up' className="navbar-item">
                 Sign Up
               </Link>
+              <Link to='/' className="navbar-item">
+                Home
+              </Link>
             </> : <>
-            <a className="navbar-item" onClick={handleLogout}>Log Out</a>
-            <Link to='/dashboard' className="navbar-item">
-              Dashboard
-            </Link>
+              <a className="navbar-item" onClick={handleLogout}>Log Out</a>
+              <Link to='/' className="navbar-item">
+                Home
+              </Link>
+              <Link to='/dashboard' className="navbar-item">
+                Dashboard
+              </Link>
             </>}
           <Link to='/about' className="navbar-item">
             About Us
