@@ -1,11 +1,14 @@
 import EventForm from "../components/EventForm"
 import { getAllEvents } from "../adapters/events-adapter";
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from "react-router-dom";
+import CurrentUserContext from "../contexts/current-user-context";
 const Events = () => {
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    setIsModalOpen(true);
+    currentUser ? setIsModalOpen(true) : navigate('/login')
   };
 
   const closeModal = () => {
@@ -17,6 +20,8 @@ const Events = () => {
   useEffect(() => {
     getAllEvents().then(setEvents);
   }, []);
+
+  const navigate = useNavigate()
 
   return (
     <>
