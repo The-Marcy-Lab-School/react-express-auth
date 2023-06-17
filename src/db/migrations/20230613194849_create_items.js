@@ -5,7 +5,7 @@
  */
 exports.up = (knex) => {
     return knex.schema.createTable("items",(table)=>{
-        table.integer("id").primary().unique();
+        table.string("id").primary().unique();
         table.string("product_name");
         table.string("ecoscore_grade");
         table.string("ingredients_text");

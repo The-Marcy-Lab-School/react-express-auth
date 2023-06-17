@@ -6,7 +6,7 @@ exports.up = (knex) => {
     return knex.schema.createTable("grocery_items_table", (table) => {
         table.increments("id").primary();
         table.integer("grocery_list_id").references("id").inTable("grocery_list");
-        table.integer("item_id").references("id").inTable("items");
+        table.string("item_id").references("id").inTable("items");
 
     })
 };
