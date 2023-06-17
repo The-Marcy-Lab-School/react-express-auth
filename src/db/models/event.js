@@ -62,7 +62,7 @@ class Event {
       .where({ id })
       .update(updatedEvent, ["*"]);
 
-    return updated ? new Event(updated) : null;
+    return updated ?? null;
   }
 
   static async delete(id) {
