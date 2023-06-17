@@ -56,12 +56,24 @@ class Grocery_list{
         }
       }
       //deleting all information/data
-      static async destroyAll() {
-        await knex.raw('DELETE FROM grocery_items_table;');
-        await knex.raw('DELETE FROM user_groceries;');
-        const deleted = await knex.raw('DELETE FROM grocery_list;');
-        return deleted
+      static async destroy(id) {
+        try{
+          await knex.raw(`DELETE FROM grocery_items_table WHERE grocery_list_id = ? RETURNING *;`,[ id ])
+          await knex.raw(`DELETE FROM user_groceries WHERE grocery_list_id = ? RETURNING *;`,[ id ])
+          const deleted = await knex.raw(`DELETE FROM grocery_list WHERE id = ? RETURNING *;`,[ id ])
+          return deleted.rowCount
+        }
+        catch (err){
+          console.log(err)
+          return null;
+        }
       }
+      // static async destroyAll() {
+      //   await knex.raw('DELETE FROM grocery_items_table;');
+      //   await knex.raw('DELETE FROM user_groceries;');
+      //   const deleted = await knex.raw('DELETE FROM grocery_list;');
+      //   return deleted
+      // }
       //deleting/removing an item from list
          deleteRate = async (nova_rate, nutri_score) => {
         const deletedRate = await knex('grocery_list')

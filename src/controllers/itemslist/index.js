@@ -1,12 +1,12 @@
 const create = require('./create');
 const update = require('./update');
 const list = require('./list');
-const destroyAll = require('./destroyAll');
+const destroy = require('./destroy');
 
 
 module.exports = {
     create,
     update,
     list,
-    destroyAll,
+    destroy,
 };

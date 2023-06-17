@@ -24,12 +24,12 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 
 Router.post('/grocerylist', groceryController.create);
 Router.get('/grocerylist', groceryController.list);
-Router.delete('/grocerylist', groceryController.destroyAll);
+Router.delete('/grocerylist/:id', groceryController.destroy);
 Router.patch('/grocerylist/:id',groceryController.update );
 
 Router.post('/itemslist', itemsController.create);
 Router.get('/itemslist', itemsController.list);
-Router.delete('/itemslist', itemsController.destroyAll);
+Router.delete('/itemslist/:id', itemsController.destroy);
 Router.patch('/itemslist/:id',itemsController.update );
 
 module.exports = Router;
