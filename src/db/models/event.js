@@ -54,7 +54,7 @@ class Event {
       description,
       image,
     ]);
-    return new Event(event);
+    return event;
   }
 
   static async update(id, updatedEvent) {
