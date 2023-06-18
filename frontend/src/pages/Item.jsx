@@ -22,14 +22,14 @@ export default function Item() {
   const [nova, setNova] = useState(null);
   const [ID, setId] = useState(null);
 
-
   useEffect(() => {
     const setAll = async () => {
-      await setName(`${product.product_name}-${product.quantity}`);
-
+      product.product_name !== undefined
+        ? await setName(`${product.product_name}-${product.quantity}`)
+        : await setName(`${product.brands_tags[0]}-${product.quantity}`)
       product.ecoscore_grade !== "not-applicable"
         ? await setEco(product.ecoscore_grade)
-        : null;
+        : null
 
       await setIngredients(product.ingredients_text);
 
@@ -77,7 +77,9 @@ export default function Item() {
       },
     });
   };
-  console.log(product.product_name);
+  console.log(product);
+  console.log( typeof product.product_name)
+    console.log(product.brands_tags[0]);
   console.log("Name:", name);
   console.log("EcoScore", ecoscore);
   console.log("Ingredients:", ingredient);
@@ -89,15 +91,6 @@ export default function Item() {
   console.log("Id", ID);
   //   console.log(product);
   console.log("Quantity:", product.quantity);
-  //   console.log(typeof product.product_name);
-  //   console.log(typeof product.ecoscore_grade);
-  //   console.log(product.ingredients_text); text
-  //   console.log(product.additives_original_tags); Array
-  //   console.log(typeof product.image_front_thumb_url);
-  //   console.log(typeof product.stores)
-  //   console.log(typeof product.nutriscore_grade)
-  //   console.log(typeof product.nova_group); number
-  //   console.log(Number(product._id));
 
   return (
     <>
@@ -113,7 +106,11 @@ export default function Item() {
               />
             </div>
             <div className="four wide column">
-              <h2>{`${product.product_name}-${product.quantity}`}</h2>
+              {product.product_name ? (
+                <h2>{`${product.product_name}-${product.quantity}`}</h2>
+              ) : (
+                <h2>{`${product.brands_tags[0]}-${product.quantity}`}</h2>
+              )}
               <p>
                 <strong>Stores: </strong>
                 {product.stores}
