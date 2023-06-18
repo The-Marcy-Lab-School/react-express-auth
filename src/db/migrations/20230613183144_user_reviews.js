@@ -5,8 +5,8 @@
 exports.up = (knex) => {
     return knex.schema.createTable('user_reviews', (table) => {
 table.increments();
-table.integer('user_id').references('id').inTable('users')
-table.integer('review_id').references('id').inTable('reviews')
+// table.integer('user_id').references('id').inTable('users')
+// table.integer('review_id').references('id').inTable('reviews')
 });
 };
 
