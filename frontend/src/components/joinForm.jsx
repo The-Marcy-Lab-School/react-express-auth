@@ -3,19 +3,12 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function JoinSusu() {
-    const [userInput, setUserInput] = useState('');
+    // const [userInput, setUserInput] = useState('');
     const{id} = useParams()
     const navigate = useNavigate();
-    const getFetchOptions = (body, method = 'POST') => ({
-        method,
-        credentials: 'include', // IMPORTANT, this tells fetch to include cookies
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-
     const joiningSusu = async (e) => {
         e.preventDefault();
-        const options = getFetchOptions(userInput, 'GET');
+        // const options = getFetchOptions('GET');
 
         const handleFetch = async () => {
             try {
