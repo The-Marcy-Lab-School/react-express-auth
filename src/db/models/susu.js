@@ -26,8 +26,12 @@ class Susu{
         }
     }
     static async create(name, password_hash, owner, payment_amount, next_payment){//possibly need id
+         const passwordHash = await hashPassword(password_hash);
         try{
-            const susu = await knex.raw('INSERT INTO susu (name, password_hash, owner, payment_amount, next_payment) VALUES(?,?,?,?,?) RETURNING *',[name, password_hash, owner, payment_amount, next_payment])
+            const susu = await knex.raw(
+							"INSERT INTO susu (name, password_hash, owner, payment_amount, next_payment) VALUES(?,?,?,?,?) RETURNING *",
+							[name, passwordHash, owner, payment_amount, next_payment]
+						);
             return new Susu(susu.rows[0])
         }
         catch(error){
