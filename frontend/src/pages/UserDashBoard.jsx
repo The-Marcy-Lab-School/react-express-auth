@@ -4,6 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import GroceryList from "./GroceryList";
 import { fetchHandler } from "../utils";
 
 export default function UserPage() {
@@ -13,6 +14,8 @@ export default function UserPage() {
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+
+  const [ lists , setList ] = useState([]);
 
   const loadUser = async () => {
     const [user, error] = await getUser(id);
@@ -29,12 +32,13 @@ export default function UserPage() {
         },
       });
       console.log(res[0]);
+      setList(res[0]);
     }catch(err){
       console.log(err)
       return null;
     }
   };
-
+  
   useEffect(() => {
     const loadInfoUser = async () => {
       try{
@@ -54,6 +58,8 @@ export default function UserPage() {
     navigate('/');
   };
 
+  console.log(lists)
+
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
 
@@ -71,5 +77,11 @@ export default function UserPage() {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
+
+    <div className="ui centered cards">
+      {lists.map(groceryList => {
+        return <GroceryList key={groceryList.grocerylist} grocery={groceryList}/>
+      })}
+    </div>
   </>;
 }
