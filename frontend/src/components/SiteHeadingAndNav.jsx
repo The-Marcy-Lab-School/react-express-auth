@@ -10,15 +10,17 @@ export default function SiteHeadingAndNav() {
     <nav>
       <ul>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/createSusu' end={true}>Create A Susu</NavLink></li>
-        <li><NavLink to='/users' end={true}>Users</NavLink></li>
         {
           currentUser
-            ? <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
-            : <>
-              <li><NavLink to='/susu'>SuSu Pages</NavLink></li>
+          ?
+          <>
+            {/* <li><NavLink to='/details' end={true}>Details</NavLink></li> */}
+            <li><NavLink to='/createSusu' end={true}>Create A Susu</NavLink></li>
+            <li><NavLink to='/susu'>SuSu Pages</NavLink></li> 
+            <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
+          </>
+            : 
               <li><NavLink to='/sign-up'>Join/Sign Up</NavLink></li>
-            </>
         }
       </ul>
     </nav>
