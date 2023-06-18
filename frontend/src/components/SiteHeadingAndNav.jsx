@@ -9,7 +9,7 @@ export default function SiteHeadingAndNav() {
     <a id='logo' href='/'>Money Mingle</a>
     <nav>
       <ul>
-        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/'>About</NavLink></li>
         {
           currentUser
           ?
