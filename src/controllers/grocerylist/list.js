@@ -1,6 +1,9 @@
 const listGrocery = async (req, res) => {
-  const { Grocery_list } = req.db;
-  const grocery = await Grocery_list.list();
+  const {
+    db: { Grocery_list },
+    params: { id },
+  } = req
+  const grocery = await Grocery_list.list(Number(id));
   res.send(grocery);
 };
 

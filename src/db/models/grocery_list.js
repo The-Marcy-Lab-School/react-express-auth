@@ -44,11 +44,22 @@ class Grocery_list{
         }
       }      
       
-      static async list () {
+      static async list (userid) {
         try{
           const result = await knex.raw(`
-          SELECT * FROM grocery_list;
-          `,[])
+          SELECT
+	items.product_name,
+	items.image_front_thumb_url,
+ 	items.nova_group,
+ 	items.nutriscore_grade,
+ 	grocery_list.id AS grocerylist
+FROM
+	grocery_items_table
+	JOIN grocery_list ON grocery_items_table.grocery_list_id = grocery_list.id
+	JOIN items ON grocery_items_table.item_id = items.id
+	JOIN user_groceries ON user_groceries.grocery_list_id = grocery_list.id
+	JOIN users ON user_groceries.user_id = users.id WHERE users.id = ?;
+          `,[userid])
           return result.rows;
         }catch(err){
           console.log(err);
