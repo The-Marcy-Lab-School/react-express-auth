@@ -14,6 +14,7 @@
             // Deletes ALL existing entries
           
             await knex("items").insert([
-              {"id": "44", product_name: "apple", ecoscore_grade: "good", ingredients_text: "apple", additives_original_tags: "404", image_front_thumb_url: "hi.png", stores: "cvs", nutriscore_grade: "hi", nova_group: "10"},
+              {"id": "44", product_name: "apple", ecoscore_grade: "good", ingredients_text: "apple", additives_original_tags: "404", image_front_thumb_url: "https://images.openfoodfacts.org/images/products/301/762/042/2003/front_en.536.100.jpg", stores: "cvs", nutriscore_grade: "hi", nova_group: "10"},
+              {"id": "47", product_name: "Nutella-400 g", ecoscore_grade: "good", ingredients_text: "apple", additives_original_tags: "404", image_front_thumb_url: "https://images.openfoodfacts.org/images/products/301/762/042/2003/front_en.536.100.jpg", stores: "cvs", nutriscore_grade: "e", nova_group: "4"},
             ]);
           };
