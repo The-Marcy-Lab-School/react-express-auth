@@ -25,7 +25,7 @@ export default function JoinSusu() {
                 console.log(e.target[0].value)
                 console.log(data.password_hash)
                 if (e.target[0].value === data.password_hash) {
-                    navigate(`/api/susu/${e.target[1].value}`);
+                    navigate(`/susu/${e.target[1].value}`);
                 }
             } catch (err) {
                 console.error(err);
