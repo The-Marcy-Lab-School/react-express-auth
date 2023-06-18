@@ -7,14 +7,15 @@ export default function GroceryList({ grocery }) {
           navigate(`/product/${grocery._id}`);
         }}
       >
+        <h4>{grocery.created_at.slice(0, 10)}</h4>
         <div className="imageCard">
           <img alt="oh no!" src={grocery.image_front_thumb_url} />
         </div>
         <div className="content">
-          {grocery.product_name ?  (
-            <div className="header">{`${grocery.product_name}-${grocery.quantity}`}</div>
+          {!grocery.product_name.includes("undefined") ?  (
+            <div className="header">{`${grocery.product_name}`}</div>
           ) : (
-            <div className="header">{`${grocery.brands_tags[0]}-${grocery.quantity}`}</div>
+            <div className="header">{(grocery.product_name).replace("undefined", "")}</div>
           )}
           <div className="meta">
             <span>
