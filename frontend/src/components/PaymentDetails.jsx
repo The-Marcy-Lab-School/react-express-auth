@@ -17,6 +17,10 @@ export default function detailsLink() {
   // console.log(data)
     return (
       <>
+        <h1>{data.name}</h1>
+
+        <h1>{data.next_payment}</h1>
+        <h1>{data.payment_amount}</h1>
       </>
         // <div className = "payment-details">
         //   <label>
