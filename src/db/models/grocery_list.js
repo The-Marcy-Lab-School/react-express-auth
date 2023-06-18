@@ -52,6 +52,7 @@ class Grocery_list{
 	items.image_front_thumb_url,
  	items.nova_group,
  	items.nutriscore_grade,
+  grocery_list.created_at,
  	grocery_list.id AS grocerylist
 FROM
 	grocery_items_table
