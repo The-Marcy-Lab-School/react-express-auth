@@ -41,7 +41,7 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', overflow: 'auto', marginTop: '30px', marginBottom: '20px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', overflow: 'auto', marginTop: '30px', marginBottom: '20px'}}>
       <h1 style={{ margin: '25px' }} className='title'>NewsFeed</h1>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {articles.map(article => (

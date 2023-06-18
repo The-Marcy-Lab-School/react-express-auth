@@ -4,6 +4,11 @@ body {
   min-height: 100vh;
 }
 
+main {
+  position: relative;
+  min-height: 55vh;
+}
+
 input,
 label {
   display: block;
@@ -86,9 +91,10 @@ form {
 #newsLetterForm {
   border: 0;
 }
+
 #eventForm{
   border: 0;
-  width:80%;
+  width: 80%;
 }
 
 #newsLetterDiv {
@@ -127,20 +133,20 @@ form {
   width: 150px;
 }
 
-.eventBox{
-  width:80%;
+.eventBox {
+  width: 80%;
   margin: 0 auto;
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.cardSec2{
-  display:flex;
+.cardSec2 {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.aboutImg{
+.aboutImg {
   width: 300px;
   height: 400px;
   object-fit: cover;
@@ -148,19 +154,70 @@ form {
   margin: 0 auto;
 }
 
-#logo{
+#logo {
   min-height: 50px;
 }
-.navbar-brand{
+
+.navbar-brand {
   display: flex;
-  align-items:center;
+  align-items: center;
 }
 
-#newsCard{
+#newsCard {
   transition-duration: .5s;
 }
 
-#newsCard:hover{
+#newsCard:hover {
   cursor: pointer;
   transform: scale(1.03);
+}
+
+#logInContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#logInBox {
+  width: 550px;
+  height: 475px;
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 30px 0;
+}
+
+.logInButton{
+  width:100%;
+}
+
+#logInForm {
+  border: 0;
+  width: 80%;
+  height:90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#errorTextDiv{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+#clickToSignUp:hover{
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 550px)  {
+  #logInBox {
+    box-shadow: rgba(100, 100, 111, 0) 0px 7px 29px 0px;
+  }
+  #footer {
+    grid-template-columns: 1fr;
+  }
+  #footerNav{
+    display:none;
+  }
 }
