@@ -7,7 +7,7 @@ exports.up = (knex) => {
         table.increments()
         table.string("nova_rate");
         table.integer("nutri_score");
-        
+        table.timestamp("created_at").defaultTo(knex.fn.now());
     })
 };
 /**
