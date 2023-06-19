@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Event = require('../models/event');
+const UserEvent = require('../models/user_event');
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -7,11 +8,41 @@ const Event = require('../models/event');
 exports.seed = async (knex) => {
   // Users
   await User.deleteAll();
-  await User.create("Jason", "Paulino", "jasonpaulino", "jasonp0830@gmail.com", "123");
-  await User.create("Randy", "Pichardo", "randypichardo", "randypichardo1987@gmail.com", "123");
-  await User.create("Staceyann", "King", "staceyannking", "staceyannking01@gmail.com", "123");
-  await User.create("Magdalena", "Gero", "magdalenagero", "magdalenamgero@gmail.com", "123");
-  await User.create("Shaina", "Guzman", "shainaguzman", "shainaguzman0624@gmail.com", "123");
+  await User.create(
+    "Jason",
+    "Paulino",
+    "jasonpaulino",
+    "jasonp0830@gmail.com",
+    "123",
+  );
+  await User.create(
+    "Randy",
+    "Pichardo",
+    "randypichardo",
+    "randypichardo1987@gmail.com",
+    "123",
+  );
+  await User.create(
+    "Staceyann",
+    "King",
+    "staceyannking",
+    "staceyannking01@gmail.com",
+    "123",
+  );
+  await User.create(
+    "Magdalena",
+    "Gero",
+    "magdalenagero",
+    "magdalenamgero@gmail.com",
+    "123",
+  );
+  await User.create(
+    "Shaina",
+    "Guzman",
+    "shainaguzman",
+    "shainaguzman0624@gmail.com",
+    "123",
+  );
 
   // Events
   await Event.deleteAll();
@@ -43,4 +74,11 @@ exports.seed = async (knex) => {
       "Join us for a book exchange event at Brooklyn Library. Bring books you'd like to swap!",
     image: "https://example.com/images/book_exchange.jpg",
   });
+
+  // User Events
+  await UserEvent.deleteAll();
+  await UserEvent.create(2, 1); // User 2 joins Event 1
+  await UserEvent.create(3, 1); // User 3 joins Event 1
+  await UserEvent.create(4, 2); // User 4 joins Event 2
+  await UserEvent.create(5, 2); // User 5 joins Event 2
 };
