@@ -1,7 +1,11 @@
-// const listFriend = async (req, res) => {
-//     const { User } = req.db;
-//     const users = await User.list();
-//     res.send(users);
-//   };
+const listFriends = async (req, res) => {
+    const { 
+        session: {userId},
+        db : {Friends} 
+    } = req;
+        
+    const friends = await Friends.list(userId);
+    res.send(friends);
+  };
   
-//   module.exports = listFriend;
+  module.exports = listFriends;
