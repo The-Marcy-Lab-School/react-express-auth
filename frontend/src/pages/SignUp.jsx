@@ -36,63 +36,77 @@ export default function SignUpPage() {
   };
 
   return <>
-    <h1>Sign Up</h1>
-    <form onSubmit={handleSubmit} onChange={handleChange}>
-      <label htmlFor="firstName">First Name</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="firstName"
-        name="firstName"
-      // onChange={handleChange}
-      // value={username}
-      />
-      <label htmlFor="lastName">Last Name</label>
-    <input
-      autoComplete="off"
-      type="text"
-      id="lastName"
-      name="lastName"
-      // onChange={handleChange}
-      // value={username}
-    />
-    <label htmlFor="email">Email</label>
-    <input
-      autoComplete="off"
-      type="email "
-      id="email"
-      name="email"
-      // onChange={handleChange}
-      // value={username}
-    />
-      <label htmlFor="username">Username</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="username"
-        name="username"
-        onChange={handleChange}
-        value={username}
-      />
+    <div id='logInContainer'>
+      <div id='signUpBox'>
+        <form onSubmit={handleSubmit} onChange={handleChange} id='logInForm'>
+          <h1 className='title has-text-centered'>Sign Up</h1>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            autoComplete="off"
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            className='input'
+          // onChange={handleChange}
+          // value={username}
+          />
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            autoComplete="off"
+            type="text"
+            id="lastName"
+            name="lastName"
+            required
+            className='input'
+          // onChange={handleChange}
+          // value={username}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            autoComplete="off"
+            type="email "
+            id="email"
+            name="email"
+            required
+            className='input'
+          // onChange={handleChange}
+          // value={username}
+          />
+          <label htmlFor="username">Username</label>
+          <input
+            autoComplete="off"
+            type="text"
+            id="username"
+            name="username"
+            onChange={handleChange}
+            value={username}
+            required
+            className='input'
+          />
 
-      <label htmlFor="password">Password</label>
-      <input
-        autoComplete="off"
-        type="password"
-        id="password"
-        name="password"
-        onChange={handleChange}
-        value={password}
-      />
+          <label htmlFor="password">Password</label>
+          <input
+            autoComplete="off"
+            type="password"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            value={password}
+            required
+            className='input'
+          />
 
-      {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
-        <label htmlFor="password-confirm">Password Confirm</label>
-        <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
-      */}
+          {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
+            <label htmlFor="password-confirm">Password Confirm</label>
+            <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
+          */}
 
-      <button>Sign Up Now!</button>
-    </form>
-    {!!errorText && <p>{errorText}</p>}
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
+          <button className='button is-rounded mb-3 is-custom'>Sign Up Now!</button>
+          {!!errorText && <p>{errorText}</p>}
+          <p className="has-text-centered">Already have an account with us? <Link to="/login">Log in!</Link></p>
+        </form>
+      </div>
+    </div>
   </>;
 }

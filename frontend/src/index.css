@@ -191,6 +191,15 @@ form {
   margin: 30px 0;
 }
 
+#signUpBox{
+  width: 550px;
+  height: 600px;
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 30px 0;
+}
+
 .logInButton{
   width:100%;
 }
@@ -204,14 +213,24 @@ form {
   justify-content: space-evenly;
 }
 
+.is-custom {
+  background: linear-gradient(to right, white 50%,  #253551 50%);
+  background-size: 200% 100%;
+  transition: background-position 0.5s, color 0.5s;
+  transition-timing-function: ease-in;
+  color: black; 
+}
+
+.is-custom:hover {
+  background-position: -100% 0;
+  color:white
+}
+
+
 #errorTextDiv{
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-}
-
-#clickToSignUp:hover{
-  text-decoration: underline;
 }
 
 #startTime, #endTime, #startDate, #endDate{
@@ -221,7 +240,7 @@ form {
 }
 
 @media only screen and (max-width: 550px)  {
-  #logInBox {
+  #logInBox, #signUpBox {
     box-shadow: rgba(100, 100, 111, 0) 0px 7px 29px 0px;
   }
   #footer {
