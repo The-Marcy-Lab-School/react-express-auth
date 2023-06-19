@@ -32,11 +32,11 @@ Router.patch('/reviews/:id', reviewController.update);
 
 // Pages
 
-Router.get('/reviews', pageController.list);
-Router.post('/reviews', pageController.create);
-Router.get('/reviews/:id', pageController.show);
-Router.delete('/reviews/:id', pageController.destroy);
-Router.patch('/reviews/:id', pageController.update);
+Router.get('/pages', pageController.list);
+Router.post('/pages', pageController.create);
+Router.get('/pages/:id', pageController.show);
+Router.delete('/pages/:id', pageController.destroy);
+Router.patch('/pages/:id', pageController.update);
 
 
 module.exports = Router;
