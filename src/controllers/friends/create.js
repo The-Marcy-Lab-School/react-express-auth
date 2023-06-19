@@ -1,16 +1,13 @@
 const createFriend = async (req, res) => {
     const {
-      session,
-      params,
+      session : {userId},
       db: { Friends },
-      body,
+      body : {friendId},
     } = req;
-    console.log(body)
-    // // TODO: check if username is taken, what should you return?
-    // const user = await User.create(username, password);
-    // session.userId = user.id;
-  
-    res.sendStatus(200);
+
+    const friend = await Friends.create(userId, friendId)
+    if(!friend) return res.sendStatus(404)
+    res.sendStatus(202);
   };
   
   module.exports = createFriend;

@@ -1,7 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const friendsController = require('./controllers/friends');
-// const postsController = require('./controllers/posts');
+const eventsController = require('./controllers/events');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -16,8 +16,10 @@ Router.patch('/users/:id', checkAuthentication, userController.update);
 Router.patch('/users', userController.updateSafe)
 
 Router.post('/friends', checkAuthentication, friendsController.create);
-// Router.delete('/friends/:friend_id', checkAuthentication, friendsController.delete);
-// Router.get('/friends/:user_id', checkAuthentication, friendsController.list);
+Router.delete('/friends', checkAuthentication, friendsController.remove);
+Router.get('/friends', checkAuthentication, friendsController.list);
+
+Router.get('/events', checkAuthentication, eventsController.list);
 
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
