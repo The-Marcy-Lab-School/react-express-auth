@@ -17,12 +17,16 @@ export default function SignUpPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrorText('');
-    if (!username || !password) return setErrorText('Missing username or password');
-
-    const [user, error] = await createUser({ username, password });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // setErrorText('');
+    // if (!username || !password) return setErrorText('Missing username or password');
+    const formData = new FormData(e.target);
+    const userData = {};
+    for (let [key, value] of formData.entries()) {
+      userData[key] = value;
+    }
+    const [user, error] = await createUser(userData);
     if (error) return setErrorText(error.statusText);
 
     setCurrentUser(user);
@@ -40,23 +44,23 @@ export default function SignUpPage() {
       <div id='signUpBox'>
         <form onSubmit={handleSubmit} onChange={handleChange} id='logInForm'>
           <h1 className='title has-text-centered'>Sign Up</h1>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="first_name">First Name</label>
           <input
             autoComplete="off"
             type="text"
-            id="firstName"
-            name="firstName"
+            id="first_name"
+            name="first_name"
             required
             className='input'
           // onChange={handleChange}
           // value={username}
           />
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="last_name">Last Name</label>
           <input
             autoComplete="off"
             type="text"
-            id="lastName"
-            name="lastName"
+            id="last_name"
+            name="last_name"
             required
             className='input'
           // onChange={handleChange}
@@ -102,7 +106,7 @@ export default function SignUpPage() {
             <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
           */}
 
-          <button className='button is-rounded mb-3 is-custom'>Sign Up Now!</button>
+          <button className='button is-rounded mb-3 is-custom' type='submit'>Sign Up Now!</button>
           {!!errorText && <p>{errorText}</p>}
           <p className="has-text-centered">Already have an account with us? <Link to="/login">Log in!</Link></p>
         </form>
