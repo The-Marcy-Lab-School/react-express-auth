@@ -4,13 +4,14 @@
  */
 exports.up = (knex) => { 
     return knex.schema.createTable('pages', (table) => {
-    table.increments()
+    table.increments('page_id')
     table.string('facility_name');
     table.string('specialty');
     table.string('description');
     table.string('address');
     table.integer('overall_rating');
     table.timestamps(true, true);
+    table.integer('user_id')
   });
   };
 

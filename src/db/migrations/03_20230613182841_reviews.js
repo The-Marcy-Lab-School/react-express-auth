@@ -3,8 +3,9 @@
  * @returns { Promise<void> }
  */
     exports.up = (knex) => knex.schema.createTable('reviews', (table) => {
-        table.increments();
-        table.integer('user_id').references('id').inTable('users').notNullable();
+        table.increments('review_id');
+        table.integer('user_id')//.references('id').inTable('users').notNullable();
+        table.integer('post_id')
         table.string('review_body').notNullable();
         table.integer('rating').notNullable();
         table.timestamps(true, true);
