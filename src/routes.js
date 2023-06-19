@@ -22,12 +22,13 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 });
 
 // Event routes
-Router.get("/events", eventController.list);
+Router.get('/events', eventController.list);
 Router.post('/events', eventController.create);
 Router.patch('/events/:id', eventController.update);
 Router.delete('/events/:id', eventController.deleteEvent);
 
 // User event routes
-Router.get("/users/:id/events", userEventsController.listJoined);
+Router.get('/users/:id/joinedEvents', userEventsController.listJoined);
+Router.get('/users/:id/createdEvents', userEventsController.listCreated);
 
 module.exports = Router;
