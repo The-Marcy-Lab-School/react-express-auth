@@ -1,16 +1,44 @@
+import { useState } from "react";
+
 export default function CreateSusu() {
+        const [id, setID] = useState('');
+        const getFetchOptions = (body, method = 'POST') => ({
+        method,
+        credentials: 'include', // IMPORTANT, this tells fetch to include cookies
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+    const susuCreate = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const formInfo = Object.fromEntries(formData.entries());
+        console.log(formInfo);
+        const user = await fetch(`/api/me`)
+        console.log(formInfo);
+        const data = await user.json();
+        setID(data.id);
+        const options = getFetchOptions(formInfo, 'POST');
+
+        const result = await fetch(`/api/susu`, options);
+        console.log(options);
+    }
     return( <>
-    <form method="post">
+    <form method="post" onSubmit={susuCreate}>
         <label>
-        Susu Name: <input name="susuName" defaultValue="Enter Susu Name" />
-        <hr />
-        Fixed Amount: <label><input type="checkbox" name ="susuAmount" value="1000"/></label>
+        Susu Name: <input name="name" defaultValue="Enter Susu Name" />
+        Susu Password: <input name="password_hash" defaultValue="Enter Susu Password" />
+        <input type="hidden" name="owner" value={id}/>
         </label>
         <hr />
-        Every Week
-        <label><input type="radio" name="paymentTime" value="everyWeek" /> Every Month</label>
-        <label><input type="radio" name="paymentTime" value="everyMonth" defaultChecked={true} /> Every Three Months</label>
-        <label><input type="radio" name="paymentTime" value="threeMonths" /></label>
+        Fixed Amount: <label><input name ="payment_amount" defaultValue="1000"/></label>
+        <hr />
+
+        <label>Every Week <input type="radio" name="next_payment" value="7" /></label>
+        <label> Every Month <input type="radio" name="next_payment" value="30" defaultChecked={true} /></label>
+        <label>Every Three Months <input type="radio" name="next_payment" value="180" /></label>
+
         <button type="submit">Submit form</button>
         </form>
     </>)
