@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import SignUpPage from "./pages/SignUp";
 import LoginPage from "./pages/Login";
 import SiteHeadingAndNav from "./components/SiteHeadingAndNav";
-import NotFoundPage from "./pages/NotFound";
+import Page404 from "./pages/Page404";
 import UserContext from "./contexts/current-user-context";
 import { checkForLoggedInUser } from "./adapters/auth-adapter";
 import UsersPage from "./pages/Users";
@@ -30,7 +30,7 @@ export default function App() {
           <Route path="/users/:id" element={<UserDashBoard />} />
           <Route path="/users/search" element={<UserHome />} />
           <Route path="/product/:id" element={<Item />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </main>
     </>
