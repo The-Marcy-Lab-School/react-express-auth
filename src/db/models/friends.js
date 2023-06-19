@@ -3,15 +3,18 @@ const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 
 class Friend {
 
-  constructor({sender, recipient}) {
-    this.sender = sender;
-    this.recipient = recipient;
+  constructor({username}) {
+    this.username = username;
   }
 
-  static async list() {
-    const query = 'SELECT * FROM users';
-    const { rows } = await knex.raw(query);
-    return rows.map((user) => new User(user));
+  static async list(userId) {
+    const query = `
+    SELECT users.username
+    FROM friends
+    JOIN users ON friends.recipient_id = users.id
+    WHERE friends.sender_id = ?;`;
+    const { rows } = await knex.raw(query, [userId]);
+    return rows.map(row => new Friend(row))
   }
 
   static async find(userID, recipientID) {
@@ -21,18 +24,26 @@ class Friend {
     return friend ? new Friend(friend.somthing) : null;
   }
 
-  static async findByUsername(username) {
-    const query = 'SELECT * FROM users WHERE username = ?';
-    const { rows: [user] } = await knex.raw(query, [username]);
-    return user ? new User(user) : null;
+  static async delete(friendUserName, userId) {
+    const query = `
+    DELETE FROM friends
+    WHERE sender_id = ?
+    AND recipient_id = (SELECT id FROM users WHERE username = ?)
+    RETURNING *;
+`;
+    const { rows: [friend] } = await knex.raw(query, [userId, friendUserName]);
+    console.log(rows)
+    // return friend
   }
 
-  static async create(sender, recipient) {
+  static async create(senderId, recipientId) {
+    const query = `
+    INSERT INTO friends (sender_id, recipient_id)
+      VALUES (?, ?) 
+      RETURNING *`;
+    const { rows: [friend] } = await knex.raw(query, [senderId, recipientId]);
 
-    const query = `INSERT INTO friends (sender, recipient)
-      VALUES (?, ?) RETURNING *`;
-    const { rows: [friend] } = await knex.raw(query, [sender, recipient]);
-    return new Friend(friens.something);
+    return friend
   }
 
   static async deleteAll() {
