@@ -1,13 +1,21 @@
 export default function GroceryList({ grocery }) {
+    const dateTime = new Date(grocery.created_at);
+    const formattedDate = dateTime.toLocaleDateString();
+    const formattedTime = dateTime.toLocaleTimeString();
+
+    console.log(formattedDate);
+    console.log(formattedTime);
   return (
     <>
       <div
         className="ui card"
-        onClick={() => {
-          navigate(`/product/${grocery._id}`);
-        }}
+        // onClick={() => {
+        //   navigate(`/product/${grocery._id}`);
+        // }}
       >
-        <h4>{grocery.created_at.slice(0, 10)}</h4>
+        <div className="row">
+            <h4>{formattedDate}{formattedTime}</h4>
+        </div>
         <div className="imageCard">
           <img alt="oh no!" src={grocery.image_front_thumb_url} />
         </div>
@@ -25,7 +33,7 @@ export default function GroceryList({ grocery }) {
 
             <span>
               <i className="icon-nova-score" />
-              {grocery.nova_groups}
+              {grocery.nova_group}
             </span>
           </div>
         </div>

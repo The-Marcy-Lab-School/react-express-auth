@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import ProductContext from "../contexts/ProductContext";
-import ProductCard from "./ProductCard"
+import ProductCard from "../components/ProductCard"
 
 export default function ProductsList(){
     const { products } = useContext(ProductContext);
