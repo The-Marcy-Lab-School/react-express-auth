@@ -12,6 +12,7 @@ exports.up = (knex) => {
     table.integer('overall_rating');
     table.boolean('isFacility');
     table.boolean('isDoctor');
+    table.string('photo');
     table.timestamps(true, true);
   });
   };

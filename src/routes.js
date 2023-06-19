@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const reviewController = require('./controllers/review');
+const pageController = require('./controllers/pages');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -28,5 +29,14 @@ Router.post('/reviews', reviewController.create);
 Router.get('/reviews/:id', reviewController.show);
 Router.delete('/reviews/:id', reviewController.destroy);
 Router.patch('/reviews/:id', reviewController.update);
+
+// Pages
+
+Router.get('/reviews', pageController.list);
+Router.post('/reviews', pageController.create);
+Router.get('/reviews/:id', pageController.show);
+Router.delete('/reviews/:id', pageController.destroy);
+Router.patch('/reviews/:id', pageController.update);
+
 
 module.exports = Router;
