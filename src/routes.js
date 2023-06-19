@@ -30,5 +30,6 @@ Router.delete('/events/:id', eventController.deleteEvent);
 // User event routes
 Router.get('/users/:id/joinedEvents', userEventsController.listJoined);
 Router.get('/users/:id/createdEvents', userEventsController.listCreated);
+Router.post("/users/:userId/events/:eventId", userEventsController.create);
 
 module.exports = Router;
