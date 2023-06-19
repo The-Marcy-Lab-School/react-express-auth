@@ -4,7 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
-import GroceryList from "./GroceryList";
+import GroceryList from "../components/GroceryCard";
 import { fetchHandler } from "../utils";
 
 export default function UserPage() {

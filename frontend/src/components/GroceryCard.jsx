@@ -1,10 +1,8 @@
-export default function GroceryList({ grocery }) {
+export default function GroceryCard({ grocery }) {
     const dateTime = new Date(grocery.created_at);
     const formattedDate = dateTime.toLocaleDateString();
     const formattedTime = dateTime.toLocaleTimeString();
 
-    console.log(formattedDate);
-    console.log(formattedTime);
   return (
     <>
       <div
