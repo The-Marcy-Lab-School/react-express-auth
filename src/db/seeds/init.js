@@ -78,6 +78,7 @@ exports.seed = async (knex) => {
   // User Events
   await UserEvent.deleteAll();
   await UserEvent.create(2, 1); // User 2 joins Event 1
+  await UserEvent.create(2, 2); // User 2 joins Event 2
   await UserEvent.create(3, 1); // User 3 joins Event 1
   await UserEvent.create(4, 2); // User 4 joins Event 2
   await UserEvent.create(5, 2); // User 5 joins Event 2

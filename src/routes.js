@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const eventController = require('./controllers/event');
+const userEventsController = require('./controllers/user_events');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -27,5 +28,6 @@ Router.patch('/events/:id', eventController.update);
 Router.delete('/events/:id', eventController.deleteEvent);
 
 // User event routes
+Router.get("/users/:id/events", userEventsController.listJoined);
 
 module.exports = Router;

@@ -14,22 +14,22 @@ class UserEvent {
     return userEvent;
   }
 
-  static async findByUserId(userId) {
-    const query = `
-      SELECT * 
-      FROM user_events
-      WHERE user_id = ?
-    `;
-    const { rows: userEvents } = await knex.raw(query, [userId]);
-    return userEvents;
-  }
-
-  static async listEventsByUser(userId) {
+  static async listJoined(userId) {
     const query = `
       SELECT events.*
       FROM user_events
       JOIN events ON user_events.event_id = events.id
-      WHERE user_events.user_id = ?
+      WHERE user_events.user_id = ? AND events.organizer_id != ?
+    `;
+    const { rows: events } = await knex.raw(query, [userId, userId]);
+    return events;
+  }
+
+  static async listCreated(userId) {
+    const query = `
+      SELECT events.*
+      FROM events
+      WHERE events.organizer_id = ?
     `;
     const { rows: events } = await knex.raw(query, [userId]);
     return events;
@@ -49,3 +49,9 @@ class UserEvent {
 }
 
 module.exports = UserEvent;
+
+/*
+
+list(userId) will return all events a user has joined excluding their own creation.
+
+*/
