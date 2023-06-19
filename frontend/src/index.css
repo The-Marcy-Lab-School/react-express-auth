@@ -81,4 +81,18 @@ form {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+
+}
+.mission {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.title {
+  display: flex;
+  font-family: 'Times New Roman', Times, serif;
+  justify-content: center;
 }

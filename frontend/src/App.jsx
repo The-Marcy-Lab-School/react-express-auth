@@ -11,9 +11,9 @@ import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import SignUpLogin from './pages/SignupLogin';
 import DoctorReview from './pages/DoctorReview';
-import Welcome from './pages/Welcome';
+import Welcome from './pages/Mission';
 import CreatePost from './pages/CreatePost';
-
+import Footer from './components/SiteFooter';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -37,5 +37,6 @@ export default function App() {
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </main>
+    <Footer />
   </>;
 }
