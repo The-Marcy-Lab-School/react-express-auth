@@ -15,13 +15,14 @@ const Events = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+  const navigate = useNavigate()
   const eventClick = async (event) => {
+    if(!currentUser) navigate('/login')
     const options = {
       userId: currentUser.id,
       eventId: event.id
     }
-     const result = await joinEvent(options);
+    await joinEvent(options)
   }
 
   const [events, setEvents] = useState([]);
@@ -29,8 +30,6 @@ const Events = () => {
   useEffect(() => {
     getAllEvents().then(setEvents);
   }, []);
-
-  const navigate = useNavigate()
 
   return (
     <>
