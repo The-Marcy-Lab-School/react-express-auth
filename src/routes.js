@@ -1,7 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const friendsController = require('./controllers/friends');
-const eventsController = require('./controllers/events');
+const eventsController = require('./controllers/event');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
