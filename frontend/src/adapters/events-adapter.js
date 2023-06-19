@@ -2,8 +2,6 @@ import { fetchHandler, getPostOptions, getPatchOptions } from "../utils";
 
 const baseUrl = '/api/events';
 
-
-
 export const createEvent = async (obj) => (
   await fetchHandler(baseUrl, getPostOptions(obj))
 );

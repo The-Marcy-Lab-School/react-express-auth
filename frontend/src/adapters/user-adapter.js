@@ -6,6 +6,10 @@ export const createUser = async ({ first_name, last_name, username, email, passw
   fetchHandler(baseUrl, getPostOptions({ first_name, last_name, username, email, password }))
 );
 
+export const joinEvent = async ({userId, eventId}) => {
+  await fetchHandler(`${baseUrl}/${userId}/events/${eventId}`, getPostOptions({userId, eventId})) 
+}
+
 // eating errors here for simplicity
 export const getAllUsers = async () => {
   const [users] = await fetchHandler(baseUrl);

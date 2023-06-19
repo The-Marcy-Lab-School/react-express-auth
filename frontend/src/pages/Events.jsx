@@ -3,6 +3,7 @@ import { getAllEvents } from "../adapters/events-adapter";
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
+import { joinEvent } from "../adapters/user-adapter";
 const Events = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +15,14 @@ const Events = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const eventClick = async (event) => {
+    const options = {
+      userId: currentUser.id,
+      eventId: event.id
+    }
+     const result = await joinEvent(options);
+  }
 
   const [events, setEvents] = useState([]);
 
@@ -33,7 +42,7 @@ const Events = () => {
         <div>
           {
             events.map((event) => <>
-              <div className='box eventBox'>
+              <div className='box eventBox' id={'eventId: '+ event.id}>
                 <div>
                   <h1 className='title'>{event.title}</h1>
                   <p>{event.borough}</p>
@@ -42,7 +51,7 @@ const Events = () => {
                   <p>{event.start_time + ' - ' + event.end_time}</p>
                 </div>
                 <div className='cardSec2'>
-                  <button className='button is-primary'>Join Event</button>
+                  <button className='button is-primary' onClick={() => eventClick(event)}>Join Event</button>
                 </div>
                 <div>
                   <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1>
