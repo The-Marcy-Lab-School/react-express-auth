@@ -26,7 +26,6 @@
   flex-wrap: nowrap;
   justify-content: flex-end;
 }
-
 body {
   margin: 0;
   place-items: center;
@@ -66,7 +65,20 @@ body {
  h1{
   size: 90px;
  }
-
+ .date{
+  font-size: 10px;
+  color: #4c5159;
+  font-weight: 700;
+ }
+ .eventType{
+  
+  font-weight: 800;
+    font-size: 19px;
+    padding-top: 10px;
+    line-height: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+ }
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
