@@ -16,7 +16,7 @@ class Susu{
     }
     static async list(user_id){
         try{
-            const {rows} = await knex.raw('SELECT * FROM users_susu WHERE users_susu.user_id=?',[user_id])
+            const {rows} = await knex.raw('SELECT * from susu JOIN users_susu ON susu.id = users_susu.susu_id WHERE user_id = ?',[user_id])
 
             return rows
         }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+// import { isValidPassword } from "../../../src/utils/auth-utils";
+// ../../../src/utils/auth-utils
 
 export default function JoinSusu() {
     const getFetchOptions = (body, method = 'POST') => ({
