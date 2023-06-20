@@ -1,8 +1,6 @@
 import { Link, useParams} from 'react-router-dom';
 import ReviewModal from '../components/ReviewModal';
-import { doctors } from '../doctorsAndReview';
 import ReviewCard from '../components/ReviewCard';
-import { reviews } from '../doctorsAndReview';
 
 
 export default function DoctorReview (){
