@@ -9,6 +9,8 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import Events from './components/Events';
+import MapComponent from './components/MapComponent';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -18,7 +20,7 @@ export default function App() {
 
   return <>
     <SiteHeadingAndNav />
-    <main>
+    <main className='home-section'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
@@ -27,6 +29,10 @@ export default function App() {
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
+      <div className = "eventList">
+        <Events></Events>
+      </div>
+        <MapComponent></MapComponent>
     </main>
   </>;
 }
