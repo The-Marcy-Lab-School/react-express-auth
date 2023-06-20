@@ -16,7 +16,8 @@ export default function JoinSusu() {
         e.preventDefault();
         // const options = getFetchOptions('GET');
         const user = await fetch(`/api/me`)
-        const data = await user.json();
+        const userdata = await user.json();
+        // console.log(data)
         const handleFetch = async () => {
             try {
                 const r = await fetch(`/api/susu/${e.target[1].value}`);
@@ -24,7 +25,7 @@ export default function JoinSusu() {
                 // console.log(data)
                 // console.log(e.target[0].value)
                 // console.log(data.password_hash)
-                let user_id = data.id
+                let user_id = userdata.id
                 let susu_id = e.target[1].value
                 let make_payments = false
                 let cardoptions = getFetchOptions({user_id, susu_id, make_payments})
