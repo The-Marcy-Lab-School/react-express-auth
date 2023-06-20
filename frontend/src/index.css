@@ -1,5 +1,8 @@
+*{
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
 body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
 }
@@ -116,9 +119,10 @@ form {
 
 #landingSection1 h1,
 #landingSection2 h1,
-#landingSection2 p {
+#landingSection2 p,
+#landingSection4 h1,
+#landingSection4 p {  
   color: white;
-  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
 }
 
 #landingSection2 {
@@ -129,8 +133,47 @@ form {
   align-items: center;
 }
 
+.aboutLink {
+  text-decoration: none;
+  color: black;
+}
+
+#landingSection2, 
+#landingSection4 {
+  background-color: #344d41;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#landingSection3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.text-3 {
+  padding-right: 5%;
+}
+
 #landingCreateButton {
-  width: 150px;
+  transition: background-color 0.2s, color 0.2s;
+  font-family: "Lucida Console", "Courier New", monospace;
+  background-color: #344d41;
+  border: 2px solid #FFF;
+  border-radius: 0px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  color: #FFF;
+}
+
+#landingCreateButton:hover {
+  background-color: #FFF;
+  color: #344d41;
 }
 
 .eventBox {
@@ -154,6 +197,7 @@ form {
   overflow: hidden;
   margin: 0 auto;
 }
+
 #aboutColumns{
   max-width: 100vw;
 }
