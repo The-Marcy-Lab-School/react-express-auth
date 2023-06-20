@@ -22,7 +22,7 @@ function EventList() {
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.events);
-        // console.log("DATA:",data)
+        console.log("DATA:",data)
         // const latitude = events[0].geometry[0].coordinates[0];
         // console.log(latitude);
       })
