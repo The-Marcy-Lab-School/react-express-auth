@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const eventController = require('./controllers/event');
+const userEventsController = require('./controllers/user_events');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -21,11 +22,15 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 });
 
 // Event routes
-Router.get("/events", eventController.list);
+Router.get('/events', eventController.list);
 Router.post('/events', eventController.create);
 Router.patch('/events/:id', eventController.update);
 Router.delete('/events/:id', eventController.deleteEvent);
 
 // User event routes
+Router.get('/users/:id/joinedEvents', userEventsController.listJoined);
+Router.get('/users/:id/createdEvents', userEventsController.listCreated);
+Router.post('/users/:userId/events/:eventId', userEventsController.create);
+Router.delete('/users/:userId/events/:eventId', userEventsController.deleteUserEvent);
 
 module.exports = Router;

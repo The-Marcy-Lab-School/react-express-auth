@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import {createEvent} from "../adapters/events-adapter";
+import CurrentUserContext from "../contexts/current-user-context"
 const EventForm = ({ isOpen, onClose }) => {
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const {currentUser} = useContext(CurrentUserContext)
+    const handleSubmit = async (e) => {
+        // e.preventDefault()
         const formData = new FormData(e.target);
         const postData = {};
         for (let [key, value] of formData.entries()) {
@@ -8,8 +12,26 @@ const EventForm = ({ isOpen, onClose }) => {
         }
         e.target.reset()
         onClose()
-        console.log(postData)
+        // console.log(postData)
+
+
+        const dataObject = {
+            organizer_id: currentUser.id,
+            type: postData.type,
+            title: postData.title,
+            start_date: postData.start_date,
+            end_date: postData.end_date,
+            start_time: postData.start_time,
+            end_time: postData.end_time,
+            location: postData.location,
+            borough: postData.borough,
+            description: postData.description,
+            image: postData.image || ''
+        }
+        const result = await createEvent(dataObject);
+        console.log("result", result)
     }
+
     return (
         <div className={`modal ${isOpen ? 'is-active' : ''}`}>
             <div className="modal-background" onClick={onClose}></div>
@@ -48,7 +70,7 @@ const EventForm = ({ isOpen, onClose }) => {
                                 <select name='borough' id='borough' required>
                                     <option>Manhattan</option>
                                     <option>Brooklyn</option>
-                                    <option>Bronx</option>
+                                    <option>The Bronx</option>
                                     <option>Queens</option>
                                     <option>Staten Island</option>
                                 </select>

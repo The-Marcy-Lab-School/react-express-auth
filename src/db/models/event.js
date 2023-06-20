@@ -35,10 +35,10 @@ class Event {
       image,
     } = newEvent;
     const query = `
-      INSERT INTO events (organizer_id, type, title, start_date, end_date, start_time, end_time, location, borough, description, image)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      RETURNING *
-    `;
+    INSERT INTO events (organizer_id, type, title, start_date, end_date, start_time, end_time, location, borough, description, image)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    RETURNING *
+  `;
     const {
       rows: [event],
     } = await knex.raw(query, [
@@ -54,7 +54,16 @@ class Event {
       description,
       image,
     ]);
-    return new Event(event);
+
+    // When an event is created, the organizer is also automatically added as a participant
+    const userEventQuery = `
+    INSERT INTO user_events (user_id, event_id)
+    VALUES (?, ?)
+    RETURNING *
+  `;
+    await knex.raw(userEventQuery, [organizer_id, event.id]);
+
+    return event;
   }
 
   static async update(id, updatedEvent) {
@@ -62,7 +71,7 @@ class Event {
       .where({ id })
       .update(updatedEvent, ["*"]);
 
-    return updated ? new Event(updated) : null;
+    return updated ?? null;
   }
 
   static async delete(id) {

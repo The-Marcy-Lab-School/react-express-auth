@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 
@@ -13,24 +13,42 @@ export default function LoginPage() {
     setErrorText('');
     const formData = new FormData(event.target);
     const [user, error] = await logUserIn(Object.fromEntries(formData.entries()));
-    if (error) return setErrorText(error.statusText);
+    if (error) return setErrorText('User not found');
     setCurrentUser(user);
     navigate(`/users/${user.id}`);
   };
 
   if (currentUser) return <Navigate to="/" />;
 
-  return <>
-    <h1 id="signUpText" style={{ fontWeight: 'bolder', fontSize: '1.5em'}}>Login</h1>
-    <form id="form" onSubmit={handleSubmit}>
-      <label htmlFor="username">Username</label>
-      <input type="text" autoComplete="username" id="username" name="username" />
+  // return <>
+  //   <h1>Login</h1>
+  //   <form onSubmit={handleSubmit}>
+  //     <label htmlFor="username">Username</label>
+  //     <input type="text" autoComplete="username" id="username" name="username" />
 
-      <label htmlFor="password">Password</label>
-      <input type="password" autoComplete="current-password" id="password" name="password" />
+  //     <label htmlFor="password">Password</label>
+  //     <input type="password" autoComplete="current-password" id="password" name="password" />
 
-      <button>Log in!</button>
-    </form>
-    { !!errorText && <p>{errorText}</p> }
-  </>;
+  //     <button>Log in!</button>
+  //   </form>
+  //   { !!errorText && <p>{errorText}</p> }
+  // </>;
+  return (
+    <div id="logInContainer">
+      <div id='logInBox'>
+        <form onSubmit={handleSubmit} id="logInForm">
+          <h1 className="title has-text-centered">Log In</h1>
+          <div id='errorTextDiv'>
+            <label className="is-size-5" htmlFor='username'>Username</label>
+            {!!errorText && <p className="has-text-danger">{errorText}</p>}
+          </div>
+          <input type="text" className='input is-medium' placeholder="Username" id='username' name='username'></input>
+          <label className="is-size-5" htmlFor='password'>Password</label>
+          <input type="password" className='input is-medium' id='password' name='password' placeholder="Password"></input>
+          <button type='submit' className="button logInButton mb-2 is-rounded is-custom">Log In</button>
+          <p className="has-text-centered">Don't have an account? Click here to <Link to="/sign-up">Sign Up!</Link></p>
+        </form>
+      </div>
+    </div>
+  )
 }

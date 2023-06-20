@@ -1,5 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
+const Article = ({ article }) => {
+  const handleClick = () => {
+    window.open(article.web_url, '_blank');
+  };
+  return (
+    <div class="card mb-4" id='newsCard'>
+      <div class="card-content">
+        <div class="content">
+          <div onClick={handleClick}>
+            <h2>{article.headline.main}</h2>
+            <p>{article.abstract}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

@@ -17,12 +17,16 @@ export default function SignUpPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrorText('');
-    if (!username || !password) return setErrorText('Missing username or password');
-
-    const [user, error] = await createUser({ username, password });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // setErrorText('');
+    // if (!username || !password) return setErrorText('Missing username or password');
+    const formData = new FormData(e.target);
+    const userData = {};
+    for (let [key, value] of formData.entries()) {
+      userData[key] = value;
+    }
+    const [user, error] = await createUser(userData);
     if (error) return setErrorText(error.statusText);
 
     setCurrentUser(user);
@@ -36,63 +40,77 @@ export default function SignUpPage() {
   };
 
   return <>
-    <h1 id="signUpText" style={{ fontWeight: 'bolder', fontSize: '1.5em'}}>Sign Up</h1>
-    <form id="form" onSubmit={handleSubmit} onChange={handleChange}>
-      <label htmlFor="firstName">First Name</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="firstName"
-        name="firstName"
-      // onChange={handleChange}
-      // value={username}
-      />
-      <label htmlFor="lastName">Last Name</label>
-    <input
-      autoComplete="off"
-      type="text"
-      id="lastName"
-      name="lastName"
-      // onChange={handleChange}
-      // value={username}
-    />
-    <label htmlFor="email">Email</label>
-    <input
-      autoComplete="off"
-      type="email "
-      id="email"
-      name="email"
-      // onChange={handleChange}
-      // value={username}
-    />
-      <label htmlFor="username">Username</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="username"
-        name="username"
-        onChange={handleChange}
-        value={username}
-      />
+    <div id='logInContainer'>
+      <div id='signUpBox'>
+        <form onSubmit={handleSubmit} onChange={handleChange} id='logInForm'>
+          <h1 className='title has-text-centered'>Sign Up</h1>
+          <label htmlFor="first_name">First Name</label>
+          <input
+            autoComplete="off"
+            type="text"
+            id="first_name"
+            name="first_name"
+            required
+            className='input'
+          // onChange={handleChange}
+          // value={username}
+          />
+          <label htmlFor="last_name">Last Name</label>
+          <input
+            autoComplete="off"
+            type="text"
+            id="last_name"
+            name="last_name"
+            required
+            className='input'
+          // onChange={handleChange}
+          // value={username}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            autoComplete="off"
+            type="email "
+            id="email"
+            name="email"
+            required
+            className='input'
+          // onChange={handleChange}
+          // value={username}
+          />
+          <label htmlFor="username">Username</label>
+          <input
+            autoComplete="off"
+            type="text"
+            id="username"
+            name="username"
+            onChange={handleChange}
+            value={username}
+            required
+            className='input'
+          />
 
-      <label htmlFor="password">Password</label>
-      <input
-        autoComplete="off"
-        type="password"
-        id="password"
-        name="password"
-        onChange={handleChange}
-        value={password}
-      />
+          <label htmlFor="password">Password</label>
+          <input
+            autoComplete="off"
+            type="password"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            value={password}
+            required
+            className='input'
+          />
 
-      {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
-        <label htmlFor="password-confirm">Password Confirm</label>
-        <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
-      */}
+          {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
+            <label htmlFor="password-confirm">Password Confirm</label>
+            <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
+          */}
 
-      <button>Sign Up Now!</button>
-    </form>
-    {!!errorText && <p>{errorText}</p>}
-    <p id="signUpText">Already have an account with us?</p> <p id="signUpText"><Link to ="/login">Log in!</Link></p>
+          <button className='button is-rounded mb-3 is-custom' type='submit'>Sign Up Now!</button>
+          {!!errorText && <p>{errorText}</p>}
+          <p className="has-text-centered">Already have an account with us? <Link to="/login">Log in!</Link></p>
+        </form>
+      </div>
+    </div>
   </>;
 }

@@ -36,6 +36,9 @@ export default function SiteHeadingAndNav() {
       </div>
       <div className={isBurgerToggled ? 'is-active navbar-menu' : 'navbar-menu'}>
         <div className='navbar-end'>
+          <Link to='/' className="navbar-item">
+            Home
+          </Link>
           {!currentUser ?
             <>
               <Link to='/login' className="navbar-item">
@@ -45,10 +48,10 @@ export default function SiteHeadingAndNav() {
                 Sign Up
               </Link>
             </> : <>
-            <a className="navbar-item" onClick={handleLogout}>Log Out</a>
-            <Link to='/dashboard' className="navbar-item">
-              Dashboard
-            </Link>
+              <a className="navbar-item" onClick={handleLogout}>Log Out</a>
+              <Link to='/dashboard' className="navbar-item">
+                Dashboard
+              </Link>
             </>}
           <Link to='/about' className="navbar-item">
             About Us
