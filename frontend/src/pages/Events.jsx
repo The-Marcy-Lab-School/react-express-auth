@@ -73,41 +73,52 @@ const Events = () => {
         <div>
           {
             events.map((event) => {
-              return (
-                  joined.has(event.id) === false && Number(event.organizer_id) !== Number(currentUser.id)? <>
-                  <div className='box eventBox' id={'eventId: ' + event.id}>
-                    <div>
-                      <h1 className='title'>{event.title}</h1>
-                      <p>{event.borough}</p>
-                      <p>{event.location}</p>
-                      <p>{event.start_date === event.end_date ? event.start_date.substring(0, 10) : event.start_date.substring(0, 10) + ' - ' + event.end_date.substring(0, 10)}</p>
-                      <p>{event.start_time + ' - ' + event.end_time}</p>
+              if (currentUser) {
+                return (
+                  joined.has(event.id) === false && Number(event.organizer_id) !== Number(currentUser.id) ? <>
+                    <div className='box eventBox' id={'eventId: ' + event.id}>
+                      <div>
+                        <h1 className='title'>{event.title}</h1>
+                        <p>{event.borough}</p>
+                        <p>{event.location}</p>
+                        <p>{event.start_date === event.end_date ? event.start_date.substring(0, 10) : event.start_date.substring(0, 10) + ' - ' + event.end_date.substring(0, 10)}</p>
+                        <p>{event.start_time + ' - ' + event.end_time}</p>
+                      </div>
+                      <div className='cardSec2'>
+                        <button className='button is-primary' onClick={() => eventClick(event)}>Join Event</button>
+                      </div>
+                      <div>
+                        <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1>
+                        <p>{event.description}</p>
+                      </div>
                     </div>
-                    <div className='cardSec2'>
-                      <button className='button is-primary' onClick={() => eventClick(event)}>Join Event</button>
+                  </> : null)
+              }
+              else {
+                return (
+                  <>
+                    <div className='box eventBox' id={'eventId: ' + event.id}>
+                      <div>
+                        <h1 className='title'>{event.title}</h1>
+                        <p>{event.borough}</p>
+                        <p>{event.location}</p>
+                        <p>{event.start_date === event.end_date ? event.start_date.substring(0, 10) : event.start_date.substring(0, 10) + ' - ' + event.end_date.substring(0, 10)}</p>
+                        <p>{event.start_time + ' - ' + event.end_time}</p>
+                      </div>
+                      <div className='cardSec2'>
+                        <button className='button is-primary' onClick={() => eventClick(event)}>Join Event</button>
+                      </div>
+                      <div>
+                        <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1>
+                        <p>{event.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1>
-                      <p>{event.description}</p>
-                    </div>
-                  </div>
-                </> : null)
+                  </>
+                )
+              }
             })
           }
         </div>
-        {/* <ul>
-          {
-            events.map((event) => <>
-              <li key={event.id}>{
-                event.title
-              }</li>
-              <li>{
-                event.description
-              }</li>
-            </>)
-          }
-        </ul> */}
-
       </div>
       <EventForm isOpen={isModalOpen} onClose={closeModal} />
     </>
