@@ -52,7 +52,7 @@ form {
   font-weight: bold;
   font-style: italic;
 }
-.card {
+/* .card {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
@@ -81,8 +81,8 @@ form {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+ } */
 
-}
 .mission {
   display: flex; 
   justify-content: center;
