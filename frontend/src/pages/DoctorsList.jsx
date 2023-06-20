@@ -13,7 +13,7 @@ import DoctorContext from "../contexts/DoctorContext";
       return (
 
         <div className="ui centered cards">
-            {doctors.map(doctor => { return <DoctorCard key={doctor.id} {...doctor} doctor={doctor} />})}
+            {doctors.map((doctor,i) => { return <DoctorCard key={i} {...doctor} />})}
         </div>
 
       )      

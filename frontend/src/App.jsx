@@ -11,7 +11,7 @@ import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import SignUpLogin from './pages/SignupLogin';
 import DoctorReview from './pages/DoctorReview';
-import Welcome from './pages/Mission';
+import Mission from './pages/Misson';
 import CreatePost from './pages/CreatePost';
 import Footer from './components/SiteFooter';
 
@@ -25,7 +25,7 @@ export default function App() {
     <SiteHeadingAndNav />
     <main>
       <Routes>
-        <Route path='/' element={<Welcome />} />
+        <Route path='/' element={<Mission />} />
         <Route path = '/signuplogin' element={<SignUpLogin />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
