@@ -23,8 +23,8 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 });
 //grocery routes
 Router.post('/grocerylist', groceryController.create);
-Router.get('/grocerylist/:id', groceryController.list);
-Router.get('/grocerylist/:id/items', groceryController.listItems);
+Router.get('/grocerylist/:id', groceryController.list); //get grocery based user id
+Router.get('/grocerylist/:id/items', groceryController.listItems); //get items based grocery list id
 Router.delete('/grocerylist/:id', groceryController.destroy);
 Router.patch('/grocerylist/:id',groceryController.update );
 
