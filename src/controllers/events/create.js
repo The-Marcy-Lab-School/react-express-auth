@@ -2,9 +2,9 @@ const createEvent = async (req, res) => {
     const {
         session,
         db: { Events },
-        body: {user_id, img_url, description, date, time, header}
+        body: {img_url, description, date, time, header}
     } = req
-    // const user_id = session.user_id;
+    const user_id = session.userId;
     console.log(user_id, img_url, description, date, time, header)
     const event = await Events.create(user_id, img_url, description, date, time, header);
     res.send(event);

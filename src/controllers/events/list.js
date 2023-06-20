@@ -2,9 +2,9 @@ const listEvents = async (req, res) => {
     const {
       session,
       db: { Events },
-      body: {user_id},
+      body: {},
     } = req;
-    //const user_id = session.user_id
+    const user_id = session.userId
     const listEvent = await Events.list(user_id);
     // console.log("events:" + listEvent)
     //const img = await PostedImages.create(url, userId);
