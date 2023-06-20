@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 
-=======
 import React, { useEffect, useContext, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 import Event from './Events';
@@ -77,4 +75,3 @@ const MapComponent = () => {
 };
 
 export default MapComponent;
->>>>>>> 4a5576d0f790919b9d0bf796f98543fb526c754f
