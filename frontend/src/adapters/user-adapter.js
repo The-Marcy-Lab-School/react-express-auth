@@ -20,6 +20,10 @@ export const listAllJoined = async (userId) => {
   const result = await fetchHandler(`${baseUrl}/${userId}/joinedEvents`)
   return result;
 }
+export const listAllCreated = async (userId) => {
+  const result = await fetchHandler(`${baseUrl}/${userId}/createdEvents`)
+  return result;
+}
 
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
