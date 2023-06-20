@@ -1,9 +1,11 @@
 import { useContext } from "react";
-import DoctorCard from "../components/DoctorCard";
 import DoctorContext from "../contexts/DoctorContext";
+import DoctorCard from "../components/DoctorCard";
+
 
 
  function DoctorsList(){
+
     console.log('hello')
       const { doctors } = useContext(DoctorContext)
       console.log(doctors)
