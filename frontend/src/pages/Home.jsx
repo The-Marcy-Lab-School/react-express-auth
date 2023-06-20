@@ -1,6 +1,13 @@
+import Events from "../components/Events";
+import MapComponent from "../components/MapComponent";
+
 export default function HomePage() {
-  // return <>
-  //   <h1>Home</h1>
-  //   <p>Put something interesting here!</p>
-  // </>;
+  return (
+    <>
+      <div className="eventList">
+        <Events></Events>
+      </div>
+      <MapComponent></MapComponent>
+    </>
+  );
 }
