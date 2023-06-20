@@ -3,7 +3,7 @@ const listItems = async (req, res) => {
     db: { Grocery_list },
     params: { id, userid },
   } = req
-  const grocery = await Grocery_list.findItemByGroceryListId(Number(userid));
+  const grocery = await Grocery_list.findItemByGroceryListId(Number(id));
   res.send(grocery);
 };
 
