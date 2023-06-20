@@ -16,6 +16,11 @@ export const getAllUsers = async () => {
   return users || [];
 };
 
+export const listAllJoined = async (userId) => {
+  const result = await fetchHandler(`${baseUrl}/${userId}/joinedEvents`)
+  return result;
+}
+
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const updateUsername = async ({ id, username }) => (
