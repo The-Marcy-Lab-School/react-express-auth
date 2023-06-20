@@ -15,14 +15,14 @@ function EventList() {
     fetchEvents();
   }, []);
 
-  // console.log("Longitude:",eventData[0].geometry[0].coordinates[1])
-
   const fetchEvents = () => {
     fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=10')
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.events);
-        console.log("DATA:",data)
+        console.log("DATA:", data);
+        console.log("Longitude:", data.events[0].geometry[0].coordinates[1])
+        console.log("Latitude:", data.events[0].geometry[0].coordinates[0])
         // const latitude = events[0].geometry[0].coordinates[0];
         // console.log(latitude);
       })

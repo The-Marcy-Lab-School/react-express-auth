@@ -19,7 +19,7 @@ const MapComponent = () => {
   // console.log("sajckanscjn:")
 
   useEffect(() => {
-    mapboxgl.accessToken = 'pk.eyJ1IjoidHJleWphZGVkIiwiYSI6ImNsaXRkYWV4czAxa28za3QzeWgzcnB5YnAifQ.Sa0yc1I-LsaVBVMIPLYzxA';
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHJleWphZGVkIiwiYSI6ImNsaXRnZGtmNjEzc2IzanF2c2xvYW54Y28ifQ.zOjQMeR4v4rGw4_L7_-Iig';
     const map = new mapboxgl.Map({
       container: 'map', // container ID
       style: 'mapbox://styles/treyjaded/cliwe9c1002ak01qhag512fac', // style URL
