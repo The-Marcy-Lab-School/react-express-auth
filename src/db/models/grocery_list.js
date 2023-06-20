@@ -44,7 +44,7 @@ class Grocery_list{
         }
       }      
       
-      static async list (userid) {
+      static async list(userid) {
         try{
           const result = await knex.raw(`
           SELECT
