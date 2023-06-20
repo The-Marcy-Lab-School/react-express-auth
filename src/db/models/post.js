@@ -1,20 +1,21 @@
 const knex = require('../knex');
 
 class Post {
-    constructor({post_id, user_id, img_url, description, header }){
+    constructor({post_id, user_id, img_url, description, header, location }){
         this.post_id = post_id
         this.user_id = user_id
         this.img_url = img_url
         this.description = description
         this.header = header
+        this.location = location
 
     }
 
-    static async create (user_id, img_url, description, header) {
+    static async create (user_id, img_url, description, header, location) {
         try {
-          const query = `INSERT INTO post (user_id, img_url, description, header)
-            VALUES (?, ?, ?, ?) RETURNING *`;
-          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description,header]);
+          const query = `INSERT INTO post (user_id, img_url, description, header, location)
+            VALUES (?, ?, ?, ?, ?) RETURNING *`;
+          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description,header, location]);
           return post ? new Post(post) : null;
         } catch (err) {
           console.error(err);
@@ -26,7 +27,6 @@ class Post {
         try {
           const query = `DELETE FROM posts WHERE post_id = ? RETURNING *`;
           const { rows: [post] } = await knex.raw(query, [post_id]);
-        //   console.log(post)
           return post;
         } catch (err) {
           console.error(err);

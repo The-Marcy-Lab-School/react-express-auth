@@ -10,7 +10,7 @@ exports.up = (knex) => knex.schema.createTable ('events', (table) => {
     table.string('time')
     table.string('header')
     table.text('description')
-    // table.string('date_created')
+    table.string('location')
     table.timestamps(true, true);
 
 });

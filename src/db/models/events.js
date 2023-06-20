@@ -1,7 +1,7 @@
 const knex = require('../knex');
 
 class Events {
-    constructor({event_id, user_id, img_url, description, date, time, header }){
+    constructor({event_id, user_id, img_url, description, date, time, header, location}){
         this.event_id = event_id
         this.user_id = user_id
         this.img_url = img_url
@@ -9,14 +9,15 @@ class Events {
         this.date = date
         this.time = time
         this.header = header
+        this.location = location
 
     }
 
-    static async create (user_id, img_url, description, date, time, header) {
+    static async create (user_id, img_url, description, date, time, header, location) {
         try {
-          const query = `INSERT INTO events (user_id, img_url, description, date, time, header)
-            VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
-          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time, header]);
+          const query = `INSERT INTO events (user_id, img_url, description, date, time, header, location)
+            VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+          const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time, header, location]);
           return post ? new Events(post) : null;
         } catch (err) {
           console.error(err);
@@ -45,6 +46,17 @@ class Events {
           return null;
         }
     }
+
+    static async listAll() {
+      try {
+        const query = 'SELECT * FROM events';
+        const { rows } = await knex.raw(query);
+        return rows
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
+      }
 
 
 

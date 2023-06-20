@@ -2,13 +2,11 @@ const listMyPost = async (req, res) => {
     const {
         session,
         db: { Post },
-        params: { }
+        body: { }
     } = req
-    const user_id = session.user_id;
-    console.log(user_id)
+    const user_id = session.userId;
     const posts = await Post.listMyPost(user_id); 
     res.send(posts);
-    // posts ? res.send(posts) : null;
     
 }
 

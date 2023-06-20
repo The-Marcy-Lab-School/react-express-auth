@@ -29,6 +29,7 @@ Router.get('/me', userController.showMe);
 Router.post('/post', postController.create)
 Router.get('/post/:user_id', postController.list)
 Router.get('/post', postController.listAll)
+Router.delete('/post/:post_id', postController.destroy);
 
 //VOLUNTEER 
 
@@ -38,8 +39,9 @@ Router.get('/volunteer', volunteerController.allVolunteer)
 
 //EVENT 
 Router.post('/events', eventsController.create)
-Router.get('/events/list', eventsController.list)
-
+Router.get('/events/:user_id', eventsController.list)
+Router.get('/events', eventsController.listAll)
+Router.delete('/events/:event_id', eventsController.destroy);
 
 
 
