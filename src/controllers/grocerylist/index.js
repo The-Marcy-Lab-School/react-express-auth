@@ -3,6 +3,7 @@ const create = require('./create');
 // const show = require('./show');
 const update = require('./update');
 const destroy = require('./destroy');
+const listItems = require('./listItems');
 
 // const login = require('./login');
 // const logout = require('./logout');
@@ -13,6 +14,7 @@ module.exports = {
   create,
   // show,
   update,
+  listItems,
   destroy,
 
   // login,
