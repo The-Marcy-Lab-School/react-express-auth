@@ -7,7 +7,7 @@ const videoId_story = 'xGAUAH2vGVU';
 const statPic = 'C:\Users\Saida\OneDrive\Pictures\datatable.PNG';
 
 
-export default function Welcome() {
+export default function Mission() {
     return <>
       <h1 className='title'> CareCompanion's Mission Statement</h1>
       
