@@ -24,14 +24,14 @@ exports.up = (knex) => {
  */
 exports.down = (knex) => knex.schema.dropTable('users');
 
-const user = {
-  first_name: "first name",
-  local_name: "last name",
-  age: "age",
-  gender: "gender",
-  race: "race",
-  ethnicity: "ethnicity",
-  username: "username",
-  password_hash: "password",
-  email: "email"
-}
+// const user = {
+//   first_name: "first name",
+//   local_name: "last name",
+//   age: "age",
+//   gender: "gender",
+//   race: "race",
+//   ethnicity: "ethnicity",
+//   username: "username",
+//   password_hash: "password",
+//   email: "email"
+// }
