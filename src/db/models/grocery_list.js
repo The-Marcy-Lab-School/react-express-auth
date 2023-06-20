@@ -1,18 +1,19 @@
 const knex = require('../knex');
 class Grocery_list{
-    constructor({ id, nova_rate, nutri_score }) {
+    constructor({ id,list_name, nova_rate, nutri_score  }) {
         this.id = id;
+        this.list_name = list_name
         this.nova_rate = nova_rate;
         this.nutri_score = nutri_score;
         
       }
 
       //adding items to grocery list 
-      static async create(nova_rate, nutri_score) {
+      static async create(list_name,nova_rate, nutri_score) {
         try{
         const query = `INSERT INTO grocery_list (nova_rate, nutri_score)
-          VALUES (?,?) RETURNING *`;
-        const { rows: [rate] } = await knex.raw(query, [nova_rate, nutri_score]);
+          VALUES (?,?,?) RETURNING *`;
+        const { rows: [rate] } = await knex.raw(query, [list_name,nova_rate, nutri_score]);
         return new Grocery_list(rate);
       } catch (err) {
         console.error(err);
