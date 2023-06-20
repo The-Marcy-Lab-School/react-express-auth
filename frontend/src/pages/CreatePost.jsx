@@ -18,6 +18,7 @@ export default function CreatePost() {
   const [is_facility, setFacility] = useState(false);
   const [is_doctor, setDoctor] = useState(false);
   const [photo, setPhoto] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     checkForLoggedInUser().then((data) => {
@@ -43,103 +44,121 @@ export default function CreatePost() {
     });
 
     if (error) {
-      return setErrorText(error.statusText);
+      setErrorText(error.statusText);
+    } else {
+      // setCurrentUser(user);
+      setFormSubmitted(true); // Set the formSubmitted state variable to true
     }
-
-    // setCurrentUser(user);
-    navigate('/home'); // Navigate to the home page
   };
-
 
   const handleChange = (event) => {
+    // ... your existing code for handling form changes
     const { name, value, type, checked } = event.target;
 
-    if (type === 'checkbox') {
-      if (name === 'is_facility') {
-        setFacility(checked);
-      }
-      if (name === 'is_doctor') {
-        setDoctor(checked);
-      }
-    } else {
-      if (name === 'facility_doctor') setFacility_doctor(value);
-      if (name === 'specialty') setSpecialty(value);
-      if (name === 'description') setDesciption(value);
-      if (name === 'address') setAddress(value);
-      if (name === 'overall_rating') setOverall_rating(value);
-      if (name === 'photo') setPhoto(value);
-    }
+if (type === 'checkbox') {
+  if (name === 'is_facility') {
+    setFacility(checked);
+  }
+  if (name === 'is_doctor') {
+    setDoctor(checked);
+  }
+} else {
+  if (name === 'facility_doctor') setFacility_doctor(value);
+  if (name === 'specialty') setSpecialty(value);
+  if (name === 'description') setDesciption(value);
+  if (name === 'address') setAddress(value);
+  if (name === 'overall_rating') setOverall_rating(value);
+  if (name === 'photo') setPhoto(value);
+}
   };
-    
-      return <>
+
+  useEffect(() => {
+    if (formSubmitted) {
+      setFacility_doctor('');
+      setSpecialty('');
+      setDesciption('');
+      setAddress('');
+      setOverall_rating(0);
+      setFacility(false);
+      setDoctor(false);
+      setPhoto('');
+    }
+  }, [formSubmitted]);
+
+  if (formSubmitted) {
+    return <Navigate to="/home" />;
+  }
+
+  return (
+    <>
       <div>
         <h4>Cant find your Health care professional or facility? Fill out the following form to be able to Create that doctor or facility for later use. </h4>
       </div>
       <form onSubmit={handleSubmit} onChange={handleChange}>
-      <label htmlFor="facility_doctor">Name</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="facility_doctor"
-        name="facility_doctor"
-        onChange={handleChange}
-        value={facility_doctor}
-      />
+        <label htmlFor="facility_doctor">Name</label>
+        <input
+          autoComplete="off"
+          type="text"
+          id="facility_doctor"
+          name="facility_doctor"
+          onChange={handleChange}
+          value={facility_doctor}
+        />
 
-      <label htmlFor="specialty">Specialty</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="specialty"
-        name="specialty"
-        onChange={handleChange}
-        value={specialty}
-      />
+        <label htmlFor="specialty">Specialty</label>
+        <input
+          autoComplete="off"
+          type="text"
+          id="specialty"
+          name="specialty"
+          onChange={handleChange}
+          value={specialty}
+        />
 
-      <label htmlFor="description">Description</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="description"
-        name="description"
-        onChange={handleChange}
-        value={description}
-      />
+        <label htmlFor="description">Description</label>
+        <input
+          autoComplete="off"
+          type="text"
+          id="description"
+          name="description"
+          onChange={handleChange}
+          value={description}
+        />
 
-  <label htmlFor="address">Address</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="address"
-        name="address"
-        onChange={handleChange}
-        value={address}
-      />
-       <label htmlFor="overall_rating">Give the Doctor or Facility a over all rating</label>
-       <input
-        autoComplete="off"
-        type="number"
-        min={1}
-        max={5}
-        id="overall_rating"
-        name="overall_rating"
-        onChange={handleChange}
-        value={overall_rating}
-      />
-
-
-    <label htmlFor="is_facility">Is this a Facility?</label>
-    <input type="checkbox" id="is_facility" name="is_facility" onChange={handleChange}/>
-
-    <label htmlFor="is_doctor">Is this a Doctor?</label>
-    <input type="checkbox" id="is_doctor" name="is_doctor" onChange={handleChange}/>
-
-      <label htmlFor="photo">Upload Photo</label>
-      <input type="text" id="photo" name="photo" onChange={handleChange}></input>
+        <label htmlFor="address">Address</label>
+        <input
+          autoComplete="off"
+          type="text"
+          id="address"
+          name="address"
+          onChange={handleChange}
+          value={address}
+        />
+        <label htmlFor="overall_rating">Give the Doctor or Facility a over all rating</label>
+        <input
+          autoComplete="off"
+          type="number"
+          min={1}
+          max={5}
+          id="overall_rating"
+          name="overall_rating"
+          onChange={handleChange}
+          value={overall_rating}
+        />
 
 
-      <button>Create Now!</button>
+        <label htmlFor="is_facility">Is this a Facility?</label>
+        <input type="checkbox" id="is_facility" name="is_facility" onChange={handleChange} />
+
+        <label htmlFor="is_doctor">Is this a Doctor?</label>
+        <input type="checkbox" id="is_doctor" name="is_doctor" onChange={handleChange} />
+
+        <label htmlFor="photo">Upload Photo</label>
+        <input type="text" id="photo" name="photo" onChange={handleChange}></input>
+
+
+        <button>Create Now!</button>
       </form>
-      
-      </>
+    </>
+  );
 }

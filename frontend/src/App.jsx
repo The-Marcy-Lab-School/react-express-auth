@@ -11,7 +11,7 @@ import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import SignUpLogin from './pages/SignupLogin';
 import DoctorReview from './pages/DoctorReview';
-import Mission from './pages/Misson';
+import Mission from './pages/Mission';
 import CreatePost from './pages/CreatePost';
 import Footer from './components/SiteFooter';
 

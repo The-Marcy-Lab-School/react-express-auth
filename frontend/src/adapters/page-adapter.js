@@ -13,7 +13,7 @@ export const createPost = async ({
   is_doctor,
   photo,
 }) => {
-  fetchHandler(
+  return fetchHandler(
     baseUrl,
     getPostOptions({
       user_id,
@@ -28,8 +28,12 @@ export const createPost = async ({
     })
   );
 };
+export const getAllPages = async () => {
+  const [pages] = await fetchHandler(baseUrl);
+  return pages || []
+} 
 
-export const getAllPost = async (id) => fetchHandler(`${baseUrl}/${id}`);
+export const getPost = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const updateDescription = async ({ id, description }) =>
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, description }));

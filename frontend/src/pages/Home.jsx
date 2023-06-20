@@ -1,24 +1,29 @@
-import { useContext, useEffect, useState } from 'react';
+// import { useContext, useEffect, useState } from 'react';
 // import { useNavigte, useParams } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
-import CurrentUserContext from '../contexts/current-user-context';
-import { getUser } from '../adapters/user-adapter';
-import { logUserOut } from '../adapters/auth-adapter';
+// import { NavLink, useParams } from 'react-router-dom';
+// import CurrentUserContext from '../contexts/current-user-context';
+// import { getUser } from '../adapters/user-adapter';
+// import { logUserOut } from '../adapters/auth-adapter';
 import DoctorCard from "../components/DoctorCard";
-import { doctors } from '../doctorsAndReview';
-import { reviews } from '../doctorsAndReview';
 
+import { useEffect, useState } from "react";
+import { getAllPages } from "../adapters/page-adapter";
+import { NavLink, Link, useParams } from 'react-router-dom';
 
  export default function DoctorsList(){
-  console.log(reviews)
-  const { pageId, id } = useParams();
+  const [pages, setPages] = useState([]);
+
+  useEffect(() => {
+    getAllPages().then(setPages)
+  }, [])
+  console.log(pages)
       return (
         <>
          <h4>
           <NavLink to="/create-post">Cant Find a Doctor? Add One Here</NavLink>
           </h4>
         <div className="ui centered cards" >
-            {doctors.map(doctor => { return <DoctorCard key={doctor.id} doctor={doctor} reviews={reviews}/>})}
+            {pages.map(page => { return <DoctorCard key={page.id} page={page}/>})}
         </div>
         </>
       )      
