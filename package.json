@@ -21,6 +21,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.5",
     "bcrypt": "^5.1.0",
     "connect-session-knex": "^3.0.1",
     "cookie-parser": "^1.4.6",
