@@ -13,7 +13,8 @@
 
 #map {
   display: flex;
-  position: relative;
+  position: absolute;
+  margin: 0;
   top: 0;
   bottom: 0;
   width: 65%;
@@ -22,7 +23,9 @@
   display: flex;
   justify-items: stretch;
   flex-direction: row;
-  flex-wrap: nowrap;}
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
 
 body {
   margin: 0;
@@ -88,6 +91,9 @@ input {
 
 header {
   display: flex;
+  position: sticky;
+  top: -1px;
+  z-index: 10000;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;

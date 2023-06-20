@@ -1,15 +1,15 @@
-// const deleteFriend = async (req, res) => {
-//     const {
-//       session,
-//       db: { User },
-//       body: { username, password },
-//     } = req;
+const deleteFriend = async (req, res) => {
+    const {
+      session : {userId},
+      db: { Friends },
+      body: { friendUserName },
+    } = req;
   
-//     // TODO: check if username is taken, what should you return?
-//     const user = await User.create(username, password);
-//     session.userId = user.id;
+    
+    const friend = await Friends.delete( friendUserName, userId);
+    if(!friend) return res.sendStatus(404)
   
-//     res.send(user);
-//   };
+    return res.send(200);
+  };
   
-//   module.exports = deleteFriend;
+  module.exports = deleteFriend;
