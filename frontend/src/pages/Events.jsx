@@ -66,7 +66,6 @@ const Events = () => {
   return (
     <>
       <div>
-        <button className='button'></button>
         <h1 className='title has-text-centered'>Events</h1>
         <div className='is-flex is-justify-content-center mb-5'>
           <button className='button' onClick={openModal}>Create Event</button>
@@ -75,7 +74,7 @@ const Events = () => {
           {
             events.map((event) => {
               return (
-                joined.has(event.id) === false ? <>
+                  joined.has(event.id) === false && Number(event.organizer_id) !== Number(currentUser.id)? <>
                   <div className='box eventBox' id={'eventId: ' + event.id}>
                     <div>
                       <h1 className='title'>{event.title}</h1>
