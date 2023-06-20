@@ -13,6 +13,7 @@ import SignUpLogin from './pages/SignupLogin';
 import DoctorReview from './pages/DoctorReview';
 import Mission from './pages/Misson';
 import CreatePost from './pages/CreatePost';
+import Footer from './components/SiteFooter';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -36,5 +37,6 @@ export default function App() {
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </main>
+    <Footer />
   </>;
 }
