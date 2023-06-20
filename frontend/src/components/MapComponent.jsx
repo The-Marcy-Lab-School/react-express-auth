@@ -1,36 +1,35 @@
-
+/* eslint-disable max-len */
 import React, { useEffect, useContext, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
-import Event from './Events';
+import CurrentUserContext from '../contexts/current-user-context.js';
 import 'mapbox-gl/dist/mapbox-gl.css';
 // import { DataContext } from '/Users/jaded/Development/test react/src/assets/DataContext.jsx'
 
 const MapComponent = () => {
   // const [latitude, setLatitude] = useState([]);
-  // const { data } = useContext(DataContext)
+  const { eventData } = useContext(CurrentUserContext); // Data from MapComponent
 
-  // console.log(data)
-  // const latitude = data[0]
+  console.log("event data from map:", eventData);
 
-  // const { setData } = useContext(DataContext); //Use context to store data through components
-  // const eventData = latitude;
+  const latitude = eventData?.events[0]?.geometry[0]?.coordinates[0];
+  const longitude = eventData?.events[0]?.geometry[0]?.coordinates[1] // the "?" character is if it doesn't exist give undefined
 
-  // setData(eventData);
-  // console.log("sajckanscjn:")
+  console.log("Latitude:", latitude);
+  console.log("Longitude:", longitude);
 
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoidHJleWphZGVkIiwiYSI6ImNsaXRnZGtmNjEzc2IzanF2c2xvYW54Y28ifQ.zOjQMeR4v4rGw4_L7_-Iig';
     const map = new mapboxgl.Map({
       container: 'map', // container ID
       style: 'mapbox://styles/treyjaded/cliwe9c1002ak01qhag512fac', // style URL
-      center: [-74.5, 40], // starting position [lng, lat]
+      center: [-74.5, 40], // starting position [lng, lat] NJ = [-74.5, 40]
       zoom: 9, // starting zoom
     });
     //  const popup = new mapboxgl.Popup({ closeOnClick: false })
     map.on('load', () => {
       new mapboxgl.Popup({ closeOnClick: false })
-        .setLngLat([-74.5, 40])
-        .setHTML('<h1>Hello World!</h1>')
+        .setLngLat([latitude, longitude])
+        .setHTML('<h1>longitude check!</h1>')
         .addTo(map);
 
       new mapboxgl.Popup({ closeOnClick: false })
@@ -67,7 +66,7 @@ const MapComponent = () => {
     return () => {
       map.remove();
     };
-  }, []);
+  }, [latitude, longitude]);
 
   return (
       <div id="map"></div>
