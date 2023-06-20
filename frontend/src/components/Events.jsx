@@ -2,35 +2,31 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable func-style */
 import React, { useEffect, useState, useContext } from 'react';
-// import { DataContext } from "test-react/src/assets/DataContext.jsx";
+import CurrentUserContext from '../contexts/current-user-context.js';
 
 // ------------------List of Events ----------------
 function EventList() {
   const [events, setEvents] = useState([]);
-  // const { data, setData } = useContext(DataContext); // Use context to store data through components
-  // setData(events);
-  // console.log("EVENTDATA:",events)
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
-  // console.log("Longitude:",eventData[0].geometry[0].coordinates[1])
+  const { updateEventData } = useContext(CurrentUserContext);
 
   const fetchEvents = () => {
     fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=10')
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.events);
-        console.log("DATA:",data)
-        // const latitude = events[0].geometry[0].coordinates[0];
-        // console.log(latitude);
+        updateEventData(data); // current event thats updated using useCONTEXT
+        console.log("DATA:", data);
+        console.log("DATE:", data.events[0].geometry[0].date);
       })
     // console.log("DATA:",data)                                                    //GENERAL DATA
     // console.log("TYPE:",data.events[0].categories[0].title)                  //Type of Hazard Events
-
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    fetchEvents();
+    updateEventData();
+  }, []);
 
   //  const latitude = events[0].geometry[0].coordinates[0]
   //  console.log(latitude)
@@ -40,7 +36,7 @@ function EventList() {
     <dl className='eventList'>
       {events.map((event) => (
         <React.Fragment key={event.id}>
-          <li ><a href="#">{event.categories.map((category) => <div key = {category.id}>{category.title}</div>)} {event.title}</a></li>
+          <li ><a href="#">{event.categories.map((category) => <div className='eventRow' key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div></div>)} {event.title}</a></li>
           {event.description && (
             <dd><em>{event.description}</em></dd>
           )}
@@ -96,7 +92,7 @@ function LayerList() {
 
 function Event() {
   return (
-//div className='eventList'>
+  // div className='eventList'>
      <EventList />
   );
 }

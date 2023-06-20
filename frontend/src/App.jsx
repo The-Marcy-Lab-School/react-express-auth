@@ -1,16 +1,14 @@
-import { useContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import SignUpPage from './pages/SignUp';
-import LoginPage from './pages/Login';
-import SiteHeadingAndNav from './components/SiteHeadingAndNav';
-import NotFoundPage from './pages/NotFound';
-import UserContext from './contexts/current-user-context';
-import { checkForLoggedInUser } from './adapters/auth-adapter';
-import UsersPage from './pages/Users';
-import UserPage from './pages/User';
-import Events from './components/Events';
-import MapComponent from './components/MapComponent';
+import { useContext, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SignUpPage from "./pages/SignUp";
+import LoginPage from "./pages/Login";
+import SiteHeadingAndNav from "./components/SiteHeadingAndNav";
+import NotFoundPage from "./pages/NotFound";
+import UserContext from "./contexts/current-user-context";
+import { checkForLoggedInUser } from "./adapters/auth-adapter";
+import UsersPage from "./pages/Users";
+import UserPage from "./pages/User";
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -18,21 +16,19 @@ export default function App() {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
-  return <>
-    <SiteHeadingAndNav />
-    <main className='home-section'>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/users' element={<UsersPage />} />
-        <Route path='/users/:id' element={<UserPage />} />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
-      <div className = "eventList">
-        <Events></Events>
-      </div>
-        <MapComponent></MapComponent>
-    </main>
-  </>;
+  return (
+    <>
+      <SiteHeadingAndNav />
+      <main className="home-section">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/:id" element={<UserPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </>
+  );
 }
