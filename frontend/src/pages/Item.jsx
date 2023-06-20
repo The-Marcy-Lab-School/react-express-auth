@@ -22,11 +22,12 @@ export default function Item() {
   const [nova, setNova] = useState(null);
   const [ID, setId] = useState(null);
 
+
   useEffect(() => {
     const setAll = async () => {
       product.product_name !== undefined
-        ? await setName(`${product.product_name}-${product.quantity}`)
-        : await setName(`${product.brands_tags[0]}-${product.quantity}`)
+        ? setName(`${product.product_name}-${product.quantity}`)
+        : setName(`${product.brands_tags[0]}-${product.quantity}`)
       product.ecoscore_grade !== "not-applicable"
         ? await setEco(product.ecoscore_grade)
         : null
@@ -42,9 +43,29 @@ export default function Item() {
       await setNutri(product.nutriscore_grade);
       await setNova(product.nova_group);
       await setId(product._id);
+
+      // const results = [];
+
+      // for(const additive of additives){
+      //   try{
+      //     const res = await fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro&titles=${additive}`);
+      //     const data = await res.json();
+
+      //     const pageId = Object.keys(data.query.pages)[0];
+      //     const extract = data.query.pages[pageId].extract;
+      //     const firstParagraph = extract.split('\n')[0];
+
+      //     results.push({item, firstParagraph});
+      //     console.log(results);
+      //   }catch(err){
+      //     console.log(err);
+      //     return null;
+      //   }
+      // }
+      
     };
     setAll();
-  }, []);
+  });
 
   if (!product) return <Page404 />;
   const handlerAddButton = async () => {
