@@ -1,27 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import CurrentUserContext from "../contexts/current-user-context";
 
 export default function CreateSusu() {
-        const [id, setID] = useState('');
-        const getFetchOptions = (body, method = 'POST') => ({
+    const { currentUser } = useContext(CurrentUserContext);
+    const getFetchOptions = (body, method = 'POST') => ({
         method,
         credentials: 'include', // IMPORTANT, this tells fetch to include cookies
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-      });
+    });
 
     const susuCreate = async (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
         const formInfo = Object.fromEntries(formData.entries());
+        formInfo.owner = currentUser.id;
         console.log(formInfo);
-        const user = await fetch(`/api/me`)
-        console.log(formInfo);
-        const data = await user.json();
-        setID(data.id);
         const options = getFetchOptions(formInfo, 'POST');
-
         const result = await fetch(`/api/susu`, options);
+        console.log(result);
         console.log(options);
     }
     return( <>
@@ -29,7 +27,7 @@ export default function CreateSusu() {
         <label>
         Susu Name: <input name="name" defaultValue="Enter Susu Name" />
         Susu Password: <input name="password_hash" defaultValue="Enter Susu Password" />
-        <input type="hidden" name="owner" value={id}/>
+        {/* <input type="hidden" name="owner" value={currentUser.id}/> */}
         </label>
         <hr />
         Fixed Amount: <label><input name ="payment_amount" defaultValue="1000"/></label>
