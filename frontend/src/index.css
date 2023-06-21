@@ -164,12 +164,23 @@ form {
   font-style: italic;
 }
 .marker {
-width: 30px;
-height: 30px;
-background: red;
-border-radius: 50%
+  background-color:#000000;
+    border:1px solid red;    
+    height:20px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width:20px;
 }
-
+.userLocationPin{
+  background-color:#ffffff;
+  border:1px solid red;    
+  height:20px;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  width:20px;
+}
 
 .mapboxgl-popup {
   padding: 10px;
