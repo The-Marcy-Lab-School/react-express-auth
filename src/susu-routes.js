@@ -35,6 +35,8 @@ SusuRouter.patch('/susu/:id', susuController.update);
 //     "nextPayment": "6/16"
 // }
 
+// SusuRouter.patch('/usersSusu/:user_id', susuController.payment)
+
 SusuRouter.delete('/susu/:id', susuController.destroy)
 
 // http://127.0.0.1:3000/api/susu/6

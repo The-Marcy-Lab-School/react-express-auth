@@ -95,9 +95,19 @@ class Susu{
             return null
         }
     }
-    isValidPassword = async (password_hash) => (
-        isValidPassword(password_hash, this.#password)
-      );
+    // static async updatepayment(make_payments){
+    //     try{
+    //         let updatateSusu = await knex.raw('', [name, password_hash, owner, payment_amount, next_payment, id])
+    //     }
+    //     catch(error){
+    //         console.log(error);
+    //         return null
+    //     }
+    // }
+
+    // isValidPassword = async (password_hash) => (
+    //     isValidPassword(password_hash, this.#password)
+    //   );
 }
 
 module.exports = Susu;
