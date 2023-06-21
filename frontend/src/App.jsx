@@ -9,6 +9,11 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import AboutUsPage from './pages/AboutUs';
+import NewsFeed from './pages/NewsFeed';
+import Events from './pages/Events';
+import Dashboard from './pages/Dashboard';
+import Footer from './components/Footer';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -21,12 +26,17 @@ export default function App() {
     <main>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/about' element={<AboutUsPage />} />
+        <Route path='/newsFeed' element={<NewsFeed />} />
+        <Route path='/events' element={<Events />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/users' element={<UsersPage />} />
-        <Route path='/users/:id' element={<UserPage />} />
+        {/* <Route path='/users' element={<UsersPage />} />
+        <Route path='/users/:id' element={<UserPage />} /> */}
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </main>
+    <Footer />
   </>;
 }
