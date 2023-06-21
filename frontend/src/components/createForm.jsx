@@ -1,9 +1,10 @@
-import { useState, useContext } from "react";
-import CurrentUserContext from "../contexts/current-user-context";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateSusu() {
-    const { currentUser } = useContext(CurrentUserContext);
-    const getFetchOptions = (body, method = 'POST') => ({
+        const [id, setID] = useState('');
+        const navigate = useNavigate();
+        const getFetchOptions = (body, method = 'POST') => ({
         method,
         credentials: 'include', // IMPORTANT, this tells fetch to include cookies
         headers: { 'Content-Type': 'application/json' },
@@ -12,15 +13,25 @@ export default function CreateSusu() {
 
     const susuCreate = async (e) => {
         e.preventDefault();
+        const user = await fetch(`/api/me`)
+        // console.log(formInfo);
+        const data = await user.json();
+        setID(data.id);
         const form = e.target;
         const formData = new FormData(form);
         const formInfo = Object.fromEntries(formData.entries());
-        formInfo.owner = currentUser.id;
-        console.log(formInfo);
+        // console.log(formInfo);
         const options = getFetchOptions(formInfo, 'POST');
         const result = await fetch(`/api/susu`, options);
-        console.log(result);
-        console.log(options);
+        const r = await result.json()
+        // user_id, susu_id, make_payments
+        let susu_id = r.id
+        let user_id = data.id
+        let make_payments = false
+        let cardoptions = getFetchOptions({user_id, susu_id, make_payments })
+        console.log(cardoptions)
+        const addcard = await fetch('/api/susuform', cardoptions)
+        navigate(`/susu/${susu_id}`);
     }
     return( <>
     <form method="post" onSubmit={susuCreate}>

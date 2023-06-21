@@ -6,11 +6,11 @@ import CurrentSusuContextProvider from './contexts/SusuContextProvider';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <UserContextProvider>
+<UserContextProvider>
   <CurrentSusuContextProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
   </CurrentSusuContextProvider>
-    </UserContextProvider>
+</UserContextProvider>
 );
