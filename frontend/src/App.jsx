@@ -11,6 +11,7 @@ import UsersPage from "./pages/Users";
 import UserDashBoard from "./pages/UserDashBoard";
 import UserHome from "./pages/UserHome";
 import Item from "./pages/Item";
+import GroceryList from "./pages/GroceryList";
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/users/:id" element={<UserDashBoard />} />
           <Route path="/users/search" element={<UserHome />} />
           <Route path="/product/:id" element={<Item />} />
+          <Route path="/users/:id/grocerylist/:id" element={<GroceryList/>}/>
           <Route path="*" element={<Page404 />} />
         </Routes>
       </main>

@@ -4,7 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
-import GroceryList from "../components/GroceryCard";
+import GroceryCard from "../components/GroceryCard";
 import { fetchHandler } from "../utils";
 
 export default function UserPage() {
@@ -15,7 +15,7 @@ export default function UserPage() {
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
-  const [ lists , setList ] = useState([]);
+  const [lists, setList] = useState([]);
 
   const loadUser = async () => {
     const [user, error] = await getUser(id);
@@ -24,41 +24,41 @@ export default function UserPage() {
   };
 
   const doFetch = async () => {
-    try{
-      const res = await fetchHandler(`/api/grocerylist/${id}`,{
+    try {
+      const res = await fetchHandler(`/api/grocerylist/${id}`, {
         method: "GET",
         headers: {
-          "Content-Type" : "application/json",
+          "Content-Type": "application/json",
         },
       });
       console.log(res[0]);
       setList(res[0]);
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
       return null;
     }
   };
-  
+
   useEffect(() => {
     const loadInfoUser = async () => {
-      try{
+      try {
         await loadUser();
         await doFetch();
-      }catch(err){
+      } catch (err) {
         console.log(err);
         return null;
       }
-    }
+    };
     loadInfoUser();
   }, [id]);
 
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
-    navigate('/');
+    navigate("/");
   };
 
-  console.log(lists)
+  console.log(lists);
 
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
@@ -66,22 +66,33 @@ export default function UserPage() {
   // What parts of state would change if we altered our currentUser context?
   // Ideally, this would update if we mutated it
   // But we also have to consider that we may NOT be on the current users page
-  const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
+  const profileUsername = isCurrentUserProfile
+    ? currentUser.username
+    : userProfile.username;
 
-  return <>
-    <h1>{profileUsername}</h1>
-    { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-    <p>If the user had any data, here it would be</p>
-    <p>Fake Bio or something</p>
-    {
-      !!isCurrentUserProfile
-        && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-    }
+  return (
+    <>
+      <h1>{profileUsername}</h1>
+      {!!isCurrentUserProfile && (
+        <button onClick={handleLogout}>Log Out</button>
+      )}
+      <p>If the user had any data, here it would be</p>
+      <p>Fake Bio or something</p>
+      {!!isCurrentUserProfile && (
+        <UpdateUsernameForm
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+        />
+      )}
 
-    <div className="ui centered cards">
-      {lists.map(groceryList => {
-        return <GroceryList key={groceryList.grocerylist} grocery={groceryList}/>
-      })}
-    </div>
-  </>;
+      <div className="ui centered cards">
+        {lists.map((list) => {
+          return (
+            <GroceryCard key={list.id} grocery={list} />
+            //add onClick and add a fetch to get the groceryid and fetch it
+          );
+        })}
+      </div>
+    </>
+  );
 }
