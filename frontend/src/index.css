@@ -240,7 +240,7 @@ form {
 
 .is-custom {
   background: linear-gradient(to right, white 50%,  #253551 50%);
-  background-size: 200% 100%;
+  background-size: 300% 100%;
   transition: background-position 0.5s, color 0.5s;
   transition-timing-function: ease-in;
   color: black; 
@@ -264,6 +264,13 @@ form {
   padding: 4px;
 }
 
+#newsCard {
+  display: flex;
+  margin: 50px;
+  color: rgb(2, 93, 2);
+  font-size: large;
+}
+
 @media only screen and (max-width: 550px)  {
   #logInBox, #signUpBox {
     box-shadow: rgba(100, 100, 111, 0) 0px 7px 29px 0px;
@@ -271,7 +278,9 @@ form {
   #footer {
     grid-template-columns: 1fr;
   }
-  #footerNav{
+  #footerNav {
     display:none;
   }
+
+
 }

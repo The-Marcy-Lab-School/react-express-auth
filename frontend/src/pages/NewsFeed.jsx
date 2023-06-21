@@ -5,38 +5,31 @@ const Article = ({ article }) => {
     window.open(article.web_url, '_blank');
   };
   return (
-    <div class="card mb-4" id='newsCard'>
-      <div class="card-content">
-        <div class="content">
+    <div class="card mb-4" >
+        <div class="content" id='newsCard' >
           <div onClick={handleClick}>
             <h2>{article.headline.main}</h2>
             <p>{article.abstract}</p>
           </div>
         </div>
-      </div>
     </div>
   );
 };
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://newsdata.io/api/1/news?apikey=pub_24581aea2419d64bc1af13fab0cfa12222033&q=environment'
-        );
+        const response = await fetch('https://api.nytimes.com/svc/search/v2/articlesearch.json?q=environment&api-key=jpOGZTJ7dvp2jenrZozAWBi37rXc0sJo');
 
         if (!response.ok) {
           throw new Error('Error fetching articles');
         }
 
         const data = await response.json();
-        const articlesFromNewsData = data.data.news;
-
-        setArticles(articlesFromNewsData);
-        setIsLoading(false);
+        setArticles(data.response.docs);
       } catch (error) {
         console.log(error);
       }
@@ -46,28 +39,13 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        overflow: 'auto',
-        marginTop: '30px',
-      }}
-    >
-      <h1 style={{ margin: '20px' }}>NewsFeed</h1>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : articles.length > 0 ? (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {articles.map((article, index) => (
-            <Article key={index} article={article} />
-          ))}
-        </div>
-      ) : (
-        <p>No articles found.</p>
-      )}
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', overflow: 'auto', marginTop: '30px', marginBottom: '20px'}}>
+      <h1 style={{ margin: '25px' }} className='title'>NewsFeed</h1>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {articles.map(article => (
+          <Article key={article._id} article={article} />
+        ))}
+      </div>
     </div>
   );
 };
