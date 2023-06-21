@@ -8,7 +8,7 @@ exports.up = (knex) => knex.schema.createTable ('post', (table) => {
     table.string('img_url')
     table.string('header')
     table.text('description')
-    // table.string('date_created')
+    table.string('location')
     table.timestamps(true, true);
 
 });
