@@ -4,6 +4,7 @@ const show = require('./show');
 const update = require('./update');
 const destroy = require('./destroy');
 const all = require('./all')
+const add = require('./add')
 
 module.exports = {
   list,
@@ -11,5 +12,6 @@ module.exports = {
   show,
   update,
   destroy,
-  all
+  all,
+  add
 };
