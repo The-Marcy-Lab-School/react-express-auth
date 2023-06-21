@@ -3,83 +3,143 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
 import { fetchHandler } from "../utils";
+import Additives from "../components/Additives";
 
 export default function Item() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { products } = useContext(ProductContext);
-  const product = products.find(
-    (product) => parseInt(product._id) === parseInt(id)
-  );
-
-  const [name, setName] = useState(null);
-  const [ecoscore, setEco] = useState(null);
-  const [ingredient, setIngredients] = useState(null);
-  const [additives, setAdditives] = useState(null);
-  const [img, setImg] = useState(null);
-  const [store, setStores] = useState(null);
-  const [nutri, setNutri] = useState(null);
-  const [nova, setNova] = useState(null);
-  const [ID, setId] = useState(null);
-
+  const [curProduct, setCurProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const results = [];
 
   useEffect(() => {
-    const setAll = async () => {
-      product.product_name !== undefined
-        ? setName(`${product.product_name}-${product.quantity}`)
-        : setName(`${product.brands_tags[0]}-${product.quantity}`)
-      product.ecoscore_grade !== "not-applicable"
-        ? await setEco(product.ecoscore_grade)
-        : null
+    const getProduct = async () => {
+      setLoading(true);
+      const product = await products.find(
+        (product) => Number(product._id) === Number(id)
+      );
 
-      await setIngredients(product.ingredients_text);
-
-      product.additives_original_tags.length !== 0
-        ? await setAdditives(product.additives_original_tags)
-        : null;
-
-      await setImg(product.image_front_thumb_url);
-      await setStores(product.stores);
-      await setNutri(product.nutriscore_grade);
-      await setNova(product.nova_group);
-      await setId(product._id);
-
-      // const results = [];
-
-      // for(const additive of additives){
-      //   try{
-      //     const res = await fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro&titles=${additive}`);
-      //     const data = await res.json();
-
-      //     const pageId = Object.keys(data.query.pages)[0];
-      //     const extract = data.query.pages[pageId].extract;
-      //     const firstParagraph = extract.split('\n')[0];
-
-      //     results.push({item, firstParagraph});
-      //     console.log(results);
-      //   }catch(err){
-      //     console.log(err);
-      //     return null;
-      //   }
-      // }
-      
+      const extractProperties = {
+        product_name: product.product_name,
+        quantity: product.quantity,
+        ecoscore_grade: product.ecoscore_grade,
+        ingredients_text: product.ingredients_text,
+        additives_original_tags: product.additives_original_tags,
+        image_front_thumb_url: product.image_front_thumb_url,
+        stores: product.stores,
+        nutriscore_grade: product.nutriscore_grade,
+        nove_group: product.nova_group,
+        id: product.id,
+        brands_tags: product.brands_tags,
+      };
+      setCurProduct(extractProperties);
+      setLoading(false);
     };
-    setAll();
-  });
+    getProduct();
+  }, []);
 
-  if (!product) return <Page404 />;
+  console.log(curProduct);
+  console.log(results);
+  // const doFetch = async () => {
+  //   for (const additive of products.additives_original_tags) {
+  //     try {
+  //       // if (!additive) return;
+  //       const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${additive.replace(
+  //         "en:",
+  //         ""
+  //       )}`;
+  //       console.log(additive);
+  //       console.log(url);
+  //       const res = await fetch(url);
+  //       console.log(res);
+  //       const data = await res.json();
+  //       const snippet = data.query.search[0].snippet.replace(
+  //         /<[^>]+>|[^\w\s]/gi,
+  //         ""
+  //       );
+  //       const title = data.query.search[0].title;
+  //       console.log("GAYYYYYY", snippet, title);
+  //       results.push({ title, snippet });
+  //       console.log("hello", results);
+  //     } catch (err) {
+  //       console.log(err);
+  //       return null;
+  //     }
+  //   }
+  //   setAdditiveInfo(results);
+  // };
+  // const curProduct = getProduct();
+
+  // const [additiveInfo, setAdditiveInfo] = useState(null);
+  // const results = [];
+
+  // console.log({product})
+  // useEffect(() => {
+  //   // const doFetch = async() => {
+
+  //   //   for (const additive of additives) {
+  //   //     try {
+  //   //       if (!additive) return;
+  //   //       const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${additive.replace(
+  //   //         "en:",
+  //   //       ""
+  //   //       )}`;
+  //   //       console.log(additive);
+  //   //       console.log(url);
+  //   //       const res = await fetch(url);
+  //   //       console.log(res)
+  //   //       const data = await res.json();
+  //   //       const snippet = data.query.search[0].snippet.replace(/<[^>]+>|[^\w\s]/gi,'');
+  //   //       const title = data.query.search[0].title;
+  //   //       console.log("GAYYYYYY",snippet, title)
+  //   //       results.push({title, snippet});
+  //   //       console.log('hello', results)
+  //   //     } catch (err) {
+  //   //       console.log(err);
+  //   //       return null;
+  //   //     }
+  //   //   }
+  //   //   setAdditiveInfo(results);
+  //   // };
+  //   // doFetch();
+  // }, []);
+  // console.log(results);
+  // console.log(additiveInfo);
+  // console.log(img);
+
+  // console.log("Name", name);
+  // console.log("Eco", ecoscore);
+  // console.log("Ingredient", ingredient);
+  // console.log("additives", additives);
+  // console.log("GATTTT", additives);
+
+  if (loading) return <h1>Loading...</h1>;
+
+  if (!curProduct) return <Page404 />;
   const handlerAddButton = async () => {
     console.log(name);
+
     const newItem = {
-      id: ID,
-      product_name: name,
-      ecoscore_grade: ecoscore,
-      ingredients_text: ingredient,
-      additives_original_tags: additives,
-      image_front_thumb_url: img,
-      stores: store,
-      nutriscore_grade: nutri,
-      nova_group: nova,
+      id: curProduct.id,
+      product_name: curProduct.product_name
+        ? curProduct.product_name
+        : curProduct.quantity + curProduct.brands_tags[0],
+      ecoscore_grade: curProduct.ecoscore_grade
+        ? curProduct.ecoscore_grade
+        : null,
+      ingredients_text: curProduct.ingredients_text
+        ? curProduct.ingredients_text
+        : null,
+      additives_original_tags: curProduct.additives_original_tags
+        ? curProduct.additives_original_tags
+        : null,
+      image_front_thumb_url: curProduct.image_front_thumb_url
+        ? curProduct.image_front_thumb_url
+        : null,
+      stores: curProduct.stores ? curProduct.stores : null,
+      nutriscore_grade: curProduct.nutriscore_grade,
+      nova_group: Number(curProduct.nove_group),
     };
     await fetchHandler(`/api/itemslist`, {
       method: "POST",
@@ -88,7 +148,6 @@ export default function Item() {
       },
       body: JSON.stringify(newItem),
     });
-    console.log(name);
   };
   const handlerRemoveButton = async () => {
     await fetchHandler(`/api/itemslist/${id}`, {
@@ -98,21 +157,22 @@ export default function Item() {
       },
     });
   };
-  console.log(product);
-  console.log( typeof product.product_name)
-    console.log(product.brands_tags[0]);
-  console.log("Name:", name);
-  console.log("EcoScore", ecoscore);
-  console.log("Ingredients:", ingredient);
-  console.log("Additives:", additives);
-  console.log("Img:", img);
-  console.log("Store:", store);
-  console.log("Nutri", nutri);
-  console.log("Nova", nova);
-  console.log("Id", ID);
-  //   console.log(product);
-  console.log("Quantity:", product.quantity);
+  // console.log(product);
+  // console.log( typeof product.product_name)
+  //   console.log(product.brands_tags[0]);
+  // console.log("Name:", name);
+  // console.log("EcoScore", ecoscore);
+  // console.log("Ingredients:", ingredient);
+  // console.log("Additives:", additives);
+  // console.log("Img:", img);
+  // console.log("Store:", store);
+  // console.log("Nutri", nutri);
+  // console.log("Nova", nova);
+  // console.log("Id", ID);
+  // //   console.log(product);
+  // console.log("Quantity:", product.quantity);
 
+  // return <></>;
   return (
     <>
       <h1>Items Page</h1>
@@ -123,30 +183,35 @@ export default function Item() {
               <img
                 alt="oh no!"
                 className="ui medium image"
-                src={product.image_front_thumb_url}
+                src={curProduct.image_front_thumb_url}
               />
             </div>
             <div className="four wide column">
-              {product.product_name ? (
-                <h2>{`${product.product_name}-${product.quantity}`}</h2>
+              {curProduct.product_name ? (
+                <h2>{`${curProduct.product_name}-${curProduct.quantity}`}</h2>
               ) : (
-                <h2>{`${product.brands_tags[0]}-${product.quantity}`}</h2>
+                <h2>{`${curProduct.brands_tags[0]}-${curProduct.quantity}`}</h2>
               )}
               <p>
                 <strong>Stores: </strong>
-                {product.stores}
+                {curProduct.stores}
               </p>
 
               <p>
                 <strong>Ingredints: </strong>
-                {product.ingredients_text}
+                {curProduct.ingredients_text}
               </p>
               {/* TRY TO ADD WHERE IF NO ADDITIVES DO SHOW ATTRIBUTE */}
-              {product.additives_original_tags.length !== 0 && (
-                <p>
-                  <strong>Additives: </strong>
-                  {product.additives_original_tags.join(" ").toUpperCase()}
-                </p>
+              {curProduct.additives_original_tags.length !== 0 && (
+                <>
+                  <p>
+                    <strong>Additives: </strong>
+                    {curProduct.additives_original_tags.join(" ").toUpperCase()}
+                  </p>
+                  {/* {additiveInfo.map((itemData) => (
+                    <Additives key={additiveInfo.title} item={itemData}/>
+                  ))} */}
+                </>
               )}
 
               <br />
@@ -155,7 +220,9 @@ export default function Item() {
                   <div className="ui three column centered grid">
                     <div className="row">
                       <div className="column">
-                        <strong>Nutri-Score: {product.nutriscore_grade}</strong>
+                        <strong>
+                          Nutri-Score: {curProduct.nutriscore_grade}
+                        </strong>
                       </div>
                     </div>
                   </div>
@@ -164,7 +231,7 @@ export default function Item() {
                   <div className="ui three column centered grid">
                     <div className="row">
                       <div className="column">
-                        <strong>Nova Group: {product.nova_group}</strong>
+                        <strong>Nova Group: {curProduct.nova_group}</strong>
                       </div>
                     </div>
                   </div>

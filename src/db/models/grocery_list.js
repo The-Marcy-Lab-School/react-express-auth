@@ -20,6 +20,48 @@ class Grocery_list{
         return null;
       }
     }
+      // First, check if the item already exists in the items table
+      static async addItem(groceryListId, itemData) {
+        const { id, product_name, ecoscore_grade, ingredients_text, additives_original_tags, image_front_thumb_url, stores, nutriscore_grade, nova_group } = itemData;
+    
+        // First, check if the item already exists in the items table
+        const [existingItem] = await knex('items')
+          .select('*')
+          .where({ id: id });
+    
+        let item;
+    
+        if (!existingItem) {
+          // If the item does not exist in the items table, create it
+          [item] = await knex('items')
+            .insert({
+              id: id,
+              product_name: product_name,
+              ecoscore_grade: ecoscore_grade,
+              ingredients_text: ingredients_text,
+              additives_original_tags: additives_original_tags,
+              image_front_thumb_url: image_front_thumb_url,
+              stores: stores,
+              nutriscore_grade: nutriscore_grade,
+              nova_group: nova_group
+            })
+            .returning('*');
+        } else {
+          // If the item already exists, use the existing item
+          item = existingItem;
+        }
+    
+        // Insert the item into the grocery_items_table
+        const [groceryItem] = await knex('grocery_items_table')
+          .insert({
+            grocery_list_id: groceryListId,
+            item_id: item.id
+          })
+          .returning('*');
+    
+        return groceryItem;
+      }
+  
       static async find(id) {
         try {
           const query = 'SELECT * FROM grocery_list WHERE id = ?';
