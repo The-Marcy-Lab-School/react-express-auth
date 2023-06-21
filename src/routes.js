@@ -22,7 +22,7 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
 });
 //grocery routes
-Router.post('/grocerylist', groceryController.create);
+Router.post('/grocerylist/:userId', groceryController.create);
 Router.post('/grocerylist/:id/items', groceryController.createItems)
 Router.get('/grocerylist/:id', groceryController.list); //get grocery based user id
 Router.get('/grocerylist/:id/items', groceryController.listItems); //get items based grocery list id
