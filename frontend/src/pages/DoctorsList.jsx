@@ -1,27 +1,28 @@
-// // import { useContext } from "react";
-// // import DoctorContext from "../contexts/DoctorContext";
-// // import DoctorCard from "../components/DoctorCard";
-// import { useEffect, useState } from "react";
-// import { getAllPages } from "../adapters/page-adapter";
-// import { Link } from 'react-router-dom';
-
-//  export default function DoctorsList(){
-//   const [pages, setPages] = useState([]);
-
-//   useEffect(() => {
-//     getAllPages.then(setPages)
-//   }, [])
-
-      
-        
-      
-//       return (
-
-//         // <div className="ui centered cards">
-//         //     {doctors.map((doctor,i) => { return <DoctorCard key={i} {...doctor} />})}
-//         // </div>
-
-//       )      
-    
-// }
-// export default DoctorsList
+// export default function DoctorsList() {
+//     const pages = useContext(PageContext);
+//     const [reviews, setReviews] = useState([]);
+  
+//     useEffect(() => {
+//       getAllPages()
+//         .then(setPages)
+//         .catch((error) => console.log(error));
+  
+//       getAllReviews()
+//         .then(setReviews)
+//         .catch((error) => console.log(error));
+//     }, []);
+  
+//     return (
+//       <>
+//         <h4>
+//           <NavLink to="/create-post">Can't Find a Doctor? Add One Here</NavLink>
+//         </h4>
+//         <div className="ui centered cards">
+//           {pages.map((page) => (
+//             <DoctorCard key={page.id} page={page} reviews={reviews} />
+//           ))}
+//         </div>
+//       </>
+//     );
+//   }
+  
