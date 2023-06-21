@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { joinEvent } from "../adapters/user-adapter";
 import { listAllJoined } from "../adapters/user-adapter";
+// import Description from "../adapters/components";
+
 const Events = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,6 +65,18 @@ const Events = () => {
   // }
   // eventChecker();
 
+  // function MyComponent() {
+  //   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  //   const openModal = () => {
+  //     setIsModalOpen(true);
+  //   };
+  
+  //   const closeModal = () => {
+  //     setIsModalOpen(false);
+  //   };
+
+
   return (
     <>
       <div>
@@ -88,8 +102,12 @@ const Events = () => {
                         <button className='button is-primary' onClick={() => eventClick(event)}>Join Event</button>
                       </div>
                       <div>
-                        <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1>
-                        <p>{event.description}</p>
+                        {/* <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1> */}
+                        {/* <p>{event.description}</p> */}
+                        <div>
+                          <button>onClick={openModal}Description</button>
+
+                        </div>
                       </div>
                     </div>
                   </> : null)
@@ -111,6 +129,9 @@ const Events = () => {
                       <div>
                         <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1>
                         <p>{event.description}</p>
+                        {/* <img>{event.image}</img> */}
+                        <button onClick={openModal}>Description</button>
+                        
                       </div>
                     </div>
                   </>

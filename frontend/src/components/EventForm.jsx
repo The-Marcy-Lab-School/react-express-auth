@@ -55,13 +55,13 @@ const EventForm = ({ isOpen, onClose }) => {
                             <input className="input" name='title' id='eventFormTitle' type="text" required></input>
                             <label htmlFor='description'>Description</label>
                             <textarea className="textarea" id='description' name='description' placeholder="e.g. This is my event and why it is happening" required></textarea>
-                            <label htmlFor="start_date">Select starting date:</label>
+                            <label htmlFor="start_date">Select start date:</label>
                             <input type="date" id="startDate" name="start_date" required></input>
-                            <label htmlFor="start_time">Select a starting time:</label>
+                            <label htmlFor="start_time">Select start time:</label>
                             <input type="time" id="startTime" name="start_time" required></input>
-                            <label htmlFor="start_date">Select ending date:</label>
+                            <label htmlFor="start_date">Select end date:</label>
                             <input type="date" id="endDate" name="end_date" required></input>
-                            <label htmlFor="start_time">Select a ending time:</label>
+                            <label htmlFor="start_time">Select end time:</label>
                             <input type="time" id="endTime" name="end_time" required></input>
                             <label htmlFor='eventFormTitle'>Location</label>
                             <input className="input" name='location' id='eventFormTitle' type="text" placeholder="123 Address str, 12345" required></input>
@@ -77,8 +77,8 @@ const EventForm = ({ isOpen, onClose }) => {
                             </div>
                         </div>
                     </form>
-
                 </section>
+                
                 <footer className="modal-card-foot">
                     <button className='button' form='eventForm' type='submit'>Publish</button>
                     <button className="button" onClick={onClose}>Cancel</button>
