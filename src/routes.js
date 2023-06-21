@@ -23,7 +23,6 @@ Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
 });
 //grocery routes
 Router.post('/grocerylist', groceryController.create);
-
 Router.get('/grocerylist/:id', groceryController.list);
 Router.get('/grocerylist/:id/:userid', groceryController.listItems);
 Router.delete('/grocerylist/:id', groceryController.destroy);
