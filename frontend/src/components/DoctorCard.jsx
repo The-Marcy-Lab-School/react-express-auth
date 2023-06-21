@@ -1,92 +1,83 @@
-import { useNavigate } from "react-router-dom";
-// import ReviewCard from "./ReviewCard";
-import React from 'react';
-import {
-  MDBCard,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCardBody,
-  MDBCardImage,
-  MDBRow,
-  MDBCol
-} from 'mdb-react-ui-kit';
+import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
-function DoctorCard ({ doctor, reviews }){
-    const navigate = useNavigate();
-    
-    const handleDoctorId = () => {
-        const id = doctor.id;
-        navigate(`/doctor/${id}`);
-    };
-    const filteredReviews = reviews.filter((review) => review.pageId === doctor.id);
-    console.log(filteredReviews)
-    return (
-<MDBCard style={{ maxWidth: '540px' }} onClick = {handleDoctorId} {...doctor} {...reviews}>
-      <MDBRow className='g-0'>
-        <MDBCol md='4'>
-          <MDBCardImage src={doctor.picture} alt='...' fluid />
-        </MDBCol>
-        <MDBCol md='8'>
-          <MDBCardBody>
-            <MDBCardTitle>{doctor.name}</MDBCardTitle>
-            <MDBCardText>
-                some random review
-            </MDBCardText>
-            <MDBCardText>
-              <small className='specialty'>{doctor.specialty}</small>
-            </MDBCardText>
-          </MDBCardBody>
-        </MDBCol>
-      </MDBRow>
-    </MDBCard>
-    )
+function DoctorCard({ doctor }) {
+  const navigate = useNavigate();
 
+  const handleDoctorId = () => {
+    const id = doctor.id;
+    navigate(`/doctor/${id}`);
+  };
+
+  return (
+    <Card
+      sx={{
+        maxWidth: 600,
+        flexDirection: 'row',
+        '&:hover': {
+        backgroundColor: '#beeae7',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+          transform: 'translateY(-2px)',
+          transition: 'box-shadow 0.3s, transform 0.3s',
+          cursor: 'pointer',
+        },
+      }}
+      onClick={handleDoctorId}
+    >
+      <CardMedia sx={{ height: 140 }} image={doctor.picture} alt="doctor image" />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {doctor.name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {doctor.specialty}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {doctor.reviews}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
+
 export default DoctorCard;
 
 
-{/* <MDBCard style={{ maxWidth: '540px' }} onClick = {handleDoctorId} doctor={doctor} reviews={reviews}>
-      <MDBRow className='g-0'>
-        <MDBCol md='4'>
-          <MDBCardImage src='{doctor.picture}' alt='...' fluid />
-        </MDBCol>
-        <MDBCol md='8'>
-          <MDBCardBody>
-            <MDBCardTitle>{doctor.name}</MDBCardTitle>
-            <MDBCardText>
-            {filteredReviews.length > 0 ? filteredReviews[0]
-           : <p>No review available.</p>}
-            </MDBCardText>
-            <MDBCardText>
-              <small className='specialty'>{doctor.specialty}</small>
-            </MDBCardText>
-          </MDBCardBody>
-        </MDBCol>
-      </MDBRow>
-    </MDBCard> */}
 
 
+// import { useNavigate } from "react-router-dom";
 
-{/* <div className="ui-card" onClick = {handleDoctorId} doctor={doctor} reviews={reviews} >
-<div className="image">
-    <img src= {doctor.picture} alt='doctor image'/>
-</div>
-<div className="content">
-    <div className="header">
-        {doctor.name}
-    </div>
-    <div className="rating">
-        {doctor.reviews}
-    </div>
-    <div className="specialty"> 
-    {doctor.specialty}
-     </div>
-     <div className="review">
-     {filteredReviews.length > 0 ? (
-<ReviewCard review={filteredReviews[0]} />
-) : (
-<p>No review available.</p>
-)}
-     </div>
-</div>
-</div> */}
+// function DoctorCard ({ doctor }){
+//     const navigate = useNavigate();
+
+//     const handleDoctorId = () => {
+//         const id = doctor.id;
+//         navigate(`/doctor/${id}`);
+//     };
+//     return (
+//         <div className="ui-card" onClick = {handleDoctorId} doctor={doctor}>
+//             <div className="image">
+//                 <img src= {doctor.picture} alt='doctor image'/>
+//             </div>
+//             <div className="content">
+//                 <div className="header">
+//                     {doctor.name}
+//                 </div>
+//                 <div className="rating">
+//                     {doctor.reviews}
+//                 </div>
+//                 <div className="specialty"> 
+//                 {doctor.specialty}
+//                  </div>
+//                  <div className="review"> {doctor.reviews} </div>
+
+//             </div>
+//         </div>
+//     )
+
+// }
+// export default DoctorCard;

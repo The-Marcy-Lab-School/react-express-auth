@@ -21,7 +21,23 @@ export default function SiteHeadingAndNav() {
       <a id="logo" href="/">
         Care Companion
       </a>
-      {currentUser && <input  onSubmit={handleSubmit} type="text" placeholder="Search.." value={searchValue} onChange={handleSearchValue} />}
+      {currentUser && (
+  <div style={{ display: 'flex', alignItems: 'center' }}>
+    <input
+      onSubmit={handleSubmit}
+      type="text"
+      placeholder="Search a Doctor/Facility..."
+      value={searchValue}
+      onChange={handleSearchValue}
+    />
+    <img
+      src="magnifying_glass.png" // Replace with the path to your magnifying glass image
+      alt="Search"
+    />
+  </div>
+  // previous search bar {currentUser && <input  onSubmit={handleSubmit} type="text" placeholder="Search a Doctor/Facility..." value={searchValue} onChange={handleSearchValue} />}
+)}
+
       <nav>
         <ul>
           <li>
