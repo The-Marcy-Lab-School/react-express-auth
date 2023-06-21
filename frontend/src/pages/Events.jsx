@@ -130,7 +130,6 @@ const Events = () => {
                         <p>{event.description}</p>
                         {/* <img>{event.image}</img> */}
                         <button onClick={openModal}>Description</button>
-                        
                       </div>
                     </div>
                   </>
