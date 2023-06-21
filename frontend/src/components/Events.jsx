@@ -10,7 +10,7 @@ function EventList() {
   const { updateEventData } = useContext(CurrentUserContext);
 
   const fetchEvents = () => {
-    fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=10')
+    fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.events);
@@ -36,7 +36,7 @@ function EventList() {
     <dl className='eventList'>
       {events.map((event) => (
         <React.Fragment key={event.id}>
-          <li ><a href="#">{event.categories.map((category) => <div className='eventRow' key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div></div>)} {event.title}</a></li>
+          <li ><a href="#">{event.categories.map((category) => <div className='eventRow' key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div><div className='eventTitle'>{event.title}</div></div>)} </a></li>
           {event.description && (
             <dd><em>{event.description}</em></dd>
           )}

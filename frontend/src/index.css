@@ -12,8 +12,7 @@
 }
 
 #map {
-  display: flex;
-  position: absolute;
+  position: relative;
   margin: 0;
   top: 0;
   bottom: 0;
@@ -21,10 +20,11 @@
 }
 .home-section {    
   display: flex;
-  justify-items: stretch;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-end;
+
+
 }
 body {
   margin: 0;
@@ -33,6 +33,7 @@ body {
   min-height: 100vh;
 }
 .eventList {
+  height: calc(100vh - 72px);
   display: flex;
   flex-grow: 1;
   justify-content: flex-start;
@@ -40,19 +41,32 @@ body {
   padding: 0;
   margin: 0;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
+/* Optional: Customize scrollbar appearance */
+.eventList::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+.eventList::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+}
+
+.eventList::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
  .eventList li {
   flex: 1;
+  
 } 
 
 .eventList li a {
   display: block;
-  /* text-align: center; */
   padding: 10px;
   border: 1px solid #333;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px #1c2026 solid;
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #d6d0d0;
@@ -71,13 +85,17 @@ body {
   font-weight: 700;
  }
  .eventType{
-  
   font-weight: 800;
-    font-size: 19px;
-    padding-top: 10px;
-    line-height: 17px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  font-size: 19px;
+  padding-top: 10px;
+  line-height: 17px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+ }
+ .eventTitle{
+  font-size: 18px;
+  color: #aaadb3;
+  font-weight: 400;
  }
 @media (prefers-color-scheme: light) {
   :root {
@@ -144,4 +162,27 @@ form {
   color: #EEBC32;
   font-weight: bold;
   font-style: italic;
+}
+.marker {
+width: 30px;
+height: 30px;
+background: red;
+border-radius: 50%
+}
+
+
+.mapboxgl-popup {
+  padding: 10px;
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+ font-size: 12px;
+ font-weight: 800;
+ letter-spacing: 1px;
+ line-height: 24px;
+ text-align: center;
+ text-transform: uppercase;
+ padding: 8px 16px;
+ max-width: 280px;
 }
