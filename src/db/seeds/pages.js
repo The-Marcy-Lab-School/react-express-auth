@@ -96,16 +96,16 @@ exports.seed = async function (knex) {
     },
     {
       user_id: 15,
-      facility_doctor: "Dr. Christopher Luk, MD",
-      specialty: "Gastroenterology",
+      facility_doctor: "Dr. Zia Khan, MD, CMD",
+      specialty: "Internal Medicine",
       description:
-        "Gastroenterologist with expertise in digestive system disorders.",
-      address: "876 Oak St, New York, NY",
+        "Dr. Khan is passionate about Internal Medicine and working closely with her patients across the Tyrone-area to help them achieve their optimal health. She went to Loyola University in Chicago, IL, and completed her doctoral training at St. George’s University School Of Medicine in True Blue, Grenada.",
+      address: "987 Walnut St, New York, NY",
       overall_rating: 4,
       is_facility: false,
       is_doctor: true,
       photo:
-        "https://www.mypmahealth.com/wp-content/uploads/2022/08/Marketing-PMA-Photo-ChristopherLuk-FAD-200x200.jpg",
+        "https://www.peachtreemedicalcenter.com/wp-content/uploads/2016/08/Dr-Zia-Khan-200x200.jpg",
     },
     {
       user_id: 31,
