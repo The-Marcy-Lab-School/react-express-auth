@@ -2,3 +2,38 @@ body{
     background-color: #FFD8A9;
 
 }
+.d-flex{
+    display: flex !important;
+}
+.justify-content-between{
+    justify-content: space-between !important;
+}
+header {
+   
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5 rem 1rem;
+    align-items: center;
+    background: #02B59F;
+  }
+
+  a{
+    text-decoration: none;
+    color:pink
+  }
+
+ 
+
+  .navbar a {
+    display:grid;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color:black;
+   
+  }
+
+  

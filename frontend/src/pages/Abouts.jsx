@@ -3,7 +3,7 @@ import '../styles/home.css';
 
 
 
-export default function HomePage() {
+export default function AboutPage() {
   const content = fetchHandler("/api/susu")
   console.log(content)
   return (<>
