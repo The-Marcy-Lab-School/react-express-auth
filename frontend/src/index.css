@@ -163,3 +163,26 @@ form {
   font-weight: bold;
   font-style: italic;
 }
+.marker {
+width: 30px;
+height: 30px;
+background: red;
+border-radius: 50%
+}
+
+
+.mapboxgl-popup {
+  padding: 10px;
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+ font-size: 12px;
+ font-weight: 800;
+ letter-spacing: 1px;
+ line-height: 24px;
+ text-align: center;
+ text-transform: uppercase;
+ padding: 8px 16px;
+ max-width: 280px;
+}
