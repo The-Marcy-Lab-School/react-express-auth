@@ -49,8 +49,10 @@ export default function SignUpPage() {
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
     if (name === 'email') setEmail(value);
+    console.log(value);
 
   };
+  //  console.log(handleChange(e))
   return <>
     <h1>Sign Up</h1>
     <form onSubmit={handleSubmit} onChange={handleChange}>
@@ -115,17 +117,14 @@ export default function SignUpPage() {
       </select>
 
       <label htmlFor="ethnicity">Ethnicity</label>
-      <select
-      id="ethnicity"
-      name="ethnicity"
-      onChange={handleChange}
-      value={ethnicity}
-      >
-      <option value="">Select an ethnicity</option>
-      <option value="hispanic">Hispanic or Latino</option>
-      <option value="nonHispanic">Non-Hispanic or Latino</option>
-      </select>
-
+      <input
+        autoComplete="off"
+        type="text"
+        id="ethnicity"
+        name="ethnicity"
+        onChange={handleChange}
+        value={ethnicity}
+      />
 
       <label htmlFor="username">Username</label>
       <input

@@ -1,22 +1,27 @@
-import { useContext } from "react";
-import DoctorCard from "../components/DoctorCard";
-import DoctorContext from "../contexts/DoctorContext";
+// // import { useContext } from "react";
+// // import DoctorContext from "../contexts/DoctorContext";
+// // import DoctorCard from "../components/DoctorCard";
+// import { useEffect, useState } from "react";
+// import { getAllPages } from "../adapters/page-adapter";
+// import { Link } from 'react-router-dom';
 
+//  export default function DoctorsList(){
+//   const [pages, setPages] = useState([]);
 
- function DoctorsList(){
-    console.log('hello')
-      const { doctors } = useContext(DoctorContext)
-      console.log(doctors)
+//   useEffect(() => {
+//     getAllPages.then(setPages)
+//   }, [])
+
       
         
       
-      return (
+//       return (
 
-        <div className="ui centered cards">
-            {doctors.map((doctor,i) => { return <DoctorCard key={i} {...doctor} />})}
-        </div>
+//         // <div className="ui centered cards">
+//         //     {doctors.map((doctor,i) => { return <DoctorCard key={i} {...doctor} />})}
+//         // </div>
 
-      )      
+//       )      
     
-}
-export default DoctorsList
+// }
+// export default DoctorsList
