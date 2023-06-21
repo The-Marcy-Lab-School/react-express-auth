@@ -7,6 +7,22 @@ import '../styles/susus-page.css';
 export default function Susu() {
   const { currentSusulist, setCurrentSusulist } = useContext(CurrentSusuContext);
 
+  // useEffect(()=>{
+  //   const handleFetch = async () => {
+  //     try {
+  //         const r = await fetch(`api/me`);
+  //         const data = await r.json();
+  //         const suRes = await fetch(`/api/susus/${data.id}`);
+  //         const suData = await suRes.json();
+  //         setCurrentSusulist(suData)
+  //     } catch (err) {
+  //         console.log(err);
+  //         return null;
+  //     }
+  //   }
+  //   handleFetch()
+  //   },[])
+
   console.log(currentSusulist);
   
   return (
