@@ -128,8 +128,10 @@ const Events = () => {
                       <div>
                         <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1>
                         <p>{event.description}</p>
-                        {/* <img>{event.image}</img> */}
-                        <button onClick={openModal}>Description</button>
+                        <details>
+                        <summary>Description</summary>
+                        <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions, award-winning fireworks and seasonal special events.</p>
+                       </details>
                       </div>
                     </div>
                   </>
@@ -139,7 +141,7 @@ const Events = () => {
           }
         </div>
       </div>
-      <EventForm isOpen={isModalOpen} onClose={closeModal} />
+      {/* <EventForm isOpen={isModalOpen} onClose={closeModal} /> */}
     </>
   )
 }
