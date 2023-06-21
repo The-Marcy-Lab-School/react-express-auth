@@ -32,7 +32,7 @@ header {
     color:black; 
   }
 
-  .btn-get-started {
+  #button .btn-get-started {
     font-family: Open Sans, sans-serif;
     text-transform: uppercase;
     font-weight: 500;

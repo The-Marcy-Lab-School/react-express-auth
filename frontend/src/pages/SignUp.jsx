@@ -15,7 +15,7 @@ export default function SignUpPage() {
   // const [formData, setFormData] = useState({ username: '', password: '' });
   // What would be the pros and cons of that?
 
-  if (currentUser) return <Navigate to="/" />;
+  // if (currentUser) return <Navigate to="/" />;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

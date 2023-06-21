@@ -14,7 +14,7 @@ return (
         <p><NavLink to='/'>Home</NavLink></p> 
         <p><NavLink to='/about'>About</NavLink></p>
         <p><NavLink to='/susu'>Susu</NavLink></p>
-        <p><NavLink to='/users'>Users</NavLink></p>
+        {/* <p><NavLink to='/users'>Users</NavLink></p> */}
         <p><NavLink to='/createSusu'>Susu Pages</NavLink></p>
         <p><NavLink to='/sign-up'>Join/Sign Up</NavLink></p>
 

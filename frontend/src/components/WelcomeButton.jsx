@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 const WelcomeButton  = () => {
-    return(<section id="hero">
+    return(<section id="button">
     <div className= "hero-container" data-asos= "fade-up" data-asos-delay="150">
       <h1>Money.Money.Money</h1>
       <h2>Getcha Moneyyy!!</h2>

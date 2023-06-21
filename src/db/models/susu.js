@@ -3,11 +3,17 @@ const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 
 class Susu{
 
+    #password = null;
+
+    constructor({password}){
+        password = this.password
+    }
+
     static async show(id){
         try{
             // SELECT * FROM users_susu JOIN users ON user_id = users.id WHERE susu_id = 1;
             //SELECT * FROM susu WHERE id =?
-            const { rows }= await knex.raw('SELECT user_id, susu_id, make_payments, username, name, owner, payment_amount, next_payment, susu.id FROM users_susu JOIN users ON user_id = users.id JOIN susu ON users_susu.susu_id = susu.id WHERE susu_id = ?;', [id]);
+            const { rows }= await knex.raw('SELECT user_id, susu_id, make_payments, username, name, owner, payment_amount, next_payment, susu.id, susu.password_hash FROM users_susu JOIN users ON user_id = users.id JOIN susu ON users_susu.susu_id = susu.id WHERE susu_id = ?;', [id]);
             if (!rows) return null 
             return rows
         }
@@ -28,12 +34,12 @@ class Susu{
         }
     }
     static async create(name, password_hash, owner, payment_amount, next_payment){//possibly need id
-        console.log({name, password_hash, owner, payment_amount, next_payment})
-         const passwordHash = await hashPassword(password_hash);
+        // console.log({name, password_hash, owner, payment_amount, next_payment})
+        //  const passwordHash = await hashPassword(password_hash);
         try{
             const { rows } = await knex.raw(
 							"INSERT INTO susu (name, password_hash, owner, payment_amount, next_payment) VALUES(?,?,?,?,?) RETURNING *",
-							[name, passwordHash, owner, payment_amount, next_payment]
+							[name, password_hash, owner, payment_amount, next_payment]
 						);
             return rows[0]
         }
@@ -89,6 +95,19 @@ class Susu{
             return null
         }
     }
+    // static async updatepayment(make_payments){
+    //     try{
+    //         let updatateSusu = await knex.raw('', [name, password_hash, owner, payment_amount, next_payment, id])
+    //     }
+    //     catch(error){
+    //         console.log(error);
+    //         return null
+    //     }
+    // }
+
+    // isValidPassword = async (password_hash) => (
+    //     isValidPassword(password_hash, this.#password)
+    //   );
 }
 
 module.exports = Susu;
