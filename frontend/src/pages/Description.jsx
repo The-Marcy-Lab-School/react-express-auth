@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from 'react';
 
-function Descriprion() {
+function Description() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => {
       setIsModalOpen(true);

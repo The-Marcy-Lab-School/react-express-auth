@@ -105,8 +105,7 @@ const Events = () => {
                         {/* <h1 className='is-size-5 has-text-weight-bold mt-4'>Description</h1> */}
                         {/* <p>{event.description}</p> */}
                         <div>
-                          <button>onClick={openModal}Description</button>
-
+                        <button onClick={openModal}>Description</button>
                         </div>
                       </div>
                     </div>
