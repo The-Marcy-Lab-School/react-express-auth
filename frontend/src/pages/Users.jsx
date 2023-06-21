@@ -14,10 +14,10 @@ export default function UsersPage() {
   return <>
     <h1>Payments:</h1>
     <PaymentDetails />
-    <ul>
+    {/* <ul>
       {
         users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
       }
-    </ul>
+    </ul> */}
   </>;
 }

@@ -24,7 +24,7 @@ export default function JoinSusu() {
             try {
                 const r = await fetch(`/api/susu/${e.target[1].value}`);
                 const data = await r.json();
-                // console.log(data)
+                console.log(data[0])
                 // console.log(e.target[0].value)
                 // console.log(data.password_hash)
                 let user_id = userdata.id
@@ -32,7 +32,7 @@ export default function JoinSusu() {
                 let make_payments = false
                 let cardoptions = getFetchOptions({user_id, susu_id, make_payments})
                 console.log(cardoptions)
-                if (e.target[0].value === data.password_hash) {
+                if (e.target[0].value === data[0].password_hash) {
                     const addcard = await fetch('/api/susuform', cardoptions)
                     navigate(`/susu/${e.target[1].value}`);
 
