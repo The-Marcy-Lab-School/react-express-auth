@@ -30,10 +30,6 @@ function EventList() {
     updateEventData();
   }, []);
 
-  //  const latitude = events[0].geometry[0].coordinates[0]
-  //  console.log(latitude)
-  //  const Longitude = eventData[0].geometry[0].coordinates[1]
-
   return (
     <dl className='eventList'>
       {events.map((event) => (
@@ -53,7 +49,7 @@ function LayerList() {
   const [layers, setLayers] = useState([]);
 
   useEffect(() => {
-    fetchLayers();
+
   }, []);
 
   const fetchLayers = () => {
