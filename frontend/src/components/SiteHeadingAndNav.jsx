@@ -16,8 +16,8 @@ return (
     <li><NavLink to='/about'>About</NavLink></li>
     <li><NavLink to='/susu'>Susu</NavLink></li>
     <li><NavLink to='/users'>Users</NavLink></li>
-    <li><NavLink to='/login'>Login</NavLink></li>
-    <li><NavLink to='/sign-up'>Sign Up</NavLink></li>
+    <li><NavLink to='/createSusu'>Susu Pages</NavLink></li>
+    <li><NavLink to='/sign-up'>Join/Sign Up</NavLink></li>
 
     {/* /* <li className= "dropdown">
       <a href="#">
