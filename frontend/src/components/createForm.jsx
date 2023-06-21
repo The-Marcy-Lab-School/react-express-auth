@@ -9,7 +9,7 @@ export default function CreateSusu() {
         credentials: 'include', // IMPORTANT, this tells fetch to include cookies
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-      });
+    });
 
     const susuCreate = async (e) => {
         e.preventDefault();
@@ -22,7 +22,6 @@ export default function CreateSusu() {
         const formInfo = Object.fromEntries(formData.entries());
         // console.log(formInfo);
         const options = getFetchOptions(formInfo, 'POST');
-
         const result = await fetch(`/api/susu`, options);
         const r = await result.json()
         // user_id, susu_id, make_payments
@@ -39,7 +38,7 @@ export default function CreateSusu() {
         <label>
         Susu Name: <input name="name" defaultValue="Enter Susu Name" />
         Susu Password: <input name="password_hash" defaultValue="Enter Susu Password" />
-        <input type="hidden" name="owner" value={id}/>
+        {/* <input type="hidden" name="owner" value={currentUser.id}/> */}
         </label>
         <hr />
         Fixed Amount: <label><input name ="payment_amount" defaultValue="1000"/></label>
