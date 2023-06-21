@@ -267,9 +267,25 @@ form {
 #newsCard {
   display: flex;
   margin: 50px;
-  color: rgb(2, 93, 2);
   font-size: large;
 }
+
+.article-container {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+
+.article-content {
+  flex: 1;
+}
+
+.article-image {
+  width: auto;
+  height: 150px;
+  margin-left: auto;
+}
+
 
 @media only screen and (max-width: 550px)  {
   #logInBox, #signUpBox {
