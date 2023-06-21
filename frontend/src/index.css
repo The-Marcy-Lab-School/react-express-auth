@@ -46,3 +46,17 @@ form {
   font-weight: bold;
   font-style: italic;
 }
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar p{
+  padding-left: 10px;
+}
+
+#headerDiv{
+  display: flex;
+  justify-content: space-between;
+}
