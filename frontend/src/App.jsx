@@ -9,7 +9,7 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
-
+import MyComponents from './adapters/event-adapter'
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -18,6 +18,7 @@ export default function App() {
 
   return <>
     <SiteHeadingAndNav />
+    <MyComponents />
     <main>
       <Routes>
         <Route path='/' element={<Home />} />
