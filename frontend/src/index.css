@@ -126,3 +126,57 @@ p{
 #login-suggest{
   padding-top: 10px;
 }
+
+
+/* 404 Page - START */
+
+.h1404{
+  font-family: 'Nunito', sans-serif;
+  font-size: 300%;
+
+}
+
+#Page404{
+  background-image: url('./media/grey.png');
+  background-size: 60%;
+  background-color: #fecbbc;
+  display: flex ;
+  justify-content: center;
+}
+
+#errordiv{
+  display: flex;
+  margin: 30px 50px 30px 50px;
+  width: 200px;
+}
+
+#lostlol{
+  width:100vw;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mrbroc{
+  width: 200px;
+}
+
+#returnButt{
+  color:whitesmoke;
+  font-family: 'Nunito', sans-serif;
+  font-size: 200%;
+  font-weight: 600;
+  padding: 60px ;
+  background-color: #66a653;
+  border: #360 5px solid;
+  border-style: dashed;
+  width:20%;
+  text-align: center;
+}
+#returnButt:hover{
+  background-color: #4a753e;
+  transform: scale(1.2);
+}
+
+
+/* 404 Page - END */
