@@ -139,7 +139,6 @@ p{
 #Page404{
   background-image: url('./media/grey.png');
   background-size: 60%;
-  background-color: #fecbbc;
   display: flex ;
   justify-content: center;
 }
