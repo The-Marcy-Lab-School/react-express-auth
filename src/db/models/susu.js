@@ -5,9 +5,11 @@ class Susu{
 
     static async show(id){
         try{
-            const { rows }= await knex.raw('SELECT * FROM susu WHERE id =?', [id]);
+            // SELECT * FROM users_susu JOIN users ON user_id = users.id WHERE susu_id = 1;
+            //SELECT * FROM susu WHERE id =?
+            const { rows }= await knex.raw('SELECT user_id, susu_id, make_payments, username, name, owner, payment_amount, next_payment, susu.id FROM users_susu JOIN users ON user_id = users.id JOIN susu ON users_susu.susu_id = susu.id WHERE susu_id = ?;', [id]);
             if (!rows) return null 
-            return rows[0]
+            return rows
         }
         catch(error){
             console.log(error);
