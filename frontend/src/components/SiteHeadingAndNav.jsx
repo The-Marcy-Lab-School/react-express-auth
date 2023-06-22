@@ -8,7 +8,8 @@ export default function SiteHeadingAndNav() {
 return (
   <header id = "header" className = "fixed-top">
       <h1 className="logo">
-        <a href="index.html">Money Mingle</a>
+      <p><NavLink to='/'>Money Mingle</NavLink></p> 
+
       </h1>
       <nav id="navbar" className="navbar">
         <p><NavLink to='/'>Home</NavLink></p> 

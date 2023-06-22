@@ -11,9 +11,14 @@ body{
 header {
     display: flex;
     justify-content: space-between;
-    padding: 0.5 rem 1rem;
+    padding: 5px;
     align-items: center;
     background: #02B59F;
+  }
+  .home-container{
+    margin-top: 10%;
+    text-align: center;
+    justify-content: center;
   }
 
   a{
@@ -31,8 +36,14 @@ header {
     font-weight: 600;
     color:black; 
   }
+  .home-container h1{
+    font-size: 70px;
+    line-height: 50px;
+    font-family: Raleway, sans-serif;
+    padding-top: 10%;
+  }
 
-  #button .btn-get-started {
+   .btn-get-started scrollto {
     font-family: Open Sans, sans-serif;
     text-transform: uppercase;
     font-weight: 500;
