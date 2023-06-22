@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import CurrentUserContext from '../contexts/current-user-context';
 import SusuCard from '../components/SusuCard';
 import '../styles/susus-page.css';
+import '../Card.css';
 
 
 export default function Susu() {
@@ -45,11 +46,11 @@ export default function Susu() {
   console.log(currentSusulist);
   
   return (
-    <>
+    <div className="susupage-container">
       {currentSusulist.map((susu) => (
         // console.log(susu)
         <SusuCard className="susu-card" key={susu.id} susu={susu} />
       ))}
-    </>
+    </div>
   );
 }

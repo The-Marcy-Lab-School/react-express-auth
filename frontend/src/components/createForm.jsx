@@ -49,6 +49,7 @@ import { useNavigate } from "react-router-dom";
     }
     return( <>
     <form method="post" onSubmit={susuCreate}>
+        Creat Susu:
         <label>
         Susu Name: <input name="name" defaultValue="Enter Susu Name" />
         Susu Password: <input name="password_hash" defaultValue="Enter Susu Password" />

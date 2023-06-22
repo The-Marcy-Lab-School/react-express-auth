@@ -11,6 +11,7 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import AboutPage from './pages/Abouts';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -23,6 +24,7 @@ export default function App() {
     <main>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/about' element={<AboutPage />} />
         <Route path='/susu' element={<Susu />} />
         <Route path='/susu/:id' element={<UsersPage />} />
         <Route path='/createSusu' element={<CreateSusu />} />

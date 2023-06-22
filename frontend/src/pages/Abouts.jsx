@@ -1,13 +1,20 @@
 import { fetchHandler } from "../utils";
-import '../styles/home.css';
+import { useSpring, animated } from 'react-spring';
+import '../styles/about.css';
 
 
 
-export default function HomePage() {
+export default function AboutPage() {
   const content = fetchHandler("/api/susu")
   console.log(content)
-  return (<>
-    
+  const fadeAnimation = useSpring({
+    from: { opacity: 1, transform: 'translateY(-150px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    config: { duration: 900 },
+  });
+  return (<div className="container">
+     <animated.div style={fadeAnimation}>
+
     <h2>Mission Statement</h2>
       <p>Our web platform restructures the operation of rotating savings associations (susu) for African and Caribbean families. By simplifying susu management, facilitating transparent transactions, and encouraging responsible financial practices, we empower these communities to achieve their financial goals, build generational wealth, and create a brighter future.
       </p>
@@ -24,5 +31,8 @@ export default function HomePage() {
           <li>Rule 5: The susu continues until each member has received their share.</li>
         </ul>
       </>
-  </>);
+      </animated.div>
+
+  </div>);
+
 }
