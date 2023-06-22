@@ -29,7 +29,7 @@ const MapComponent = () => {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-      console.log(`Latitude: ${myLatitude} Longitude: ${myLongitude}`);
+
     } else {
       console.log("Geolocation is not supported by this browser.");
     }

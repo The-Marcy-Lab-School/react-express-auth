@@ -11,7 +11,9 @@ function EventList() {
 
   const fetchEvents = () => {
     fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response)
+        return response.json()})
       .then((data) => {
         setEvents(data.events);
         updateEventData(data); // current event thats updated using useCONTEXT

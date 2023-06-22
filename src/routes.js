@@ -1,7 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/user');
 const friendsController = require('./controllers/friends');
-// const eventsController = require('./controllers/events');
+const eventsController = require('./controllers/event');
 const commentsController = require('./controllers/comments');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
@@ -26,7 +26,15 @@ Router.post('/friends', checkAuthentication, friendsController.create);
 Router.delete('/friends', checkAuthentication, friendsController.remove);
 Router.get('/friends', checkAuthentication, friendsController.list);
 
-// Router.get('/events', checkAuthentication, eventsController.list);
+Router.get('/events', checkAuthentication, eventsController.list);
+
+
+/*
+Ask Zo send you the npm fetch stuff
+Ask Trevon to give you the code for fetching from the API
+Check in with Raven and ask how I should structure the information I send back to the front end
+
+*/
 
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);

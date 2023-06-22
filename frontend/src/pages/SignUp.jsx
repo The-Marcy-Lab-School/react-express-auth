@@ -7,7 +7,7 @@ import { createUser } from "../adapters/user-adapter";
 // more validation and provide real time feedback to the user about usernames and passwords
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser, userLocation : location } = useContext(CurrentUserContext);
   const [errorText, setErrorText] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ export default function SignUpPage() {
     if (!username || !password)
       return setErrorText("Missing username or password");
 
-    const [user, error] = await createUser({ username, password });
+    const [user, error] = await createUser({ username, password, location });
     if (error) return setErrorText(error.statusText);
 
     setCurrentUser(user);
