@@ -1,32 +1,36 @@
-import { Link,useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import { loadSusuDetails } from "../adapters/susu-adapter";
 import SusuMembers from "./Members";
-
+import CurrentUserContext from "../contexts/current-user-context";
+import Button from '@mui/material/Button';
 
 
 export default function detailsLink() {
   const {id} = useParams()
-    const [errorText, setErrorText] = useState(null);
-    const [data, setData] = useState([])
+  const [errorText, setErrorText] = useState(null);
+  const [data, setData] = useState([])
+  const { currentUser } = useContext(CurrentUserContext);
   useEffect(()=>{
     const loadDetails = async () =>{
       const [details, error] = await loadSusuDetails(id);
-      // console.log(details, 1)
       if(error) return setErrorText(true);
       setData(details)
       
     }
     loadDetails();
   },[id])
-  console.log(data)
-  
+  console.log(data);
+
     return (
       <>
       <ul>
         {
-          data.map((user) => <li key={user.user_id}> <SusuMembers users ={user} /> </li>)
+          data.map((user) => <div key={user.user_id}> <SusuMembers user={user} owner={currentUser.id!==user.owner ? true : false}/> </div>)
         }
+        {/* {
+          data.length > 0 && currentUser.id===data[0].owner ? <Button variant="contained">Submit Changes</Button> : <Button variant="contained" disabled>Submit Changes</Button>
+        } */}
       </ul>
         <h1>{data.length > 0 ? data[0].name : ''}</h1>
 

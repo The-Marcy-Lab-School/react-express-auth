@@ -95,19 +95,20 @@ class Susu{
             return null
         }
     }
-    // static async updatepayment(make_payments){
-    //     try{
-    //         let updatateSusu = await knex.raw('', [name, password_hash, owner, payment_amount, next_payment, id])
-    //     }
-    //     catch(error){
-    //         console.log(error);
-    //         return null
-    //     }
-    // }
+    static async updatepayment(userId, susuId, make_payments){
+        try{
+            let updateSusu = await knex.raw('UPDATE users_susu SET make_payments = ? WHERE users_susu.susu_id = ? AND user_id = ? RETURNING *;', [make_payments, susuId, userId])
+            return updateSusu;
+        }
+        catch(error){
+            console.log(error);
+            return null
+        }
+    }
 
-    // isValidPassword = async (password_hash) => (
-    //     isValidPassword(password_hash, this.#password)
-    //   );
+    isValidPassword = async (password_hash) => (
+        isValidPassword(password_hash, this.#password)
+      );
 }
 
 module.exports = Susu;
