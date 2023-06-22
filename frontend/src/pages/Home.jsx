@@ -8,11 +8,13 @@ export default function HomePage() {
 
   return (
     <>
+      <div className="home-section">
         <div className="eventList">
           <Events></Events>
+        </div>
+        <MapComponent></MapComponent>
+        <SafeButton />
       </div>
-      <MapComponent></MapComponent>
-      <SafeButton />
     </>
   );
 }
