@@ -4,10 +4,17 @@ const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 class User {
   #passwordHash = null;
 
-  constructor({ id, username, password_hash }) {
+  constructor({ id, first_name, last_name, age, gender, race, ethnicity, username, password_hash, email }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.gender = gender;
+    this.race = race;
+    this.ethnicity = ethnicity;
   }
 
   static async list() {
@@ -27,13 +34,15 @@ class User {
     const { rows: [user] } = await knex.raw(query, [username]);
     return user ? new User(user) : null;
   }
-
-  static async create(username, password) {
+  // help me
+  static async create(first_name, last_name, age, gender, race, ethnicity, username, password, email) {
     const passwordHash = await hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const { rows: [user] } = await knex.raw(query, [username, passwordHash]);
+console.log({first_name, last_name, age, gender, race, ethnicity, username, password, email})
+
+    const query = `INSERT INTO users (first_name, last_name, age, gender, race, ethnicity, username, password_hash, email)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+    const { rows: [user] } = await knex.raw(query, [first_name, last_name, age, gender, race, ethnicity, username, passwordHash, email]);
     return new User(user);
   }
 

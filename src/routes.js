@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('./controllers/user');
+const reviewController = require('./controllers/review');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -19,5 +20,13 @@ Router.get('/me', userController.showMe);
 Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
 });
+
+// Reviews
+
+Router.get('/reviews', reviewController.list);
+Router.post('/reviews', reviewController.create);
+Router.get('/reviews/:id', reviewController.show);
+Router.delete('/reviews/:id', reviewController.destroy);
+Router.patch('/reviews/:id', reviewController.update);
 
 module.exports = Router;
