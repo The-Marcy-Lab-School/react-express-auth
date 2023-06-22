@@ -17,7 +17,6 @@ export default function ProductInGroceryList({props}) {
             <span>
               <i className="icon-nutri-score" />
               {props.nutriscore_grade}
-              fhajsdh
             </span>
 
             <span>

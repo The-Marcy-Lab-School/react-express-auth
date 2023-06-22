@@ -5,6 +5,7 @@ import ProductContext from "../contexts/ProductContext";
 import CurrentUserContext from "../contexts/current-user-context";
 import { fetchHandler } from "../utils";
 import Additives from "../components/Additives";
+import GroceryList from "./GroceryList";
 
 export default function Item() {
   const { id } = useParams();
@@ -15,7 +16,8 @@ export default function Item() {
   const [loading, setLoading] = useState(false);
   const results = [];
   const [selectedValue, setSelectedValue] = useState("");
-  const [option, setOption] = useState(null);
+  const [option, setOption] = useState([]);
+
   const repeat = [];
   for (let i = 1; i <= option; i++) {
     repeat.push(i);
@@ -96,7 +98,9 @@ export default function Item() {
         });
         const data = res[0];
         console.log(res[0]);
-        setOption(Object.keys(data).length);
+        console.log(data);
+        // setOption(Object.keys(data).length);
+        setOption(data);
       } catch (err) {
         console.log(err);
         return null;
@@ -106,11 +110,11 @@ export default function Item() {
     userAmountGroceryList();
     getProduct();
   }, []);
-
-  console.log(curProduct);
-  console.log(results);
-  console.log(option);
-  console.log(repeat);
+console.log(option)
+  // console.log(curProduct);
+  // console.log(results);
+  // console.log(option);
+  // console.log(repeat);
   // const doFetch = async () => {
   //   for (const additive of products.additives_original_tags) {
   //     try {
@@ -322,9 +326,14 @@ export default function Item() {
                   required
                 >
                   <option value="">Select an option</option>
-                  {repeat.map((option, index) => (
+                  {/* {repeat.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
+                    </option>
+                  ))} */}
+                  {option.map((opt, index) => (
+                    <option key={index} value={opt.grocery_list_id}>
+                      {opt.grocery_list_id}
                     </option>
                   ))}
                 </select>
