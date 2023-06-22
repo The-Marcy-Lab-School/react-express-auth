@@ -6,12 +6,14 @@ const update = require('./update');
 const login = require('./login');
 const logout = require('./logout');
 const showMe = require('./show-me');
+const updateSafe = require('./updateSafe');
 
 module.exports = {
   list,
   create,
   show,
   update,
+  updateSafe,
 
   login,
   logout,
