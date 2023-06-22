@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 
@@ -33,6 +33,9 @@ export default function LoginPage() {
         <button>Log in!</button>
       </form>
       { !!errorText && <p>{errorText}</p> }
+      <p>
+        Don't have an account? <Link to="/sign-up">Sign up!</Link>
+      </p>
     </div>
   </>;
 }

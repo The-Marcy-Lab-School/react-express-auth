@@ -1,12 +1,8 @@
-import { useState } from "react";
-
 import Events from "../components/Events";
 import MapComponent from "../components/MapComponent";
 import SafeButton from '../components/SafeButton';
 
 export default function HomePage() {
-  const [isSafe, setIsSafe] = useState(true);
-
   return (
     <>
       <div className="home-section">
@@ -15,7 +11,7 @@ export default function HomePage() {
         </div>
         <div className="map-section">
         <MapComponent></MapComponent>
-        <SafeButton isSafe={isSafe} setIsSafe={setIsSafe}/>
+        <SafeButton />
         </div>
       </div>
     </>

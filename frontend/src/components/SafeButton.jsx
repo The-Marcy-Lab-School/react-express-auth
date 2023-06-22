@@ -1,12 +1,21 @@
-export default function SafeButton({ isSafe, setIsSafe }) {
+import { useContext, useEffect } from 'react';
+import { updateIsSafe } from '../adapters/user-adapter';
+import CurrentUserContext from '../contexts/current-user-context.js';
+
+export default function SafeButton() {
+  const { isSafe, setIsSafe } = useContext(CurrentUserContext);
+
   function clickHandler() {
     setIsSafe(!isSafe);
-    console.log(isSafe);
   }
 
+  useEffect(() => {
+    updateIsSafe({ isSafe });
+  }, [isSafe]);
+
   return (
-        <button className='safe-button' onClick={clickHandler}>
-            <div>Solace</div>
-        </button>
+    <button className='safe-button' onClick={clickHandler}>
+        <div>Solace</div>
+    </button>
   );
 }
