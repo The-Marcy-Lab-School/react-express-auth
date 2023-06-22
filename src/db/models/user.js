@@ -4,10 +4,11 @@ const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 class User {
   #passwordHash = null;
 
-  constructor({ id, username, password_hash }) {
+  constructor({ id, username, password_hash, latitude, longitude }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
+    this.location = {latitude, longitude}
   }
 
   static async list() {
@@ -43,12 +44,12 @@ class User {
     return user ? new User(user) : null;
   }
 
-  static async create(username, password) {
+  static async create(username, password, { myLatitude, myLongitude }) {
     const passwordHash = await hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const { rows: [user] } = await knex.raw(query, [username, passwordHash]);
+    const query = `INSERT INTO users (username, password_hash, latitude, longitude)
+      VALUES (?, ?, ?, ?) RETURNING *`;
+    const { rows: [user] } = await knex.raw(query, [username, passwordHash, myLatitude, myLongitude]);
     return new User(user);
   }
 
