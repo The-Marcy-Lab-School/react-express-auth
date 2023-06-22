@@ -19,7 +19,7 @@ export default function App() {
   return (
     <>
       <SiteHeadingAndNav />
-      <main className="home-section">
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
