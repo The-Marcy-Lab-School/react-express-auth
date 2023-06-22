@@ -25,11 +25,10 @@ const MapComponent = () => {
   // the "?" character is if it doesn't exist give undefined
 
   // console.log("event data from map:", eventData);
-  
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
@@ -59,6 +58,27 @@ const MapComponent = () => {
     );
     // Add zoom and rotation controls to the map.
     map.addControl(new mapboxgl.NavigationControl());
+
+    const eventRow = document.getElementsByClassName('eventRow');
+    // console.log("event row:", eventRow);
+
+    // Access the specific element in the array
+    Array.from(eventRow).forEach((element) => {
+      // Add event listener to the element
+      element.addEventListener('click', () => {
+        // Handle the click event
+        // Fly to a random location
+        console.log("element:", element);
+        console.log(`The latitude is ${data[0].geometry[0]?.coordinates[0]} and the longitude is ${data[0].geometry[0]?.coordinates[1]}`);
+        map.flyTo({
+          center: [data[0].geometry[0]?.coordinates[0], data[0].geometry[0]?.coordinates[1]],
+          essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+          
+        });
+      });
+    });
+
+    
 
     for (let i = 0; i < data?.length; i++) {
       // const size = 200;
@@ -164,6 +184,8 @@ const MapComponent = () => {
 
       // console.log("mapholddddd:", mapHold.data.features);
 
+      
+
       for (const feature of mapHold.data.features) {
         map.on('load', () => {
           const el = document.createElement('div');
@@ -179,22 +201,6 @@ const MapComponent = () => {
           new mapboxgl.Marker(userLocation) // User's location on MAPBOX
             .setLngLat([myLongitude, myLatitude])
             .addTo(map);
-
-            const eventRow = document.getElementsByClassName('eventRow');
-            // console.log("event row:", eventRow);
-
-            // Access the specific element in the array
-            Array.from(eventRow).forEach((element) => {
-              // Add event listener to the element
-              element.addEventListener('click', () => {
-              // Handle the click event
-              // Fly to a random location
-              map.flyTo({
-                center: [myLatitude, myLongitude],
-                essential: true, // this animation is considered essential with respect to prefers-reduced-motion
-                });
-              });
-            });
 
           // Make a marker for each feature and add it to the map
           const popup = new mapboxgl.Popup({

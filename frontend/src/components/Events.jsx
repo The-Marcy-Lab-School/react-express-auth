@@ -12,13 +12,13 @@ function EventList() {
   const fetchEvents = () => {
     fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
       .then((response) => {
-        console.log(response)
-        return response.json()})
+        console.log(response);
+        return response.json();
+      })
       .then((data) => {
         setEvents(data.events);
         updateEventData(data); // current event thats updated using useCONTEXT
         console.log("DATA:", data);
-        console.log("DATE:", data.events[0].geometry[0].date);
       })
     // console.log("DATA:",data)                                                    //GENERAL DATA
     // console.log("TYPE:",data.events[0].categories[0].title)                  //Type of Hazard Events
