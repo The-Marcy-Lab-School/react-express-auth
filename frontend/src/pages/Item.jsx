@@ -2,6 +2,7 @@ import Page404 from "./Page404";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
+import CurrentUserContext from "../contexts/current-user-context";
 import { fetchHandler } from "../utils";
 import Additives from "../components/Additives";
 
@@ -9,10 +10,59 @@ export default function Item() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { products } = useContext(ProductContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const [curProduct, setCurProduct] = useState(null);
   const [loading, setLoading] = useState(false);
   const results = [];
+  const [selectedValue, setSelectedValue] = useState("");
+  const [option, setOption] = useState(null);
+  const repeat = [];
+  for (let i = 1; i <= option; i++) {
+    repeat.push(i);
+  }
+  const handleDropdownChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+  const handleButtonClick = async () => {
+    if(selectedValue === "") return null;
+    console.log("Button clicked for:", selectedValue);
+    const newItem = {
+      id: curProduct.id,
+      product_name: curProduct.product_name
+        ? curProduct.product_name
+        : curProduct.quantity + curProduct.brands_tags[0],
+      ecoscore_grade: curProduct.ecoscore_grade
+        ? curProduct.ecoscore_grade
+        : null,
+      ingredients_text: curProduct.ingredients_text
+        ? curProduct.ingredients_text
+        : null,
+      additives_original_tags: curProduct.additives_original_tags
+        ? curProduct.additives_original_tags
+        : null,
+      image_front_thumb_url: curProduct.image_front_thumb_url
+        ? curProduct.image_front_thumb_url
+        : null,
+      stores: curProduct.stores ? curProduct.stores : null,
+      nutriscore_grade: curProduct.nutriscore_grade,
+      nova_group: Number(curProduct.nove_group),
+    };
+    try {
+      await fetchHandler(`/api/grocerylist/${selectedValue}/items`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newItem),
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
+    // Perform any desired action based on the selected value
+  };
+
+  // console.log(currentUser.id)
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
@@ -36,11 +86,31 @@ export default function Item() {
       setCurProduct(extractProperties);
       setLoading(false);
     };
+    const userAmountGroceryList = async () => {
+      try {
+        const res = await fetchHandler(`/api/grocerylist/${currentUser.id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = res[0];
+        console.log(res[0]);
+        setOption(Object.keys(data).length);
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
+    };
+    // console.log(res)
+    userAmountGroceryList();
     getProduct();
   }, []);
 
   console.log(curProduct);
   console.log(results);
+  console.log(option);
+  console.log(repeat);
   // const doFetch = async () => {
   //   for (const additive of products.additives_original_tags) {
   //     try {
@@ -118,8 +188,6 @@ export default function Item() {
 
   if (!curProduct) return <Page404 />;
   const handlerAddButton = async () => {
-    console.log(name);
-
     const newItem = {
       id: curProduct.id,
       product_name: curProduct.product_name
@@ -247,7 +315,26 @@ export default function Item() {
               <button className="ui button fluid" onClick={handlerAddButton}>
                 Add
               </button>
-              <button className="ui button fluid" onClick={handlerRemoveButton}>
+              <div>
+                <select
+                  value={selectedValue}
+                  onChange={handleDropdownChange}
+                  required
+                >
+                  <option value="">Select an option</option>
+                  {repeat.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={handleButtonClick}>Add</button>
+              </div>
+              <button
+                className="ui button fluid"
+                onClick={handlerRemoveButton}
+                type="submit"
+              >
                 Remove
               </button>
             </div>
