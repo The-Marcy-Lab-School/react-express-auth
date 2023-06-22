@@ -22,6 +22,9 @@ const MapComponent = () => {
   const [myLatitude, setLatitude] = useState(null); // Hook is used to retrieve the geolocation data when the component mounts
   const [myLongitude, setLongitude] = useState(null);
 
+  // const [eventLatitude, setEventLatitude] = useState(data[0].geometry[0]?.coordinates[0]); 
+  // const [eventLongitude, setEventLongitude] = useState(data[0].geometry[0]?.coordinates[1]);
+
   // the "?" character is if it doesn't exist give undefined
 
   // console.log("event data from map:", eventData);
@@ -60,23 +63,28 @@ const MapComponent = () => {
     map.addControl(new mapboxgl.NavigationControl());
 
     const eventRow = document.getElementsByClassName('eventRow');
-    // console.log("event row:", eventRow);
+    console.log("event row:", eventRow);
 
-    // Access the specific element in the array
-    Array.from(eventRow).forEach((element) => {
+    for (let i = 0; i < eventRow.length; i++) {
+      const element = eventRow[i];
       // Add event listener to the element
       element.addEventListener('click', () => {
         // Handle the click event
         // Fly to a random location
-        console.log("element:", element);
-        console.log(`The latitude is ${data[0].geometry[0]?.coordinates[0]} and the longitude is ${data[0].geometry[0]?.coordinates[1]}`);
+        console.log("eventRow:", eventRow);
+        console.log(`The latitude is ${data[i].geometry[0]?.coordinates[0]} and the longitude is ${data[i].geometry[0]?.coordinates[1]}`);
         map.flyTo({
-          center: [data[0].geometry[0]?.coordinates[0], data[0].geometry[0]?.coordinates[1]],
+          center: [data[i].geometry[0]?.coordinates[0], data[i].geometry[0]?.coordinates[1]],
           essential: true, // this animation is considered essential with respect to prefers-reduced-motion
-          
         });
       });
-    });
+    }
+
+
+    // Access the specific element in the array
+    
+
+    
 
     
 
