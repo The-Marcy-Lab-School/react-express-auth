@@ -9,11 +9,13 @@ export default function SafeButton() {
 
     function clickHandler() {
         setIsSafe(!isSafe);
+        updateIsSafe({ isSafe });
+        console.log(isSafe)
     }
 
-    useEffect( () => {
-        updateIsSafe({ isSafe });
-      }, [isSafe]);
+    // useEffect( () => {
+        
+    //   }, [isSafe]);
 
     return (
         <button className='safe-button' onClick={clickHandler}>
