@@ -11,9 +11,10 @@ export default function HomePage() {
       <div className="home-section">
         <div className="eventList">
           <Events></Events>
+        </div>
+        <MapComponent></MapComponent>
+        <SafeButton />
       </div>
-      <MapComponent></MapComponent>
-      <SafeButton />
     </>
   );
 }
