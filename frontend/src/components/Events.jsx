@@ -12,13 +12,13 @@ function EventList() {
   const fetchEvents = () => {
     fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
       .then((response) => {
-        console.log(response)
-        return response.json()})
+        console.log(response);
+        return response.json();
+      })
       .then((data) => {
         setEvents(data.events);
         updateEventData(data); // current event thats updated using useCONTEXT
         console.log("DATA:", data);
-        console.log("DATE:", data.events[0].geometry[0].date);
       })
     // console.log("DATA:",data)                                                    //GENERAL DATA
     // console.log("TYPE:",data.events[0].categories[0].title)                  //Type of Hazard Events
@@ -34,7 +34,7 @@ function EventList() {
     <dl className='eventList'>
       {events.map((event) => (
         <React.Fragment key={event.id}>
-          <li ><a href="#">{event.categories.map((category) => <div className='eventRow' key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div><div className='eventTitle'>{event.title}</div></div>)} </a></li>
+          <li className='eventRow'><a href="#">{event.categories.map((category) => <div key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div><div className='eventTitle'>{event.title}</div></div>)} </a></li>
           {event.description && (
             <dd><em>{event.description}</em></dd>
           )}

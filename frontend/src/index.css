@@ -97,6 +97,17 @@ body {
   color: #aaadb3;
   font-weight: 400;
  }
+
+.login-page, .sign-up-page{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem; 
+  padding-bottom: 3rem; 
+  width: 100%;
+  gap: 1rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
