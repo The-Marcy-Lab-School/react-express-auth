@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 
@@ -21,16 +21,21 @@ export default function LoginPage() {
   if (currentUser) return <Navigate to="/" />;
 
   return <>
-    <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username</label>
-      <input type="text" autoComplete="username" id="username" name="username" />
+    <div className="login-page">
+      <h1>Login</h1>
+      <form className='form' onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
+        <input type="text" autoComplete="username" id="username" name="username" />
 
-      <label htmlFor="password">Password</label>
-      <input type="password" autoComplete="current-password" id="password" name="password" />
+        <label htmlFor="password">Password</label>
+        <input type="password" autoComplete="current-password" id="password" name="password" />
 
-      <button>Log in!</button>
-    </form>
-    { !!errorText && <p>{errorText}</p> }
+        <button>Log in!</button>
+      </form>
+      { !!errorText && <p>{errorText}</p> }
+      <p>
+        Don't have an account? <Link to="/sign-up">Sign up!</Link>
+      </p>
+    </div>
   </>;
 }
