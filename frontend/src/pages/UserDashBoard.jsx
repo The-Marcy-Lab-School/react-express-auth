@@ -88,7 +88,7 @@ export default function UserPage() {
       <div className="ui centered cards">
         {lists.map((list) => {
           return (
-            <GroceryCard key={list.id} grocery={list} />
+            <GroceryCard key={list.id} grocery={list} onClick={() => navigate(`/grocerylist/${list.id}`)}/>
             //add onClick and add a fetch to get the groceryid and fetch it
           );
         })}
