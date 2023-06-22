@@ -13,7 +13,6 @@ export default function HomePage() {
         </div>
         <MapComponent></MapComponent>
         <SafeButton />
-      </div>
     </>
   );
 }
