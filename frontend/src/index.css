@@ -133,7 +133,6 @@ p{
 .h1404{
   font-family: 'Nunito', sans-serif;
   font-size: 300%;
-
 }
 
 #Page404{
@@ -179,3 +178,66 @@ p{
 
 
 /* 404 Page - END */
+
+
+/* UserHome - START */
+
+#search-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./media/green.png');
+}
+
+#search-food-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0px;
+}
+
+#search-food-area{
+  display: flex;
+  flex-direction: column;
+  background-image: url('./media/brown.png');
+  background-size: 50%;
+  height: 80%;
+  border-radius: 15px;
+  width: 90%;
+}
+
+#search-text{
+  color: white;
+  background-image: url('./media/black.png');
+  background-size: 200%;
+  padding: 20px 200px;
+  border-radius: 15px;
+  
+}
+
+#search-food-box{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center
+}
+
+#search-food-box input{
+  scale: 1.5;
+  border-color: grey;
+  border-radius: 5px;
+  border-style: revert;
+  margin: 0px;
+}
+#search-food-box button{
+  padding: 15px;
+  background-color: whitesmoke;
+  border-color: grey;
+  border-style: double;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 150%;
+}
+
+/* UserHome - END*/
