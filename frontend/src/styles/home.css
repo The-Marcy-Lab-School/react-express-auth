@@ -58,5 +58,8 @@ header {
     
     transition:0.5s;
   }
+  .logo{
+    list-style: none;
+  }
 
   

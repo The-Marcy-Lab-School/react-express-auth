@@ -8,17 +8,29 @@ export default function SiteHeadingAndNav() {
 return (
   <header id = "header" className = "fixed-top">
       <h1 className="logo">
-      <p><NavLink to='/'>Money Mingle</NavLink></p> 
+      <li><NavLink to='/'>Money Mingle</NavLink></li> 
+    
 
       </h1>
       <nav id="navbar" className="navbar">
-        <p><NavLink to='/'>Home</NavLink></p> 
-        <p><NavLink to='/about'>About</NavLink></p>
-        <p><NavLink to='/susu'>Susu</NavLink></p>
-        {/* <p><NavLink to='/users'>Users</NavLink></p> */}
-        <p><NavLink to='/createSusu'>Susu Pages</NavLink></p>
-        <p><NavLink to='/sign-up'>Join/Sign Up</NavLink></p>
-
+      <ul> 
+        <li><NavLink to='/'>Home</NavLink></li> 
+      <li><NavLink to='/about'>About</NavLink></li>
+      {
+      currentUser ? 
+        <>
+        <li><NavLink to='/createSusu' end={true}>Create a Susu</NavLink></li>
+        <li><NavLink to='/susu'>Susu Pages</NavLink></li>
+        <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
+        </>
+        : 
+        <li><NavLink to='/sign-up'>Join/Sign Up</NavLink></li>
+        
+      }
+     
+        
+</ul>
+       
       </nav>  
   </header>
   
