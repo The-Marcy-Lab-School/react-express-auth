@@ -8,7 +8,8 @@ export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
 
   return <header>
-    <a id='logo' href='/'>React/Express Auth</a>
+    <img src='logo.png'></img>
+    <a id='logo' href='/'>IQ Food</a>
     <nav>
       <ul>
         <li><NavLink to='/'>Home</NavLink></li>
