@@ -5,7 +5,9 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 **Table of Contents**
 
 - [Setup](#setup)
+- [Deploying](#deploying)
 - [Understanding the Code](#understanding-the-code)
+- [Advice](#advice)
 
 ## Setup
 
@@ -33,7 +35,7 @@ Run the `npm run dev` command from the root directory to start your Express serv
 
 #### Rebuilding the static assets
 
-The Express server is configured to serve static assets from the `public/` folder. Those static assets are the current **build** of the React frontend found in the `frontend/` folder. You can see the built version of the React frontend by going to the server's address: http://127.0.0.1:3000/
+The Express server is configured to serve static assets from the `public/` folder. Those static assets are the current **build** of the React frontend found in the `frontend/` folder. You can see the built version of the React frontend by going to the server's address: http://localhost:3000/
 
 In order to update this built version of your React application, you will need to run the `npm run build` command _from the `frontend/` folder_.
 
@@ -45,9 +47,55 @@ If you look in the `vite.config.js` file, you will see that we've already config
 
 ---
 
-## Understanding the Code
+# Deploying
 
-### Backend API
+We recommend deploying using Render.com. It offers free hosting of web servers and PostgreSQL databases with minimal limitations.
+
+Follow the steps below to create a PostgreSQL database hosted by Render and deploy a web application forked from this repository:
+
+1. Make an account on https://render.com/
+2. Create a PostgreSQL Server
+   - https://dashboard.render.com/ and click on <kbd>New +</kbd>
+   - Select PostgreSQL
+   - Fill out information for your DB
+     - **Region**: `US East (Ohio)`
+     - **Instance Type**: Free
+   - Select <kbd>Create Database</kbd>
+   - Keep the created page open. You will need the `Internal Database URL` value from this page for the next step
+3. Deploy Your Express Server
+   - https://dashboard.render.com/ and click on <kbd>New +</kbd>
+   - Select <kbd>Web Service</kbd>
+   - Connect your GitHub account (if not connected already)
+   - Find your repository and select <kbd>Connect</kbd>
+   - Fill out the information for your Server
+     - **Name**: the name of your app
+     - **Region**: `US East (Ohio)` - the important thing is that it matches the PostgreSQL region
+     - **Branch**: `main`
+     - **Root Directory**: leave this blank
+     - **Runtime**: `Node`
+     - **Build Command**: `npm build`
+     - **Start Command**: `npm start`
+     - **Instance Type**: Free
+   - Select <kbd>Create Web Service</kbd> (Note: The first build will fail because you need to set up environment variables)
+4. Set up environment variables
+
+   - From the Web Service you just created, select <kbd>Environment</kbd> on the left side-menu
+   - Under Secret Files, select <kbd>Add Secret File</kbd>
+     - **Filename**: `.env`
+     - **Contents**:
+       - Look at your local `.env` file and copy over the `SESSION_SECRET` value.
+       - Add a `PG_CONNECTION_STRING` variable with the `Internal Database URL` value from your Postgres page (created in step 2)
+   - Click <kbd>Save Changes</kbd>
+
+5. Future changes to your code
+   - If you followed these steps, your Render server will automatically redeploy whenever the main branch is committed to. To update the deployed application, simply commit to main.
+   - For front-end changes, make sure to run `npm run build` to update the contents of the `public/` folder and push those changes.
+
+---
+
+# Understanding the Code
+
+## Backend API
 
 The provided backend exposes the following API endpoints defined in `src/routes.js`:
 
@@ -61,7 +109,7 @@ The provided backend exposes the following API endpoints defined in `src/routes.
 | PATCH  | /users/:id | Update the username of a specific user by id       |
 | DELETE | /logout    | Log the current user out                           |
 
-### Middleware
+## Middleware
 
 In `src/server.js` and in `src/routes.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `src/middleware/` folder
 
@@ -106,7 +154,7 @@ Router.patch("/users/:id", checkAuthentication, userController.update);
 - `checkAuthentication` verifies that the current user is logged in before processing the request. (see `src/middleware/check-authentication`)
 - Here, we specify middleware for a singular route. Only logged-in users should be able to hit this endpoint.
 
-### Authentication & Authorization
+## Authentication & Authorization
 
 - **authenticated** means "We have confirmed this person is who they say they are"
 
@@ -116,7 +164,7 @@ So if we just want a user to be logged into the site to show content, we just ch
 
 However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
 
-#### Cookies
+### Cookies
 
 In the context of computing and the internet, a **acookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
 
@@ -124,7 +172,7 @@ In the context of computing and the internet, a **acookie** is a small text file
 
 When you visit the website again, the server retrieves the information from the cookie to personalize your experience and provide you with relevant content.
 
-#### Storing User IDs on the Cookie for Authentication
+### Storing User IDs on the Cookie for Authentication
 
 In our application, we are using cookies to store the `userId` of the currently logged-in user on the `req.session` object. This will allow us to implement **authentication** (confirm that the user is logged in).
 
@@ -148,6 +196,8 @@ The reason this route is used instead of `GET /api/users/:id` is two fold.
 
 1. We don't know the user's `id` on load, so how could we know which `id` to provide in the URL?
 2. `GET` REST routes are supposed to be **idempotent** (eye-dem-PO-tent) which means "don't change." `GET /api/me` will change depending on the auth cookie. So, this little example app also has a `GET /api/users/:id` route because `GET /api/me` is not a replacement for it. `GET /api/users:id` isn't used in the client yet but your projects might in the future if you ever want to find a particular user by id (or username)!
+
+---
 
 # Advice
 
