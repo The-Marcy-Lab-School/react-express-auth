@@ -2,17 +2,12 @@
 
 const updateUser = async (req, res) => {
   const {
-    session,
+    session : { userId },
     db: { User },
-    params: { id },
-    body,
+    body: { isSafe },
   } = req;
-  console.log(session)
 
-  
-
-  const user = await User.updateSafe(session.userId);
-  console.log(user)
+  const user = await User.updateSafe(userId, isSafe);
   if (!user) return res.sendStatus(404);
   return res.send(user).status(200).end();
 };

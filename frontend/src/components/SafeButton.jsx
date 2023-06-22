@@ -1,15 +1,23 @@
+import { useContext, useEffect } from 'react'
+import { updateIsSafe } from '../adapters/user-adapter'
+import CurrentUserContext from '../contexts/current-user-context.js';
 
+export default function SafeButton() {
 
-export default function SafeButton({isSafe, setIsSafe}) {
+    const { isSafe, setIsSafe } = useContext(CurrentUserContext)
+
 
     function clickHandler() {
         setIsSafe(!isSafe);
-        console.log(isSafe)
     }
+
+    useEffect( () => {
+        updateIsSafe({ isSafe });
+      }, [isSafe]);
 
     return (
         <button className='safe-button' onClick={clickHandler}>
-            
+
         </button>
     )
 }

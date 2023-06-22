@@ -30,26 +30,22 @@ class User {
     return user ? new User(user) : null;
   }
 
-  static async updateSafe(id) {
+  static async updateSafe(id, isSafe) {
     const query = `
     UPDATE users
-    SET is_safe = CASE
-      WHEN is_safe = true THEN false
-      WHEN is_safe = false THEN true
-      WHEN is_safe IS NULL THEN false
-    END
+    SET is_safe = ?
     WHERE id = ?
     RETURNING *;`;
-    const { rows: [user] } = await knex.raw(query, [id]);
+    const { rows: [user] } = await knex.raw(query, [isSafe, id]);
     return user ? new User(user) : null;
   }
 
-  static async create(username, password, { myLatitude, myLongitude }) {
+  static async create(username, password, { myLatitude, myLongitude }/*, isSafe*/) {
     const passwordHash = await hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash, latitude, longitude)
-      VALUES (?, ?, ?, ?) RETURNING *`;
-    const { rows: [user] } = await knex.raw(query, [username, passwordHash, myLatitude, myLongitude]);
+    const query = `INSERT INTO users (username, password_hash, latitude, longitude, is_safe)
+      VALUES (?, ?, ?, ?, true) RETURNING *`;
+    const { rows: [user] } = await knex.raw(query, [username, passwordHash, myLatitude, myLongitude/*, isSafe*/]);
     return new User(user);
   }
 

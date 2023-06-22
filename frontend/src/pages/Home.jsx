@@ -5,7 +5,6 @@ import MapComponent from "../components/MapComponent";
 import SafeButton from '../components/SafeButton'
 
 export default function HomePage() {
-  const [isSafe, setIsSafe] = useState(true);
 
 
   return (
@@ -14,7 +13,7 @@ export default function HomePage() {
         <Events></Events>
       </div>
       <MapComponent></MapComponent>
-      <SafeButton isSafe={isSafe} setIsSafe={setIsSafe}/>
+      <SafeButton />
     </>
   );
 }
