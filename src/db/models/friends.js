@@ -24,16 +24,16 @@ class Friend {
     return friend ? new Friend(friend.somthing) : null;
   }
 
-  static async delete(friendUserName, userId) {
+  static async delete(friendId, userId) {
     const query = `
     DELETE FROM friends
     WHERE sender_id = ?
-    AND recipient_id = (SELECT id FROM users WHERE username = ?)
-    RETURNING *;
+    AND recipient_id = ?
+    RETURNING *
 `;
-    const { rows: [friend] } = await knex.raw(query, [userId, friendUserName]);
+    const { rows: [friend] } = await knex.raw(query, [userId, friendId]);
     console.log(rows)
-    // return friend
+    return friend
   }
 
   static async create(senderId, recipientId) {

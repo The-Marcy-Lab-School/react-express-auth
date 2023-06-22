@@ -11,6 +11,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.userBoxes{
+  background-color: white;
+}
+
 #map {
   position: relative;
   margin: 0;
