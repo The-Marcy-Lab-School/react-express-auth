@@ -197,3 +197,11 @@ form {
  padding: 8px 16px;
  max-width: 280px;
 }
+
+.safe-button {
+  background-color: red;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border-style: none;
+}

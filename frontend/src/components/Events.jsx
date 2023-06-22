@@ -10,7 +10,7 @@ function EventList() {
   const { updateEventData } = useContext(CurrentUserContext);
 
   const fetchEvents = () => {
-    fetch('http://localhost:3000/api/events')
+    fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
       .then((response) => {
         console.log(response)
         return response.json()})
