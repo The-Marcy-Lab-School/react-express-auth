@@ -4,6 +4,7 @@ import CurrentUserContext from "./current-user-context";
 export default function CurrentUserContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [eventData, setEventData] = useState(null);
+  const [isSafe, setIsSafe] = useState(null);
   const [myLatitude, setLatitude] = useState(null); // Hook is used to retrieve the geolocation data when the component mounts 
   const [myLongitude, setLongitude] = useState(null);
 
@@ -24,7 +25,7 @@ export default function CurrentUserContextProvider({ children }) {
   };
 
   const userLocation = {myLatitude, myLongitude}
-  const context = { currentUser, setCurrentUser, eventData, updateEventData, userLocation  };
+  const context = { currentUser, setCurrentUser, eventData, updateEventData, userLocation, isSafe, setIsSafe  };
 
   return (
     <CurrentUserContext.Provider value={context}>
