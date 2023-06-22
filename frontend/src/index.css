@@ -11,27 +11,60 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.map-section {
+  display: flex;
+  width: 65%;
+  flex-direction: row;
+}
+
 #map {
   position: relative;
-  margin: 0;
   top: 0;
-  bottom: 0;
-  width: 65%;
+  left: 0;
+  height: calc(100vh - 72px);
+  width: 100%;
+  outline: none;
 }
-.home-section {    
+
+.safe-button {
+  position: fixed;
+  height: 50px;
+  width: 250px;
+  margin: 10px;
+  z-index: 98;
+  opacity: 0.5;
+  background: #4c5159;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  height: 40px;
+  letter-spacing: 1px;
+  line-height: 16px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.11);
+  transition: box-shadow 0.15s ease-in-out; /* Add a transition effect */
+
+}
+.safe-button:hover {
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2); /* Apply the glowing effect */
+  opacity: 0.8;
+}
+
+.home-section {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-
-
 }
+
 body {
   margin: 0;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
+
 .eventList {
   height: calc(100vh - 72px);
   display: flex;
@@ -42,25 +75,30 @@ body {
   margin: 0;
   flex-direction: column;
   overflow-x: hidden;
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
 }
 
 /* Optional: Customize scrollbar appearance */
 .eventList::-webkit-scrollbar {
-  width: 5px; /* Width of the scrollbar */
+  width: 5px;
+  /* Width of the scrollbar */
 }
 
 .eventList::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color of the scrollbar thumb */
+  background-color: #888;
+  /* Color of the scrollbar thumb */
 }
 
 .eventList::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
+  background-color: #555;
+  /* Color of the scrollbar thumb on hover */
 }
- .eventList li {
+
+.eventList li {
   flex: 1;
-  
-} 
+
+}
 
 .eventList li a {
   display: block;
@@ -75,43 +113,51 @@ body {
 
 .eventList li a:hover {
   background-color: #464141;
-} */
- h1{
+}
+
+*/ h1 {
   size: 90px;
- }
- .date{
+}
+
+.date {
   font-size: 10px;
   color: #4c5159;
   font-weight: 700;
- }
- .eventType{
+}
+
+.eventType {
   font-weight: 800;
   font-size: 19px;
   padding-top: 10px;
   line-height: 17px;
   white-space: nowrap;
   text-overflow: ellipsis;
- }
- .eventTitle{
+}
+
+.eventTitle {
   font-size: 18px;
   color: #aaadb3;
   font-weight: 400;
- }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
 }
 
 
-input, label {
+input,
+label {
   display: block;
 }
 
@@ -163,23 +209,25 @@ form {
   font-weight: bold;
   font-style: italic;
 }
+
 .marker {
-  background-color:#000000;
-    border:1px solid red;    
-    height:20px;
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
-    width:20px;
+  background-color: #000000;
+  border: 1px solid red;
+  height: 20px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 20px;
 }
-.userLocationPin{
-  background-color:#ffffff;
-  border:1px solid red;    
-  height:20px;
-  border-radius:50%;
-  -moz-border-radius:50%;
-  -webkit-border-radius:50%;
-  width:20px;
+
+.userLocationPin {
+  background-color: #ffffff;
+  border: 1px solid red;
+  height: 20px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 20px;
 }
 
 .mapboxgl-popup {
@@ -188,20 +236,12 @@ form {
 }
 
 .mapboxgl-popup-content {
- font-size: 12px;
- font-weight: 800;
- letter-spacing: 1px;
- line-height: 24px;
- text-align: center;
- text-transform: uppercase;
- padding: 8px 16px;
- max-width: 280px;
-}
-
-.safe-button {
-  background-color: red;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border-style: none;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  max-width: 280px;
 }

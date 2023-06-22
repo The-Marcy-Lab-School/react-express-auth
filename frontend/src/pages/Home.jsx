@@ -13,8 +13,10 @@ export default function HomePage() {
         <div className="eventList">
           <Events></Events>
         </div>
+        <div className="map-section">
         <MapComponent></MapComponent>
         <SafeButton isSafe={isSafe} setIsSafe={setIsSafe}/>
+        </div>
       </div>
     </>
   );
