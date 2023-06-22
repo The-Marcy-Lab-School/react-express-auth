@@ -32,7 +32,7 @@ function EventList() {
     <dl className='eventList'>
       {events.map((event) => (
         <React.Fragment key={event.id}>
-          <li ><a href="#">{event.categories.map((category) => <div className='eventRow' key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div><div className='eventTitle'>{event.title}</div></div>)} </a></li>
+          <li className='eventRow'><a href="#">{event.categories.map((category) => <div key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div><div className='eventTitle'>{event.title}</div></div>)} </a></li>
           {event.description && (
             <dd><em>{event.description}</em></dd>
           )}
