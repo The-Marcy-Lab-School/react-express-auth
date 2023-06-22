@@ -46,11 +46,11 @@ export default function Susu() {
   console.log(currentSusulist);
   
   return (
-    <>
+    <div className="susupage-container">
       {currentSusulist.map((susu) => (
         // console.log(susu)
         <SusuCard className="susu-card" key={susu.id} susu={susu} />
       ))}
-    </>
+    </div>
   );
 }

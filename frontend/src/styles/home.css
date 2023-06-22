@@ -1,5 +1,5 @@
 body{
-    background-color: #FFD8A9;
+    background-color: #DDA15E;
 
 }
 .d-flex{
@@ -13,7 +13,7 @@ header {
     justify-content: space-between;
     padding: 5px;
     align-items: center;
-    background: #02B59F;
+    background: #FEFAE0;
   }
   .home-container{
     margin-top: 10%;
@@ -21,9 +21,13 @@ header {
     justify-content: center;
   }
 
+
+  a:hover{
+    color:#DDA15E;
+  }
   a{
     text-decoration: none;
-    color:pink
+    color:#283618
   }
 
   .navbar a {
