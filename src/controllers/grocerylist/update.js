@@ -1,20 +1,18 @@
-const { isAuthorized } = require('../../utils/auth-utils');
-
-const updateUser = async (req, res) => {
+const updateGrocery = async (req, res) => {
   const {
-    session,
-    db: { User },
+    // session
+    db: { Grocery_list },
     params: { id },
-    body: { username },
+    body: { list_name,nova_rate, nutri_score }
   } = req;
 
-  if (!isAuthorized(id, session)) return res.sendStatus(403);
+  // if (!isAuthorized(id, session)) return res.sendStatus(403);
+  const grocery = await Grocery_list.find(id);
+  if (!grocery) return res.sendStatus(404);
 
-  const user = await User.find(id);
-  if (!user) return res.sendStatus(404);
-
-  const updatedUser = await user.update(username);
-  res.send(updatedUser);
+  const updatedGrocery = await Grocery_list.update(id, list_name,nova_rate, nutri_score);
+  res.send(updatedGrocery);
 };
 
-module.exports = updateUser;
+module.exports = updateGrocery;
+

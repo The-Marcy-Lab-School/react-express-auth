@@ -1,6 +1,7 @@
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
+  overflow: hidden;
 }
 
 input, label {
@@ -16,22 +17,36 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #000;
+  background-image:  url("./media/black.png") ;
 }
 
-#logo {
-  font-size: 1.5rem;
+.brand{
+  display: flex;
+  align-items: center;
+}
+
+#logo{
+  height:100px;
+}
+
+#title {
+  font-size: 4.5rem;
   font-weight: bold;
+  font-style: normal;
   text-decoration: none;
   color: #FFF;
 }
 
 nav ul {
+  color:white;
   display: flex;
-  gap: 1rem;
-  padding: 0;
+  background-image: url('./media/yellow.png');
+  background-size: cover;
+  gap: 4.5rem;
+  padding: 20px 40px;
   margin: 0;
   list-style: none;
+  border-radius: 15px;
 }
 
 nav a {
@@ -42,13 +57,186 @@ nav a {
 form {
   padding: 1rem;
   border: 1px solid #CCC;
-  width: 15rem;
+  width: 30rem;
+  /* height: 15rem; */
   margin: 1rem auto;
 }
 
 /* automatically added by NavLink component */
 .active {
-  color: #EEBC32;
+  color: black;
   font-weight: bold;
   font-style: italic;
 }
+main{
+  /* border: #CCC 1px solid; */
+  height: 95vh ;
+}
+.sign-bg{
+  margin-top: 0px;
+  height: 100%;
+  width: auto;
+  background-image: url('./media/bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+
+#moto-div{
+  background-color: whitesmoke;
+  opacity:60%;
+  border-radius: 15px;
+  width: 400px;
+  padding: 30px 0px 10px 40px;
+  margin: 100px 0px 50px 50px;
+}
+
+
+#story-div{
+  background-color: whitesmoke;
+  opacity:60%;
+  border-radius: 15px;
+  width: 400px;
+  padding: 10px 10px 10px 40px;
+  margin: 0px 0px 50px 50px;
+}
+
+.moto-text{
+  margin-top: 0px;
+}
+
+p{
+  font-weight: 700;
+}
+
+
+.user-form{
+  margin-top: 200px;
+  background-image: url('./media/white.png');
+  background-size: cover;
+  border: 5px rgb(231, 203, 174) solid;
+  /* border-image: url('./media/black.png'); */
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login-suggest{
+  padding-top: 10px;
+}
+
+
+/* 404 Page - START */
+
+.h1404{
+  font-family: 'Nunito', sans-serif;
+  font-size: 300%;
+}
+
+#Page404{
+  background-image: url('./media/grey.png');
+  background-size: 60%;
+  display: flex ;
+  justify-content: center;
+}
+
+#errordiv{
+  margin: 2% 50px 0px 50px;
+  width: 0px;
+}
+
+#lostlol{
+  width:100vw;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mrbroc{
+  width: 170px;
+}
+
+#returnButt{
+  color:whitesmoke;
+  font-family: 'Nunito', sans-serif;
+  font-size: 200%;
+  font-weight: 600;
+  padding: 40px ;
+  background-color: #66a653;
+  border: #360 5px solid;
+  border-style: dashed;
+  width:30%;
+  text-align: center;
+}
+#returnButt:hover{
+  background-color: #4a753e;
+  transform: scale(1.2);
+}
+
+
+/* 404 Page - END */
+
+
+/* UserHome - START */
+
+#search-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./media/green.png');
+}
+
+#search-food-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0px;
+}
+
+#search-food-area{
+  display: flex;
+  flex-direction: column;
+  background-image: url('./media/brown.png');
+  background-size: 50%;
+  height: 80%;
+  border-radius: 15px;
+  width: 90%;
+}
+
+#search-text{
+  color: white;
+  background-image: url('./media/black.png');
+  background-size: 200%;
+  padding: 20px 200px;
+  border-radius: 15px;
+  
+}
+
+#search-food-box{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center
+}
+
+#search-food-box input{
+  scale: 1.5;
+  border-color: grey;
+  border-radius: 5px;
+  border-style: revert;
+  margin: 0px;
+}
+#search-food-box button{
+  padding: 15px;
+  background-color: whitesmoke;
+  border-color: grey;
+  border-style: double;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 150%;
+}
+
+/* UserHome - END*/
