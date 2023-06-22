@@ -4,7 +4,8 @@
  */
 exports.up = (knex) => knex.schema.createTable('events', (table) =>{
   table.increments();
-  table.string('geolocation');
+  table.string('latitude');
+  table.string('longitude');
   table.string('description');
   table.string('title');
   table.string('type');
