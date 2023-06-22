@@ -19,7 +19,7 @@ return (
       {
       currentUser ? 
         <>
-        <li><NavLink to='/createSusu' end={true}>Create a Susu</NavLink></li>
+        <li><NavLink to='/createSusu' end={true}>Create/join Susu</NavLink></li>
         <li><NavLink to='/susu'>Susu Pages</NavLink></li>
         <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
         </>
