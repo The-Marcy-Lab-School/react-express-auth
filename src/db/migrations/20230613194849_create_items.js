@@ -8,7 +8,7 @@ exports.up = (knex) => {
         table.string("id").primary().unique();
         table.string("product_name");
         table.string("ecoscore_grade");
-        table.string("ingredients_text");
+        table.string("ingredients_text", 1000);
         table.string("additives_original_tags");
         table.string("image_front_thumb_url");
         table.string("stores");

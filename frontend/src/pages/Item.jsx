@@ -14,14 +14,9 @@ export default function Item() {
   const { currentUser } = useContext(CurrentUserContext);
   const [curProduct, setCurProduct] = useState(null);
   const [loading, setLoading] = useState(false);
-  const results = [];
   const [selectedValue, setSelectedValue] = useState("");
   const [option, setOption] = useState([]);
-
-  const repeat = [];
-  for (let i = 1; i <= option; i++) {
-    repeat.push(i);
-  }
+  const [additiveInfo, setAdditiveInfo] = useState([]);
   const handleDropdownChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -81,11 +76,12 @@ export default function Item() {
         image_front_thumb_url: product.image_front_thumb_url,
         stores: product.stores,
         nutriscore_grade: product.nutriscore_grade,
-        nove_group: product.nova_group,
+        nova_group: product.nova_group,
         id: product.id,
         brands_tags: product.brands_tags,
       };
       setCurProduct(extractProperties);
+      setAdditiveInfo(extractProperties.additives_original_tags);
       setLoading(false);
     };
     const userAmountGroceryList = async () => {
@@ -97,52 +93,25 @@ export default function Item() {
           },
         });
         const data = res[0];
-        console.log(res[0]);
         console.log(data);
-        // setOption(Object.keys(data).length);
         setOption(data);
       } catch (err) {
         console.log(err);
         return null;
       }
     };
-    // console.log(res)
     userAmountGroceryList();
     getProduct();
+    // console.log(additiveInfo)
   }, []);
-console.log(option)
-  // console.log(curProduct);
+  console.log(option);
+  console.log(curProduct);
+  console.log(additiveInfo);
   // console.log(results);
   // console.log(option);
   // console.log(repeat);
-  // const doFetch = async () => {
-  //   for (const additive of products.additives_original_tags) {
-  //     try {
-  //       // if (!additive) return;
-  //       const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${additive.replace(
-  //         "en:",
-  //         ""
-  //       )}`;
-  //       console.log(additive);
-  //       console.log(url);
-  //       const res = await fetch(url);
-  //       console.log(res);
-  //       const data = await res.json();
-  //       const snippet = data.query.search[0].snippet.replace(
-  //         /<[^>]+>|[^\w\s]/gi,
-  //         ""
-  //       );
-  //       const title = data.query.search[0].title;
-  //       console.log("GAYYYYYY", snippet, title);
-  //       results.push({ title, snippet });
-  //       console.log("hello", results);
-  //     } catch (err) {
-  //       console.log(err);
-  //       return null;
-  //     }
-  //   }
-  //   setAdditiveInfo(results);
-  // };
+  // doFetch();
+  console.log(additiveInfo)
   // const curProduct = getProduct();
 
   // const [additiveInfo, setAdditiveInfo] = useState(null);
@@ -191,44 +160,7 @@ console.log(option)
   if (loading) return <h1>Loading...</h1>;
 
   if (!curProduct) return <Page404 />;
-  const handlerAddButton = async () => {
-    const newItem = {
-      id: curProduct.id,
-      product_name: curProduct.product_name
-        ? curProduct.product_name
-        : curProduct.quantity + curProduct.brands_tags[0],
-      ecoscore_grade: curProduct.ecoscore_grade
-        ? curProduct.ecoscore_grade
-        : null,
-      ingredients_text: curProduct.ingredients_text
-        ? curProduct.ingredients_text
-        : null,
-      additives_original_tags: curProduct.additives_original_tags
-        ? curProduct.additives_original_tags
-        : null,
-      image_front_thumb_url: curProduct.image_front_thumb_url
-        ? curProduct.image_front_thumb_url
-        : null,
-      stores: curProduct.stores ? curProduct.stores : null,
-      nutriscore_grade: curProduct.nutriscore_grade,
-      nova_group: Number(curProduct.nove_group),
-    };
-    await fetchHandler(`/api/itemslist`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newItem),
-    });
-  };
-  const handlerRemoveButton = async () => {
-    await fetchHandler(`/api/itemslist/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  };
+
   // console.log(product);
   // console.log( typeof product.product_name)
   //   console.log(product.brands_tags[0]);
@@ -280,9 +212,9 @@ console.log(option)
                     <strong>Additives: </strong>
                     {curProduct.additives_original_tags.join(" ").toUpperCase()}
                   </p>
-                  {/* {additiveInfo.map((itemData) => (
-                    <Additives key={additiveInfo.title} item={itemData}/>
-                  ))} */}
+                  {additiveInfo.map((itemData, i) => (
+                    <Additives key={i} item={itemData}/>
+                  ))}
                 </>
               )}
 
@@ -316,9 +248,6 @@ console.log(option)
               >
                 Go Back
               </button>
-              <button className="ui button fluid" onClick={handlerAddButton}>
-                Add
-              </button>
               <div>
                 <select
                   value={selectedValue}
@@ -326,11 +255,6 @@ console.log(option)
                   required
                 >
                   <option value="">Select an option</option>
-                  {/* {repeat.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))} */}
                   {option.map((opt, index) => (
                     <option key={index} value={opt.grocery_list_id}>
                       {opt.grocery_list_id}
@@ -339,13 +263,6 @@ console.log(option)
                 </select>
                 <button onClick={handleButtonClick}>Add</button>
               </div>
-              <button
-                className="ui button fluid"
-                onClick={handlerRemoveButton}
-                type="submit"
-              >
-                Remove
-              </button>
             </div>
           </div>
         </div>

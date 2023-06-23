@@ -201,9 +201,9 @@ p{
   flex-direction: column;
   background-image: url('./media/brown.png');
   background-size: 50%;
-  height: 80%;
+  height: 100vh;
   border-radius: 15px;
-  width: 90%;
+  width: 100%;
 }
 
 #search-text{
