@@ -1,3 +1,5 @@
+/* eslint-disable func-style */
+/* eslint-disable max-len */
 import { useState } from "react";
 import CurrentUserContext from "./current-user-context";
 

@@ -11,16 +11,19 @@
 /* eslint-disable no-trailing-spaces */
 
 import { useEffect, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import mapboxgl from 'mapbox-gl';
 import CurrentUserContext from '../contexts/current-user-context.js';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const MapComponent = () => {
-  const { eventData } = useContext(CurrentUserContext); // Data from MapComponent
-  const data = eventData?.events;
-
   const [myLatitude, setLatitude] = useState(null); // Hook is used to retrieve the geolocation data when the component mounts
   const [myLongitude, setLongitude] = useState(null);
+
+  const { eventData, userLocation } = useContext(CurrentUserContext); // Data from MapComponent
+  const data = eventData?.events;
+
+  const navigate = useNavigate();
 
   // const [eventLatitude, setEventLatitude] = useState(data[0].geometry[0]?.coordinates[0]); 
   // const [eventLongitude, setEventLongitude] = useState(data[0].geometry[0]?.coordinates[1]);
@@ -38,12 +41,14 @@ const MapComponent = () => {
     function showPosition(position) {
       setLatitude(position?.coords.latitude); // Functions are used to update the state variables with the retrieved values.
       setLongitude(position?.coords.longitude);
+      console.log(`My latitude is ${position.coords.latitude} and my longitude is ${position.coords.longitude}`);
     }
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHJleWphZGVkIiwiYSI6ImNsaXRnZGtmNjEzc2IzanF2c2xvYW54Y28ifQ.zOjQMeR4v4rGw4_L7_-Iig';
     const map = new mapboxgl.Map({
       container: 'map', // container ID
       style: 'mapbox://styles/treyjaded/cliwe9c1002ak01qhag512fac', // style URL
+      // DARK STYLE: mapbox://styles/mapbox/dark-v11
       center: [myLongitude, myLatitude], // starting position [lng, lat] NJ = [-74.5, 40]
       zoom: 9, // starting zoom
     });
@@ -82,87 +87,13 @@ const MapComponent = () => {
 
 
     // Access the specific element in the array
-    
 
-    
 
-    
+
+
+
 
     for (let i = 0; i < data?.length; i++) {
-      // const size = 200;
-
-      // // This implements `StyleImageInterface`
-      // // to draw a pulsing dot icon on the map.
-      // const pulsingDot = {
-      //   width: size,
-      //   height: size,
-      //   data: new Uint8Array(size * size * 4),
-
-      //   // When the layer is added to the map,
-      //   // get the rendering context for the map canvas.
-      //   onAdd() {
-      //     const canvas = document.createElement('canvas');
-      //     canvas.width = this.width;
-      //     canvas.height = this.height;
-      //     this.context = canvas.getContext('2d');
-      //   },
-
-      //   // Call once before every frame where the icon will be used.
-      //   render() {
-      //     const duration = 1000;
-      //     const t = (performance.now() % duration) / duration;
-
-      //     const radius = (size / 2) * 0.3;
-      //     const outerRadius = (size / 2) * 0.7 * t + radius;
-      //     const context = this.context;
-
-      //     // Draw the outer circle.
-      //     context.clearRect(0, 0, this.width, this.height);
-      //     context.beginPath();
-      //     context.arc(
-      //       this.width / 2,
-      //       this.height / 2,
-      //       outerRadius,
-      //       0,
-      //       Math.PI * 2,
-      //     );
-      //     context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
-      //     context.fill();
-
-      //     // Draw the inner circle.
-      //     context.beginPath();
-      //     context.arc(
-      //       this.width / 2,
-      //       this.height / 2,
-      //       radius,
-      //       0,
-      //       Math.PI * 2,
-      //     );
-      //     context.fillStyle = 'rgba(255, 100, 100, 1)';
-      //     context.strokeStyle = 'white';
-      //     context.lineWidth = 2 + 4 * (1 - t);
-      //     context.fill();
-      //     context.stroke();
-
-      //     // Update this image's data with data from the canvas.
-      //     this.data = context.getImageData(
-      //       0,
-      //       0,
-      //       this.width,
-      //       this.height,
-      //     ).data;
-
-      //     // Continuously repaint the map, resulting
-      //     // in the smooth animation of the dot.
-      //     map.triggerRepaint();
-
-      //     // Return `true` to let the map know that the image was updated.
-      //     return true;
-      //   },
-      // };
-      // console.log(pulsingDot); //
-
-
       const latitude = data[i].geometry[0]?.coordinates[0];
       const longitude = data[i].geometry[0]?.coordinates[1];
 
@@ -192,21 +123,21 @@ const MapComponent = () => {
 
       // console.log("mapholddddd:", mapHold.data.features);
 
-      
+
 
       for (const feature of mapHold.data.features) {
         map.on('load', () => {
           const el = document.createElement('div');
           el.className = 'marker';
 
-          const userLocation = document.createElement('div');
-          userLocation.className = 'userLocationPin';
+          const userLocationPin = document.createElement('div');
+          userLocationPin.className = 'userLocationPin';
 
           const coordinates = feature.geometry.coordinates.slice(); // Coordinates of Disasters
           const { description } = feature.properties; // Description of Disasters
           const type = feature.properties.title; // Type of Disasters
 
-          new mapboxgl.Marker(userLocation) // User's location on MAPBOX
+          new mapboxgl.Marker(userLocationPin) // User's location on MAPBOX
             .setLngLat([myLongitude, myLatitude])
             .addTo(map);
 
@@ -241,6 +172,16 @@ const MapComponent = () => {
             map.getCanvas().style.cursor = '';
             popup.remove();
           });
+          
+        
+          const handleClick = () => {
+            // Navigate to the "/disaster" page
+          };
+        
+
+          el.addEventListener('click', () => (
+            navigate('/disaster')
+          ));
         });
       }
     }

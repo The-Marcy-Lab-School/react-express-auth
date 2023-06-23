@@ -13,9 +13,14 @@ export default function SafeButton() {
     updateIsSafe({ isSafe });
   }, [isSafe]);
 
+  function clickHandler() {
+    setIsSafe(!isSafe);
+    updateIsSafe({ isSafe });
+  }
+
   return (
     <button className='safe-button' onClick={clickHandler}>
-        <div>Solace</div>
+
     </button>
   );
 }

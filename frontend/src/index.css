@@ -1,4 +1,11 @@
 :root {
+  --clr-dark: #1e1e1e;
+  --clr-light: #d9d9d9;
+  --clr-grey: #896a67;
+  --clr-orange: #ec4e20;
+  --clr-green: #00ff00;
+  --clr-red: #ff0000;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -148,6 +155,18 @@ body {
   padding-bottom: 3rem; 
   width: 100%;
   gap: 1rem;
+}
+
+.form-title, .form-redirect{
+  color: #d9daec;
+}
+
+.username-label, .password-label{
+  color: #d6d0d0;
+}
+
+.form-redirect-link{
+  color: #a577ee;
 }
 
 @media (prefers-color-scheme: light) {
