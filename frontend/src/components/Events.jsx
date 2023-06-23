@@ -30,8 +30,33 @@ function EventList() {
     updateEventData();
   }, []);
 
+  function AlertList() {
+    const [alert, setAlert] = useState([]);
+
+    const latitude = events[0]?.geometry[0]?.coordinates[0];
+    const longitude = events[0]?.geometry[0]?.coordinates[1];
+
+    const fetchLayers = () => {
+      console.log("latitude", latitude); console.log("longitude", longitude);
+      fetch(`https://api.weather.gov/alerts?point=34.870158,-77.051228`)
+        .then((response) => {
+          console.log(response);
+          return response.json();
+        })
+        .then((data) => {
+          setAlert(data.events);
+          console.log("ALERT DATA:", data);
+        })
+        .catch((error) => console.log(error));
+    };
+    useEffect(() => {
+      fetchLayers();
+    }, []);
+  }
+
   return (
     <dl className='eventList'>
+      <AlertList />
       {events.map((event) => (
         <React.Fragment key={event.id}>
           <li ><a className='eventRow' href="#">{event.categories.map((category) => <div key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div><div className='eventTitle'>{event.title}</div></div>)} </a></li>
@@ -42,56 +67,25 @@ function EventList() {
       ))}
     </dl>
   );
-}
-
-// ------------------List of Layers ----------------
-function LayerList() {
-  const [layers, setLayers] = useState([]);
-
-  useEffect(() => {
-
-  }, []);
-
-  const fetchLayers = () => {
-    const eventId = "EONET_182";
-    fetch(`https://eonet.gsfc.nasa.gov/api/v3/events/${eventId}?status=open&limit=5`)
-      .then((response) => response.json())
-      .then((event) => {
-        const { categories } = event;
-        const fetchLayersPromises = categories.map((category) => {
-          const layerMapAPI = `https://eonet.gsfc.nasa.gov/api/v3/layers/${category.id}?status=open&limit=5`;
-          // console.log("event:", event)
-          return fetch(layerMapAPI).then((response) => response.json());
-        });
-
-        Promise.all(fetchLayersPromises)
-          .then((layersData) => {
-            const layers = layersData.flatMap((data) => data.categories[0].layers);
-            setLayers(layers);
-          })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => console.log(error));
-  };
-
-  return (
-    <React.Fragment>
-      <div id="eventTitle"></div>
-      <dl id="layerList">
-        {layers.map((layer) => (
-          <React.Fragment key={layer.id}>
-            <dt>{layer.name}</dt>
-          </React.Fragment>
-        ))}
-      </dl>
-    </React.Fragment>
-  );
+  // return (
+  //   <React.Fragment>
+  //     <div id=""></div>
+  //     <dl id="layerList">
+  //       {layers.map((layer) => (
+  //         <React.Fragment key={layer.id}>
+  //           <dt>{layer.name}</dt>
+  //         </React.Fragment>
+  //       ))}
+  //     </dl>
+  //   </React.Fragment>
+  // );
 }
 
 function Event() {
   return (
-  // div className='eventList'>
-     <EventList />
+    <>
+    <EventList />
+    </>
   );
 }
 

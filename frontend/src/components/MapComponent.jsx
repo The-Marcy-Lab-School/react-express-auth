@@ -63,7 +63,7 @@ const MapComponent = () => {
     map.addControl(new mapboxgl.NavigationControl());
 
     const eventRow = document.getElementsByClassName('eventRow');
-    console.log("event row:", eventRow);
+    // console.log("event row:", eventRow);
 
     for (let i = 0; i < eventRow.length; i++) {
       const element = eventRow[i];
@@ -71,7 +71,7 @@ const MapComponent = () => {
       element.addEventListener('click', () => {
         // Handle the click event
         // Fly to a random location
-        console.log("eventRow:", eventRow);
+        // console.log("eventRow:", eventRow);
         console.log(`The latitude is ${data[i].geometry[0]?.coordinates[0]} and the longitude is ${data[i].geometry[0]?.coordinates[1]}`);
         map.flyTo({
           center: [data[i].geometry[0]?.coordinates[0], data[i].geometry[0]?.coordinates[1]],
@@ -223,7 +223,6 @@ const MapComponent = () => {
           el.addEventListener('mouseenter', () => {
             // Change the cursor style as a UI indicator.
             map.getCanvas().style.cursor = 'pointer';
-            console.log('OK WE HERE');
             // Copy coordinates array.
 
             // Ensure that if the map is zoomed out such that multiple
