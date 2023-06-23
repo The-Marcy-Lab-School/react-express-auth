@@ -20,17 +20,32 @@ export default function LoginPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  return <>
-    <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username</label>
-      <input type="text" autoComplete="username" id="username" name="username" />
+  return (
+    <>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="field">
+          <label className="label" htmlFor="username">Username</label>
+          <div className="control">
+            <input className="input" type="text" autoComplete="username" id="username" name="username" />
+          </div>
+        </div>
 
-      <label htmlFor="password">Password</label>
-      <input type="password" autoComplete="current-password" id="password" name="password" />
+        <div className="field">
+          <label className="label" htmlFor="password">Password</label>
+          <div className="control">
+            <input className="input" type="password" autoComplete="current-password" id="password" name="password" />
+          </div>
+        </div>
 
-      <button>Log in!</button>
-    </form>
-    { !!errorText && <p>{errorText}</p> }
-  </>;
+        <div className="field is-grouped">
+          <div className="control">
+            <button className="button is-link">Log in!</button>
+          </div>
+        </div>
+      </form>
+
+      {errorText && <p>{errorText}</p>}
+    </>
+  );
 }

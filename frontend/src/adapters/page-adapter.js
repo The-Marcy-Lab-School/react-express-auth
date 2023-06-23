@@ -30,8 +30,8 @@ export const createPost = async ({
 };
 export const getAllPages = async () => {
   const [pages] = await fetchHandler(baseUrl);
-  return pages || []
-} 
+  return pages || [];
+};
 
 export const getPost = async (id) => fetchHandler(`${baseUrl}/${id}`);
 

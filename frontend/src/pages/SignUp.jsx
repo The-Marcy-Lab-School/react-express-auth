@@ -3,8 +3,6 @@ import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
 
-// Controlling the signup form is a good idea because we want to adde (eventually)
-// more validation and provide real time feedback to the user about usernames and passwords
 export default function SignUpPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
@@ -19,10 +17,6 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  // We could also use a single state variable for the form data:
-  // const [formData, setFormData] = useState({ username: '', password: '' });
-  // What would be the pros and cons of that?
-
   if (currentUser) return <Navigate to="/" />;
 
   const handleSubmit = async (event) => {
@@ -30,7 +24,7 @@ export default function SignUpPage() {
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
 
-    const [user, error] = await createUser({ first_name, last_name, age, gender, race, ethnicity, username, password, email});
+    const [user, error] = await createUser({ first_name, last_name, age, gender, race, ethnicity, username, password, email });
     if (error) return setErrorText(error.statusText);
 
     setCurrentUser(user);
@@ -38,7 +32,6 @@ export default function SignUpPage() {
   };
 
   const handleChange = (event) => {
-    // console.log(event)
     const { name, value } = event.target;
     if (name === 'first_name') setFirstName(value);
     if (name === 'last_name') setLastName(value);
@@ -49,121 +42,160 @@ export default function SignUpPage() {
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
     if (name === 'email') setEmail(value);
-    console.log(value);
-
   };
-  //  console.log(handleChange(e))
-  return <>
-    <h1>Sign Up</h1>
-    <form onSubmit={handleSubmit} onChange={handleChange}>
-    <label htmlFor="first_name">First Name</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="first_name"
-        name="first_name"
-        onChange={handleChange}
-        value={first_name}
-      />
 
-      <label htmlFor="last_name">Last Name</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="last_name"
-        name="last_name"
-        onChange={handleChange}
-        value={last_name}
-      />
+  return (
+    <>
+      <h1>Sign Up</h1>
+      <form onSubmit={handleSubmit} onChange={handleChange}>
+        <div className="field">
+          <label className="label" htmlFor="first_name">First Name</label>
+          <div className="control">
+            <input
+              autoComplete="off"
+              type="text"
+              id="first_name"
+              name="first_name"
+              value={first_name}
+              className="input"
+            />
+          </div>
+        </div>
 
-      <label htmlFor="age">Age</label>
-      <input
-        autoComplete="off"
-        type="number"
-        id="age"
-        name="age"
-        onChange={handleChange}
-        value={age}
-      />
+        <div className="field">
+          <label className="label" htmlFor="last_name">Last Name</label>
+          <div className="control">
+            <input
+              autoComplete="off"
+              type="text"
+              id="last_name"
+              name="last_name"
+              value={last_name}
+              className="input"
+            />
+          </div>
+        </div>
 
-      <label htmlFor="gender">Gender</label>
-      <select
-      id="gender"
-      name="gender"
-      onChange={handleChange}
-      value={gender}
-      >
-      <option value="">Select a gender</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-      <option value="other">Other</option>
-      </select>
+        <div className="field">
+          <label className="label" htmlFor="age">Age</label>
+          <div className="control">
+            <input
+              autoComplete="off"
+              type="number"
+              id="age"
+              name="age"
+              value={age}
+              className="input"
+            />
+          </div>
+        </div>
 
-      <label htmlFor="race">Race</label>
-      <select
-      id="race"
-      name="race"
-      onChange={handleChange}
-      value={race}
-      >
-      <option value="">Select a race</option>
-      <option value="asian">Asian</option>
-      <option value="black">Black</option>
-      <option value="latino">Latino</option>
-      <option value='american indian or alaska native'>American Indian or Alaska Native</option>
-      <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
-      <option value="white">White</option>
-      <option value="other">Other</option>
-      </select>
+        <div className="field">
+          <label className="label" htmlFor="gender">Gender</label>
+          <div className="control">
+            <div className="select">
+              <select
+                id="gender"
+                name="gender"
+                value={gender}
+                className="input"
+              >
+                <option value="">Select a gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-      <label htmlFor="ethnicity">Ethnicity</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="ethnicity"
-        name="ethnicity"
-        onChange={handleChange}
-        value={ethnicity}
-      />
+        <div className="field">
+          <label className="label" htmlFor="race">Race</label>
+          <div className="control">
+            <div className="select">
+              <select
+                id="race"
+                name="race"
+                value={race}
+                className="input"
+              >
+                <option value="">Select a race</option>
+                <option value="asian">Asian</option>
+                <option value="black">Black</option>
+                <option value="latino">Latino</option>
+                <option value="american indian or alaska native">American Indian or Alaska Native</option>
+                <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+                <option value="white">White</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-      <label htmlFor="username">Username</label>
-      <input
-        autoComplete="off"
-        type="text"
-        id="username"
-        name="username"
-        onChange={handleChange}
-        value={username}
-      />
+        <div className="field">
+          <label className="label" htmlFor="ethnicity">Ethnicity</label>
+          <div className="control">
+            <input
+              autoComplete="off"
+              type="text"
+              id="ethnicity"
+              name="ethnicity"
+              value={ethnicity}
+              className="input"
+            />
+          </div>
+        </div>
 
-      <label htmlFor="password">Password</label>
-      <input
-        autoComplete="off"
-        type="password"
-        id="password"
-        name="password"
-        onChange={handleChange}
-        value={password}
-      />
+        <div className="field">
+          <label className="label" htmlFor="username">Username</label>
+          <div className="control">
+            <input
+              autoComplete="off"
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              className="input"
+            />
+          </div>
+        </div>
 
-      <label htmlFor="email">Email</label>
-      <input
-        autoComplete="off"
-        type="email"
-        id="email"
-        name="email"
-        onChange={handleChange}
-        value={email}
-      />
+        <div className="field">
+          <label className="label" htmlFor="password">Password</label>
+          <div className="control">
+            <input
+              autoComplete="off"
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              className="input"
+            />
+          </div>
+        </div>
 
-      {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
-        <label htmlFor="password-confirm">Password Confirm</label>
-        <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
-      */}
+        <div className="field">
+          <label className="label" htmlFor="email">Email</label>
+          <div className="control">
+            <input
+              autoComplete="off"
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              className="input"
+            />
+          </div>
+        </div>
 
-      <button>Sign Up Now!</button>
-    </form>
-    { !!errorText && <p>{errorText}</p> }
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
-  </>;
+        <button className="button is-link">Sign Up Now!</button>
+      </form>
+
+      {!!errorText && <p>{errorText}</p>}
+
+      <p>
+        Already have an account with us? <Link to="/login">Log in!</Link>
+      </p>
+    </>
+  );
 }

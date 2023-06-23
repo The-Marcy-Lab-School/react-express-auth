@@ -1,32 +1,55 @@
-// import { useContext, useEffect, useState } from 'react';
-// import { useNavigte, useParams } from 'react';
-// import { NavLink, useParams } from 'react-router-dom';
-// import CurrentUserContext from '../contexts/current-user-context';
-// import { getUser } from '../adapters/user-adapter';
-// import { logUserOut } from '../adapters/auth-adapter';
+import React from 'react'
 import DoctorCard from "../components/DoctorCard";
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getAllPages } from "../adapters/page-adapter";
-import { NavLink, Link, useParams } from 'react-router-dom';
+import { getAllReviews } from "../adapters/review-adapter";
+import { NavLink } from 'react-router-dom';
 
- export default function DoctorsList(){
-  const [pages, setPages] = useState([]);
+
+export default function DoctorsList() {
+ 
+  const [reviews, setReviews] = useState([]);
+  const [allPages, setAllPages] = useState([]);
 
   useEffect(() => {
-    getAllPages().then(setPages)
-  }, [])
-  console.log(pages)
-      return (
-        <>
-         <h4>
-          <NavLink to="/create-post">Cant Find a Doctor? Add One Here</NavLink>
-          </h4>
-        <div className="ui centered cards" >
-            {pages.map(page => { return <DoctorCard key={page.id} page={page}/>})}
-        </div>
-        </>
-      )      
-    
-}
 
+    getAllReviews()
+      .then((data) => {
+        setReviews(data);
+      })
+      .catch((error) => console.log(error));
+
+      getAllPages()
+      .then((data) => setAllPages(data))
+      .catch((error) => console.log(error));
+  }, []);
+
+
+  return (
+    <>
+   
+    <div className="navbar-start" style={{ flexGrow: 1, justifyContent: 'center' }}>
+    <div className="field is-grouped">
+  <p className="control is-expanded">
+    <input className="input" type="text" placeholder="Search..." />
+  </p>
+  <p className="control">
+    <a className="button is-info">
+      Search
+    </a>
+  </p>
+</div>
+    </div>
+
+
+      <h4>
+        <NavLink to="/create-post">Can't Find a Doctor? Add One Here</NavLink>
+      </h4>
+      <div className="ui centered cards">
+        {allPages.map((page) => (
+          <DoctorCard key={page.id} page={page} reviews={reviews} />
+        ))}
+      </div>
+    </>
+  );
+}

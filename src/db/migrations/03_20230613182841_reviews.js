@@ -5,8 +5,8 @@
 exports.up = (knex) =>
   knex.schema.createTable("reviews", (table) => {
     table.increments();
-    table.integer("user_id"); //.references('id').inTable('users').notNullable();
-    table.integer("page_id"); //.references('id').inTable('pages').notNullable();
+    table.integer("user_id").references("id").inTable("users").notNullable();
+    table.integer("page_id").references("id").inTable("pages").notNullable();
     table.string("review_body", 500).notNullable();
     table.integer("rating").notNullable();
     table.timestamps(true, true);

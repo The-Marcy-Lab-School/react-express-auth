@@ -1,20 +1,21 @@
 const knex = require('../knex');
 
 class Reviews {
-    constructor({id, user_id, review_body, rating }){
+    constructor({id, user_id, page_id, review_body, rating }){
         this.id = id;
         this.user_id = user_id;
+        this.page_id = page_id;
         this.review_body = review_body;
         this.rating = rating;
 
     }
-    static async create(user_id, review_body, rating ) {
+    static async create(user_id, page_id,review_body, rating ) {
         try {
     
           const query = `
-          INSERT INTO reviews (user_id, review_body, rating )
-            VALUES (?, ?, ?) RETURNING *`;
-          const { rows: [review] } = await knex.raw(query, [user_id, review_body, rating]);
+          INSERT INTO reviews (user_id, page_id, review_body, rating )
+            VALUES (?, ?, ?, ?) RETURNING *`;
+          const { rows: [review] } = await knex.raw(query, [user_id, page_id,review_body, rating]);
           return new Reviews(review);
         } catch (err) {
           console.error(err);

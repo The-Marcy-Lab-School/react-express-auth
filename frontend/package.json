@@ -10,12 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mui/material": "^5.13.5",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "bulma": "^0.9.4",
     "mdb-react-ui-kit": "^6.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
-    "react-youtube": "^10.1.0"
+    "react-youtube": "^10.1.0",
+    "vue-bulma-rating": "^1.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

@@ -1,10 +1,10 @@
 /**
  * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
+ * @returns { Promise<void> }
  */
-exports.seed = async function(knex) {
+exports.seed = async function (knex) {
   // await knex('reviews').del()
-  await knex('reviews').insert([
+  await knex("reviews").insert([
     {
   user_id: 4,
   page_id: 1,
