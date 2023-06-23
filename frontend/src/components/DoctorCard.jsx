@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import ReviewCard from "./ReviewCard";
 
 
 function DoctorCard ({page}){
