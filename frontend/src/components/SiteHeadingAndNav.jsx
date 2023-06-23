@@ -5,82 +5,59 @@ import DoctorContext from '../contexts/DoctorContext'
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
-  const { doctors, filteredObject, setFilteredObject } = useContext (DoctorContext)
-  const [searchValue, setSearchvValue] = useState('');
-
-console.log(doctors)
-console.log()
-
+  const [searchValue, setSearchValue] = useState('');
 
   const handleSearchValue = (e) => {
-    setSearchvValue(e.target.value)
-    const filtered = doctors.filter((doc) => {
-      const { facility_doctor } = doc;
-      console.log(facility_doctor)
-      return facility_doctor.toLowerCase().includes(searchValue.toLowerCase())
-    })
-    setFilteredObject(filtered)
-  }
-  console.log(searchValue)
-  console.log(filteredObject)
+    setSearchValue(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchValue)
-    setSearchvValue('')
-  }
+    console.log(searchValue);
+    setSearchValue('');
+  };
 
   return (
-    <header>
-      <a id="logo" href="/">
-        Care Companion
-      </a>
-      {currentUser && (
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    <input
-      onSubmit={handleSubmit}
-      type="text"
-      placeholder="Search a Doctor/Facility..."
-      value={searchValue}
-      onChange={handleSearchValue}
-    />
-    <button>Search</button>
-    <img
-      src="magnifying_glass.png" // Replace with the path to your magnifying glass image
-    />
+<nav className="navbar" role="navigation" aria-label="main navigation">
+  <div className="navbar-brand">
+  <a className="navbar-item" href="/">
+      Care Companion
+    </a>
+    <a
+      role="button"
+      className="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
-  // previous search bar {currentUser && <input  onSubmit={handleSubmit} type="text" placeholder="Search a Doctor/Facility..." value={searchValue} onChange={handleSearchValue} />}
-)}
+  <NavLink className="navbar-item" to="/" exact>
+          Mission
+        </NavLink>
 
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/">Mission</NavLink>
-          </li>
-          {/* <li>
-            <NavLink to="/users" end={true}>
-              Users
+    <div className="navbar-end">
+    <div className="navbar-item">
+
+        {currentUser ? (
+          <>
+            <NavLink className="navbar-item" to="/home">
+              <strong>Home</strong>
             </NavLink>
-          </li> */}
-          {currentUser ? (
-            <>
-            <li>
-                <NavLink to="/home">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to={`/users/${currentUser.id}`}>
-                  {currentUser.username}
-                </NavLink>
-              </li>
-              
-            </>
-          ) : (
-            <li>
-              <NavLink to="/signuplogin">Sign Up / Login</NavLink>
-            </li>
-          )}
-        </ul>
-      </nav>
-    </header>
+            <NavLink className="navbar-item" to={`/users/${currentUser.id}`}>
+              {currentUser.username}
+            </NavLink>
+          </>
+        ) : (
+          <NavLink className="navbar-item" to="/signuplogin">
+            <strong>Sign Up / Login</strong>
+          </NavLink>
+        )}
+      </div>
+    </div>
+</nav>
+
   );
 }
