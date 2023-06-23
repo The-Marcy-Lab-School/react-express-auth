@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable func-style */
-import React, { useEffect, useState, useContext } from 'react';
-import CurrentUserContext from '../contexts/current-user-context.js';
+import React, { useEffect, useState, useContext } from "react";
+import CurrentUserContext from "../contexts/current-user-context.js";
 
 // ------------------List of Events ----------------
 function EventList() {
@@ -10,7 +10,7 @@ function EventList() {
   const { updateEventData } = useContext(CurrentUserContext);
 
   const fetchEvents = () => {
-    fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
+    fetch("https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20")
       .then((response) => {
         console.log(response);
         return response.json();
@@ -20,8 +20,8 @@ function EventList() {
         updateEventData(data); // current event thats updated using useCONTEXT
         console.log("DATA:", data);
       })
-    // console.log("DATA:",data)                                                    //GENERAL DATA
-    // console.log("TYPE:",data.events[0].categories[0].title)                  //Type of Hazard Events
+      // console.log("DATA:",data)                                                    //GENERAL DATA
+      // console.log("TYPE:",data.events[0].categories[0].title)                  //Type of Hazard Events
       .catch((error) => console.log(error));
   };
 
@@ -30,13 +30,52 @@ function EventList() {
     updateEventData();
   }, []);
 
+  const latitude2 = 80;
+  const latitude1 = 75;
+  const longtitude2 = 65;
+  const longtitude1 = 64;
+  const convertToMiles = (latitude2, latitude1, longtitude2, longtitude1) => {
+    const math = Math.floor(
+      Math.sqrt(
+        (latitude2 * 69 - latitude1 * 69) * (latitude2 * 69 - latitude1 * 69) +
+          (longtitude2 * 54.6 - longtitude1 * 54.6) *
+            (longtitude2 * 54.6 - longtitude1 * 54.6)
+      )
+    );
+    return math >= 4.5 ? Math.ceil(math) + "miles" : Math.floor(math) + "miles";
+  };
+  //  const latitude = events[0].geometry[0].coordinates[0]
+  //  console.log(latitude)
+  //  const Longitude = eventData[0].geometry[0].coordinates[1]
+
   return (
-    <dl className='eventList'>
+    <dl className="eventList">
       {events.map((event) => (
         <React.Fragment key={event.id}>
-          <li className='eventRow'><a href="#">{event.categories.map((category) => <div key = {category.id}> <div className='date'>{ event.geometry[0].date}</div> <div className='eventType'> {category.title}</div><div className='eventTitle'>{event.title}</div></div>)} </a></li>
+          <li>
+            <a href="#">
+              {event.categories.map((category) => (
+                <div className="eventRow" key={category.id}>
+                  {" "}
+                  <div className="date">{event.geometry[0].date}</div>{" "}
+                  <div className="eventType"> {category.title}</div>
+                  <div className="eventTitle">{event.title}</div>
+                  <div className="distance">
+                    {convertToMiles(
+                      latitude2,
+                      latitude1,
+                      longtitude2,
+                      longtitude1
+                    )}
+                  </div>
+                </div>
+              ))}{" "}
+            </a>
+          </li>
           {event.description && (
-            <dd><em>{event.description}</em></dd>
+            <dd>
+              <em>{event.description}</em>
+            </dd>
           )}
         </React.Fragment>
       ))}
@@ -49,12 +88,14 @@ function LayerList() {
   const [layers, setLayers] = useState([]);
 
   useEffect(() => {
-
+    fetchLayers();
   }, []);
 
   const fetchLayers = () => {
     const eventId = "EONET_182";
-    fetch(`https://eonet.gsfc.nasa.gov/api/v3/events/${eventId}?status=open&limit=5`)
+    fetch(
+      `https://eonet.gsfc.nasa.gov/api/v3/events/${eventId}?status=open&limit=5`
+    )
       .then((response) => response.json())
       .then((event) => {
         const { categories } = event;
@@ -66,7 +107,9 @@ function LayerList() {
 
         Promise.all(fetchLayersPromises)
           .then((layersData) => {
-            const layers = layersData.flatMap((data) => data.categories[0].layers);
+            const layers = layersData.flatMap(
+              (data) => data.categories[0].layers
+            );
             setLayers(layers);
           })
           .catch((error) => console.log(error));
@@ -79,9 +122,11 @@ function LayerList() {
       <div id="eventTitle"></div>
       <dl id="layerList">
         {layers.map((layer) => (
-          <React.Fragment key={layer.id}>
-            <dt>{layer.name}</dt>
-          </React.Fragment>
+          <>
+            <React.Fragment key={layer.id}>
+              <dt>{layer.name}</dt>
+            </React.Fragment>
+          </>
         ))}
       </dl>
     </React.Fragment>
@@ -90,8 +135,8 @@ function LayerList() {
 
 function Event() {
   return (
-  // div className='eventList'>
-     <EventList />
+    // div className='eventList'>
+    <EventList />
   );
 }
 
