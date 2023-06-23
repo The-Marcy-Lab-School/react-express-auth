@@ -1,8 +1,10 @@
+import React from 'react'
 import DoctorCard from "../components/DoctorCard";
 import { useEffect, useState, useContext } from "react";
 import { getAllPages } from "../adapters/page-adapter";
 import { getAllReviews } from "../adapters/review-adapter";
 import { NavLink } from 'react-router-dom';
+
 
 export default function DoctorsList() {
  
@@ -25,6 +27,21 @@ export default function DoctorsList() {
 
   return (
     <>
+   
+    <div className="navbar-start" style={{ flexGrow: 1, justifyContent: 'center' }}>
+    <div className="field is-grouped">
+  <p className="control is-expanded">
+    <input className="input" type="text" placeholder="Search..." />
+  </p>
+  <p className="control">
+    <a className="button is-info">
+      Search
+    </a>
+  </p>
+</div>
+    </div>
+
+
       <h4>
         <NavLink to="/create-post">Can't Find a Doctor? Add One Here</NavLink>
       </h4>

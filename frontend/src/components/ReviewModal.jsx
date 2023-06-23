@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import CurrentUserContext from "../contexts/current-user-context";
 import { createReview } from "../adapters/review-adapter";
+import 'bulma/css/bulma.css';
 
 const ReviewModal = ({id}) => {
   const [showModal, setShowModal] = useState(false);
@@ -11,7 +12,9 @@ const ReviewModal = ({id}) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   
   const handleOpenModal = () => {
+
     setShowModal(true);
+  
   };
 
   const handleCloseModal = () => {
@@ -55,41 +58,60 @@ const ReviewModal = ({id}) => {
       <button onClick={handleOpenModal}>Write A Review</button>
 
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <h2>Write Review</h2>
-            <form onSubmit={handleSubmit} onChange={handleChange}>
-              <div>
-                <label htmlFor="rating">Rating (out of 5):</label>
-                <input
-                  type="number"
-                  id="rating"
-                  min="0"
-                  max="5"
-                  name="rating"
-                  value={rating}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="review_body">Review:</label>
-                <textarea
-                  id="review_body"
-                  name="review_body"
-                  value={review_body}
-                  onChange={handleChange}
-                />
-              </div>
-              <button type="submit">Submit</button>
-            </form>
+        <div className="modal is-active">
+          <div className="modal-background" onClick={handleCloseModal}></div>
+          <div className="modal-card">
+            <header className="modal-card-head">
+              <p className="modal-card-title">Write Review</p>
+              <button
+                className="delete"
+                aria-label="close"
+                onClick={handleCloseModal}
+              ></button>
+            </header>
+            <section className="modal-card-body">
+              <form onSubmit={handleSubmit} onChange={handleChange}>
+                {/* Form fields */}
+                <div>
+          <label htmlFor="rating">Rating (out of 5):</label>
+          <input
+            type="number"
+            id="rating"
+            min="0"
+            max="5"
+            name="rating"
+            value={rating}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="review_body">Review:</label>
+          <textarea
+            id="review_body"
+            name="review_body"
+            value={review_body}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit" className="button is-primary">
+                Submit
+              </button>
+                
+              </form>
+            </section>
+            <footer className="modal-card-foot">
+
+    
+              <button className="button" onClick={handleCloseModal}>
+                Cancel
+              </button>
+            </footer>
           </div>
         </div>
       )}
     </div>
-  );
+  ); 
+   
 };
 
 export default ReviewModal;

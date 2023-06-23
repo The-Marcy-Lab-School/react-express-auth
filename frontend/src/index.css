@@ -1,3 +1,4 @@
+@import 'bulma/css/bulma.css';
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
@@ -95,4 +96,36 @@ form {
   display: flex;
   font-family: 'Times New Roman', Times, serif;
   justify-content: center;
+}
+
+.subtitle {
+  font-size: small;
+}
+.column is-half{
+  justify-content: center;
+}
+.columns{
+  display: flex;
+  align-items: center;
+}
+
+.centered-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.box-text {
+  display: inline-block;
+}
+#review{
+  display: flex;
+  height: 20vh;
+  margin-right: 15vh;
+}
+.subtitle{
+  font-style: italic;
+  bottom: 5vh;
 }
