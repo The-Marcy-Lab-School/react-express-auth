@@ -22,19 +22,19 @@ export default function LoginPage() {
 
   return <>
     <div className="login-page">
-      <h1>Login</h1>
+      <h1 className="form-title">Login</h1>
       <form className='form' onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username" className="username-label">Username</label>
         <input type="text" autoComplete="username" id="username" name="username" />
 
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className="password-label">Password</label>
         <input type="password" autoComplete="current-password" id="password" name="password" />
 
         <button>Log in!</button>
       </form>
       { !!errorText && <p>{errorText}</p> }
-      <p>
-        Don't have an account? <Link to="/sign-up">Sign up!</Link>
+      <p className="form-redirect">
+        Don't have an account? <Link to="/sign-up" className="form-redirect-link">Sign up!</Link>
       </p>
     </div>
   </>;

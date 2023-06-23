@@ -39,9 +39,9 @@ export default function SignUpPage() {
   return (
     <>
       <div className = 'sign-up-page'>
-        <h1>Sign Up</h1>
+        <h1 className="form-title">Sign Up</h1>
         <form onSubmit={handleSubmit} onChange={handleChange}>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username" className="username-label">Username</label>
           <input
             autoComplete="off"
             type="text"
@@ -51,7 +51,7 @@ export default function SignUpPage() {
             value={username}
           />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className="password-label">Password</label>
           <input
             autoComplete="off"
             type="password"
@@ -69,8 +69,8 @@ export default function SignUpPage() {
           <button>Sign Up Now!</button>
         </form>
         {!!errorText && <p>{errorText}</p>}
-        <p>
-          Already have an account with us? <Link to="/login">Log in!</Link>
+        <p className="form-redirect">
+          Already have an account with us? <Link to="/login" className="form-redirect-link">Log in!</Link>
         </p>
       </div>
     </>
