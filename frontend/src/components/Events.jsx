@@ -12,16 +12,14 @@ function EventList() {
 
   const fetchEvents = () => {
     fetch("https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20")
-      .then((response) =>
-        // console.log(response);
-        response.json())
+      .then((response) => response.json())
       .then((data) => {
-        setEvents(data.events);
-        updateEventData(data); // current event thats updated using useCONTEXT
+        const filteredEvents = data.events.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
+
+        setEvents(filteredEvents);
+        updateEventData(data);
         console.log("DATA:", data);
       })
-      // console.log("DATA:",data)                                                    //GENERAL DATA
-      // console.log("TYPE:",data.events[0].categories[0].title)                  //Type of Hazard Events
       .catch((error) => console.log(error));
   };
 
@@ -68,10 +66,8 @@ function EventList() {
     );
     return math >= 4.5 ? `${Math.ceil(math)}miles` : `${Math.floor(math)}miles`;
   };
-  //  const latitude = events[0].geometry[0].coordinates[0]
-  //  console.log(latitude)
-  //  const Longitude = eventData[0].geometry[0].coordinates[1]
-
+  console.log("EVENTS:", events);
+  // console.log(events[2]?.categories[0]?.id);
   return (
     <dl className="eventList">
       <AlertList />
@@ -79,34 +75,34 @@ function EventList() {
         <React.Fragment key={event.id}>
           <li>
             <a href="#">
-              {event.categories.map((category) => (
-                <div className="eventRow" key={category.id}>
-                  {" "}
-                  <div className="date">{event.geometry[0].date}</div>{" "}
-                  <div className="eventType"> {category.title}</div>
-                  <div className="eventTitle">{event.title}</div>
-                  <div className="distance">
-                    {convertToMiles(
-                      latitude2,
-                      latitude1,
-                      longtitude2,
-                      longtitude1,
-                    )}
+              <div className="eventRow">
+                <div className="date">{event.geometry[0].date}</div>
+                {event.categories.map((category) => (
+                  <div className="eventType" key={category.id}>
+                    {category.title}
                   </div>
+                ))}
+                <div className="eventTitle">{event.title}</div>
+                <div className="distance">
+                  {convertToMiles(
+                    latitude2,
+                    latitude1,
+                    longtitude2,
+                    longtitude1,
+                  )}
                 </div>
-              ))}{" "}
+              </div>
+              {event.description && (
+                <dd>
+                  <em>{event.description}</em>
+                </dd>
+              )}
             </a>
           </li>
-          {event.description && (
-            <dd>
-              <em>{event.description}</em>
-            </dd>
-          )}
         </React.Fragment>
       ))}
     </dl>
   );
-
   // return (
   //   <React.Fragment>
   //     <div id=""></div>

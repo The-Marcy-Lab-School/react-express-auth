@@ -21,8 +21,8 @@ const MapComponent = () => {
   const [myLongitude, setLongitude] = useState(null);
 
   const { eventData, userLocation } = useContext(CurrentUserContext); // Data from MapComponent
-  const data = eventData?.events;
-
+  const events = eventData?.events;
+  const data = events.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
   const navigate = useNavigate();
 
   // const [eventLatitude, setEventLatitude] = useState(data[0].geometry[0]?.coordinates[0]); 
@@ -77,7 +77,6 @@ const MapComponent = () => {
         // Handle the click event
         // Fly to a random location
         // console.log("eventRow:", eventRow);
-        console.log(`The latitude is ${data[i].geometry[0]?.coordinates[0]} and the longitude is ${data[i].geometry[0]?.coordinates[1]}`);
         map.flyTo({
           center: [data[i].geometry[0]?.coordinates[0], data[i].geometry[0]?.coordinates[1]],
           essential: true, // this animation is considered essential with respect to prefers-reduced-motion
@@ -173,14 +172,8 @@ const MapComponent = () => {
             popup.remove();
           });
           
-        
-          const handleClick = () => {
-            // Navigate to the "/disaster" page
-          };
-        
-
           el.addEventListener('click', () => (
-            navigate('/disaster')
+            navigate('/disaster')// Navigate to the "/disaster" page
           ));
         });
       }
