@@ -6,11 +6,36 @@ import React, { useEffect, useState, useContext } from "react";
 import CurrentUserContext from '../contexts/current-user-context.js';
 
 function InfoList() {
-    const [events, setEvents] = useState([]);
-    const { eventData, userLocation } = useContext(CurrentUserContext);
-    const data = eventData?.events;
+  const { eventData, userLocation } = useContext(CurrentUserContext); // Data from MapComponent
+  const events = eventData?.events;
+  const data = events.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
 
-    console.log("Current", userLocation)
+//   return (
+//     <dl className="eventList">
+//       {events.map((event) => (
+//         <React.Fragment key={event.id}>
+//           <li>
+//             <a href="#">
+//               <div className="eventRow">
+//                 <div className="date">{event.geometry[0].date}</div>
+//                 {event.categories.map((category) => (
+//                   <div className="eventType" key={category.id}>
+//                     {category.title}
+//                   </div>
+//                 ))}
+//                 <div className="eventTitle">{event.title}</div>
+//               </div>
+//               {event.description && (
+//                 <dd>
+//                   <em>{event.description}</em>
+//                 </dd>
+//               )}
+//             </a>
+//           </li>
+//         </React.Fragment>
+//       ))}
+//     </dl>
+//   );
 }
 
 const Disaster = () => (

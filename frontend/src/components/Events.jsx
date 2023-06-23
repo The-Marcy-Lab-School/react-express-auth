@@ -66,7 +66,7 @@ function EventList() {
     );
     return math >= 4.5 ? `${Math.ceil(math)}miles` : `${Math.floor(math)}miles`;
   };
-  console.log("EVENTS:", events);
+
   // console.log(events[2]?.categories[0]?.id);
   return (
     <dl className="eventList">

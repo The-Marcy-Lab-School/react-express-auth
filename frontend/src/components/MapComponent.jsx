@@ -22,7 +22,7 @@ const MapComponent = () => {
 
   const { eventData, userLocation } = useContext(CurrentUserContext); // Data from MapComponent
   const events = eventData?.events;
-  const data = events.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
+  const data = events?.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
   const navigate = useNavigate();
 
   // const [eventLatitude, setEventLatitude] = useState(data[0].geometry[0]?.coordinates[0]); 
