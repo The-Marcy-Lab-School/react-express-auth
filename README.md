@@ -61,7 +61,7 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
      - **Region**: `US East (Ohio)`
      - **Instance Type**: Free
    - Select <kbd>Create Database</kbd>
-   - Keep the created page open. You will need the `Internal Database URL` value from this page for the next step
+   - Keep the created database page open. You will need the `Internal Database URL` value from this page for step 4
 3. Deploy Your Express Server
    - https://dashboard.render.com/ and click on <kbd>New +</kbd>
    - Select <kbd>Web Service</kbd>
@@ -78,13 +78,12 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
      - **Instance Type**: Free
    - Select <kbd>Create Web Service</kbd> (Note: The first build will fail because you need to set up environment variables)
 4. Set up environment variables
-
    - From the Web Service you just created, select <kbd>Environment</kbd> on the left side-menu
    - Under Secret Files, select <kbd>Add Secret File</kbd>
      - **Filename**: `.env`
      - **Contents**:
-       - Look at your local `.env` file and copy over the `SESSION_SECRET` value.
-       - Add a `PG_CONNECTION_STRING` variable with the `Internal Database URL` value from your Postgres page (created in step 2)
+       - Look at your local `.env` file and copy over the `SESSION_SECRET` variable and value.
+       - Add a `PG_CONNECTION_STRING` variable. Its value should be the `Internal Database URL` value from your Postgres page (created in step 2)
    - Click <kbd>Save Changes</kbd>
 
 5. Future changes to your code
