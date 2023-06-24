@@ -5,6 +5,7 @@ import ReviewCard from '../components/ReviewCard';
 
 export default function DoctorReview() {
   let { id } = useParams();
+ 
 
   // Access the location state to get the page and reviews
   const { state } = useLocation();
@@ -15,9 +16,9 @@ export default function DoctorReview() {
 
   return (
     <>
-      <article>
+      <article className='doctorReview'>
         <div className="imgandspecialty">
-          <img src={page.photo} alt="Doctor Picture" className="personImg" />
+          <img src={page.photo} alt="Doctor Picture" id="personImg" />
           <h3 className="specialty">{page.specialty}</h3>
           <h4 className="location">{page.address}</h4>
         </div>

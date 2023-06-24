@@ -3,8 +3,6 @@ import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
 
-// Controlling the signup form is a good idea because we want to adde (eventually)
-// more validation and provide real time feedback to the user about usernames and passwords
 export default function SignUpPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
@@ -18,10 +16,6 @@ export default function SignUpPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-
-  // We could also use a single state variable for the form data:
-  // const [formData, setFormData] = useState({ username: '', password: '' });
-  // What would be the pros and cons of that?
 
   if (currentUser) return <Navigate to="/" />;
 
@@ -38,7 +32,6 @@ export default function SignUpPage() {
   };
 
   const handleChange = (event) => {
-    // console.log(event)
     const { name, value } = event.target;
     if (name === 'first_name') setFirstName(value);
     if (name === 'last_name') setLastName(value);
@@ -49,8 +42,6 @@ export default function SignUpPage() {
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
     if (name === 'email') setEmail(value);
-    console.log(value);
-
   };
   //  console.log(handleChange(e))
   return (
@@ -249,7 +240,6 @@ export default function SignUpPage() {
     </>
   );
 }
-
 /* 
 In reality, we'd want a LOT more validation on signup, so add more things if you have time
   <label htmlFor="password-confirm">Password Confirm</label>

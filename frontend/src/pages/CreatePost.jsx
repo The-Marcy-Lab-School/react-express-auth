@@ -16,7 +16,7 @@ export default function CreatePost() {
   const [address, setAddress] = useState('');
   const [is_facility, setFacility] = useState(false);
   const [is_doctor, setDoctor] = useState(false);
-  const [photo, setPhoto] = useState('');
+  const [photo, setPhoto] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function CreatePost() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorText('');
+    setErrorText("");
 
     const user_id = loggedIn.id;
     const [user, error] = await createPost({
@@ -38,7 +38,7 @@ export default function CreatePost() {
       address,
       is_facility,
       is_doctor,
-      photo
+      photo,
     });
 
     if (error) {
@@ -50,23 +50,23 @@ export default function CreatePost() {
   };
 
   const handleChange = (event) => {
-    // ... your existing code for handling form changes
     const { name, value, type, checked } = event.target;
 
-    if (type === 'checkbox') {
-      if (name === 'is_facility') {
-        setFacility(checked);
-      }
-      if (name === 'is_doctor') {
-        setDoctor(checked);
-      }
-    } else {
-      if (name === 'facility_doctor') setFacility_doctor(value);
-      if (name === 'specialty') setSpecialty(value);
-      if (name === 'description') setDesciption(value);
-      if (name === 'address') setAddress(value);
-      if (name === 'photo') setPhoto(value);
-    }
+if (type === 'checkbox') {
+  if (name === 'is_facility') {
+    setFacility(checked);
+  }
+  if (name === 'is_doctor') {
+    setDoctor(checked);
+  }
+} else {
+  if (name === 'facility_doctor') setFacility_doctor(value);
+  if (name === 'specialty') setSpecialty(value);
+  if (name === 'description') setDesciption(value);
+  if (name === 'address') setAddress(value);
+
+  if (name === 'photo') setPhoto(value);
+}
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function CreatePost() {
       setAddress('');
       setFacility(false);
       setDoctor(false);
-      setPhoto('');
+      setPhoto("");
     }
   }, [formSubmitted]);
 
@@ -85,7 +85,7 @@ export default function CreatePost() {
     return <Navigate to="/home" />;
   }
 
-  return (
+return (
     <>
       <div id="createpost-container">
         <div className="container createpost-text">
@@ -102,10 +102,11 @@ export default function CreatePost() {
             <div className="control">
               <input
                 autoComplete="off"
+                className="input"
                 type="text"
                 id="facility_doctor"
                 name="facility_doctor"
-                className="input"
+                value={facility_doctor}
                 onChange={handleChange}
               />
             </div>
@@ -118,10 +119,11 @@ export default function CreatePost() {
             <div className="control">
               <input
                 autoComplete="off"
+                className="input"
                 type="text"
                 id="specialty"
                 name="specialty"
-                className="input"
+                value={facility_doctor}
                 onChange={handleChange}
               />
             </div>
@@ -134,10 +136,11 @@ export default function CreatePost() {
             <div className="control">
               <input
                 autoComplete="off"
+                className="input"
                 type="text"
                 id="description"
                 name="description"
-                className="input"
+                value={description}
                 onChange={handleChange}
               />
             </div>
@@ -150,20 +153,28 @@ export default function CreatePost() {
             <div className="control">
               <input
                 autoComplete="off"
+                className="input"
                 type="text"
                 id="address"
                 name="address"
-                className="input"
+                value={overall_rating}
                 onChange={handleChange}
               />
             </div>
           </div>
 
+
           <div className="field">
             <div className="control checkbox-field">
               <label htmlFor="is_facility" className="checkbox">
                 Is this a Facility?
-                <input type="checkbox" id="is_facility" name="is_facility" onChange={handleChange} />
+                <input
+                type="checkbox"
+                id="is_facility"
+                name="is_facility"
+                checked={is_facility}
+                onChange={handleChange}
+              />
               </label>
             </div>
           </div>
@@ -172,7 +183,13 @@ export default function CreatePost() {
             <div className="control checkbox-field">
               <label htmlFor="is_doctor" className="checkbox">
                 Is this a Doctor?
-                <input type="checkbox" id="is_doctor" name="is_doctor" onChange={handleChange} />
+                <input
+                type="checkbox"
+                id="is_doctor"
+                name="is_doctor"
+                checked={is_doctor}
+                onChange={handleChange}
+              />
               </label>
             </div>
           </div>
