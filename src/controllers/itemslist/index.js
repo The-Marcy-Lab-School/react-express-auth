@@ -2,6 +2,7 @@ const create = require('./create');
 const update = require('./update');
 const list = require('./list');
 const destroy = require('./destroy');
+const deleteItem = require('./deleteItem');
 
 
 module.exports = {
@@ -9,4 +10,5 @@ module.exports = {
     update,
     list,
     destroy,
+    deleteItem,
 };

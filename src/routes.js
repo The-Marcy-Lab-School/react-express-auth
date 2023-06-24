@@ -32,6 +32,8 @@ Router.patch('/grocerylist/:id',groceryController.update );
 Router.post('/itemslist', itemsController.create);
 Router.get('/itemslist', itemsController.list);
 Router.delete('/itemslist/:id', itemsController.destroy);
+Router.delete('/itemslist/:id',itemsController.deleteItem);// deletes one specific item
 Router.patch('/itemslist/:id',itemsController.update );
+
 
 module.exports = Router;
