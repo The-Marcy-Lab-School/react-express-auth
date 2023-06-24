@@ -145,9 +145,9 @@ WHERE grocery_list_id = ?
       //   return deleted
       // }
       //deleting/removing an item from list
-         deleteRate = async (nova_rate, nutri_score) => {
+         deleteRate = async (list_name,nova_rate, nutri_score) => {
         const deletedRate = await knex('grocery_list')
-          .where({ nova_rate, nutri_score })
+          .where({ list_name,nova_rate, nutri_score })
           .del();
         
         return deletedRate > 0 ? "Rates deleted successfully." : "No rates deleted.";
