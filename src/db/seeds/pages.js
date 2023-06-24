@@ -12,7 +12,6 @@ exports.seed = async function (knex) {
       description:
         "Dr. Enrique Hernandez specializes in Gynecologic Oncology, with a special focus on Gynecologic Cancers, Cervical Cancer and Gestational Trophoblastic Disease.",
       address: "123 Main St, New York, NY",
-      overall_rating: 4,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -25,7 +24,6 @@ exports.seed = async function (knex) {
       description:
         "I strive to individualize the care I provide to each patients specific needs. I believe the relationships and rapport I develop with my patients is second to none.",
       address: "456 Elm St, New York, NY",
-      overall_rating: 3,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -38,7 +36,6 @@ exports.seed = async function (knex) {
       description:
         "As a Family Practice physician, I strive to promote preventive care with my patients. With todays technology, we have the opportunity to prevent so many diseases. Educating my patients in these areas is a top priority.",
       address: "789 Oak St, New York, NY",
-      overall_rating: 5,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -51,7 +48,6 @@ exports.seed = async function (knex) {
       description:
         "My goal is to offer patient oriented medical care that is tailored to each individual’s needs and medical conditions based on best practice guidelines.",
       address: "321 Maple Ave, New York, NY",
-      overall_rating: 2,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -64,7 +60,6 @@ exports.seed = async function (knex) {
       description:
         "Excellent digestive care is fundamental to good health, and Gastro Health takes pride in improving our patients quality of life.",
       address: "654 Pine St, New York, NY",
-      overall_rating: 4,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -76,7 +71,6 @@ exports.seed = async function (knex) {
     //   specialty: "Internal Medicine",
     //   description: "Dr. Khan is passionate about Internal Medicine and working closely with her patients across the Tyrone-area to help them achieve their optimal health. She went to Loyola University in Chicago, IL, and completed her doctoral training at St. George’s University School Of Medicine in True Blue, Grenada.",
     //   address: "987 Walnut St, New York, NY",
-    //   overall_rating: 5,
     //   is_facility: false,
     //   is_doctor: true,
     //   photo: "https://www.peachtreemedicalcenter.com/wp-content/uploads/2016/08/Dr-Zia-Khan-200x200.jpg"
@@ -88,7 +82,6 @@ exports.seed = async function (knex) {
       description:
         "Specialist in the diagnosis and treatment of neurological disorders.",
       address: "543 Cedar St, New York, NY",
-      overall_rating: 3,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -101,7 +94,6 @@ exports.seed = async function (knex) {
       description:
         "Dr. Khan is passionate about Internal Medicine and working closely with her patients across the Tyrone-area to help them achieve their optimal health. She went to Loyola University in Chicago, IL, and completed her doctoral training at St. George’s University School Of Medicine in True Blue, Grenada.",
       address: "987 Walnut St, New York, NY",
-      overall_rating: 4,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -114,7 +106,6 @@ exports.seed = async function (knex) {
       description:
         "Expert urologist specializing in the urinary system and male reproductive organs.",
       address: "789 Pine St, New York, NY",
-      overall_rating: 3,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -127,7 +118,6 @@ exports.seed = async function (knex) {
       description:
         "Dr. Bhuvanesh Singh specializes in Otolaryngology, with a special focus on Head & Neck Cancer & Surgery and Thyroid Cancer & Surgery",
       address: "16 E 60th St Fl 4 New York, NY 10022",
-      overall_rating: 4,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -140,7 +130,6 @@ exports.seed = async function (knex) {
       description:
         "Psychiatrist providing compassionate care for mental health conditions.",
       address: "123 Cedar St, New York, NY",
-      overall_rating: 3,
       is_facility: false,
       is_doctor: true,
       photo:
@@ -153,7 +142,6 @@ exports.seed = async function (knex) {
       description:
         "CityMD is the largest provider of urgent cares in New York and New Jersey",
       address: "5024 5th Ave, Brooklyn, NY ",
-      overall_rating: 2,
       is_facility: true,
       is_doctor: false,
       photo:
@@ -168,7 +156,6 @@ exports.seed = async function (knex) {
       description:
         "A full-service, 450-bed academic teaching hospital in the Sunset Park neighborhood of Brooklyn",
       address: "150 55th St, Brooklyn, NY",
-      overall_rating: 4,
       is_facility: true,
       is_doctor: false,
       photo:
@@ -181,7 +168,6 @@ exports.seed = async function (knex) {
       specialty: "Hospital",
       description: "Public teaching hospital located in the Coney Island neighborhood of Brooklyn",
       address: "2601 Ocean Pkwy, Brooklyn, NY 11235",
-      overall_rating: 4,
       is_facility: true,
       is_doctor: false,
       photo:
@@ -193,7 +179,6 @@ exports.seed = async function (knex) {
       specialty: "Doctor's Office ",
       description: "Family Medicine",
       address: "822 54th St, Brooklyn, NY 11220",
-      overall_rating: 2,
       is_facility: true,
       is_doctor: false,
       photo:
@@ -205,7 +190,6 @@ exports.seed = async function (knex) {
       specialty: "Doctor's Office ",
       description: "Family Care Medical Clinic",
       address: "4620 3rd Ave, Brooklyn, NY 11220",
-      overall_rating: 3,
       is_facility: true,
       is_doctor: false,
       photo:
@@ -217,7 +201,6 @@ exports.seed = async function (knex) {
     specialty: "Hospital ",
     description: " non-profit, non-sectarian hospital located in Borough Park, in the New York City borough of Brooklyn, in the U.S. state of New York",
     address: "4802 10th Ave, Brooklyn, NY 11219",
-    overall_rating: 5,
     is_facility: true,
     is_doctor: false,
     photo:
@@ -229,7 +212,6 @@ exports.seed = async function (knex) {
     specialty: "Hospital ",
     description: " Largest ambulatory care facility in Brooklyn ",
     address: "515 6th St, Brooklyn, NY 11215",
-    overall_rating: 1,
     is_facility: true,
     is_doctor: false,
     photo:
@@ -241,7 +223,6 @@ exports.seed = async function (knex) {
     specialty: "Hospital ",
     description: "Full-service community teaching hospital",
     address: "121 Dekalb Ave, Brooklyn, NY 11201",
-    overall_rating: 4,
     is_facility: true,
     is_doctor: false,
     photo:
@@ -253,7 +234,6 @@ exports.seed = async function (knex) {
     specialty: "Hospital",
     description: "Owned and operated by NYC Health + Hospitals, a municipal agency that runs New York City's public hospitals. ",
     address: "451 Clarkson Ave, Brooklyn, NY 11203",
-    overall_rating: 4,
     is_facility: true,
     is_doctor: false,
     photo:
@@ -266,7 +246,6 @@ exports.seed = async function (knex) {
     specialty: "Hospital",
     description: " Family Care Hospital in NewYork-Presbyterian Brooklyn Methodist Hospital",
     address: " 506 6th St, Brooklyn, NY 11215",
-    overall_rating: 4,
     is_facility: true,
     is_doctor: false,
     photo:

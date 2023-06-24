@@ -20,17 +20,55 @@ export default function LoginPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  return <>
-    <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username</label>
-      <input type="text" autoComplete="username" id="username" name="username" />
+  return (
+    <>
+      <div id="login-component">
+        <div id="login-content">
+          <div id="login-text">
+            <h1>Log In to your account!</h1>
+          </div>
+          <form id="loginform" onSubmit={handleSubmit}>
+            <div className="field">
+              <label htmlFor="username" className="label">
+                Username
+              </label>
+              <div className="control">
+                <input
+                  type="text"
+                  autoComplete="username"
+                  id="username"
+                  name="username"
+                  className="input"
+                />
+              </div>
+            </div>
 
-      <label htmlFor="password">Password</label>
-      <input type="password" autoComplete="current-password" id="password" name="password" />
+            <div className="field">
+              <label htmlFor="password" className="label">
+                Password
+              </label>
+              <div className="control">
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  id="password"
+                  name="password"
+                  className="input"
+                />
+              </div>
+            </div>
 
-      <button>Log in!</button>
-    </form>
-    { !!errorText && <p>{errorText}</p> }
-  </>;
+            <div className="field">
+              <div id="login-button" className="control">
+                <button type="submit" className="button is-link log_in">
+                  Log in!
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        {!!errorText && <p>{errorText}</p>}
+      </div>
+    </>
+  );
 }

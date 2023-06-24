@@ -7,7 +7,6 @@ const createPages = async (req, res) => {
       specialty,
       description,
       address,
-      overall_rating,
       is_facility,
       is_doctor,
       photo,
@@ -21,7 +20,6 @@ const createPages = async (req, res) => {
     specialty,
     description,
     address,
-    overall_rating,
     is_facility,
     is_doctor,
     photo

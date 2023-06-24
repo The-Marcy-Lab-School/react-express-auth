@@ -24,7 +24,7 @@ export default function DoctorReview() {
 
         <div>
           <h2 className="name">{page.facility_doctor}</h2>
-          <div className="overallrating">{page.overall_rating}</div>
+          <div className="overallrating">{5}</div>
         </div>
 
         <div>

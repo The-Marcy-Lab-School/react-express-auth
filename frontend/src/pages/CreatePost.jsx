@@ -14,7 +14,6 @@ export default function CreatePost() {
   const [specialty, setSpecialty] = useState('');
   const [description, setDesciption] = useState('');
   const [address, setAddress] = useState('');
-  const [overall_rating, setOverall_rating] = useState(0);
   const [is_facility, setFacility] = useState(false);
   const [is_doctor, setDoctor] = useState(false);
   const [photo, setPhoto] = useState('');
@@ -37,7 +36,6 @@ export default function CreatePost() {
       specialty,
       description,
       address,
-      overall_rating,
       is_facility,
       is_doctor,
       photo
@@ -55,21 +53,20 @@ export default function CreatePost() {
     // ... your existing code for handling form changes
     const { name, value, type, checked } = event.target;
 
-if (type === 'checkbox') {
-  if (name === 'is_facility') {
-    setFacility(checked);
-  }
-  if (name === 'is_doctor') {
-    setDoctor(checked);
-  }
-} else {
-  if (name === 'facility_doctor') setFacility_doctor(value);
-  if (name === 'specialty') setSpecialty(value);
-  if (name === 'description') setDesciption(value);
-  if (name === 'address') setAddress(value);
-  if (name === 'overall_rating') setOverall_rating(value);
-  if (name === 'photo') setPhoto(value);
-}
+    if (type === 'checkbox') {
+      if (name === 'is_facility') {
+        setFacility(checked);
+      }
+      if (name === 'is_doctor') {
+        setDoctor(checked);
+      }
+    } else {
+      if (name === 'facility_doctor') setFacility_doctor(value);
+      if (name === 'specialty') setSpecialty(value);
+      if (name === 'description') setDesciption(value);
+      if (name === 'address') setAddress(value);
+      if (name === 'photo') setPhoto(value);
+    }
   };
 
   useEffect(() => {
@@ -78,7 +75,6 @@ if (type === 'checkbox') {
       setSpecialty('');
       setDesciption('');
       setAddress('');
-      setOverall_rating(0);
       setFacility(false);
       setDoctor(false);
       setPhoto('');
@@ -91,74 +87,114 @@ if (type === 'checkbox') {
 
   return (
     <>
-      <div>
-        <h4>Cant find your Health care professional or facility? Fill out the following form to be able to Create that doctor or facility for later use. </h4>
+      <div id="createpost-container">
+        <div className="container createpost-text">
+          <h4 className="subtitle createpost-text-details">
+            Can't find your Health care professional or facility? Fill out the following form to be able to Create that
+            doctor or facility for later use.
+          </h4>
+        </div>
+        <form className="container createpost-form" onSubmit={handleSubmit} onChange={handleChange}>
+          <div className="field">
+            <label htmlFor="facility_doctor" className="label">
+              Name
+            </label>
+            <div className="control">
+              <input
+                autoComplete="off"
+                type="text"
+                id="facility_doctor"
+                name="facility_doctor"
+                className="input"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <label htmlFor="specialty" className="label">
+              Specialty
+            </label>
+            <div className="control">
+              <input
+                autoComplete="off"
+                type="text"
+                id="specialty"
+                name="specialty"
+                className="input"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <label htmlFor="description" className="label">
+              Description
+            </label>
+            <div className="control">
+              <input
+                autoComplete="off"
+                type="text"
+                id="description"
+                name="description"
+                className="input"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <label htmlFor="address" className="label">
+              Address
+            </label>
+            <div className="control">
+              <input
+                autoComplete="off"
+                type="text"
+                id="address"
+                name="address"
+                className="input"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <div className="control checkbox-field">
+              <label htmlFor="is_facility" className="checkbox">
+                Is this a Facility?
+                <input type="checkbox" id="is_facility" name="is_facility" onChange={handleChange} />
+              </label>
+            </div>
+          </div>
+
+          <div className="field">
+            <div className="control checkbox-field">
+              <label htmlFor="is_doctor" className="checkbox">
+                Is this a Doctor?
+                <input type="checkbox" id="is_doctor" name="is_doctor" onChange={handleChange} />
+              </label>
+            </div>
+          </div>
+
+          <div className="field">
+            <label htmlFor="photo" className="label">
+              Upload Photo
+            </label>
+            <div className="control">
+              <input type="text" id="photo" name="photo" className="input" onChange={handleChange} />
+            </div>
+          </div>
+
+          <div className="field createpost-submit-button">
+            <div className="control">
+              <button type="submit" className="button is-link">
+                Create Now!
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-      <form onSubmit={handleSubmit} onChange={handleChange}>
-        <label htmlFor="facility_doctor">Name</label>
-        <input
-          autoComplete="off"
-          type="text"
-          id="facility_doctor"
-          name="facility_doctor"
-          onChange={handleChange}
-          value={facility_doctor}
-        />
-
-        <label htmlFor="specialty">Specialty</label>
-        <input
-          autoComplete="off"
-          type="text"
-          id="specialty"
-          name="specialty"
-          onChange={handleChange}
-          value={specialty}
-        />
-
-        <label htmlFor="description">Description</label>
-        <input
-          autoComplete="off"
-          type="text"
-          id="description"
-          name="description"
-          onChange={handleChange}
-          value={description}
-        />
-
-        <label htmlFor="address">Address</label>
-        <input
-          autoComplete="off"
-          type="text"
-          id="address"
-          name="address"
-          onChange={handleChange}
-          value={address}
-        />
-        <label htmlFor="overall_rating">Give the Doctor or Facility a over all rating</label>
-        <input
-          autoComplete="off"
-          type="number"
-          min={1}
-          max={5}
-          id="overall_rating"
-          name="overall_rating"
-          onChange={handleChange}
-          value={overall_rating}
-        />
-
-
-        <label htmlFor="is_facility">Is this a Facility?</label>
-        <input type="checkbox" id="is_facility" name="is_facility" onChange={handleChange} />
-
-        <label htmlFor="is_doctor">Is this a Doctor?</label>
-        <input type="checkbox" id="is_doctor" name="is_doctor" onChange={handleChange} />
-
-        <label htmlFor="photo">Upload Photo</label>
-        <input type="text" id="photo" name="photo" onChange={handleChange}></input>
-
-
-        <button>Create Now!</button>
-      </form>
     </>
   );
 }
