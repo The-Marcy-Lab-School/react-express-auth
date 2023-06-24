@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
+// import DoctorContext from '../contexts/DoctorContext'
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
