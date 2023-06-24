@@ -5,10 +5,7 @@ const update = require('./update');
 const destroy = require('./destroy');
 const listItems = require('./listItems');
 const createItems = require('./createItem');
-
-// const login = require('./login');
-// const logout = require('./logout');
-// const showMe = require('./show-me');
+const deleteItem = require('./deleteItem')
 
 module.exports = {
   list,
@@ -18,7 +15,7 @@ module.exports = {
   update,
   listItems,
   destroy,
-
+deleteItem
   // login,
   // logout,
   // showMe,
