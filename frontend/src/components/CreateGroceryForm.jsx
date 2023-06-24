@@ -1,13 +1,16 @@
 import { useContext, useState } from 'react';
 import { fetchHandler } from '../utils';
 import CurrentUserContext from '../contexts/current-user-context';
+import ProductContext from '../contexts/ProductContext';
 
 export default function CreateGroceryForm() {
     const [ inputValue, setInputValue ] = useState("");
     const { currentUser } = useContext(CurrentUserContext);
+    const { setAddButton } = useContext(ProductContext);
 
     const handleCreate = async(e) => {
         e.preventDefault();
+        setAddButton(true);
         try{
             const res = await fetchHandler(`/api/grocerylist/${currentUser.id}`,{
                 method: "POST",

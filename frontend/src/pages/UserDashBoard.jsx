@@ -17,7 +17,7 @@ export default function UserPage() {
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   const [lists, setList] = useState([]);
-  const {removeButton, setRemoveButton} = useContext(ProductContext);
+  const {removeButton, setRemoveButton, addButton, setAddButton} = useContext(ProductContext);
 
 
   const loadUser = async () => {
@@ -47,6 +47,9 @@ export default function UserPage() {
       setRemoveButton(false);
       console.log("render")
     }
+    if(addButton){
+      setAddButton(false);
+    }
     const loadInfoUser = async () => {
       try {
         await loadUser();
@@ -57,7 +60,7 @@ export default function UserPage() {
       }
     };
     loadInfoUser();
-  }, [id, removeButton]);
+  }, [id, removeButton, addButton]);
   // id
 
   const handleLogout = async () => {
