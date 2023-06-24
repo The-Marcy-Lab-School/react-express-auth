@@ -1,35 +1,41 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchHandler } from "../utils";
-
+import { useContext } from "react";
+import ProductContext from "../contexts/ProductContext";
 export default function GroceryCard({ grocery }) {
   const dateTime = new Date(grocery.created_at);
   const formattedDate = dateTime.toLocaleDateString();
   const formattedTime = dateTime.toLocaleTimeString();
   const navigate = useNavigate();
   const { id } = useParams();
-
-  console.log(grocery);
+  const { setRemoveButton } = useContext(ProductContext)
 
   const handleRemoveGroceryList = async() => {
-    console.log("click")
-    try{
-      const res = await fetchHandler(`/api/grocerylist/${grocery.grocery_list_id}`,{
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        },
-      });
-    }catch(err){
+    setRemoveButton(true);
+    try {
+      const res = await fetchHandler(
+        `/api/grocerylist/${grocery.grocery_list_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (err) {
       console.log(err);
       return null;
     }
-  }
+  };
+
+  console.log(grocery);
+
   // console.log(user.id);
   return (
     <>
       <div className="ui card">
-        <div 
-        className="ui card"
+        <div
+          className="ui card"
           onClick={() => {
             navigate(`/users/${id}/grocerylist/${grocery.grocery_list_id}`);
           }}
@@ -62,7 +68,9 @@ export default function GroceryCard({ grocery }) {
             </div>
           </div>
         </div>
-        <button className="ui button fluid" onClick={handleRemoveGroceryList}>Remove</button>
+        <button className="ui button fluid" onClick={handleRemoveGroceryList}>
+          Remove
+        </button>
       </div>
     </>
   );

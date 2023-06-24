@@ -54,6 +54,7 @@ export default function Item() {
       });
     } catch (err) {
       console.log(err);
+      return null;
     }
 
     // Perform any desired action based on the selected value

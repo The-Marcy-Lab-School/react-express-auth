@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
+import ProductContext from "../contexts/ProductContext";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
 import GroceryCard from "../components/GroceryCard";
+import CreateGroceryForm from "../components/CreateGroceryForm";
 import { fetchHandler } from "../utils";
 
 export default function UserPage() {
@@ -14,8 +16,9 @@ export default function UserPage() {
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
-
   const [lists, setList] = useState([]);
+  const {removeButton, setRemoveButton} = useContext(ProductContext);
+
 
   const loadUser = async () => {
     const [user, error] = await getUser(id);
@@ -40,6 +43,10 @@ export default function UserPage() {
   };
 
   useEffect(() => {
+    if(removeButton){
+      setRemoveButton(false);
+      console.log("render")
+    }
     const loadInfoUser = async () => {
       try {
         await loadUser();
@@ -50,7 +57,8 @@ export default function UserPage() {
       }
     };
     loadInfoUser();
-  }, [id]);
+  }, [id, removeButton]);
+  // id
 
   const handleLogout = async () => {
     logUserOut();
@@ -84,11 +92,16 @@ export default function UserPage() {
           setCurrentUser={setCurrentUser}
         />
       )}
+      <CreateGroceryForm/>
 
       <div className="ui centered cards">
         {lists.map((list) => {
           return (
-            <GroceryCard key={list.id} grocery={list} onClick={() => navigate(`/grocerylist/${list.id}`)}/>
+                <GroceryCard
+                  key={list.id}
+                  grocery={list}
+                  onClick={() => navigate(`/grocerylist/${list.id}`)}
+                />
             //add onClick and add a fetch to get the groceryid and fetch it
           );
         })}
