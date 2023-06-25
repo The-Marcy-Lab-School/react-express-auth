@@ -154,7 +154,7 @@ WHERE grocery_list_id = ?
       };
       static async deleteItem(groceryListId, itemId) {
         // Delete the item from the grocery_items_table
-        const deletedRows = await knex('grocery_items_table')
+        const deletedRows = await knex('grocery_items_table', 'items')
           .where({
             grocery_list_id: groceryListId,
             item_id: itemId
