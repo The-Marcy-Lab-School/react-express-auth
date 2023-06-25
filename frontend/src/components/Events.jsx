@@ -9,7 +9,6 @@ import CurrentUserContext from "../contexts/current-user-context.js";
 function EventList() {
   const [events, setEvents] = useState([]);
   const { updateEventData, userLocation } = useContext(CurrentUserContext);
-
   const fetchEvents = () => {
     fetch("https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20")
       .then((response) => response.json())
@@ -42,7 +41,7 @@ function EventList() {
           response.json())
         .then((data) => {
           setAlert(data.events);
-          console.log("ALERT DATA:", data);
+          console.log("ALERT DATA:", alert);
         })
         .catch((error) => console.log(error));
     };
@@ -85,6 +84,7 @@ function EventList() {
                 <div className="eventTitle">{event.title}</div>
                 <div className="distance">
                   {convertToMiles(
+                    console.log("events:", event.id),
                     latitude2,
                     latitude1,
                     longtitude2,
