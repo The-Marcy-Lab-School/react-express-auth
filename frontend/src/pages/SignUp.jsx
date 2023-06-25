@@ -36,7 +36,7 @@ export default function SignUpPage() {
   };
 
   return <>
-    <h1>Sign Up</h1>
+    <h1></h1>
     <form onSubmit={handleSubmit} onChange={handleChange}>
       <label htmlFor="username">Username</label>
       <input
@@ -66,6 +66,5 @@ export default function SignUpPage() {
       <button>Sign Up Now!</button>
     </form>
     { !!errorText && <p>{errorText}</p> }
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
   </>;
 }
