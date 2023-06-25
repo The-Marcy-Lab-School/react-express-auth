@@ -1,6 +1,6 @@
 :root {
-  --clr-dark: #1e1e1e;
-  --clr-light: #d9d9d9;
+  --clr-dark: black;
+  --clr-light: white;
   --clr-grey: #896a67;
   --clr-orange: #ec4e20;
   --clr-green: #00ff00;
@@ -167,6 +167,10 @@ body {
 
 .form-redirect-link{
   color: #a577ee;
+}
+
+.list-title{
+  color: #d9daec;
 }
 
 @media (prefers-color-scheme: light) {
