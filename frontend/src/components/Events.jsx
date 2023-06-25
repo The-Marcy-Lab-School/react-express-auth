@@ -3,6 +3,8 @@
 /* eslint-disable func-style */
 import React, { useEffect, useState, useContext } from 'react';
 import CurrentUserContext from '../contexts/current-user-context.js';
+import { apiFetchHandler } from '../utils'
+
 
 // ------------------List of Events ----------------
 function EventList() {
@@ -12,7 +14,6 @@ function EventList() {
   const fetchEvents = () => {
     fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((data) => {
@@ -25,8 +26,14 @@ function EventList() {
       .catch((error) => console.log(error));
   };
 
+  const fetchProcessed = async () => {
+    const data = await apiFetchHandler('/api/events')
+    console.log(data)
+  }
+
   useEffect(() => {
     fetchEvents();
+    fetchProcessed();
     updateEventData();
   }, []);
 
