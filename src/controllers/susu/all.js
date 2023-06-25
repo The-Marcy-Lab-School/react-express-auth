@@ -1,7 +1,5 @@
 const AllSusu= async (req, res) => {
     const {
-      // session : { userId },
-    //   Params: { user_id },
       db: { Susu },
     } = req;
     const susu = await Susu.all();

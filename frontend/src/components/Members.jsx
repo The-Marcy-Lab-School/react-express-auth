@@ -27,14 +27,6 @@ export default function SusuMembers({ user, owner }) {
 
     return (
      <FormControlLabel  control={<Checkbox className="susu-member" onClick={() => setChecked(!isChecked)}/>} label={`${user.username}`} disabled={owner} checked={isChecked}/>
-     
-     // <label>
-     //    <span className = "name">{`${user.username}`}</span>
-     //    <input type="checkbox" disabled={owner} checked={user.make_payments} />
-     //  </label>
-//     <>
-//          {users.username} {users.make_payments = true ? '[]' : '[X]]'};
-//     </>
   )}
 
   

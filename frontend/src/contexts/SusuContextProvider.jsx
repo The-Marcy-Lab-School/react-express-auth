@@ -21,7 +21,8 @@ export default function CurrentSusuContextProvider({ children }) {
     }
     handleFetch()
     },[])
-// console.log(context.CurrentSusulist)
+
+    
   return (
     <CurrentSusuContext.Provider value={ context }>
       {children}
