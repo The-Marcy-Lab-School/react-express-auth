@@ -51,7 +51,6 @@ export default function UsersPage() {
       body: JSON.stringify({ friendId }),
     });
     if (error) return console.log(error);
-    console.log(data);
   };
 
   return (

@@ -3,12 +3,14 @@
 /* eslint-disable func-style */
 import React, { useEffect, useState, useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context.js";
-
+import "./Modal.css";
+import CommentModal from "./CommentModal.jsx";
 // ------------------List of Events ----------------
 function EventList() {
   const [events, setEvents] = useState([]);
   const { updateEventData } = useContext(CurrentUserContext);
-
+  const [modal, setModal] = useState(false);
+  console.log("events:" + events);
   const fetchEvents = () => {
     fetch("https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20")
       .then((response) => {
@@ -44,6 +46,9 @@ function EventList() {
     );
     return math >= 4.5 ? Math.ceil(math) + "miles" : Math.floor(math) + "miles";
   };
+  const toggleModal = () => {
+    setModal(!modal);
+  };
   //  const latitude = events[0].geometry[0].coordinates[0]
   //  console.log(latitude)
   //  const Longitude = eventData[0].geometry[0].coordinates[1]
@@ -54,6 +59,16 @@ function EventList() {
         <React.Fragment key={event.id}>
           <li>
             <a href="#">
+              {modal && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <CommentModal userId={event} />
+                    <button onClick={toggleModal} className="close-modal">
+                      ClOSE
+                    </button>
+                  </div>
+                </div>
+              )}
               {event.categories.map((category) => (
                 <div className="eventRow" key={category.id}>
                   {" "}
@@ -68,6 +83,9 @@ function EventList() {
                       longtitude1
                     )}
                   </div>
+                  <button className="btn-modal" onClick={toggleModal}>
+                    COMMENT
+                  </button>
                 </div>
               ))}{" "}
             </a>
