@@ -158,7 +158,7 @@ WHERE grocery_list_id = ?
           .where({
             grocery_list_id: groceryListId,
             item_id: itemId
-          })
+          }) 
           .del();
       
         return deletedRows > 0 ? "Item deleted successfully." : "Item not found in the grocery list.";
