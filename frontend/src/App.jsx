@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import SignUpPage from "./pages/SignUp";
 import LoginPage from "./pages/Login";
 import SiteHeadingAndNav from "./components/SiteHeadingAndNav";
+import Disaster from './pages/Disaster';
 import NotFoundPage from "./pages/NotFound";
 import UserContext from "./contexts/current-user-context";
 import { checkForLoggedInUser } from "./adapters/auth-adapter";
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/:id" element={<UserPage />} />
+          <Route path="/disaster" element={<Disaster />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
