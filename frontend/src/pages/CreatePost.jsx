@@ -123,7 +123,7 @@ return (
                 type="text"
                 id="specialty"
                 name="specialty"
-                value={facility_doctor}
+                value={specialty}
                 onChange={handleChange}
               />
             </div>
@@ -157,7 +157,7 @@ return (
                 type="text"
                 id="address"
                 name="address"
-                value={overall_rating}
+                value={address}
                 onChange={handleChange}
               />
             </div>
