@@ -145,7 +145,7 @@ WHERE grocery_list_id = ?
       //   return deleted
       // }
       //deleting/removing an item from list
-        deleteRate = async (list_name,nova_rate, nutri_score) => {
+         deleteRate = async (list_name,nova_rate, nutri_score) => {
         const deletedRate = await knex('grocery_list')
           .where({ list_name,nova_rate, nutri_score })
           .del();
@@ -154,11 +154,11 @@ WHERE grocery_list_id = ?
       };
       static async deleteItem(groceryListId, itemId) {
         // Delete the item from the grocery_items_table
-        const deletedRows = await knex('grocery_items_table')
+        const deletedRows = await knex('grocery_items_table', 'items')
           .where({
             grocery_list_id: groceryListId,
             item_id: itemId
-          })
+          }) 
           .del();
       
         return deletedRows > 0 ? "Item deleted successfully." : "Item not found in the grocery list.";
