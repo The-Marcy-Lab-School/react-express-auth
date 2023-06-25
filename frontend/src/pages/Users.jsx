@@ -4,6 +4,7 @@ import UserLink from "../components/UserLink";
 import { getPostOptions, fetchHandler, deleteOptions } from "../utils";
 import FriendsCard from "../components/UserCard";
 import UserFriendsCard from "../components/UserFriendsCard";
+import UserItem from "../components/UserItem";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
@@ -55,32 +56,46 @@ export default function UsersPage() {
 
   return (
     <>
-      <div className="friendsBoxes">
-        <h1>Friends</h1>
-        <div>
-          {friends.map((friend) => {
-            return (
-              <UserFriendsCard
+      <div className="users-container">
+        <div className="friends-list">
+          <h1 className="list-title">Friends</h1>
+          <div>
+            {friends.map((friend) => {
+              // return (
+              //   <UserFriendsCard
+              //     key={friend.id}
+              //     friend={friend.username}
+              //     onClick={() => handleRemoveFriend(friend.username)}
+              //   />
+              // );
+              <UserItem
                 key={friend.id}
                 friend={friend.username}
-                onClick={() => handleRemoveFriend(friend.username)}
+                onPing={handlePing}
+                onRemoveFriend={handleRemoveFriend}
               />
-            );
-          })}
+            })}
+          </div>
         </div>
-      </div>
-      <div className="userBoxes">
-        <h1>Users</h1>
-        <div>
-          {users.map((user) => {
-            return (
-              <FriendsCard
-                key={user.id}
-                user={user.username}
-                onClick={() => handleAddFriend(user.username)}
+        <div className="users-list">
+          <h1 className="list-title">Users</h1>
+          <div>
+            {users.map((user) => {
+              // return (
+              //   <FriendsCard
+              //     key={user.id}
+              //     user={user.username}
+              //     onClick={() => handleAddFriend(user.username)}
+              //   />
+              // );
+              <UserItem
+                key={friend.id}
+                friend={friend.username}
+                onPing={handlePing}
+                onAddFriend={handleAddFriend}
               />
-            );
-          })}
+            })}
+          </div>
         </div>
       </div>
     </>
