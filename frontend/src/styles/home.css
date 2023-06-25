@@ -1,5 +1,5 @@
 body{
-    background-color: #DDA15E;
+    background-color: #689e80;
 
 }
 .d-flex{
@@ -13,17 +13,20 @@ header {
     justify-content: space-between;
     padding: 5px;
     align-items: center;
-    background: #FEFAE0;
+   
   }
   .home-container{
+    
     margin-top: 10%;
     text-align: center;
     justify-content: center;
   }
 
-
+h1{
+    color:white;
+}
   a:hover{
-    color:#DDA15E;
+    color:#88c6a3;
   }
   a{
     text-decoration: none;
@@ -39,9 +42,11 @@ header {
     text-transform: uppercase;
     font-weight: 600;
     color:black; 
+   
   }
   .home-container h1{
     font-size: 70px;
+    font-weight:700;
     line-height: 50px;
     font-family: Raleway, sans-serif;
     padding-top: 10%;
@@ -62,4 +67,9 @@ header {
     list-style: none;
   }
 
+  .btn-primary{
+    background-color: #689e80;
+    border-color: white;
+   
+  }
   
