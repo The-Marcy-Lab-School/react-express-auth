@@ -94,6 +94,18 @@ h4{
   height: 100%;
 }
 
+.box{
+  background-color: #132734;
+ 
+}
+.ui ,.subtitle,.title, p.has-text-centered{
+  color: #FFF;
+}
+
+#review.box{
+  background-color: #FFF;
+}
+
 .box-text {
   display: inline-block;
 }
@@ -379,7 +391,7 @@ h4{
 .box-text {
   display: inline-block;
 }
-\
+
 #review {
   display: flex;
   height: 20vh;
@@ -722,6 +734,8 @@ h4{
   height: 30vh;
   margin-right: 10vh;
 }
+
+
 .firstStory{
   display: flex;
   align-items: center;
