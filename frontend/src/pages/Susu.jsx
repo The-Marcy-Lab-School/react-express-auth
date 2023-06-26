@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import CurrentUserContext from '../contexts/current-user-context';
 import SusuCard from '../components/SusuCard';
 import '../styles/susus-page.css';
-import '../Card.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 export default function Susu() {
@@ -46,11 +46,14 @@ export default function Susu() {
   console.log(currentSusulist);
   
   return (
-    <div className="susupage-container">
+    <Container className="susupage-container">
+      <Row>
       {currentSusulist.map((susu) => (
-        // console.log(susu)
+        <Col key={susu.id} xs={6} md={3}>
         <SusuCard className="susu-card" key={susu.id} susu={susu} />
+        </Col>
       ))}
-    </div>
+      </Row>
+    </Container>
   );
 }
