@@ -16,6 +16,7 @@ export default function SignUpPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [picture, setPicture] = useState('');
 
   if (currentUser) return <Navigate to="/" />;
 
@@ -24,7 +25,7 @@ export default function SignUpPage() {
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
 
-    const [user, error] = await createUser({ first_name, last_name, age, gender, race, ethnicity, username, password, email });
+    const [user, error] = await createUser({ first_name, last_name, age, gender, race, ethnicity, username, password, email, picture });
     if (error) return setErrorText(error.statusText);
 
     setCurrentUser(user);
@@ -42,6 +43,7 @@ export default function SignUpPage() {
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
     if (name === 'email') setEmail(value);
+    if (name === 'picture') setPicture(value);
   };
   //  console.log(handleChange(e))
   return (
@@ -216,6 +218,23 @@ export default function SignUpPage() {
                   name="email"
                   onChange={handleChange}
                   value={email}
+                  className="input"
+                />
+              </div>
+            </div>
+
+            <div className="field">
+              <label htmlFor="picture" className="label">
+                Picture
+              </label>
+              <div className="control">
+                <input
+                  autoComplete="off"
+                  type="picture"
+                  id="picture"
+                  name="picture"
+                  onChange={handleChange}
+                  value={picture}
                   className="input"
                 />
               </div>

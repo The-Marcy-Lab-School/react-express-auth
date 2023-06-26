@@ -14,6 +14,7 @@ exports.up = (knex) => {
   table.string('username').unique();
   table.string('password_hash');
   table.string('email').unique();
+  table.string('picture');
   table.timestamps(true, true);
 });
 };

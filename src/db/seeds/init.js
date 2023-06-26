@@ -26,7 +26,8 @@ exports.seed = async (knex) => {
     "English",
     "johndoe123",
     "hashed_password_123",
-    "john.doe@example.com"
+    "john.doe@example.com",
+    ''
   );
   await User.create(
     "Jane",
@@ -37,7 +38,8 @@ exports.seed = async (knex) => {
     "Jamaican",
     "janesmith456",
     "hashed_password_456",
-    "jane.smith@example.com"
+    "jane.smith@example.com",
+    ''
   );
   await User.create(
     "Michael",
@@ -48,7 +50,8 @@ exports.seed = async (knex) => {
     "Chinese",
     "michaelj88",
     "hashed_password_789",
-    "michael.johnson@example.com"
+    "michael.johnson@example.com",
+    ''
   );
   await User.create(
     "Emily",
@@ -59,7 +62,8 @@ exports.seed = async (knex) => {
     "Korean",
     "emilydavis35",
     "hashed_myPassword123",
-    "emilydavis35@gmail.com"
+    "emilydavis35@gmail.com",
+    ''
   );
   await User.create(
     "David",
@@ -70,7 +74,8 @@ exports.seed = async (knex) => {
     "Mexican",
     "davidgonzalez45",
     "hashed_qwerty123",
-    "davidgonzalez45@yahoo.com"
+    "davidgonzalez45@yahoo.com",
+    ''
   );
   await User.create(
     "Sophia",
@@ -81,7 +86,8 @@ exports.seed = async (knex) => {
     "Chinese",
     "sophialee26",
     "hashed_password123",
-    "sophialee26@hotmail.com"
+    "sophialee26@hotmail.com",
+    ''
   );
   await User.create(
     "James",
@@ -92,7 +98,8 @@ exports.seed = async (knex) => {
     "African American",
     "jamestaylor50",
     "hashed_ilovecoding",
-    "jamestaylor50@gmail.com"
+    "jamestaylor50@gmail.com",
+    ''
   );
   await User.create(
     "Emma",
@@ -103,7 +110,8 @@ exports.seed = async (knex) => {
     "Mexican",
     "emmalopez32",
     "hashed_mySecretPassword",
-    "emmalopez32@yahoo.com"
+    "emmalopez32@yahoo.com",
+    ''
   );
   await User.create(
     "Daniel",
@@ -114,7 +122,8 @@ exports.seed = async (knex) => {
     "Chinese",
     "danielchen42",
     "hashed_securepass123",
-    "danielchen42@hotmail.com"
+    "danielchen42@hotmail.com",
+    ''
   );
   await User.create(
     "Olivia",
@@ -125,7 +134,8 @@ exports.seed = async (knex) => {
     "Vietnamese",
     "olivianguyen29",
     "hashed_qwertyuiop",
-    "olivianguyen29@gmail.com"
+    "olivianguyen29@gmail.com",
+    ''
   );
   await User.create(
     "Christopher",
@@ -136,7 +146,8 @@ exports.seed = async (knex) => {
     "Korean",
     "christopherkim38",
     "hashed_myp@ssw0rd",
-    "christopherkim38@yahoo.com"
+    "christopherkim38@yahoo.com",
+    ''
   );
   await User.create(
     "Ava",
@@ -147,7 +158,8 @@ exports.seed = async (knex) => {
     "Chinese",
     "avawang31",
     "hashed_password456",
-    "avawang31@hotmail.com"
+    "avawang31@hotmail.com",
+    ''
   );
   await User.create(
     "Matthew",
@@ -158,7 +170,8 @@ exports.seed = async (knex) => {
     "Mexican",
     "matthewmartinez47",
     "hashed_12345678",
-    "matthewmartinez47@gmail.com"
+    "matthewmartinez47@gmail.com",
+    ''
   );
   await User.create(
     "Isabella",
@@ -169,7 +182,8 @@ exports.seed = async (knex) => {
     "Puerto Rican",
     "isabellagarcia24",
     "hashed_passw0rd!",
-    "isabellagarcia24@yahoo.com"
+    "isabellagarcia24@yahoo.com",
+    ''
   );
   await User.create(
     "Andrew",
@@ -180,7 +194,8 @@ exports.seed = async (knex) => {
     "Chinese",
     "andrewliu39",
     "hashed_password789",
-    "andrewliu39@hotmail.com"
+    "andrewliu39@hotmail.com",
+    ''
   );
   await User.create(
     "Mia",
@@ -191,7 +206,8 @@ exports.seed = async (knex) => {
     "Mexican",
     "miahernandez27",
     "hashed_myP@ssw0rd",
-    "miahernandez27@gmail.com"
+    "miahernandez27@gmail.com",
+    ''
   );
   await User.create(
     "Joseph",
@@ -202,7 +218,8 @@ exports.seed = async (knex) => {
     "Korean",
     "josephkim36",
     "hashed_passw0rd",
-    "josephkim36@yahoo.com"
+    "josephkim36@yahoo.com",
+    ''
   );
   await User.create(
     "Charlotte",
@@ -213,7 +230,8 @@ exports.seed = async (knex) => {
     "Chinese",
     "charlottechang30",
     "hashed_1234567890",
-    "charlottechang30@hotmail.com"
+    "charlottechang30@hotmail.com",
+    ''
   );
   await User.create(
     "William",
@@ -224,7 +242,8 @@ exports.seed = async (knex) => {
     "Puerto Rican",
     "williamgonzalez42",
     "hashed_password1234",
-    "williamgonzalez42@gmail.com"
+    "williamgonzalez42@gmail.com",
+    ''
   );
   await User.create(
     "Amelia",
@@ -235,7 +254,8 @@ exports.seed = async (knex) => {
     "Indian",
     "ameliakaur25",
     "hashed_securepassword",
-    "ameliakaur25@yahoo.com"
+    "ameliakaur25@yahoo.com",
+    ''
   );
   await User.create(
     "Benjamin",
@@ -246,7 +266,8 @@ exports.seed = async (knex) => {
     "Vietnamese",
     "benjaminnguyen33",
     "hashed_password5678",
-    "benjaminnguyen33@hotmail.com"
+    "benjaminnguyen33@hotmail.com",
+    ''
   );
   await User.create(
     "Sofia",
@@ -257,7 +278,8 @@ exports.seed = async (knex) => {
     "Mexican",
     "sofiaramos29",
     "hashed_mysecret123",
-    "sofiaramos29@gmail.com"
+    "sofiaramos29@gmail.com",
+    ''
   );
   await User.create(
     "Daniel",
@@ -268,7 +290,8 @@ exports.seed = async (knex) => {
     "Chinese",
     "danielchen43",
     "hashed_pass123456",
-    "danielchen43@yahoo.com"
+    "danielchen43@yahoo.com",
+    ''
   );
   await User.create(
     "Sarah",
@@ -279,7 +302,8 @@ exports.seed = async (knex) => {
     "African American",
     "sarahjohnson37",
     "hashed_securepass456",
-    "sarahjohnson37@hotmail.com"
+    "sarahjohnson37@hotmail.com",
+    ''
   );
   await User.create(
     "Christopher",
@@ -290,7 +314,8 @@ exports.seed = async (knex) => {
     "Mexican",
     "christophergarcia29",
     "hashed_qwerty5678",
-    "christophergarcia29@gmail.com"
+    "christophergarcia29@gmail.com",
+    ''
   );
   await User.create(
     "Olivia",
@@ -301,7 +326,8 @@ exports.seed = async (knex) => {
     "African American",
     "oliviabrown31",
     "hashed_password7890",
-    "oliviabrown31@yahoo.com"
+    "oliviabrown31@yahoo.com",
+    ''
   );
   await User.create(
     "Daniel",
@@ -312,7 +338,8 @@ exports.seed = async (knex) => {
     "Puerto Rican",
     "daniellopez33",
     "hashed_myp@ssw0rd",
-    "daniellopez33@hotmail.com"
+    "daniellopez33@hotmail.com",
+    ''
   );
   await User.create(
     "Sophia",
@@ -323,7 +350,8 @@ exports.seed = async (knex) => {
     "African American",
     "sophiawalker25",
     "hashed_password1234",
-    "sophiawalker25@gmail.com"
+    "sophiawalker25@gmail.com",
+    ''
   );
   await User.create(
     "Ethan",
@@ -334,7 +362,8 @@ exports.seed = async (knex) => {
     "Mexican",
     "ethanmartinez39",
     "hashed_ilovecoding123",
-    "ethanmartinez39@yahoo.com"
+    "ethanmartinez39@yahoo.com",
+    ''
   );
   await User.create(
     "Emily",
@@ -345,7 +374,8 @@ exports.seed = async (knex) => {
     "African American",
     "emilybrown28",
     "hashed_passw0rd!",
-    "emilybrown28@hotmail.com"
+    "emilybrown28@hotmail.com",
+    ''
   );
   await User.create(
     "Alexander",
@@ -356,7 +386,8 @@ exports.seed = async (knex) => {
     "Puerto Rican",
     "alexandertorres47",
     "hashed_qwertyuiop",
-    "alexandertorres47@gmail.com"
+    "alexandertorres47@gmail.com",
+    ''
   );
 };
 
