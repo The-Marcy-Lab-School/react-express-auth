@@ -1,29 +1,163 @@
-.card {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 16px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width:15em;
-  height:10em;
+/* CSS HEX */
+:root
+{ --background-color: #dda15eff;
+--header-color: #fefae0ff;
+--dark-accent-color: #254441;
+--dark-accent-color-2: #283618;
+--light-accent-color: #43aa8bff;
+}
+
+.card_container{
+  margin-top:100px;
+  margin-bottom: 2em;
   text-align: center;
-  margin-left:2em;
+  max-width: fit-content;
+  height: fit-content;
+  padding-bottom: 2%;
+  border: 1px solid #ccc;
+  /* padding: 20px 35px; */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
+  border-radius: 20px;
+} 
+
+#payment_amount{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(67, 170, 139, 0.492);
+  border-radius: 99em 65em 0 99em;
+  display: flex;
+  align-items: center;
+  padding: 0.625em 0.75em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark-accent-color);
+
 }
 
-.card-image {
-  width: 3em;
-  height: auto;
-  margin-bottom: 16px;
+ #card-image {
+  width:64px;
+  height:64px;
+  object-fit: scale-down;
+  margin:35px 0 -25px;
 }
 
-.card-title {
-  font-size: 18px;
-  margin-bottom: 8px;
+.card_title{
+  padding-top: 1.5em;
+  text-align: left;
 }
 
-.card-description {
-  font-size: 14px;
-  color: #666;
+#subtitle{
+  text-align:left;
+  position: relative;
+  top: -130px;
+  left: -5px;
 }
 
-/* oomdmscdjks */
+#form_button {
+  position: relative;
+  display: inline-block;
+  margin: 15px;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: var(--dark-accent-color);
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid var(--dark-accent-color);
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 0 var(--dark-accent-color);
+}
+
+#form_button:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0 var(--dark-accent-color);
+}
+
+#form_button:active {
+  transform: scale(0.9);
+}
+
+#card_footer{
+  background-color: rgb(211 161 94 / 8%);
+  border-radius: 0 0 20px;
+  position: relative;
+  top: 0.4em;
+}
+/* ALT card CSS */
+/* .card {
+  width: 320px;
+  background: #fefae0;
+  color: #254441;
+  position: relative;
+  border-radius: 2.5em;
+  padding: 2em;
+  transition: transform 0.4s ease;
+}
+
+.card .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5em;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+
+.card .card-top, .card .card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card .card-top p, .card .card-top .card-title, .card .card-bottom p, .card .card-bottom .card-title {
+  margin: 0;
+}
+
+.card .card-title {
+  font-weight: bold;
+}
+
+.card .card-top p, .card .card-bottom p {
+  font-weight: 600;
+}
+
+.card .card-bottom {
+  align-items: flex-end;
+}
+
+.card .card-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.card .card-image svg {
+  width: 4em;
+  height: 4em;
+  transition: transform 0.4s ease;
+}
+
+.card:hover {
+  cursor: pointer;
+  transform: scale(0.97);
+}
+
+.card:hover .card-content {
+  transform: scale(0.96);
+}
+
+.card:hover .card-image svg {
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.9);
+} */

@@ -5,8 +5,6 @@ import SusuMembers from "./Members";
 import InviteForm from "./InviteForm";
 import CurrentUserContext from "../contexts/current-user-context";
 import Button from '@mui/material/Button';
-
-
 export default function detailsLink() {
   const {id} = useParams()
   const [errorText, setErrorText] = useState(null);
@@ -38,15 +36,15 @@ export default function detailsLink() {
 
     return (
       <>
+       <h1>Susu Name: {data.length > 0 ? data[0].name : ''}</h1>
       <ul>
         {
           data.map((user) => <div key={user.user_id}> <SusuMembers user={user} owner={currentUser.id!==user.owner ? true : false}/> </div>)
         }
       </ul>
-        <h1>{data.length > 0 ? data[0].name : ''}</h1>
-
-        <h1>{data.length > 0 ? data[0].next_payment: ''}</h1>
-        <h1>{data.length > 0 ? data[0].payment_amount : ''}</h1>
+        <h2>Payment Interval: {data.length > 0 ? data[0].next_payment: ''} Days</h2>
+        <h1>Payment Amount: ${data.length > 0 ? data[0].payment_amount : ''}</h1>
+        <h3>Susu ID:{data.length > 0 ? data[0].susu_id:''}</h3>
         {
           data.length > 0 && currentUser.id===data[0].owner ? <> <InviteForm susuData={data} /> <Button variant="contained" color="error" onClick={handleDelete}>Delete Susu</Button> </>: <Button variant="contained" color="error" disabled>Delete Susu</Button>
         }
