@@ -7,6 +7,9 @@ const login = require('./login');
 const logout = require('./logout');
 const showMe = require('./show-me');
 
+const findUser = require('./find-user');
+
+
 module.exports = {
   list,
   create,
@@ -16,4 +19,6 @@ module.exports = {
   login,
   logout,
   showMe,
+
+  findUser
 };
