@@ -9,13 +9,13 @@ class Reviews {
         this.rating = rating;
 
     }
-    static async create(user_id, page_id,review_body, rating ) {
+    static async create(user_id, page_id,review_body, rating, staff_friendliness, wait_times, quality_of_care ) {
         try {
     
           const query = `
           INSERT INTO reviews (user_id, page_id, review_body, rating )
-            VALUES (?, ?, ?, ?) RETURNING *`;
-          const { rows: [review] } = await knex.raw(query, [user_id, page_id,review_body, rating]);
+            VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+          const { rows: [review] } = await knex.raw(query, [user_id, page_id,review_body, rating, staff_friendliness, wait_times, quality_of_care]);
           return new Reviews(review);
         } catch (err) {
           console.error(err);
