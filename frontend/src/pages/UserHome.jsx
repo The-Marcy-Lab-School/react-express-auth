@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import ProductContext from "../contexts/ProductContext";
-import ProductsList from "./ProductsList";
+import ProductsList from "../components/ProductsList";
 
 export default function Page404() {
   const { setQuery } = useContext(ProductContext);
@@ -13,16 +13,16 @@ export default function Page404() {
 
   return (
     // <>
-      <div id="search-food-area">
-        <form id="search-food-form" onSubmit={handleSubmit}>
-          <h1 id="search-text">Search</h1>
-          <div id="search-food-box">
-            <input type="text" placeholder="Enter your food" />
-            <button type="submit">Search</button>
-          </div>
-        </form>
-        <ProductsList />
-      </div>
+    <div id="search-food-area">
+      <form id="search-food-form" onSubmit={handleSubmit}>
+        <h1 id="search-text">Search</h1>
+        <div id="search-food-box">
+          <input type="text" placeholder="Enter your food" />
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      <ProductsList />
+    </div>
     // </>
   );
   // <body id="search-page">
