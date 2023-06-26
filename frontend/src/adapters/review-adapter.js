@@ -7,6 +7,9 @@ export const createReview = async ({
   page_id,
   review_body,
   rating,
+  staff_friendliness,
+  wait_times,
+  quality_of_care
 }) => {
   return fetchHandler(
     baseUrl,
@@ -15,6 +18,9 @@ export const createReview = async ({
       page_id,
       review_body,
       rating,
+      staff_friendliness,
+      wait_times,
+      quality_of_care
     })
   );
 };

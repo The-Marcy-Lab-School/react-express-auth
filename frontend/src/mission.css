@@ -1,0 +1,42 @@
+.box1{
+    
+    height: 680px;
+}
+.box2{
+height: 400px;
+}
+.box3{
+    height: 430px; 
+}
+
+.border {
+    border-top: 1px solid black; /* Specify border styles */
+    margin: 10px 0; /* Adjust margin as desired */
+  }
+
+.carecompanion {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  .carecompanion:hover {
+    animation: wavyText 1s linear infinite;
+  }
+  
+  @keyframes wavyText {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
