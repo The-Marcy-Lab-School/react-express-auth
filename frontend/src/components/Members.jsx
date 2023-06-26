@@ -4,7 +4,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { getPatchOptions } from '../utils';
 
 export default function SusuMembers({ user, owner }) {
-    // return <li >{users.username} {users.make_payments = true ? '[]' : '[X]]'}</li>;
     const [isChecked, setChecked] = useState(user.make_payments === 'true' ? true : false);
     
     console.log(isChecked, user)
