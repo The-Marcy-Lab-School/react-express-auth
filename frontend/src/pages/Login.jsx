@@ -20,7 +20,7 @@ export default function LoginPage() {
 
 
   return <>
-    <h1>Login</h1>
+    <h1></h1>
     <form onSubmit={handleSubmit}>
       <label htmlFor="username">Username</label>
       <input type="text" autoComplete="username" id="username" name="username" />

@@ -1,3 +1,6 @@
+
+
+
 import React from 'react';
 import { fetchHandler } from '../utils';
 import '../styles/home.css';
@@ -9,7 +12,7 @@ export default function HomePage() {
 
   return (
     <>
-      <h2>In construction</h2>
+     
       <WelcomeButton />
     </>
   );

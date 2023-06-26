@@ -21,8 +21,8 @@ const WelcomeButton = () => {
         <h2>Embark on a shared journey towards financial prosperity</h2>
         {/* <animated.div style={fadeAnimation}> */}
         <br />
-          <Button variant="primary">
-            <Link to="/about" className="btn-get-started scrollto">
+          <Button variant="primary" size = "lg" className="welcome-button">
+            <Link to="/about" className="btn-get-started scrollto" >
               Welcome
             </Link>
           </Button>
