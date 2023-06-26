@@ -22,7 +22,7 @@ const WelcomeButton = () => {
         <br />
           <Button variant="primary" size = "lg" className="welcome-button">
             <Link to="/about" className="btn-get-started scrollto" >
-              Welcome
+              WELCOME
             </Link>
           </Button>
         </animated.div>

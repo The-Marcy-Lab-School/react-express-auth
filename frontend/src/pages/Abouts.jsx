@@ -12,7 +12,7 @@ export default function AboutPage() {
     to: { opacity: 1, transform: 'translateY(0)' },
     config: { duration: 900 },
   });
-  return (<div className="container">
+  return (<div className="about_container">
      <animated.div style={fadeAnimation}>
 
     <h2>Mission Statement</h2>
