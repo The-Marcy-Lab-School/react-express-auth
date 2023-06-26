@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchHandler } from "../utils";
-import ProductInGroceryList from "./ProductInGroceryList";
+import ProductInGroceryList from "../components/ProductInGroceryList";
 
 export default function GroceryList() {
   const { id } = useParams();

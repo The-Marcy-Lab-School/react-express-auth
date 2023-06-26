@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import NovaScore from "./NovaScore";
+import NutriScoreGrade from "./NutriScoreGrade"
 
 export default function ProductCard({ item }) {
   const navigate = useNavigate();
@@ -21,13 +23,12 @@ export default function ProductCard({ item }) {
           )}
           <div className="meta">
             <span>
-              <i className="icon-nutri-score" />
-              {item.nutriscore_grade}
+              <NutriScoreGrade props={item.nutriscore_grade}/>
             </span>
 
             <span>
               <i className="icon-nova-score" />
-              {item.nova_groups}
+                <NovaScore props={item.nova_group}/>
             </span>
           </div>
         </div>

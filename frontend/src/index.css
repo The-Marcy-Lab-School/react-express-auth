@@ -238,5 +238,42 @@ p{
   font-family: 'Nunito', sans-serif;
   font-size: 150%;
 }
-
+.previousButton, .nextButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: whitesmoke;
+  border-color: grey;
+  border-radius: 10px;
+  border-style: double;
+  cursor: pointer;
+  font-size: 16px;
+}
+.previousButton::before{
+  content: "";
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background:url('../src/media/previousArrow.png') no-repeat center;
+  background-size: contain;
+  font-size: 16px;
+  margin-right:10px;
+}
+.nextButton::before{
+  content: "";
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background:url('../src/media/previousArrow.png') no-repeat center;
+  background-size: contain;
+  font-size: 16px;
+  margin-right:10px;
+  transform: rotateY(180deg);
+}
+.buttonNextPrev{
+  display: flex;
+  justify-content: space-around;
+  margin: 5vh;
+}
 /* UserHome - END*/

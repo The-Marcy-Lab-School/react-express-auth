@@ -40,7 +40,10 @@ export default function GroceryCard({ grocery }) {
             navigate(`/users/${id}/grocerylist/${grocery.grocery_list_id}`);
           }}
         >
-          <div className="row">
+          <div className="header">
+            <h3>{grocery.list_name}</h3>
+          </div>
+          <div className="content">
             <h4>
               {formattedDate}
               {formattedTime}
