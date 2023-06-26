@@ -2,8 +2,10 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable func-style */
-import React, { useEffect, useState, useContext } from "react";
-import CurrentUserContext from "../contexts/current-user-context.js";
+import React, { useEffect, useState, useContext } from 'react';
+import CurrentUserContext from '../contexts/current-user-context.js';
+import { apiFetchHandler } from '../utils'
+
 
 // ------------------List of Events ----------------
 function EventList() {
@@ -11,7 +13,7 @@ function EventList() {
   const { updateEventData, userLocation } = useContext(CurrentUserContext);
 
   const fetchEvents = () => {
-    fetch("https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20")
+    fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
       .then((response) => response.json())
       .then((data) => {
         const filteredEvents = data.events.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
@@ -23,8 +25,14 @@ function EventList() {
       .catch((error) => console.log(error));
   };
 
+  const fetchProcessed = async () => {
+    const data = await apiFetchHandler('/api/events')
+    console.log(data)
+  }
+
   useEffect(() => {
     fetchEvents();
+    fetchProcessed();
     updateEventData();
   }, []);
 

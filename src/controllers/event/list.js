@@ -1,19 +1,13 @@
-
-
+const { Events } = require("pg");
+const turf = require("turf")
+const inPolygon = require("@turf/boolean-point-in-polygon")
 const listEvents = async (req, res) => {
-    // const {
-    //     session: {userId},
-    //     db : {Event},
-    // } = req;
+    const {
+        session: {userId},
+        db : { User },
+    } = req;
 
-    // const events =  await Event.list()
-    // console.log(events)
-
-    // if(!events.length) return res.sendStatus(404)
-
-
-    // return res.send(events)
-
+   
 const fetchData = async (url) => {
   try {
     const response = await fetch(url); // use fetch
@@ -24,11 +18,42 @@ const fetchData = async (url) => {
     return null;
   }
 };
-    const { events } = await fetchData('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
-    const types = ['volcanoes', 'severeStorms', 'wildfires']
-    const filtered = events.filter(event => types.includes(event.categories[0].id))
-    
-    return res.send(filtered) 
+    const processed = []
+
+    const { features : disasters } = await fetchData('https://api.weather.gov/alerts/active?severity=Severe&limit=1')
+    const users = await fetchData('http://localhost:3000/api/users')
+    const filtered = disasters.filter( disaster => !!disaster.geometry)
+    filtered.forEach(disaster => {
+      const { geometry: { coordinates } } = disaster 
+      const polygon = turf.polygon(coordinates)
+      const usersToAdd = []
+      
+      users.forEach( user => {
+        const { location : { latitude, longitude } } = user
+        const point = turf.point([+latitude, +longitude])
+        const isInside = inPolygon.default(point, polygon) 
+        if(isInside) {
+          usersToAdd.push(user)
+        }
+      })
+      const { properties : { 
+        severity,
+        event,
+        headline,
+        description,
+        instruction,
+        response
+       }} = disaster
+      processed.push({ 
+        severity,
+        event,
+        headline,
+        description,
+        instruction,
+        response,
+        'nearByUsers' : usersToAdd})
+    })
+    return res.send(processed)
 }
 
 module.exports = listEvents
