@@ -50,7 +50,7 @@ export default function DoctorReview() {
   });
 
   // Pagination logic
-  const reviewsPerPage = 3;
+  const reviewsPerPage = 2;
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
@@ -69,7 +69,7 @@ export default function DoctorReview() {
     }
 console.log(starRating)
     return (
-      <nav className="pagination is-centered" role="navigation" aria-label="pagination">
+      <nav className="pagination is-centered is-small" role="navigation" aria-label="pagination">
         <ul className="pagination-list">
           {pageNumbers.map((number) => (
             <li key={number}>

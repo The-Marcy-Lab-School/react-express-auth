@@ -1,13 +1,15 @@
 const knex = require('../knex');
 
 class Reviews {
-    constructor({id, user_id, page_id, review_body, rating }){
+    constructor({id, user_id, page_id, review_body, rating, staff_friendliness, wait_times, quality_of_care }){
         this.id = id;
         this.user_id = user_id;
         this.page_id = page_id;
         this.review_body = review_body;
         this.rating = rating;
-
+        this.staff_friendliness = staff_friendliness;
+        this.wait_times = wait_times;
+        this.quality_of_care = quality_of_care;
     }
     static async create(user_id, page_id,review_body, rating, staff_friendliness, wait_times, quality_of_care ) {
         try {
