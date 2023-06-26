@@ -33,7 +33,7 @@ const UserItem = ({ user, onPing, onRemoveFriend, onAddFriend }) => {
                     </button>
                 )}
                 {onAddFriend && (
-                    <button className='add-button' onClick={handleRemoveFriend}>
+                    <button className='add-button' onClick={handleAddFriend}>
                         Add
                     </button>
                 )}

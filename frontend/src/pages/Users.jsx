@@ -71,7 +71,7 @@ export default function UsersPage() {
               // );
               <UserItem
                 key={friend.id}
-                friend={friend.username}
+                user={friend.username}
                 onPing={handlePing}
                 onRemoveFriend={handleRemoveFriend}
               />
@@ -90,8 +90,8 @@ export default function UsersPage() {
               //   />
               // );
               <UserItem
-                key={friend.id}
-                friend={friend.username}
+                key={user.id}
+                user={user.username}
                 onPing={handlePing}
                 onAddFriend={handleAddFriend}
               />
