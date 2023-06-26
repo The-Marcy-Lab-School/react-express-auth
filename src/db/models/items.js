@@ -80,13 +80,28 @@ class Items{
 
 
     //deleting/removing an item from list
-      // deleteItem = async (name,food_rating,nutri_score_quality,ingredients,addivites,nova_score,eco_score) => {
-      //   const deletedItem = await knex('Items')
-      //     .where({ name,food_rating,nutri_score_quality,ingredients,addivites,nova_score,eco_score })
-      //     .del();
-        
-      //   return deletedItem > 0 ? "Items deleted successfully." : "No item deleted.";
-      // };
+    static async deleteItem(id,product_name,ecoscore_grade,ingredients_text,additives_original_tags,image_front_thumb_url,stores,nutriscore_grade,nova_group) {
+      try {
+        const [deleteItem] = await knex('items')
+          .where({ id: id })
+          .delete({ product_name: product_name,
+            ecoscore_grade: ecoscore_grade,
+            ingredients_text:ingredients_text,
+            additives_original_tags: additives_original_tags,
+            image_front_thumb_url:image_front_thumb_url,
+            stores: stores,
+            nutriscore_grade: nutriscore_grade,
+            nova_group: nova_group})
+          .returning('*');
+          
+        return deleteItem ? new Items(deleteItem) : null;
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
+    
+  }
+    
 
 
 }

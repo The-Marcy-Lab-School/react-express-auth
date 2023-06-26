@@ -28,10 +28,13 @@ Router.get('/grocerylist/:id', groceryController.list); //get grocery based user
 Router.get('/grocerylist/:id/items', groceryController.listItems); //get items based grocery list id
 Router.delete('/grocerylist/:id', groceryController.destroy);
 Router.patch('/grocerylist/:id',groceryController.update );
+Router.delete('/grocerylist/:grocerylist_id/:item_id',groceryController.deleteItem);
 
 Router.post('/itemslist', itemsController.create);
 Router.get('/itemslist', itemsController.list);
 Router.delete('/itemslist/:id', itemsController.destroy);
+Router.delete('/itemslist/:id',itemsController.deleteItem);// deletes one specific item
 Router.patch('/itemslist/:id',itemsController.update );
+
 
 module.exports = Router;
