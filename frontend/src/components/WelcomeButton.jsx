@@ -19,7 +19,6 @@ const WelcomeButton = () => {
         <h1>Money.Money.Money</h1>
         <br></br>
         <h2>Embark on a shared journey towards financial prosperity</h2>
-        {/* <animated.div style={fadeAnimation}> */}
         <br />
           <Button variant="primary" size = "lg" className="welcome-button">
             <Link to="/about" className="btn-get-started scrollto" >

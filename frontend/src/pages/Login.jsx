@@ -18,7 +18,6 @@ export default function LoginPage() {
     navigate(`/users/${user.id}`);
   };
 
-  // if (currentUser) return <Navigate to="/" />;
 
   return <>
     <h1></h1>

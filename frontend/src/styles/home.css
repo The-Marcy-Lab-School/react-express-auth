@@ -2,6 +2,7 @@ body{
     background-color: #689e80;
 
 }
+
 .d-flex{
     display: flex !important;
 }
@@ -15,7 +16,6 @@ header {
     align-items: center; 
   }
 
-  
   .home-container{
     
     margin-top: 10%;
@@ -73,6 +73,11 @@ h1{
   .logo{
     list-style: none;
   }
+
+  .navbar-nav{
+    padding-left: 53rem;
+    display:flex;
+}
 
   .btn-primary{
     background-color: #689e80;
