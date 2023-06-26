@@ -6,15 +6,21 @@ const logRoutes = require('./middleware/log-routes');
 const cors = require('cors')
 const app = express();
 
+const corsOptions = {
+  origin: '*',
+  credentials:true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 app.use(handleCookieSessions);
 app.use(logRoutes);
-app.use(cors())
+// app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/api', routes);
 
-app.get('*',(req, res, next) => {
+app.get('*', (req, res, next) => {
   if (req.originalUrl.startsWith('/api')) next();
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });

@@ -21,7 +21,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@turf/boolean-point-in-polygon": "^6.5.0",
+    "@turf/turf": "^6.5.0",
     "bcrypt": "^5.1.0",
+    "bootstrap": "^5.3.0",
     "connect-session-knex": "^3.0.1",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
@@ -31,7 +34,8 @@
     "express-session": "^1.17.3",
     "knex": "^2.4.2",
     "node-fetch": "^3.3.1",
-    "pg": "^8.10.0"
+    "pg": "^8.10.0",
+    "turf": "^3.0.14"
   },
   "devDependencies": {
     "eslint": "^8.39.0",
