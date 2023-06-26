@@ -30,6 +30,7 @@ nav ul {
 
 nav a {
   display: block;
+  padding-right: 5%;
   color: #FFF;
 }
 
@@ -42,7 +43,7 @@ form {
 
 /* automatically added by NavLink component */
 .active {
-  color: #606C38;
+  color: #2a593f;
   font-weight: bold;
   font-style: italic;
 }

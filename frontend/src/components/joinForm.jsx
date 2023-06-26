@@ -56,3 +56,33 @@ export default function JoinSusu() {
     </>
   );
 }
+
+// =======
+
+// export default function JoinSusu() {
+//     const getFetchOptions = (body, method = 'POST') => ({
+//         method,
+//         credentials: 'include', // IMPORTANT, this tells fetch to include cookies
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(body),
+//       });
+//     const{id} = useParams()
+//     const navigate = useNavigate();
+//     const joiningSusu = async (e) => {
+//         e.preventDefault();
+//         const user = await fetch(`/api/me`)
+//         const userdata = await user.json();
+//         const handleFetch = async () => {
+//             try {
+//                 const r = await fetch(`/api/susu/${e.target[1].value}`);
+//                 const data = await r.json();
+//                 console.log(data[0])
+//                 let user_id = userdata.id
+//                 let susu_id = e.target[1].value
+//                 let make_payments = false
+//                 let cardoptions = getFetchOptions({user_id, susu_id, make_payments})
+//                 console.log(cardoptions)
+//                 if (e.target[0].value === data[0].password_hash) {
+//                     const addcard = await fetch('/api/susuform', cardoptions)
+//                     navigate(`/susu/${e.target[1].value}`);
+// >>>>>>> main
