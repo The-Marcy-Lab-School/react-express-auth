@@ -1,43 +1,127 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, NavLink } from 'react-router-dom';
+import { useState } from 'react';
 import ReviewModal from '../components/ReviewModal';
-import ReviewCard from '../components/ReviewCard';
-
+import UserReview from '../components/UserReview';
 
 export default function DoctorReview() {
   let { id } = useParams();
- 
-
-  // Access the location state to get the page and reviews
   const { state } = useLocation();
-  const { page, reviews } = state;
+  const { page, reviews, users } = state;
 
+  const individualReview = reviews.filter((review) => review.page_id === parseInt(id));
+  console.log(individualReview);
 
-  const individualReview = reviews.filter(review => review.page_id === parseInt(id))
+  const userToReview = users.filter((user) =>
+    individualReview.some((review) => review.user_id === user.id)
+  );
+  const ratings = individualReview.map((review) => review.rating);
+  const averageRating =
+    ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+
+  let starone = '⭐️';
+  let startwo = '⭐️ ⭐️';
+  let starthree = '⭐️ ⭐️ ⭐️';
+  let starfour = '⭐️ ⭐️ ⭐️ ⭐️';
+  let starfive = '⭐️ ⭐️ ⭐️ ⭐️ ⭐️';
+  let starRating;
+  switch (averageRating) {
+    case 1:
+      starRating = starone;
+      break;
+    case 2:
+      starRating = startwo;
+      break;
+    case 3:
+      starRating = starthree;
+      break;
+    case 4:
+      starRating = starfour;
+      break;
+    case 5:
+      starRating = starfive;
+      break;
+    default:
+      starRating = ''; // handle cases where rating is not 1-5
+  }
+
+  const combinedReviews = individualReview.map((review) => {
+    const matchingUser = userToReview.find((user) => user.id === review.user_id);
+    return { ...review, user: matchingUser };
+  });
+
+  // Pagination logic
+  const reviewsPerPage = 3;
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = combinedReviews.slice(indexOfFirstReview, indexOfLastReview);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Pagination component
+  const Pagination = () => {
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(combinedReviews.length / reviewsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+console.log(starRating)
+    return (
+      <nav className="pagination is-centered" role="navigation" aria-label="pagination">
+        <ul className="pagination-list">
+          {pageNumbers.map((number) => (
+            <li key={number}>
+              <button id="pagination"
+                className={`pagination-link ${number === currentPage ? 'is-current' : ''}`}
+                aria-label={`Goto page ${number}`}
+                onClick={() => paginate(number)}
+              >
+                {number}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  };
 
   return (
     <>
-      <article className='doctorReview'>
-        <div className="imgandspecialty">
-          <img src={page.photo} alt="Doctor Picture" id="personImg" />
-          <h3 className="specialty">{page.specialty}</h3>
-          <h4 className="location">{page.address}</h4>
+      <article className="doctorReview">
+        <div className="column is-half doctorInfo">
+          <div className="imgandspecialty">
+            <div className="doctorPictureFrame">
+              <img src={page.photo} alt="Doctor Picture" id="personImg" />
+            </div>
+            <div className="specifications">
+              <h2 className="name">{page.facility_doctor}</h2>
+              <h4 className="location">{page.address}</h4>
+              <h3 className="specialty">{page.specialty} {starRating}</h3>
+              <p className="description">"{page.description}"</p>
+            </div>
+            <ReviewModal id={id} />
+            <NavLink><button className='reviewButton'>Compare</button></NavLink>
+          </div>
         </div>
-
-        <div>
-          <h2 className="name">{page.facility_doctor}</h2>
-          <div className="overallrating">{page.overall_rating}</div>
-        </div>
-
-        <div>
-          {/* Render the reviews here */}
-          {individualReview.length > 0 ? (
-            individualReview.map((review) => <ReviewCard review={review} key={review.userId} />)
+        <div className="reviewrow">
+          {currentReviews.length > 0 ? (
+            currentReviews.map((review) => <UserReview review={review} key={review.user.id} />)
           ) : (
             <p>No reviews available.</p>
           )}
-        </div>
 
-        <ReviewModal id={id} />
+          <div className='paginationButton'>
+          {combinedReviews.length > reviewsPerPage && (
+            <Pagination
+              reviewsPerPage={reviewsPerPage}
+              totalReviews={combinedReviews.length}
+              paginate={paginate}
+            />
+          )}
+          </div>
+        </div>
       </article>
     </>
   );

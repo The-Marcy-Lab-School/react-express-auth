@@ -45,11 +45,13 @@ nav ul {
   margin: 0;
   list-style: none;
 }
-
-nav a {
-  display: block;
+nav .item{
   color: #FFF;
 }
+.navbar{
+  background-color: #132734;
+}
+
 
 form {
   padding: 1rem;
@@ -68,44 +70,13 @@ h4{
   font-weight: bold;
   font-style: italic;
 }
-/* .card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  background-color: #beeae7;
 
-}
-
-.card:hover {
-  background-color: #f0f0f0;
-}
-
-.card h3 {
-  font-size: 18px;
-  color: #333;
-}
-
-.card p {
-  margin-bottom: 5px;
-}
-
-.card p.rating {
-  font-weight: bold;
-} 
-.box {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
- } */
 
 .mission {
   display: flex; 
   justify-content: center;
   align-items: center;
 }
-
-
 
 .title {
   display: flex;
@@ -129,37 +100,38 @@ h4{
   align-items: center;
   justify-content: center;
   height: 100%;
+  font-size: 2vh;
 }
 
 .box-text {
   display: inline-block;
 }
+
 #review{
   display: flex;
   height: 20vh;
   margin-right: 15vh;
+  width: 100%;
 }
-.subtitle{
-  font-style: italic;
-  bottom: 5vh;
-}
+
+
+/* This is the begining of the css for the mission page*/
+/*boxes and divs*/
 .box1{
   display: flex;
   flex-direction: column;
   text-align: center;
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   background-color: #132734;
   color: white;
-
   font-weight: bold;
 }
 .box2{
   height: 75vh;
   display: flex;
   align-items: center;
-  
 }
 .box3{
   display: flex;
@@ -170,21 +142,6 @@ align-items: center;
   color: white;
   font-size: 5vh;
 }
-.box4{
-  /* height: 100vh; */
-}
-.doctorImg{
-  height: 30vh;
-
-}
-.practice{
-display: flex;
-}
-.factsTitle{
-  color: #132734;
-  font-size: 5vh;
-  margin-bottom: 45px;
-}
 
 .leftbox{
   display: flex;
@@ -192,42 +149,11 @@ display: flex;
   text-align: center;
   margin-left: 10px;
   width: 50%;
-
 }
 .rightbox{
   display: flex;
   justify-content: center;
   width: 50%;
-
-}
-.fact1{
-  margin-left: 125px;
-  margin-right: 125px;
-  justify-content: center;
-  
-}
-
-.quote{
-  font-size: 3.5vh;
-  line-height: 6vh;
-  margin-left: 30%;
-  margin-right: 30%;
-}
-
-.facts_stories{
-  color: #132734;
-  font-size: 5vh;
-  text-align: center;
-  margin-top: 7vh;
-
-}
-
-.firstStory{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  height: 30vh;
-  margin-left: 10vh;
 }
 
 .secondStory{
@@ -236,7 +162,71 @@ display: flex;
   align-items: center;
   height: 30vh;
   margin-right: 10vh;
+}
+.firstStory{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 30vh;
+  margin-left: 10vh;
+}
+.story{ 
+  text-align: center;
+  width: 50%;
+  padding:20vh;
+  }
+.story1{
+    text-align: center;
+    margin-right: 25vh;
+    width: 50%;
+    padding:20vh;
+  }
 
+.funfacts{
+    height: 50vh;
+    display: flex;
+    justify-content: space-between;
+  }
+  .fact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .thefact{
+    margin-top: 2vh;
+    margin-left: 7vh;
+    margin-right: 7vh;
+    font-weight: lighter;
+    font-size: 2vh;
+    text-align: center;
+  }
+  .fact1{
+    margin-left: 125px;
+    margin-right: 125px;
+    justify-content: center;
+    
+  }
+/*title*/
+.facts_stories{
+  color: #132734;
+  font-size: 5vh;
+  text-align: center;
+  margin-top: 7vh;
+}
+.box1 h1{
+  font-size: 11vh;
+  font-weight: bold;
+  letter-spacing: .25vh;
+}
+.factsTitle{
+  color: #132734;
+  font-size: 5vh;
+  margin-bottom: 45px;
+}
+/*images*/
+.doctorImg{
+  height: 30vh;
 }
 .doctorStoryimg{
 display: flex;
@@ -244,52 +234,127 @@ align-content: center;
 justify-content: center;
 height:20vh;
 }
+/* This is the end of the css for the mission page*/
 
-.story{ 
-text-align: center;
-width: 50%;
-padding:20vh;
-}
-.story1{
-  text-align: center;
-  margin-right: 25vh;
-  width: 50%;
-  padding:20vh;
-}
-.fact{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.funfacts{
-  height: 50vh;
-  display: flex;
-  justify-content: space-between;
-}
-.thefact{
-  margin-top: 2vh;
-  margin-left: 7vh;
-  margin-right: 7vh;
-  font-weight: lighter;
-  font-size: 2vh;
-  text-align: center;
-}
 
-.box1 h1{
-  font-size: 11vh;
-  font-weight: bold;
-  letter-spacing: .25vh;
-}
 
+
+
+
+/*The begining css for doctor review page*/
 .doctorReview{
   height: 100vh;
   display: flex;
   margin-left: 10vh;
 }
+  #personImg{
+    border-radius: 6%;
+    height: 100%;
+    width: 100%;
+   } 
+   .quote{
+    font-size: 3.5vh;
+    line-height: 6vh;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
+/*The end css for doctor review page*/
 
- #personImg{
- border-radius: 6%;
- /* height: 200px;
- width: 200px; */
-} 
+/*The begining css for doctor card component*/
+  .subtitle{
+    font-style: italic;
+    bottom: 5vh;
+  }
+  /*The end css for doctor card component*/
+
+
+/* This is the css for the indvidual user reviews on the doctor review page */
+.reviewrow{
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  margin-top: 5vh;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 10vh;
+  margin-bottom: 5vh;
+}
+#reviewbox{
+  border: solid;
+  border-color: #132734;
+  width: 100%;
+}
+
+.username{
+font-size:2vh ;
+font-weight: bold;
+letter-spacing:.75vh ;
+}
+.rating{
+  font-size: 1.75vh;
+}
+.userSpecs{
+font-size: 1.4vh;
+display: flex;
+justify-content: space-around;
+margin-top: 1vh;
+font-weight:100;
+}
+
+.paginationButton{
+  width: 100%;
+}
+#pagination{
+background-color: #132734;
+color:#FFC100
+}
+/*This is the end of the css for the indvidual user reviews on the doctor review page*/
+
+
+/* This is the css for the doctor card information on the doctor review page */
+.doctorPictureFrame{
+height: 300px;
+width: 350px;
+}
+.imgandspecialty{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.name{
+  color: #132734;
+  font-weight: bolder;
+  font-size: 3.5vh;
+  margin-bottom: 0.75vh;
+}
+.location{
+  color: #132734;
+  font-size: 2.5vh;
+  letter-spacing: .25vh;
+  margin-bottom: 0.75vh;
+}
+.specialty{
+  font-style: italic;
+  color: #132734;
+  font-weight: lighter;
+  margin-bottom: 0.75vh;
+}
+.description{
+  font-style: italic;
+  color: #132734;
+  font-size: 2vh;
+  font-weight: lighter;
+  width: 46vh;
+  margin-bottom: 2vh;
+}
+
+.reviewButton{
+  height: 5vh;
+  width: 16vh;
+  border-radius: 1.5vh;
+  border: none;
+  margin-bottom: 2vh;
+  background-color:#132734 ;
+  color:#FFC100;
+}
+/* This is the end of the css for the doctor card information on the doctor review page */

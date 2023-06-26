@@ -5,12 +5,10 @@ import { handleFetch } from "../utils/fetch-utils";
 function DoctorProvider({ children }) {
     const [doctors, setDoctor] = useState([])
     const [filteredObject, setFilteredObject] = useState([]);
-console.log(filteredObject)
 
     useEffect(() => {
         const doFetch = async () => {
             const data = await handleFetch('/api/pages');
-            console.log(data);
             setDoctor(data);
         }
         doFetch();

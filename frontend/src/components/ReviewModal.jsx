@@ -52,10 +52,11 @@ const ReviewModal = ({id}) => {
     console.log(value)
 
   }
+  
 
   return (
     <div>
-      <button onClick={handleOpenModal}>Write A Review</button>
+      <button className="reviewButton" onClick={handleOpenModal}>Write A Review</button>
 
       {showModal && (
         <div className="modal is-active">

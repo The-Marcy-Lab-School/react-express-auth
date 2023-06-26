@@ -25,7 +25,6 @@ export const getPatchOptions = (body) => ({
 export const fetchHandler = async (url, options = basicFetchOptions) => {
   try {
     const res = await fetch(url, options);
-    console.log(res);
     if (!res.ok)
       return [null, { status: res.status, statusText: res.statusText }];
     if (res.status === 204) return [true, null];
