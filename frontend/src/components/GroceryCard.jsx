@@ -13,7 +13,7 @@ export default function GroceryCard({ grocery }) {
   const handleRemoveGroceryList = async() => {
     setRemoveButton(true);
     try {
-      const res = await fetchHandler(
+      await fetchHandler(
         `/api/grocerylist/${grocery.grocery_list_id}`,
         {
           method: "DELETE",
@@ -71,6 +71,7 @@ export default function GroceryCard({ grocery }) {
             </div>
           </div>
         </div>
+        <button className="ui button fluid">View</button>
         <button className="ui button fluid" onClick={handleRemoveGroceryList}>
           Remove
         </button>
