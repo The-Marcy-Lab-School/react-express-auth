@@ -7,7 +7,7 @@ function DoctorCard ({page, reviews, users}){
 
   
     const navigate = useNavigate();
-    
+
     const handleDoctorId = () => {
         const id = page.id;
         navigate(`/doctor/${id}`, { state: { page, reviews, users } });
@@ -75,7 +75,6 @@ function DoctorCard ({page, reviews, users}){
           <p className="subtitle">"{page.description}"</p>
         </div>
         </div>
-
     )
 
 }

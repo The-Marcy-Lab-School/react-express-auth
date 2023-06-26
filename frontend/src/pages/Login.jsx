@@ -22,30 +22,53 @@ export default function LoginPage() {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="field">
-          <label className="label" htmlFor="username">Username</label>
-          <div className="control">
-            <input className="input" type="text" autoComplete="username" id="username" name="username" />
+      <div id="login-component">
+        <div id="login-content">
+          <div id="login-text">
+            <h1>Log In to your account!</h1>
           </div>
-        </div>
+          <form id="loginform" onSubmit={handleSubmit}>
+            <div className="field">
+              <label htmlFor="username" className="label">
+                Username
+              </label>
+              <div className="control">
+                <input
+                  type="text"
+                  autoComplete="username"
+                  id="username"
+                  name="username"
+                  className="input"
+                />
+              </div>
+            </div>
 
-        <div className="field">
-          <label className="label" htmlFor="password">Password</label>
-          <div className="control">
-            <input className="input" type="password" autoComplete="current-password" id="password" name="password" />
-          </div>
-        </div>
+            <div className="field">
+              <label htmlFor="password" className="label">
+                Password
+              </label>
+              <div className="control">
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  id="password"
+                  name="password"
+                  className="input"
+                />
+              </div>
+            </div>
 
-        <div className="field is-grouped">
-          <div className="control">
-            <button className="button is-link">Log in!</button>
-          </div>
+            <div className="field">
+              <div id="login-button" className="control">
+                <button type="submit" className="button is-link log_in">
+                  Log in!
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-
-      {errorText && <p>{errorText}</p>}
+        {!!errorText && <p>{errorText}</p>}
+      </div>
     </>
   );
 }

@@ -9,7 +9,6 @@ class Pages {
     specialty,
     description,
     address,
-    overall_rating,
     is_facility,
     is_doctor,
     photo,
@@ -20,7 +19,6 @@ class Pages {
       (this.specialty = specialty),
       (this.description = description),
       (this.address = address),
-      (this.overall_rating = overall_rating),
       (this.is_facility = is_facility),
       (this.is_doctor = is_doctor),
       (this.photo = photo);
@@ -55,15 +53,14 @@ class Pages {
     specialty,
     description,
     address,
-    overall_rating,
     is_facility,
     is_doctor,
     photo
   ) {
     try {
       const query = `
-      INSERT INTO pages (user_id, facility_doctor, specialty, description, address, overall_rating, is_facility, is_doctor, photo)
-      VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) 
+      INSERT INTO pages (user_id, facility_doctor, specialty, description, address, is_facility, is_doctor, photo)
+      VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
       RETURNING *`;
       const {
         rows: [page],
@@ -73,7 +70,6 @@ class Pages {
         specialty,
         description,
         address,
-        overall_rating,
         is_facility,
         is_doctor,
         photo

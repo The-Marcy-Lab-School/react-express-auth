@@ -10,7 +10,6 @@ exports.up = (knex) => {
     table.string("specialty");
     table.string("description", 500);
     table.string("address");
-    table.integer("overall_rating");
     table.boolean("is_facility");
     table.boolean("is_doctor");
     table.string("photo");

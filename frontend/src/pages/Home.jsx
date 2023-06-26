@@ -10,7 +10,7 @@ import { getAllUsers } from '../adapters/user-adapter';
  
 
 export default function DoctorsList() {
- 
+
   const [reviews, setReviews] = useState([]);
   const [allPages, setAllPages] = useState([]);
   const [users, setUsers] = useState([]);
@@ -25,7 +25,7 @@ export default function DoctorsList() {
     const filtered = doctors.filter((doc) => {
       const { facility_doctor, specialty } = doc;
       return facility_doctor.toLowerCase().includes(searchValue.toLowerCase()) || specialty.toLowerCase().includes(searchValue.toLowerCase())
-    
+
     })
     setFilteredObject(filtered)
   }
@@ -38,8 +38,7 @@ export default function DoctorsList() {
         setReviews(data);
       })
       .catch((error) => console.log(error));
-
-      getAllPages()
+    getAllPages()
       .then((data) => setAllPages(data))
       .catch((error) => console.log(error));
 
@@ -47,8 +46,6 @@ export default function DoctorsList() {
       .then((data) => setUsers(data))
       .catch((error) => console.log(error))
   }, []);
-
-
   return (
     <>
     <div className="navbar-start" style={{ flexGrow: 1, justifyContent: 'center', marginTop:"2vh" }}>
@@ -60,9 +57,8 @@ export default function DoctorsList() {
      />
   </p>
 
-</div>
-    </div>
-
+        </div>
+      </div>
 
       <h4>
         <NavLink to="/create-post" style={{color:"#FFC100", marginLeft:"1vh"}}>Can't Find a Doctor? Add One Here</NavLink>
