@@ -48,7 +48,7 @@ export default function GroceryList() {
               image_front_thumb_url: product.image_front_thumb_url,
               product_name: product.product_name,
               nutriscore_grade: product.nutriscore_grade,
-              nova_groups: product.nova_groups,
+              nova_groups: product.nova_group,
               item_id: product.item_id,
               grocery_list_id: product.grocery_list_id
             }}
