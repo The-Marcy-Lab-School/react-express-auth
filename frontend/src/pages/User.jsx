@@ -47,14 +47,14 @@ console.log(userProfile)
       <div className="card" id = 'usercard'>
   <div className="card-image">
     <figure className="image is-4by3">
-      <img src={userProfile.picture} alt="Placeholder image" />
+      <img src={userProfile.picture} alt="Placeholder image" id = 'userimage' />
     </figure>
   </div>
   <div className="card-content">
     <div className="media">
       <div className="media-content">
         <p className="title is-4">{userProfile.first_name} {userProfile.last_name}</p>
-        <p className="subtitle is-6">@{userProfile.username}</p>
+        <p className="subtitle is-6" id= 'username'>@{userProfile.username}</p>
         <p className="age">Age: {userProfile.age}</p>
         <p className="gender">Gender: {userProfile.gender}</p>
         <p className="race">Race: {userProfile.race}</p>
@@ -65,33 +65,15 @@ console.log(userProfile)
     </div>
 
     <div className="content">
-      <button onClick={handleLogout}>Log Out</button>
+      <button id= 'logoutbtn'onClick={handleLogout}>Log Out</button>
     </div>
   </div>
 </div>
 </div>
 
 
-<div className="userreviews">
-        <div className="box">
-          <div className="name">Amber Lambright</div>
-          <div className="rating">hi</div>
-          <div className="">5</div>
-          <div className="userSpecs">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-
 
       <div id="user-component">
-        <h1>{profileUsername}</h1>
-        {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
-        <p>If the user had any data, here it would be</p>
-        <p>Fake Bio or something</p>
         {
           !!isCurrentUserProfile
           && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />

@@ -94,7 +94,7 @@ const ReviewModal = ({id}) => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="button is-primary">
+        <button type="submit"  onClick={handleCloseModal} className="button is-primary">
                 Submit
               </button>
                 

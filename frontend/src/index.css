@@ -972,9 +972,25 @@ h4 {
 
 /*user page*/
 #usercard{
-  width:20vw;
-  margin-left: 5%;
+  width:30vw;
+  margin-left: 15%;
   margin-top: 3%;
+  box-shadow: none;
+}
+
+#userimage{
+  border-radius: 5%;
+}
+#username{
+  text-align: center;
+}
+#logoutbtn{
+  background-color: #132734;
+  color: #FFC100;
+  border: none;
+  border-radius:2vh;
+  height: 4vh;
+  width: 12vh;
 }
 
 .userreviews{
