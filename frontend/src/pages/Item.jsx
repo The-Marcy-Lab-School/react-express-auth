@@ -148,47 +148,54 @@ export default function Item() {
 
   // return <></>;
   return (
-    <>
-      <h1>Items Page</h1>
-      <div className="ui segment">
+    <div className="page-bg">
+      <div className="page-main">
         <div className="ui two column centered grid">
+          <h1 className="item-page-product-name">
+            {curProduct.product_name ? (
+              <h2>{`${curProduct.product_name}-${curProduct.quantity}`}</h2>
+            ) : (
+              <h2>{`${curProduct.brands_tags[0]}-${curProduct.quantity}`}</h2>
+            )}
+          </h1>
           <div className="row">
+            <p>
+              <strong>Stores: </strong>
+              {curProduct.stores}
+            </p>
+
             <div className="four wide column">
               <MissingImgItem img={curProduct.image_front_thumb_url} />
             </div>
+
             <div className="four wide column">
-              {curProduct.product_name ? (
-                <h2>{`${curProduct.product_name}-${curProduct.quantity}`}</h2>
-              ) : (
-                <h2>{`${curProduct.brands_tags[0]}-${curProduct.quantity}`}</h2>
-              )}
-              <p>
-                <strong>Stores: </strong>
-                {curProduct.stores}
-              </p>
-
-              <p>
-                <strong>Ingredints: </strong>
-                {curProduct.ingredients_text}
-              </p>
-              {/* TRY TO ADD WHERE IF NO ADDITIVES DO SHOW ATTRIBUTE */}
-              {curProduct.additives_original_tags.length !== 0 && (
-                <>
-                  <p>
-                    <strong>Additives: </strong>
-                    {curProduct.additives_original_tags.join(" ").toUpperCase()}
-                  </p>
-                  {additiveInfo.map((itemData, i) => (
-                    <Additives key={i} item={itemData} />
-                  ))}
-                </>
-              )}
-
               <br />
-              <div className="row">
+              <div className="nutri-scores">
                 <NutriScoreGrade props={curProduct.nutriscore_grade} />
                 <NovaScore props={curProduct.nova_group} />
               </div>
+
+              <div className="product-page-2nd-row">
+                <p>
+                  <strong>Ingredints: </strong>
+                  {curProduct.ingredients_text}
+                </p>
+                {/* TRY TO ADD WHERE IF NO ADDITIVES DO SHOW ATTRIBUTE */}
+                {curProduct.additives_original_tags.length !== 0 && (
+                  <>
+                    <p>
+                      <strong>Additives: </strong>
+                      {curProduct.additives_original_tags
+                        .join(" ")
+                        .toUpperCase()}
+                    </p>
+                    {additiveInfo.map((itemData, i) => (
+                      <Additives key={i} item={itemData} />
+                    ))}
+                  </>
+                )}
+              </div>
+
               {/* Wrap this button component in a Link */}
               <button
                 className="ui button fluid"
@@ -215,6 +222,6 @@ export default function Item() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
