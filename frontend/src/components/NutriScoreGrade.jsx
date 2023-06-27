@@ -6,8 +6,27 @@ import NutriGradeE from "../media/scores/nutriscore-e.svg";
 import NutriNotApplicable from "../media/scores/nutriscore-not-applicable.svg";
 
 export default function NutriScoreGrade({ props: nutriGrade }) {
+
+    const getBackgroundColor = () => {
+        if(nutriGrade === "a"){
+          return "#e8f4ed";
+        }else if(nutriGrade === "b"){
+          return "#dff2bd";
+        }else if(nutriGrade === "c"){
+          return "#fff4cd";
+        }else if(nutriGrade === "d"){
+          return "#ffe0ce";
+        }else if(nutriGrade === "e"){
+          return "#fdeeee";
+        }else{
+          return "#ededed";
+        }
+    };
+
+    const backgroundColor = getBackgroundColor();
+
   return (
-    <div id="nutri-div" className="ui segment">
+    <div id="nutri-div" className="ui segment" style={{ backgroundColor }}>
       <div className="ui three column grid">
         <div className="row">
           <div id="nutri-stats" className="column">

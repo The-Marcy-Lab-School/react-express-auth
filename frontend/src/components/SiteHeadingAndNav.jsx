@@ -32,8 +32,8 @@ export default function SiteHeadingAndNav() {
                 <NavLink to={`/users/${currentUser.id}`}>DashBoard</NavLink>
               </li>
               <li>
-                <NavLink to="/users" end={true}>
-                  Article
+                <NavLink to="/aboutus" end={true}>
+                  About
                 </NavLink>
               </li>
             </>
