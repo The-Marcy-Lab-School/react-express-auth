@@ -5,8 +5,6 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "../CreateForm.css";
 
-// export default function CreateSusu() {
-//     const getFetchOptions = (body, method = 'POST') => ({
 
 export default function CreateSusu() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -88,43 +86,3 @@ export default function CreateSusu() {
 }
 
        
-// export default function CreateSusu() {
-//   const { currentUser } = useContext(CurrentUserContext);
-// const [id, setID] = useState('');
-// const navigate = useNavigate();
-// const getFetchOptions = (body, method = 'POST') => ({
-// method,
-// credentials: 'include', // IMPORTANT, this tells fetch to include cookies
-// headers: { 'Content-Type': 'application/json' },
-// body: JSON.stringify(body),
-// });
-
-// const susuCreate = async (e) => {
-// e.preventDefault();
-// const form = e.target;
-// const formData = new FormData(form);
-// const formInfo = Object.fromEntries(formData.entries());
-// formInfo.owner = currentUser.id;
-// console.log(formInfo);
-// const options = getFetchOptions(formInfo, 'POST');
-// const result = await fetch(`/api/susu`, options);
-// const r = await result.json()
-// let susu_id = r.id
-// let user_id = currentUser.id
-// let make_payments = false
-// let cardoptions = getFetchOptions({user_id, susu_id, make_payments })
-// console.log(cardoptions)
-// const addcard = await fetch('/api/susuform', cardoptions)
-// navigate(`/susu/${susu_id}`);
-// }
-// return( <>
-// <form method="post" onSubmit={susuCreate}>
-// Creat Susu:
-// <label>
-// Susu Name: <input name="name" defaultValue="Enter Susu Name" />
-// Susu Password: <input name="password_hash" defaultValue="Enter Susu Password" />
-// </label>
-// <hr />
-// Fixed Amount: <label><input name ="payment_amount" defaultValue="1000"/></label>
-// <hr />
-// >>>>>>> main

@@ -7,8 +7,7 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const [user, error] = await updateUsername(Object.fromEntries(formData.entries()));
-    // If our user isn't who they say they are
-    // (an auth error on update) log them out
+    
     if (error?.status > 400 && error?.status < 500) {
       setCurrentUser(null);
       return navigate('/');
