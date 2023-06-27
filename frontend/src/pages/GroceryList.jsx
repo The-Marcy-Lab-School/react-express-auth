@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchHandler } from "../utils";
-import ProductInGroceryList from "./ProductInGroceryList";
+import ProductInGroceryList from "../components/ProductInGroceryList";
 
 export default function GroceryList() {
   const { id } = useParams();
@@ -44,6 +44,7 @@ export default function GroceryList() {
               product_name: product.product_name,
               nutriscore_grade: product.nutriscore_grade,
               nova_groups: product.nova_groups,
+              item_id: product.item_id
             }}
           />);
         })}

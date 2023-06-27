@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import NovaScore from "./NovaScore";
+import NutriScoreGrade from "./NutriScoreGrade"
+import MissingImgItem from "./MissingImgItem";
 
 export default function ProductCard({ item }) {
   const navigate = useNavigate();
@@ -11,7 +14,8 @@ export default function ProductCard({ item }) {
         }}
       >
         <div className="imageCard">
-          <img alt="oh no!" src={item.image_front_thumb_url} />
+          <MissingImgItem img={item.image_small_url}/>
+          {/*item.image_front_thumb_url */}
         </div>
         <div className="content">
           {item.product_name ? (
@@ -21,13 +25,12 @@ export default function ProductCard({ item }) {
           )}
           <div className="meta">
             <span>
-              <i className="icon-nutri-score" />
-              {item.nutriscore_grade}
+              <NutriScoreGrade props={item.nutriscore_grade}/>
             </span>
 
             <span>
               <i className="icon-nova-score" />
-              {item.nova_groups}
+                <NovaScore props={item.nova_group}/>
             </span>
           </div>
         </div>

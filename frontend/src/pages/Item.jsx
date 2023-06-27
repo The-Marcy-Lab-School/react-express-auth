@@ -5,7 +5,9 @@ import ProductContext from "../contexts/ProductContext";
 import CurrentUserContext from "../contexts/current-user-context";
 import { fetchHandler } from "../utils";
 import Additives from "../components/Additives";
-import GroceryList from "./GroceryList";
+import NutriScoreGrade from "../components/NutriScoreGrade";
+import NovaScore from "../components/NovaScore";
+import MissingImgItem from "../components/MissingImgItem";
 
 export default function Item() {
   const { id } = useParams();
@@ -21,7 +23,7 @@ export default function Item() {
     setSelectedValue(event.target.value);
   };
   const handleButtonClick = async () => {
-    if(selectedValue === "") return null;
+    if (selectedValue === "") return null;
     console.log("Button clicked for:", selectedValue);
     const newItem = {
       id: curProduct.id,
@@ -59,6 +61,7 @@ export default function Item() {
 
     // Perform any desired action based on the selected value
   };
+  console.log(curProduct)
 
   // console.log(currentUser.id)
   useEffect(() => {
@@ -74,7 +77,7 @@ export default function Item() {
         ecoscore_grade: product.ecoscore_grade,
         ingredients_text: product.ingredients_text,
         additives_original_tags: product.additives_original_tags,
-        image_front_thumb_url: product.image_front_thumb_url,
+        image_front_thumb_url: product.image_url,
         stores: product.stores,
         nutriscore_grade: product.nutriscore_grade,
         nova_group: product.nova_group,
@@ -112,42 +115,9 @@ export default function Item() {
   // console.log(option);
   // console.log(repeat);
   // doFetch();
-  console.log(additiveInfo)
+  console.log(additiveInfo);
   // const curProduct = getProduct();
 
-  // const [additiveInfo, setAdditiveInfo] = useState(null);
-  // const results = [];
-
-  // console.log({product})
-  // useEffect(() => {
-  //   // const doFetch = async() => {
-
-  //   //   for (const additive of additives) {
-  //   //     try {
-  //   //       if (!additive) return;
-  //   //       const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${additive.replace(
-  //   //         "en:",
-  //   //       ""
-  //   //       )}`;
-  //   //       console.log(additive);
-  //   //       console.log(url);
-  //   //       const res = await fetch(url);
-  //   //       console.log(res)
-  //   //       const data = await res.json();
-  //   //       const snippet = data.query.search[0].snippet.replace(/<[^>]+>|[^\w\s]/gi,'');
-  //   //       const title = data.query.search[0].title;
-  //   //       console.log("GAYYYYYY",snippet, title)
-  //   //       results.push({title, snippet});
-  //   //       console.log('hello', results)
-  //   //     } catch (err) {
-  //   //       console.log(err);
-  //   //       return null;
-  //   //     }
-  //   //   }
-  //   //   setAdditiveInfo(results);
-  //   // };
-  //   // doFetch();
-  // }, []);
   // console.log(results);
   // console.log(additiveInfo);
   // console.log(img);
@@ -185,11 +155,7 @@ export default function Item() {
         <div className="ui two column centered grid">
           <div className="row">
             <div className="four wide column">
-              <img
-                alt="oh no!"
-                className="ui medium image"
-                src={curProduct.image_front_thumb_url}
-              />
+              <MissingImgItem img={curProduct.image_front_thumb_url} />
             </div>
             <div className="four wide column">
               {curProduct.product_name ? (
@@ -214,33 +180,15 @@ export default function Item() {
                     {curProduct.additives_original_tags.join(" ").toUpperCase()}
                   </p>
                   {additiveInfo.map((itemData, i) => (
-                    <Additives key={i} item={itemData}/>
+                    <Additives key={i} item={itemData} />
                   ))}
                 </>
               )}
 
               <br />
               <div className="row">
-                <div className="ui segment">
-                  <div className="ui three column centered grid">
-                    <div className="row">
-                      <div className="column">
-                        <strong>
-                          Nutri-Score: {curProduct.nutriscore_grade}
-                        </strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="ui segment">
-                  <div className="ui three column centered grid">
-                    <div className="row">
-                      <div className="column">
-                        <strong>Nova Group: {curProduct.nova_group}</strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <NutriScoreGrade props={curProduct.nutriscore_grade} />
+                <NovaScore props={curProduct.nova_group} />
               </div>
               {/* Wrap this button component in a Link */}
               <button

@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import ProductContext from "../contexts/ProductContext";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "./ProductCard";
 
 export default function ProductsList() {
   const { products, setPage, page } = useContext(ProductContext);
@@ -17,8 +17,15 @@ export default function ProductsList() {
           return <ProductCard key={product._id} item={product} />;
         })}
       </div>
-      <button onClick={handlerNextPage}>Next</button>
-      <button onClick={handlerPreviousPage}>Previous</button>
+
+      <div className="buttonNextPrev">
+        <button className="previousButton" onClick={handlerPreviousPage}>
+          Previous
+        </button>
+        <button className="nextButton" onClick={handlerNextPage}>
+          Next
+        </button>
+      </div>
     </>
   );
 }
