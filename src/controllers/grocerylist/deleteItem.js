@@ -1,12 +1,12 @@
 const deleteItem = async (req, res) => {
     const {
-      db: { Grocery_list, Items },
-      params: { grocerylist_Id, item_Id },
+      db: { Grocery_list},
+      params: { grocerylist_id, item_id },
     } = req
   
     
   
-    const result = await Grocery_list.deleteItem(grocerylist_Id, item_Id);
+    const result = await Grocery_list.deleteItem(grocerylist_id, item_id);
     res.sendStatus(result ? 204 : 404);
      
   
