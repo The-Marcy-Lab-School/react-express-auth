@@ -6,32 +6,58 @@ import NovaScoreUnknown from "../media/scores/nova-score-unknown.svg";
 
 export default function NovaScore({ props: novaGroup }) {
   console.log("NovaScore", novaGroup);
+
+  const getBackgroundColor = () => {
+    if (novaGroup === 1) {
+      return "#e8f4ed";
+    } else if (novaGroup === 2) {
+      return "#fff4cd";
+    } else if (novaGroup === 3) {
+      return "#ffe0ce";
+    } else if (novaGroup === 4) {
+      return "#fdeeee";
+    } else {
+      return "#ededed";
+    }
+  };
+  const backgroundColor = getBackgroundColor();
+
   return (
-        <div id="nova-div" className="ui segment">
-          <div className="ui one column grid">
-            <div className="row">
-              <div id="nutri-stats" className="column">
-                <strong>
-                  <img
-                    alt={`Nova Score ${novaGroup}`}
-                    src={
-                      novaGroup === 1
-                        ? NovaScore1
-                        : novaGroup === 2
-                        ? NovaScore2
-                        : novaGroup === 3
-                        ? NovaScore3
-                        : novaGroup === 4
-                        ? NovaScore4
-                        : NovaScoreUnknown
-                    }
-                    style={{ width: "34px", height: "65px" }}
-                  />
-                </strong>
-                <p id="nutri-details">{novaGroup === 1 ? "Unprocessed or minimally" : novaGroup === 2 ? "Processed or minimally" : novaGroup === 3 ? "Processed foods" : novaGroup === 4 ? "Ultra processed foods" : "Unknown"}</p>
-              </div>
-            </div>
+    <div id="nova-div" className="ui segment" style={{ backgroundColor }}>
+      <div className="ui one column grid">
+        <div className="row">
+          <div id="nutri-stats" className="column">
+            <strong>
+              <img
+                alt={`Nova Score ${novaGroup}`}
+                src={
+                  novaGroup === 1
+                    ? NovaScore1
+                    : novaGroup === 2
+                    ? NovaScore2
+                    : novaGroup === 3
+                    ? NovaScore3
+                    : novaGroup === 4
+                    ? NovaScore4
+                    : NovaScoreUnknown
+                }
+                style={{ width: "34px", height: "65px" }}
+              />
+            </strong>
+            <p id="nutri-details">
+              {novaGroup === 1
+                ? "Unprocessed or minimally"
+                : novaGroup === 2
+                ? "Processed or minimally"
+                : novaGroup === 3
+                ? "Processed foods"
+                : novaGroup === 4
+                ? "Ultra processed foods"
+                : "Unknown"}
+            </p>
           </div>
         </div>
+      </div>
+    </div>
   );
 }
