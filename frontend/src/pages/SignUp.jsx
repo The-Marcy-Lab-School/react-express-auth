@@ -57,10 +57,6 @@ export default function SignUpPage() {
         value={password}
       />
 
-      {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
-        <label htmlFor="password-confirm">Password Confirm</label>
-        <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
-      */}
 
       <button>Sign Up Now!</button>
     </form>
