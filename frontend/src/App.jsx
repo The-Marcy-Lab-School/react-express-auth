@@ -7,11 +7,11 @@ import SiteHeadingAndNav from "./components/SiteHeadingAndNav";
 import Page404 from "./pages/Page404";
 import UserContext from "./contexts/current-user-context";
 import { checkForLoggedInUser } from "./adapters/auth-adapter";
-import UsersPage from "./pages/Users";
 import UserDashBoard from "./pages/UserDashBoard";
 import UserHome from "./pages/UserHome";
 import Item from "./pages/Item";
 import GroceryList from "./pages/GroceryList";
+import AboutUs from "./pages/AboutUs";
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -27,7 +27,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/users" element={<UsersPage />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/users/:id" element={<UserDashBoard />} />
           <Route path="/users/search" element={<UserHome />} />
           <Route path="/product/:id" element={<Item />} />

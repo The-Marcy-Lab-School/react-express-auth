@@ -7,7 +7,7 @@ import NovaScoreUnknown from "../media/scores/nova-score-unknown.svg";
 export default function NovaScore({ props: novaGroup }) {
   console.log("NovaScore", novaGroup);
   return (
-        <div className="ui segment">
+        <div className="ui segment" >
           <div className="ui one column grid">
             <div className="row">
               <div className="column">
