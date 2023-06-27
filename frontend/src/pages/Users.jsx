@@ -31,6 +31,14 @@ export default function UsersPage() {
 
   console.log(findUserIdByName("ayaz"));
 
+  const handlePing = async(username) => {
+    const friendId = findUserIdByName(username);
+    const [data, error] = await fetchHandler(`/api/friends`, {
+      
+    });
+    console.log(`Pinging ${username}`);
+  };
+
   const handleAddFriend = async (username) => {
     const friendId = findUserIdByName(username);
     const [data, error] = await fetchHandler(
@@ -62,19 +70,20 @@ export default function UsersPage() {
           <h1 className="list-title">Friends</h1>
           <div>
             {friends.map((friend) => {
-              // return (
-              //   <UserFriendsCard
-              //     key={friend.id}
-              //     friend={friend.username}
-              //     onClick={() => handleRemoveFriend(friend.username)}
-              //   />
-              // );
-              <UserItem
-                key={friend.id}
-                user={friend.username}
-                onPing={handlePing}
-                onRemoveFriend={handleRemoveFriend}
-              />
+              return (
+                <UserFriendsCard
+                  key={friend.id}
+                  friend={friend.username}
+                  onPing={() => handlePing(friend.username)}
+                  onClick={() => handleRemoveFriend(friend.username)}
+                />
+              );
+              // <UserItem
+              //   key={friend.id}
+              //   user={friend.username}
+              //   onPing={handlePing}
+              //   onRemoveFriend={handleRemoveFriend}
+              // />
             })}
           </div>
         </div>
@@ -82,19 +91,20 @@ export default function UsersPage() {
           <h1 className="list-title">Users</h1>
           <div>
             {users.map((user) => {
-              // return (
-              //   <FriendsCard
-              //     key={user.id}
-              //     user={user.username}
-              //     onClick={() => handleAddFriend(user.username)}
-              //   />
-              // );
-              <UserItem
-                key={user.id}
-                user={user.username}
-                onPing={handlePing}
-                onAddFriend={handleAddFriend}
-              />
+              return (
+                <FriendsCard
+                  key={user.id}
+                  user={user.username}
+                  onPing={() => handlePing(user.username)}
+                  onClick={() => handleAddFriend(user.username)}
+                />
+              );
+              // <UserItem
+              //   key={user.id}
+              //   user={user.username}
+              //   onPing={handlePing}
+              //   onAddFriend={handleAddFriend}
+              // />
             })}
           </div>
         </div>
