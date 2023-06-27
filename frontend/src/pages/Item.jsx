@@ -61,6 +61,7 @@ export default function Item() {
 
     // Perform any desired action based on the selected value
   };
+  console.log(curProduct)
 
   // console.log(currentUser.id)
   useEffect(() => {
