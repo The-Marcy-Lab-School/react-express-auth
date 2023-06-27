@@ -22,72 +22,12 @@ export default function App() {
     <>
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                {" "}
-                <SiteHeadingAndNav />
-                <Home />
-              </>
-            }
-          />
-          <Route
-            path="/home"
-            element={
-              <>
-                <SiteHeadingAndNav />
-                <Home />
-              </>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <>
-                <SiteHeadingAndNav />
-                <LoginPage />
-              </>
-            }
-          />
-          <Route
-            path="/sign-up"
-            element={
-              <>
-                <SiteHeadingAndNav />
-                <SignUpPage />
-              </>
-            }
-          />
-          <Route
-            path="/users"
-            element={
-              <>
-                {" "}
-                <SiteHeadingAndNav />
-                <UsersPage />
-              </>
-            }
-          />
-          <Route
-            path="/users/:id"
-            element={
-              <>
-                {" "}
-                <SiteHeadingAndNav />
-                <UserPage />
-              </>
-            }
-          />
-          <Route
-            path="/disaster"
-            element={
-              <>
-                <SiteHeadingAndNav />
-                <Disaster />
-              </>
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/:id" element={<UserPage />} />
+          <Route path="/disaster/:eventId" element={<Disaster />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
