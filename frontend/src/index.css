@@ -535,6 +535,17 @@ padding:20vh;
  width: 200px; */
 } 
 
+/*user page*/
+#usercard{
+  width:20vw;
+  margin-left: 5%;
+  margin-top: 3%;
+}
+
+.userreviews{
+  display: flex;
+  justify-content:flex-end;
+}
 
 @media screen and (max-width: 768px) {
   .createpost-form {
