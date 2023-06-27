@@ -4,8 +4,7 @@
 /* eslint-disable func-style */
 import React, { useEffect, useState, useContext } from 'react';
 import CurrentUserContext from '../contexts/current-user-context.js';
-import { apiFetchHandler } from '../utils'
-
+import { apiFetchHandler } from '../utils';
 
 // ------------------List of Events ----------------
 function EventList() {
@@ -19,7 +18,7 @@ function EventList() {
 
         setEvents(filteredEvents);
         updateEventData(data);
-        console.log("DATA:", data);
+        // console.log("DATA:", data);
 
         // Store the data in local storage
         localStorage.setItem('eventsData', JSON.stringify(data));
@@ -66,7 +65,7 @@ function EventList() {
   const latitude1 = 75;
   const longtitude2 = 65;
   const longtitude1 = 64;
-  const convertToMiles = (latitude2, latitude1, longtitude2, longtitude1) => {
+  const convertToMiles = () => {
     const math = Math.floor(
       Math.sqrt(
         (latitude2 * 69 - latitude1 * 69) * (latitude2 * 69 - latitude1 * 69)
@@ -113,18 +112,6 @@ function EventList() {
       ))}
     </dl>
   );
-  // return (
-  //   <React.Fragment>
-  //     <div id=""></div>
-  //     <dl id="layerList">
-  //       {layers.map((layer) => (
-  //         <React.Fragment key={layer.id}>
-  //           <dt>{layer.name}</dt>
-  //         </React.Fragment>
-  //       ))}
-  //     </dl>
-  //   </React.Fragment>
-  // );
 }
 
 function Event() {

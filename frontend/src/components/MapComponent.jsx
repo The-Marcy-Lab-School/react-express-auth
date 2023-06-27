@@ -24,7 +24,6 @@ const MapComponent = () => {
   const events = eventData?.events;
   const data = events?.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
   const navigate = useNavigate();
-
   // const [eventLatitude, setEventLatitude] = useState(data[0].geometry[0]?.coordinates[0]); 
   // const [eventLongitude, setEventLongitude] = useState(data[0].geometry[0]?.coordinates[1]);
 
@@ -48,7 +47,8 @@ const MapComponent = () => {
     const map = new mapboxgl.Map({
       container: 'map', // container ID
       style: 'mapbox://styles/treyjaded/cliwe9c1002ak01qhag512fac', // style URL
-      // DARK STYLE: mapbox://styles/mapbox/dark-v11
+      // DARK STYLE:     mapbox://styles/mapbox/dark-v11
+      // CUSTOM TREVON STYLE:   mapbox://styles/treyjaded/cliwe9c1002ak01qhag512fac
       center: [myLongitude, myLatitude], // starting position [lng, lat] NJ = [-74.5, 40]
       zoom: 9, // starting zoom
     });
@@ -173,7 +173,7 @@ const MapComponent = () => {
           });
           
           el.addEventListener('click', () => (
-            navigate('/disaster')// Navigate to the "/disaster" page
+            navigate(`/disaster/${data[i]?.id}`)// Navigate to the "/disaster" page with the specified ID
           ));
         });
       }

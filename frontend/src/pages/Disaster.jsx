@@ -2,12 +2,18 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable func-style */
+import { useParams, useLocation } from 'react-router-dom';
 import React, { useEffect, useState, useContext } from "react";
 import CurrentUserContext from '../contexts/current-user-context.js';
 
 function InfoList() {
   const [events, setEvents] = useState([]);
   const { eventData, userLocation, updateEventData } = useContext(CurrentUserContext); // Data from MapComponent
+
+  const { eventId } = useParams();
+
+  const eventsId = events.map((event) => event.id);
+  console.log(eventId);
 
   useEffect(() => {
     // Retrieve data from local storage
@@ -19,35 +25,54 @@ function InfoList() {
 
       setEvents(filteredEvents);
       updateEventData(parsedData);
-      console.log(parsedData);
     }
   }, []);
 
+  // return (
+  //   <div>
+  //     <h2>Disaster Page</h2>
+  //     <p>Event ID: {eventId}</p>
+  //     {/* Render the rest of the page */}
+  //   </div>
+  // );
+
+  const selectedEvent = events.find((event) => event.id === eventId); // find the selected event.
+
   return (
-    <dl className="eventList">
-      {events.map((event) => (
-        <React.Fragment key={event.id}>
-          <li>
-            <a href="#">
-              <div className="eventRow">
-                <div className="date">{event.geometry[0].date}</div>
-                {event.categories.map((category) => (
-                  <div className="eventType" key={category.id}>
-                    {category.title}
-                  </div>
-                ))}
-                <div className="eventTitle">{event.title}</div>
+    <div className="container">
+      <dl className="disasterList">
+        {selectedEvent && (
+          <React.Fragment key={selectedEvent.id}>
+            <li>
+              <a href="#">
+                <div className="disasterRow">
+                  <div className="disasterDate">{selectedEvent.geometry[0].date}</div>
+                  {selectedEvent.categories.map((category) => (
+                    <div className="disasterType" key={category.id}>
+                      {category.title}
+                    </div>
+                  ))}
+                  <div className="disasterTitle">{selectedEvent.title}</div>
+                </div>
+                {selectedEvent.description && (
+                  <dd className="disasterDd">
+                    <em>{selectedEvent.description}</em>
+                  </dd>
+                )}
+              </a>
+              <div className="disasterDetails">
+                <div className="disasterLocation">Location: New York</div>
+                <div className="disasterTime">Time: 10:00 AM</div>
+                <div className="disasterParticipants">Participants: 50</div>
               </div>
-              {event.description && (
-                <dd>
-                  <em>{event.description}</em>
-                </dd>
-              )}
-            </a>
-          </li>
-        </React.Fragment>
-      ))}
-    </dl>
+            </li>
+          </React.Fragment>
+        )}
+      </dl>
+      <footer className="footer">
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
+      </footer>
+    </div>
   );
 }
 

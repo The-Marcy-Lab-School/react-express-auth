@@ -20,7 +20,7 @@ export default function SafeButton() {
 
   return (
     <button className='safe-button' onClick={clickHandler}>
-
+      Solace
     </button>
   );
 }
