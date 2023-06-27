@@ -2,62 +2,58 @@ import React, { useState, useContext } from 'react';
 import CurrentUserContext from "../contexts/current-user-context";
 import { createReview } from "../adapters/review-adapter";
 import 'bulma/css/bulma.css';
-
-const ReviewModal = ({id}) => {
+const ReviewModal = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [review_body, setReview_body] = useState('');
   const [errorText, setErrorText] = useState('');
+  const [staff_friendliness, setStaffFriendliness] = useState(0);
+  const [wait_times, setWaitTimes] = useState(0);
+  const [quality_of_care, setQualityOfCare] = useState(0);
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  
   const handleOpenModal = () => {
-
     setShowModal(true);
-  
   };
-
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("handlesubmit")
-    const user = currentUser
+    const user = currentUser;
     const page_id = id;
-    const user_id = user.id
-    console.log(page_id)
-    console.log(user_id)
-    const [review, error] = await createReview({user_id, page_id, review_body, rating})
+    const user_id = user.id;
+    const [review, error] = await createReview({
+      user_id,
+      page_id,
+      review_body,
+      rating,
+      staff_friendliness,
+      wait_times,
+      quality_of_care,
+    });
     if (error) {
       setErrorText(error.statusText);
-      console.log(setErrorText(error.statusText))
     } else {
-      // setCurrentUser(user);
-      setFormSubmitted(true); // Set the formSubmitted state variable to true
+      // Assuming review is the newly created review object
+      // Update the reviews state or perform any necessary action
+      // to display the new review
+      setFormSubmitted(true);
     }
-    // Perform any necessary actions with the rating and review data
-
     setRating(0);
     setReview_body('');
-    // setShowModal(false);
   };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if(name === 'review_body') setReview_body(value)
-    if(name === 'rating') setRating(value)
-    console.log(value)
-
-  }
-  
-
+    if (name === 'review_body') setReview_body(value);
+    if (name === 'rating') setRating(value);
+    if (name === 'staff_friendliness') setStaffFriendliness(value);
+    if (name === 'wait_times') setWaitTimes(value);
+    if (name === 'quality_of_care') setQualityOfCare(value);
+  };
   return (
     <div>
-      <button className="reviewButton" onClick={handleOpenModal}>Write A Review</button>
-
+      <button className="button reviewButton" onClick={handleOpenModal}>Write A Review</button>
       {showModal && (
         <div className="modal is-active">
           <div className="modal-background" onClick={handleCloseModal}></div>
@@ -73,46 +69,92 @@ const ReviewModal = ({id}) => {
             <section className="modal-card-body">
               <form onSubmit={handleSubmit} onChange={handleChange}>
                 {/* Form fields */}
-                <div>
-          <label htmlFor="rating">Rating (out of 5):</label>
-          <input
-            type="number"
-            id="rating"
-            min="0"
-            max="5"
-            name="rating"
-            value={rating}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="review_body">Review:</label>
-          <textarea
-            id="review_body"
-            name="review_body"
-            value={review_body}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit"  onClick={handleCloseModal} className="button is-primary">
-                Submit
-              </button>
-                
+                <div className="field">
+                  <label htmlFor="rating" className="label">Rating (out of 5):</label>
+                  <div className="control">
+                    <input
+                      type="number"
+                      id="rating"
+                      min="0"
+                      max="5"
+                      name="rating"
+                      value={rating}
+                      onChange={handleChange}
+                      className="input"
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label htmlFor="review_body" className="label">Review:</label>
+                  <div className="control">
+                    <textarea
+                      id="review_body"
+                      name="review_body"
+                      value={review_body}
+                      onChange={handleChange}
+                      className="textarea"
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label htmlFor="staff_friendliness" className="label">Staff Friendliness (out of 5):</label>
+                  <div className="control">
+                    <input
+                      type="number"
+                      id="staff_friendliness"
+                      min="0"
+                      max="5"
+                      name="staff_friendliness"
+                      value={staff_friendliness}
+                      onChange={handleChange}
+                      className="input"
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label htmlFor="wait_times" className="label">Wait Times (out of 5):</label>
+                  <div className="control">
+                    <input
+                      type="number"
+                      id="wait_times"
+                      min="0"
+                      max="5"
+                      name="wait_times"
+                      value={wait_times}
+                      onChange={handleChange}
+                      className="input"
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label htmlFor="quality_of_care" className="label">Quality of Care (out of 5):</label>
+                  <div className="control">
+                    <input
+                      type="number"
+                      id="quality_of_care"
+                      min="0"
+                      max="5"
+                      name="quality_of_care"
+                      value={quality_of_care}
+                      onChange={handleChange}
+                      className="input"
+                    />
+                  </div>
+                </div>
+                <div className="field is-grouped">
+                  <div className="control">
+                    <button type="submit" className="button is-link">Submit</button>
+                  </div>
+                  <div className="control">
+                    <button className="button" onClick={handleCloseModal}>Cancel</button>
+                  </div>
+                </div>
               </form>
             </section>
-            <footer className="modal-card-foot">
-
-    
-              <button className="button" onClick={handleCloseModal}>
-                Cancel
-              </button>
-            </footer>
           </div>
         </div>
       )}
     </div>
-  ); 
-   
+  );
 };
-
 export default ReviewModal;
