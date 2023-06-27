@@ -6,9 +6,22 @@ import React, { useEffect, useState, useContext } from "react";
 import CurrentUserContext from '../contexts/current-user-context.js';
 
 function InfoList() {
-  const { eventData, userLocation } = useContext(CurrentUserContext); // Data from MapComponent
-  const events = eventData?.events;
-  const data = events?.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
+  const [events, setEvents] = useState([]);
+  const { eventData, userLocation, updateEventData } = useContext(CurrentUserContext); // Data from MapComponent
+
+  useEffect(() => {
+    // Retrieve data from local storage
+    const storedData = localStorage.getItem('eventsData');
+
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      const filteredEvents = parsedData?.events.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
+
+      setEvents(filteredEvents);
+      updateEventData(parsedData);
+      console.log(parsedData);
+    }
+  }, []);
 
   return (
     <dl className="eventList">
@@ -39,10 +52,10 @@ function InfoList() {
 }
 
 const Disaster = () => (
-    <div>
-        <InfoList />
-        {/* Add your content here */}
-    </div>
+  <div>
+    <InfoList />
+    {/* Add your content here */}
+  </div>
 );
 
 export default Disaster;

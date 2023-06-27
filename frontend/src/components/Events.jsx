@@ -20,14 +20,17 @@ function EventList() {
         setEvents(filteredEvents);
         updateEventData(data);
         console.log("DATA:", data);
+
+        // Store the data in local storage
+        localStorage.setItem('eventsData', JSON.stringify(data));
       })
       .catch((error) => console.log(error));
   };
 
   const fetchProcessed = async () => {
-    const data = await apiFetchHandler('/api/events')
-    console.log(data)
-  }
+    const data = await apiFetchHandler('/api/events');
+    console.log(data);
+  };
 
   useEffect(() => {
     fetchEvents();
@@ -92,7 +95,6 @@ function EventList() {
                 <div className="eventTitle">{event.title}</div>
                 <div className="distance">
                   {convertToMiles(
-                    console.log("events:", event.id),
                     latitude2,
                     latitude1,
                     longtitude2,
