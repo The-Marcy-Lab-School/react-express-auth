@@ -138,12 +138,7 @@ WHERE grocery_list_id = ?
       return null;
     }
   }
-  // static async destroyAll() {
-  //   await knex.raw('DELETE FROM grocery_items_table;');
-  //   await knex.raw('DELETE FROM user_groceries;');
-  //   const deleted = await knex.raw('DELETE FROM grocery_list;');
-  //   return deleted
-  // }
+ 
   //deleting/removing an item from list
   deleteRate = async (list_name, nova_rate, nutri_score) => {
     const deletedRate = await knex('grocery_list')

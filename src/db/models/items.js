@@ -76,9 +76,7 @@ class Items {
       return null;
     }
   }
-  //   const deleted = await knex.raw('Items').del();
-  //   return deleted;
-  // }
+  
 
 
   //deleting/removing an item from list
