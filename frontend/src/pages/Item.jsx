@@ -26,7 +26,7 @@ export default function Item() {
     if (selectedValue === "") return null;
     console.log("Button clicked for:", selectedValue);
     const newItem = {
-      id: curProduct.id,
+      id: curProduct.id ? curProduct.id : null,
       product_name: curProduct.product_name
         ? curProduct.product_name
         : curProduct.quantity + curProduct.brands_tags[0],
@@ -46,6 +46,7 @@ export default function Item() {
       nutriscore_grade: curProduct.nutriscore_grade,
       nova_group: Number(curProduct.nova_group),
     };
+    // console.log(newItems)
     try {
       await fetchHandler(`/api/grocerylist/${selectedValue}/items`, {
         method: "POST",
@@ -70,7 +71,7 @@ export default function Item() {
       const product = await products.find(
         (product) => Number(product._id) === Number(id)
       );
-
+        console.log(product)
       const extractProperties = {
         product_name: product.product_name,
         quantity: product.quantity,
@@ -81,7 +82,7 @@ export default function Item() {
         stores: product.stores,
         nutriscore_grade: product.nutriscore_grade,
         nova_group: product.nova_group,
-        id: product.id,
+        id: product._id,
         brands_tags: product.brands_tags,
       };
       setCurProduct(extractProperties);

@@ -169,7 +169,35 @@ WHERE grocery_list_id = ?
       }
     }
       
-      
+    static async updateNovaScore(groceryListId) {
+      try {
+        // Calculate the average nova_score using SQL aggregation
+        const query = `
+          UPDATE grocery_list
+          SET nova_rate = (
+            SELECT AVG(items.nova_group)
+            FROM grocery_items_table
+            JOIN items ON grocery_items_table.item_id = items.id
+            WHERE grocery_items_table.grocery_list_id = ?
+          )
+          WHERE id = ?
+          RETURNING nova_rate
+        `;
+        
+        const { rows } = await knex.raw(query, [groceryListId, groceryListId]);
+    
+        if (rows.length > 0) {
+          const updatedNovaScore = rows[0].nova_score;
+          return updatedNovaScore;
+        } else {
+          return null; // Grocery list not found or no items in the list
+        }
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
+    }
+    
         
       
       
