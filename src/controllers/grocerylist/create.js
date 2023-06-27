@@ -5,10 +5,10 @@ const createGrocery = async (req, res) => {
     body: { list_name, nova_rate, nutri_score },
   } = req;
   // session.userId = user.id;
-  const Grocery = await Grocery_list.create( list_name, nova_rate, nutri_score, userId);
+  const Grocery = await Grocery_list.create(list_name, nova_rate, nutri_score, userId);
 
 
-  res.send( Grocery );
+  res.send(Grocery);
 };
 
 module.exports = createGrocery;

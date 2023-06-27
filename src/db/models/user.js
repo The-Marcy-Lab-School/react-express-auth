@@ -8,7 +8,7 @@ class User {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
-    
+
   }
 
   static async list() {

@@ -15,7 +15,7 @@ module.exports = {
   update,
   listItems,
   destroy,
-deleteItem
+  deleteItem
   // login,
   // logout,
   // showMe,
