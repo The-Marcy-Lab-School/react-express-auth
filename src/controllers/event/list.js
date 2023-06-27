@@ -21,7 +21,7 @@ const fetchData = async (url) => {
     const processed = []
 
     const { features : disasters } = await fetchData('https://api.weather.gov/alerts/active?severity=Severe&limit=1')
-    const users = await fetchData('http://localhost:3000/api/users')
+    const users = await fetchData(`http://localhost:3000/api/users`)
     const filtered = disasters.filter( disaster => !!disaster.geometry)
     filtered.forEach(disaster => {
       const { geometry: { coordinates } } = disaster 

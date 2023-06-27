@@ -7,6 +7,8 @@ const updateUser = async (req, res) => {
     body: { isSafe },
   } = req;
 
+  if (!userId) return res.sendStatus(404);
+
   const user = await User.updateSafe(userId, isSafe);
   if (!user) return res.sendStatus(404);
   return res.send(user).status(200).end();

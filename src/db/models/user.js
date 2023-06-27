@@ -34,10 +34,10 @@ class User {
   static async updateSafe(id, isSafe) {
     console.log(isSafe)
     const query = `
-    UPDATE users
-    SET is_safe = ?
-    WHERE id = ?
-    RETURNING *;`;
+      UPDATE users
+      SET is_safe = ?
+      WHERE id = ?
+      RETURNING *;`;
     const { rows: [user] } = await knex.raw(query, [isSafe, id]);
     return user ? new User(user) : null;
   }
