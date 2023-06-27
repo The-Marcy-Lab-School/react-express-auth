@@ -33,7 +33,7 @@ Router.delete('/grocerylist/:grocerylist_id/:item_id',groceryController.deleteIt
 Router.post('/itemslist', itemsController.create);
 Router.get('/itemslist', itemsController.list);
 Router.delete('/itemslist/:id', itemsController.destroy);
-Router.delete('/itemslist/:id',itemsController.deleteItem);// deletes one specific item
+Router.delete('/itemslist/:id',itemsController.deleteItems);// deletes one specific item
 Router.patch('/itemslist/:id',itemsController.update );
 
 

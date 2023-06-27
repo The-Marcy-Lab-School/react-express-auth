@@ -44,7 +44,7 @@ export default function Item() {
         : null,
       stores: curProduct.stores ? curProduct.stores : null,
       nutriscore_grade: curProduct.nutriscore_grade,
-      nova_group: Number(curProduct.nove_group),
+      nova_group: Number(curProduct.nova_group),
     };
     try {
       await fetchHandler(`/api/grocerylist/${selectedValue}/items`, {
@@ -61,6 +61,7 @@ export default function Item() {
 
     // Perform any desired action based on the selected value
   };
+  // console.log(curProduct.nova_group)
 
   // console.log(currentUser.id)
   useEffect(() => {
@@ -87,6 +88,8 @@ export default function Item() {
       setAdditiveInfo(extractProperties.additives_original_tags);
       setLoading(false);
     };
+    // console.log(product.nova_group)
+
     const userAmountGroceryList = async () => {
       try {
         const res = await fetchHandler(`/api/grocerylist/${currentUser.id}`, {
@@ -110,6 +113,7 @@ export default function Item() {
   console.log(option);
   console.log(curProduct);
   console.log(additiveInfo);
+
   // console.log(results);
   // console.log(option);
   // console.log(repeat);

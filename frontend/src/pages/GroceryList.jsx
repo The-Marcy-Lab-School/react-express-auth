@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { fetchHandler } from "../utils";
 import ProductInGroceryList from "../components/ProductInGroceryList";
+import ProductContext from "../contexts/ProductContext";
 
 export default function GroceryList() {
   const { id } = useParams();
   const [itemList, setItemList] = useState([]);
+  const {removeItem, setRemoveItem} = useContext(ProductContext);
   console.log(id);
 
   useEffect(() => {
+    if(removeItem){
+      setRemoveItem(false);
+    }
     const groceryList = async () => {
       try {
         const res = await fetchHandler(`/api/grocerylist/${id}/items`, {
@@ -27,7 +32,7 @@ export default function GroceryList() {
       }
     };
     groceryList();
-  }, [id]);
+  }, [id, removeItem]);
 
   console.log(typeof itemList);
   console.log(itemList);
@@ -44,6 +49,8 @@ export default function GroceryList() {
               product_name: product.product_name,
               nutriscore_grade: product.nutriscore_grade,
               nova_groups: product.nova_groups,
+              item_id: product.item_id,
+              grocery_list_id: product.grocery_list_id
             }}
           />);
         })}
