@@ -6,6 +6,8 @@ const checkAuthentication = require('./middleware/check-authentication');
 const Router = express.Router();
 Router.use(addModels);
 
+Router.get('/user/:username', userController.findUser);
+
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);
