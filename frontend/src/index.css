@@ -278,3 +278,123 @@ form {
   padding: 8px 16px;
   max-width: 280px;
 }
+
+/* ================ Disaster Page Feed component style ============== */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.disasterList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.disasterList li {
+  flex: 1;
+
+}
+
+.disasterList li a {
+  display: block;
+  padding: 10px;
+  border: 1px solid #333;
+  border-bottom: 1px #1c2026 solid;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #d6d0d0;
+  text-decoration: none;
+}
+
+.disasterList li a:hover {
+  background-color: #464141;
+}
+.disasterRow {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+}
+
+.disasterDate {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.disasterType {
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+}
+
+.disasterTitle {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.disasterDd {
+  margin-top: 0.5rem;
+}
+
+.disasterDetails {
+  background-color: #f2f2f2;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.disasterLocation,
+.disasterTime,
+.disasterParticipants {
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+/* styles.css */
+
+/* Reset */
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.hero {
+  position: relative;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.hero-title {
+  
+}
