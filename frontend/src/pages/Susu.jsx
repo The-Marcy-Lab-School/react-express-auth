@@ -5,8 +5,13 @@ import CurrentSusuContextProvider from "../contexts/SusuContextProvider";
 function Susu() {
   const { currentSusulist } = useContext(CurrentSusuContextProvider);
 
+<<<<<<< Updated upstream
   console.log(currentSusulist);
 
+=======
+  // console.log(currentSusulist);
+  
+>>>>>>> Stashed changes
   return (
     <>
       {currentSusulist.map((susu) => (
