@@ -70,7 +70,7 @@ export default function GroceryCard({ grocery }) {
               if (index < 3) {
                 return (
                   <div key={index}>
-                    <img alt="oh no!" src={item.image_front_thumb_url} />
+                    <img className="grocery-preview-image" alt="oh no!" src={item.image_front_thumb_url} />
                   </div>
                 );
               }

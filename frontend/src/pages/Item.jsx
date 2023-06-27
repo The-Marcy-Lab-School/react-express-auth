@@ -71,7 +71,7 @@ export default function Item() {
       const product = await products.find(
         (product) => Number(product._id) === Number(id)
       );
-        console.log(product)
+      console.log(product);
       const extractProperties = {
         product_name: product.product_name,
         quantity: product.quantity,
@@ -136,6 +136,22 @@ export default function Item() {
 
   if (!curProduct) return <Page404 />;
 
+  // console.log(product);
+  // console.log( typeof product.product_name)
+  //   console.log(product.brands_tags[0]);
+  // console.log("Name:", name);
+  // console.log("EcoScore", ecoscore);
+  // console.log("Ingredients:", ingredient);
+  // console.log("Additives:", additives);
+  // console.log("Img:", img);
+  // console.log("Store:", store);
+  // console.log("Nutri", nutri);
+  // console.log("Nova", nova);
+  // console.log("Id", ID);
+  // //   console.log(product);
+  // console.log("Quantity:", product.quantity);
+
+  // return <></>;
   return (
     <div className="page-bg">
       <div className="page-main">
@@ -148,69 +164,70 @@ export default function Item() {
             )}
           </h1>
           <div className="row">
-            <p>
-              <strong>Stores: </strong>
-              {curProduct.stores}
-            </p>
+            <div className="product-page-1st-row">
+              <p id="stores-info">
+                <strong>Stores: </strong>
+                {curProduct.stores}
+              </p>
 
-            <div className="four wide column">
-              <MissingImgItem img={curProduct.image_front_thumb_url} />
+              <div className="four wide column">
+                <MissingImgItem img={curProduct.image_front_thumb_url} />
+              </div>
+
+              <div className="four wide column">
+                <br />
+                <div className="nutri-scores">
+                  <NutriScoreGrade props={curProduct.nutriscore_grade} />
+                  <NovaScore props={curProduct.nova_group} />
+                </div>
+              </div>
+            </div>
+            <div className="product-page-2nd-row">
+              <p id="ingredients-info">
+                <strong>Ingredints: </strong>
+                {curProduct.ingredients_text}
+              </p>
+              {/* TRY TO ADD WHERE IF NO ADDITIVES DO SHOW ATTRIBUTE */}
+              {curProduct.additives_original_tags.length !== 0 && (
+                <div id="additives-info">
+                  <p>
+                    <strong>Additives: </strong>
+                    {curProduct.additives_original_tags.join(" ").toUpperCase()}
+                  </p>
+                  {additiveInfo.map((itemData, i) => (
+                    <Additives key={i} item={itemData} />
+                  ))}
+                </div>
+              )}
             </div>
 
-            <div className="four wide column">
-              <br />
-              <div className="nutri-scores">
-                <NutriScoreGrade props={curProduct.nutriscore_grade} />
-                <NovaScore props={curProduct.nova_group} />
-              </div>
+            {/* Wrap this button component in a Link */}
 
-              <div className="product-page-2nd-row">
-                <p>
-                  <strong>Ingredints: </strong>
-                  {curProduct.ingredients_text}
-                </p>
-                {/* TRY TO ADD WHERE IF NO ADDITIVES DO SHOW ATTRIBUTE */}
-                {curProduct.additives_original_tags.length !== 0 && (
-                  <>
-                    <p>
-                      <strong>Additives: </strong>
-                      {curProduct.additives_original_tags
-                        .join(" ")
-                        .toUpperCase()}
-                    </p>
-                    {additiveInfo.map((itemData, i) => (
-                      <Additives key={i} item={itemData} />
-                    ))}
-                  </>
-                )}
-              </div>
-
-              {/* Wrap this button component in a Link */}
+            <div id="product-page-bottons" >
               <button
                 className="ui button fluid"
                 onClick={() => navigate(`/users/search`)}
               >
                 Go Back
               </button>
-              <div>
-                <select
-                  value={selectedValue}
-                  onChange={handleDropdownChange}
-                  required
-                >
-                  <option value="">Select an option</option>
-                  {option.map((opt, index) => (
-                    <option key={index} value={opt.grocery_list_id}>
-                      {opt.grocery_list_id}
-                    </option>
-                  ))}
-                </select>
-                <button onClick={handleButtonClick}>Add</button>
-              </div>
+              <select
+                value={selectedValue}
+                onChange={handleDropdownChange}
+                required
+              >
+                <option value="">Select an option</option>
+                {option.map((opt, index) => (
+                  <option key={index} value={opt.grocery_list_id}>
+                    {opt.grocery_list_id}
+                  </option>
+                ))}
+              </select>
+              <button onClick={handleButtonClick}>Add</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    // </div>
   );
 }
