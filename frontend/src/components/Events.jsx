@@ -4,14 +4,12 @@
 /* eslint-disable func-style */
 import React, { useEffect, useState, useContext } from 'react';
 import CurrentUserContext from '../contexts/current-user-context.js';
-import { apiFetchHandler } from '../utils'
-
+import { apiFetchHandler } from '../utils';
 
 // ------------------List of Events ----------------
 function EventList() {
   const [events, setEvents] = useState([]);
   const { updateEventData, userLocation } = useContext(CurrentUserContext);
-
   const fetchEvents = () => {
     fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20')
       .then((response) => response.json())
@@ -20,15 +18,18 @@ function EventList() {
 
         setEvents(filteredEvents);
         updateEventData(data);
-        console.log("DATA:", data);
+        // console.log("DATA:", data);
+
+        // Store the data in local storage
+        localStorage.setItem('eventsData', JSON.stringify(data));
       })
       .catch((error) => console.log(error));
   };
 
   const fetchProcessed = async () => {
-    const data = await apiFetchHandler('/api/events')
-    console.log(data)
-  }
+    const data = await apiFetchHandler('/api/events');
+    console.log(data);
+  };
 
   useEffect(() => {
     fetchEvents();
@@ -50,7 +51,7 @@ function EventList() {
           response.json())
         .then((data) => {
           setAlert(data.events);
-          console.log("ALERT DATA:", data);
+          console.log("ALERT DATA:", alert);
         })
         .catch((error) => console.log(error));
     };
@@ -64,7 +65,7 @@ function EventList() {
   const latitude1 = 75;
   const longtitude2 = 65;
   const longtitude1 = 64;
-  const convertToMiles = (latitude2, latitude1, longtitude2, longtitude1) => {
+  const convertToMiles = () => {
     const math = Math.floor(
       Math.sqrt(
         (latitude2 * 69 - latitude1 * 69) * (latitude2 * 69 - latitude1 * 69)
@@ -111,18 +112,6 @@ function EventList() {
       ))}
     </dl>
   );
-  // return (
-  //   <React.Fragment>
-  //     <div id=""></div>
-  //     <dl id="layerList">
-  //       {layers.map((layer) => (
-  //         <React.Fragment key={layer.id}>
-  //           <dt>{layer.name}</dt>
-  //         </React.Fragment>
-  //       ))}
-  //     </dl>
-  //   </React.Fragment>
-  // );
 }
 
 function Event() {
