@@ -85,6 +85,7 @@ class Susu{
             const foundSusu = await Susu.show(id)
             if(!foundSusu) return null;
             // await knex.raw('DELETE FROM susu WHERE susu.id = ?', [id])
+            const deletedSusuMemebers =  await knex.raw('DELETE FROM users_susu WHERE users_susu.susu_id = ? RETURNING *', [id])
             const deletedpost =  await knex.raw('DELETE FROM susu WHERE id= ? RETURNING *', [id])
             return deletedpost.rows[0]
         }
