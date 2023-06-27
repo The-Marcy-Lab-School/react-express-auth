@@ -54,12 +54,7 @@ export default function GroceryCard({ grocery }) {
   return (
     <>
       <div className="ui card">
-        <div
-          className="ui card"
-          onClick={() => {
-            navigate(`/users/${id}/grocerylist/${grocery.grocery_list_id}`);
-          }}
-        >
+        <div className="ui card">
           <div className="header">
             <h3>{grocery.list_name}</h3>
           </div>
@@ -99,6 +94,9 @@ export default function GroceryCard({ grocery }) {
             </div>
           </div>
         </div>
+        <button className="ui button fluid" onClick={() => {
+            navigate(`/users/${id}/grocerylist/${grocery.grocery_list_id}`);
+          }}>View</button>
         <button className="ui button fluid" onClick={handleRemoveGroceryList}>
           Remove
         </button>
