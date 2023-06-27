@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchHandler } from "../utils";
 import { useContext, useEffect, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
+import NovaScore from "../components/NovaScore";
 export default function GroceryCard({ grocery }) {
   const dateTime = new Date(grocery.created_at);
   const formattedDate = dateTime.toLocaleDateString();
@@ -90,6 +91,7 @@ export default function GroceryCard({ grocery }) {
               <span>
                 <i className="icon-nova-score" />
                 {grocery.nova_rate}
+                <NovaScore props={grocery.nova_rate} />
               </span>
             </div>
           </div>
