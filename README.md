@@ -84,6 +84,14 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
      - **Contents**:
        - Look at your local `.env` file and copy over the `SESSION_SECRET` variable and value.
        - Add a `PG_CONNECTION_STRING` variable. Its value should be the `Internal Database URL` value from your Postgres page (created in step 2)
+       - Add a `NODE_ENV` variable with the value `'production'`
+       - The contents should look like this:
+      
+        ```env
+        SESSION_SECRET='AS12FD42FKJ42FIE3WOIWEUR1283'
+        PG_CONNECTION_STRING='postgresql://user:password@host/dbname'
+        NODE_ENV='production'
+        ```
    - Click <kbd>Save Changes</kbd>
 
 5. Future changes to your code
