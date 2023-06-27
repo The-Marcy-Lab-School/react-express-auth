@@ -1,6 +1,3 @@
-
-
-
 import React from 'react';
 import { fetchHandler } from '../utils';
 import '../styles/home.css';

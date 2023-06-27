@@ -16,13 +16,13 @@ const WelcomeButton = () => {
     <section id="button">
       <div className="home-container">
       <animated.div style={fadeAnimation}>
-        <h1>Money.Money.Money</h1>
+        <h1>Community.Savings.Trust</h1>
         <br></br>
         <h2>Embark on a shared journey towards financial prosperity</h2>
         <br />
           <Button variant="primary" size = "lg" className="welcome-button">
             <Link to="/about" className="btn-get-started scrollto" >
-              Welcome
+              WELCOME
             </Link>
           </Button>
         </animated.div>

@@ -39,9 +39,9 @@ form {
   border: 1px solid #CCC;
   width: 15rem;
   margin: 1rem auto;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 
-/* automatically added by NavLink component */
 .active {
   color: #2a593f;
   font-weight: bold;
