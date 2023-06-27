@@ -17,8 +17,8 @@ export default function UserPage() {
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   const [lists, setList] = useState([]);
-  const {removeButton, setRemoveButton, addButton, setAddButton} = useContext(ProductContext);
-
+  const { removeButton, setRemoveButton, addButton, setAddButton } =
+    useContext(ProductContext);
 
   const loadUser = async () => {
     const [user, error] = await getUser(id);
@@ -43,11 +43,11 @@ export default function UserPage() {
   };
 
   useEffect(() => {
-    if(removeButton){
+    if (removeButton) {
       setRemoveButton(false);
-      console.log("render")
+      console.log("render");
     }
-    if(addButton){
+    if (addButton) {
       setAddButton(false);
     }
     const loadInfoUser = async () => {
@@ -82,33 +82,38 @@ export default function UserPage() {
     : userProfile.username;
 
   return (
-    <>
-      <h1>{profileUsername}</h1>
-      {!!isCurrentUserProfile && (
-        <button onClick={handleLogout}>Log Out</button>
-      )}
-      <p>If the user had any data, here it would be</p>
-      <p>Fake Bio or something</p>
-      {!!isCurrentUserProfile && (
-        <UpdateUsernameForm
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
-        />
-      )}
-      <CreateGroceryForm/>
+    <body className="page-bg">
+      <div id="userDash-head">
+        <CreateGroceryForm />
+        <div id="userDash-head-user">
+          <h1>{profileUsername}</h1>
+          {!!isCurrentUserProfile && (
+            <button onClick={handleLogout}>Log Out</button>
+          )}
+          <p>If the user had any data, here it would be</p>
+          <p>Fake Bio or something</p>
+          {!!isCurrentUserProfile && (
+            <UpdateUsernameForm
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          )}
+        </div>
+      </div>
 
-      <div className="ui centered cards">
+      <div id='grocery-card' className="ui centered cards">
         {lists.map((list) => {
           return (
-                <GroceryCard
-                  key={list.id}
-                  grocery={list}
-                  onClick={() => navigate(`/grocerylist/${list.id}`)}
-                />
+            <GroceryCard
+              key={list.id}
+              grocery={list}
+              onClick={() => navigate(`/grocerylist/${list.id}`)}
+            />
             //add onClick and add a fetch to get the groceryid and fetch it
           );
         })}
       </div>
-    </>
+
+    </body>
   );
 }

@@ -7,10 +7,10 @@ import NutriNotApplicable from "../media/scores/nutriscore-not-applicable.svg";
 
 export default function NutriScoreGrade({ props: nutriGrade }) {
   return (
-    <div className="ui segment">
+    <div id="nutri-div" className="ui segment">
       <div className="ui three column grid">
         <div className="row">
-          <div className="column">
+          <div id="nutri-stats" className="column">
             <strong>
               <img
                 alt={`Nova Score ${nutriGrade}A}`}
@@ -30,7 +30,7 @@ export default function NutriScoreGrade({ props: nutriGrade }) {
                 style={{ width: "120px", height: "65px" }}
               />
             </strong>
-            <p>{nutriGrade === "a" ? "Very good nutritional quality" : nutriGrade === "b" ? "Good nutritional quality" : nutriGrade === "c" ? "Average nutritional quality" : nutriGrade === "d" ? "Poor nutritional quality" : nutriGrade === "e" ? "Bad nutritional quality" : "Unknown"}</p>
+            <p id="nutri-details">{nutriGrade === "a" ? "Very good nutritional quality" : nutriGrade === "b" ? "Good nutritional quality" : nutriGrade === "c" ? "Average nutritional quality" : nutriGrade === "d" ? "Poor nutritional quality" : nutriGrade === "e" ? "Bad nutritional quality" : "Unknown"}</p>
           </div>
         </div>
       </div>

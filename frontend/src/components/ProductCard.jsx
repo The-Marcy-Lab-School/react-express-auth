@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import NovaScore from "./NovaScore";
-import NutriScoreGrade from "./NutriScoreGrade"
+import NutriScoreGrade from "./NutriScoreGrade";
 import MissingImgItem from "./MissingImgItem";
 
 export default function ProductCard({ item }) {
@@ -8,30 +8,27 @@ export default function ProductCard({ item }) {
   return (
     <>
       <div
+        id="product-search-cards"
         className="ui card"
         onClick={() => {
           navigate(`/product/${item._id}`);
         }}
       >
-        <div className="imageCard">
-          <MissingImgItem img={item.image_small_url}/>
+        <div id="product-search-cards-image" className="imageCard">
+          <MissingImgItem img={item.image_small_url} />
           {/*item.image_front_thumb_url */}
         </div>
-        <div className="content">
+        <div id="product-search-cards-content" className="content">
           {item.product_name ? (
             <div className="header">{`${item.product_name}-${item.quantity}`}</div>
           ) : (
             <div className="header">{`${item.brands_tags[0]}-${item.quantity}`}</div>
           )}
-          <div className="meta">
-            <span>
-              <NutriScoreGrade props={item.nutriscore_grade}/>
-            </span>
+          <div id="card-info-section" className="meta">
+            <NutriScoreGrade props={item.nutriscore_grade} />
 
-            <span>
-              <i className="icon-nova-score" />
-                <NovaScore props={item.nova_group}/>
-            </span>
+            <i className="icon-nova-score" />
+            <NovaScore props={item.nova_group} />
           </div>
         </div>
       </div>
