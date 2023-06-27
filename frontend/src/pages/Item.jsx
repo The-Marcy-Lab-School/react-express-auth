@@ -136,22 +136,6 @@ export default function Item() {
 
   if (!curProduct) return <Page404 />;
 
-  // console.log(product);
-  // console.log( typeof product.product_name)
-  //   console.log(product.brands_tags[0]);
-  // console.log("Name:", name);
-  // console.log("EcoScore", ecoscore);
-  // console.log("Ingredients:", ingredient);
-  // console.log("Additives:", additives);
-  // console.log("Img:", img);
-  // console.log("Store:", store);
-  // console.log("Nutri", nutri);
-  // console.log("Nova", nova);
-  // console.log("Id", ID);
-  // //   console.log(product);
-  // console.log("Quantity:", product.quantity);
-
-  // return <></>;
   return (
     <div className="page-bg">
       <div className="page-main">
