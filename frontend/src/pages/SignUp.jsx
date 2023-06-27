@@ -3,7 +3,7 @@ import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
 
-// Controlling the signup form is a good idea because we want to adde (eventually)
+// Controlling the signup form is a good idea because we want to  (eventually)
 // more validation and provide real time feedback to the user about usernames and passwords
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ export default function SignUpPage() {
   // const [formData, setFormData] = useState({ username: '', password: '' });
   // What would be the pros and cons of that?
 
-  if (currentUser) return <Navigate to="/" />;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +35,7 @@ export default function SignUpPage() {
   };
 
   return <>
-    <h1>Sign Up</h1>
+    <h1></h1>
     <form onSubmit={handleSubmit} onChange={handleChange}>
       <label htmlFor="username">Username</label>
       <input
@@ -66,6 +65,5 @@ export default function SignUpPage() {
       <button>Sign Up Now!</button>
     </form>
     { !!errorText && <p>{errorText}</p> }
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
   </>;
 }

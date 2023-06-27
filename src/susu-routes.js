@@ -11,6 +11,8 @@ SusuRouter.use(addModels);
 SusuRouter.get('/susu/:id', susuController.show);
 SusuRouter.get('/susus/:user_id', susuController.list);
 SusuRouter.get('/susu', susuController.all)
+SusuRouter.post('/susuform', susuController.add)
+SusuRouter.patch('/susucheck', susuController.varify)
 
 SusuRouter.post('/susu', susuController.create);
 // http://127.0.0.1:3000/api/susu
@@ -32,6 +34,8 @@ SusuRouter.patch('/susu/:id', susuController.update);
 //     "paymentAmount": "100",
 //     "nextPayment": "6/16"
 // }
+
+// SusuRouter.patch('/usersSusu/:user_id', susuController.payment)
 
 SusuRouter.delete('/susu/:id', susuController.destroy)
 

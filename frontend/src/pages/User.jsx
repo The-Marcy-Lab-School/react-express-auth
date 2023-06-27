@@ -4,11 +4,8 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
-<<<<<<< Updated upstream
-=======
 import "../styles/users.css";
 import InviteCard from "../components/InviteCard";
->>>>>>> Stashed changes
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -44,12 +41,9 @@ export default function UserPage() {
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
 
-  // What parts of state would change if we altered our currentUser context?
-  // Ideally, this would update if we mutated it
-  // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
-  return <>
+  return <div className="profile-container">
     <h1>{profileUsername}</h1>
     { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
     <p>If the user had any data, here it would be</p>
@@ -58,14 +52,10 @@ export default function UserPage() {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
-<<<<<<< Updated upstream
-  </>;
-=======
     <div>
       {userInvites.map((invites) => (
         <InviteCard key={invites.id} invites={invites}/>
       ))}
     </div>
   </div>;
->>>>>>> Stashed changes
 }

@@ -12,12 +12,8 @@ export default function UsersPage() {
   }, []);
 
   return <>
-    <h1>Payements:</h1>
+    <h1>Payments:</h1>
     <PaymentDetails />
-    <ul>
-      {
-        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
-      }
-    </ul>
+    
   </>;
 }

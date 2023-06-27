@@ -1,8 +1,7 @@
 const showSusu = async (req, res) => {
   const {
     db: { Susu },
-    params: { id },
-    // body: {id}
+    params: { id }
   } = req;
 
   const susu = await Susu.show(id);
