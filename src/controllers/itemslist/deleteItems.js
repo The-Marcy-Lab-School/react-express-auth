@@ -1,4 +1,4 @@
-const deleteItem = async (req, res) => {
+const deleteItems = async (req, res) => {
     const {
       db: { Items },
       params: { id },
@@ -12,5 +12,5 @@ const deleteItem = async (req, res) => {
     res.send("Item deleted successfully.");
   };
   
-  module.exports = deleteItem;
+  module.exports = deleteItems;
   
