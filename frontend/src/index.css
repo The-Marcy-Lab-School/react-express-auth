@@ -1,8 +1,16 @@
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
+    overflow-style: none;  
 }
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0px;
+}
+
+
 
 /*  */
 
@@ -323,6 +331,48 @@ p{
 .nutri-scores{
   background-color: white;
   display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+#nutri-div{
+  background-color: white;
+  border-style: none;
+}
+#nova-div{
+  background-color: white;
+  border-style: none;
+}
+#nutri-details{
+  width: auto;
+  text-align: center;
+}
+
+#nutri-stats{
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#product-search-cards{
+  display: flex;
+  width: 30rem;
+}
+
+#product-search-cards-image{
+  
+}
+
+#product-search-cards-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#card-info-section{
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 

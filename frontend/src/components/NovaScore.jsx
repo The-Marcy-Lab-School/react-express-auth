@@ -7,10 +7,10 @@ import NovaScoreUnknown from "../media/scores/nova-score-unknown.svg";
 export default function NovaScore({ props: novaGroup }) {
   console.log("NovaScore", novaGroup);
   return (
-        <div className="ui segment">
+        <div id="nova-div" className="ui segment">
           <div className="ui one column grid">
             <div className="row">
-              <div className="column">
+              <div id="nutri-stats" className="column">
                 <strong>
                   <img
                     alt={`Nova Score ${novaGroup}`}
@@ -28,7 +28,7 @@ export default function NovaScore({ props: novaGroup }) {
                     style={{ width: "34px", height: "65px" }}
                   />
                 </strong>
-                <p>{novaGroup === 1 ? "Unprocessed or minimally" : novaGroup === 2 ? "Processed or minimally" : novaGroup === 3 ? "Processed foods" : novaGroup === 4 ? "Ultra processed foods" : "Unknown"}</p>
+                <p id="nutri-details">{novaGroup === 1 ? "Unprocessed or minimally" : novaGroup === 2 ? "Processed or minimally" : novaGroup === 3 ? "Processed foods" : novaGroup === 4 ? "Ultra processed foods" : "Unknown"}</p>
               </div>
             </div>
           </div>

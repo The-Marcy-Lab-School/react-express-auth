@@ -7,7 +7,7 @@ export default function ProductCard({ item }) {
   const navigate = useNavigate();
   return (
     <>
-      <div
+      <div id="product-search-cards"
         className="ui card"
         onClick={() => {
           navigate(`/product/${item._id}`);
@@ -17,21 +17,17 @@ export default function ProductCard({ item }) {
           <MissingImgItem img={item.image_small_url}/>
           {/*item.image_front_thumb_url */}
         </div>
-        <div className="content">
+        <div id="product-search-cards-content" className="content">
           {item.product_name ? (
             <div className="header">{`${item.product_name}-${item.quantity}`}</div>
           ) : (
             <div className="header">{`${item.brands_tags[0]}-${item.quantity}`}</div>
           )}
-          <div className="meta">
-            <span>
+          <div id="card-info-section" className="meta">
               <NutriScoreGrade props={item.nutriscore_grade}/>
-            </span>
-
-            <span>
+            
               <i className="icon-nova-score" />
                 <NovaScore props={item.nova_group}/>
-            </span>
           </div>
         </div>
       </div>
