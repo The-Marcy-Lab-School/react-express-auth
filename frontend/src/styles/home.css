@@ -74,7 +74,7 @@ h1{
     list-style: none;
   }
 
-  .btn-primary{
+  #welcome-button{
     background-color: #689e80;
     border-color: white;
    
