@@ -17,7 +17,10 @@ export default function CreateGroceryForm() {
                 headers:{
                     "Content-Type" : "application/json",
                 },
-                body: JSON.stringify({list_name:inputValue}),
+                body: JSON.stringify({
+                    list_name:inputValue,
+                    nova_rate:0,
+                }),
             });
         }catch(err){
             console.log(err);

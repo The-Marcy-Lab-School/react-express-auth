@@ -7,6 +7,7 @@ function ProductContextProvider({ children }) {
   const [page, setPage] = useState(1);
   const [removeButton, setRemoveButton] = useState(false);
   const [addButton, setAddButton] = useState(false);
+  const [removeItem, setRemoveItem] = useState(false);
   // console.log(products.length)
 
   useEffect(() => {
@@ -43,6 +44,8 @@ function ProductContextProvider({ children }) {
     setRemoveButton,
     addButton,
     setAddButton,
+    removeItem,
+    setRemoveItem,
   };
 
   return (

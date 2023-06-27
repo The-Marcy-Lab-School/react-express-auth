@@ -1,10 +1,31 @@
 import NovaScore from "../components/NovaScore";
 import NutriScoreGrade from "./NutriScoreGrade";
 import { useNavigate } from "react-router-dom";
+import { fetchHandler } from "../utils";
+import ProductContext from "../contexts/ProductContext";
+import { useContext } from "react";
 
 export default function ProductInGroceryList({ props }) {
   const navigate = useNavigate();
+  const {setRemoveItem} = useContext(ProductContext);
+
   console.log(props);
+  const handleRemoveItem = async() => {
+    setRemoveItem(true);
+    try{
+      await fetchHandler(`/api/grocerylist/${props.grocery_list_id}/${props.item_id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  };
+
+  
   return (
     <>
       <div className="ui card">
@@ -35,7 +56,7 @@ export default function ProductInGroceryList({ props }) {
         >
           View
         </button>
-        <button className="ui button fluid">Remove</button>
+        <button className="ui button fluid" onClick={handleRemoveItem}>Remove</button>
       </div>
     </>
   );
