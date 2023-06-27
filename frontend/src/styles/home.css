@@ -85,9 +85,11 @@ h1{
   }
 
   .navbar-nav{
-    padding-left: 53rem;
+    margin-left: 45rem;
+    /* padding-left: 49rem; */
     display:flex;
 }
+
 
   .btn-primary{
     background-color: #689e80;
