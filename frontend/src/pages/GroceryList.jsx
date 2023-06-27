@@ -44,6 +44,7 @@ export default function GroceryList() {
               product_name: product.product_name,
               nutriscore_grade: product.nutriscore_grade,
               nova_groups: product.nova_groups,
+              item_id: product.item_id
             }}
           />);
         })}

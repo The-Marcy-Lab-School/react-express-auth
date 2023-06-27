@@ -1,14 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import NovaScore from "../components/NovaScore";
 import NutriScoreGrade from "./NutriScoreGrade";
 
 export default function ProductInGroceryList({ props }) {
+  const navigate = useNavigate();
   console.log(props);
   return (
     <>
       <div
         className="ui card"
         onClick={() => {
-          navigate(`/product/${props.id}`);
+          navigate(`/product/${props.item_id}`);
         }}
       >
         <div className="imageCard">
