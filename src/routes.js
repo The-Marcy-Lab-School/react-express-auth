@@ -5,13 +5,14 @@ const eventsController = require('./controllers/event');
 const commentsController = require('./controllers/comments');
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
+const { isAuthorized } = require('./utils/auth-utils');
 
 const Router = express.Router();
 Router.use(addModels);
 
 // COMMENTS ROUTES
 Router.post('/userscomment', commentsController.create);
-Router.get('/userscomment', commentsController.list);
+Router.get('/userscomment/:id', commentsController.list);
 Router.delete('/userscomment', commentsController.destroy);
 Router.patch('/userscomment', commentsController.update);
 

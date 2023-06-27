@@ -38,6 +38,8 @@ export default function SignUpPage() {
 
   return (
     <>
+    <div className="backImg">
+
       <div className = 'sign-up-page'>
         <h1 className="form-title">Sign Up</h1>
         <form onSubmit={handleSubmit} onChange={handleChange}>
@@ -72,6 +74,7 @@ export default function SignUpPage() {
         <p className="form-redirect">
           Already have an account with us? <Link to="/login" className="form-redirect-link">Log in!</Link>
         </p>
+      </div>
       </div>
     </>
   );

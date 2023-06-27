@@ -9,9 +9,14 @@ class Comment {
     this.comment = comment;
   }
 
-  static async listComment() {
-    const query = 'SELECT * FROM comments';
-    const { rows } = await knex.raw(query);
+  static async listComment(eventId) {
+    const query = `SELECT *
+    FROM comments 
+    JOIN users 
+    ON comments.user_id = users.id
+    WHERE event_id = ? 
+    `;
+    const { rows } = await knex.raw(query, [eventId]);
     return rows;
   }
 

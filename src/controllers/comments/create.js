@@ -8,7 +8,6 @@ const createComment = async (req, res) => {
   // TODO: check if username is taken, what should you return?
   const commented = await Comment.create(eventId, userId, comments);
   // session.userId = user.id;
-
   res.send(commented);
 };
 

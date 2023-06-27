@@ -5,6 +5,8 @@ import SafeButton from '../components/SafeButton';
 export default function HomePage() {
   return (
     <>
+        <div className="backImgTwo">
+
       <div className="home-section">
         <div className="eventList">
           <Events></Events>
@@ -13,6 +15,7 @@ export default function HomePage() {
         <MapComponent></MapComponent>
         <SafeButton />
         </div>
+      </div>
       </div>
     </>
   );

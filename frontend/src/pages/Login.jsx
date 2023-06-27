@@ -21,6 +21,8 @@ export default function LoginPage() {
   if (currentUser) return <Navigate to="/" />;
 
   return <>
+      <div className="backImg">
+
     <div className="login-page">
       <h1 className="form-title">Login</h1>
       <form className='form' onSubmit={handleSubmit}>
@@ -36,6 +38,7 @@ export default function LoginPage() {
       <p className="form-redirect">
         Don't have an account? <Link to="/sign-up" className="form-redirect-link">Sign up!</Link>
       </p>
+    </div>
     </div>
   </>;
 }

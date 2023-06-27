@@ -1,13 +1,15 @@
+
 const listComment = async (req, res) => {
     const {
-      session,
-      db: { Comment },
+      session: {userId},
+      db: {Comment},
+      params: { id },
     } = req;
   
-    // TODO: check if username is taken, what should you return?
-    const commented = await Comment.listComment();
+    const commented = await Comment.listComment(id);
     // session.userId = user.id;
-  
+    console.log(id);
+
     res.send(commented);
   };
   

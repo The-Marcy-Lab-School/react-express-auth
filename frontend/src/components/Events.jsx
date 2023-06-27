@@ -11,7 +11,9 @@ function EventList() {
   const [events, setEvents] = useState([]);
   const { updateEventData, userLocation } = useContext(CurrentUserContext);
   const [modal, setModal] = useState(false);
-  console.log("events:" + events);
+  const [singleEvent, setSingleEvent] = useState([]);
+  const [commentEvent, setCommentEvent] = useState([]);
+
   const fetchEvents = () => {
     fetch("https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=20")
       .then((response) => response.json())
@@ -52,7 +54,7 @@ function EventList() {
         )
         .then((data) => {
           setAlert(data.events);
-          console.log("ALERT DATA:", data);
+          // console.log("ALERT DATA:", data);
         })
         .catch((error) => console.log(error));
     };
@@ -76,13 +78,24 @@ function EventList() {
     );
     return math >= 4.5 ? `${Math.ceil(math)}miles` : `${Math.floor(math)}miles`;
   };
-  const toggleModal = () => {
+  const toggleModal = (event) => {
+    setSingleEvent(event);
     setModal(!modal);
   };
 
   // console.log(events[2]?.categories[0]?.id);
   return (
     <dl className="eventList">
+      {modal && (
+        <div className="modal">
+          <div className="modal-content">
+            <CommentModal data={singleEvent} />
+            <button onClick={toggleModal} className="close-modal">
+              ClOSE
+            </button>
+          </div>
+        </div>
+      )}
       <AlertList />
       {events.map((event) => (
         <React.Fragment key={event.id}>
@@ -90,17 +103,7 @@ function EventList() {
             <a href="#">
               <div className="eventRow">
                 <div className="date">{event.geometry[0].date}</div>
-                {modal && (
-                <div className="modal">
-                  <div className="modal-content">
-                    <CommentModal userId={event} />
-                    <button onClick={toggleModal} className="close-modal">
-                      ClOSE
-                    </button>
-                  </div>
-                </div>
-              )}
-              {event.categories.map((category) => (
+                {event.categories.map((category) => (
                   <div className="eventType" key={category.id}>
                     {category.title}
                   </div>
@@ -111,12 +114,15 @@ function EventList() {
                     latitude2,
                     latitude1,
                     longtitude2,
-                    longtitude1,
+                    longtitude1
                   )}
                 </div>
-                  <button className="btn-modal" onClick={toggleModal}>
-                    COMMENT
-                  </button>
+                <button
+                  className="btn-modal"
+                  onClick={() => toggleModal(event)}
+                >
+                  COMMENT
+                </button>
               </div>
               {event.description && (
                 <dd>

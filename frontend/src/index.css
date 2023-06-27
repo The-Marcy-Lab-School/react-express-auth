@@ -278,3 +278,25 @@ form {
   padding: 8px 16px;
   max-width: 280px;
 }
+
+
+.backImg{
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif?20190827115610');
+  height: 100vh;
+}
+.backImgTwo{
+  background-image: url('https://media.istockphoto.com/id/1354982067/vector/sky-starry-black-night-background-with-star-starry-galaxy-space-8bit-texture-in-flat-style.jpg?s=612x612&w=0&k=20&c=jg_rvaUBAvwbSyIWlRbIGSLf2JkqAehZ0HRfxA8X9VQ=');
+  height: 100vh;
+}
+
+.centeredContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh
+}
+
+
+.landingContainer{
+  background-color: white;
+}
