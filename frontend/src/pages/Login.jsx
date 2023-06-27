@@ -18,7 +18,6 @@ export default function LoginPage() {
     navigate(`/users/${user.id}`);
   };
 
-
   return <>
     <h1></h1>
     <form onSubmit={handleSubmit}>

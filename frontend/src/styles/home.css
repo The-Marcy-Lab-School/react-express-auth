@@ -1,10 +1,11 @@
 body{
     background-color: #689e80;
-
 }
+
 .d-flex{
     display: flex !important;
 }
+
 .justify-content-between{
     justify-content: space-between !important;
 }
@@ -15,9 +16,7 @@ header {
     align-items: center; 
   }
 
-  
   .home-container{
-    
     margin-top: 10%;
     text-align: center;
     justify-content: center;
@@ -26,9 +25,7 @@ header {
 h1{
     color:white;
 }
-  a:hover{
-    color:#88c6a3;
-  }
+  
   a{
     text-decoration: none;
     color:#283618
@@ -42,9 +39,20 @@ h1{
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 600;
-    color:black; 
-   
+    color:white; 
   }
+   a :hover{
+    color:#283618;
+  }
+
+  #basic-nav-dropdown{
+    color: white;
+  }
+
+  #basic-nav-dropdown:hover{
+    color: #283618;   
+  }
+
   .home-container h1{
     font-size: 70px;
     font-weight:700;
@@ -54,17 +62,19 @@ h1{
   }
 
    .btn-get-started scrollto {
-    font-family: Open Sans, sans-serif;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 14px;
-    display: inline-block;
-    padding:10px, 35px, 10px, 35px;
-    border-radius: 4px; 
-    transition:0.5s;
-   
+        font-family: Open Sans, sans-serif;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
+        display: inline-block;
+        padding:10px, 35px, 10px, 35px;
+        border-radius: 4px; 
+        transition:0.5s; 
   }
   
+  .dropdown-menu{
+    background-color: #689e80;
+  }
 .welcome-button{
     :hover{
       background-color: #689e80;
@@ -74,9 +84,15 @@ h1{
     list-style: none;
   }
 
+  .navbar-nav{
+    margin-left: 45rem;
+    /* padding-left: 49rem; */
+    display:flex;
+}
+
+
   .btn-primary{
     background-color: #689e80;
     border-color: white;
-   
   }
   
