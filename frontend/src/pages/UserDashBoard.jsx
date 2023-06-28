@@ -82,7 +82,7 @@ export default function UserPage() {
     : userProfile.username;
 
   return (
-    <body className="page-bg">
+    <div className="page-bg">
       <div id="userDash-head">
         <CreateGroceryForm />
         <div id="userDash-head-user">
@@ -114,6 +114,6 @@ export default function UserPage() {
         })}
       </div>
 
-    </body>
+    </div>
   );
 }
