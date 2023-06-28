@@ -143,6 +143,7 @@ export default function detailsLink() {
   return (
     <>
       <h1 id="page_title">{data.length > 0 ? data[0].name : ""}</h1>
+      <h3 id="this_susu_id">Susu ID:{data.length > 0 ? data[0].susu_id : ""}</h3>
       <div id="members_and_chart">
         <div id="member_section">
           <h2 id="member_title">Members</h2>
@@ -167,14 +168,14 @@ export default function detailsLink() {
             </h2>
           </div>
           <div id="payment_time">
+            <h1 id="payment_details_title">Payment Interval</h1>
             <h2>
-              Payment Interval: Every {data.length > 0 ? data[0].next_payment : ""}{" "}
+              Every {data.length > 0 ? data[0].next_payment : ""}{" "}
               Days
             </h2>
           </div>
         </div>
       </div>
-      <h3>Susu ID:{data.length > 0 ? data[0].susu_id : ""}</h3>
       {data.length > 0 && currentUser.id === data[0].owner ? (
         <>
           {" "}

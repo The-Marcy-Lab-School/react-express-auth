@@ -14,7 +14,7 @@ export default function UserPage() {
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
-  const [userInvites, setUserInvites] = useState([]) 
+  const [userInvites, setUserInvites] = useState([])
 
   useEffect(() => {
     const loadUser = async () => {
@@ -22,9 +22,9 @@ export default function UserPage() {
       if (error) return setErrorText(error.statusText);
       setUserProfile(user);
     };
-    const loadInvites = async() =>{
+    const loadInvites = async () => {
       const invites = await fetch('/api/invites')
-      const res = await  invites.json()
+      const res = await invites.json()
       console.log(res)
       setUserInvites(res)
     }
@@ -44,17 +44,19 @@ export default function UserPage() {
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
   return <div className="profile-container">
-    <h1>{profileUsername}</h1>
-    { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-    <p>If the user had any data, here it would be</p>
-    <p>Fake Bio or something</p>
+    <div className="identity">
+      <h1 className="profile-center">{profileUsername}</h1>
+      {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
+      <p className="profile-center">If the user had any data, here it would be</p>
+      <p className="profile-center">Fake Bio or something</p>
+    </div>
     {
       !!isCurrentUserProfile
-        && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+      && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
     }
-    <div>
+    <div className="invite-section">
       {userInvites.map((invites) => (
-        <InviteCard key={invites.id} invites={invites}/>
+        <InviteCard key={invites.id} invites={invites} />
       ))}
     </div>
   </div>;

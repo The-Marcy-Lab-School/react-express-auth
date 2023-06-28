@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
+import "../styles/users.css";
 
 
 function InviteCard({invites}) {
@@ -35,7 +36,8 @@ async function handleDelete(){
 }
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <div className="individual-card">
+      <Card style={{ width: '18rem' }}>
       {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
       <Card.Body>
         <Card.Title>{invites.name}</Card.Title>
@@ -46,6 +48,7 @@ async function handleDelete(){
         <Button variant="primary" onClick={handleAccept}>accept</Button>
       </Card.Body>
     </Card>
+    </div>
   );
 }
 
