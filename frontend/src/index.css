@@ -8,7 +8,17 @@ body {
 input,
 label {
   display: block;
+  
 }
+
+.input{
+ border-color: #132734;
+}
+
+.label{
+  color: white;
+}
+
 
 input {
   margin-bottom: 1rem;
@@ -45,7 +55,9 @@ nav .item {
   background-color: #132734;
 }
 
-
+.create{
+  background-color:#f0bc07;
+}
 form {
   padding: 1rem;
   border: 1px solid #CCC;
@@ -105,12 +117,15 @@ h4 {
 }
 
 .box{
-  background-color: #132734;
  
+  transition: all .2s ease-in;
 }
-.ui ,.subtitle,.title, p.has-text-centered{
-  color: #FFF;
+.box:hover{
+  cursor: pointer;
+  background-color: #bbdde9;
+  transform: scale(1.02);
 }
+
 
 #review.box{
   background-color: #FFF;
@@ -127,7 +142,6 @@ h4 {
 }
 
 
-
 /* Sign Up/Login Component */
 
 .signuplogincomponent {
@@ -137,7 +151,7 @@ h4 {
 .welcome {
   display: flex;
   justify-content: center;
-  min-height: 20vh;
+  min-height: 10vh;
   align-items: center;
   letter-spacing: 1px;
 }
@@ -282,7 +296,7 @@ h4 {
 }
 
 .sign_up {
-  color: #B9D7EA;
+  color: white;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -340,7 +354,7 @@ h4 {
 /* Create Post Component */
 
 #createpost-container {
-  background-color: #769FCD;
+  background-color: white;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -363,7 +377,7 @@ h4 {
   width: 35%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #B9D7EA;
+  background-color: pink;
   border-radius: 20px;
   border: 1px solid black;
   padding: 1rem;
@@ -384,6 +398,7 @@ h4 {
 .createpost-submit-button {
   display: flex;
   justify-content: center;
+  
 }
 
 .columns {
@@ -428,6 +443,7 @@ h4 {
   min-height: 20vh;
   align-items: center;
   letter-spacing: 1px;
+  background-color: white;
 }
 
 .welcome-text {
@@ -439,7 +455,8 @@ h4 {
 }
 
 .signuplogindiv {
-  height: 60vh;
+  height: 50vh;
+  background-color: white;
 }
 
 #sign_box {
@@ -448,14 +465,14 @@ h4 {
   max-width: 400px;
   height: auto;
   border-radius: 10px;
-  background: #B9D7EA;
+  background: #132734;
   margin: 0 auto;
-  padding: 20px;
+  padding: 60px;
 }
 
 .instructions {
   margin-bottom: 10px;
-  color: #000000;
+  color: white;
   text-align: center;
   text-shadow: black;
   font-size: 16px;
@@ -470,7 +487,7 @@ h4 {
 }
 
 .loginout-button {
-  background-color: #D6E6F2;
+  background-color: white ;
   width: 100%;
   max-width: 300px;
   border-radius: 15px;
@@ -625,14 +642,6 @@ h4 {
   min-height: 79vh;
 }
 
-/* Create Post Component */
-
-#createpost-container {
-  background-color: #769FCD;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .createpost-text {
   display: flex;
   justify-content: center;
@@ -651,7 +660,7 @@ h4 {
   width: 35%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #B9D7EA;
+  background-color: #132734;
   border-radius: 20px;
   border: 1px solid black;
   padding: 1rem;
@@ -667,11 +676,13 @@ h4 {
   margin-right: 10px;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .createpost-submit-button {
   display: flex;
   justify-content: center;
+  
 }
 
 .columns {
@@ -799,7 +810,6 @@ h4 {
   margin-left: 125px;
   margin-right: 125px;
   justify-content: center;
-
 }
 
 /*title*/
@@ -867,6 +877,7 @@ h4 {
 .subtitle {
   font-style: italic;
   bottom: 5vh;
+  color: #000000;
 }
 
 /*The end css for doctor card component*/

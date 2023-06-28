@@ -6,8 +6,8 @@ export default function SignUpLogin() {
   return (
     <div className="signuplogincomponent">
       <div className="welcome">
-        <h1 className="welcome-text">
-          Welcome!
+        <h1 className="welcome-text" style={{ fontSize: '50px', fontWeight: 'bold' }}>
+         <em> Welcome to CareCompanion!</em>
         </h1>
       </div>
       <div class="signuplogindiv">

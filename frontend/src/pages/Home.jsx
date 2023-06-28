@@ -9,6 +9,7 @@ import CurrentUserContext from '../contexts/current-user-context';
 import { getAllUsers } from '../adapters/user-adapter';
 
 
+
 export default function DoctorsList() {
 
   const [reviews, setReviews] = useState([]);
@@ -46,12 +47,16 @@ export default function DoctorsList() {
       .then((data) => setUsers(data))
       .catch((error) => console.log(error))
   }, []);
+  
+  
+  
   return (
     <>
       <div className="navbar-start" style={{ flexGrow: 1, justifyContent: 'center', marginTop: "2vh" }}>
         <div className="field is-grouped">
           <p className="control is-expanded">
-            <input className="input" type="text" placeholder="Doctor/Facility/Specialty..."
+            
+            <input className="input" type="text" style={{ fontSize: '20px' , width: '410px' }} placeholder="Search for Doctor/Facility/Specialty...🔍"
               value={searchValue}
               onChange={handleSearchValue}
             />
@@ -59,9 +64,11 @@ export default function DoctorsList() {
 
         </div>
       </div>
+     
 
-      <h4 className="header-four">
-        <NavLink to="/create-post" style={{color:"#FFC100", marginLeft:"1vh"}}>Can't Find a Doctor or Medical Facility? Add One Here</NavLink>
+
+      <h4>
+        <NavLink to="/create-post" style={{ color: "#FFC100", marginLeft: "1vh",  WebkitTextStroke: ".5px black" }}>Can't Find a Doctor? Add One Here</NavLink>
       </h4>
       <div className="ui centered cards" style={{ marginLeft: "1vh" }}>
         {filteredObject.length > 0 ? (

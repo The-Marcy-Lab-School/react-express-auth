@@ -1,3 +1,6 @@
+
+
+
 .box1{
     
     height: 680px;
@@ -9,10 +12,28 @@ height: 400px;
     height: 430px; 
 }
 
-.border {
-    border-top: 1px solid black; /* Specify border styles */
-    margin: 10px 0; /* Adjust margin as desired */
-  }
+.story, .story1, .secondstory{
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  height: 100vh; /* Adjust the height as needed */
+  padding: 20px;
+  font-size: larger;
+}
+.header{
+  font-size: x-large;
+}
+
+.factsTitle, .fact1{
+  padding: 0%;
+
+}
+
+
+.factsstories{
+  font-size: 50px;
+}
 
 .carecompanion {
     display: inline-block;
