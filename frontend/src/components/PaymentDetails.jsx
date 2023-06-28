@@ -20,6 +20,7 @@ export default function detailsLink() {
   const [unAuthDialog, setUnAuthDialog] = useState(false);
   const [ deleteUser, setDeleteUser ] = useState('');
   const [ deletePassword, setDeletePassword ] = useState('');
+  const [ payments, setPayments ] = useState({});
 
   useEffect(()=>{
     const loadLoggedInUser = async () =>{
@@ -42,7 +43,7 @@ export default function detailsLink() {
       setData(details);
     }
     loadDetails();
-  },[id])
+  },[payments])
   console.log(data, data[0]);
 
   const deleteAuth = () =>{
@@ -101,7 +102,7 @@ export default function detailsLink() {
        <h1>Susu Name: {data.length > 0 ? data[0].name : ''}</h1>
       <ul>
         {
-          data.map((user) => <div key={user.user_id}> <SusuMembers user={user} owner={currentUser.id!==user.owner ? true : false}/> </div>)
+          data.map((user) => <div key={user.user_id}> <SusuMembers payments={payments} setPayments={setPayments} user={user} owner={currentUser.id!==user.owner ? true : false}/> </div>)
         }
         {<div style={({width: '50%'})}>
           <PaymentChart data={data}/>
