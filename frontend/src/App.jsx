@@ -14,12 +14,11 @@ import DoctorReview from './pages/DoctorReview';
 import Mission from './pages/Mission';
 import CreatePost from './pages/CreatePost';
 import Footer from './components/SiteFooter';
-import PageContext from './contexts/PagesContext';
-import { getAllPages } from './adapters/page-adapter';
+
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
-  const [pages, setPages] = useState([]);
+
 
   useEffect(() => {
     checkForLoggedInUser().then(setCurrentUser);

@@ -2,8 +2,11 @@ import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 
+
+
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
+
 
 
   return (
@@ -35,7 +38,7 @@ export default function SiteHeadingAndNav() {
             <NavLink exact='true'  className="navbar-item" to="/home">
               <strong style={{color:"white"}}>Home</strong>
             </NavLink>
-            <NavLink exact='true'  className="navbar-item" to={`/users/${currentUser.id}`} style={{color:"#FFC100"}}>
+            <NavLink exact='true' className="navbar-item" to={`/users/${currentUser.id}`} style={{color:"#FFC100"}}>
               {currentUser.username}
             </NavLink>
           </>
