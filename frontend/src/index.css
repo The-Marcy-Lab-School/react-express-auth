@@ -319,11 +319,6 @@ h4 {
   flex-shrink: 0;
 }
 
-/* User Component */
-
-#user-component {
-  min-height: 79vh;
-}
 
 /* Create Post Component */
 
@@ -614,12 +609,6 @@ h4 {
 
 .footer-ele {
   flex-shrink: 0;
-}
-
-/* User Component */
-
-#user-component {
-  min-height: 79vh;
 }
 
 /* Create Post Component */
@@ -971,6 +960,9 @@ font-weight:100;
   }
 
 /* This is the end of the css for the doctor card information on the doctor review page */
+.userpage{
+display: flex;
+}
 #usercard{
   width:30vw;
   margin-left: 15%;

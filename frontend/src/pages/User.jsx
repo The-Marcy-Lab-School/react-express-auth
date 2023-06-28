@@ -4,7 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
-import { getAllBookMark } from "../adapters/bookmark-adapter";
+
 import Bookmarkcard from "../components/BookmarkCard";
 
 export default function UserPage() {
@@ -13,6 +13,7 @@ export default function UserPage() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
+  const [clickedBookmark, setClickedBookmark] = useState(false);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   useEffect(() => {
@@ -21,15 +22,15 @@ export default function UserPage() {
       if (error) return setErrorText(error.statusText);
       setUserProfile(user);
     };
-    const bookmarks = async () =>{
+    const bookmarks = async () => {
       const bookmark = await fetch(`/api/bookmark/${id}`);
-      const response = await bookmark.json()
+      const response = await bookmark.json();
       setUserBookmark(response);
-      console.log(userBookmark)
-      console.log(response)
-    }
+      console.log(userBookmark);
+      console.log(response);
+    };
     loadUser();
-    bookmarks()
+    bookmarks();
   }, [id]);
   // console.log(userBookmark, '234322')
   const handleLogout = async () => {
@@ -49,47 +50,54 @@ export default function UserPage() {
 
   return (
     <>
-     <div>
-      <div className="card" id = 'usercard'>
-  <div className="card-image">
-    <figure className="image is-4by3">
-      <img src={userProfile.picture} alt="Placeholder image" id = 'userimage' />
-    </figure>
-  </div>
-  <div className="card-content">
-    <div className="media">
-      <div className="media-content">
-        <p className="title is-4">{userProfile.first_name} {userProfile.last_name}</p>
-        <p className="subtitle is-6" id= 'username'>@{userProfile.username}</p>
-        <p className="age">Age: {userProfile.age}</p>
-        <p className="gender">Gender: {userProfile.gender}</p>
-        <p className="race">Race: {userProfile.race}</p>
-        <p className="ethnicity">Ethnicity: {userProfile.ethnicity}</p>
-      
-
+      <div className="userpage">
+        <div className="card" id="usercard">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img
+                src={userProfile.picture}
+                alt="Placeholder image"
+                id="userimage"
+              />
+            </figure>
+          </div>
+          <div className="card-content">
+            <div className="media">
+              <div className="media-content">
+                <p className="title is-4">
+                  {userProfile.first_name} {userProfile.last_name}
+                </p>
+                <p className="subtitle is-6" id="username">
+                  @{userProfile.username}
+                </p>
+                <p className="age">Age: {userProfile.age}</p>
+                <p className="gender">Gender: {userProfile.gender}</p>
+                <p className="race">Race: {userProfile.race}</p>
+                <p className="ethnicity">Ethnicity: {userProfile.ethnicity}</p>
+              </div>
+              <div className="content">
+                <button id="logoutbtn" onClick={handleLogout}>
+                  Log Out
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <article className="" id="bookmarkedSide">
+          {userBookmark.map((bookmark) => (
+            <Bookmarkcard key={bookmark.id} bookmark={bookmark} />
+          ))}
+        </article>
       </div>
-    </div>
-
-    <div className="content">
-      <button id= 'logoutbtn'onClick={handleLogout}>Log Out</button>
-    </div>
-  </div>
-</div>
-</div>
-
-
 
       <div id="user-component">
-        {
-          !!isCurrentUserProfile
-          && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
-        }
+        {!!isCurrentUserProfile && (
+          <UpdateUsernameForm
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
+        )}
       </div>
-      <article className="" id="bookmarkedSide">
-        {userBookmark.map((bookmark)=> (
-          <Bookmarkcard key={bookmark.id} bookmark={bookmark}/>
-        ))}
-        </article>
     </>
   );
 }
