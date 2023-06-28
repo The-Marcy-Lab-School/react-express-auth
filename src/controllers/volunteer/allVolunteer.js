@@ -2,9 +2,9 @@ const allVolunteers = async (req, res) => {
     const {
         session,
         db: { Volunteer },
-        body: { event_id }
+        body: { }
     } = req
-    const user = await Volunteer.allVolunteers(event_id); 
+    const user = await Volunteer.listAll(); 
     res.send(user);
     
     

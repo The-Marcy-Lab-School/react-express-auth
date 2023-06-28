@@ -4,6 +4,7 @@ const baseUrl = '/api';
 
 export const checkForLoggedInUser = async () => {
   const [data] = await fetchHandler(`${baseUrl}/me`);
+  console.log("data" + data)
   return data;
 };
 

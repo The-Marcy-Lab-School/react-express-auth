@@ -4,11 +4,11 @@ import UserLink from "../components/UserLink";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
-
+ 
   useEffect(() => {
     getAllUsers().then(setUsers);
   }, []);
-
+  console.log("setter:"+users)
   return <>
     <h1>Users</h1>
     <ul>

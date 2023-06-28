@@ -34,19 +34,14 @@ Router.delete('/post/:post_id', postController.destroy);
 //VOLUNTEER 
 
 Router.post('/volunteer', volunteerController.volunteer)
-Router.get('/volunteer', volunteerController.allVolunteer)
-
+//Router.get('/volunteer', volunteerController.allVolunteer)
+Router.get('/volunteer/:user_id', volunteerController.find)
 
 //EVENT 
 Router.post('/events', eventsController.create)
 Router.get('/events/:user_id', eventsController.list)
 Router.get('/events', eventsController.listAll)
 Router.delete('/events/:event_id', eventsController.destroy);
-
-
-
-
-
 
 Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
