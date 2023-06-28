@@ -45,6 +45,9 @@ nav .item {
   background-color: #132734;
 }
 
+.transparent-link {
+  background-color: transparent;
+}
 
 form {
   padding: 1rem;
@@ -128,6 +131,7 @@ h4 {
   min-height: 20vh;
   align-items: center;
   letter-spacing: 1px;
+  background-color: white;
 }
 
 .welcome-text {
@@ -140,6 +144,7 @@ h4 {
 
 .signuplogindiv {
   height: 60vh;
+  background-color: white;
 }
 
 #sign_box {
@@ -218,6 +223,15 @@ h4 {
   text-align: center;
   font-size: 30px;
   font-family: Calibri, sans-serif;
+  color: white;
+}
+
+.username-label {
+  color: white;
+}
+
+.password-label {
+  color: white;
 }
 
 #login-button {
@@ -254,6 +268,39 @@ h4 {
   text-align: center;
   font-size: 30px;
   font-family: Calibri, sans-serif;
+  color: white;
+}
+
+.firstname-label {
+  color: white;
+}
+
+.lastname-label {
+  color: white;
+}
+
+.age-label {
+  color: white;
+}
+
+.gender-label {
+  color: white;
+}
+
+.race-label {
+  color: white;
+}
+
+.ethnicity-label {
+  color: white;
+}
+
+.email-label {
+  color: white;
+}
+
+.picture-label {
+  color: white;
 }
 
 #signup-form {
@@ -556,9 +603,7 @@ h4 {
   background-color: #FFC100;
   color:#132734;
 }
-.label{
-  color:white
-}
+
 
 .sign_up {
   color: #B9D7EA;
@@ -878,9 +923,9 @@ h4 {
 }
 
 .username {
-  font-size: 2vh;
+  font-size: 3vh;
   font-weight: bold;
-  letter-spacing: .75vh;
+
 }
 
 .rating {
@@ -949,9 +994,13 @@ font-weight:100;
     margin-bottom: 2vh;
   }
 
+  .cats {
+    font-size: small;
+  }
+
   .reviewButton {
     height: 5vh;
-    width: 16vh;
+    width: 16vw;
     border-radius: 1.5vh;
     border: none;
     margin-bottom: 2vh;
