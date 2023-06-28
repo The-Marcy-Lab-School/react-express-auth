@@ -5,7 +5,7 @@
 exports.up = (knex) => {
   return knex.schema.createTable("pages", (table) => {
     table.increments();
-    table.integer("user_id").references('id').inTable('users');
+    table.integer("user_id").references("id").inTable('users');
     table.string("facility_doctor");
     table.string("specialty");
     table.string("description", 500);

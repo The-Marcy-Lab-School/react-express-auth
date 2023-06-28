@@ -47,6 +47,7 @@ export default function CreatePost() {
       // setCurrentUser(user);
       setFormSubmitted(true); // Set the formSubmitted state variable to true
     }
+    
   };
 
   const handleChange = (event) => {

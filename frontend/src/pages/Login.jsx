@@ -29,7 +29,7 @@ export default function LoginPage() {
           </div>
           <form id="loginform" onSubmit={handleSubmit}>
             <div className="field">
-              <label htmlFor="username" className="label">
+              <label htmlFor="username" className="label username-label">
                 Username
               </label>
               <div className="control">
@@ -44,7 +44,7 @@ export default function LoginPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="password" className="label">
+              <label htmlFor="password" className="label password-label">
                 Password
               </label>
               <div className="control">

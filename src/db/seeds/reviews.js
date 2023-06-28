@@ -62,7 +62,7 @@ exports.seed = async function (knex) {
     {
       user_id: 1,
       page_id: 3,
-      review_body: "When it comes to doctors who do it right, Dr. Wilson was truly exceptional. He and his staff demonstrated an unwavering commitment to providing personalized care, ensuring that my unique needs were met with utmost attention. As a person of color, it was a breath of fresh air to receive healthcare that was inclusive, respectful, and considerate. I wholeheartedly recommend Dr. Wilson to all people of color.",
+      review_body: "When it comes to doctors who do it right, Dr. Wilson was truly exceptional. She and her staff demonstrated an unwavering commitment to providing personalized care, ensuring that my unique needs were met with utmost attention. As a person of color, it was a breath of fresh air to receive healthcare that was inclusive, respectful, and considerate. I wholeheartedly recommend Dr. Wilson to all people of color.",
       rating: 5,
       staff_friendliness: 5,
       wait_times: 5,
@@ -71,7 +71,7 @@ exports.seed = async function (knex) {
     {
       user_id: 8,
       page_id: 3,
-      review_body: "The level of care provided by Dr. Wilson was outstanding. His team was not only highly skilled but also showed genuine compassion. They made me feel valued and addressed all my concerns. As a person of color, it's reassuring to know that such exceptional healthcare is available.",
+      review_body: "The level of care provided by Dr. Wilson was outstanding. Her team was not only highly skilled but also showed genuine compassion. They made me feel valued and addressed all my concerns. As a person of color, it's reassuring to know that such exceptional healthcare is available.",
       rating: 5,
       staff_friendliness: 5,
       wait_times: 5,
@@ -80,7 +80,7 @@ exports.seed = async function (knex) {
     {
       user_id: 24,
       page_id: 3,
-      review_body: "I had a positive experience with Dr. Wilson. The quality of care provided exceeded my expectations and his staff treated me with respect and dignity throughout my entire visit. As a person of color, it's important to feel safe and well-cared for in the healthcare system, and Dr. Wilson and his team met those expectations.",
+      review_body: "I had a positive experience with Dr. Wilson. The quality of care provided exceeded my expectations and her staff treated me with respect and dignity throughout my entire visit. As a person of color, it's important to feel safe and well-cared for in the healthcare system, and Dr. Wilson and her team met those expectations.",
       rating: 5,
       staff_friendliness: 5,
       wait_times: 5,

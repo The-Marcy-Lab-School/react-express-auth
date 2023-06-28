@@ -55,9 +55,7 @@ nav .item {
   background-color: #132734;
 }
 
-.create{
-  background-color:#f0bc07;
-}
+
 form {
   padding: 1rem;
   border: 1px solid #CCC;
@@ -154,6 +152,7 @@ h4 {
   min-height: 10vh;
   align-items: center;
   letter-spacing: 1px;
+  background-color: white;
 }
 
 .welcome-text {
@@ -166,6 +165,7 @@ h4 {
 
 .signuplogindiv {
   height: 60vh;
+  background-color: white;
 }
 
 #sign_box {
@@ -244,6 +244,15 @@ h4 {
   text-align: center;
   font-size: 30px;
   font-family: Calibri, sans-serif;
+  color: white;
+}
+
+.username-label {
+  color: white;
+}
+
+.password-label {
+  color: white;
 }
 
 #login-button {
@@ -280,6 +289,39 @@ h4 {
   text-align: center;
   font-size: 30px;
   font-family: Calibri, sans-serif;
+  color: white;
+}
+
+.firstname-label {
+  color: white;
+}
+
+.lastname-label {
+  color: white;
+}
+
+.age-label {
+  color: white;
+}
+
+.gender-label {
+  color: white;
+}
+
+.race-label {
+  color: white;
+}
+
+.ethnicity-label {
+  color: white;
+}
+
+.email-label {
+  color: white;
+}
+
+.picture-label {
+  color: white;
 }
 
 #signup-form {
@@ -345,11 +387,6 @@ h4 {
   flex-shrink: 0;
 }
 
-/* User Component */
-
-#user-component {
-  min-height: 79vh;
-}
 
 /* Create Post Component */
 
@@ -510,7 +547,7 @@ h4 {
 
 #login-component {
   min-height: 100vh;
-  background-color: #769FCD;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -518,14 +555,14 @@ h4 {
 
 #login-content {
   width: 35%;
-  background: #B9D7EA;
+  background: #132734;
   padding: 2rem;
   border-radius: 20px;
 }
 
 #loginform {
   width: 90%;
-  background: #B9D7EA;
+  background: #132734;
   border-radius: 20px;
   border: 1px solid black;
 }
@@ -551,7 +588,7 @@ h4 {
 
 #signup-component {
   min-height: 100vh;
-  background-color: #769FCD;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -559,7 +596,7 @@ h4 {
 
 #signup-content {
   width: 35%;
-  background: #B9D7EA;
+  background: #132734;
   padding: 2rem;
   border-radius: 20px;
   margin-top: 2rem;
@@ -575,9 +612,10 @@ h4 {
 
 #signup-form {
   width: 90%;
-  background: #B9D7EA;
+  background: #132734;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 1px solid #FFC100;
+  
 }
 
 #signup-button {
@@ -585,6 +623,11 @@ h4 {
   justify-content: center;
   margin-top: 2rem;
 }
+.button.is-link{
+  background-color: #FFC100;
+  color:#132734;
+}
+
 
 .sign_up {
   color: #B9D7EA;
@@ -592,6 +635,7 @@ h4 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  
 }
 
 #already {
@@ -634,12 +678,6 @@ h4 {
 
 .footer-ele {
   flex-shrink: 0;
-}
-
-/* User Component */
-
-#user-component {
-  min-height: 79vh;
 }
 
 .createpost-text {
@@ -903,27 +941,20 @@ h4 {
 }
 
 .username {
-  font-size: 2vh;
+  font-size: 3vh;
   font-weight: bold;
-  letter-spacing: .75vh;
+
 }
 
 .rating {
   font-size: 1.75vh;
 }
-
-.categories {
-  font-size: 1.75vh;
-  display: flex;
-  justify-content: space-between;
-}
-
-.userSpecs {
-  font-size: 1.4vh;
-  display: flex;
-  justify-content: space-around;
-  margin-top: 1vh;
-  font-weight: 100;
+.userSpecs{
+font-size: 1.4vh;
+display: flex;
+justify-content: space-around;
+margin-top: 1vh;
+font-weight:100;
 }
 
 .paginationButton {
@@ -940,60 +971,160 @@ h4 {
 
 
 /* This is the css for the doctor card information on the doctor review page */
-.doctorPictureFrame {
-  height: 300px;
-  width: 350px;
-}
+  .doctorPictureFrame {
+    height: 300px;
+    width: 350px;
+  }
 
-.imgandspecialty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .imgandspecialty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.name {
-  color: #132734;
-  font-weight: bolder;
-  font-size: 3.5vh;
-  margin-bottom: 0.75vh;
-}
+  .name {
+    color: #132734;
+    font-weight: bolder;
+    font-size: 3.5vh;
+    margin-bottom: 0.75vh;
+  }
 
-.location {
-  color: #132734;
-  font-size: 2.5vh;
-  letter-spacing: .25vh;
-  margin-bottom: 0.75vh;
-}
+  .location {
+    color: #132734;
+    font-size: 2.5vh;
+    letter-spacing: .25vh;
+    margin-bottom: 0.75vh;
+  }
 
-.specialty {
-  font-style: italic;
-  color: #132734;
-  font-weight: lighter;
-  margin-bottom: 0.75vh;
-}
+  .specialty {
+    font-style: italic;
+    color: #132734;
+    font-weight: lighter;
+    margin-bottom: 0.75vh;
+  }
 
-.description {
-  font-style: italic;
-  color: #132734;
-  font-size: 2vh;
-  font-weight: lighter;
-  width: 46vh;
-  margin-bottom: 2vh;
-}
+  .description {
+    font-style: italic;
+    color: #132734;
+    font-size: 2vh;
+    font-weight: lighter;
+    width: 46vh;
+    margin-bottom: 2vh;
+  }
 
-.reviewButton {
-  height: 5vh;
-  width: 16vh;
-  border-radius: 1.5vh;
-  border: none;
-  margin-bottom: 2vh;
-  background-color: #132734;
-  color: #FFC100;
-}
+  .cats {
+    font-size: small;
+  }
+
+  .reviewButton {
+    height: 5vh;
+    width: 16vw;
+    border-radius: 1.5vh;
+    border: none;
+    margin-bottom: 2vh;
+    background-color: #132734;
+    color: #FFC100;
+  }
 
 /* This is the end of the css for the doctor card information on the doctor review page */
+.userpage{
+display: flex;
+justify-content: space-around;
 
+}
+#usercard{
+  width:30vw;
 
+  margin-top: 3%;
+  box-shadow: none;
+}
+
+#userimage{
+  border-radius: 5%;
+}
+#username{
+  text-align: center;
+}
+#logoutbtn{
+  background-color: #132734;
+  color: #FFC100;
+  border: none;
+  border-radius:2vh;
+  height: 4vh;
+  width: 12vh;
+}
+
+.userreviews{
+  display: flex;
+  justify-content:flex-end;
+}
+.updateButton{
+  width: 25vh;
+  height: 3vh;
+  background-color: #132734;
+  color: #FFC100;
+  border: none;
+  border-radius:2vh;
+}
+
+#user-component{
+  border:none;
+}
+.logoutButton{
+  background-color: #132734;
+  color: #FFC100;
+  border: none;
+  border-radius:2vh;
+  height: 4vh;
+  width: 12vh;
+}
+#bookmarkbox{
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+  width: 50vh;
+  border: solid 2px #132734;
+  text-align: center;
+  align-items: center;
+  border-radius: 4%;
+  margin-top: 13%;
+}
+#bookmarkReview{
+  height: 12.75vh;
+  width: 65%;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+}
+#bookmarkReviewText{
+  font-size: 1.15vh;
+}
+.bookmarkRating{
+  font-size: 1.5vh;
+}
+#bookmarkDoctorSpecailty{
+font-size: 2vh;
+font-weight: bold;
+}
+#bookmarkAddress{
+  font-size: 1.8vh;
+}
+
+#savedheading{
+  font-weight: bold;
+  display: flex;
+  justify-content: center
+  /* margin-left: 100%; */
+  
+}
+#bookmarkedSide{
+  text-align: center;
+}
+
+#saveddocimg{
+  display: flex;
+  justify-content: center;
+}
 @media screen and (max-width: 768px) {
   .createpost-form {
     width: 25%;
@@ -1005,3 +1136,5 @@ h4 {
     width: 15%;
   }
 }
+
+

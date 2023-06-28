@@ -3,17 +3,6 @@ const User = require("../models/user");
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-// table.increments();
-// table.string('first_name');
-// table.string('last_name');
-// table.integer('age');
-// table.string('gender');
-// table.string('race');
-// table.string('ethnicity');
-// table.string('username').unique();
-// table.string('password_hash');
-// table.string('email').unique();
-// table.timestamps(true, true);
 
 exports.seed = async (knex) => {
   // await User.deleteAll();
