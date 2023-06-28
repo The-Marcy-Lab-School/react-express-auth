@@ -21,6 +21,12 @@ header {
     text-align: center;
     justify-content: center;
   }
+  .home-h1{
+    color:#2a593f;
+  }
+  .home-h2{
+    color:#ece4d4;
+  }
 
 h1{
     color:white;
@@ -45,10 +51,6 @@ h1{
     color:#283618;
   }
 
-  #basic-nav-dropdown{
-    color: white;
-  }
-
   #basic-nav-dropdown:hover{
     color: #283618;   
   }
@@ -61,7 +63,7 @@ h1{
     padding-top: 10%;
   }
 
-   .btn-get-started scrollto {
+   /* .btn-get-started scrollto {
         font-family: Open Sans, sans-serif;
         text-transform: uppercase;
         font-weight: 500;
@@ -71,7 +73,7 @@ h1{
         border-radius: 4px; 
         transition:0.5s; 
   }
-  
+   */
   .dropdown-menu{
     background-color: #33323341;
   }
@@ -91,11 +93,13 @@ h1{
   
   #nav-links{
     justify-content: flex-end;
-    margin-right: 6rem
+    margin-right: 6rem;
+    padding-left:20px;
   }
 
 #full-nav{
   background-color: #33323341;
+  
 }
 
 .navbar a {
@@ -110,21 +114,17 @@ h1{
   color: #2b5841;
   background-color: transparent !important;
 }
-/*Test*/
-/* 
-.ashley {
-  width: 100vw;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 2.5em;
-  padding-left: 1em;
+
+.btn-primary:focus, .btn-primary:hover{
+    background-color: #d8d4b4;
+    color:#ece4d4;
+    border-color: #ece4d4;
 }
 
-.ashley-items {
-  display: flex;
-  gap: 20px;
-  padding-right:1em;
-} */
+.btn-get-started scrollto:hover{
+    color: #ece4d4;
+}
+
+.welcome-button:hover {
+    color: #ece4d4;
+}
