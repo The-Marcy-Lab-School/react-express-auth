@@ -82,7 +82,7 @@ export default function UserPage() {
             </div>
           </div>
         </div>
-      
+
         <article className="" id="bookmarkedSide">
         <strong id= 'savedheading'><h2>Saved</h2></strong>
           {userBookmark.map((bookmark) => (
@@ -90,16 +90,7 @@ export default function UserPage() {
           ))}
         </article>
         </div>
-   
-
-      {/* <div id="user-component">
-        {!!isCurrentUserProfile && (
-          <UpdateUsernameForm
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
-          />
-        )}
-      </div> */}
     </>
   );
 }
+
