@@ -30,7 +30,7 @@ export default function UserPage() {
     }
     loadUser();
     loadInvites();
-  }, [id]);
+  }, [userInvites, id]);
 
   const handleLogout = async () => {
     logUserOut();
