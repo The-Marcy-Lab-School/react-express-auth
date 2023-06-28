@@ -41,7 +41,31 @@ form {
   margin: 1rem auto;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
-
+#log-in-form{
+  width: 320px;
+  border-radius: 0.75rem;
+  background-color: #A2CDB0;
+  padding: 2rem;
+  color: rgba(243, 244, 246, 1);
+}
+#login-title{
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: black;
+}
+#login-button{
+  display: block;
+  width: 100%;
+  background-color: #A0C49D;
+  padding: 0.75rem;
+  text-align: center;
+  color: rgba(17, 24, 39, 1);
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
 .active {
   color: #2a593f;
   font-weight: bold;

@@ -20,14 +20,15 @@ export default function LoginPage() {
 
   return <>
     <h1></h1>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id='log-in-form'>
+      <h2 id='login-title'>Log In</h2>
       <label htmlFor="username">Username</label>
       <input type="text" autoComplete="username" id="username" name="username" />
 
       <label htmlFor="password">Password</label>
       <input type="password" autoComplete="current-password" id="password" name="password" />
 
-      <button>Log in!</button>
+      <button id='login-button'>Log in!</button>
     </form>
     { !!errorText && <p>{errorText}</p> }
   </>;
