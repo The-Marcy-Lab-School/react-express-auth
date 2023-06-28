@@ -9,9 +9,9 @@ export default function PaymentChart({data}) {
         datasets: [{
             label: 'Payment Amount',
             data: data.map((user) => user.payment_amount),
-            backgroundColor: data.map((user) => user.make_payments === 'true' ? 'green' : 'red'),
-            borderColor: ['black'],
-            borderWidth: 2,
+            backgroundColor: data.map((user) => user.make_payments === 'true' ? '#2a593f' : '#ece4d4'),
+            borderColor: ['#88c6a3'],
+            borderWidth: 1.5,
         }]
     })
     useEffect(() => {
@@ -20,9 +20,9 @@ export default function PaymentChart({data}) {
             datasets: [{
                 label: 'Payment Amount',
                 data: data.map((user) => user.payment_amount),
-                backgroundColor: data.map((user) => user.make_payments === 'true' ? 'green' : 'red'),
-                borderColor: ['black'],
-                borderWidth: 2,
+                backgroundColor: data.map((user) => user.make_payments === 'true' ? '#2a593f' : '#ece4d4'),
+                borderColor: ['#88c6a3'],
+                borderWidth: 1.5,
             }]
         })
     }, [data])
