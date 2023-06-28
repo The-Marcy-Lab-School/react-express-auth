@@ -82,38 +82,39 @@ export default function UserPage() {
     : userProfile.username;
 
   return (
-    <div className="page-bg">
-      <div id="userDash-head">
-        <CreateGroceryForm />
-        <div id="userDash-head-user">
-          <h1>{profileUsername}</h1>
-          {!!isCurrentUserProfile && (
-            <button onClick={handleLogout}>Log Out</button>
-          )}
-          <p>If the user had any data, here it would be</p>
-          <p>Fake Bio or something</p>
-          {!!isCurrentUserProfile && (
-            <UpdateUsernameForm
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
-            />
-          )}
+    <>
+      <div className="page-bg">
+        <div id="userDash-head">
+          <CreateGroceryForm />
+          <div id="userDash-head-user">
+            <h1>{profileUsername}</h1>
+            {!!isCurrentUserProfile && (
+              <button onClick={handleLogout}>Log Out</button>
+            )}
+            <p>If the user had any data, here it would be</p>
+            <p>Fake Bio or something</p>
+            {!!isCurrentUserProfile && (
+              <UpdateUsernameForm
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+              />
+            )}
+          </div>
+        </div>
+
+        <div id="grocery-card" className="ui centered cards">
+          {lists.map((list) => {
+            return (
+              <GroceryCard
+                key={list.id}
+                grocery={list}
+                onClick={() => navigate(`/grocerylist/${list.id}`)}
+              />
+              //add onClick and add a fetch to get the groceryid and fetch it
+            );
+          })}
         </div>
       </div>
-
-      <div id='grocery-card' className="ui centered cards">
-        {lists.map((list) => {
-          return (
-            <GroceryCard
-              key={list.id}
-              grocery={list}
-              onClick={() => navigate(`/grocerylist/${list.id}`)}
-            />
-            //add onClick and add a fetch to get the groceryid and fetch it
-          );
-        })}
-      </div>
-
-    </div>
+    </>
   );
 }
