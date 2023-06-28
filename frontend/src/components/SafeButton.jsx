@@ -6,6 +6,7 @@ export default function SafeButton() {
   const { isSafe, setIsSafe } = useContext(CurrentUserContext);
 
   function clickHandler() {
+    console.log(isSafe)
     setIsSafe(!isSafe);
   }
 
