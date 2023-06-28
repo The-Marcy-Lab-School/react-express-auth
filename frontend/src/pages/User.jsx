@@ -74,8 +74,7 @@ export default function UserPage() {
                 <p className="gender">Gender: {userProfile.gender}</p>
                 <p className="race">Race: {userProfile.race}</p>
                 <p className="ethnicity">Ethnicity: {userProfile.ethnicity}</p>
-              </div>
-              <div className="content">
+                <br/>
                 <button id="logoutbtn" onClick={handleLogout}>
                   Log Out
                 </button>
@@ -83,21 +82,24 @@ export default function UserPage() {
             </div>
           </div>
         </div>
+      
         <article className="" id="bookmarkedSide">
+        <strong id= 'savedheading'><h2>Saved</h2></strong>
           {userBookmark.map((bookmark) => (
             <Bookmarkcard key={bookmark.id} bookmark={bookmark} />
           ))}
         </article>
-      </div>
+        </div>
+   
 
-      <div id="user-component">
+      {/* <div id="user-component">
         {!!isCurrentUserProfile && (
           <UpdateUsernameForm
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
           />
         )}
-      </div>
+      </div> */}
     </>
   );
 }

@@ -962,10 +962,12 @@ font-weight:100;
 /* This is the end of the css for the doctor card information on the doctor review page */
 .userpage{
 display: flex;
+justify-content: space-around;
+
 }
 #usercard{
   width:30vw;
-  margin-left: 15%;
+
   margin-top: 3%;
   box-shadow: none;
 }
@@ -997,6 +999,10 @@ display: flex;
   border: none;
   border-radius:2vh;
 }
+
+#user-component{
+  border:none;
+}
 .logoutButton{
   background-color: #132734;
   color: #FFC100;
@@ -1006,10 +1012,15 @@ display: flex;
   width: 12vh;
 }
 #bookmarkbox{
+  display: flex;
+  flex-direction: column;
   height: 30vh;
   width: 50vh;
-  border: solid #132734;
+  border: solid 2px #132734;
   text-align: center;
+  align-items: center;
+  border-radius: 4%;
+  margin-top: 13%;
 }
 #bookmarkReview{
   height: 12.75vh;
@@ -1026,9 +1037,26 @@ display: flex;
 }
 #bookmarkDoctorSpecailty{
 font-size: 2vh;
+font-weight: bold;
 }
 #bookmarkAddress{
   font-size: 1.8vh;
+}
+
+#savedheading{
+  font-weight: bold;
+  display: flex;
+  justify-content: center
+  /* margin-left: 100%; */
+  
+}
+#bookmarkedSide{
+  text-align: center;
+}
+
+#saveddocimg{
+  display: flex;
+  justify-content: center;
 }
 @media screen and (max-width: 768px) {
   .createpost-form {
