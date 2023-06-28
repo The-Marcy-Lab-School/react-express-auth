@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { createFeed, getAllFeeds } from "../adapters/feeds-adapter";
+// `import { createFeed, getAllFeeds } from "../adapters/feeds-adapter";
 
 function Feeds() {
   const [feeds, setFeeds] = useState([]);
