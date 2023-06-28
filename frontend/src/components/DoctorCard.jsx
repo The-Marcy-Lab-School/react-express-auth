@@ -111,18 +111,15 @@ function DoctorCard({ page, reviews, users }) {
           </div>
         </div>
         <div>
-        {!clickedBookmark ? (
-          <FontAwesomeIcon
-            onClick={handleSubmit}
-            icon={faBookmark}
-            style={{ color: "#132734" }}
-          />
-        ) : (
-          <FontAwesomeIcon
-          icon={faCheck}
-          style={{ color: "#132734" }}
-        />
-        )}
+          {!clickedBookmark ? (
+            <FontAwesomeIcon
+              onClick={handleSubmit}
+              icon={faBookmark}
+              style={{ color: "#132734" }}
+            />
+          ) : (
+            <FontAwesomeIcon icon={faCheck} style={{ color: "#132734" }} />
+          )}
         </div>
         <p className="subtitle">"{page.description}"</p>
       </div>
