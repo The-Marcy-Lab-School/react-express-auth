@@ -4,8 +4,10 @@ const updateUser = async (req, res) => {
   const {
     session : { userId },
     db: { User },
-    body: { isSafe },
+    body : { isSafe }
   } = req;
+
+  if (!userId) return res.sendStatus(404);
 
   const user = await User.updateSafe(userId, isSafe);
   if (!user) return res.sendStatus(404);

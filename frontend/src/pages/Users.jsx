@@ -1,59 +1,62 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getAllUsers } from "../adapters/user-adapter";
 import UserLink from "../components/UserLink";
 import { getPostOptions, fetchHandler, deleteOptions } from "../utils";
 import FriendsCard from "../components/UserCard";
 import UserFriendsCard from "../components/UserFriendsCard";
 import UserItem from "../components/UserItem";
+import AllUsersContext from '../contexts/all-users-context'
 
 export default function UsersPage() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [friends, setFriends] = useState([]);
+
+  const { users, setUsers } = useContext(AllUsersContext);
 
   useEffect(() => {
     getAllUsers().then(setUsers);
   }, []);
 
-  useEffect(() => {
-    async function getData() {
-      const urlFetch = await fetch("/api/friends");
-      const res = await urlFetch.json();
-      setFriends(res);
-    }
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   async function getData() {
+  //     const urlFetch = await fetch("/api/friends");
+  //     const res = await urlFetch.json();
+  //     setFriends(res);
+  //   }
+  //   getData();
+  // }, []);
 
-  const findUserIdByName = (username) => {
-    const user = users.find((user) => user.username === username);
-    if (!user) return "users not found";
-    return user.id;
-  };
+  // const findUserIdByName = (username) => {
+  //   const user = users.find((user) => user.username === username);
+  //   if (!user) return "users not found";
+  //   return user.id;
+  // };
 
-  console.log(findUserIdByName("ayaz"));
+  // console.log(findUserIdByName("ayaz"));
 
-  const handleAddFriend = async (username) => {
-    const friendId = findUserIdByName(username);
-    const [data, error] = await fetchHandler(
-      `/api/friends`,
-      getPostOptions({ friendId })
-    );
-    if (error) return console.log(error);
-    console.log(data);
-  };
+  // const handleAddFriend = async (username) => {
+  //   const friendId = findUserIdByName(username);
+  //   const [data, error] = await fetchHandler(
+  //     `/api/friends`,
+  //     getPostOptions({ friendId })
+  //   );
+  //   if (error) return console.log(error);
+  //   console.log(data);
+  // };
 
-  const handleRemoveFriend = async (username) => {
-    const friendId = findUserIdByName(username);
-    console.log(friendId);
+  // const handleRemoveFriend = async (username) => {
+  //   const friendId = findUserIdByName(username);
+  //   console.log(friendId);
 
-    const [data, error] = await fetchHandler(`/api/friends`, {
-      method: "DELETE",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ friendId }),
-    });
-    if (error) return console.log(error);
-    console.log(data);
-  };
+  //   const [data, error] = await fetchHandler(`/api/friends`, {
+  //     method: "DELETE",
+  //     credentials: "include",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ friendId }),
+  //   });
+  //   if (error) return console.log(error);
+  //   console.log(data);
+  // };
 
   return (
     <>
@@ -61,7 +64,7 @@ export default function UsersPage() {
         <div className="friends-list">
           <h1 className="list-title">Friends</h1>
           <div>
-            {friends.map((friend) => {
+            {/* {friends.map((friend) => {
               // return (
               //   <UserFriendsCard
               //     key={friend.id}
@@ -72,16 +75,18 @@ export default function UsersPage() {
               <UserItem
                 key={friend.id}
                 friend={friend.username}
-                onPing={handlePing}
+                // onPing={handlePing}
                 onRemoveFriend={handleRemoveFriend}
               />
-            })}
+            })} */}
           </div>
         </div>
         <div className="users-list">
           <h1 className="list-title">Users</h1>
           <div>
             {users.map((user) => {
+              console.log(user)
+              const { id } = user
               // return (
               //   <FriendsCard
               //     key={user.id}
@@ -89,12 +94,12 @@ export default function UsersPage() {
               //     onClick={() => handleAddFriend(user.username)}
               //   />
               // );
-              <UserItem
-                key={friend.id}
-                friend={friend.username}
-                onPing={handlePing}
-                onAddFriend={handleAddFriend}
-              />
+              return (<UserItem
+                key={ id }
+                {...user}
+                // onPing={handlePing}
+                // onAddFriend={handleAddFriend}
+              />)
             })}
           </div>
         </div>

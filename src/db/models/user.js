@@ -4,11 +4,12 @@ const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 class User {
   #passwordHash = null;
 
-  constructor({ id, username, password_hash, latitude, longitude }) {
+  constructor({ id, username, password_hash, latitude, longitude, is_safe }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
     this.location = {latitude, longitude}
+    this.isSafe = is_safe
   }
 
   static async list() {
@@ -30,21 +31,22 @@ class User {
     return user ? new User(user) : null;
   }
 
-  static async updateSafe(id, isSafe) {
+  static async updateSafe(userId, isSafe) {
+    console.log(isSafe)
     const query = `
     UPDATE users
     SET is_safe = ?
     WHERE id = ?
     RETURNING *;`;
-    const { rows: [user] } = await knex.raw(query, [isSafe, id]);
+    const { rows: [user] } = await knex.raw(query, [isSafe, userId]);
     return user ? new User(user) : null;
   }
 
   static async create(username, password, { myLatitude, myLongitude }/*, isSafe*/) {
     const passwordHash = await hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash, latitude, longitude, is_safe)
-      VALUES (?, ?, ?, ?, true) RETURNING *`;
+    const query = `INSERT INTO users (username, password_hash, latitude, longitude)
+      VALUES (?, ?, ?, ?) RETURNING *`;
     const { rows: [user] } = await knex.raw(query, [username, passwordHash, myLatitude, myLongitude/*, isSafe*/]);
     return new User(user);
   }
