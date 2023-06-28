@@ -1,6 +1,10 @@
 
 import React, {useContext, useEffect, useState } from "react";
 import { createEvent,getAllEvents } from "../adapters/events-adapter";
+import { Form, Button, Col, Row, FormGroup, Label, Input } from "reactstrap";
+
+
+
 function EventsPage() {
   
   const [events, setEvents] = useState([]); 
@@ -138,81 +142,92 @@ const handleRSVPClick = (event_id) => {
 
   return (
     <div>
-      <h1>Event Page</h1>
+      <h1>Events</h1>
       <button onClick={toggleFormVisibility}>Make Event</button>
       {showForm && (
-        <form onSubmit={handleFormSubmit}>
-          <label>
-            Image URL:
-            <input
-              type="text"
-              value={imgUrl}
-              onChange={(e) => setImgUrl(e.target.value)}
+        <Form onSubmit={handleFormSubmit}>
+        <h1 id="events-form-header">Make an Event</h1>
+        <FormGroup>
+          <Label >Heading</Label>
+          <Input
+          type="text"
+          bsSize="lg"
+          id="heading-input"
+          name="heading-input"
+          placeholder="Heading"
+          className="mb-3"
+          value={eventHeader}
+          onChange={(e) => setEventHeader(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+            <Label for="exampleFile">
+            Upload a Pic
+            </Label>
+            <Input
+            id="exampleFile"
+            name="file"
+            type="text"
+            value={ imgUrl }
+            onChange={(e) => setImgUrl(e.target.value)}
+            /> 
+        </FormGroup>
+        <FormGroup>
+            <Label for="exampleText">
+            Description
+            </Label>
+            <Input
+            id="exampleText"
+            name="text"
+            type="textarea"
+            value={ eventDescription }
+            onChange={(e) => setEventDescription(e.target.value)}
             />
-          </label>
-          <label>
-            Event Description:
-            <textarea
-              value={eventDescription}
-              onChange={(e) => setEventDescription(e.target.value)}
+        </FormGroup>
+        <FormGroup>
+            <Label for="exampleDate">
+            Date
+            </Label>
+            <Input
+            id="exampleDate"
+            name="date"
+            placeholder="date placeholder"
+            type="text"
+            value={ eventDate }
+            onChange={(e) => setEventDate(e.target.value)}
             />
-          </label>
-          <label>
-            Date:
-            <input
-              type="date"
-              value={eventDate}
-              onChange={(e) => setEventDate(e.target.value)}
+        </FormGroup>
+        <FormGroup>
+            <Label for="exampleTime">
+            Time
+            </Label>
+            <Input
+            id="exampleTime"
+            name="time"
+            placeholder="time placeholder"
+            type="time"
+            value={ eventTime }
+            onChange={(e) => setEventTime(e.target.value)}
             />
-          </label>
-          <label>
-            Time:
-            <input
-              type="time"
-              value={eventTime}
-              onChange={(e) => setEventTime(e.target.value)}
-            />
-          </label>
-          <label>
-            Header:
-            <input
-              type="text"
-              value={eventHeader}
-              onChange={(e) => setEventHeader(e.target.value)}
-            />
-          </label>
-          <label>
-            Location:
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        </FormGroup>
+        <FormGroup>
+          <Label for="exampleAddress">
+            Location
+          </Label>
+          <Input
+            id="exampleAddress"
+            name="address"
+            placeholder="1234 Main St"
+            type="text"
+            value={ location }
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </FormGroup>
+        <Button color="success">
+            Create Event
+        </Button>
+        </Form>
       )}
-
-      {/* <h2>Events:</h2>
-      {events.length === 0 ? (
-        <p>No events available.</p>
-      ) : (
-        <ul>
-          {events.map((event, index) => (
-            <li key={index}>
-              <h3>{event.header}</h3>
-              <p>{event.description}</p>
-              <p>Date: {event.date}</p>
-              <p>Time: {event.time}</p>
-              <p>Location: {event.location}</p>
-              <img src={event.img_url} alt="Event" />
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  ); */}
-  <h2>Events:</h2>
       {events.length === 0 ? (
         <p>No events available.</p>
       ) : (
