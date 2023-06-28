@@ -16,7 +16,7 @@ export default function AboutPage() {
   return (
         <>
         <section className="big-sec">
-          <h1 className="about-h1">Who are We</h1>
+          <h1 className="about-h1">Who We Are</h1>
         </section>
 
   <div className="about_container">

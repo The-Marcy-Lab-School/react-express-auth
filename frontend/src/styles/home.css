@@ -21,6 +21,12 @@ header {
     text-align: center;
     justify-content: center;
   }
+  .home-h1{
+    color:#2a593f;
+  }
+  .home-h2{
+    color:#ece4d4;
+  }
 
 h1{
     color:white;
@@ -45,10 +51,6 @@ h1{
     color:#283618;
   }
 
-  #basic-nav-dropdown{
-    color: white;
-  }
-
   #basic-nav-dropdown:hover{
     color: #283618;   
   }
@@ -61,7 +63,7 @@ h1{
     padding-top: 10%;
   }
 
-   .btn-get-started scrollto {
+   /* .btn-get-started scrollto {
         font-family: Open Sans, sans-serif;
         text-transform: uppercase;
         font-weight: 500;
@@ -71,9 +73,9 @@ h1{
         border-radius: 4px; 
         transition:0.5s; 
   }
-  
+   */
   .dropdown-menu{
-    background-color: #689e80;
+    background-color: #33323341;
   }
 .welcome-button{
     :hover{
@@ -84,15 +86,45 @@ h1{
     list-style: none;
   }
 
-  .navbar-nav{
-    margin-left: 45rem;
-    /* padding-left: 49rem; */
-    display:flex;
-}
-
-
   .btn-primary{
     background-color: #689e80;
     border-color: white;
   }
   
+  #nav-links{
+    justify-content: flex-end;
+    margin-right: 6rem;
+    padding-left:20px;
+  }
+
+#full-nav{
+  background-color: #33323341;
+  
+}
+
+.navbar a {
+  color:#f7eccd;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: #2b5841;
+}
+
+.dropdown-item:hover{
+  color: #2b5841;
+  background-color: transparent !important;
+}
+
+.btn-primary:focus, .btn-primary:hover{
+    background-color: #d8d4b4;
+    color:#ece4d4;
+    border-color: #ece4d4;
+}
+
+.btn-get-started scrollto:hover{
+    color: #ece4d4;
+}
+
+.welcome-button:hover {
+    color: #ece4d4;
+}
