@@ -17,10 +17,9 @@ export default function DoctorsList() {
     useContext(DoctorContext);
   const [searchValue, setSearchValue] = useState("");
   const [userBookmark, setUserBookmark] = useState([]);
+
   
 
-
-  let user = currentUser
   const handleSearchValue = (e) => {
     setSearchValue(e.target.value);
     const filtered = doctors.filter((doc) => {
@@ -48,13 +47,13 @@ export default function DoctorsList() {
       .catch((error) => console.log(error));
 
     const bookmarks = async () => {
-      const bookmark = await fetch(`/api/bookmark/${user.id}`);
+      const bookmark = await fetch(`/api/bookmark/${currentUser.id}`);
       const response = await bookmark.json();
       setUserBookmark(response);
     };
     bookmarks();
   }, []);
-  console.log();
+
   return (
     <>
       <div
@@ -75,7 +74,12 @@ export default function DoctorsList() {
       </div>
 
       <h4 className="header-four">
-        <NavLink to="/create-post" style={{color:"#FFC100", marginLeft:"1vh"}}>Can't Find a Doctor or Medical Facility? Add One Here</NavLink>
+        <NavLink
+          to="/create-post"
+          style={{ color: "#FFC100", marginLeft: "1vh" }}
+        >
+          Can't Find a Doctor or Medical Facility? Add One Here
+        </NavLink>
       </h4>
       <div className="ui centered cards" style={{ marginLeft: "1vh" }}>
         {filteredObject.length > 0

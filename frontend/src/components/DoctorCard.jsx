@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createBookmark } from "../adapters/bookmark-adapter";
 
+
 function DoctorCard({ page, reviews, users }) {
+  const [clickedBookmark, setClickedBookmark] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const { currentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const user = currentUser;
@@ -20,13 +24,23 @@ function DoctorCard({ page, reviews, users }) {
     event.preventDefault();
     const user_id = user.id;
     const page_id = page.id;
-    const [bookmark, error] = await createBookmark({
-      user_id,
-      page_id,
-    });
-    if (error) {
-      setErrorText(error.statusText);
-      console.log(setErrorText(error.statusText));
+
+    try {
+      const { bookmark, error } = await createBookmark({
+        user_id,
+        page_id,
+      });
+
+      if (error) {
+        setErrorText(error.statusText);
+        console.log(error.statusText);
+      } else {
+        // Bookmark creation successful
+        console.log("Bookmark created:", bookmark);
+        setClickedBookmark(true); // Update the bookmark state
+      }
+    } catch (error) {
+      console.log("Error creating bookmark:", error);
     }
   };
 
@@ -61,16 +75,14 @@ function DoctorCard({ page, reviews, users }) {
   }
 
   return (
-    <div
-      className="column is-three-quarters"
-    >
+    <div className="column is-three-quarters">
       <div className="box" style={{ border: "solid", borderColor: "black" }}>
         <p className="title is-4">
           {page.facility_doctor} - {page.specialty}{" "}
         </p>
 
         <p className="has-text-centered">{page.address}</p>
-        <div className="columns" onClick={handleDoctorId}>
+        <div className="columns" onClick={handleDoctorId} >
           <div className="column is-one-third">
             <div onClick={handleDoctorId}>
               <img
@@ -98,11 +110,20 @@ function DoctorCard({ page, reviews, users }) {
             </div>
           </div>
         </div>
-        <FontAwesomeIcon
-                onClick={handleSubmit}
-                icon={faBookmark}
-                style={{ color: "#132734" }}
-              />
+        <div>
+        {!clickedBookmark ? (
+          <FontAwesomeIcon
+            onClick={handleSubmit}
+            icon={faBookmark}
+            style={{ color: "#132734" }}
+          />
+        ) : (
+          <FontAwesomeIcon
+          icon={faCheck}
+          style={{ color: "#132734" }}
+        />
+        )}
+        </div>
         <p className="subtitle">"{page.description}"</p>
       </div>
     </div>

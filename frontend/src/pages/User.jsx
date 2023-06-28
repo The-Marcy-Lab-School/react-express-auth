@@ -13,7 +13,7 @@ export default function UserPage() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
-  const [clickedBookmark, setClickedBookmark] = useState(false);
+
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   useEffect(() => {
