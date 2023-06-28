@@ -122,11 +122,9 @@ When a natural disasters occurs people in the affected area will be put in the s
 
 Users will be able to look on map to see disasters around, around the world (Stretch)
 
-### Wireframe
-[https://www.figma.com/file/DvEDedU00nHOiGEvI4nHVg/Solace?type=design&node-id=0%3A1&mode=design&t=QSkvRY3s9pxkdNWo-1]
+### [Wireframe](https://www.figma.com/file/DvEDedU00nHOiGEvI4nHVg/Solace?type=design&node-id=0%3A1&mode=design&t=QSkvRY3s9pxkdNWo-1)
 
-### ERD
-[https://drive.google.com/file/d/1g5c3dFZ9geGmKmXSajTihxw9kcHsXFDr/view?usp=sharing]
+### [ERD](https://drive.google.com/file/d/1g5c3dFZ9geGmKmXSajTihxw9kcHsXFDr/view?usp=sharing)
 
 ### What we want our app to do:
 
