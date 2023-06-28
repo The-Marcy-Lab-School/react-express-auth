@@ -16,9 +16,9 @@ const WelcomeButton = () => {
     <section id="button">
       <div className="home-container">
       <animated.div style={fadeAnimation}>
-        <h1>Community.Savings.Trust</h1>
+        <h1 className="home-h1">Community.Savings.Trust</h1>
         <br></br>
-        <h2>Embark on a shared journey towards financial prosperity</h2>
+        <h2 className="home-h2">Embark on a shared journey towards financial prosperity</h2>
         <br />
           <Button variant="primary" size = "lg" id="welcome-button">
             <Link to="/about" className="btn-get-started scrollto" >
