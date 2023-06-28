@@ -1,0 +1,36 @@
+#page_title{
+    text-align: center;
+}
+
+/* #member-list{
+
+} */
+
+#members_and_chart{
+    display:flex;
+    justify-content: space-around;
+    padding-left:2em;
+    text-align:center;
+}
+
+#payment_chart{
+    margin-right:16em;
+}
+#member_section{
+    width: 10em;
+    height:min-content;
+    background-color: aqua;
+    text-align:left;
+}
+
+#member_title{
+    color:black;
+}
+
+#payment_section{
+    background-color: black;
+}
+
+#payment_time{
+    background-color: grey;
+}

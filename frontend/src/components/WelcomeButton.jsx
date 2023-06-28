@@ -20,7 +20,7 @@ const WelcomeButton = () => {
         <br></br>
         <h2>Embark on a shared journey towards financial prosperity</h2>
         <br />
-          <Button variant="primary" size = "lg" className="welcome-button">
+          <Button variant="primary" size = "lg" id="welcome-button">
             <Link to="/about" className="btn-get-started scrollto" >
               WELCOME
             </Link>
