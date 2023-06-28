@@ -196,7 +196,7 @@ button{
   border-color: rgb(91, 180, 255);
   font-size: 16px;
   height: 40px;
-  margin: 10px;
+  margin: 16px;
   padding: 0 16px;
   border-radius: 0.25rem;
   border: 2px solid transparent;
@@ -301,13 +301,21 @@ header {
   align-items: center;
   padding: 0.5rem 1rem;
   background: #000;
+  height: 40px;
 }
 
 #logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #FFF;
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+#logo img {
+  display: block;
+  width: 134px;
+  height: 29px;
+  /* margin-right: 18px; */
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 nav ul {
