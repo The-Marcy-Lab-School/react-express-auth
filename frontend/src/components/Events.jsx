@@ -28,7 +28,7 @@ function EventList() {
 
   const fetchProcessed = async () => {
     const data = await apiFetchHandler('/api/events');
-    console.log("NICK API:",data);
+    console.log("NICK API:", data);
   };
 
   useEffect(() => {
