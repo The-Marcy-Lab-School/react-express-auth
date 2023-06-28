@@ -1,16 +1,4 @@
 
-//import FormControl from '@mui/material/FormControl';
-// or
-// import { FormControl } from '@mui/material';
-
-// export default function HomePage() {
-//   return ( 
-//   <>
-//     <h1>Home</h1>
-//     <p>Put something interesting here!</p>
-//   </>
-//   );
-// }
 export default function HomePage() {
   return <>
     <div className="issue">
@@ -42,6 +30,35 @@ export default function HomePage() {
           If the app successfully engages users and encourages their participation in local cleaning events this will draw more attention to the issue at hand and lead to a more widespread and sustained effort to keep NYC streets clean. Users can then learn about the negative effects of pollution, contribute their time and effort, making a tangible difference in their neighborhoods. This collective action will create a sense of pride, ownership, and community spirit, fostering a cleaner and more vibrant NYC. The ultimate impact of Urban Unblemished's solution would be a cleaner, greener, and more livable NYC. It would enhance the overall quality of life for residents and visitors by improving the aesthetics, health, and sense of belonging in the community.
           </p>
         </div>
+        <div id="uu-how-to">
+        <div id='wrapper'>
+          <div id="graphics-header">
+            <h1 id='how-to-header'> 
+              How Urban Unblemished Works
+            </h1>
+            <p id='header-text'>
+            Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            </p>
+          </div>
+        </div>
+        <div id="graphics-div">
+          <div>
+            <img src="../../assets/JOIN_NOW_ICON.png"/>
+            <h1 id='how-to-header'>Join Now</h1>
+            <p>Create an account today and begin making history.</p>
+          </div>
+          <div>
+          <img src="../../assets/DISCUSS_ICON.png"/>
+            <h1 id='how-to-header'>Discuss</h1>
+            <p>Chat online with other members about the next plans of action.</p>
+          </div>
+          <div>
+          <img src="../../assets/MAKE_EVENTS_ICON.png"/>
+            <h1 id='how-to-header'>Make Events</h1>
+            <p>Band together, form events and clean organized.<br /> Form clean up groups and promote and discuss events.</p>
+          </div>
+        </div>
+      </div>
   </>;
 }
                        

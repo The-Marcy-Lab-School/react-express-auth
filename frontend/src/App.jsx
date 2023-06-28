@@ -10,6 +10,7 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import EventsPage from './pages/EventsPage'; 
+// import image from '../assets/BACKGROUND_IMG.png';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);

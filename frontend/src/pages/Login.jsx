@@ -1,7 +1,10 @@
-import { useContext, useState } from "react";
+import { React, useContext, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Row, Col, FormGroup, Label, Input, Form, Button } from "reactstrap";
+
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -22,15 +25,41 @@ export default function LoginPage() {
 
   return <>
     <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username</label>
-      <input type="text" autoComplete="username" id="username" name="username" />
-
-      <label htmlFor="password">Password</label>
-      <input type="password" autoComplete="current-password" id="password" name="password" />
-
-      <button>Log in!</button>
-    </form>
+    <Form id="create-form" onSubmit={ handleSubmit }>
+      <Row>
+        <Col>
+          <FormGroup>
+            <Label for="username">
+              Username
+            </Label>
+            <Input
+              id="username"
+              name="email"
+              placeholder="Username"
+              type="text"
+              autoComplete="username"
+            />
+          </FormGroup>
+        </Col>
+        <Col md={6}>
+          <FormGroup>
+            <Label for="password">
+              Password
+            </Label>
+            <Input
+              id='password'
+              name="password"
+              placeholder="Password"
+              type="password"
+              autoComplete="current-password"
+            />
+          </FormGroup>
+        </Col>
+      </Row>
+      <Button>
+        Log in
+      </Button>
+    </Form>
     { !!errorText && <p>{errorText}</p> }
   </>;
 }
