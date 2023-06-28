@@ -17,8 +17,15 @@ export default function UserPage() {
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   const [lists, setList] = useState([]);
-  const { removeButton, setRemoveButton, addButton, setAddButton } =
-    useContext(ProductContext);
+  const {
+    removeButton,
+    setRemoveButton,
+    addButton,
+    setAddButton,
+    recommendation,
+    setRecommendation,
+    recomItem,
+  } = useContext(ProductContext);
 
   const loadUser = async () => {
     const [user, error] = await getUser(id);
@@ -50,6 +57,9 @@ export default function UserPage() {
     if (addButton) {
       setAddButton(false);
     }
+    if (recommendation) {
+      setRecommendation(false);
+    }
     const loadInfoUser = async () => {
       try {
         await loadUser();
@@ -60,7 +70,7 @@ export default function UserPage() {
       }
     };
     loadInfoUser();
-  }, [id, removeButton, addButton]);
+  }, [id, removeButton, addButton, recommendation]);
   // id
 
   const handleLogout = async () => {

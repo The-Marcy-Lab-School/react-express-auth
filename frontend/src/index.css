@@ -586,3 +586,65 @@ p{
   flex-direction: column;
   align-items: center;
 }
+#mainAB{
+  display:grid;
+  justify-content: space-evenly;
+}
+#team-container{
+  display: flex;
+  justify-content: space-around;
+}
+#header-Ab{
+    display: grid;
+    justify-items: center;
+    width: 865px;
+    padding-left: 122px;
+    padding-top: 25px;
+}
+#body-Ab{
+  padding-top: 70px;
+  display: grid;
+  margin: 0;
+ justify-items: center;
+}
+#team{
+  padding-top: 60px;
+}
+#image-Abp{
+  height: 300px;
+    width: 600px;
+}
+#p2{
+  width:700px;
+}
+#image-Ab{
+padding-top: 35px;
+}
+#teamTitle{
+  padding-left: 40%;
+}
+
+.team-container {
+  display: flex;
+  justify-content: center;
+}
+
+.team-member {
+  text-align: center;
+  margin: 20px;
+}
+
+.team-member img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-member h3 {
+  margin: 10px 0;
+}
+
+.team-member p {
+  color: #888;
+}

@@ -9,9 +9,36 @@ export default function GroceryCard({ grocery }) {
   const formattedTime = dateTime.toLocaleTimeString();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { setRemoveButton } = useContext(ProductContext);
+  const { setRemoveButton, setRecommendation, recommendation } =
+    useContext(ProductContext);
   const [imgs, setImgs] = useState([]);
+  const [recomItem, setRecomItem] = useState(null);
 
+  function getRandomIndex(array) {
+    const length = array.length;
+    const randomIndex = Math.floor(Math.random() * length);
+    return randomIndex;
+  }
+  const handleRecommendation = async () => {
+    setRecommendation(true);
+    try {
+      const res = await fetchHandler(
+        `/api/grocerylist/${grocery.grocery_list_id}/rec`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const randomIndex = getRandomIndex(res);
+      console.log(res[randomIndex])
+      setRecomItem(res[randomIndex]);
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  };
   const handleRemoveGroceryList = async () => {
     setRemoveButton(true);
     try {
@@ -49,9 +76,11 @@ export default function GroceryCard({ grocery }) {
       }
     };
     imgPerGroceryList();
-  }, []);
+  }, [recommendation]);
 
-
+  console.log("Recommendation", recomItem);
+  console.log(recomItem)
+  // console.log(recomItem[0].image_front_thumb_url)
   return (
     <>
       <div className="ui card">
@@ -70,7 +99,11 @@ export default function GroceryCard({ grocery }) {
               if (index < 3) {
                 return (
                   <div key={index}>
-                    <img className="grocery-preview-image" alt="oh no!" src={item.image_front_thumb_url} />
+                    <img
+                      className="grocery-preview-image"
+                      alt="oh no!"
+                      src={item.image_front_thumb_url}
+                    />
                   </div>
                 );
               }
@@ -96,13 +129,42 @@ export default function GroceryCard({ grocery }) {
             </div>
           </div>
         </div>
-        <button className="ui button fluid" onClick={() => {
+        <button className="ui button fluid" onClick={handleRecommendation}>
+          Recommendation
+        </button>
+        <button
+          className="ui button fluid"
+          onClick={() => {
             navigate(`/users/${id}/grocerylist/${grocery.grocery_list_id}`);
-          }}>View</button>
+          }}
+        >
+          View
+        </button>
         <button className="ui button fluid" onClick={handleRemoveGroceryList}>
           Remove
         </button>
       </div>
+      {recomItem && (
+        <div className="ui card">
+          <div className="image">
+            <img src={recomItem[0].image_front_thumb_url} />
+          </div>
+          <div className="content">
+            <div className="meta">
+              <span>
+                <i className="icon-nutri-score" />
+                {recomItem[0].nutriscore_grade}
+              </span>
+
+              <span>
+                <i className="icon-nova-score" />
+                {recomItem[0].nova_group}
+                <NovaScore props={recomItem[0].nova_group} />
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

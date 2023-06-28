@@ -138,7 +138,31 @@ WHERE grocery_list_id = ?
       return null;
     }
   }
- 
+  static async rec(id) {
+    try {
+      const query = `
+        SELECT items.*
+        FROM items
+        LEFT JOIN (
+          SELECT item_id
+          FROM grocery_items_table
+          WHERE grocery_list_id = ?
+        ) AS existing_items
+        ON items.id = existing_items.item_id
+        WHERE existing_items.item_id IS NULL -- Exclude items already on the specified grocery list
+          AND items.nova_group <= 2 -- Nova group rating lower or equal to 2
+      `;
+        
+      const { rows } = await knex.raw(query, [id]);
+      return rows;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+  
+  
+  
   //deleting/removing an item from list
   deleteRate = async (list_name, nova_rate, nutri_score) => {
     const deletedRate = await knex('grocery_list')

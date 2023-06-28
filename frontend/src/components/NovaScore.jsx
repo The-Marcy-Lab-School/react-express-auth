@@ -8,13 +8,13 @@ export default function NovaScore({ props: novaGroup }) {
   console.log("NovaScore", novaGroup);
 
   const getBackgroundColor = () => {
-    if (novaGroup === 1) {
+    if (novaGroup == 1) {
       return "#e8f4ed";
-    } else if (novaGroup === 2) {
+    } else if (novaGroup == 2) {
       return "#fff4cd";
-    } else if (novaGroup === 3) {
+    } else if (novaGroup == 3) {
       return "#ffe0ce";
-    } else if (novaGroup === 4) {
+    } else if (novaGroup == 4) {
       return "#fdeeee";
     } else {
       return "#ededed";
