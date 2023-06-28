@@ -173,6 +173,10 @@ h1 {
   margin: 2%;
 }
 
+.profile-username {
+  color: #fff;
+}
+
  /* =================================== Sign-in & Login Pages ====================================== */
 
 .login-page, .sign-up-page{ 

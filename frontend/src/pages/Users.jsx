@@ -45,15 +45,29 @@ export default function UsersPage() {
     // console.log(`Ping!`);
     // }
 
+    // try {
+    //   await knex('pings').insert({
+    //     senderId: loggedInUserId,
+    //     receiverId: receiverId,
+    //   });
+    //   console.log(`${loggedInUser} asked if you're safe`);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+
+    const friendId = findUserIdByName(username);
+
     try {
-      await knex('pings').insert({
-        senderId: loggedInUserId,
-        receiverId: receiverId,
+      await fetchHandler('/api/pings', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ receiverId: friendId }),
       });
       console.log(`${loggedInUser} asked if you're safe`);
-      } catch (error) {
-        console.log(error);
-      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleAddFriend = async (username) => {
