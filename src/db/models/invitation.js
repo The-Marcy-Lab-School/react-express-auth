@@ -3,7 +3,7 @@ const knex = require('../knex');
 class Invitation {
  
   static async list(id) {
-    const query = 'SELECT * FROM invitations WHERE receiver_id = ?';
+    const query = 'SELECT receiver_id, susu_id, invitations.id, sender_id, users.username, susu.name FROM invitations JOIN users ON invitations.sender_id = users.id JOIN susu on susu.id = invitations.susu_id WHERE receiver_id = ?';
     const { rows } = await knex.raw(query, [id]);
     return rows;
   }

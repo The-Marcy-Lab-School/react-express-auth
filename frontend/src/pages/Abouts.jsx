@@ -7,21 +7,36 @@ import '../styles/about.css';
 export default function AboutPage() {
   const content = fetchHandler("/api/susu")
   console.log(content)
+  
   const fadeAnimation = useSpring({
     from: { opacity: 1, transform: 'translateY(-150px)' },
     to: { opacity: 1, transform: 'translateY(0)' },
     config: { duration: 900 },
   });
-  return (<div className="about_container">
+  return (
+  <div className="about_container">
      <animated.div style={fadeAnimation}>
 
+   <div id="img-container">
+   <section className="sec-1">
     <h2>Mission Statement</h2>
       <p>Our web platform restructures the operation of rotating savings associations (susu) for African and Caribbean families. By simplifying susu management, facilitating transparent transactions, and encouraging responsible financial practices, we empower these communities to achieve their financial goals, build generational wealth, and create a brighter future.
       </p>
-    <h2>What is a Susu?</h2>
+  </section>
+  <div className="picture">
+    <img src ="https://www.freeiconspng.com/thumbs/money-png/dollar-flying-money-png-4.png"></img>
+  </div>
+   </div>
+  
+
+  <section className="sec-2">
+   <h2>What is a Susu?</h2>
       <p>Susu is a traditional savings system where a group of people pool their money together regularly. Each member contributes a fixed amount, and the total amount is given to one member at each cycle until everyone has received their share. It's a way to save money, support each other, and reach financial goals as a community.  
       </p>
-    <h2>Rules</h2>
+  </section>
+   
+<section className="sec-3">
+  <h2>Rules</h2>
       <>
         <ul>
           <li>Rule 1: Members contribute a fixed amount of money regularly.</li>
@@ -31,6 +46,8 @@ export default function AboutPage() {
           <li>Rule 5: The susu continues until each member has received their share.</li>
         </ul>
       </>
+</section>
+   
       </animated.div>
 
   </div>);

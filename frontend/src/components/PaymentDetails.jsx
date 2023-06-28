@@ -30,8 +30,9 @@ export default function detailsLink() {
   const [currentUser, setCurrentUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [unAuthDialog, setUnAuthDialog] = useState(false);
-  const [deleteUser, setDeleteUser] = useState("");
-  const [deletePassword, setDeletePassword] = useState("");
+  const [ deleteUser, setDeleteUser ] = useState('');
+  const [ deletePassword, setDeletePassword ] = useState('');
+  const [ payments, setPayments ] = useState({});
 
   useEffect(() => {
     const loadLoggedInUser = async () => {
@@ -53,7 +54,7 @@ export default function detailsLink() {
       setData(details);
     };
     loadDetails();
-  }, [id]);
+  },[payments])
   console.log(data, data[0]);
 
   const deleteAuth = () => {
@@ -148,11 +149,7 @@ export default function detailsLink() {
           <ul id="member-list">
             {data.map((user) => (
               <div key={user.user_id}>
-                {" "}
-                <SusuMembers
-                  user={user}
-                  owner={currentUser.id !== user.owner ? true : false}
-                />{" "}
+<SusuMembers payments={payments} setPayments={setPayments} user={user} owner={currentUser.id!==user.owner ? true : false}/>
               </div>
             ))}
           </ul>

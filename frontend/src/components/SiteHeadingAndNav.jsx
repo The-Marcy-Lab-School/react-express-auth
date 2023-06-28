@@ -38,10 +38,16 @@ return (
                 <>
                 <NavDropdown className="links" title="Join">
                   <NavDropdown.Item className="links" href="/login">Login</NavDropdown.Item>
-                  <NavDropdown.Item className="links" href="/signup">Sign Up</NavDropdown.Item>
+                  <NavDropdown.Item className="links" href="/sign-up">Sign Up</NavDropdown.Item>
                 </NavDropdown>
                 </>
             }
       </Navbar.Collapse>
   </Navbar>
 )}
+
+//     </Nav>
+//   </Navbar.Collapse>
+// </Container>
+// </Navbar>
+// )}

@@ -5,6 +5,7 @@ import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
 import "../styles/users.css";
+import InviteCard from "../components/InviteCard";
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function UserPage() {
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+  const [userInvites, setUserInvites] = useState([]) 
 
   useEffect(() => {
     const loadUser = async () => {
@@ -20,9 +22,15 @@ export default function UserPage() {
       if (error) return setErrorText(error.statusText);
       setUserProfile(user);
     };
-
+    const loadInvites = async() =>{
+      const invites = await fetch('/api/invites')
+      const res = await  invites.json()
+      console.log(res)
+      setUserInvites(res)
+    }
     loadUser();
-  }, [id]);
+    loadInvites();
+  }, [userInvites, id]);
 
   const handleLogout = async () => {
     logUserOut();
@@ -44,5 +52,10 @@ export default function UserPage() {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
+    <div>
+      {userInvites.map((invites) => (
+        <InviteCard key={invites.id} invites={invites}/>
+      ))}
+    </div>
   </div>;
 }
