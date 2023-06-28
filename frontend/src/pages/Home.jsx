@@ -47,12 +47,12 @@ export default function DoctorsList() {
       .then((data) => setUsers(data))
       .catch((error) => console.log(error));
 
-    const bookmarks = async () => {
-      const bookmark = await fetch(`/api/bookmark/${user.id}`);
-      const response = await bookmark.json();
-      setUserBookmark(response);
-    };
-    bookmarks();
+    // const bookmarks = async () => {
+    //   const bookmark = await fetch(`/api/bookmark/${user.id}`);
+    //   const response = await bookmark.json();
+    //   setUserBookmark(response);
+    // };
+    // bookmarks();
   }, []);
   console.log();
   return (
