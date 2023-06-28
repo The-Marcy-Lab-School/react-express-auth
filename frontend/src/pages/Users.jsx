@@ -33,10 +33,14 @@ export default function UsersPage() {
 
   const handlePing = async(username) => {
     const friendId = findUserIdByName(username);
-    const [data, error] = await fetchHandler(`/api/friends`, {
-      
-    });
-    console.log(`Pinging ${username}`);
+    const [data, error] = await fetchHandler(`/api/pings`, 
+      getPostOptions({ friendID })
+    );
+    if (error) {
+    console.log(error);
+    } else {
+    console.log(`Ping!`);
+    }
   };
 
   const handleAddFriend = async (username) => {
