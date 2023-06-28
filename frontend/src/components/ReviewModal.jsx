@@ -143,7 +143,7 @@ const ReviewModal = ({ id }) => {
                 </div>
                 <div className="field is-grouped">
                   <div className="control">
-                    <button type="submit" className="button is-link">Submit</button>
+                    <button type="submit" className="button is-link" onClick={handleCloseModal}>Submit</button>
                   </div>
                   <div className="control">
                     <button className="button" onClick={handleCloseModal}>Cancel</button>

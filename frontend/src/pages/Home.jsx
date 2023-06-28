@@ -46,12 +46,12 @@ export default function DoctorsList() {
       .then((data) => setUsers(data))
       .catch((error) => console.log(error));
 
-    const bookmarks = async () => {
-      const bookmark = await fetch(`/api/bookmark/${currentUser.id}`);
-      const response = await bookmark.json();
-      setUserBookmark(response);
-    };
-    bookmarks();
+    // const bookmarks = async () => {
+    //   const bookmark = await fetch(`/api/bookmark/${user.id}`);
+    //   const response = await bookmark.json();
+    //   setUserBookmark(response);
+    // };
+    // bookmarks();
   }, []);
 
   return (
@@ -74,14 +74,9 @@ export default function DoctorsList() {
       </div>
 
       <h4 className="header-four">
-        <NavLink
-          to="/create-post"
-          style={{ color: "#FFC100", marginLeft: "1vh" }}
-        >
-          Can't Find a Doctor or Medical Facility? Add One Here
-        </NavLink>
+        <NavLink to="/create-post" style={{color:"#132734", marginLeft:"1vh"}}>Can't Find a Doctor or Medical Facility? Add One Here</NavLink>
       </h4>
-      <div className="ui centered cards" style={{ marginLeft: "1vh" }}>
+      <div className="ui centered cards" style={{ marginLeft: "1vh", display: "flex", justifyContent:"center", flexDirection: "column", alignItems: "center"}}>
         {filteredObject.length > 0
           ? filteredObject.map((doc) => (
               <DoctorCard

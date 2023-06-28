@@ -45,6 +45,9 @@ nav .item {
   background-color: #132734;
 }
 
+.transparent-link {
+  background-color: transparent;
+}
 
 form {
   padding: 1rem;
@@ -128,6 +131,7 @@ h4 {
   min-height: 20vh;
   align-items: center;
   letter-spacing: 1px;
+  background-color: white;
 }
 
 .welcome-text {
@@ -140,6 +144,7 @@ h4 {
 
 .signuplogindiv {
   height: 60vh;
+  background-color: white;
 }
 
 #sign_box {
@@ -218,6 +223,15 @@ h4 {
   text-align: center;
   font-size: 30px;
   font-family: Calibri, sans-serif;
+  color: white;
+}
+
+.username-label {
+  color: white;
+}
+
+.password-label {
+  color: white;
 }
 
 #login-button {
@@ -254,6 +268,39 @@ h4 {
   text-align: center;
   font-size: 30px;
   font-family: Calibri, sans-serif;
+  color: white;
+}
+
+.firstname-label {
+  color: white;
+}
+
+.lastname-label {
+  color: white;
+}
+
+.age-label {
+  color: white;
+}
+
+.gender-label {
+  color: white;
+}
+
+.race-label {
+  color: white;
+}
+
+.ethnicity-label {
+  color: white;
+}
+
+.email-label {
+  color: white;
+}
+
+.picture-label {
+  color: white;
 }
 
 #signup-form {
@@ -556,9 +603,7 @@ h4 {
   background-color: #FFC100;
   color:#132734;
 }
-.label{
-  color:white
-}
+
 
 .sign_up {
   color: #B9D7EA;
@@ -878,9 +923,9 @@ h4 {
 }
 
 .username {
-  font-size: 2vh;
+  font-size: 3vh;
   font-weight: bold;
-  letter-spacing: .75vh;
+
 }
 
 .rating {
@@ -949,9 +994,13 @@ font-weight:100;
     margin-bottom: 2vh;
   }
 
+  .cats {
+    font-size: small;
+  }
+
   .reviewButton {
     height: 5vh;
-    width: 16vh;
+    width: 16vw;
     border-radius: 1.5vh;
     border: none;
     margin-bottom: 2vh;
@@ -962,10 +1011,12 @@ font-weight:100;
 /* This is the end of the css for the doctor card information on the doctor review page */
 .userpage{
 display: flex;
+justify-content: space-around;
+
 }
 #usercard{
   width:30vw;
-  margin-left: 15%;
+
   margin-top: 3%;
   box-shadow: none;
 }
@@ -997,6 +1048,10 @@ display: flex;
   border: none;
   border-radius:2vh;
 }
+
+#user-component{
+  border:none;
+}
 .logoutButton{
   background-color: #132734;
   color: #FFC100;
@@ -1006,10 +1061,15 @@ display: flex;
   width: 12vh;
 }
 #bookmarkbox{
+  display: flex;
+  flex-direction: column;
   height: 30vh;
   width: 50vh;
-  border: solid #132734;
+  border: solid 2px #132734;
   text-align: center;
+  align-items: center;
+  border-radius: 4%;
+  margin-top: 13%;
 }
 #bookmarkReview{
   height: 12.75vh;
@@ -1026,9 +1086,26 @@ display: flex;
 }
 #bookmarkDoctorSpecailty{
 font-size: 2vh;
+font-weight: bold;
 }
 #bookmarkAddress{
   font-size: 1.8vh;
+}
+
+#savedheading{
+  font-weight: bold;
+  display: flex;
+  justify-content: center
+  /* margin-left: 100%; */
+  
+}
+#bookmarkedSide{
+  text-align: center;
+}
+
+#saveddocimg{
+  display: flex;
+  justify-content: center;
 }
 @media screen and (max-width: 768px) {
   .createpost-form {

@@ -5,9 +5,10 @@ export default function Bookmarkcard({ bookmark }) {
 
 
 
+
   return (
-    <div className="column is-three-quarters">
-      <div className="box" id="bookmarkbox" >
+ 
+      <div  id="bookmarkbox">
         <p id="bookmarkDoctorSpecailty">
           {bookmark.facility_doctor} - {bookmark.specialty}
         </p>
@@ -16,18 +17,17 @@ export default function Bookmarkcard({ bookmark }) {
           {bookmark.address}
         </p>
         <div className="columns">
-          <div className="column is-one-third">
-            <div>
+          <div className="column is-one-third" style={{ width:"100%"} }>
+            <div id= 'saveddocimg' >
               <img
                 src={bookmark.photo}
                 alt="Image"
                 style={{ width: "100px", height: "100px" }}
               />
-              <FontAwesomeIcon icon={faBookmark} style={{ color: "#132734" }} />
             </div>
           </div>
         </div>
       </div>
-    </div>
+
   );
 }
