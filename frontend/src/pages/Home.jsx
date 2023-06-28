@@ -73,13 +73,8 @@ export default function DoctorsList() {
         </div>
       </div>
 
-      <h4>
-        <NavLink
-          to="/create-post"
-          style={{ color: "#FFC100", marginLeft: "1vh" }}
-        >
-          Can't Find a Doctor? Add One Here
-        </NavLink>
+      <h4 className="header-four">
+        <NavLink to="/create-post" style={{color:"#FFC100", marginLeft:"1vh"}}>Can't Find a Doctor or Medical Facility? Add One Here</NavLink>
       </h4>
       <div className="ui centered cards" style={{ marginLeft: "1vh" }}>
         {filteredObject.length > 0

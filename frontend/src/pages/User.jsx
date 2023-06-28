@@ -49,57 +49,47 @@ export default function UserPage() {
 
   return (
     <>
-      <div className="userProfilePage">
-        <article className="profile">
-          <div className="column is-half" id="userProfileInfo">
-            <div
-              className="card"
-              style={{ width: "300px", borderRadius: "100%" }}
-            >
-              <div className="card-image" style={{ borderRadius: "100%" }}>
-                <figure className="image is-4by3">
-                  <img
-                    style={{ borderRadius: "20vh" }}
-                    src="https://bulma.io/images/placeholders/1280x960.png"
-                    alt="Placeholder image"
-                  />
-                </figure>
-              </div>
-            </div>
+     <div>
+      <div className="card" id = 'usercard'>
+  <div className="card-image">
+    <figure className="image is-4by3">
+      <img src={userProfile.picture} alt="Placeholder image" id = 'userimage' />
+    </figure>
+  </div>
+  <div className="card-content">
+    <div className="media">
+      <div className="media-content">
+        <p className="title is-4">{userProfile.first_name} {userProfile.last_name}</p>
+        <p className="subtitle is-6" id= 'username'>@{userProfile.username}</p>
+        <p className="age">Age: {userProfile.age}</p>
+        <p className="gender">Gender: {userProfile.gender}</p>
+        <p className="race">Race: {userProfile.race}</p>
+        <p className="ethnicity">Ethnicity: {userProfile.ethnicity}</p>
+      
 
-            <div className="box" id="personInfoCard">
-              <p className="title is-4">
-                {userProfile.first_name} {userProfile.last_name}
-              </p>
-              <p className="subtitle is-6">{profileUsername}</p>
-              <div>
-                {!!isCurrentUserProfile && (
-                  <UpdateUsernameForm
-                    currentUser={currentUser}
-                    setCurrentUser={setCurrentUser}
-                  />
-                )}
-              </div>
-              <div className="userinfo">
-                <h4>{userProfile.age}</h4>
-                <h4>{userProfile.gender}</h4>
-                <h4>{userProfile.race}</h4>
-                <h4>{userProfile.ethnicity}</h4>
-              </div>
-            </div>
-            {!!isCurrentUserProfile && (
-              <button className="logoutButton" onClick={handleLogout}>
-                Log Out
-              </button>
-            )}
-          </div>
-        </article>
-        <article className="" id="bookmarkedSide">
+      </div>
+    </div>
+
+    <div className="content">
+      <button id= 'logoutbtn'onClick={handleLogout}>Log Out</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+      <div id="user-component">
+        {
+          !!isCurrentUserProfile
+          && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        }
+      </div>
+      <article className="" id="bookmarkedSide">
         {userBookmark.map((bookmark)=> (
           <Bookmarkcard key={bookmark.id} bookmark={bookmark}/>
         ))}
         </article>
-      </div>
     </>
   );
 }

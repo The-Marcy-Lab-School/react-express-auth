@@ -9,6 +9,9 @@ exports.up = (knex) =>
     table.integer("page_id").references("id").inTable("pages").notNullable();
     table.string("review_body", 500).notNullable();
     table.integer("rating").notNullable();
+    table.integer("staff_friendliness").notNullable();
+    table.integer("wait_times").notNullable();
+    table.integer("quality_of_care").notNullable();
     table.timestamps(true, true);
   });
 

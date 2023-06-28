@@ -13,7 +13,7 @@ Router.get("/users", userController.list);
 Router.post("/users", userController.create);
 Router.get("/users/:id", userController.show);
 // We can use middleware slotted in between the route and the controller as well
-Router.patch("/users/:id", checkAuthentication, userController.update);
+Router.patch('/users/:id',checkAuthentication, userController.update);
 
 Router.post("/login", userController.login);
 Router.delete("/logout", userController.logout);
@@ -25,11 +25,12 @@ Router.get("/logged-in-secret", checkAuthentication, (req, res) => {
 
 // Reviews
 
-Router.get("/reviews", reviewController.list);
-Router.post("/reviews", reviewController.create);
-Router.get("/reviews/:id", reviewController.show);
-Router.delete("/reviews/:id", reviewController.destroy);
-Router.patch("/reviews/:id", reviewController.update);
+Router.get('/reviews', reviewController.list);
+Router.post('/reviews', reviewController.create);
+Router.get('/reviews/:id', reviewController.show);
+Router.get('reviews/:user_id', reviewController.show)
+Router.delete('/reviews/:id', reviewController.destroy);
+Router.patch('/reviews/:id', reviewController.update);
 
 // Pages
 
