@@ -5,7 +5,6 @@ const migrationsDirectory = path.join(__dirname, 'src', 'db', 'migrations');
 const migrationsStub = path.join(__dirname, 'migration-stub.js');
 const seedsDirectory = path.join(__dirname, 'src', 'db', 'seeds');
 
-
 module.exports = {
   development: {
     client: 'pg',

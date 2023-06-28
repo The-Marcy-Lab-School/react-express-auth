@@ -137,9 +137,9 @@ export default function DoctorReview() {
               <p className="description">"{page.description}"</p>
             </div>
             <div className="categories-all">
-              <p>Staff Friendliness: {starFriendliness}</p>
-              <p>Wait Times: {starWait}</p>
-              <p>Quality of Care: {starCare}</p>
+              <p className="cats">Staff Friendliness: {starFriendliness}</p>
+              <p className="cats">Wait Times: {starWait}</p>
+              <p className="cats">Quality of Care: {starCare}</p>
             </div>
             <ReviewModal id={id} />
             <NavLink to="/compare"><button className='reviewButton'>Compare</button></NavLink>
