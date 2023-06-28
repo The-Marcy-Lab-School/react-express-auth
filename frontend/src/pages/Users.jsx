@@ -17,20 +17,20 @@ export default function UsersPage() {
     getAllUsers().then(setUsers);
   }, []);
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     const urlFetch = await fetch("/api/friends");
-  //     const res = await urlFetch.json();
-  //     setFriends(res);
-  //   }
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    async function getData() {
+      const urlFetch = await fetch("/api/friends");
+      const res = await urlFetch.json();
+      setFriends(res);
+    }
+    getData();
+  }, []);
 
-  // const findUserIdByName = (username) => {
-  //   const user = users.find((user) => user.username === username);
-  //   if (!user) return "users not found";
-  //   return user.id;
-  // };
+  const findUserIdByName = (username) => {
+    const user = users.find((user) => user.username === username);
+    if (!user) return "users not found";
+    return user.id;
+  };
 
   // console.log(findUserIdByName("ayaz"));
 
