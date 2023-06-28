@@ -4,7 +4,7 @@
 
 Solace strives to provide people with peace of mind and the reassurance that their loved ones are safe and secure back home after a natural disaster occurs.
 
-### Who We Serve**
+### Who We Serve
 
 Our target audience are people in communities that have been impacted by natural disasters or that have family and/or friends in affected communities. Our program seeks to assist these communities in staying better connected to each other internationally and create a sense of security through communication in response to the increasing number of natural disasters occurring as a result of climate change.
 
