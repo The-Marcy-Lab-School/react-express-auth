@@ -1,5 +1,5 @@
 .about_container{
-   max-width:600px;
+   max-width:800px;
    margin:0 auto;
    padding:20px;
    display:flex;
@@ -12,17 +12,15 @@
    border:1px solid #ccc;
    border-radius: 4px;
    padding:20px;
-   background-color: #f7f7f7;
+   background-color: #88c6a3;
    box-shadow:0 2px 4px rgba(0,0,0,0.1);
-   margin-right:10rem;
-   width:500px;
 }
 .sec-2{
    margin-bottom: 30px;
    border:1px solid #ccc;
    border-radius: 4px;
    padding:20px;
-   background-color: #f7f7f7;
+   background-color: #d8d4b4;
    box-shadow:0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -31,7 +29,7 @@
    border:1px solid #ccc;
    border-radius: 4px;
    padding:20px;
-   background-color: #f7f7f7;
+   background-color: #2a593f;
    box-shadow:0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -59,8 +57,4 @@ li{
 
 .about_container{
    margin-top: 50px;
-}
-#img-container{
-   display: flex;
-   max-width: 1000px;
 }

@@ -23,9 +23,6 @@ export default function AboutPage() {
       <p>Our web platform restructures the operation of rotating savings associations (susu) for African and Caribbean families. By simplifying susu management, facilitating transparent transactions, and encouraging responsible financial practices, we empower these communities to achieve their financial goals, build generational wealth, and create a brighter future.
       </p>
   </section>
-  <div className="picture">
-    <img src ="https://www.freeiconspng.com/thumbs/money-png/dollar-flying-money-png-4.png"></img>
-  </div>
    </div>
   
 
