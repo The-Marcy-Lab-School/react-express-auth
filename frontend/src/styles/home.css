@@ -73,7 +73,7 @@ h1{
   }
   
   .dropdown-menu{
-    background-color: #689e80;
+    background-color: #33323341;
   }
 .welcome-button{
     :hover{
@@ -84,19 +84,47 @@ h1{
     list-style: none;
   }
 
-<<<<<<< HEAD
-  #welcome-button{
-=======
-  .navbar-nav{
-    margin-left: 45rem;
-    /* padding-left: 49rem; */
-    display:flex;
-}
-
-
   .btn-primary{
->>>>>>> 70dee49f2f9eda09412e7a9387e50aebdf4d56ca
     background-color: #689e80;
     border-color: white;
   }
   
+  #nav-links{
+    justify-content: flex-end;
+    margin-right: 6rem
+  }
+
+#full-nav{
+  background-color: #33323341;
+}
+
+.navbar a {
+  color:#f7eccd;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: #2b5841;
+}
+
+.dropdown-item:hover{
+  color: #2b5841;
+  background-color: transparent !important;
+}
+/*Test*/
+/* 
+.ashley {
+  width: 100vw;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2.5em;
+  padding-left: 1em;
+}
+
+.ashley-items {
+  display: flex;
+  gap: 20px;
+  padding-right:1em;
+} */
