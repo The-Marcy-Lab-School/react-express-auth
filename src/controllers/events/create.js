@@ -5,6 +5,7 @@ const createEvent = async (req, res) => {
         body: {img_url, description, date, time, header, location}
     } = req
     const user_id = session.userId;
+    console.log(user_id, img_url, description, date, time, header, location)
     const event = await Events.create(user_id, img_url, description, date, time, header, location);
     res.send(event);
 }

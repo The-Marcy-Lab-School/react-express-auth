@@ -1,3 +1,16 @@
+
+//import FormControl from '@mui/material/FormControl';
+// or
+// import { FormControl } from '@mui/material';
+
+// export default function HomePage() {
+//   return ( 
+//   <>
+//     <h1>Home</h1>
+//     <p>Put something interesting here!</p>
+//   </>
+//   );
+// }
 export default function HomePage() {
   return <>
     <div className="issue">
@@ -31,30 +44,4 @@ export default function HomePage() {
         </div>
   </>;
 }
-
-// import React from "react";
-// import { Card, CardHeader, CardBody, CardTitle, CardText, Button } from "reactstrap";
-
-// const EventCard = ({ heading, img,  description, date, time, location }) => {
-//   return (
-//     <Card variant="outlined">
-//       <CardHeader>
-//         <CardTitle>Brownsville's Dirt Level is High</CardTitle>
-//       </CardHeader>
-//       <CardBody>
-//         {/* <CardImage src='https://randomwordgenerator.com/img/picture-generator/52e5d74a4356b10ff3d8992cc12c30771037dbf852547941742679d59044_640.jpg' /> */}
-//         <CardText> As I walk through Brownsville, Brooklyn on a weekly basis, I watch the same set of trash be blown in the wind. Lets team up to make our neighborhood green again! </CardText>
-//         <p>
-//           <b>Date:</b> {date}
-//           <br />
-//           <b>Time:</b> {time}
-//           <br />
-//           <b>Location:</b> {location}
-//         </p>
-//       </CardBody>
-//       <Button color="green">Join This Clean Up</Button>
-//     </Card>
-//   );
-// };
-
-// // export default EventCard;
+                       

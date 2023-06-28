@@ -26,6 +26,7 @@ class Events {
       }
 
     static async delete (event_id)  {
+      console.log("sql"+ event_id)
         try {
           const query = `DELETE FROM events WHERE event_id = ? RETURNING *`;
           const { rows: [post] } = await knex.raw(query, [event_id]);
