@@ -484,3 +484,23 @@ p{
   flex-direction: column;
   align-items: center;
 }
+#mainAB{
+  display:grid;
+  justify-content: space-evenly;
+}
+#team-images{
+  display: flex;
+}
+#header-Ab{
+  padding-top: 50px;
+}
+#body-Ab{
+  padding-top: 100px;
+}
+#team{
+  padding-top: 100px;
+}
+#image-Abp{
+  height: 300px;
+    width: 600px;
+}
