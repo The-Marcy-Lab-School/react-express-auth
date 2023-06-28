@@ -12,7 +12,7 @@ export const createUser = async ({
   username,
   password,
   email,
-  picture
+  picture,
 }) =>
   fetchHandler(
     baseUrl,
@@ -26,7 +26,7 @@ export const createUser = async ({
       username,
       password,
       email,
-      picture
+      picture,
     })
   );
 

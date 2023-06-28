@@ -55,7 +55,7 @@ export default function SignUpPage() {
           </div>
           <form id="signup-form" onSubmit={handleSubmit} onChange={handleChange}>
             <div className="field">
-              <label htmlFor="first_name" className="label">
+              <label htmlFor="first_name" className="label firstname-label">
                 First Name
               </label>
               <div className="control">
@@ -72,7 +72,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="last_name" className="label">
+              <label htmlFor="last_name" className="label lastname-label">
                 Last Name
               </label>
               <div className="control">
@@ -89,7 +89,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="age" className="label">
+              <label htmlFor="age" className="label age-label">
                 Age
               </label>
               <div className="control">
@@ -106,7 +106,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="gender" className="label genderlabel">
+              <label htmlFor="gender" className="label gender-label">
                 Gender
               </label>
               <div className="control">
@@ -127,7 +127,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="race" className="label">
+              <label htmlFor="race" className="label race-label">
                 Race
               </label>
               <div className="control">
@@ -156,7 +156,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="ethnicity" className="label">
+              <label htmlFor="ethnicity" className="label ethnicity-label">
                 Ethnicity
               </label>
               <div className="control">
@@ -173,7 +173,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="username" className="label">
+              <label htmlFor="username" className="label username-label">
                 Username
               </label>
               <div className="control">
@@ -190,7 +190,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="password" className="label">
+              <label htmlFor="password" className="label password-label">
                 Password
               </label>
               <div className="control">
@@ -207,7 +207,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="email" className="label">
+              <label htmlFor="email" className="label email-label">
                 Email
               </label>
               <div className="control">
@@ -224,7 +224,7 @@ export default function SignUpPage() {
             </div>
 
             <div className="field">
-              <label htmlFor="picture" className="label">
+              <label htmlFor="picture" className="label picture-label">
                 Picture
               </label>
               <div className="control">
@@ -252,7 +252,7 @@ export default function SignUpPage() {
           </form>
           {!!errorText && <p>{errorText}</p>}
           <div id="already">
-            <p>- Already have an account with us?  <Link to="/login">Log in!</Link> -</p>
+            <p style={{color:"white"}}>- Already have an account with us?  <Link to="/login" style={{color:"#FFC100"}}>Log in!</Link> -</p>
           </div>
         </div>
       </div>

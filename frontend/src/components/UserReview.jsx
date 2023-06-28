@@ -92,9 +92,9 @@ export default function UserReview({ review }) {
           <div className="starRating">{starRating}</div>
           <div className="rating">{review.review_body}</div>
           <div className="categories">
-            <p>Staff Friendliness: {starFriendliness}</p>
-            <p>Wait Times: {starWait}</p>
-            <p>Quality of Care: {starCare}</p>
+            <p className="cats">Staff Friendliness: {starFriendliness}</p>
+            <p className="cats">Wait Times: {starWait}</p>
+            <p className="cats">Quality of Care: {starCare}</p>
           </div>
           <div className="userSpecs">
             <div>{review.user.race}</div>
