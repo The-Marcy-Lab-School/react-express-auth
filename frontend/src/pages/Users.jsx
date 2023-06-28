@@ -32,15 +32,25 @@ export default function UsersPage() {
   console.log(findUserIdByName("ayaz"));
 
   const handlePing = async(username) => {
-    const friendId = findUserIdByName(username);
-    const [data, error] = await fetchHandler(`/api/pings`, 
-      getPostOptions({ friendID })
-    );
-    if (error) {
-    console.log(error);
-    } else {
-    console.log(`Ping!`);
-    }
+    // const friendId = findUserIdByName(username);
+    // const [data, error] = await fetchHandler(`/api/pings`, 
+    //   getPostOptions({ friendID })
+    // );
+    // if (error) {
+    // console.log(error);
+    // } else {
+    // console.log(`Ping!`);
+    // }
+
+    try {
+      await knex('pings').insert({
+        senderId: loggedInUserId,
+        receiverId: receiverId,
+      });
+      console.log(`${loggedInUser} asked if you're safe`);
+      } catch (error) {
+        console.log(error);
+      }
   };
 
   const handleAddFriend = async (username) => {
