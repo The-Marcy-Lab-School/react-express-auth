@@ -1,29 +1,12 @@
 body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  margin: 0;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	margin: 0;
 }
-
-input, label {
-  display: block;
-}
-
-input {
-  margin-bottom: 1rem;
-}
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #000;
-}
-
-#logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #FFF;
 }
 
 nav ul {
@@ -35,210 +18,98 @@ nav ul {
 }
 
 nav a {
-  display: block;
-  color: #FFF;
-}
-
-form {
-  padding: 1rem;
-  border: 1px solid #CCC;
-  width: 15rem;
-  margin: 1rem auto;
-}
-
-/* automatically added by NavLink component */
-.active {
-  color: #EEBC32;
-  font-weight: bold;
-  font-style: italic;
-}
-
-/* test */
-/* 
-		Details flips card to more info on the band
-		tickets button gradient move - mix blend mode
-		details hover = darker color
-		overflowing container
-*/
-
-:root {
-	--blue: #4e73bc;
-	--white: #fff;
-	--dark: #313b40;
-	--light: #eaedef;
-	--blue-grey: #545b6d;
-}
-/* 
-/* -- Event Card Layout --*/
-.event {
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	grid-template-rows: auto;
-	grid-gap: 0;
-  /*
-  display: flex;
-    flex-wrap: wrap;
-    margin: -1rem -1rem;
-    padding-bottom: 3rem;
-  */
-}
-
-.row{
-  display: flex;
-    flex-wrap: wrap;
-    margin: -1rem -1rem;
-    padding-bottom: 3rem;
-}
-
-.image-wrapper {
-	grid-column: span 2;
-	grid-row: 1;
-	position: relative;
-}
-
-.event-date {
-	grid-column: span 1;
-	grid-row: 2;
-}
-
-.event-time {
-	grid-column: span 1;
-	grid-row: 2;
-}
-
-.event-title {
-	grid-column: span 2;
-	grid-row: 3;
-	background-color: var(--light);
-	padding: 1.5em 1.2em 2.5em;
-	margin-top: -0.2em;
-}
-
-.event-details {
-	grid-column: span 1;
-	grid-row: 4;
-}
-
-.event-tickets {
-	grid-column: span 1;
-	grid-row: 4;
-}
-
-.card {
-	width: 23em;
-	margin: 2em auto;
-	font: 1em "Roboto", sans-serif;
-}
-
-.image-wrapper:after {
-	content: "";
-	position: absolute;
-	display: block;
-	margin: auto;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 99%;
-	background-image: linear-gradient(to top, rgba(64,101,173, 0.7) 0%, rgba(0, 0, 0, 0) 100%)
-}
-
-.featured-image {
-	width: 100%;
-	border-radius: 0.45em 0.45em 0 0;
-	object-fit: cover;
-	max-height: 16em;
-}
-
-.title {
-	font-size: 1.25em;
-	font-weight: 900;
-	color: var(--dark);
-}
-
-.link {
 	text-decoration: none;
-	transition: color 200ms ease-in 0s;
-	color: var(--dark);
+  	display: block;
+  	color: #FFF;
 }
-
-.link:hover {
-	color: var(--blue);
-}
-
-.address {
-	font-style: normal;
-}
-
-.venue {
-	font-weight: 900;
-}
-
-.venue,
-.streetAddress,
-.locality {
-	margin: 0.3em 0;
-	color: var(--dark);
-	opacity: 0.85;
-}
-
-.event-details {
-	background-color: var(--blue-grey);
-	padding: 1em;
-	text-align: center;
-	border-radius: 0 0 0 0.45em;
-	transition: background-color 200ms ease-in 0s;
-	cursor: pointer;
-}
-
-.event-details:hover {
-	background-color: #3b404c;
-}
-
-.event-tickets {
-	background-image: linear-gradient(to right, #618ee6 0%, #3a5fb3 75%);
-	padding: 1em;
-	text-align: center;
-	border-radius: 0 0 0.45em 0;
-	transition: background 200ms ease-in 0s;
-	cursor: pointer;
-}
-
-.event-tickets:hover {
-	background-image: linear-gradient(to right, #618ee6 20%, #3a5fb3 100%);
-}
-
-.event-details .link,
-.event-tickets .link {
-	color: var(--white);
-	letter-spacing: 0.1em;
-}
-
-.date,
-.time {
-	z-index: 2000;
-	background-color: var(--white);
-	color: var(--dark);
-	font-weight: 900;
-	text-align: center;
-	padding: 0.8em 0.5em 0.3em;
-	margin: -1.5em 0 -1.5em;
-	max-height: 1.5em;
-}
-
-.date time, .time time {
-	opacity: 0.85;
-}
-
-.date {
-	margin-left: 1em;
-	border-radius: 0.3em 0 0 0.3em;
-	border-right: 2px solid var(--dark);
-}
-
-.time {
-	max-width: 5em;
-	border-radius: 0 0.3em 0.3em 0;
-}
+ 
+  /* automatically added by NavLink component */
+  .active {
+	color: #69FFF1;
+	font-weight: bold;
+	font-style: italic;
+  }
+  
+  #main-text-box{
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(4, 1fr);
+	justify-content: center;
+  }
+  
+   #home-header {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 3rem;
+	display: flex;
+	justify-content: center;
+  }
+  #issue, #impacts, #solution{
+	display:block;
+	margin: auto;
+  }
+  #home-card {
+	max-width: 575px; 
+	height:auto;
+  }
+  
+  #about-area{
+	font-family: 'Montserrat', sans-serif;
+  }
+  
+  #about-area-div {
+	  display: flex;
+	  margin-top: 10rem;
+	  justify-content: center;
+  }
+  
+  #about-img{
+	height:550px;
+	width:550px;
+  }
+  
+  #about-text-div{
+	width:700px;
+  }
+  
+  #about-text{
+	font-size: 1.6em;
+  }
+  
+  #be {
+	font-size: 4em;
+	margin: 0;
+  }
+  
+  #about-header{
+	margin-top:5rem;
+	font-weight:700;
+	font-size: 5rem;
+  }
+  
+  #graphics-header{
+	width:900px;
+	display: flexbox;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  #graphics-div{
+	display: flex;
+	justify-content: space-around;
+  }
+  #wrapper{
+	display: flex;
+	justify-content: center;
+  }
+  
+  #how-to-header{
+	font-family:'Montserrat', sans-serif ;
+	text-align:center ;
+  }
+  #graphic{
+	width:600px;
+	height:600px;
+  }
 
 @media screen and (max-width: 400px) {
 	.card {

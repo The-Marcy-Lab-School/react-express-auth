@@ -1,0 +1,20 @@
+#events-header{
+    text-align: center;
+    font-size: 65px;
+}
+
+#row{
+    padding: 0 !important;
+}
+
+#right-col{
+    max-width: 190px;
+    /* padding-right : 0 !important;
+    padding-left : 0 !important; */
+    margin: 0;
+}
+
+/* #card-img{
+    max-width: 176px;
+    height: 120px;
+} */

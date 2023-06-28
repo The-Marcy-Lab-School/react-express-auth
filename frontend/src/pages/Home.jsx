@@ -24,7 +24,7 @@ export default function HomePage() {
             </div>
             <div id="issue">
               <h1 id='home-header'>What Brings Us Together? </h1>
-              <Card id='card' outline>
+              <Card id="home-card" outline>
                 <CardBody>  
                   <CardText>
                     <p>
@@ -37,7 +37,7 @@ export default function HomePage() {
             </div>
             <div id="impacts">
               <h1 id='home-header'>Where's the Harm?</h1>
-              <Card id='card'>
+              <Card id="home-card">
                 <CardBody>
                   <CardText>
                   <p id="impacts-text">
@@ -57,7 +57,7 @@ export default function HomePage() {
             </div>
             <div id="solution">
               <h1 id='home-header'> The Solution</h1>
-              <Card id='card'>
+              <Card id="home-card">
                 <CardBody>
                   <CardText>
                     <p>

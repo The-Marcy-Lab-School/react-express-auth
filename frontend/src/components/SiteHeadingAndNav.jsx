@@ -8,15 +8,19 @@ export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
   const [color, changeColor] = useState('#69FFF1');
 
-  return <header style={{fontSize:'20px'}}>
+  return <header style={{
+    fontSize:'20px',
+    backgroundColor: '#233329',
+    height:'100px',
+    textDecoration: 'none'
+    }}>
     <a id='logo' href='/'>
-      <img src='../../assets/URBAN_UNBLEMISHED_LOGO.png' alt='Logo' />
+      <img height={150}  width={250} src='../../assets/URBAN_UNBLEMISHED_LOGO.png' alt='Logo' />
     </a>
     <nav>
       <ul>
         <li><NavLink to='/events'>Events</NavLink></li>
         <li><NavLink to='/users' end={true}>Users</NavLink></li>
-
         {
           currentUser
             ? <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>

@@ -1,8 +1,7 @@
-
-import React, {useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createEvent,getAllEvents } from "../adapters/events-adapter";
-import { Form, Button, Col, Row, FormGroup, Label, Input } from "reactstrap";
-
+import {Card,Button, CardBody, CardFooter,CardImg, CardImgOverlay, CardTitle, Col,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
+import styles from '../events.css';
 
 
 function EventsPage() {
@@ -142,8 +141,8 @@ const handleRSVPClick = (event_id) => {
 
   return (
     <div>
-      <h1>Events</h1>
-      <button onClick={toggleFormVisibility}>Make Event</button>
+      <h1 id="events-header">Events</h1>
+      <button id='make-event-btn' onClick={toggleFormVisibility}>Make Event</button>
       {showForm && (
         <Form onSubmit={handleFormSubmit}>
         <h1 id="events-form-header">Make an Event</h1>
@@ -192,7 +191,7 @@ const handleRSVPClick = (event_id) => {
             id="exampleDate"
             name="date"
             placeholder="date placeholder"
-            type="text"
+            type="date"
             value={ eventDate }
             onChange={(e) => setEventDate(e.target.value)}
             />
@@ -231,62 +230,47 @@ const handleRSVPClick = (event_id) => {
       {events.length === 0 ? (
         <p>No events available.</p>
       ) : (
-        <div class = "row">
-          {events.map((event) => (
-            <section className="event card" key={event.event_id}>
-            <div className="event-title title-block">
-              <h2 className="title">{event.header}</h2>
-              <p className="venue">
-                <a className="link" href="#" target="_blank" aria-label="Visit venue website">
-                  {event.description}
-                </a>
-              </p>
-              <address className="address">
-                <p className="streetAddress">{event.location}</p>
-                <span className="locality zip">{event.header}</span>
-              </address>
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+        <div className="col"></div>
+          {events.map((event, index) => (
+            <div key={index}>
+              <Container>
+                <Card id='card' key={event.event_id}>
+                  <Row id="row">
+                    <Col id="left-col">
+                    <CardImg id='card-img' src={ event.img_url } />
+                    <CardImgOverlay>
+                      <CardTitle
+                      style={{
+                        borderStyle:'solid',
+                        color:'white',
+                        borderColor:'black',
+                        borderRadius:'5px',
+                        width:'fit-content',
+                        backgroundColor:'black',
+                        fontSize:'30px',
+                      }}
+                      >{event.date}</CardTitle>
+                    </CardImgOverlay>
+                    </Col>
+                    <Col
+                    id="right-col" style={{
+                      backgroundColor: '#6A7152'
+                    }}>
+                    <CardBody>
+                        <CardTitle id="card-title">{ event.header}</CardTitle>
+                        <Button color="info" size="lg">RSVP</Button>
+                    </CardBody>
+                    </Col>
+                  </Row>
+                  <CardFooter id='footer'>16+ People are Going!</CardFooter>
+                </Card>
+              </Container>
             </div>
-            <div className="image-wrapper">
-              <img className="featured-image" src={event.img_url} alt="Event" />
-              <div className="overlay"></div>
-            </div>
-            <div className="event-date date">
-              <time dateTime={event.date}>{event.date}</time>
-            </div>
-            <div className="event-time time">
-              <time dateTime={event.time}>{event.time}</time>
-            </div>
-            
-              {userId === event.user_id && (
-                <div className="event-details" onClick={() => handleDeleteEvent(event.event_id)}>
-                <a className="link details" href="#" onClick={() => handleDeleteEvent(event.event_id)}>
-                  DELETE
-                </a>
-                </div>
-              )}
-            
-              {userId === event.user_id && (
-                   <div className="event-tickets">
-                <a className="link" onClick={() => handleRSVPClick(event.event_id)}>
-                  RSVP
-                </a>
-                </div>
-              )}
-              {userId !== event.user_id && (
-                <div className="event-tickets full">
-                <a className="link" onClick={() => handleRSVPClick(event.event_id)}>
-                  RSVP
-                </a>
-                </div>
-              )}
-           
-          </section>
-          
-
           ))}
-        </div>
+      </div>
       )}
-    </div>
+    // </div>
   );
 }
 export default EventsPage;
