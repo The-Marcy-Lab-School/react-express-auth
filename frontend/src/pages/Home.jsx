@@ -63,10 +63,7 @@ export default function DoctorsList() {
       >
         <div className="field is-grouped">
           <p className="control is-expanded">
-            <input
-              className="input"
-              type="text"
-              placeholder="Doctor/Facility/Specialty..."
+         
             
             <input className="input" type="text" style={{ fontSize: '20px' , width: '410px' }} placeholder="Search for Doctor/Facility/Specialty...🔍"
               value={searchValue}
