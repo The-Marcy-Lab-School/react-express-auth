@@ -1,3 +1,16 @@
+.big-sec{
+   height:100vh;
+   width:100%;
+   background-color: #88c6a3;
+   display:flex;
+   justify-content: center;
+   align-items: center;
+}
+.about-h1{
+   font-size: 100px;
+   
+}
+
 .about_container{
    max-width:800px;
    margin:0 auto;

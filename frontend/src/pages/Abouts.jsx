@@ -14,6 +14,11 @@ export default function AboutPage() {
     config: { duration: 900 },
   });
   return (
+        <>
+        <section className="big-sec">
+          <h1 className="about-h1">Who are We</h1>
+        </section>
+
   <div className="about_container">
      <animated.div style={fadeAnimation}>
 
@@ -47,6 +52,7 @@ export default function AboutPage() {
    
       </animated.div>
 
-  </div>);
+  </div>
+  </>);
 
 }

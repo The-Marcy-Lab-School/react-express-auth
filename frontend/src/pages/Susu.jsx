@@ -27,7 +27,7 @@ export default function Susu() {
 
 
   console.log(currentSusulist);
-  
+
   return (
     <Container className="susupage-container">
       <Row>
@@ -40,3 +40,4 @@ export default function Susu() {
     </Container>
   );
 }
+// export default Susu;
