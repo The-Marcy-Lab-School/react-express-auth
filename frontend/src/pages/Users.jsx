@@ -12,7 +12,6 @@ export default function UsersPage() {
   }, []);
 
   return <>
-    <h1>Payments:</h1>
     <PaymentDetails />
     
   </>;
