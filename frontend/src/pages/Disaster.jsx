@@ -11,8 +11,8 @@ function InfoList() {
   const { eventData, userLocation, updateEventData } = useContext(CurrentUserContext); // Data from MapComponent
 
   const { eventId } = useParams();
-
   const eventsId = events.map((event) => event.id);
+  console.log(eventsId);
   console.log(eventId);
 
   useEffect(() => {

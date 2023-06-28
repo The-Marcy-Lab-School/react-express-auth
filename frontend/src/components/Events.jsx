@@ -28,7 +28,7 @@ function EventList() {
 
   const fetchProcessed = async () => {
     const data = await apiFetchHandler('/api/events');
-    console.log(data);
+    console.log("NICK API:",data);
   };
 
   useEffect(() => {
@@ -44,14 +44,13 @@ function EventList() {
     const longitude = events[0]?.geometry[0]?.coordinates[1];
 
     const fetchLayers = () => {
-      // console.log("latitude", latitude); console.log("longitude", longitude);
       fetch(`https://api.weather.gov/alerts?point=${userLocation?.myLatitude},${userLocation?.myLongitude}`)
         .then((response) =>
           // console.log(response);
           response.json())
         .then((data) => {
           setAlert(data.events);
-          console.log("ALERT DATA:", alert);
+          // console.log("ALERT DATA:", alert);
         })
         .catch((error) => console.log(error));
     };
@@ -73,10 +72,9 @@ function EventList() {
         * (longtitude2 * 54.6 - longtitude1 * 54.6),
       ),
     );
-    return math >= 4.5 ? `${Math.ceil(math)}miles` : `${Math.floor(math)}miles`;
+    return math >= 4.5 ? `${Math.ceil(math)} miles` : `${Math.floor(math)} miles`;
   };
 
-  // console.log(events[2]?.categories[0]?.id);
   return (
     <dl className="eventList">
       <AlertList />
@@ -85,7 +83,7 @@ function EventList() {
           <li>
             <a href="#">
               <div className="eventRow">
-                <div className="date">{event.geometry[0].date}</div>
+                <div className="date">{event.geometry[0].date.slice(0, 16).replace("T", " ")}</div>
                 {event.categories.map((category) => (
                   <div className="eventType" key={category.id}>
                     {category.title}
