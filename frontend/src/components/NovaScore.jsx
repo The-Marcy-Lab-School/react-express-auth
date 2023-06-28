@@ -23,7 +23,7 @@ export default function NovaScore({ props: novaGroup }) {
   const backgroundColor = getBackgroundColor();
 
   return (
-    <div id="nova-div" className="ui segment" style={{ backgroundColor }}>
+    <div id="nova-div" className="ui">
       <div className="ui one column grid">
         <div className="row">
           <div id="nutri-stats" className="column">

@@ -16,7 +16,7 @@ body {
 
 .page-bg{
   background-image: url('./media/green.png');
-  height: 100rem;
+  height: 90rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@ body {
 }
 
 
-
+/* HOME PAGE - START */
 
 input, label {
   display: block;
@@ -157,6 +157,18 @@ p{
   padding-top: 10px;
 }
 
+/* HOME PAGE - END */
+
+
+
+
+
+
+
+
+
+
+
 
 /* 404 Page - START */
 
@@ -207,6 +219,19 @@ p{
 
 
 /* 404 Page - END */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* UserHome - START */
@@ -308,14 +333,48 @@ p{
 /* UserHome - END*/
 
 
+
+
+
+
+
+
+
+
 /* Item Page - START */
 
+.product-page-1st-row{
+  display: flex;
+  width: 90%;
+  /* flex-direction: ; */
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 5%;
+}
+
+#stores-info{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  /* height:20rem; */
+  padding:15px 20px 30px 20px;
+  border-radius: 15px;
+}
+#products-store-list{
+  display: flex;
+  flex-direction: column;
+  background-color: #4a753e;
+}
+
+
+
 #product-page-image{
- 
   width: 75%;
   border-radius: 25px;
-  /* padding: 100px; */
-  background-image:url('./media/white.png');
+  padding: 10px;
+  background-color: white;
+  max-height: 350px;
 }
 
 .item-page-product-name{
@@ -327,50 +386,88 @@ p{
   margin-bottom: 0px;
 }
 
-#stores-info{
-  background-image:url('./media/white.png');
+#nova-n-nutri{
+  padding: 10px;
+  /* background-color: #360; */
+  border-radius: 15px;
   display: flex;
-  flex-direction: column;
-  width: 30rem;
-  height:20rem;
-  padding:20px;
+  flex-direction: column-reverse;
 }
 
-.product-page-1st-row{
-  display: flex;
-  /* flex-direction: ; */
-}
+
+
+
+
+
+
 
 .product-page-2nd-row{
+  margin-top: 2%;
+  margin-bottom: 2%;
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
 
 #ingredients-info{
-  background-image:url('./media/white.png');
+  background-color: white ;
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  width: 25rem;
   /* height:20rem; */
   padding:20px;
+  border-radius: 15px;
 }
 
 #additives-info{
-  background-image:url('./media/white.png');
+  background-color: white;
   display: flex;
   flex-direction: column;
-  /* width: 30rem;
-  height:20rem; */
+  width: 25rem;
+  /* height:20rem; */
   padding:20px;
+  border-radius: 15px;
+  margin-bottom: 15px;
 }
 
 #product-page-bottons{
   display: flex;
+  scale: 1.5;
+
   /* width: 30rem; - Go back bottun takes up all open space
   justify-content: space-around; */
 }
 
+#product-back-button{
+  background-color: rgb(112, 205, 182);
+}#product-back-button:hover{
+  scale: 1.2;
+  background-color: rgb(79, 172, 148);
+  /* color: white; */
+}
+
+#product-page-select-option{
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+}
+
+  /* #dropdown-options:hover{
+  background-color: black
+}  */
+
+
+#product-add-button{
+  background-color: #66a653;
+  margin-left: 1%;
+  /* scale: 1.2; */
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+}#product-add-button:hover{  
+  scale: 1.2;
+  background-color: #4f8e3b;
+}
 
 
 
@@ -390,11 +487,16 @@ p{
 
 #nutri-div{
   background-color: white;
-  border-style: none;
+  width: 100%;
+  margin-top: 10px;
+  /* border-style: none; */
 }
 #nova-div{
   background-color: white;
-  border-style: none;
+  width: 100%;
+  margin-top: 10px;
+
+  /* border-style: none; */
 }
 #nutri-details{
   width: auto;

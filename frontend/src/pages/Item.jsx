@@ -71,7 +71,7 @@ export default function Item() {
       const product = await products.find(
         (product) => Number(product._id) === Number(id)
       );
-      console.log(product);
+      // console.log(product);
       const extractProperties = {
         product_name: product.product_name,
         quantity: product.quantity,
@@ -100,10 +100,10 @@ export default function Item() {
           },
         });
         const data = res[0];
-        console.log(data);
+        // console.log(data);
         setOption(data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         return null;
       }
     };
@@ -111,15 +111,15 @@ export default function Item() {
     getProduct();
     // console.log(additiveInfo)
   }, []);
-  console.log(option);
+  // console.log(option);
   console.log(curProduct);
-  console.log(additiveInfo);
+  // console.log(additiveInfo);
 
   // console.log(results);
   // console.log(option);
   // console.log(repeat);
   // doFetch();
-  console.log(additiveInfo);
+  // console.log(additiveInfo);
   // const curProduct = getProduct();
 
   // console.log(results);
@@ -150,7 +150,7 @@ export default function Item() {
   // console.log("Id", ID);
   // //   console.log(product);
   // console.log("Quantity:", product.quantity);
-
+  console.log(curProduct.stores.split(','))
   // return <></>;
   return (
     <div className="page-bg">
@@ -167,6 +167,7 @@ export default function Item() {
             <div className="product-page-1st-row">
               <p id="stores-info">
                 <strong>Stores: </strong>
+                
                 {curProduct.stores}
               </p>
 
@@ -176,7 +177,7 @@ export default function Item() {
 
               <div className="four wide column">
                 <br />
-                <div className="nutri-scores">
+                <div id="nova-n-nutri" className="nutri-scores">
                   <NutriScoreGrade props={curProduct.nutriscore_grade} />
                   <NovaScore props={curProduct.nova_group} />
                 </div>
@@ -184,7 +185,7 @@ export default function Item() {
             </div>
             <div className="product-page-2nd-row">
               <p id="ingredients-info">
-                <strong>Ingredints: </strong>
+                <strong>Ingredients: </strong>
                 {curProduct.ingredients_text}
               </p>
               {/* TRY TO ADD WHERE IF NO ADDITIVES DO SHOW ATTRIBUTE */}
@@ -204,13 +205,13 @@ export default function Item() {
             {/* Wrap this button component in a Link */}
 
             <div id="product-page-bottons" >
-              <button
+              <button id="product-back-button"
                 className="ui button fluid"
                 onClick={() => navigate(`/users/search`)}
               >
                 Go Back
               </button>
-              <select
+              <select className="button-hover" id="product-page-select-option"
                 value={selectedValue}
                 onChange={handleDropdownChange}
                 required
@@ -222,7 +223,7 @@ export default function Item() {
                   </option>
                 ))}
               </select>
-              <button onClick={handleButtonClick}>Add</button>
+              <button id="product-add-button" className="ui button " onClick={handleButtonClick}>Add</button>
             </div>
           </div>
         </div>

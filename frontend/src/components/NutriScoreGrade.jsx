@@ -26,7 +26,7 @@ export default function NutriScoreGrade({ props: nutriGrade }) {
     const backgroundColor = getBackgroundColor();
 
   return (
-    <div id="nutri-div" className="ui segment" style={{ backgroundColor }}>
+    <div id="nutri-div" className="ui" >
       <div className="ui three column grid">
         <div className="row">
           <div id="nutri-stats" className="column">
