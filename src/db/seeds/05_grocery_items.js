@@ -9,12 +9,12 @@
             // Deletes ALL existing entries
           
             await knex("grocery_items_table").insert([
-              { grocery_list_id: 1, item_id: 20341046 },
-              { grocery_list_id: 3, item_id: 3017620422003 },
-              { grocery_list_id: 2, item_id: 20341046 },
-              { grocery_list_id: 3, item_id: 8002270014901 },
-              { grocery_list_id: 2, item_id: 7622300336738 },
-              { grocery_list_id: 3, item_id: 7622300336738 },
+              { grocery_list_id: 1, item_id: 44 },
+              { grocery_list_id: 3, item_id: 47 },
+              { grocery_list_id: 2, item_id: 44 },
+              { grocery_list_id: 3, item_id: 40 },
+              { grocery_list_id: 2, item_id: 35 },
+              { grocery_list_id: 3, item_id: 35 },
               
             ]);
           };
