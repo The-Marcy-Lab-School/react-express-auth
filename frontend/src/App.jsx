@@ -16,7 +16,7 @@ export default function App() {
   useEffect(() => {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
-
+console.log("set" + setCurrentUser )
   return (
     <>
       <SiteHeadingAndNav />

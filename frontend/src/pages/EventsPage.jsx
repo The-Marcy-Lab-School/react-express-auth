@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { createEvent,getAllEvents } from "../adapters/events-adapter";
 
+import React, {useContext, useEffect, useState } from "react";
+import { createEvent,getAllEvents } from "../adapters/events-adapter";
 function EventsPage() {
-  const [events, setEvents] = useState([]); // State to hold the list of events
+  
+  const [events, setEvents] = useState([]); 
   const [showForm, setShowForm] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -12,19 +13,99 @@ function EventsPage() {
   const [location, setLocation] = useState("");
 
 
+//////////userId////////////
+ const [userId, setUserId] = useState(null);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('/api/me');
+        if (response.ok) {
+          const data = await response.json();
+          setUserId(data.id);
+          console.log('User ID:', data.id);
+          // You can perform further operations with the userId variable here
+        } else {
+          throw new Error('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+
+////////////////DELETE/////////////////////////////
+const handleDeleteEvent = (eventId) => {
+  const requestBody = {
+    event_id: eventId,
+  };
+  console.log("delete")
+  fetch("/api/events/${eventId}", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Event deletion successful");
+        setEvents(events.filter((event) => event.event_id !== eventId))
+        console.log("this is event"+eventId)
+      } else {
+        console.error("Event deletion failed");
+      }
+    })
+    .catch((error) => {
+      console.error("Event deletion error:", error);
+    });
+};
+////////////////RSVP/////////////////////
+const handleRSVPClick = (event_id) => {
+      const requestBody = {
+        event_id: event_id,
+      };
+      console.log("volun")
+      fetch("/api/volunteer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log("RSVP success");
+          } else {
+            console.error("RSVP failed");
+            // Handle RSVP failure
+          }
+        })
+        .catch((error) => {
+          console.error("RSVP error:", error);
+        });
+    };  
+
+////////////////GetEvents/////////////////////
     useEffect(() => {
         
-        const doFetch = async () => {
-            const result = await getAllEvents()
-            console.log(result)
-            setEvents(result)
-        }
-        doFetch()
+      const doFetch = async () => {
+          const result = await getAllEvents()
+          console.log(result)
+          setEvents(result)
+      }
+      doFetch()
+  },[])
 
-        
-    },[])
+///////////////SUBMIT////////////////////
 
+
+///////////////GET VOLUNTEER//////////////////
+
+////////////////////////////////////
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -36,7 +117,7 @@ function EventsPage() {
       header: eventHeader,
       location: location,
     };
-    console.log(eventData)
+    //console.log(eventData)
     createEvent(eventData)
     // Update the events state with the new event data
     setEvents((prevEvents) => [...prevEvents, eventData]);
@@ -79,7 +160,7 @@ function EventsPage() {
           <label>
             Date:
             <input
-              type="text"
+              type="date"
               value={eventDate}
               onChange={(e) => setEventDate(e.target.value)}
             />
@@ -87,7 +168,7 @@ function EventsPage() {
           <label>
             Time:
             <input
-              type="text"
+              type="time"
               value={eventTime}
               onChange={(e) => setEventTime(e.target.value)}
             />
@@ -112,7 +193,7 @@ function EventsPage() {
         </form>
       )}
 
-      <h2>Events:</h2>
+      {/* <h2>Events:</h2>
       {events.length === 0 ? (
         <p>No events available.</p>
       ) : (
@@ -130,7 +211,69 @@ function EventsPage() {
         </ul>
       )}
     </div>
+  ); */}
+  <h2>Events:</h2>
+      {events.length === 0 ? (
+        <p>No events available.</p>
+      ) : (
+        <div class = "row">
+          {events.map((event) => (
+            <section className="event card" key={event.event_id}>
+            <div className="event-title title-block">
+              <h2 className="title">{event.header}</h2>
+              <p className="venue">
+                <a className="link" href="#" target="_blank" aria-label="Visit venue website">
+                  {event.description}
+                </a>
+              </p>
+              <address className="address">
+                <p className="streetAddress">{event.location}</p>
+                <span className="locality zip">{event.header}</span>
+              </address>
+            </div>
+            <div className="image-wrapper">
+              <img className="featured-image" src={event.img_url} alt="Event" />
+              <div className="overlay"></div>
+            </div>
+            <div className="event-date date">
+              <time dateTime={event.date}>{event.date}</time>
+            </div>
+            <div className="event-time time">
+              <time dateTime={event.time}>{event.time}</time>
+            </div>
+            
+              {userId === event.user_id && (
+                <div className="event-details" onClick={() => handleDeleteEvent(event.event_id)}>
+                <a className="link details" href="#" onClick={() => handleDeleteEvent(event.event_id)}>
+                  DELETE
+                </a>
+                </div>
+              )}
+            
+              {userId === event.user_id && (
+                   <div className="event-tickets">
+                <a className="link" onClick={() => handleRSVPClick(event.event_id)}>
+                  RSVP
+                </a>
+                </div>
+              )}
+              {userId !== event.user_id && (
+                <div className="event-tickets full">
+                <a className="link" onClick={() => handleRSVPClick(event.event_id)}>
+                  RSVP
+                </a>
+                </div>
+              )}
+           
+          </section>
+          
+
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
-
 export default EventsPage;
+
+

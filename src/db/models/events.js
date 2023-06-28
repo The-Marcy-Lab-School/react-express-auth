@@ -19,7 +19,6 @@ class Events {
             VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *`;
           const { rows: [post] } = await knex.raw(query, [user_id, img_url, description, date, time, header, location]);
           return post ? new Events(post) : null;
-          console.log(post)
         } catch (err) {
           console.error(err);
           return null;
@@ -27,10 +26,10 @@ class Events {
       }
 
     static async delete (event_id)  {
-      console.log(event_id)
+      console.log("sql"+ event_id)
         try {
           const query = `DELETE FROM events WHERE event_id = ? RETURNING *`;
-          const { rows: [post]} = await knex.raw(query, [event_id]);
+          const { rows: [post] } = await knex.raw(query, [event_id]);
           return post;
         } catch (err) {
           console.error(err);
