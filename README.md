@@ -50,7 +50,7 @@ Users click on a button on the home page to be redirected to a sign up/log in pa
 
 - After the users clicks “sign up” or “log in”, then be redirected to the home page
 
-- After a user logs in they’,l have access to different functionalities in home page (friends,communities)
+- After a user logs in they’ll have access to different functionalities in home page (friends,communities)
 
 Users can view a weather forecast that will show harsher weather on the homepage.
 
