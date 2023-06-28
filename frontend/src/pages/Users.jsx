@@ -64,7 +64,7 @@ export default function UsersPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ receiverId: friendId }),
       });
-      console.log(`${loggedInUser} asked if you're safe`);
+      console.log(`${username} asked if you're safe`);
     } catch (error) {
       console.log(error);
     }
