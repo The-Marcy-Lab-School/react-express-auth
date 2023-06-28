@@ -1,10 +1,17 @@
-#page_title{
+#page_title, #this_susu_id{
     text-align: center;
 }
 
-/* #member-list{
+#this_susu_id{
+    text-align: center;
+    color:#333233ad;
+    font-style: italic;
+    font-size:larger;
+}
 
-} */
+#member-list{
+    text-align: left;
+}
 
 #members_and_chart{
     display:flex;
@@ -17,20 +24,42 @@
     margin-right:16em;
 }
 #member_section{
-    width: 10em;
-    height:min-content;
-    background-color: aqua;
+    /* width: 15em; */
+    height:fit-content;
     text-align:left;
+    border-radius: 30px;
+    border: 1px solid #33323372;
+    background: #ece4d4d5;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 #member_title{
-    color:black;
+    color:#2b5841;
+    text-align: center;
+    margin: .5em;
+    text-transform: uppercase;
 }
 
 #payment_section{
-    background-color: black;
+    background-color: #2b5841;
+    height:fit-content;
+    border-radius: 30px;
+    text-align: center;
+    border: 1px solid #33323372;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2em;
 }
 
 #payment_time{
-    background-color: grey;
+    background-color: #2b5841;
+    height:fit-content;
+    border-radius: 30px;
+    text-align: center;
+    border: 1px solid #33323372;
+    background-color: #33323341;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+#payment_details_title {
+    text-align: center;
 }
