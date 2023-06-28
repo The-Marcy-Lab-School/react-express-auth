@@ -1,160 +1,121 @@
-# A React+Express with Auth Template
+# Solace
 
-This repo can be used to start a React+Express project fully equipped with Auth for user creation and login.
+**Mission Statement**
 
-**Table of Contents**
+Solace strives to provide people with peace of mind and the reassurance that their loved ones are safe and secure back home after a natural disaster occurs.
 
-- [Setup](#setup)
-- [Understanding the Code](#understanding-the-code)
+**Who We Serve**
 
-## Setup
+Our target audience are people in communities that have been impacted by natural disasters or that have family and/or friends in affected communities. Our program seeks to assist these communities in staying better connected to each other internationally and create a sense of security through communication in response to the increasing number of natural disasters occurring as a result of climate change.
 
-- Fork this template repo
-- Copy the `.env.template` and name it `.env`
-- Create a database called `react_auth_example` database (or update your new `.env` to whatever database you are using)
-- Double check that the `.env` variables are all correct (username, password, database name)
-- `npm run kickstart` (`npm run dev` or `npm start` afterwards). This will do the following commands all together:
-  - `cd frontend && npm i && cd ..` - installs front end dependencies
-  - `npm i` - installs all dependencies
-  - `npm run migrate` - runs `knex migrate:latest` which will run the provided migration file (look in the `src/db/migrations` folder)
-  - `npm run seed` - runs `knex seed:run` which will run the provided seed file (look in `src/db/seeds` folder)
-  - `npm run start` - runs `node src/index.js`, starting your server.
-- Then, open a new terminal and `cd` into `frontend`. Then run `npm run dev` to start your Vite development server.
+**Product Overview**
 
-The provided migration and seeds file will create a `users` table with `id`, `username`, and `password_hash` columns.
+Our mobile-first web application, Solace, is designed to address the specific needs of communities that are at risk of a natural disaster occurring by connecting them with their loved ones and providing peace of mind regarding their family's safety and well-being. The app aims to facilitate seamless communication between families, particularly during times of crisis. Additionally, Solace offers a unique feature that allows users to stay informed about upcoming potential disasters worldwide. 
 
-- For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
-- If you need to update these columns, consider looking into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
-- If creating a new table, look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
+**Summary**
 
-## Running your application
+Many people are unaware of the increase in natural disasters due to climate change and the specific hazards that their communities may face. Many do not have access to timely and accurate information about ongoing disasters and this can lead to a lack of preparedness and increased vulnerability to the effects of natural hazards. “Every year in the United States, natural hazards threaten lives and livelihoods and result in billions of dollars in damage.”(National Oceanic and Atmospheric Administration (NOAA))Knowledge about natural disasters, such as hurricanes, floods, earthquakes, and wildfires, helps people prepare and take appropriate actions to protect themselves, their families, and their property. Early warning systems, evacuation plans, and disaster preparedness measures can significantly reduce the loss of life and property during such events.
 
-Run the `npm run dev` command from the root directory to start your Express server.
+“Climate change is the defining issue of our time….every day we fail to act is a day that we step a little closer towards a fate that none of us wants- a fate that will resonate through generations in the damage done to humankind and life on earth.”(Antonio Guterres, UN Secretary General)
 
-#### Rebuilding the static assets
+Additionally, during and after a disaster, people often experience anxiety and concern for the safety of their loved ones. “It's common for communities and individuals affected by a disaster to experience a range of thoughts, feelings and behaviours that can be intense, confusing and frightening.” (beyondblue.org) Communication channels can become disrupted or overloaded, making it difficult for individuals to reassure their family and friends that they are safe and secure.
 
-The Express server is configured to serve static assets from the `public/` folder. Those static assets are the current **build** of the React frontend found in the `frontend/` folder. You can see the built version of the React frontend by going to the server's address: http://127.0.0.1:3000/
+The aftermath of a natural disaster leads to families being homeless, shortages of food and even a negative impact on the economy. This leaves the people impacted by the natural disasters vulnerable and in need of help with minimum support.
 
-In order to update this built version of your React application, you will need to run the `npm run build` command _from the `frontend/` folder_.
+Solace provides users with a platform that enables them to navigate to a dedicated page showcasing various crisis events. 
 
-#### Working with a dev server
+**The Problem**
 
-If you would like to work on the frontend without having to constantly rebuild the project, start a Vite dev server by running the `npm run dev` command _from the `frontend/` folder_.
+The increasing frequency of natural disasters due to climate change poses a significant challenge to people who are impacted by the disaster. It becomes crucial for them to have a means of ensuring the safety and well-being of their friends and family during such events. 
 
-If you look in the `vite.config.js` file, you will see that we've already configured the dev server to proxy any reqeusts made to `/api` to the back-end server.
+There are numerous individuals who possess the desire to contribute their time and/or resources in assisting those impacted by natural disasters. However, they often face the challenge of not knowing the most effective ways to do so safely during natural disasters. 
 
----
+This website would serve as a vital communication platform, bridging the gap and alleviating the concerns in times of crisis. Also allowing other users from all around the world to help the people affected by the disaster by donating goods or money or starting a group chat where other users of the same interests can join and go out to the location and physically help during the aftermath of the disaster.
 
-## Understanding the Code
+**Solution**
 
-### Backend API
+Our app aims to address these challenges by providing a centralized platform that offers comprehensive information on natural hazards, real-time updates, and alerts. By raising awareness, it helps users understand the risks in their communities and take appropriate measures to prepare for and respond to disasters. 
 
-The provided backend exposes the following API endpoints defined in `src/routes.js`:
+This application would serve as a vital communication platform, bridging the gap and alleviating the concerns of those in high risk areas in times of crisis. The communication features within the app also enable users to quickly and easily notify their loved ones about their safety, reducing anxiety and maintaining important connections during challenging times.
 
-| Method | Path       | Description                                        |
-| ------ | ---------- | -------------------------------------------------- |
-| GET    | /users     | Get the list of all users                          |
-| GET    | /me        | Get the current logged in user based on the cookie |
-| GET    | /users/:id | Get a specific user by id                          |
-| POST   | /users     | Create a new user                                  |
-| POST   | /login     | Log in to an existing user                         |
-| PATCH  | /users/:id | Update the username of a specific user by id       |
-| DELETE | /logout    | Log the current user out                           |
+We aim to promote preparedness and resilience by providing educational resources, safety guidelines, and evacuation routes. It encourages users to create emergency plans and store essential documents securely within the app for quick access during an emergency.
 
-### Middleware
+Overall, this app combines hazard awareness, real-time updates, and communication features to empower users with the knowledge and tools they need to navigate natural disasters while providing peace of mind to their loved ones
 
-In `src/server.js` and in `src/routes.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `src/middleware/` folder
+**User Story**
 
-**Express Middleware**
+Users click on a button on the home page to be redirected to a sign up/log in page
+Users will type in a password and username in two input fields respectively
+After the users clicks “sign up” or “log in”, then be redirected to the home page
+After a user logs in they’,l have access to different functionalities in home page (friends,communities)
+Users can view a weather forecast that will show harsher weather on the homepage.
+Weather feed will consist a real-time weather update,up to 14 day hourly weather forecast
+Users can also view disaster news feed in homepage without logging in or signing up
+Disaster feed will consist of a list of recent disasters in chronological order, describing the type of disaster, general info about the disaster.
+	
+Users can log out
+The user will open a menu, in the menu they will press a button that says “log out”
+When pressed users will be redirected to log in/sign up page
+Users can add other users as friends 
+A friends request will be sent to the recipient
+The recipient can either deny or accept the friend request
+Friends list will be updated on both ends if request is accepted
+If denied nothing happens (MVP)
+If denied sender will receive notification (Stretch)
+Users get a notification to mark themselves as safe when something happens in their  area
+The first rendition of this feature will be implemented using page refreshes (white board how this will look at marcy)
+“Safe” button glows red, user will press
+After, sender of request will be notified that they are safe by refreshing connections page
+Users get a notification when something happens near their friends.
+The first rendition of this feature will be implemented using page refreshes 
+Besides each disaster card in news feed there will be a button that says “ping impacted friends”
+When pressed a request sent to those friends asking if they are safe or not
+Users can ping their friends to mark themselves as safe.
+If the friend hasn't pinged themselves after a certain amount of time, the user is able to send another request.
+Users can see a newsfeed with cards of recent natural disasters.
+Fetch call will be made to API whenever page loads
 
-```js
-app.use(express.json());
-```
 
-- We are telling Express to parse incoming data as JSON
+Stretch Features:
+Users can join communities (STRETCH FEATURE)
+How will these communities be grouped (by which disaster they are at risk of, neighborhood)?
+Users can check in on other users in the community through chatroom(Stretch?)
+Users can check in on other users in community through mass requesting users in community to mark themselves as safe (MVP)
+When a natural disasters occurs people in the affected area will be put in the same chat room (Stretch)
+We will discuss further what this’ll look like
+How will users in the affected area be grouped? By district? Neighborhood?
+When a user joins a chat they won’t be able to join a second time
+Users will be able to look on map to see disasters around, around the world (Stretch)
+What we want our app to do:
 
-```js
-app.use(express.static(path.join(__dirname, "..", "public")));
-```
+_Data Collection and Analysis:_ Gather comprehensive and up-to-date data on natural hazards, including historical records, scientific studies, and real-time monitoring. This data can help identify high-risk areas and understand the potential impacts of different disasters.
 
-- We are telling Express to serve static assets from the `public/` folder
+_Risk Assessment and Mapping:_ Utilize the collected data to assess the vulnerability and exposure of communities to various natural hazards. Create hazard maps that visually illustrate the areas most at risk, taking into account factors such as proximity to fault lines, flood zones, or wildfire-prone regions.
 
-```js
-app.use("/api", routes);
-```
+_App Development:_ Develop a user-friendly mobile application that integrates the risk assessment and mapping data. The app should provide interactive maps, detailed hazard information, and real-time updates from reliable sources, such as government agencies, weather services, and local authorities.
 
-- `routes` is the Router exported from `src/routes.js`. We are telling Express to send any requests starting with `/api` to that Router.
+_Communication Features:_ Incorporate communication features within the app to facilitate messaging and notifications. Users should be able to send pre-configured or custom messages to their designated contact lists, assuring them of their safety. Additionally, users should receive messages from their loved ones, creating a two-way communication channel.
 
-**Custom Middlware**
+_Preparedness and Education:_ Include educational resources within the app to promote preparedness and resilience. Provide safety guidelines, evacuation routes, emergency plans, and storage options for essential documents. Offer tips on emergency supplies, shelter, and first aid, ensuring that users are well-informed and can take appropriate actions during a disaster.
 
-```js
-app.use(handleCookieSessions);
-```
 
-- `handleCookieSessions` adds a `req.session` object to every `req` coming into the server. (see `src/middleware/handle-cookie-sessions`)
+**Sources**
+United Nations Office for Disaster Risk Reduction (UNDRR): The UNDRR provides comprehensive information and resources on disaster risk reduction and management. Their website offers reports, publications, and global databases related to natural hazards and disaster risk.
+Website: https://www.undrr.org/
+United States Geological Survey (USGS): The USGS is a reliable source for earthquake and volcanic activity data. Their website provides access to real-time earthquake information, seismic hazard assessments, volcano monitoring data, and more.
+Website: https://www.usgs.gov/natural-hazards
+National Oceanic and Atmospheric Administration (NOAA): NOAA is a leading authority on weather and climate-related information. Their website offers data on hurricanes, severe weather events, storm surge, and other hazards. They also provide access to weather models, forecasts, and historical climate data.
+Website: https://www.noaa.gov/
+Federal Emergency Management Agency (FEMA): FEMA is an agency of the U.S. Department of Homeland Security focused on disaster response and recovery. Their website provides resources on emergency management, hazard mitigation, and community resilience.
+Website: https://www.fema.gov/
+National Aeronautics and Space Administration (NASA): NASA's Earth Science program collects data on various natural hazards using satellite observations. Their website offers access to Earth science data, including information on wildfires, floods, hurricanes, and other hazards.
+Website: https://earthdata.nasa.gov/
+Centers for Disease Control and Prevention (CDC): The CDC provides information on public health and emergency preparedness, including guidelines for responding to natural disasters. Their website offers resources on disaster response, recovery, and health risks associated with different hazards.
+Website: https://www.cdc.gov/disasters/
+World Meteorological Organization (WMO): The WMO is a specialized agency of the United Nations focused on meteorology, weather, and climate-related issues. Their website provides access to global weather data, climate reports, and information on extreme weather events.
+Website: https://public.wmo.int/
+8.Beyond Blue has been providing supports and services to people in Australia for 20 years. They are Australia’s most well-known and visited mental health organisation, focused on supporting people affected by anxiety, depression and suicide. 
+Website: https://www.beyondblue.org.au/mental-health/natural-disasters-and-your-mental-health
+These sources offer valuable data, reports, publications, and resources related to natural hazards and disaster management. They can be used to gather information, conduct research, and stay updated on the latest developments in the field.
 
-```js
-Router.use(addModels);
-```
 
-- `addModels` adds a `req.db` property to all incoming requests. This is an object containing the models imported from the `db/models/` folder (see `src/middleware/add-model`)
-
-```js
-Router.patch("/users/:id", checkAuthentication, userController.update);
-```
-
-- `checkAuthentication` verifies that the current user is logged in before processing the request. (see `src/middleware/check-authentication`)
-- Here, we specify middleware for a singular route. Only logged-in users should be able to hit this endpoint.
-
-### Authentication & Authorization
-
-- **authenticated** means "We have confirmed this person is who they say they are"
-
-- **authorized** means "This person is who they say they are AND they are allowed to be here."
-
-So if we just want a user to be logged into the site to show content, we just check if they're _authenticated_.
-
-However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
-
-#### Cookies
-
-In the context of computing and the internet, a **acookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
-
-**Cookies contain information about your preferences and interactions with the website**, such as login information, shopping cart contents, or browsing history.
-
-When you visit the website again, the server retrieves the information from the cookie to personalize your experience and provide you with relevant content.
-
-#### Storing User IDs on the Cookie for Authentication
-
-In our application, we are using cookies to store the `userId` of the currently logged-in user on the `req.session` object. This will allow us to implement **authentication** (confirm that the user is logged in).
-
-The flow of cookie data looks like this:
-
-![](readme-img/cookies-session-userid-diagram.svg)
-
-1. When a request comes in for signup/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
-2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
-3. When we get the `User` back from the model, we store the `user.id` in that cookie (`session.userId = user.id`)
-4. Now, that cookie lives with every request made by that user (`req.session`) and the client can check if it is logged in using the `/api/me` endpoint (see below).
-
-## /api/me
-
-In order to keep source of truth simple, we're going to track who is logged in with that `GET /api/me` convention.
-
-- Each time a page is loaded, we quickly hit `GET /api/me`.
-- If there is a logged in user, we'll see that in the json.
-
-The reason this route is used instead of `GET /api/users/:id` is two fold.
-
-1. We don't know the user's `id` on load, so how could we know which `id` to provide in the URL?
-2. `GET` REST routes are supposed to be **idempotent** (eye-dem-PO-tent) which means "don't change." `GET /api/me` will change depending on the auth cookie. So, this little example app also has a `GET /api/users/:id` route because `GET /api/me` is not a replacement for it. `GET /api/users:id` isn't used in the client yet but your projects might in the future if you ever want to find a particular user by id (or username)!
-
-# Advice
-
-## Do not trust the front end
-
-Remember, **DO NOT TRUST THE FRONTEND**. Validate everything on the server. Just because you block a form in the GUI doesn't mean a nefarious actor couldn't just pop open a console and make a `fetch` request. Also, the frontend can be buggy and mistakes can happen.
-
-## Be wary of errors
-
-Given time constraints, this project is handling barely any errors. The model is very brittle right now, the server and sql errors should be handled like we've done before. We're also only handling the most basic of flows and errors on the client. Things like handling attempted recreations of users who already exist or even wrong passwords can be handled much more delicately.
