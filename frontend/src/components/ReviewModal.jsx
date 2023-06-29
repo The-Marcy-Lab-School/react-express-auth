@@ -42,6 +42,8 @@ const ReviewModal = ({ id }) => {
     }
     setRating(0);
     setReview_body("");
+    setShowModal(false);
+    window.location.reload();
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -51,11 +53,7 @@ const ReviewModal = ({ id }) => {
     if (name === "wait_times") setWaitTimes(value);
     if (name === "quality_of_care") setQualityOfCare(value);
   };
-  // function handleCloseModalAndSubmit(event) {
-  //   event.preventDefault();
-  //   handleCloseModal();
-  //   handleSubmit();
-  // }
+
   return (
     <div>
       <button className="button reviewButton" onClick={handleOpenModal}>
@@ -77,7 +75,11 @@ const ReviewModal = ({ id }) => {
               <form onSubmit={handleSubmit} onChange={handleChange}>
                 {/* Form fields */}
                 <div className="field">
-                  <label htmlFor="rating" className="label">
+                  <label
+                    htmlFor="rating"
+                    className="label"
+                    style={{ color: "#001A49" }}
+                  >
                     Rating (out of 5):
                   </label>
                   <div className="control">
@@ -94,7 +96,11 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="review_body" className="label">
+                  <label
+                    htmlFor="review_body"
+                    className="label"
+                    style={{ color: "#001A49" }}
+                  >
                     Review:
                   </label>
                   <div className="control">
@@ -108,7 +114,11 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="staff_friendliness" className="label">
+                  <label
+                    htmlFor="staff_friendliness"
+                    className="label"
+                    style={{ color: "#001A49" }}
+                  >
                     Staff Friendliness (out of 5):
                   </label>
                   <div className="control">
@@ -125,7 +135,11 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="wait_times" className="label">
+                  <label
+                    htmlFor="wait_times"
+                    className="label"
+                    style={{ color: "#001A49" }}
+                  >
                     Wait Times (out of 5):
                   </label>
                   <div className="control">
@@ -142,7 +156,11 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="quality_of_care" className="label">
+                  <label
+                    htmlFor="quality_of_care"
+                    className="label"
+                    style={{ color: "#001A49" }}
+                  >
                     Quality of Care (out of 5):
                   </label>
                   <div className="control">

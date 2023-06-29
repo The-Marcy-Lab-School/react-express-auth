@@ -182,9 +182,6 @@ export default function DoctorReview() {
               <p className="cats">Quality of Care: {starCare}</p>
             </div>
             <ReviewModal id={id} />
-            <NavLink to="/compare">
-              <button className="reviewButton">Compare</button>
-            </NavLink>
           </div>
         </div>
         <div className="reviewrow">
