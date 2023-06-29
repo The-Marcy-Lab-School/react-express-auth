@@ -36,26 +36,26 @@ Our objective is to cater to individuals from diverse backgrounds, particularly 
 
 
 ### Technologies  
-We built MayaSnax using the following technologies:
+We built CareCompanion using the following technologies:
 
-![](mayasnax-technologies.png)
+![](readme-img/technologies.png.png)
 
-The frontend was built using HTML, CSS, JavaScript, React, and MaterialUI. The backend was built using Node and Express, bcrypt for password hashing, a PostgreSQL database, and Knex to connect our server to our database.
+
 
 ### ERD
 
-To manage the data necessary for the MayaSnax backend, we have implemented the following schema in our PostgreSQL database:
+To manage the data necessary for the CareCompanion backend, we have implemented the following schema in our PostgreSQL database:
 
-![](mayasnax-erd.png)
+![](readme-img/ERD.png.png)
 
 ### Key API Endpoints
 
-The MayaSnax API provides the following endpoints:
+The CareCompanion API provides the following endpoints:
 
 | endpoint | description | example |
 | - | - | - |
-| `/api/snacks` | Get all possible snack options | `GET /api/snacks` |
-| `/api/snacks/:mood` | Get all snack suggestions for a particular mood | `GET /api/snacks/happy` |
-| `/api/snacks/:snackid` | Post a piece of feedback for a particular snack | `POST /api/snacks/5` |
+| `/api/reviews` | Posts a review for a doctor or facilities | `POST /api/reviews` |
+| `/api/reviews` | Gets all reviews for doctors or facilities | `GET /api/reviews` |
+| `/api/bookmark` | Gets the doctor or facility that was saved to your liking| `GET /api/bookmark/:id` |
 
 
