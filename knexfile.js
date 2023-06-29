@@ -12,8 +12,8 @@ module.exports = {
       host: process.env.PG_HOST || '127.0.0.1',
       port: process.env.PG_PORT || 5432,
       user: process.env.PG_USER || 'postgres',
-      password: process.env.PG_PASS || '',
-      database: process.env.PG_DB || 'urban-unblemished',
+      password: process.env.PG_PASS || 'postgres',
+      database: process.env.PG_DB || 'react_auth_example',
     },
     migrations: {
       directory: migrationsDirectory,
@@ -31,6 +31,17 @@ module.exports = {
       user: process.env.PG_USER || 'postgres',
       password: process.env.PG_PASS || '',
       database: process.env.database || 'urban-unblemished',
+    },
+  },
+  production: {
+    client: 'pg',
+    connection: process.env.PG_CONNECTION_STRING,
+    migrations: {
+      directory: migrationsDirectory,
+      stub: migrationsStub,
+    },
+    seeds: {
+      directory: seedsDirectory,
     },
   },
   production: {
