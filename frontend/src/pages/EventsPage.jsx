@@ -176,17 +176,17 @@ const handleRSVPClick = (event_id) => {
               </FormGroup>
               <FormGroup>
                   <Input
-                  id="exampleFile"
-                  name="file"
-                  type="file"
-                  placeholder="Add a Picture"
+                  id="image_url"
+                  name="image"
+                  type="text"
+                  placeholder="Image URL"
                   value={ imgUrl }
                   onChange={(e) => setImgUrl(e.target.value)}
                   /> 
               </FormGroup>
               <FormGroup>
                   <Input
-                  id="exampleText"
+                  id="eventDescription"
                   name="text"
                   type="textarea"
                   placeholder="Description"
@@ -275,7 +275,10 @@ const handleRSVPClick = (event_id) => {
                       <CardTitle>{event.time}</CardTitle>
                       <CardText>{event.location}</CardText>
                     </CardBody>
-                        <Button color="info" size="lg">RSVP</Button>
+                        <Button  size="lg" style={{
+                          backgroundColor:'#63A46C',
+                          color:'black'
+                        }}>RSVP</Button>
                   <CardFooter id='footer'>16+ People are Going!</CardFooter>
                 </Card>
               </Col>
