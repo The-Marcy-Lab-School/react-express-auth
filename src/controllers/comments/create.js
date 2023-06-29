@@ -2,11 +2,12 @@ const createComment = async (req, res) => {
   const {
     session,
     db: { Comment },
-    body: { event_id, user_id, comments },
+    body: { event_id, comments },
   } = req;
 
+  console.log(event_id, comments);
   // TODO: check if username is taken, what should you return?
-  const commented = await Comment.create(event_id, user_id, comments);
+  const commented = await Comment.create(event_id, session.userId, comments);
   // session.userId = user.id;
 
   res.send(commented);
