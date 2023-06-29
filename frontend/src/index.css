@@ -1153,6 +1153,84 @@ font-weight: bold;
   display: flex;
   justify-content: center;
 }
+
+
+css for new homepage
+
+/* doctorcard parctice */
+
+.card-wrapper {
+  display: grid;
+  width: 100%;
+  row-gap: 20px;
+  column-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  margin-top: 50px;
+}
+.entiredoctorCard {
+  display: flex;
+  width: 40vw;
+  height: 35vh;
+  background-color: #001A49;
+  color:white;
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  border: solid white;
+}
+.entiredoctorCard:hover{
+  background-color: #4F50FF;
+}
+.doctorImage {
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.doctorInformation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  width: 100%;
+
+}
+.firstDoctorReview {
+font-size: 1.75vh;
+border: solid #E9ECEF;
+border-radius: 2%;
+padding: 1vh;
+}
+.test{
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 20px;
+  justify-content: space-evenly;
+  margin-top: 8vh;
+}
+.testdoctordescription{
+  font-size: 12.5px;
+  font-weight: lighter;
+  padding: 10px;
+  font-style: italic;
+}
+.doctorLink{
+  color: #4F50FF;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  height: 100vh;
+
+  
+}
+
 @media screen and (max-width: 768px) {
   .createpost-form {
     width: 25%;

@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 import DoctorContext from "../contexts/DoctorContext";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getAllUsers } from "../adapters/user-adapter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function DoctorsList() {
   const [reviews, setReviews] = useState([]);
@@ -17,8 +19,6 @@ export default function DoctorsList() {
     useContext(DoctorContext);
   const [searchValue, setSearchValue] = useState("");
   const [userBookmark, setUserBookmark] = useState([]);
-
-  
 
   const handleSearchValue = (e) => {
     setSearchValue(e.target.value);
@@ -46,56 +46,48 @@ export default function DoctorsList() {
       .then((data) => setUsers(data))
       .catch((error) => console.log(error));
 
-    // const bookmarks = async () => {
-    //   const bookmark = await fetch(`/api/bookmark/${user.id}`);
-    //   const response = await bookmark.json();
-    //   setUserBookmark(response);
-    // };
-    // bookmarks();
   }, []);
 
   return (
     <>
-      <div
-        className="navbar-start"
-        style={{ flexGrow: 1, justifyContent: "center", marginTop: "2vh" }}
-      >
-        <div className="field is-grouped">
-          <p className="control is-expanded">
-         
-            
-            <input className="input" type="text" style={{ fontSize: '20px' , width: '410px' }} placeholder="Search for Doctor/Facility/Specialty...🔍"
-              value={searchValue}
-              onChange={handleSearchValue}
-            />
-          </p>
+      <main>
+        <div>
+          <div>
+            <p>
+              <input
+                style={{ fontSize: "15px", width: "410px", textAlign:"center",borderColor:"#001A49" }}
+                className="input"
+                type="text"
+                placeholder="Search for Doctor/Facility/Specialty...🔍"
+                value={searchValue}
+                onChange={handleSearchValue}
+              />
+            </p>
+          </div>
         </div>
-      </div>
-     
-
-
-      <h4>
-        <NavLink to="/create-post" style={{ color: "#FFC100", marginLeft: "1vh",  WebkitTextStroke: ".5px black" }}>Can't Find a Doctor? Add One Here</NavLink>
-      </h4>
-      <div className="ui centered cards" style={{ marginLeft: "1vh", display: "flex", justifyContent:"center", flexDirection: "column", alignItems: "center"}}>
-        {filteredObject.length > 0
-          ? filteredObject.map((doc) => (
-              <DoctorCard
-                key={doc.id}
-                page={doc}
-                reviews={reviews}
-                users={users}
-              />
-            ))
-          : allPages.map((page) => (
-              <DoctorCard
-                key={page.id}
-                page={page}
-                reviews={reviews}
-                users={users}
-              />
-            ))}
-      </div>
+        <h4>
+          <NavLink to="/create-post" className="doctorLink">Can't Find a Doctor? Add One Here</NavLink>
+        </h4>
+        <div className="test">
+          {filteredObject.length > 0
+            ? filteredObject.map((doc) => (
+                <DoctorCard
+                  key={doc.id}
+                  page={doc}
+                  reviews={reviews}
+                  users={users}
+                />
+              ))
+            : allPages.map((page) => (
+                <DoctorCard
+                  key={page.id}
+                  page={page}
+                  reviews={reviews}
+                  users={users}
+                />
+              ))}
+        </div>
+      </main>
     </>
   );
 }
