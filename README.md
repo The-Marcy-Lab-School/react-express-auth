@@ -24,6 +24,7 @@ The aftermath of a natural disaster leads to families being homeless, shortages 
 
 Solace provides users with a platform that enables them to navigate to a dedicated page showcasing various crisis events. 
 
-### Technologies
+### ![Technologies](https://github.com/Civic-Tech-Team-8/Solace/blob/main/images/technologies.png "Technologies")
 
-### ERD
+
+### ![ERD](https://github.com/Civic-Tech-Team-8/Solace/blob/main/images/erd.png "ERD")
