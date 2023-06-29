@@ -38,7 +38,7 @@ Our objective is to cater to individuals from diverse backgrounds, particularly 
 ### Technologies  
 We built CareCompanion using the following technologies:
 
-![](readme-img/technologies.png.png)
+![](readme-img/technologies.png)
 
 
 
@@ -46,7 +46,7 @@ We built CareCompanion using the following technologies:
 
 To manage the data necessary for the CareCompanion backend, we have implemented the following schema in our PostgreSQL database:
 
-![](readme-img/ERD.png.png)
+![](readme-img/ERD.png)
 
 ### Key API Endpoints
 
