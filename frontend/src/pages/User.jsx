@@ -49,7 +49,6 @@ export default function UserPage() {
       <h1 className="profile-username">{profileUsername}</h1>
       {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
       <p className="profile-data">My Location is {userLocation?.myLatitude}, {userLocation?.myLongitude}!</p>
-      <p className="profile-data">Fake Bio or something</p>
       {
         !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
