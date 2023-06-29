@@ -29,7 +29,9 @@ export const getAllReviews = async () => {
   return reviews || [];
 };
 
-export const getReview = async (id) => fetchHandler(`${baseUrl}/${id}`);
+export const getReview = async (id) => {
+  return fetchHandler(`${baseUrl}/${id}`);
+}
 
 export const updateDescription = async ({ id, review_body }) =>
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, review_body }));

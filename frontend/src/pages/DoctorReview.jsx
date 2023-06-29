@@ -1,40 +1,54 @@
-import { useParams, useLocation, NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import ReviewModal from '../components/ReviewModal';
-import UserReview from '../components/UserReview';
+import { useParams, useLocation, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ReviewModal from "../components/ReviewModal";
+import UserReview from "../components/UserReview";
 
 export default function DoctorReview() {
   let { id } = useParams();
+  const [pageReviews, setPageReview] = useState([]);
   const { state } = useLocation();
-  const { page, reviews, users } = state;
+  const { page } = state;
 
-  const individualReview = reviews.filter((review) => review.page_id === parseInt(id));
-  console.log(individualReview);
+  useEffect(() => {
+    const getReviews = async () => {
+      const response = await fetch(`/api/reviews/${id}`);
+      const data = await response.json();
+      setPageReview(data);
+      console.log(pageReviews);
+    };
+    getReviews();
+  }, []);
 
-  const userToReview = users.filter((user) =>
-    individualReview.some((review) => review.user_id === user.id)
-  );
-  const ratings = individualReview.map((review) => review.rating);
+  const ratings = pageReviews.map((review) => review.rating);
   const averageRating =
     ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
 
-  const allFriendliness = individualReview.map((review) => review.staff_friendliness);
+  const allFriendliness = pageReviews.map(
+    (review) => review.staff_friendliness
+  );
   const averageStaffFriendliness =
-    allFriendliness.reduce((sum, friendlinessScore) => sum + friendlinessScore, 0) / allFriendliness.length;
+    allFriendliness.reduce(
+      (sum, friendlinessScore) => sum + friendlinessScore,
+      0
+    ) / allFriendliness.length;
 
-  const allWaitTimes = individualReview.map((review) => review.wait_times);
+  const allWaitTimes = pageReviews.map((review) => review.wait_times);
   const averageWaitTimes =
-    allWaitTimes.reduce((sum, waitTimeScore) => sum + waitTimeScore, 0) / allWaitTimes.length;
+    allWaitTimes.reduce((sum, waitTimeScore) => sum + waitTimeScore, 0) /
+    allWaitTimes.length;
 
-  const allQualityOfCare = individualReview.map((review) => review.quality_of_care);
+  const allQualityOfCare = pageReviews.map((review) => review.quality_of_care);
   const averageQualityOfCare =
-    allQualityOfCare.reduce((sum, qualityOfCareScore) => sum + qualityOfCareScore, 0) / allQualityOfCare.length;
+    allQualityOfCare.reduce(
+      (sum, qualityOfCareScore) => sum + qualityOfCareScore,
+      0
+    ) / allQualityOfCare.length;
 
-  let starone = '⭐️';
-  let startwo = '⭐️ ⭐️';
-  let starthree = '⭐️ ⭐️ ⭐️';
-  let starfour = '⭐️ ⭐️ ⭐️ ⭐️';
-  let starfive = '⭐️ ⭐️ ⭐️ ⭐️ ⭐️';
+  let starone = "⭐️";
+  let startwo = "⭐️ ⭐️";
+  let starthree = "⭐️ ⭐️ ⭐️";
+  let starfour = "⭐️ ⭐️ ⭐️ ⭐️";
+  let starfive = "⭐️ ⭐️ ⭐️ ⭐️ ⭐️";
   let starRating;
   let starFriendliness;
   let starWait;
@@ -56,7 +70,7 @@ export default function DoctorReview() {
       starRating = starfive;
       break;
     default:
-      starRating = ''; // handle cases where rating is not 1-5
+      starRating = ""; // handle cases where rating is not 1-5
   }
   const calculateStarRating = (averageRating) => {
     if (averageRating >= 0.5 && averageRating < 1.5) {
@@ -70,27 +84,27 @@ export default function DoctorReview() {
     } else if (averageRating >= 4.5) {
       return starfive;
     } else {
-      return ''; // handle cases where rating is not within 0.5-5 range
+      return ""; // handle cases where rating is not within 0.5-5 range
     }
   };
-  
+
   // Update the switch statements
   starFriendliness = calculateStarRating(averageStaffFriendliness);
   starWait = calculateStarRating(averageWaitTimes);
   starCare = calculateStarRating(averageQualityOfCare);
-
-  const combinedReviews = individualReview.map((review) => {
-    const matchingUser = userToReview.find((user) => user.id === review.user_id);
-    return { ...review, user: matchingUser };
-  });
 
   // Pagination logic
   const reviewsPerPage = 2;
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = combinedReviews.slice(indexOfFirstReview, indexOfLastReview);
+  const currentReviews = pageReviews.slice(
+    indexOfFirstReview,
+    indexOfLastReview
+  );
 
+  // Define the paginate function
+  // Define the paginate function
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -98,18 +112,42 @@ export default function DoctorReview() {
   // Pagination component
   const Pagination = () => {
     const pageNumbers = [];
+    const totalPages = Math.ceil(pageReviews.length / reviewsPerPage);
+    const maxDisplayedPages = 2; // Set the maximum number of displayed pages
 
-    for (let i = 1; i <= Math.ceil(combinedReviews.length / reviewsPerPage); i++) {
+    let startPage = currentPage - Math.floor(maxDisplayedPages / 2);
+    let endPage = currentPage + Math.floor(maxDisplayedPages / 2);
+
+    if (startPage < 1) {
+      endPage += 1 - startPage;
+      startPage = 1;
+    }
+
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      if (startPage > 1) {
+        startPage -= endPage - currentPage;
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(i);
     }
-    console.log(starRating)
+
     return (
-      <nav className="pagination is-centered is-small" role="navigation" aria-label="pagination">
+      <nav
+        className="pagination is-centered is-small"
+        role="navigation"
+        aria-label="pagination"
+      >
         <ul className="pagination-list">
           {pageNumbers.map((number) => (
             <li key={number}>
-              <button id="pagination"
-                className={`pagination-link ${number === currentPage ? 'is-current' : ''}`}
+              <button
+                id="pagination"
+                className={`pagination-link ${
+                  number === currentPage ? "is-current" : ""
+                }`}
                 aria-label={`Goto page ${number}`}
                 onClick={() => paginate(number)}
               >
@@ -133,7 +171,9 @@ export default function DoctorReview() {
             <div className="specifications">
               <h2 className="name">{page.facility_doctor}</h2>
               <h4 className="location">{page.address}</h4>
-              <h3 className="specialty">{page.specialty} {starRating}</h3>
+              <h3 className="specialty">
+                {page.specialty} {starRating}
+              </h3>
               <p className="description">"{page.description}"</p>
             </div>
             <div className="categories-all">
@@ -142,21 +182,25 @@ export default function DoctorReview() {
               <p className="cats">Quality of Care: {starCare}</p>
             </div>
             <ReviewModal id={id} />
-            <NavLink to="/compare"><button className='reviewButton'>Compare</button></NavLink>
+            <NavLink to="/compare">
+              <button className="reviewButton">Compare</button>
+            </NavLink>
           </div>
         </div>
         <div className="reviewrow">
           {currentReviews.length > 0 ? (
-            currentReviews.map((review) => <UserReview review={review} key={review.user.id} />)
+            currentReviews.map((review) => (
+              <UserReview review={review} key={review.id} />
+            ))
           ) : (
             <p>No reviews available.</p>
           )}
 
-          <div className='paginationButton'>
-            {combinedReviews.length > reviewsPerPage && (
+          <div className="paginationButton">
+            {pageReviews.length > reviewsPerPage && (
               <Pagination
                 reviewsPerPage={reviewsPerPage}
-                totalReviews={combinedReviews.length}
+                totalReviews={pageReviews.length}
                 paginate={paginate}
               />
             )}

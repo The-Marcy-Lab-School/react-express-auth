@@ -252,7 +252,7 @@ export default function SignUpPage() {
           </form>
           {!!errorText && <p>{errorText}</p>}
           <div id="already">
-            <p style={{color:"white"}}>- Already have an account with us?  <Link to="/login" style={{color:"#FFC100"}}>Log in!</Link> -</p>
+            <p style={{color:"white"}}>- Already have an account with us?  <Link to="/login" style={{color:"#4F50FF"}}>Log in!</Link> -</p>
           </div>
         </div>
       </div>

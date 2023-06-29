@@ -90,7 +90,7 @@ return (
     <>
       <div id="createpost-container">
         <div className="container createpost-text">
-          <h4 className="subtitle createpost-text-details" style={{ fontSize: '35px' }}>
+          <h4 className="subtitle createpost-text-details" style={{ fontSize: '35px', color:"#001A49" }}>
             Can't find your Health Care Provider? Fill out the following form to Create 
            New Doctor or Facility. 
           </h4>

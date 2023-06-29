@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createReview } from "../adapters/review-adapter";
-import 'bulma/css/bulma.css';
+import "bulma/css/bulma.css";
 const ReviewModal = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
-  const [review_body, setReview_body] = useState('');
-  const [errorText, setErrorText] = useState('');
+  const [review_body, setReview_body] = useState("");
+  const [errorText, setErrorText] = useState("");
   const [staff_friendliness, setStaffFriendliness] = useState(0);
   const [wait_times, setWaitTimes] = useState(0);
   const [quality_of_care, setQualityOfCare] = useState(0);
@@ -41,19 +41,26 @@ const ReviewModal = ({ id }) => {
       setFormSubmitted(true);
     }
     setRating(0);
-    setReview_body('');
+    setReview_body("");
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'review_body') setReview_body(value);
-    if (name === 'rating') setRating(value);
-    if (name === 'staff_friendliness') setStaffFriendliness(value);
-    if (name === 'wait_times') setWaitTimes(value);
-    if (name === 'quality_of_care') setQualityOfCare(value);
+    if (name === "review_body") setReview_body(value);
+    if (name === "rating") setRating(value);
+    if (name === "staff_friendliness") setStaffFriendliness(value);
+    if (name === "wait_times") setWaitTimes(value);
+    if (name === "quality_of_care") setQualityOfCare(value);
   };
+  // function handleCloseModalAndSubmit(event) {
+  //   event.preventDefault();
+  //   handleCloseModal();
+  //   handleSubmit();
+  // }
   return (
     <div>
-      <button className="button reviewButton" onClick={handleOpenModal}>Write A Review</button>
+      <button className="button reviewButton" onClick={handleOpenModal}>
+        Write A Review
+      </button>
       {showModal && (
         <div className="modal is-active">
           <div className="modal-background" onClick={handleCloseModal}></div>
@@ -70,7 +77,9 @@ const ReviewModal = ({ id }) => {
               <form onSubmit={handleSubmit} onChange={handleChange}>
                 {/* Form fields */}
                 <div className="field">
-                  <label htmlFor="rating" className="label">Rating (out of 5):</label>
+                  <label htmlFor="rating" className="label">
+                    Rating (out of 5):
+                  </label>
                   <div className="control">
                     <input
                       type="number"
@@ -85,7 +94,9 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="review_body" className="label">Review:</label>
+                  <label htmlFor="review_body" className="label">
+                    Review:
+                  </label>
                   <div className="control">
                     <textarea
                       id="review_body"
@@ -97,7 +108,9 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="staff_friendliness" className="label">Staff Friendliness (out of 5):</label>
+                  <label htmlFor="staff_friendliness" className="label">
+                    Staff Friendliness (out of 5):
+                  </label>
                   <div className="control">
                     <input
                       type="number"
@@ -112,7 +125,9 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="wait_times" className="label">Wait Times (out of 5):</label>
+                  <label htmlFor="wait_times" className="label">
+                    Wait Times (out of 5):
+                  </label>
                   <div className="control">
                     <input
                       type="number"
@@ -127,7 +142,9 @@ const ReviewModal = ({ id }) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label htmlFor="quality_of_care" className="label">Quality of Care (out of 5):</label>
+                  <label htmlFor="quality_of_care" className="label">
+                    Quality of Care (out of 5):
+                  </label>
                   <div className="control">
                     <input
                       type="number"
@@ -143,10 +160,18 @@ const ReviewModal = ({ id }) => {
                 </div>
                 <div className="field is-grouped">
                   <div className="control">
-                    <button type="submit" className="button is-link" onClick={handleCloseModal}>Submit</button>
+                    <button
+                      type="submit"
+                      className="button is-link"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </button>
                   </div>
                   <div className="control">
-                    <button className="button" onClick={handleCloseModal}>Cancel</button>
+                    <button className="button" onClick={handleCloseModal}>
+                      Cancel
+                    </button>
                   </div>
                 </div>
               </form>

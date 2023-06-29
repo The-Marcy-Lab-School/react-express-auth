@@ -50,7 +50,7 @@ export default function DoctorsList() {
 
   return (
     <>
-      <main>
+      <main id="homeMain">
         <div>
           <div>
             <p>

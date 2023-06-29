@@ -33,9 +33,7 @@ class Pages {
 
   static async find(id) {
     const query = "SELECT * FROM pages WHERE id = ?";
-    const {
-      rows: [page],
-    } = await knex.raw(query, [id]);
+    const { rows } = await knex.raw(query, [id]);
     return page ? new Pages(page) : null;
   }
 

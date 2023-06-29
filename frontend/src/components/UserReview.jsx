@@ -88,7 +88,7 @@ export default function UserReview({ review }) {
     
     return (
         <div className="box" id ='reviewbox'>
-          <div className="username">{review.user.username}</div>
+          <div className="username">{review.username}</div>
           <div className="starRating">{starRating}</div>
           <div className="rating">{review.review_body}</div>
           <div className="categories">
@@ -97,10 +97,10 @@ export default function UserReview({ review }) {
             <p className="cats">Quality of Care: {starCare}</p>
           </div>
           <div className="userSpecs">
-            <div>{review.user.race}</div>
-            <div>{review.user.ethnicity}</div>
-            <div>{review.user.age}</div>
-            <div>{review.user.gender}</div>
+            <div>{review.race}</div>
+            <div>{review.ethnicity}</div>
+            <div>{review.age}</div>
+            <div>{review.gender}</div>
           </div>
         </div>
     );

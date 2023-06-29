@@ -25,9 +25,9 @@ class Reviews {
         }
       }
       static async find(id) {
-        const query = 'SELECT * FROM reviews WHERE id = ?';
-        const { rows: [review] } = await knex.raw(query, [id]);
-        return review ? new Reviews(review) : null;
+        const query = `SELECT reviews.id, users.username, reviews.review_body, reviews.staff_friendliness, reviews.quality_of_care, reviews.wait_times ,reviews.rating, users.race, users.ethnicity, users.age, users.gender FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.page_id = ?`;
+        const { rows } = await knex.raw(query, [id]);
+        return rows
       }
       static async list() {
         const query = 'SELECT * FROM reviews';

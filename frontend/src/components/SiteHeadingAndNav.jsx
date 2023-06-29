@@ -4,6 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 
 
 
+
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -20,19 +21,19 @@ export default function SiteHeadingAndNav() {
 
           {currentUser ? (
             <>
-              <NavLink exact='true' className="navbar-item transparent-link" to="/home" style={{ color: "#FFC100", backgroundColor: "transparent" }}>
+              <NavLink exact='true' className="navbar-item transparent-link" to="/home" style={{ color: "#FFE8DA", backgroundColor: "transparent" }}>
                 <strong style={{ color: "white" }}>Home</strong>
               </NavLink>
-              <NavLink exact='true' className="navbar-item" to="/" style={{ color: "#FFC100", backgroundColor: "transparent" }}>
+              <NavLink exact='true' className="navbar-item" to="/" style={{ color: "#FFE8DA", backgroundColor: "transparent" }}>
                 Mission
               </NavLink>
-              <NavLink exact='true' className="navbar-item" to={`/users/${currentUser.id}`} style={{ color: "#FFC100", backgroundColor: "transparent" }}>
+              <NavLink exact='true' className="navbar-item" to={`/users/${currentUser.id}`} style={{ color: "#FFE8DA", backgroundColor: "transparent" }}>
                 {currentUser.username}
               </NavLink>
             </>
           ) : (
-            <NavLink exact='true' className="navbar-item transparent-link" to="/signuplogin" style={{ color: "#FFC100", backgroundColor: "transparent" }}>
-              <strong style={{ color: "#FFC100" }}>Sign Up / Login</strong>
+            <NavLink exact='true' className="navbar-item transparent-link" to="/signuplogin" style={{ color: "#FFE8DA", backgroundColor: "transparent" }}>
+              <strong style={{ color: "#FFE8DA" }}>Sign Up / Login</strong>
             </NavLink>
           )}
         </div>

@@ -9,7 +9,6 @@ body {
 input,
 label {
   display: block;
-  
 }
 
 .input{
@@ -17,7 +16,7 @@ label {
 }
 
 .label{
-  color: white;
+  color:#001A49;
 }
 
 
@@ -121,12 +120,12 @@ h4 {
 }
 
 .box{
- 
   transition: all .2s ease-in;
 }
 .box:hover{
   cursor: pointer;
-  background-color: #bbdde9;
+  background-color:#4F50FF;
+  color: #FFE8DA;
   transform: scale(1.02);
 }
 
@@ -149,7 +148,7 @@ h4 {
 /* Sign Up/Login Component */
 
 .signuplogincomponent {
-  background-color: #769FCD;
+  height: 100vh;
 }
 
 .welcome {
@@ -158,32 +157,22 @@ h4 {
   min-height: 10vh;
   align-items: center;
   letter-spacing: 1px;
-  background-color: white;
+  background-color:#001A49;
 }
 
 .welcome-text {
-  color: #000000;
+  color: #ffffff;
   text-align: center;
   text-shadow: black;
   font-size: 30px;
   font-family: Calibri, sans-serif;
 }
 
-.signuplogindiv {
+/* .signuplogindiv {
   height: 60vh;
-  background-color: white;
-}
+  background-color:#001A49;
+} */
 
-#sign_box {
-  background-color: #769FCD;
-  width: 80%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 10px;
-  background: #B9D7EA;
-  margin: 0 auto;
-  padding: 20px;
-}
 
 .instructions {
   margin-bottom: 10px;
@@ -225,25 +214,12 @@ h4 {
 
 #login-component {
   min-height: 100vh;
-  background-color: #769FCD;
+  background-color:#001A49;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#login-content {
-  width: 35%;
-  background: #B9D7EA;
-  padding: 2rem;
-  border-radius: 20px;
-}
-
-#loginform {
-  width: 90%;
-  background: #B9D7EA;
-  border-radius: 20px;
-  border: 1px solid black;
-}
 
 #login-text {
   margin-bottom: 2rem;
@@ -281,14 +257,14 @@ h4 {
   justify-content: center;
 }
 
-#signup-content {
+/* #signup-content {
   width: 35%;
   background: #B9D7EA;
   padding: 2rem;
   border-radius: 20px;
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
+} */
 
 #signup-text {
   margin-bottom: 2rem;
@@ -330,12 +306,12 @@ h4 {
   color: white;
 }
 
-#signup-form {
+/* #signup-form {
   width: 90%;
   background: #B9D7EA;
   border-radius: 20px;
   border: 1px solid black;
-}
+} */
 
 #signup-button {
   display: flex;
@@ -469,6 +445,20 @@ h4 {
   width: 100%;
 }
 
+.create{
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius:10px;
+  height: 50px;
+  width: 30vh;
+}
+
+.create:hover {
+  background-color: #4F50FF;
+  color: white;
+}
+
 .subtitle {
   font-style: italic;
   bottom: 5vh;
@@ -477,40 +467,22 @@ h4 {
 /* Sign Up/Login Component */
 
 .signuplogincomponent {
-  background-color: #769FCD;
+  background-color:#001A49
 }
 
-.welcome {
-  display: flex;
-  justify-content: center;
-  min-height: 20vh;
-  align-items: center;
-  letter-spacing: 1px;
-  background-color: white;
-}
-
-.welcome-text {
-  color: #000000;
-  text-align: center;
-  text-shadow: black;
-  font-size: 30px;
-  font-family: Calibri, sans-serif;
-}
-
-.signuplogindiv {
-  height: 50vh;
-  background-color: white;
-}
 
 #sign_box {
-  background-color: #769FCD;
   width: 80%;
   max-width: 400px;
   height: auto;
   border-radius: 10px;
-  background: #132734;
+  background: white;
+  color: #000000;
   margin: 0 auto;
   padding: 60px;
+}
+.title.is-4 {
+  color:#001A49;
 }
 
 .instructions {
@@ -530,8 +502,10 @@ h4 {
 }
 
 .loginout-button {
-  background-color: white ;
+  background-color:#4F50FF;
   width: 100%;
+  border: none;
+  color: #ffe8da;
   max-width: 300px;
   border-radius: 15px;
   font-family: Calibri, sans-serif;
@@ -561,16 +535,16 @@ h4 {
 
 #login-content {
   width: 35%;
-  background: #132734;
+  background:#001A49;
   padding: 2rem;
   border-radius: 20px;
 }
 
 #loginform {
   width: 90%;
-  background: #132734;
+  background: #001A49;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 1px solid #4F50FF;
 }
 
 #login-text {
@@ -602,7 +576,7 @@ h4 {
 
 #signup-content {
   width: 35%;
-  background: #132734;
+  background:#001A49;
   padding: 2rem;
   border-radius: 20px;
   margin-top: 2rem;
@@ -618,9 +592,9 @@ h4 {
 
 #signup-form {
   width: 90%;
-  background: #132734;
+  background:#001A49;
   border-radius: 20px;
-  border: 1px solid #FFC100;
+  border: 1px solid #4F50FF;
   
 }
 
@@ -630,8 +604,12 @@ h4 {
   margin-top: 2rem;
 }
 .button.is-link{
-  background-color: #FFC100;
-  color:#132734;
+  background-color: white;
+  border:solid #001A49;
+  color:#001A49;
+}
+.button.is-link:hover{
+  background-color:#4F50FF
 }
 
 
@@ -704,9 +682,9 @@ h4 {
   width: 35%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #132734;
+  background-color:#001A49;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 5px solid #4F50FF;
   padding: 1rem;
 }
 
@@ -764,7 +742,7 @@ h4 {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #132734;
+  background-color: #001A49;
   color: white;
   font-weight: bold;
 }
@@ -773,13 +751,14 @@ h4 {
   height: 75vh;
   display: flex;
   align-items: center;
+  color: #001A49;
 }
 
 .box3 {
   display: flex;
   align-items: center;
   height: 75vh;
-  background-color: #132734;
+  background-color: #001A49;
   text-align: center;
   color: white;
   font-size: 5vh;
@@ -791,6 +770,7 @@ h4 {
   text-align: center;
   margin-left: 10px;
   width: 50%;
+  color: #001A49;
 }
 
 .rightbox {
@@ -802,33 +782,40 @@ h4 {
 .secondStory {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: space-evenly;
   align-items: center;
-  height: 30vh;
-  margin-right: 10vh;
+  height: 35vh;
+  margin-right: 5vh;
+  margin-bottom: 5vh;
+  color: #001A49;
 }
 
 .firstStory {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   flex-direction: row;
-  height: 30vh;
-  margin-left: 10vh;
+  height: 35vh;
+  margin-bottom: 5vh;
+  margin-left: 5vh;
+  color: #001A49;
 }
 
 .story {
-  text-align: center;
-  width: 50%;
-  padding: 20vh;
+
+  width: 30%;
+
 }
 
 .story1 {
-  text-align: center;
-  margin-right: 25vh;
-  width: 50%;
-  padding: 20vh;
+  
+  width: 30%;
+
 }
 
 .funfacts {
+  background-color: #001A49;
+  color: white;
   height: 50vh;
   display: flex;
   justify-content: space-between;
@@ -854,14 +841,17 @@ h4 {
   margin-left: 125px;
   margin-right: 125px;
   justify-content: center;
+  color: #001A49;
 }
 
 /*title*/
 .facts_stories {
-  color: #132734;
+  color: #001A49;
   font-size: 5vh;
   text-align: center;
   margin-top: 7vh;
+  margin-bottom: 2vh;
+  font-weight: bolder;
 }
 
 .box1 h1 {
@@ -871,21 +861,22 @@ h4 {
 }
 
 .factsTitle {
-  color: #132734;
+  color:#001A49;
   font-size: 5vh;
   margin-bottom: 45px;
+  font-weight: bold;
 }
 
 /*images*/
 .doctorImg {
-  height: 30vh;
+  height: 40vh;
 }
 
 .doctorStoryimg {
   display: flex;
   align-content: center;
   justify-content: center;
-  height: 20vh;
+  height: 40vh;
 }
 
 /* This is the end of the css for the mission page*/
@@ -909,22 +900,19 @@ h4 {
 }
 
 .quote {
-  font-size: 3.5vh;
-  line-height: 6vh;
+  font-size: 4.5vh;
+  line-height: 7vh;
   margin-left: 30%;
   margin-right: 30%;
 }
 
-/*The end css for doctor review page*/
-
-/*The begining css for doctor card component*/
-.subtitle {
-  font-style: italic;
-  bottom: 5vh;
-  color: #000000;
+.specifications{
+  
 }
 
-/*The end css for doctor card component*/
+/*The end css for doctor review page*/
+
+
 
 
 /* This is the css for the indvidual user reviews on the doctor review page */
@@ -942,8 +930,13 @@ h4 {
 
 #reviewbox {
   border: solid;
-  border-color: #132734;
+  border-color:#001A49;
+  color: #001A49;
   width: 100%;
+}
+
+#reviewbox:hover{
+  color:white
 }
 
 .username {
@@ -969,8 +962,8 @@ font-weight:100;
 }
 
 #pagination {
-  background-color: #132734;
-  color: #FFC100;
+  background-color:#4F50FF;
+  color: white;
 }
 
 /*This is the end of the css for the indvidual user reviews on the doctor review page*/
@@ -986,17 +979,18 @@ font-weight:100;
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #001A49;
   }
 
   .name {
-    color: #132734;
+    color:#001A49;
     font-weight: bolder;
     font-size: 3.5vh;
     margin-bottom: 0.75vh;
   }
 
   .location {
-    color: #132734;
+    color: #001A49;
     font-size: 2.5vh;
     letter-spacing: .25vh;
     margin-bottom: 0.75vh;
@@ -1004,14 +998,14 @@ font-weight:100;
 
   .specialty {
     font-style: italic;
-    color: #132734;
+    color: #001A49;
     font-weight: lighter;
     margin-bottom: 0.75vh;
   }
 
   .description {
     font-style: italic;
-    color: #132734;
+    color: #001A49;
     font-size: 2vh;
     font-weight: lighter;
     width: 46vh;
@@ -1028,8 +1022,13 @@ font-weight:100;
     border-radius: 1.5vh;
     border: none;
     margin-bottom: 2vh;
-    background-color: #132734;
-    color: #FFC100;
+    background-color:#001A49;
+    color: #FFE8DA;
+  }
+
+  .reviewButton:hover {
+    color: #001A49;
+    background-color: white;
   }
 
 /* This is the end of the css for the doctor card information on the doctor review page */
@@ -1138,11 +1137,13 @@ font-weight: bold;
 
 #savedheading{
   font-weight: bold;
+  font-size: 6vh;
   display: flex;
   justify-content: center;
   margin-top: 3vh;
   margin-bottom: 3vh;
   font-weight: bold;
+  color: #4F50FF;
   
 }
 #bookmarkedSide{
@@ -1155,7 +1156,6 @@ font-weight: bold;
 }
 
 
-css for new homepage
 
 /* doctorcard parctice */
 
@@ -1221,14 +1221,12 @@ padding: 1vh;
 .doctorLink{
   color: #4F50FF;
 }
-main {
+#homeMain {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
-  height: 100vh;
-
-  
+  height: 100%;
 }
 
 @media screen and (max-width: 768px) {

@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
-import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 import Bookmarkcard from "../components/BookmarkCard";
 
@@ -84,7 +85,7 @@ export default function UserPage() {
         </div>
       
         <article id="bookmarkedSide">
-        <strong id= 'savedheading'><h2>Bookmarked</h2></strong>
+        <strong id= 'savedheading'><h2><FontAwesomeIcon icon={faBookmark} /></h2></strong>
           {userBookmark.map((bookmark) => (
             <Bookmarkcard key={bookmark.id} bookmark={bookmark} />
           ))}

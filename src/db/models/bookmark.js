@@ -21,7 +21,7 @@ class Bookmarks {
     }
   }
   static async find(id) {
-    const query = `SELECT bookmark.id, facility_doctor, specialty, address, photo, bookmark.user_id, bookmark.page_id FROM bookmark JOIN pages ON bookmark.page_id = pages.id WHERE bookmark.user_id =?`;
+    const query = `SELECT bookmark.id, facility_doctor, description ,specialty, address, photo, bookmark.user_id, bookmark.page_id FROM bookmark JOIN pages ON bookmark.page_id  = pages.id WHERE bookmark.user_id =?`;
     const { rows } = await knex.raw(query, [id]);
     return rows;
     // ? new Bookmarks(bookmark) : null;
