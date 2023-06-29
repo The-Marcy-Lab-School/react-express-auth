@@ -3,29 +3,13 @@
     font-size: 65px;
 }
 
-#row{
-    padding: 0 !important;
-    max-width: 500px;
-}
-
-#col{
-    max-width: 176px;
-    min-width: 200px;
-}
-
-#right-col{
-    max-width: 190px;
-    /* padding-right : 0 !important;
-    padding-left : 0 !important; */
-    margin: 0;
-}
-
 #card-img{
     max-width: 176px;
     min-width: 200px;
     height: 120px;
 }
 
-#left-col{
-    padding: 0;
+#event-form-card{
+    background-color: black;
+    color: white;
 }

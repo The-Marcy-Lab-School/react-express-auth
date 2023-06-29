@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createEvent,getAllEvents } from "../adapters/events-adapter";
-import {Card,Button, CardBody, CardFooter,CardImg, Col,  CardTitle, CardText,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
-// import styles from '../events.css';
+import {Card, Button, CardBody, CardFooter,CardImg, Col,  CardTitle, CardText,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
+import styles from '../events.css';
 
 
 function EventsPage() {
@@ -140,16 +140,26 @@ const handleRSVPClick = (event_id) => {
   };
 
   return (
-    <div>
+    <div style={{
+      padding:'40px'
+    }}>
       <h1 id="events-header">Events</h1>
-      <button id='make-event-btn' onClick={toggleFormVisibility}>Make Event</button>
+      <button id='make-event-btn' onClick={toggleFormVisibility} style={{margin:'40px'}}>Make Event</button>
       {showForm && (
-        <div id="event-form-div">
+        <div id="event-form-div" style={{
+          display:'flex',
+          justifyContent:'center',
+          padding:'20px'
+        }}>
           <Card id="event-form-card">
             <Form onSubmit={handleFormSubmit} style={{
                 padding:'20px'
               }}>
-              <h1 id="events-form-header" >Make an Event</h1>
+              <h1 id="events-form-header" style={{
+                display:'flex',
+                justifyContent:'center',
+                alignSelf:'center'
+              }}>Make an Event</h1>
               <FormGroup >
                 <Input
                 type="text"
@@ -163,25 +173,21 @@ const handleRSVPClick = (event_id) => {
                 />
               </FormGroup>
               <FormGroup>
-                  <Label for="exampleFile">
-                  Upload a Pic
-                  </Label>
                   <Input
                   id="exampleFile"
                   name="file"
-                  type="text"
+                  type="file"
+                  placeholder="Add a Picture"
                   value={ imgUrl }
                   onChange={(e) => setImgUrl(e.target.value)}
                   /> 
               </FormGroup>
               <FormGroup>
-                  <Label for="exampleText">
-                  Description
-                  </Label>
                   <Input
                   id="exampleText"
                   name="text"
                   type="textarea"
+                  placeholder="Description"
                   value={ eventDescription }
                   onChange={(e) => setEventDescription(e.target.value)}
                   />
@@ -241,11 +247,11 @@ const handleRSVPClick = (event_id) => {
       {events.length === 0 ? (
         <p>No events available.</p>
       ) : (
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-        <div className="col"></div>
+        <div>
+          <Row xs="3">
           {events.map((event, index) => (
             <div key={index}>
-              <Container>
+              <Col>
                 <Card id='card' key={event.event_id}>
                     <CardImg id='card-img' src={ event.img_url } />
                     <CardBody>
@@ -258,9 +264,10 @@ const handleRSVPClick = (event_id) => {
                         <Button color="info" size="lg">RSVP</Button>
                   <CardFooter id='footer'>16+ People are Going!</CardFooter>
                 </Card>
-              </Container>
+              </Col>
             </div>
           ))}
+          </Row>
       </div>
       )}
     </div>
