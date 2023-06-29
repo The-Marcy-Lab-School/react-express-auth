@@ -26,9 +26,7 @@ function EventList() {
 
         setEvents(filteredEvents);
         updateEventData(data);
-        // console.log("DATA:", data);
 
-        // Store the data in local storage
         localStorage.setItem("eventsData", JSON.stringify(data));
       })
       .catch((error) => console.log(error));
@@ -36,7 +34,6 @@ function EventList() {
 
   const fetchProcessed = async () => {
     const data = await apiFetchHandler("/api/events");
-    console.log("NICK API:", data);
   };
 
   useEffect(() => {
@@ -70,12 +67,7 @@ function EventList() {
       fetchLayers();
     }, []);
   }
-
-  const latitude2 = 80;
-  const latitude1 = 75;
-  const longtitude2 = 65;
-  const longtitude1 = 64;
-  const convertToMiles = () => {
+  const convertToMiles = (latitude2, latitude1, longtitude2, longtitude1) => {
     const math = Math.floor(
       Math.sqrt(
         (latitude2 * 69 - latitude1 * 69) * (latitude2 * 69 - latitude1 * 69) +
@@ -84,8 +76,8 @@ function EventList() {
       )
     );
     return math >= 4.5
-      ? `${Math.ceil(math)} miles`
-      : `${Math.floor(math)} miles`;
+      ? `${Math.ceil(math)} miles from you`
+      : `${Math.floor(math)} miles from you`;
   };
 
   const toggleModal = (event) => {
@@ -98,10 +90,7 @@ function EventList() {
       {modal && (
         <div className="modal">
           <div className="modal-content">
-            <CommentModal data={singleEvent} />
-            <button onClick={toggleModal} className="close-modal">
-              ClOSE
-            </button>
+            <CommentModal data={singleEvent} closeButton={toggleModal} />
           </div>
         </div>
       )}
@@ -122,10 +111,10 @@ function EventList() {
                 <div className="eventTitle">{event.title}</div>
                 <div className="distance">
                   {convertToMiles(
-                    latitude2,
-                    latitude1,
-                    longtitude2,
-                    longtitude1
+                    userLocation.myLatitude,
+                    event.geometry[0].coordinates[0],
+                    userLocation.myLongitude,
+                    event.geometry[0].coordinates[1]
                   )}
                 </div>
                 <button

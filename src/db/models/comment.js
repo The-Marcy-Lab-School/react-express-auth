@@ -18,13 +18,13 @@ class Comment {
     return rows;
   }
 
-  static async create(event_id, user_id, commented) {
+  static async create(event_id, userId, commented) {
     const query = `INSERT INTO comments (event_id, user_id, comments)
       VALUES (?, ?, ?)
       RETURNING *`;
     const {
       rows: [comment],
-    } = await knex.raw(query, [event_id, user_id, commented]);
+    } = await knex.raw(query, [event_id, userId, commented]);
     return comment;
   }
 

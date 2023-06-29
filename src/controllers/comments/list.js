@@ -1,6 +1,5 @@
 const listComment = async (req, res) => {
   const {
-    session: { userId },
     db: { Comment },
     params: { id },
   } = req;
