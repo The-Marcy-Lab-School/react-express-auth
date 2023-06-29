@@ -1,5 +1,4 @@
-# MayaSnax
-
+# Urban-Unblemished
 ### Getting Started
 
 1. Fork this template repo
@@ -33,7 +32,7 @@ The frontend was built using HTML, CSS, JavaScript, React, and MaterialUI. The b
 
 ### ERD
 
-To manage the data necessary for the MayaSnax backend, we have implemented the following schema in our PostgreSQL database:
+To manage the data necessary for the Urban-Unblemished backend, we have implemented the following schema in our PostgreSQL database:
 
 ![](Urban-Unblemished-erd.png)
 
