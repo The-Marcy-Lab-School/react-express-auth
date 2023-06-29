@@ -109,7 +109,7 @@ export default function LoginPage() {
         <label htmlFor="password" className="password-label">Password</label>
         <input type="password" autoComplete="current-password" id="password" name="password" placeholder="xxxxxxxxx"/>
 
-        <button>Log in</button>
+        <button className="signInButton" >Log in</button>
       </form>
       { !!errorText && <p>{errorText}</p> }
       <p className="form-redirect">

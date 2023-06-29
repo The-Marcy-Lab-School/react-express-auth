@@ -134,7 +134,7 @@ h1 {
 }
 
 .date {
-  font-size: 10px;
+  font-size: 13px;
   color: #4c5159;
   font-weight: 700;
 }
@@ -173,6 +173,10 @@ h1 {
   margin: 2%;
 }
 
+.profile-username {
+  color: #fff;
+}
+
  /* =================================== Sign-in & Login Pages ====================================== */
 
 .login-page, .sign-up-page{ 
@@ -208,14 +212,14 @@ input{
   border-width: 2px;
 }
 
-button{
+.signInButton {
   width: 100%;
   color: rgb(255, 255, 255);
   background-color: rgb(91, 180, 255);
   border-color: rgb(91, 180, 255);
   font-size: 16px;
   height: 40px;
-  margin: 10px;
+  margin: 16px;
   padding: 0 16px;
   border-radius: 0.25rem;
   border: 2px solid transparent;
@@ -239,7 +243,7 @@ button{
   transition: background-color 0.3s ease; /* Set the transition property */
    
 }
-button:hover{
+.signInButton :hover{
   background-color: rgb(45, 160, 255);
   color: white;
  
@@ -306,28 +310,81 @@ input {
     color: #747bff;
   }
 
-  button {
+  .signInButton {
     background-color: #f9f9f9;
   }
 }
 
+ /* =================================== HEADER & NAV  ====================================== */
 header {
-  display: flex;
   position: sticky;
-  top: -1px;
-  z-index: 10000;
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  top: -1px;
+  z-index: 10000;
   padding: 0.5rem 1rem;
-  background: #000;
+  background: rgb(26, 26, 26);
+  height: 45px;
+  padding-left: 95px;
+  padding-right: 75px;
+ 
+}
+.nav-toggle{
+  padding: 1rem;
+  transition: color 300ms ease 0s;
+  cursor: pointer;
+  display: flex;
+  animation: slideInFromLeft 0.3s ease-in-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+nav a {
+  display: block;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: rgb(142, 142, 154);
+  text-decoration: none
+}
+nav a:hover {
+  transition: color 0.3s ease; 
+  color: rgb(240, 240, 245);
 }
 
 #logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+  display: flex;
+  /* text-transform: lowercase; */
+  font-variant: small-caps;
+  font-size: 2.15rem;
+  letter-spacing: 0.07em;
+  font-weight: 400;
+  color: rgb(225, 225, 233);
   text-decoration: none;
-  color: #FFF;
+  align-items: center;
+  flex-direction: row-reverse;
 }
+
+#logo-img {
+  width: 29px;
+  height: 29px;
+  padding: 7px;
+  cursor: pointer;
+}
+
 
 nav ul {
   display: flex;
@@ -337,18 +394,10 @@ nav ul {
   list-style: none;
 }
 
-nav a {
-  display: block;
-  color: #FFF;
-}
 
-
+ /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ HEADER & NAV  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 /* automatically added by NavLink component */
-.active {
-  color: #EEBC32;
-  font-weight: bold;
-  font-style: italic;
-}
+
 
 .marker {
   background-color: #000000;
