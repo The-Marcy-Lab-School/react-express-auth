@@ -90,9 +90,9 @@ return (
     <>
       <div id="createpost-container">
         <div className="container createpost-text">
-          <h4 className="subtitle createpost-text-details">
-            Can't find your Health care professional or facility? Fill out the following form to be able to Create that
-            doctor or facility for later use.
+          <h4 className="subtitle createpost-text-details" style={{ fontSize: '35px' }}>
+            Can't find your Health Care Provider? Fill out the following form to Create 
+           New Doctor or Facility. 
           </h4>
         </div>
         <form className="container createpost-form" onSubmit={handleSubmit} onChange={handleChange}>
@@ -206,7 +206,7 @@ return (
 
           <div className="field createpost-submit-button">
             <div className="control">
-              <button type="submit" className="button is-link">
+              <button type="submit" className="create">
                 Create Now!
               </button>
             </div>

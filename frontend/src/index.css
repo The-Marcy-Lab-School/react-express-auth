@@ -3,12 +3,23 @@
 body {
   font-family: Calibri, sans-serif;
   margin: 0;
+  background-color: #E9ECEF;
 }
 
 input,
 label {
   display: block;
+  
 }
+
+.input{
+ border-color: #132734;
+}
+
+.label{
+  color: white;
+}
+
 
 input {
   margin-bottom: 1rem;
@@ -31,7 +42,7 @@ header {
 
 nav ul {
   display: flex;
-  gap: 1rem;
+  /* gap: 1rem; */
   padding: 0;
   margin: 0;
   list-style: none;
@@ -42,12 +53,14 @@ nav .item {
 }
 
 .navbar {
-  background-color: #132734;
+  background-color: #001A49;
+  padding: 20px;
 }
 
-.transparent-link {
-  background-color: transparent;
+.navbar-item {
+  font-family: 'Oxygen', sans-serif;
 }
+
 
 form {
   padding: 1rem;
@@ -107,6 +120,21 @@ h4 {
   height: 100%;
 }
 
+.box{
+ 
+  transition: all .2s ease-in;
+}
+.box:hover{
+  cursor: pointer;
+  background-color: #bbdde9;
+  transform: scale(1.02);
+}
+
+
+#review.box{
+  background-color: #FFF;
+}
+
 .box-text {
   display: inline-block;
 }
@@ -118,7 +146,6 @@ h4 {
 }
 
 
-
 /* Sign Up/Login Component */
 
 .signuplogincomponent {
@@ -128,7 +155,7 @@ h4 {
 .welcome {
   display: flex;
   justify-content: center;
-  min-height: 20vh;
+  min-height: 10vh;
   align-items: center;
   letter-spacing: 1px;
   background-color: white;
@@ -317,7 +344,7 @@ h4 {
 }
 
 .sign_up {
-  color: #B9D7EA;
+  color: white;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -370,7 +397,7 @@ h4 {
 /* Create Post Component */
 
 #createpost-container {
-  background-color: #769FCD;
+  background-color: white;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -393,7 +420,7 @@ h4 {
   width: 35%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #B9D7EA;
+  background-color: pink;
   border-radius: 20px;
   border: 1px solid black;
   padding: 1rem;
@@ -414,6 +441,7 @@ h4 {
 .createpost-submit-button {
   display: flex;
   justify-content: center;
+  
 }
 
 .columns {
@@ -458,6 +486,7 @@ h4 {
   min-height: 20vh;
   align-items: center;
   letter-spacing: 1px;
+  background-color: white;
 }
 
 .welcome-text {
@@ -469,7 +498,8 @@ h4 {
 }
 
 .signuplogindiv {
-  height: 60vh;
+  height: 50vh;
+  background-color: white;
 }
 
 #sign_box {
@@ -478,14 +508,14 @@ h4 {
   max-width: 400px;
   height: auto;
   border-radius: 10px;
-  background: #B9D7EA;
+  background: #132734;
   margin: 0 auto;
-  padding: 20px;
+  padding: 60px;
 }
 
 .instructions {
   margin-bottom: 10px;
-  color: #000000;
+  color: white;
   text-align: center;
   text-shadow: black;
   font-size: 16px;
@@ -500,7 +530,7 @@ h4 {
 }
 
 .loginout-button {
-  background-color: #D6E6F2;
+  background-color: white ;
   width: 100%;
   max-width: 300px;
   border-radius: 15px;
@@ -656,14 +686,6 @@ h4 {
   flex-shrink: 0;
 }
 
-/* Create Post Component */
-
-#createpost-container {
-  background-color: #769FCD;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .createpost-text {
   display: flex;
   justify-content: center;
@@ -682,7 +704,7 @@ h4 {
   width: 35%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #B9D7EA;
+  background-color: #132734;
   border-radius: 20px;
   border: 1px solid black;
   padding: 1rem;
@@ -698,11 +720,13 @@ h4 {
   margin-right: 10px;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .createpost-submit-button {
   display: flex;
   justify-content: center;
+  
 }
 
 .columns {
@@ -830,7 +854,6 @@ h4 {
   margin-left: 125px;
   margin-right: 125px;
   justify-content: center;
-
 }
 
 /*title*/
@@ -898,6 +921,7 @@ h4 {
 .subtitle {
   font-style: italic;
   bottom: 5vh;
+  color: #000000;
 }
 
 /*The end css for doctor card component*/
@@ -1015,25 +1039,36 @@ justify-content: space-around;
 
 }
 #usercard{
-  width:30vw;
 
+  position: sticky;
+  top: 10%;
+  left: 10%;
+  width:400px;
+  height: 600px;
   margin-top: 3%;
-  box-shadow: none;
+  box-shadow:none;
+  background-color: #001A49;
+  color:white;
+  border-radius: 5%;
+  overflow: hidden;
+
 }
 
-#userimage{
-  border-radius: 5%;
-}
 #username{
   text-align: center;
 }
 #logoutbtn{
-  background-color: #132734;
-  color: #FFC100;
+  background-color: white;
+  color: black;
   border: none;
-  border-radius:2vh;
-  height: 4vh;
-  width: 12vh;
+  border-radius:10px;
+  height: 50px;
+  width: 100%;
+}
+
+#logoutbtn:hover {
+  background-color: #4F50FF;
+  color: white;
 }
 
 .userreviews{
@@ -1061,16 +1096,25 @@ justify-content: space-around;
   width: 12vh;
 }
 #bookmarkbox{
+  padding:5%;
   display: flex;
   flex-direction: column;
   height: 30vh;
   width: 50vh;
-  border: solid 2px #132734;
+  border: solid 2px black;
   text-align: center;
   align-items: center;
   border-radius: 4%;
-  margin-top: 13%;
+  margin-bottom: 13%;
+  background-color: #001A49;
 }
+.headerBookmark{
+  margin-bottom: 2vh;
+  color: white;
+  
+  width: 100%;
+}
+
 #bookmarkReview{
   height: 12.75vh;
   width: 65%;
@@ -1095,8 +1139,10 @@ font-weight: bold;
 #savedheading{
   font-weight: bold;
   display: flex;
-  justify-content: center
-  /* margin-left: 100%; */
+  justify-content: center;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  font-weight: bold;
   
 }
 #bookmarkedSide{
@@ -1120,3 +1166,28 @@ font-weight: bold;
 }
 
 
+/* Compare Page Component */
+
+.compare-page {
+  display: flex;
+  justify-content: space-around;
+}
+
+.all-cats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh; 
+  width: 30vw;
+}
+
+.comparison {
+  text-decoration: underline;
+}
+
+.categories-criterion {
+  justify-content: center;
+  border: 1px solid black;
+  padding: 5%;
+}
