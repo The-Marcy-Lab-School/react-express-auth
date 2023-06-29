@@ -1,5 +1,5 @@
 body{
-    background-color: #689e80;
+    background-color: #f4f1e9;
 }
 
 .d-flex{
@@ -25,13 +25,14 @@ header {
     color:#2a593f;
   }
   .home-h2{
-    color:#ece4d4;
+    color:#2a593f;
   }
 
 h1{
     color:white;
 }
   
+
   a{
     text-decoration: none;
     color:#283618
@@ -63,17 +64,7 @@ h1{
     padding-top: 10%;
   }
 
-   /* .btn-get-started scrollto {
-        font-family: Open Sans, sans-serif;
-        text-transform: uppercase;
-        font-weight: 500;
-        font-size: 14px;
-        display: inline-block;
-        padding:10px, 35px, 10px, 35px;
-        border-radius: 4px; 
-        transition:0.5s; 
-  }
-   */
+   
   .dropdown-menu{
     background-color: #33323341;
   }
@@ -98,7 +89,7 @@ h1{
   }
 
 #full-nav{
-  background-color: #33323341;
+  background-color: #689e80;
   
 }
 

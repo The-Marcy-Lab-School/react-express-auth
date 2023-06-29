@@ -8,9 +8,8 @@ export default function HomePage() {
   console.log(content);
 
   return (
-    <>
-     
+    <div className='home-wrapper'>
       <WelcomeButton />
-    </>
+    </div>
   );
 }
