@@ -14,6 +14,7 @@ import DoctorReview from './pages/DoctorReview';
 import Mission from './pages/Mission';
 import CreatePost from './pages/CreatePost';
 import Footer from './components/SiteFooter';
+import ComparePage from './pages/Compare';
 
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="/users" element={<UsersPage />} />
             <Route path="/users/:id" element={<UserPage />} />
             <Route path="/doctor/:id" element={<DoctorReview />} />
+            <Route path="/compare" element={<ComparePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
       </main>

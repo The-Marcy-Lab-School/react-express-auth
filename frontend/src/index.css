@@ -41,7 +41,7 @@ header {
 
 nav ul {
   display: flex;
-  gap: 1rem;
+  /* gap: 1rem; */
   padding: 0;
   margin: 0;
   list-style: none;
@@ -52,7 +52,12 @@ nav .item {
 }
 
 .navbar {
-  background-color: #132734;
+  background-color: #001A49;
+  padding: 20px;
+}
+
+.navbar-item {
+  font-family: 'Oxygen', sans-serif;
 }
 
 
@@ -1138,3 +1143,28 @@ font-weight: bold;
 }
 
 
+/* Compare Page Component */
+
+.compare-page {
+  display: flex;
+  justify-content: space-around;
+}
+
+.all-cats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh; 
+  width: 30vw;
+}
+
+.comparison {
+  text-decoration: underline;
+}
+
+.categories-criterion {
+  justify-content: center;
+  border: 1px solid black;
+  padding: 5%;
+}
