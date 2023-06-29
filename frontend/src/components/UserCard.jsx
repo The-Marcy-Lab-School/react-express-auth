@@ -9,10 +9,10 @@ function FriendsCard(props) {
     <Card style={{ width: "18rem" }}>
       <Card.Body>
         <Card.Title className="card-name">{props.user}</Card.Title>
-        <Card.Subtitle className="card-status">Safe status: {props.status}</Card.Subtitle>
+        <Card.Subtitle className="card-status">Safe status: <span className='card-safe-status'>{status ? `SAFE` : `NOT SAFE`}</span></Card.Subtitle>
         <Card.Text className="card-text">
           You can add {props.user}. 
-          Is {props.user} safe?: <span id='user-status'>{status ? `YES` : `NO`}</span>
+          Is {props.user} safe?: <span className='user-status'>{status ? `YES` : `NO`}</span>
         </Card.Text>
         <Button
           onClick={props.onPing}

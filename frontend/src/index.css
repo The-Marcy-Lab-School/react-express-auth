@@ -187,6 +187,16 @@ h1 {
   display: flex;
 }
 
+.user-status {
+  color: #fff;
+  font-weight: 700;
+}
+
+.card-safe-status {
+  color: #fff;
+  font-weight: 800;
+}
+
 .friends-list, .users-list {
   margin: 2%;
 }
