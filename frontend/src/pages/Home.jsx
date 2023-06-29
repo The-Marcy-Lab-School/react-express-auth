@@ -3,20 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, CardBody, CardText, Button} from "reactstrap";
 import image from '../../assets/BACKGROUND_IMG.png';
 import { NavLink } from "react-router-dom";
-
 import '../index.css';
 
 export default function HomePage() {
   return <>
-          <div id='main-text-box' style={{backgroundImage: `url(${image})`}}>
-            <div id='about-area-div'>
+          <div id='main-text-box' >
+            <div id='about-area-div' style={{
+              backgroundImage: `url(${image})`,
+              margin:'0'
+          }}>
               <div id='about-text-div'>
-                <h1 id='about-header'>Be<br />
+                <h1 id='about-header' className='animate__animated animate__slideInDown'>Be<br />
                 the Change<br />
                 You Want to See!
                 </h1>
                 <p id='about-text'>
-                  Clean or dirty, countless people share it all on Urban Unblemished. Discuss areas of NYC that need help or even join in on a fun event -- sign up to be apart of the change.
+                  Clean or dirty, countless people share it all on Urban Unblemished. Team up and join fun events to keep NYC clean -- sign up to be apart of the change.
                 </p>
                 <Button size="lg" color="success"><NavLink to='/sign-up' style={{
                   textDecoration:'none',
@@ -33,8 +35,7 @@ export default function HomePage() {
                 <CardBody>  
                   <CardText>
                     <p>
-                      The problem we are addressing with Urban Unblemished is the prevalence of pollution and inadequate street maintenance in NYC. It negative   ly  impacts the community by creating an unsightly and unhygienic environment, inviting unwelcomed creatures into the environment and diminishing  the overall quality of life for residents and visitors alike. Lack of cleanliness can lead to health hazards, discourage economic growth, and  contribute to a sense of apathy towards the environment and promote disconnection among residents. 
-                      Furthermore, the problem extends beyond the physical aspects. It affects the perception of Brooklyn as a desirable place to live, work,   and visit.  A cleaner and more vibrant environment fosters a sense of pride and belonging amongst residents, promoting community engagement  and    enhancing the overall well-being of individuals. Addressing this problem is essential to create a healthier, greener, and more livable  NYC. By   empowering residents and volunteers to actively participate in street cleaning efforts, Urban Unblemished aims to instill a sense  of responsibility, and ownership in the community. Our application keeps users coming back by offering engaging features that are easily accessible, fostering a sense of community and a hope for change. In addition, a big part of the mission we plan to promote is that   cleanliness is an ongoing   effort that will require commitment in which we aim to inspire through the language we use to convey our message  to users.
+                      Pollution and inadequate street maintenance negatively  impacts the community by creating an unsightly and unhygienic environment, inviting unwelcomed creatures into the environment and diminishing  the overall quality of life for residents and visitors alike. 
                     </p>
                   </CardText>
                 </CardBody>
@@ -45,17 +46,25 @@ export default function HomePage() {
               <Card id="home-card">
                 <CardBody>
                   <CardText>
-                  <p id="impacts-text">
-                  Littering is a major problem in New York City, and it has a number of negative consequences, including creating an unsightly and unhygienic environment,  contributing to NYC pollution, which promotes rat infestation and diminishing the overall quality of life for residents and visitors alike. Rats are attracted to food and garbage, and litter provides these critters with a ready source of both. When rats are present, they can spread disease, contaminate food, and damage property. They can also make people feel unsafe and uncomfortable.(NYS Department of Health. NYSDOH, https://www.nyc.gov/site/doh/health/health-topics/rats.page. Accessed 26 May 2023)  
+                  <div id="impacts-text">
+                    <h6>
+                      Littering can have a negative impact on the quality of life in New York City. Rats can cause a number of problems, including:
+                    </h6>
+                    <ul>
+                      <li>
 
-                  A study by the New York City Department of Health and Mental Hygiene found that there is a strong correlation between littering and rat       infestation. The study found that neighborhoods with more litter had more rats. The study also found that rats were more likely to be found in      areas with poor sanitation, such as those with overflowing garbage cans and piles of trash. (Pasley, James. “How the rat population in New York     City grew by 800% and infested the city in less than 65 years.” Insider, March 18, 2023, https://www.insider.com/     new-york-city-explosive-increase-rats-over-last-65-years-2023-3. Accessed 26 May 2023.)
-                  Littering can also have a negative impact on the quality of life in New York City. Rats can cause a number of problems, including:
                   Spreading disease: Rats can carry diseases such as rabies, leptospirosis, and salmonella. These diseases can be transmitted to humans through       contact with rat droppings, urine, or saliva.
+                      </li>
+                      <li>
                   Contaminating food: Rats can contaminate food by chewing on it or urinating on it. This can make food unsafe to eat.
+                      </li>
+                      <li> 
                   Damaging property: Rats can chew through wires, pipes, and other materials, which can cause damage to homes and businesses.
                   Making people feel unsafe: Rats can make people feel unsafe, especially in areas where they are seen frequently. This can lead to people avoiding       certain areas or feeling nervous about being outside at night.
+                        </li>
+                    </ul>
                   (ROS Team. “What You Should Know About New York City Rats Issue.“ RentOwnSell NY, https://www.nyrentownsell.com/blog/new-york-city-rat-issue/.      Accessed 26 May 2023.)
-                  </p>
+                  </div>
                   </CardText>
                 </CardBody>
               </Card>
@@ -66,7 +75,7 @@ export default function HomePage() {
                 <CardBody>
                   <CardText>
                     <p>
-                    If users actively participate in keeping the streets clean through the Urban Unblemished app, this will cause a major shift in NYC pollution. By providing an informative, inspiring and user-friendly interface, and fostering volunteer engagement, Urban Unblemished aims to hold space for individuals interested in discussing and contributing to street cleanliness and community building. If the app successfully engages users and encourages their participation in local cleaning events this will draw more attention to the issue at hand and lead to a more widespread and sustained effort to keep NYC streets clean. Users can then learn about the negative effects of pollution, contribute their time and effort, making a tangible difference in their neighborhoods. This collective action will create a sense of pride, ownership, and community spirit, fostering a cleaner and more vibrant NYC. The ultimate impact of Urban Unblemished's solution would be a cleaner, greener, and more livable NYC. It would enhance the overall quality of life for residents and visitors by improving the aesthetics, health, and sense of belonging in the community.
+                    If users actively participate in keeping the streets clean through the Urban Unblemished app, this will cause a major shift in NYC pollution.  This collective action will create a sense of pride, ownership, and community spirit, fostering a cleaner and more vibrant NYC. The ultimate impact of Urban Unblemished's solution would be a cleaner, greener, and more livable NYC. Teamwork will enhance the overall quality of life for residents and visitors by improving the aesthetics, health, and sense of belonging in the community.
                     </p>
                   </CardText>
                 </CardBody>

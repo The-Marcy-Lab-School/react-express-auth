@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createEvent,getAllEvents } from "../adapters/events-adapter";
-import {Card, Button, CardBody, CardFooter,CardImg, Col,  CardTitle, CardText,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
+import {Card, Button, CardBody, CardFooter,CardImg, Col,  CardTitle, CardText,Form, FormGroup,Label, Input, Row} from 'reactstrap';
 import styles from '../events.css';
 
 
@@ -149,11 +149,13 @@ const handleRSVPClick = (event_id) => {
       {showForm && (
         <div id="event-form-div" style={{
           display:'flex',
-          justifyContent:'center'
+          justifyContent:'center',
+          padding:'40px'
+
         }}>
           <Card id="event-form-card">
             <Form onSubmit={handleFormSubmit} style={{
-                padding:'20px'
+                padding:'40px'
               }}>
               <h1 id="events-form-header" style={{
                 display:'flex',
@@ -257,7 +259,11 @@ const handleRSVPClick = (event_id) => {
           {events.map((event, index) => (
             <div key={index}>
               <Col>
-                <Card id='card' key={event.event_id}>
+                <Card id='card' key={event.event_id}
+                style={{
+                  maxWidth:'320px'
+                }}
+                >
                     <CardImg id='card-img' src={ event.img_url } style={{
                       height:'200px',
                       maxWidth:'320px'
