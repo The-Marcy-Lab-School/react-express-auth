@@ -1,6 +1,7 @@
 const { Events } = require("pg");
 const turf = require("turf")
 const inPolygon = require("@turf/boolean-point-in-polygon")
+
 const listEvents = async (req, res) => {
     const {
         session: {userId},
@@ -21,7 +22,7 @@ const fetchData = async (url) => {
     const processed = []
 
     const { features : disasters } = await fetchData('https://api.weather.gov/alerts/active?severity=Severe&limit=1')
-    const users = await fetchData(`http://localhost:3000/api/users`)
+    const users = await User.list()
     const filtered = disasters.filter( disaster => !!disaster.geometry)
     filtered.forEach(disaster => {
       const { geometry: { coordinates } } = disaster 
@@ -54,6 +55,7 @@ const fetchData = async (url) => {
         'nearByUsers' : usersToAdd})
     })
     return res.send(processed)
+    // return res.send(202)
 }
 
 module.exports = listEvents

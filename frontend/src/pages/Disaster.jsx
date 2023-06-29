@@ -11,14 +11,14 @@ function InfoList() {
   const { eventData, userLocation, updateEventData } = useContext(CurrentUserContext); // Data from MapComponent
 
   const { eventId } = useParams();
-
   const eventsId = events.map((event) => event.id);
+  console.log(eventsId);
   console.log(eventId);
 
   useEffect(() => {
     // Retrieve data from local storage
     const storedData = localStorage.getItem('eventsData');
-
+    const imgData = localStorage.getItem('imageData');
     if (storedData) {
       const parsedData = JSON.parse(storedData);
       const filteredEvents = parsedData?.events.filter((event) => !event.categories.some((category) => category.title === 'Sea and Lake Ice'));
@@ -46,7 +46,7 @@ function InfoList() {
             <li>
               <a href="#">
                 <div className="disasterRow">
-                  <div className="disasterDate">{selectedEvent.geometry[0].date}</div>
+                  <div className="disasterDate">{selectedEvent.geometry[0].date.slice(0, 16).replace("T", " ")}</div>
                   {selectedEvent.categories.map((category) => (
                     <div className="disasterType" key={category.id}>
                       {category.title}
@@ -70,7 +70,7 @@ function InfoList() {
         )}
       </dl>
       <footer className="footer">
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <p>&copy; 2023 Solace. All rights reserved.</p>
       </footer>
     </div>
   );

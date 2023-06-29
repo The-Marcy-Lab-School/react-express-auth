@@ -157,7 +157,7 @@ export default function SignUpPage() {
           <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
         */}
 
-          <button>Sign Up Now!</button>
+          <button className="signInButton" >Sign Up Now!</button>
         </form>
         {!!errorText && <p>{errorText}</p>}
         <p className="form-redirect">

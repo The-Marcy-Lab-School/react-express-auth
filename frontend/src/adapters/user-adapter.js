@@ -7,6 +7,7 @@ export const createUser = async ({ username, password, location }) => (
 );
 
 export const updateIsSafe = async ({ isSafe }) => {
+  console.log(isSafe)
   fetchHandler(baseUrl, getPatchOptions({ isSafe }))
 }
 

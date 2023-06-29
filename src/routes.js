@@ -3,12 +3,17 @@ const userController = require('./controllers/user');
 const friendsController = require('./controllers/friends');
 const eventsController = require('./controllers/event');
 const commentsController = require('./controllers/comments');
+const pingsController = require ('./controllers/pings')
 const addModels = require('./middleware/add-models');
 const checkAuthentication = require('./middleware/check-authentication');
 const { isAuthorized } = require('./utils/auth-utils');
 
 const Router = express.Router();
 Router.use(addModels);
+
+Router.post('/pings', checkAuthentication, pingsController.create)
+Router.get('/pings/:id', checkAuthentication, pingsController.list)
+Router.patch("/pings/:id", checkAuthentication, pingsController.update)
 
 // COMMENTS ROUTES
 Router.post('/userscomment', commentsController.create);
@@ -27,7 +32,7 @@ Router.post('/friends', checkAuthentication, friendsController.create);
 Router.delete('/friends', checkAuthentication, friendsController.remove);
 Router.get('/friends', checkAuthentication, friendsController.list);
 
-Router.get('/events', checkAuthentication, eventsController.list);
+Router.get('/events', eventsController.list);
 
 
 /*
