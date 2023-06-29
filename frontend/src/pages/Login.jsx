@@ -13,8 +13,10 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("clicked")
     setErrorText('');
     const formData = new FormData(event.target);
+    console.log(formData)
     const [user, error] = await logUserIn(Object.fromEntries(formData.entries()));
     if (error) return setErrorText(error.statusText);
     setCurrentUser(user);
@@ -39,7 +41,7 @@ export default function LoginPage() {
     }}>
     <h1>Log In</h1>
     <Form id="create-form" onSubmit={ handleSubmit }>
-      <Row id="signup-row">
+      <Row id="login-row">
         <Col md={9}>
           <FormGroup>
           <Label for="username">Username</Label>
@@ -49,7 +51,7 @@ export default function LoginPage() {
               type="text"
               autoComplete="username"
               bsSize="md"
-              placeHolder="Username"
+              placeholder="Username"
               style={{
               }}
             />
@@ -62,15 +64,15 @@ export default function LoginPage() {
               type="password"
               autoComplete="current-password"
               bsSize="md"
-              placeHolder="Password"
+              placeholder="Password"
             />
           </FormGroup>
         </Col>
       </Row>
-    </Form>
       <Button size="lg" color="success">
         Log In
       </Button>
+    </Form>
     </Card>
     </div>
     { !!errorText && <p>{errorText}</p> }
