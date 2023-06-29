@@ -1,160 +1,61 @@
-# A React+Express with Auth Template .
+# CareCompanion
 
-This repo can be used to start a React+Express project fully equipped with Auth for user creation and login.
+### Getting Started
 
-**Table of Contents**
+1. Fork this template repo
+2. Create a PostgreSQL database
+3. Create a `.env` file and define environment variables for your PostgreSQL credentials. See the `knexfile.js` file for needed variables.
+4. Run the command `npm run kickstart`
 
-- [Setup](#setup)
-- [Understanding the Code](#understanding-the-code)
+### Mission Statement
 
-## Setup
+At CareCompanion, our mission is to empower People of Color in the healthcare system by providing an application that allows patients to rate and review their healthcare experiences with physicians, primary care providers, hospitals, and doctor's offices. CareCompanion aims to promote equity, accountability, and transparency by amplifying the voices of people in marginalized communities.
 
-- Fork this template repo
-- Copy the `.env.template` and name it `.env`
-- Create a database called `react_auth_example` database (or update your new `.env` to whatever database you are using)
-- Double check that the `.env` variables are all correct (username, password, database name)
-- `npm run kickstart` (`npm run dev` or `npm start` afterwards). This will do the following commands all together:
-  - `cd frontend && npm i && cd ..` - installs front end dependencies
-  - `npm i` - installs all dependencies
-  - `npm run migrate` - runs `knex migrate:latest` which will run the provided migration file (look in the `src/db/migrations` folder)
-  - `npm run seed` - runs `knex seed:run` which will run the provided seed file (look in `src/db/seeds` folder)
-  - `npm run start` - runs `node src/index.js`, starting your server.
-- Then, open a new terminal and `cd` into `frontend`. Then run `npm run dev` to start your Vite development server.
+### Who We Serve
 
-The provided migration and seeds file will create a `users` table with `id`, `username`, and `password_hash` columns.
+CareCompanion primarily aims to serve People of Color interested in learning and sharing their experience with healthcare providers, including physicians, primary care providers, hospitals, and doctor's offices. CareCompanion aims to address the unique challenges and disparities POC face in the health care system. 
 
-- For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
-- If you need to update these columns, consider looking into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
-- If creating a new table, look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
+### Product Overview
 
-## Running your application
+CareCompanion is an application designed to help People of Color find physicians, primary care providers, hospitals, and doctor's offices, that treat their POC patients equitably and hold their doctors accountable for how they treat their POC patients. This is done by allowing patients to search and find  physicians, primary care providers, hospitals, and doctor's offices, and rating and reviewing them based on the care they received. This information will then be available to anyone else on the application that searches for that provider. CareCompanion purpose is to help POCs find a provider that they feel safe and respected and who takes their medical issues seriously 
 
-Run the `npm run dev` command from the root directory to start your Express server.
 
-#### Rebuilding the static assets
+### Summary
 
-The Express server is configured to serve static assets from the `public/` folder. Those static assets are the current **build** of the React frontend found in the `frontend/` folder. You can see the built version of the React frontend by going to the server's address: http://127.0.0.1:3000/
+ Some hard facts to know
 
-In order to update this built version of your React application, you will need to run the `npm run build` command _from the `frontend/` folder_.
+According to the National Library of Medicine, health disparities refer to inequalities or variations in the quality of health and healthcare services that exist among different racial, ethnic, and socio-economic groups. These disparities can manifest as differences in disease prevalence, health outcomes, or access to healthcare resources. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3540621/
 
-#### Working with a dev server
+In the United States, the issue of racial and ethnic disparities in health and healthcare continues to be an ongoing and significant concern. The COVID-19 pandemic has further highlighted the disproportionate impact experienced by people of color, shedding light on the existing inequities in health and healthcare. However, it is important to note that these disparities have been well-documented for many years and are deeply rooted in long-standing structural and systemic inequities stemming from racism and discrimination. https://www.kff.org/racial-equity-and-health-policy/report/key-data-on-health-and-health-care-by-race-and-ethnicity/
 
-If you would like to work on the frontend without having to constantly rebuild the project, start a Vite dev server by running the `npm run dev` command _from the `frontend/` folder_.
 
-If you look in the `vite.config.js` file, you will see that we've already configured the dev server to proxy any reqeusts made to `/api` to the back-end server.
+According to the KFF(Kaiser Family Foundation), an independent source for health policy research, polling, and news, when it comes to health coverage, access to healthcare, and utilization of care, there are notable disparities between different racial and ethnic groups. In general, Black, Hispanic, and AIAN (American Indian and Alaska Native) individuals experienced more unfavorable outcomes compared to White individuals across the various measures examined (as depicted in Figure 5). On the other hand, the experiences of Asian individuals were mostly comparable to or better than those of White individuals in relation to these specific measures.
 
----
+Our objective is to cater to individuals from diverse backgrounds, particularly those who identify as people of color (POC), who face health disparities and may harbor reservations about seeking care from specific healthcare providers. By incorporating feedback from individuals across various backgrounds, our aim is to foster a sense of safety and comfort within our communities when it comes to accessing healthcare services from physicians, primary care providers, hospitals, and doctor's offices.
 
-## Understanding the Code
 
-### Backend API
 
-The provided backend exposes the following API endpoints defined in `src/routes.js`:
+### Technologies  
+We built MayaSnax using the following technologies:
 
-| Method | Path       | Description                                        |
-| ------ | ---------- | -------------------------------------------------- |
-| GET    | /users     | Get the list of all users                          |
-| GET    | /me        | Get the current logged in user based on the cookie |
-| GET    | /users/:id | Get a specific user by id                          |
-| POST   | /users     | Create a new user                                  |
-| POST   | /login     | Log in to an existing user                         |
-| PATCH  | /users/:id | Update the username of a specific user by id       |
-| DELETE | /logout    | Log the current user out                           |
+![](mayasnax-technologies.png)
 
-### Middleware
+The frontend was built using HTML, CSS, JavaScript, React, and MaterialUI. The backend was built using Node and Express, bcrypt for password hashing, a PostgreSQL database, and Knex to connect our server to our database.
 
-In `src/server.js` and in `src/routes.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `src/middleware/` folder
+### ERD
 
-**Express Middleware**
+To manage the data necessary for the MayaSnax backend, we have implemented the following schema in our PostgreSQL database:
 
-```js
-app.use(express.json());
-```
+![](mayasnax-erd.png)
 
-- We are telling Express to parse incoming data as JSON
+### Key API Endpoints
 
-```js
-app.use(express.static(path.join(__dirname, "..", "public")));
-```
+The MayaSnax API provides the following endpoints:
 
-- We are telling Express to serve static assets from the `public/` folder
+| endpoint | description | example |
+| - | - | - |
+| `/api/snacks` | Get all possible snack options | `GET /api/snacks` |
+| `/api/snacks/:mood` | Get all snack suggestions for a particular mood | `GET /api/snacks/happy` |
+| `/api/snacks/:snackid` | Post a piece of feedback for a particular snack | `POST /api/snacks/5` |
 
-```js
-app.use("/api", routes);
-```
 
-- `routes` is the Router exported from `src/routes.js`. We are telling Express to send any requests starting with `/api` to that Router.
-
-**Custom Middlware**
-
-```js
-app.use(handleCookieSessions);
-```
-
-- `handleCookieSessions` adds a `req.session` object to every `req` coming into the server. (see `src/middleware/handle-cookie-sessions`)
-
-```js
-Router.use(addModels);
-```
-
-- `addModels` adds a `req.db` property to all incoming requests. This is an object containing the models imported from the `db/models/` folder (see `src/middleware/add-model`)
-
-```js
-Router.patch("/users/:id", checkAuthentication, userController.update);
-```
-
-- `checkAuthentication` verifies that the current user is logged in before processing the request. (see `src/middleware/check-authentication`)
-- Here, we specify middleware for a singular route. Only logged-in users should be able to hit this endpoint.
-
-### Authentication & Authorization
-
-- **authenticated** means "We have confirmed this person is who they say they are"
-
-- **authorized** means "This person is who they say they are AND they are allowed to be here."
-
-So if we just want a user to be logged into the site to show content, we just check if they're _authenticated_.
-
-However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
-
-#### Cookies
-
-In the context of computing and the internet, a **acookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
-
-**Cookies contain information about your preferences and interactions with the website**, such as login information, shopping cart contents, or browsing history.
-
-When you visit the website again, the server retrieves the information from the cookie to personalize your experience and provide you with relevant content.
-
-#### Storing User IDs on the Cookie for Authentication
-
-In our application, we are using cookies to store the `userId` of the currently logged-in user on the `req.session` object. This will allow us to implement **authentication** (confirm that the user is logged in).
-
-The flow of cookie data looks like this:
-
-![](readme-img/cookies-session-userid-diagram.svg)
-
-1. When a request comes in for signup/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
-2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
-3. When we get the `User` back from the model, we store the `user.id` in that cookie (`session.userId = user.id`)
-4. Now, that cookie lives with every request made by that user (`req.session`) and the client can check if it is logged in using the `/api/me` endpoint (see below).
-
-## /api/me
-
-In order to keep source of truth simple, we're going to track who is logged in with that `GET /api/me` convention.
-
-- Each time a page is loaded, we quickly hit `GET /api/me`.
-- If there is a logged in user, we'll see that in the json.
-
-The reason this route is used instead of `GET /api/users/:id` is two fold.
-
-1. We don't know the user's `id` on load, so how could we know which `id` to provide in the URL?
-2. `GET` REST routes are supposed to be **idempotent** (eye-dem-PO-tent) which means "don't change." `GET /api/me` will change depending on the auth cookie. So, this little example app also has a `GET /api/users/:id` route because `GET /api/me` is not a replacement for it. `GET /api/users:id` isn't used in the client yet but your projects might in the future if you ever want to find a particular user by id (or username)!
-
-# Advice
-
-## Do not trust the front end
-
-Remember, **DO NOT TRUST THE FRONTEND**. Validate everything on the server. Just because you block a form in the GUI doesn't mean a nefarious actor couldn't just pop open a console and make a `fetch` request. Also, the frontend can be buggy and mistakes can happen.
-
-## Be wary of errors
-
-Given time constraints, this project is handling barely any errors. The model is very brittle right now, the server and sql errors should be handled like we've done before. We're also only handling the most basic of flows and errors on the client. Things like handling attempted recreations of users who already exist or even wrong passwords can be handled much more delicately.
