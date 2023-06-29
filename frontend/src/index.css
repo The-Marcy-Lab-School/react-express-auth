@@ -124,9 +124,8 @@ nav a {
 	align-items:center;
 	background-color: black;
 	color: white;
-
 }
 
-#signup-row{
-
+#event-form-card{
+	width: 700px;
 }

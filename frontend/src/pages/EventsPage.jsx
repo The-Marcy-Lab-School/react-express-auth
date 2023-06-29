@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createEvent,getAllEvents } from "../adapters/events-adapter";
-import {Card,Button, CardBody, CardFooter,CardImg, CardImgOverlay, CardTitle, CardText,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
+import {Card,Button, CardBody, CardFooter,CardImg, Col,  CardTitle, CardText,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
 // import styles from '../events.css';
 
 
@@ -144,12 +144,13 @@ const handleRSVPClick = (event_id) => {
       <h1 id="events-header">Events</h1>
       <button id='make-event-btn' onClick={toggleFormVisibility}>Make Event</button>
       {showForm && (
-        <div id="event-form">
-          <Card>
-            <Form onSubmit={handleFormSubmit}>
-              <h1 id="events-form-header">Make an Event</h1>
-              <FormGroup>
-                <Label >Heading</Label>
+        <div id="event-form-div">
+          <Card id="event-form-card">
+            <Form onSubmit={handleFormSubmit} style={{
+                padding:'20px'
+              }}>
+              <h1 id="events-form-header" >Make an Event</h1>
+              <FormGroup >
                 <Input
                 type="text"
                 bsSize="lg"
@@ -185,33 +186,39 @@ const handleRSVPClick = (event_id) => {
                   onChange={(e) => setEventDescription(e.target.value)}
                   />
               </FormGroup>
-              <FormGroup>
-                  <Label for="exampleDate">
-                  Date
-                  </Label>
-                  <Input
-                  id="exampleDate"
-                  name="date"
-                  placeholder="date placeholder"
-                  type="date"
-                  value={ eventDate }
-                  onChange={(e) => setEventDate(e.target.value)}
-                  />
-              </FormGroup>
-              <FormGroup>
-                  <Label for="exampleTime">
-                  Time
-                  </Label>
-                  <Input
-                  id="exampleTime"
-                  name="time"
-                  placeholder="time placeholder"
-                  type="time"
-                  value={ eventTime }
-                  onChange={(e) => setEventTime(e.target.value)}
-                  />
-              </FormGroup>
-              <FormGroup>
+                <Row>
+                <Col>
+                  <FormGroup>
+                    <Label for="exampleDate">
+                    Date
+                    </Label>
+                    <Input
+                    id="exampleDate"
+                    name="date"
+                    placeholder="date placeholder"
+                    type="date"
+                    value={ eventDate }
+                    onChange={(e) => setEventDate(e.target.value)}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label for="exampleTime">
+                    Time
+                    </Label>
+                    <Input
+                    id="exampleTime"
+                    name="time"
+                    placeholder="time placeholder"
+                    type="time"
+                    value={ eventTime }
+                    onChange={(e) => setEventTime(e.target.value)}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+            <FormGroup>
                 <Label for="exampleAddress">
                   Location
                 </Label>
