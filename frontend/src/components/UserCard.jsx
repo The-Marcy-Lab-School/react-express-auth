@@ -2,7 +2,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 function FriendsCard(props) {
-  const { isSafe } = props;
+  const { status } = props;
+  console.log(props, 'PROPS')
 
   return (
     <Card style={{ width: "18rem" }}>
@@ -11,12 +12,12 @@ function FriendsCard(props) {
         <Card.Subtitle className="card-status">Safe status: {props.status}</Card.Subtitle>
         <Card.Text className="card-text">
           You can add {props.user}. 
-          Is {props.user} safe?: {props.status}
+          Is {props.user} safe?: <span id='user-status'>{status ? `YES` : `NO`}</span>
         </Card.Text>
         <Button
           onClick={props.onPing}
-          variant={isSafe ? "secondary" : "danger"}
-          disabled={!isSafe}
+          variant={status ? "secondary" : "danger"}
+          disabled={!status}
         >
           Ping
         </Button>
