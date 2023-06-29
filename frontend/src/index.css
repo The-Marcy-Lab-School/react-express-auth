@@ -17,6 +17,13 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+main{
+  flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 70px);
+    min-height: 400px;
+}
 
 .map-section {
   display: flex;
@@ -122,7 +129,7 @@ body {
   background-color: #464141;
 }
 
-*/ h1 {
+h1 {
   size: 90px;
 }
 
@@ -147,31 +154,128 @@ body {
   font-weight: 400;
  }
 
+ /* =================================== Sign-in & Login Pages ====================================== */
+
 .login-page, .sign-up-page{ 
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
   align-items: center;
-  padding-top: 3rem; 
-  padding-bottom: 3rem; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Set the desired transparency using the alpha value */
+  z-index: 1; 
+}
+form {
+  display: flex;
+  width: 20rem;
+  -webkit-box-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+input{
+  font-size: 16px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 0.25rem;
+  border: 2px solid transparent;
   width: 100%;
-  gap: 1rem;
+  border-width: 2px;
 }
 
-.form-title, .form-redirect{
+button{
+  width: 100%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(91, 180, 255);
+  border-color: rgb(91, 180, 255);
+  font-size: 16px;
+  height: 40px;
+  margin: 10px;
+  padding: 0 16px;
+  border-radius: 0.25rem;
+  border: 2px solid transparent;
+  width: 100%;
+  border-width: 2px;
+  font-size: 0.9375rem;
+  font-family: Styrene, sans-serif;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  user-select: none;
+  border-width: .4px;
+  border-style: solid;
+  border-color: rgb(91, 180, 255);
+  border-image: initial;
+  border-radius: 0.25rem;
+  padding: 0.83334em 1em;
+  text-decoration: none;
+  transition: background-color 0.3s ease; /* Set the transition property */
+   
+}
+button:hover{
+  background-color: rgb(45, 160, 255);
+  color: white;
+ 
+}
+
+.form-title{
+  font-size: 2.3rem;
+  line-height: 1.5;
+  font-weight: 600;
   color: #d9daec;
 }
 
 .username-label, .password-label{
   color: #d6d0d0;
+  color: rgb(142, 142, 154);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  width: 360px;
+  margin: 7px 0px 5px;
+}
+p{
+  color: rgb(142, 142, 154);
 }
 
 .form-redirect-link{
+  text-decoration: none;
   color: #a577ee;
+  font-size: 19px;
 }
 
 .list-title{
   color: #d9daec;
 }
+
+input,
+label {
+  display: block;
+}
+
+input {
+  margin-bottom: 1rem;
+}
+#signInMap{
+  position: absolute; 
+  top: 0;
+  bottom: 0; 
+  width: 100%; 
+}
+
+#btn-spin {
+ display: none;
+}
+ /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Sign-in & Login Pages ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -186,16 +290,6 @@ body {
   button {
     background-color: #f9f9f9;
   }
-}
-
-
-input,
-label {
-  display: block;
-}
-
-input {
-  margin-bottom: 1rem;
 }
 
 header {
@@ -229,12 +323,6 @@ nav a {
   color: #FFF;
 }
 
-form {
-  padding: 1rem;
-  border: 1px solid #CCC;
-  width: 15rem;
-  margin: 1rem auto;
-}
 
 /* automatically added by NavLink component */
 .active {
