@@ -3,6 +3,7 @@
 body {
   font-family: Calibri, sans-serif;
   margin: 0;
+  background-color: #E9ECEF;
 }
 
 input,
@@ -1038,25 +1039,36 @@ justify-content: space-around;
 
 }
 #usercard{
-  width:30vw;
 
+  position: sticky;
+  top: 10%;
+  left: 10%;
+  width:400px;
+  height: 600px;
   margin-top: 3%;
-  box-shadow: none;
+  box-shadow:none;
+  background-color: #001A49;
+  color:white;
+  border-radius: 5%;
+  overflow: hidden;
+
 }
 
-#userimage{
-  border-radius: 5%;
-}
 #username{
   text-align: center;
 }
 #logoutbtn{
-  background-color: #132734;
-  color: #FFC100;
+  background-color: white;
+  color: black;
   border: none;
-  border-radius:2vh;
-  height: 4vh;
-  width: 12vh;
+  border-radius:10px;
+  height: 50px;
+  width: 100%;
+}
+
+#logoutbtn:hover {
+  background-color: #4F50FF;
+  color: white;
 }
 
 .userreviews{
@@ -1084,16 +1096,25 @@ justify-content: space-around;
   width: 12vh;
 }
 #bookmarkbox{
+  padding:5%;
   display: flex;
   flex-direction: column;
   height: 30vh;
   width: 50vh;
-  border: solid 2px #132734;
+  border: solid 2px black;
   text-align: center;
   align-items: center;
   border-radius: 4%;
-  margin-top: 13%;
+  margin-bottom: 13%;
+  background-color: #001A49;
 }
+.headerBookmark{
+  margin-bottom: 2vh;
+  color: white;
+  
+  width: 100%;
+}
+
 #bookmarkReview{
   height: 12.75vh;
   width: 65%;
@@ -1118,8 +1139,10 @@ font-weight: bold;
 #savedheading{
   font-weight: bold;
   display: flex;
-  justify-content: center
-  /* margin-left: 100%; */
+  justify-content: center;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  font-weight: bold;
   
 }
 #bookmarkedSide{

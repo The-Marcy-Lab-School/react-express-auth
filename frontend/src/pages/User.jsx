@@ -64,10 +64,10 @@ export default function UserPage() {
           <div className="card-content">
             <div className="media">
               <div className="media-content">
-                <p className="title is-4">
+                <p className="title is-4" style={{color:'white'}}>
                   {userProfile.first_name} {userProfile.last_name}
                 </p>
-                <p className="subtitle is-6" id="username">
+                <p className="subtitle is-6" id="username" style={{color:'white'}}>
                   @{userProfile.username}
                 </p>
                 <p className="age">Age: {userProfile.age}</p>
@@ -83,8 +83,8 @@ export default function UserPage() {
           </div>
         </div>
       
-        <article className="" id="bookmarkedSide">
-        <strong id= 'savedheading'><h2>Saved</h2></strong>
+        <article id="bookmarkedSide">
+        <strong id= 'savedheading'><h2>Bookmarked</h2></strong>
           {userBookmark.map((bookmark) => (
             <Bookmarkcard key={bookmark.id} bookmark={bookmark} />
           ))}
