@@ -176,7 +176,7 @@ export default function detailsLink() {
           </div>
         </div>
       </div>
-      {data.length > 0 && currentUser.id === data[0].owner ? (
+      {data.length > 0 && currentUser && currentUser.id === data[0].owner ? (
         <>
           {" "}
           <InviteForm susuData={data} />{" "}
