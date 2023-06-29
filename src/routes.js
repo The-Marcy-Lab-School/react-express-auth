@@ -31,7 +31,7 @@ Router.post('/friends', checkAuthentication, friendsController.create);
 Router.delete('/friends', checkAuthentication, friendsController.remove);
 Router.get('/friends', checkAuthentication, friendsController.list);
 
-Router.get,('/events', eventsController.list);
+Router.get('/events', eventsController.list);
 
 
 /*
