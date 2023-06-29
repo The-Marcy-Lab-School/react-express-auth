@@ -65,9 +65,10 @@ const handleDeleteEvent = (eventId) => {
     .catch((error) => {
       console.error("Event deletion error:", error);
     });
-};
-////////////////RSVP/////////////////////
-const handleRSVPClick = (event_id) => {
+  };
+  ////////////////RSVP/////////////////////
+  const handleRSVPClick = (event_id) => {
+  console.log("clicked")
       const requestBody = {
         event_id: event_id,
       };
@@ -79,8 +80,8 @@ const handleRSVPClick = (event_id) => {
         },
         body: JSON.stringify(requestBody),
       })
-        .then((response) => {
-          if (response.ok) {
+      .then((response) => {
+        if (response.ok) {
             console.log("RSVP success");
           } else {
             console.error("RSVP failed");
@@ -278,7 +279,7 @@ const handleRSVPClick = (event_id) => {
                         <Button  size="lg" style={{
                           backgroundColor:'#63A46C',
                           color:'black'
-                        }}>RSVP</Button>
+                        }} onClick={ handleRSVPClick(event.event_id) }>RSVP</Button>
                   <CardFooter id='footer'>16+ People are Going!</CardFooter>
                 </Card>
               </Col>
