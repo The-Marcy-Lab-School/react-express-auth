@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import mapboxgl from 'mapbox-gl';
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
@@ -7,7 +8,7 @@ import UpdateUsernameForm from "../components/UpdateUsernameForm";
 
 export default function UserPage() {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser, userLocation } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
@@ -32,21 +33,27 @@ export default function UserPage() {
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
 
+  if (userLocation?.myLatitude === null && userLocation?.myLongitude === null) {
+    userLocation.myLatitude = " Loading ";
+    userLocation.myLongitude = " Please Wait";
+  }
   // What parts of state would change if we altered our currentUser context?
   // Ideally, this would update if we mutated it
   // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
+  
+
   return <>
     <div className="profile-page">
       <h1 className="profile-username">{profileUsername}</h1>
-      { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-      <p className="profile-data">If the user had any data, here it would be</p>
+      {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
+      <p className="profile-data">My Location is {userLocation?.myLatitude}, {userLocation?.myLongitude}!</p>
       <p className="profile-data">Fake Bio or something</p>
       {
         !!isCurrentUserProfile
-          && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+        && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
       }
-      </div>
+    </div>
   </>;
 }

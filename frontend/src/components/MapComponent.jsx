@@ -40,7 +40,7 @@ const MapComponent = () => {
     function showPosition(position) {
       setLatitude(position?.coords.latitude); // Functions are used to update the state variables with the retrieved values.
       setLongitude(position?.coords.longitude);
-      console.log(`My latitude is ${position.coords.latitude} and my longitude is ${position.coords.longitude}`);
+      // console.log(`My latitude is ${position.coords.latitude} and my longitude is ${position.coords.longitude}`);
     }
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHJleWphZGVkIiwiYSI6ImNsaXRnZGtmNjEzc2IzanF2c2xvYW54Y28ifQ.zOjQMeR4v4rGw4_L7_-Iig';
@@ -76,7 +76,6 @@ const MapComponent = () => {
       element.addEventListener('click', () => {
         // Handle the click event
         // Fly to a random location
-        // console.log("eventRow:", eventRow);
         map.flyTo({
           center: [data[i].geometry[0]?.coordinates[0], data[i].geometry[0]?.coordinates[1]],
           essential: true, // this animation is considered essential with respect to prefers-reduced-motion
@@ -99,8 +98,6 @@ const MapComponent = () => {
       const { title } = data[i];
       const eventType = data[i].categories[0].title;
 
-      // console.log("Latitude:", latitude);
-      // console.log("Longitude:", longitude);
 
       const mapHold = {
         type: 'geojson',
@@ -120,7 +117,6 @@ const MapComponent = () => {
         },
       };
 
-      // console.log("mapholddddd:", mapHold.data.features);
 
 
 
