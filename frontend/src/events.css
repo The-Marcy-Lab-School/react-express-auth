@@ -3,13 +3,14 @@
     font-size: 65px;
 }
 
-#card-img{
-    max-width: 176px;
-    min-width: 200px;
-    height: 120px;
-}
-
 #event-form-card{
     background-color: black;
     color: white;
+}
+
+#card{
+    max-width: 320px;
+}
+body{
+    vertical-align: middle;
 }

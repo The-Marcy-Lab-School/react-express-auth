@@ -141,15 +141,15 @@ const handleRSVPClick = (event_id) => {
 
   return (
     <div style={{
-      padding:'40px'
+      verticalAlign:'middle',
+      padding:'100px'
     }}>
       <h1 id="events-header">Events</h1>
       <button id='make-event-btn' onClick={toggleFormVisibility} style={{margin:'40px'}}>Make Event</button>
       {showForm && (
         <div id="event-form-div" style={{
           display:'flex',
-          justifyContent:'center',
-          padding:'20px'
+          justifyContent:'center'
         }}>
           <Card id="event-form-card">
             <Form onSubmit={handleFormSubmit} style={{
@@ -247,13 +247,21 @@ const handleRSVPClick = (event_id) => {
       {events.length === 0 ? (
         <p>No events available.</p>
       ) : (
-        <div>
+        <div style={{
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center'
+        }}>
+
           <Row xs="3">
           {events.map((event, index) => (
             <div key={index}>
               <Col>
                 <Card id='card' key={event.event_id}>
-                    <CardImg id='card-img' src={ event.img_url } />
+                    <CardImg id='card-img' src={ event.img_url } style={{
+                      height:'200px',
+                      maxWidth:'320px'
+                    }}/>
                     <CardBody>
                       <CardTitle id="card-title">{ event.header}</CardTitle>
                       <CardText>{event.description}</CardText>
