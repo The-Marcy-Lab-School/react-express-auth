@@ -3,7 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col, FormGroup, Label, Input, Form, Button } from "reactstrap";
+import { Row, Col, Card, FormGroup, Label, Input, Form, Button } from "reactstrap";
 
 
 export default function LoginPage() {
@@ -24,42 +24,55 @@ export default function LoginPage() {
   if (currentUser) return <Navigate to="/" />;
 
   return <>
-    <h1>Login</h1>
+    <div id="login-form" style={{
+      display:'flex',
+      justifyContent:"center",
+
+    }}>
+    <Card style={{
+      width:'350px',
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor:"black",
+      color:"white"
+    }}>
+    <h1>Log In</h1>
     <Form id="create-form" onSubmit={ handleSubmit }>
-      <Row>
-        <Col>
+      <Row id="signup-row">
+        <Col md={9}>
           <FormGroup>
-            <Label for="username">
-              Username
-            </Label>
+          <Label for="username">Username</Label>
             <Input
               id="username"
-              name="email"
-              placeholder="Username"
+              name="username"
               type="text"
               autoComplete="username"
+              bsSize="md"
+              placeHolder="Username"
+              style={{
+              }}
             />
           </FormGroup>
-        </Col>
-        <Col md={6}>
           <FormGroup>
-            <Label for="password">
-              Password
-            </Label>
+          <Label for="password">Password</Label>
             <Input
               id='password'
               name="password"
-              placeholder="Password"
               type="password"
               autoComplete="current-password"
+              bsSize="md"
+              placeHolder="Password"
             />
           </FormGroup>
         </Col>
       </Row>
-      <Button>
-        Log in
-      </Button>
     </Form>
+      <Button size="lg" color="success">
+        Log In
+      </Button>
+    </Card>
+    </div>
     { !!errorText && <p>{errorText}</p> }
   </>;
 }

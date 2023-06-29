@@ -3,7 +3,7 @@ import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col, FormGroup, Label, Input, Form, Button } from "reactstrap";
+import { Row, Col, Card, FormGroup, Label, Input, Form, Button } from "reactstrap";
 
 // Controlling the signup form is a good idea because we want to adde (eventually)
 // more validation and provide real time feedback to the user about usernames and passwords
@@ -38,44 +38,42 @@ export default function SignUpPage() {
   };
 
   return <>
-    <h1>Sign Up</h1>
-    <Form id="sign-up-form" onSubmit={handleSubmit} onChange={handleChange}>
-    <Row>
-      <Col>
-        <FormGroup>
-          <Label htmlFor="username">
-            Username
-          </Label>
-          <Input
-            id="username"
-            name="email"
-            placeholder="Username"
-            type="text"
-            autoComplete="username"
-          />
-        </FormGroup>
-      </Col>
-      <Col md={6}>
-        <FormGroup>
-          <Label htmlFor="password">
-            Password
-          </Label>
-          <Input
-            id="password"
-            name="password"
-            placeholder="Password"
-            type="password"
-            autoComplete="off"
-          onChange={handleChange}
-          value={password}
-          />
-        </FormGroup>
-      </Col>
-    </Row>
-    <Button>
-      Sign Up
-    </Button>
-  </Form>
+    <div id="signup-form">
+      <Card id='signup-card'>
+        <h1>Sign Up</h1>
+        <Form id="sign-up-form" onSubmit={handleSubmit} onChange={handleChange}>
+        <Row>
+          <Col>
+            <FormGroup>
+              <Input
+                id="username"
+                name="username"
+                placeholder="Username"
+                type="text"
+                autoComplete="off"
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                id="password"
+                name="password"
+                placeholder="Password"
+                type="password"
+                autoComplete="off"
+              onChange={handleChange}
+              value={password}
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Button color="success" size="lg">
+          Sign Up
+        </Button>
+      </Form>
+
+      </Card>
+    </div>
     { !!errorText && <p>{errorText}</p> }
     <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
     </>;

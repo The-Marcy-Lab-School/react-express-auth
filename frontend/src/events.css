@@ -5,6 +5,12 @@
 
 #row{
     padding: 0 !important;
+    max-width: 500px;
+}
+
+#col{
+    max-width: 176px;
+    min-width: 200px;
 }
 
 #right-col{
@@ -14,7 +20,12 @@
     margin: 0;
 }
 
-/* #card-img{
+#card-img{
     max-width: 176px;
+    min-width: 200px;
     height: 120px;
-} */
+}
+
+#left-col{
+    padding: 0;
+}

@@ -6,11 +6,10 @@ import { Button } from "reactstrap";
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
-  const [color, changeColor] = useState('#69FFF1');
 
   return <header style={{
     fontSize:'20px',
-    backgroundColor: '#233329',
+    backgroundColor: 'black',
     height:'100px',
     textDecoration: 'none'
     }}>

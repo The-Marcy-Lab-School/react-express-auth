@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createEvent,getAllEvents } from "../adapters/events-adapter";
-import {Card,Button, CardBody, CardFooter,CardImg, CardImgOverlay, CardTitle, Col,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
-import styles from '../events.css';
+import {Card,Button, CardBody, CardFooter,CardImg, CardImgOverlay, CardTitle, CardText,Form, FormGroup,Label, Input, Row, Container } from 'reactstrap';
+// import styles from '../events.css';
 
 
 function EventsPage() {
@@ -236,33 +236,15 @@ const handleRSVPClick = (event_id) => {
             <div key={index}>
               <Container>
                 <Card id='card' key={event.event_id}>
-                  <Row id="row">
-                    <Col id="left-col">
                     <CardImg id='card-img' src={ event.img_url } />
-                    <CardImgOverlay>
-                      <CardTitle
-                      style={{
-                        borderStyle:'solid',
-                        color:'white',
-                        borderColor:'black',
-                        borderRadius:'5px',
-                        width:'fit-content',
-                        backgroundColor:'black',
-                        fontSize:'30px',
-                      }}
-                      >{event.date}</CardTitle>
-                    </CardImgOverlay>
-                    </Col>
-                    <Col
-                    id="right-col" style={{
-                      backgroundColor: '#6A7152'
-                    }}>
                     <CardBody>
-                        <CardTitle id="card-title">{ event.header}</CardTitle>
-                        <Button color="info" size="lg">RSVP</Button>
+                      <CardTitle id="card-title">{ event.header}</CardTitle>
+                      <CardText>{event.description}</CardText>
+                      <CardTitle>{event.date}</CardTitle>
+                      <CardTitle>{event.time}</CardTitle>
+                      <CardText>{event.location}</CardText>
                     </CardBody>
-                    </Col>
-                  </Row>
+                        <Button color="info" size="lg">RSVP</Button>
                   <CardFooter id='footer'>16+ People are Going!</CardFooter>
                 </Card>
               </Container>
@@ -270,7 +252,7 @@ const handleRSVPClick = (event_id) => {
           ))}
       </div>
       )}
-    // </div>
+    </div>
   );
 }
 export default EventsPage;

@@ -1,7 +1,9 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, CardBody, CardText } from "reactstrap";
+import { Card, CardBody, CardText, Button} from "reactstrap";
 import image from '../../assets/BACKGROUND_IMG.png';
+import { NavLink } from "react-router-dom";
+
 import '../index.css';
 
 export default function HomePage() {
@@ -16,7 +18,10 @@ export default function HomePage() {
                 <p id='about-text'>
                   Clean or dirty, countless people share it all on Urban Unblemished. Discuss areas of NYC that need help or even join in on a fun event -- sign up to be apart of the change.
                 </p>
-                <button>Sign Up</button>
+                <Button size="lg" color="success"><NavLink to='/sign-up' style={{
+                  textDecoration:'none',
+                  color:'black'
+                }}>Sign Up</NavLink></Button>
               </div>
               <div className="about-img" id='about-img-div'>
                 <img src='../../assets/MAIN_GRAPHIC.png' id='about-img' alt='icon' />

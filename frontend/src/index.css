@@ -25,7 +25,7 @@ nav a {
  
   /* automatically added by NavLink component */
   .active {
-	color: #69FFF1;
+	color: #0EB1D2;
 	font-weight: bold;
 	font-style: italic;
   }
@@ -111,22 +111,22 @@ nav a {
 	height:600px;
   }
 
-@media screen and (max-width: 400px) {
-	.card {
-		width: 100%;
-	}
-	.date,
-	.time {
-		text-align: center;
-	}
-	.time {
-		max-width: 60%;
-	}
+  /*SIGN UP*/
+#signup-form{
+	display: flex;
+	justify-content: center;
 }
 
-@media screen and (max-width: 300px) {
-	.date,
-	.time {
-		font-size: 0.8em;
-	}
-} 
+#signup-card{
+	width:350px;
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	background-color: black;
+	color: white;
+
+}
+
+#signup-row{
+
+}
