@@ -8,9 +8,10 @@ function UserFriendsCard(props) {
     <Card style={{ width: "18rem" }}>
       <Card.Body>
         <Card.Title className="card-name">{props.friend}</Card.Title>
+        <Card.Subtitle className="card-status">Safe status: {props.status}</Card.Subtitle>
         <Card.Text className="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          You're friends with {props.friend}. 
+          Is {props.friend} safe?: {props.status}
         </Card.Text>
         <Button
           onClick={props.onPing}

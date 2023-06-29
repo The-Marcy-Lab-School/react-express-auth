@@ -176,6 +176,12 @@ h1 {
   font-weight: 600;
 }
 
+.card-status {
+  font-size: 18px;
+  color: #aaa;
+  font-weight: 500;
+}
+
 .card {
   margin: 2%;
   display: flex;
