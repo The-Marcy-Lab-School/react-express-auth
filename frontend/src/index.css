@@ -47,7 +47,7 @@ main{
   margin: 10px;
   z-index: 98;
   opacity: 0.5;
-  background: #4c5159;
+  /* background: #4c5159; */
   color: #ffffff;
   font-size: 12px;
   font-weight: 800;
@@ -62,6 +62,15 @@ main{
   transition: box-shadow 0.15s ease-in-out; /* Add a transition effect */
 
 }
+
+.safe-button--safe {
+  background: red;
+} 
+
+.safe-button--unsafe {
+  background: green
+}
+
 .safe-button:hover {
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2); /* Apply the glowing effect */
   opacity: 0.8;

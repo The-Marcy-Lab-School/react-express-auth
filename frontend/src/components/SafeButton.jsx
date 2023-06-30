@@ -20,7 +20,7 @@ export default function SafeButton() {
   }
 
   return (
-    <button className='safe-button' onClick={clickHandler}>
+    <button className={`safe-button ${isSafe ? 'safe-button--safe' : 'safe-button--unsafe'}`} onClick={clickHandler}>
       Solace
     </button>
   );
