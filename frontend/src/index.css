@@ -4,6 +4,8 @@ body {
   font-family: Calibri, sans-serif;
   margin: 0;
   background-color: #E9ECEF;
+  position: relative;
+  min-height: 100vh;
 }
 
 input,
@@ -356,13 +358,17 @@ h4 {
 
 /* Footer */
 
+.content-container {
+  padding-bottom: 100px; /* Adjust this value based on the height of your footer */
+}
+
 .footer {
-  margin-top: auto;
-  /* Push the footer to the bottom */
   background-color: #f5f5f5;
   padding: 20px;
   text-align: center;
-  min-height: 13.5vh;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-ele {
@@ -975,6 +981,8 @@ font-weight:100;
   .doctorPictureFrame {
     height: 300px;
     width: 350px;
+    border: 1px solid #001A49;
+    border-radius: 20px;
   }
 
   .imgandspecialty {
@@ -984,8 +992,23 @@ font-weight:100;
     color: #001A49;
   }
 
+  .imgandspecialty_1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #001A49;
+    margin-top: 39px;
+  }
+  
+  .imgandspecialty_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #001A49;
+  }
+
   .name {
-    color:#001A49;
+    color:#001a49;
     font-weight: bolder;
     font-size: 3.5vh;
     margin-bottom: 0.75vh;
@@ -1012,6 +1035,18 @@ font-weight:100;
     font-weight: lighter;
     width: 46vh;
     margin-bottom: 2vh;
+  }
+
+  .staff-f {
+    color: #001a49;
+  }
+
+  .wait-t {
+    color: #001a49;
+  }
+
+  .quality-c {
+    color: #001a49;
   }
 
   .cats {
@@ -1308,14 +1343,24 @@ padding: 1vh;
   justify-content: center;
   height: 90vh; 
   width: 30vw;
+  
 }
 
 .comparison {
   text-decoration: underline;
+  text-align: center;
+  color: #001A49;
 }
+
+.star-stat {
+  text-align: center;
+  font-size: smaller;
+}
+
 
 .categories-criterion {
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid #001A49;
   padding: 5%;
+  border-radius: 10px;
 }

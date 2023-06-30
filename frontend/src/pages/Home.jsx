@@ -65,7 +65,7 @@ export default function DoctorsList() {
           </div>
         </div>
         <h4>
-          <NavLink to="/create-post" className="doctorLink">Can't Find a Doctor? Add One Here</NavLink>
+          <NavLink to="/create-post" className="doctorLink">Can't Find a Doctor or Facility? Add One Here</NavLink>
         </h4>
         <div className="test">
           {filteredObject.length > 0

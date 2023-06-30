@@ -10,6 +10,7 @@ export default function ComparePage() {
   const [doctorName, setDoctorName] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [secondDoctorCompare, setSecondDoctorCompare] = useState("");
+  
   const { doctors, filteredObject, setFilteredObject } =
     useContext(DoctorContext);
   const defaultObj = {
@@ -138,7 +139,7 @@ export default function ComparePage() {
   return (
     <>
       <div className="compare-page">
-        <div className="imgandspecialty">
+        <div className="imgandspecialty_1">
           <div className="doctorPictureFrame">
             <img
               src={individualDoctor.length > 0 ? individualDoctor[0].photo : ""}
@@ -166,9 +167,9 @@ export default function ComparePage() {
             </p>
           </div>
           <div className="categories-all">
-            <p>Staff Friendliness: {starFriendliness}</p>
-            <p>Wait Times: {starWait}</p>
-            <p>Quality of Care: {starCare}</p>
+            <p className="staff-f">Staff Friendliness: {starFriendliness}</p>
+            <p className="wait-t">Wait Times: {starWait}</p>
+            <p className="quality-c">Quality of Care: {starCare}</p>
           </div>
         </div>
         <div className="all-cats">
@@ -179,24 +180,24 @@ export default function ComparePage() {
           <div className="categories-criterion">
             <div className="staff-friend">
               <p className="comparison">Staff Friendliness</p>
-              <p>{starFriendliness} to {starFriendliness}</p>
+              <p className="star-stat">{starFriendliness} to {starFriendliness}</p>
             </div>
 
             <br />
             <div className="staff-friend">
               <p className="comparison">Wait Times</p>
-              <p>{starWait} to {starWait}</p>
+              <p className="star-stat">{starWait} to {starWait}</p>
             </div>
 
             <br />
             <div className="staff-friend">
               <p className="comparison">Quality of Care</p>
-              <p>{starCare} to {starCare}</p>
+              <p className="star-stat">{starCare} to {starCare}</p>
             </div>
           </div>
           <br />
         </div>
-        <div className="imgandspecialty">
+        <div className="imgandspecialty_2">
           <input
             // options={options}
             // setInputValue={setInputValue}
@@ -226,9 +227,9 @@ export default function ComparePage() {
             </p>
           </div>
           <div className="categories-all">
-            <p>Staff Friendliness: {starFriendliness}</p>
-            <p>Wait Times: {starWait}</p>
-            <p>Quality of Care: {starCare}</p>
+            <p className="staff-f">Staff Friendliness: {starFriendliness}</p>
+            <p className="wait-t">Wait Times: {starWait}</p>
+            <p className="quality-c">Quality of Care: {starCare}</p>
           </div>
         </div>
       </div>
