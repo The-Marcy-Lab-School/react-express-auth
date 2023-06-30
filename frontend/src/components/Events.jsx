@@ -128,81 +128,83 @@ function EventList() {
   const alertId = alertProp?.map((a) => a.id);
   console.log(alertProp);
   return (
-    <dl className="eventList">
-      {modal && (
-        <div className="modal">
-          <div className="modal-content">
-            <CommentModal data={singleEvent} closeButton={toggleModal} />
-          </div>
-        </div>
-      )}
-      <AlertList />
-      {events.map((event) => (
-        <React.Fragment key={event.id}>
-          <li>
-            <a href="#">
-              <div className="eventRow">
-                <div className="date">
-                  {event.geometry[0].date.slice(0, 16).replace("T", " ")}
-                </div>
-                {event.categories.map((category) => (
-                  <div className="eventType" key={category.id}>
-                    {category.title}
-                  </div>
-                ))}
-                <div className="eventTitle">{event.title}</div>
-                <div className="distance">
-                  {convertToMiles(
-                    userLocation.myLatitude,
-                    event.geometry[0].coordinates[0],
-                    userLocation.myLongitude,
-                    event.geometry[0].coordinates[1]
-                  )}
-                </div>
-                <button
-                  className="btn-modal"
-                  onClick={() => toggleModal(event)}
-                >
-                  COMMENT
-                </button>
-              </div>
-              {event.description && (
-                <dd>
-                  <em>{event.description}</em>
-                </dd>
-              )}
-            </a>
-          </li>
-        </React.Fragment>
-      ))}
-    </dl>
     <>
       <dl className="eventList">
-        {alertProp?.map((a) => (
-          <React.Fragment key={alertId}>
+        {modal && (
+          <div className="modal">
+            <div className="modal-content">
+              <CommentModal data={singleEvent} closeButton={toggleModal} />
+            </div>
+          </div>
+        )}
+        <AlertList />
+        {events.map((event) => (
+          <React.Fragment key={event.id}>
             <li>
               <a href="#">
                 <div className="eventRow">
-                  <div className="date">{a?.areaDesc.split(";")[0]}</div>
-                  <div className="eventType" >
-                    {a?.event}
+                  <div className="date">
+                    {event.geometry[0].date.slice(0, 16).replace("T", " ")}
                   </div>
-                  <div className="eventTitle">{a?.severity}</div>
+                  {event.categories.map((category) => (
+                    <div className="eventType" key={category.id}>
+                      {category.title}
+                    </div>
+                  ))}
+                  <div className="eventTitle">{event.title}</div>
                   <div className="distance">
                     {convertToMiles(
-                      latitude2,
-                      latitude1,
-                      longtitude2,
-                      longtitude1,
+                      userLocation.myLatitude,
+                      event.geometry[0].coordinates[0],
+                      userLocation.myLongitude,
+                      event.geometry[0].coordinates[1]
                     )}
                   </div>
+                  <button
+                    className="btn-modal"
+                    onClick={() => toggleModal(event)}
+                  >
+                    COMMENT
+                  </button>
                 </div>
-              <em>   Status: {a?.certainty}</em>
+                {event.description && (
+                  <dd>
+                    <em>{event.description}</em>
+                  </dd>
+                )}
               </a>
             </li>
           </React.Fragment>
         ))}
       </dl>
+      <>
+        <dl className="eventList">
+          {alertProp?.map((a) => (
+            <React.Fragment key={alertId}>
+              <li>
+                <a href="#">
+                  <div className="eventRow">
+                    <div className="date">{a?.areaDesc.split(";")[0]}</div>
+                    <div className="eventType" >
+                      {a?.event}
+                    </div>
+                    <div className="eventTitle">{a?.severity}</div>
+                    <div className="distance">
+                      {convertToMiles(
+                        latitude2,
+                        latitude1,
+                        longtitude2,
+                        longtitude1,
+                      )}
+                    </div>
+                  </div>
+                <em>   Status: {a?.certainty}</em>
+                </a>
+              </li>
+            </React.Fragment>
+          ))}
+        </dl>
+      </>
     </>
   );
 }
