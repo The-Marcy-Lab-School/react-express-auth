@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
+import logo from "../../frontpic/logo_black.png"
 
 
 export default function SiteHeadingAndNav() {
@@ -11,7 +12,7 @@ export default function SiteHeadingAndNav() {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <img src="./frontpic/logo-transparent-png.png" alt="Care Companion Logo" style={{ width: "125px", height: "9vh" }} />
+        <img src={logo} alt="Care Companion Logo" style={{ width: "125px", height: "9vh" }} />
       </div>
 
       <div className="navbar-end">

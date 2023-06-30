@@ -1,4 +1,4 @@
-import { useParams, useLocation, NavLink } from "react-router-dom";
+import { useParams, useLocation, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReviewModal from "../components/ReviewModal";
 import UserReview from "../components/UserReview";
@@ -6,8 +6,16 @@ import UserReview from "../components/UserReview";
 export default function DoctorReview() {
   let { id } = useParams();
   const [pageReviews, setPageReview] = useState([]);
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { page } = state;
+
+  
+  const handleDoctorId = () => {
+    const id = page.id;
+    navigate(`/doctor/compare/${id}`);
+  };
+
 
   useEffect(() => {
     const getReviews = async () => {
@@ -103,7 +111,7 @@ export default function DoctorReview() {
     indexOfLastReview
   );
 
-  // Define the paginate function
+  
   // Define the paginate function
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -182,6 +190,9 @@ export default function DoctorReview() {
               <p className="cats">Quality of Care: {starCare}</p>
             </div>
             <ReviewModal id={id} />
+            
+              <button className="reviewButton" onClick={handleDoctorId}>Compare</button>
+            
           </div>
         </div>
         <div className="reviewrow">

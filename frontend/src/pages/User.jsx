@@ -27,8 +27,7 @@ export default function UserPage() {
       const bookmark = await fetch(`/api/bookmark/${id}`);
       const response = await bookmark.json();
       setUserBookmark(response);
-      console.log(userBookmark);
-      console.log(response);
+
     };
     loadUser();
     bookmarks();
@@ -47,7 +46,7 @@ export default function UserPage() {
   const profileUsername = isCurrentUserProfile
     ? currentUser.username
     : userProfile.username;
-  console.log(userBookmark);
+
 
   return (
     <>

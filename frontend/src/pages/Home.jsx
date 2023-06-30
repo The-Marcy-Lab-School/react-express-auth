@@ -18,7 +18,6 @@ export default function DoctorsList() {
   const { doctors, filteredObject, setFilteredObject } =
     useContext(DoctorContext);
   const [searchValue, setSearchValue] = useState("");
-  const [userBookmark, setUserBookmark] = useState([]);
 
   const handleSearchValue = (e) => {
     setSearchValue(e.target.value);
