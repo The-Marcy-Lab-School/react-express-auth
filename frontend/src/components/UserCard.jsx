@@ -2,20 +2,22 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 function FriendsCard(props) {
-  const { isSafe } = props;
+  const { status } = props;
+  console.log(props, 'PROPS')
 
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
         <Card.Title className="card-name">{props.user}</Card.Title>
+        <Card.Subtitle className="card-status">Safe status: <span className='card-safe-status'>{status ? `SAFE` : `NOT SAFE`}</span></Card.Subtitle>
         <Card.Text className="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          You can add {props.user}. 
+          Is {props.user} safe?: <span className='user-status'>{status ? `YES` : `NO`}</span>
         </Card.Text>
         <Button
           onClick={props.onPing}
-          variant={isSafe ? "secondary" : "danger"}
-          disabled={!isSafe}
+          variant={status ? "secondary" : "danger"}
+          disabled={!status}
         >
           Ping
         </Button>
