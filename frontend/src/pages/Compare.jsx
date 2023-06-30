@@ -179,19 +179,19 @@ export default function ComparePage() {
           <div className="categories-criterion">
             <div className="staff-friend">
               <p className="comparison">Staff Friendliness</p>
-              <p>{starFriendliness} to </p>
+              <p>{starFriendliness} to {starFriendliness}</p>
             </div>
 
             <br />
             <div className="staff-friend">
               <p className="comparison">Wait Times</p>
-              <p>{starWait} to </p>
+              <p>{starWait} to {starWait}</p>
             </div>
 
             <br />
             <div className="staff-friend">
               <p className="comparison">Quality of Care</p>
-              <p>{starCare} to </p>
+              <p>{starCare} to {starCare}</p>
             </div>
           </div>
           <br />
@@ -226,9 +226,9 @@ export default function ComparePage() {
             </p>
           </div>
           <div className="categories-all">
-            <p>Staff Friendliness: 3</p>
-            <p>Wait Times: 2</p>
-            <p>Quality of Care: 1</p>
+            <p>Staff Friendliness: {starFriendliness}</p>
+            <p>Wait Times: {starWait}</p>
+            <p>Quality of Care: {starCare}</p>
           </div>
         </div>
       </div>
