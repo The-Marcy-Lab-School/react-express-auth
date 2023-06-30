@@ -126,9 +126,6 @@ export default function ComparePage() {
 
     // console.log("FILTERED", filteredDoctorList[0]);
   };
-<<<<<<< HEAD
-  console.log("seconddocstate", secondDoctorCompare);
-=======
   // console.log(secondDoctorCompare.photo)
   function compare(secondDoc){
     if(secondDoctorCompare){
@@ -137,7 +134,6 @@ export default function ComparePage() {
       return defaultObj[secondDoc]
   }
 
->>>>>>> kristen
 
   return (
     <>
@@ -209,30 +205,13 @@ export default function ComparePage() {
           />
           <div className="doctorPictureFrame">
             <img
-<<<<<<< HEAD
-              src={secondDoctorCompare.photo}
-=======
               src={compare("photo")}
->>>>>>> kristen
               alt="Doctor Picture"
               id="personImg"
             />
           </div>
           <div className="specifications">
             <h2 className="name">
-<<<<<<< HEAD
-            {secondDoctorCompare.name}
-            </h2>
-            <h4 className="location">
-            {secondDoctorCompare.address}
-            </h4>
-            <h3 className="specialty">
-            {secondDoctorCompare.specialty}
-              : Stars
-            </h3>
-            <p className="description">
-            {secondDoctorCompare.description}
-=======
               {compare("facility_doctor")}
             </h2>
             <h4 className="location">
@@ -244,7 +223,6 @@ export default function ComparePage() {
             </h3>
             <p className="description">
               {compare("description")}
->>>>>>> kristen
             </p>
           </div>
           <div className="categories-all">
