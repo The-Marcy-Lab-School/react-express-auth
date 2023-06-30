@@ -7,10 +7,9 @@ import '../index.css';
 
 export default function HomePage() {
   return <>
-          <div id='main-text-box' >
+          <div id='main-text-box'>
             <div id='about-area-div' style={{
               backgroundImage: `url(${image})`,
-              margin:'0'
           }}>
               <div id='about-text-div'>
                 <h1 id='about-header' className='animate__animated animate__slideInDown'>Be<br />
@@ -29,59 +28,71 @@ export default function HomePage() {
                 <img src='../../assets/MAIN_GRAPHIC.png' id='about-img' alt='icon' />
               </div>
             </div>
-            <div id="issue">
-              <h1 id='home-header'>What Brings Us Together? </h1>
-              <Card id="home-card" outline>
-                <CardBody>  
-                  <CardText>
-                    <p>
-                      Pollution and inadequate street maintenance negatively  impacts the community by creating an unsightly and unhygienic environment, inviting unwelcomed creatures into the environment and diminishing  the overall quality of life for residents and visitors alike. 
-                    </p>
-                  </CardText>
-                </CardBody>
-              </Card>
-            </div>
-            <div id="impacts">
-              <h1 id='home-header'>Where's the Harm?</h1>
-              <Card id="home-card">
-                <CardBody>
-                  <CardText>
-                  <div id="impacts-text">
-                    <h6>
-                      Littering can have a negative impact on the quality of life in New York City. Rats can cause a number of problems, including:
-                    </h6>
-                    <ul>
-                      <li>
+            <div id="divider-div" style={{
+              backgroundColor:'black',
+              height:'230px'
+            }}></div>
+            <div id="card-holder" style={{
+              margin:'15px'
+            }}>
+              <div id="issue">
+                <Card id="home-card" outline>
+                  <CardBody>  
+                <h1 id='home-header'>What Brings Us Together? </h1>
+                    <CardText>
+                      <p>
+                        Pollution and inadequate street maintenance negatively  impacts the community by creating an unsightly and unhygienic environment, inviting unwelcomed creatures into the environment and diminishing  the overall quality of life for residents and visitors alike. 
+                      </p>
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </div>
+              <div id="impacts">
+                <Card id="home-card">
+                  <CardBody>
+                <h1 id='home-header'>Where's the Harm?</h1>
+                    <CardText>
+                    <div id="impacts-text">
+                      <h6>
+                        Littering can have a negative impact on the quality of life in New York City. Rats can cause a number of problems, including:
+                      </h6>
+                      <ul>
+                        <li>
 
-                  Spreading disease: Rats can carry diseases such as rabies, leptospirosis, and salmonella. These diseases can be transmitted to humans through       contact with rat droppings, urine, or saliva.
-                      </li>
-                      <li>
-                  Contaminating food: Rats can contaminate food by chewing on it or urinating on it. This can make food unsafe to eat.
-                      </li>
-                      <li> 
-                  Damaging property: Rats can chew through wires, pipes, and other materials, which can cause damage to homes and businesses.
-                  Making people feel unsafe: Rats can make people feel unsafe, especially in areas where they are seen frequently. This can lead to people avoiding       certain areas or feeling nervous about being outside at night.
+                    Spreading disease: Rats can carry diseases such as rabies, leptospirosis, and salmonella. These diseases can be transmitted to humans through       contact with rat droppings, urine, or saliva.
                         </li>
-                    </ul>
-                  (ROS Team. “What You Should Know About New York City Rats Issue.“ RentOwnSell NY, https://www.nyrentownsell.com/blog/new-york-city-rat-issue/.      Accessed 26 May 2023.)
-                  </div>
-                  </CardText>
-                </CardBody>
-              </Card>
-            </div>
-            <div id="solution">
-              <h1 id='home-header'> The Solution</h1>
-              <Card id="home-card">
-                <CardBody>
-                  <CardText>
-                    <p>
-                    If users actively participate in keeping the streets clean through the Urban Unblemished app, this will cause a major shift in NYC pollution.  This collective action will create a sense of pride, ownership, and community spirit, fostering a cleaner and more vibrant NYC. The ultimate impact of Urban Unblemished's solution would be a cleaner, greener, and more livable NYC. Teamwork will enhance the overall quality of life for residents and visitors by improving the aesthetics, health, and sense of belonging in the community.
-                    </p>
-                  </CardText>
-                </CardBody>
-              </Card>
-            </div>
+                        <li>
+                    Contaminating food: Rats can contaminate food by chewing on it or urinating on it. This can make food unsafe to eat.
+                        </li>
+                        <li> 
+                    Damaging property: Rats can chew through wires, pipes, and other materials, which can cause damage to homes and businesses.
+                    Making people feel unsafe: Rats can make people feel unsafe, especially in areas where they are seen frequently. This can lead to people avoiding       certain areas or feeling nervous about being outside at night.
+                          </li>
+                      </ul>
+                    (ROS Team. “What You Should Know About New York City Rats Issue.“ RentOwnSell NY, https://www.nyrentownsell.com/blog/new-york-city-rat-issue/.      Accessed 26 May 2023.)
+                    </div>
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </div>
+              <div id="solution">
+                <Card id="home-card">
+                  <CardBody>
+                <h1 id='home-header'> The Solution</h1>
+                    <CardText>
+                      <p>
+                      If users actively participate in keeping the streets clean through the Urban Unblemished app, this will cause a major shift in NYC pollution.  This collective action will create a sense of pride, ownership, and community spirit, fostering a cleaner and more vibrant NYC. The ultimate impact of Urban Unblemished's solution would be a cleaner, greener, and more livable NYC. Teamwork will enhance the overall quality of life for residents and visitors by improving the aesthetics, health, and sense of belonging in the community.
+                      </p>
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </div>
+        </div>
       </div>
+      <div id="divider-div" style={{
+              backgroundColor:'black',
+              height:'230px'
+            }}></div>
       <div id="uu-how-to">
         <div id='wrapper'>
           <div id="graphics-header">

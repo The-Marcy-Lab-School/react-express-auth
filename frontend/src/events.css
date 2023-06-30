@@ -6,11 +6,13 @@
 #event-form-card{
     background-color: black;
     color: white;
+    width: 700px;
 }
 
-#card{
-    max-width: 320px;
+#home-card{
+    max-width: 520px;
 }
+ 
 body{
     vertical-align: middle;
 }

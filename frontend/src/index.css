@@ -30,16 +30,9 @@ nav a {
 	font-style: italic;
   }
   
-  #main-text-box{
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(4, 1fr);
-	justify-content: center;
-  }
-  
    #home-header {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 3rem;
+	font-size: 2.5rem;
 	display: flex;
 	justify-content: center;
   }
@@ -47,6 +40,7 @@ nav a {
 	display:block;
 	margin: auto;
   }
+
   #home-card {
 	max-width: 575px; 
 	height:auto;
@@ -58,13 +52,13 @@ nav a {
   
   #about-area-div {
 	  display: flex;
-	  margin-top: 10rem;
 	  justify-content: center;
   }
   
   #about-img{
 	height:550px;
 	width:550px;
+	margin: 30px;
   }
   
   #about-text-div{
@@ -75,22 +69,10 @@ nav a {
 	font-size: 1.6em;
   }
   
-  #be {
-	font-size: 4em;
-	margin: 0;
-  }
-  
   #about-header{
 	margin-top:5rem;
 	font-weight:700;
 	font-size: 5rem;
-  }
-  
-  #graphics-header{
-	width:900px;
-	display: flexbox;
-	justify-content: center;
-	align-items: center;
   }
   
   #graphics-div{
@@ -126,6 +108,8 @@ nav a {
 	color: white;
 }
 
-#event-form-card{
-	width: 700px;
+#card-holder{
+	display:flex;
+	justify-content: center;
+	align-items: center;
 }

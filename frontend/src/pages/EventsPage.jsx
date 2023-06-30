@@ -146,7 +146,7 @@ const handleDeleteEvent = (eventId) => {
       padding:'100px'
     }}>
       <h1 id="events-header">Events</h1>
-      <button id='make-event-btn' onClick={toggleFormVisibility} style={{margin:'40px'}}>Make Event</button>
+      <Button id='make-event-btn' onClick={toggleFormVisibility} style={{margin:'40px'}} outline color="success">Make Event</Button>
       {showForm && (
         <div id="event-form-div" style={{
           display:'flex',
@@ -262,7 +262,8 @@ const handleDeleteEvent = (eventId) => {
               <Col>
                 <Card id='card' key={event.event_id}
                 style={{
-                  maxWidth:'320px'
+                  maxWidth:'320px',
+                  margin:'30px'
                 }}
                 >
                     <CardImg id='card-img' src={ event.img_url } style={{
@@ -270,7 +271,12 @@ const handleDeleteEvent = (eventId) => {
                       maxWidth:'320px'
                     }}/>
                     <CardBody>
-                      <CardTitle id="card-title">{ event.header}</CardTitle>
+                      <CardTitle id="card-title" style={{
+                        fontWeight:'bolder',
+                        fontSize:'20px',
+                        display:'flex',
+                        justifyContent:'center'
+                      }}>{ event.header}</CardTitle>
                       <CardText>{event.description}</CardText>
                       <CardTitle>{event.date}</CardTitle>
                       <CardTitle>{event.time}</CardTitle>
@@ -278,9 +284,9 @@ const handleDeleteEvent = (eventId) => {
                     </CardBody>
                         <Button  size="lg" style={{
                           backgroundColor:'#63A46C',
-                          color:'black'
+                          color:'black', 
+                          margin:'12px'
                         }} onClick={ handleRSVPClick(event.event_id) }>RSVP</Button>
-                  <CardFooter id='footer'>16+ People are Going!</CardFooter>
                 </Card>
               </Col>
             </div>
