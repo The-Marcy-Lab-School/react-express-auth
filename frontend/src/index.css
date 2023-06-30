@@ -27,7 +27,7 @@ main{
 
 .map-section {
   display: flex;
-  width: 65%;
+  width: 60%;
   flex-direction: row;
 }
 
@@ -81,6 +81,7 @@ body {
 
 .eventList {
   height: calc(100vh - 72px);
+  width: auto;
   display: flex;
   flex-grow: 1;
   list-style: none;
@@ -449,28 +450,6 @@ nav ul {
 
 /* ================ Disaster Page Feed component style ============== */
 
-
-
-.hidden {
-  display: none;
-}
-.main-disaster{
-  width: 400px;
-  height: calc(100vh - 72px);
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: auto;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.main-disaster.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
 .popup {
   opacity: 0;
   visibility: hidden;
@@ -481,45 +460,105 @@ nav ul {
   opacity: 1;
   visibility: visible;
 }
+/*------------------------------------------------ disaster feed --------------------------------*/
 
+
+.main-disaster{
+  width: min-content;
+ 
+}
+
+.for-user {
+    text-transform: uppercase;
+    font-variant: small-caps;
+    font-size: 2rem;
+    letter-spacing: 0.07em;
+    font-weight: 400;
+    color: rgb(225, 225, 233);
+    text-decoration: none;
+    text-align: center;
+}
 .disasterList {
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
+  height: calc(100vh - 72px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.disasterList::-webkit-scrollbar {
+  width: 5px;
+  /* Width of the scrollbar */
+}
+
+.disasterList::-webkit-scrollbar-thumb {
+  background-color: #888;
+  /* Color of the scrollbar thumb */
+}
+
+.disasterList::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+  /* Color of the scrollbar thumb on hover */
 }
 .disasterList li {
+ 
   flex: 1;
-
+  flex-grow: 1;
+  margin-bottom: 10px;
+  padding: 0;
+  flex-direction: column;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
 }
 
 .disasterList li a {
-  display: block;
   padding: 10px;
-  border: 1px solid #333;
-  border-bottom: 1px #1c2026 solid;
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #d6d0d0;
   text-decoration: none;
 }
 
-.disasterList li a:hover {
-  background-color: #464141;
+.disasterHeadline {
+  text-align: center;
+}
+.serverity{
+  text-transform: uppercase;
+  font-variant: small-caps;
+  font-size: 1rem;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+  padding: 10px;
+  color: #d6d0d0;
+  text-align: center;
+  border-bottom: 1px solid
 }
 .disasterRow {
-  flex: 1;
   display: flex;
-  flex-direction: column;
   min-height: max-content;
   max-width: 960px;
   border-bottom: 1px solid #ccc;
   padding: 1rem;
+  align-items: center;
+  flex-direction: column;
+  border-top: 1px solid
+}
+.d{
+padding: 10px;
+color: #d6d0d0;
+font-weight: 600;
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid;
 }
 
 .disasterDate {
   font-weight: bold;
   margin-right: 1rem;
+  margin-top: 13px;
 }
 
 .disasterType {
@@ -539,7 +578,8 @@ nav ul {
   color: #ffffff;
   font-size: 24px;
   font-weight: 700;
-  margin-top: 21px;
+  margin-top: 8px;
+  text-align: center;
 }
 
 .disasterDd {
@@ -549,14 +589,13 @@ nav ul {
 .disasterDetails {
   background-color: #f2f2f2;
   padding: 1rem;
-  margin-top: 1rem;
 }
 
 .disasterLocation,
 .disasterTime,
 .disasterParticipants {
   margin-bottom: 0.5rem;
-  color: #666;
+  color: #f9f9f9;
 }
 /* ---------------- Profile Style ------------------------------------- */
 .profile-page {

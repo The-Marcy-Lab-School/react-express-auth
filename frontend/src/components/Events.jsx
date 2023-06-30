@@ -32,29 +32,38 @@ function EventList() {
 
   const fetchProcessed = async () => {
     const data = await apiFetchHandler('/api/events');
+    console.log("API ME DATA", data);
     setAlert(data[0]);
     updateAlertData(data[0]);
   };
 
   const latitude = events[0]?.geometry[0]?.coordinates[0];
   const longitude = events[0]?.geometry[0]?.coordinates[1];
+  const alertLatitude = alert[0]?.eventCoordinates[0][1];
+  const alertLongitude = alert[0]?.eventCoordinates[0][0];
+  // const coordinates = alert[0].eventCoordinates[0];
 
   const fetchLayers = () => {
-    fetch(`https://api.weather.gov/alerts?point=${userLocation?.myLatitude},${userLocation?.myLongitude}`)
+    fetch(`https://api.weather.gov/alerts?point=${alertLatitude},${alertLongitude}`)
       .then((response) => response?.json())
       .then((data) => {
         setUserAlert(data);
         updateUserAlertData(data);
+        console.log("coor:", data.features[0].properties);
       })
       .catch((error) => console.log(error));
   };
+  useEffect(() => {
+    if (alertLatitude && alertLongitude) {
+      fetchLayers();
+    }
+  }, [alertLatitude, alertLongitude]);
 
   useEffect(() => {
     fetchEvents();
     fetchProcessed();
     updateEventData();
     updateUserAlertData();
-    fetchLayers();
   }, []);
 
   const latitude2 = 80;
@@ -72,9 +81,53 @@ function EventList() {
     return math >= 4.5 ? `${Math.ceil(math)} miles` : `${Math.floor(math)} miles`;
   };
   const eventId = events.map((event) => event.id);
-
+  const alertProp = userAlert.features?.map((alerts) => alerts.properties);
+  const alertId = alertProp?.map((a) => a.id);
+  console.log(alertProp);
   return (
     <>
+      <dl className="eventList">
+        {alertProp?.map((a) => (
+          <React.Fragment key={alertId}>
+            <li>
+              <a href="#">
+                <div className="eventRow">
+                  <div className="date">{a?.areaDesc.split(";")[0]}</div>
+                  <div className="eventType" >
+                    {a?.event}
+                  </div>
+                  <div className="eventTitle">{a?.severity}</div>
+                  <div className="distance">
+                    {convertToMiles(
+                      latitude2,
+                      latitude1,
+                      longtitude2,
+                      longtitude1,
+                    )}
+                  </div>
+                </div>
+              <em>   Status: {a?.certainty}</em>
+              </a>
+            </li>
+          </React.Fragment>
+        ))}
+      </dl>
+    </>
+  );
+}
+
+function Event() {
+  return (
+    <>
+      <EventList />
+    </>
+  );
+}
+
+export default Event;
+
+/*
+ <>
       <dl className="eventList">
         {events.map((event) => (
           <React.Fragment key={event.id}>
@@ -109,14 +162,4 @@ function EventList() {
       </dl>
     </>
   );
-}
-
-function Event() {
-  return (
-    <>
-      <EventList />
-    </>
-  );
-}
-
-export default Event;
+  */
