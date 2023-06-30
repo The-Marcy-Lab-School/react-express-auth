@@ -100,7 +100,8 @@ export default function HomePage() {
               How Urban Unblemished Works
             </h1>
             <p id='header-text'>
-            Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            Join today and make change tomorrow. <br />
+            Meet New Yorkers looking for a greener day!
             </p>
           </div>
         </div>
@@ -109,11 +110,6 @@ export default function HomePage() {
             <img id="graphic" src="../../assets/JOIN_NOW_ICON.png"/>
             <h1 id='how-to-header'>Join Now</h1>
             <p>Create an account today and begin making history.</p>
-          </div>
-          <div>
-          <img id="graphic" src="../../assets/DISCUSS_ICON.png"/>
-            <h1 id='how-to-header'>Discuss</h1>
-            <p>Chat online with other members about the next plans of action.</p>
           </div>
           <div>
           <img id="graphic" src="../../assets/MAKE_EVENTS_ICON.png"/>
