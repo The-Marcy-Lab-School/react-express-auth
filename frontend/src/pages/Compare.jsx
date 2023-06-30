@@ -10,10 +10,20 @@ export default function ComparePage() {
   const [doctorName, setDoctorName] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [secondDoctorCompare, setSecondDoctorCompare] = useState("");
-
   const { doctors, filteredObject, setFilteredObject } =
     useContext(DoctorContext);
-  console.log(doctors);
+  const defaultObj = {
+    address: "N/A",
+    description: "N/A",
+    facility_doctor: "N/A",
+    id: "N/A",
+    is_doctor: "N/A",
+    is_facility: "N/A",
+    photo:
+      "https://worldrefiningassociation.com/wp-content/uploads/placeholder-speaker-l-2.jpg",
+    specialty: "N/A",
+    user_id: "N/A",
+  };
 
   useEffect(() => {
     const getIndividualDoctor = async () => {
@@ -30,16 +40,6 @@ export default function ComparePage() {
     getIndividualDoctor();
     getReviews();
   }, []);
-
-  // useEffect(() => {
-  //   const getSearchDoctor = async () => {
-  //     if (!inputValue) return;
-  //     const response = await fetch(`/api/pages/search/?query=${inputValue}`);
-  //     const data = await response.json();
-  //     setIndividualDoctor(data);
-  //   };
-  //   getSearchDoctor();
-  // }, [inputValue]);
 
   const ratings = doctorReview.map((review) => review.rating);
   const averageRating =
@@ -126,7 +126,18 @@ export default function ComparePage() {
 
     // console.log("FILTERED", filteredDoctorList[0]);
   };
+<<<<<<< HEAD
   console.log("seconddocstate", secondDoctorCompare);
+=======
+  // console.log(secondDoctorCompare.photo)
+  function compare(secondDoc){
+    if(secondDoctorCompare){
+      return secondDoctorCompare[secondDoc]
+    }
+      return defaultObj[secondDoc]
+  }
+
+>>>>>>> kristen
 
   return (
     <>
@@ -198,13 +209,18 @@ export default function ComparePage() {
           />
           <div className="doctorPictureFrame">
             <img
+<<<<<<< HEAD
               src={secondDoctorCompare.photo}
+=======
+              src={compare("photo")}
+>>>>>>> kristen
               alt="Doctor Picture"
               id="personImg"
             />
           </div>
           <div className="specifications">
             <h2 className="name">
+<<<<<<< HEAD
             {secondDoctorCompare.name}
             </h2>
             <h4 className="location">
@@ -216,6 +232,19 @@ export default function ComparePage() {
             </h3>
             <p className="description">
             {secondDoctorCompare.description}
+=======
+              {compare("facility_doctor")}
+            </h2>
+            <h4 className="location">
+              {compare("address")}
+            </h4>
+            <h3 className="specialty">
+              {compare("specialty")}
+              : {starRating}
+            </h3>
+            <p className="description">
+              {compare("description")}
+>>>>>>> kristen
             </p>
           </div>
           <div className="categories-all">
