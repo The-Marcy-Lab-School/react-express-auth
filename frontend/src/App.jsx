@@ -40,6 +40,7 @@ export default function App() {
             <Route path="/users" element={<UsersPage />} />
             <Route path="/users/:id" element={<UserPage />} />
             <Route path="/doctor/:id" element={<DoctorReview />} />
+            <Route path="/doctor/compare/:id" element={<ComparePage />}/>
             <Route path="/compare" element={<ComparePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

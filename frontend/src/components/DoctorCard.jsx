@@ -13,7 +13,7 @@ function DoctorCard({ page, reviews, users }) {
   const navigate = useNavigate();
   const user = currentUser;
 
-  var handleDoctorId = () => {
+  const handleDoctorId = () => {
     const id = page.id;
     navigate(`/doctor/${id}`, { state: { page, reviews, users } });
   };

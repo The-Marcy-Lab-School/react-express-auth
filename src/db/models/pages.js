@@ -32,9 +32,30 @@ class Pages {
   }
 
   static async find(id) {
-    const query = "SELECT * FROM pages WHERE id = ?";
-    const { rows } = await knex.raw(query, [id]);
-    return page ? new Pages(page) : null;
+    try {
+      console.log("yooooo", id);
+      const query = "SELECT * FROM pages WHERE id = ?";
+      const { rows } = await knex.raw(query, [id]);
+      return rows;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  static async search(inputQuery) {
+    try {
+      const query = `SELECT pages.*
+      FROM pages
+      WHERE
+        pages.facility_doctor ILIKE '%' || ? || '%' OR
+        pages.specialty ILIKE '%' || ? || '%'`;
+      const { rows } = await knex.raw(query, [inputQuery, inputQuery]);
+      return rows;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   }
 
   static async findByPageFacility(facility_doctor) {
@@ -70,7 +91,7 @@ class Pages {
         address,
         is_facility,
         is_doctor,
-        photo
+        photo,
       ]);
       return new Pages(page);
     } catch (err) {
