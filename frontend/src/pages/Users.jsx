@@ -21,10 +21,12 @@ export default function UsersPage() {
     async function getData() {
       const urlFetch = await fetch("/api/friends");
       const res = await urlFetch.json();
+      console.log(res, "RES")
       setFriends(res);
     }
     getData();
   }, []);
+
 
   const findUserIdByName = (username) => {
     const user = users.find((user) => user.username === username);
@@ -101,10 +103,12 @@ export default function UsersPage() {
           <h1 className="list-title">Friends</h1>
           <div>
             {friends.map((friend) => {
+              console.log(friend.isSafe, 'SAFE!')
               return (
                 <UserFriendsCard
                   key={friend.id}
                   friend={friend.username}
+                  status={friend.isSafe}
                   onPing={() => handlePing(friend.username)}
                   onClick={() => handleRemoveFriend(friend.username)}
                 />
@@ -122,11 +126,11 @@ export default function UsersPage() {
           <h1 className="list-title">Users</h1>
           <div>
             {users.map((user) => {
-
               return (
                 <FriendsCard
                   key={user.id}
                   user={user.username}
+                  status={user.isSafe}
                   onPing={() => handlePing(user.username)}
                   onClick={() => handleAddFriend(user.username)}
                 />

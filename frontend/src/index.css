@@ -176,9 +176,25 @@ h1 {
   font-weight: 600;
 }
 
+.card-status {
+  font-size: 18px;
+  color: #aaa;
+  font-weight: 500;
+}
+
 .card {
   margin: 2%;
   display: flex;
+}
+
+.user-status {
+  color: #fff;
+  font-weight: 700;
+}
+
+.card-safe-status {
+  color: #fff;
+  font-weight: 800;
 }
 
 .friends-list, .users-list {

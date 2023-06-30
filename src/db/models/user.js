@@ -13,7 +13,7 @@ class User {
   }
 
   static async list() {
-    const query = 'SELECT * FROM users';
+    const query = 'SELECT * FROM users ORDER BY is_safe ASC';
     const { rows } = await knex.raw(query);
     return rows.map((user) => new User(user));
   }
@@ -41,6 +41,8 @@ class User {
     const { rows: [user] } = await knex.raw(query, [isSafe, userId]);
     return user ? new User(user) : null;
   }
+
+  
 
   static async create(username, password, { myLatitude, myLongitude }/*, isSafe*/) {
     const passwordHash = await hashPassword(password);
