@@ -2,7 +2,7 @@ const knex = require('../knex');
 const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 
 class User {
-  #passwordHash = null;
+  #passwordHash = null; // a private property
 
   constructor({ id, username, password_hash }) {
     this.id = id;

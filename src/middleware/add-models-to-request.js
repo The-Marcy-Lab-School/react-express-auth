@@ -1,10 +1,10 @@
 const User = require('../db/models/user');
 
-const addModels = (req, res, next) => {
+const addModelsToRequest = (req, res, next) => {
   req.db = {
     User,
   };
   next();
 };
 
-module.exports = addModels;
+module.exports = addModelsToRequest;
