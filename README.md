@@ -102,6 +102,8 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
 
 # Understanding the Code
 
+![](/readme-img/full-stack-diagram.svg)
+
 ## Backend API
 
 The provided backend exposes the following API endpoints defined in `src/routes.js`:
