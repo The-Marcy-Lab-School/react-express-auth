@@ -55,12 +55,6 @@ If your project involves using specific data sources or APIs, mention them and e
 *Example:* This application will utilize the WeatherAPI API to retrieve live weather data based on the user's current location. We will use the WebLocation API to get the user's current location.
 ___
 
-### 😰 Potential Challenges and Mitigation: 
-Address potential challenges you might encounter during the development process and outline your plans to overcome them.
-
-*Example:* We anticipate that incorporating the ChatGPT API to be challenging. To overcome this challenge, we will consult the ChatGPT documentation and utilize tutorials to implement the feature.
-___
-
 ### 🤝 Team and Responsibilities (if applicable): 
 If you are working in a team, specify the roles and responsibilities of each team member and how you will collaborate throughout the project.
 
