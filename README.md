@@ -102,7 +102,7 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
 
 # Understanding the Code
 
-![](/readme-img/full-stack-diagram.svg)
+![](/documentation/readme-img/full-stack-diagram.svg)
 
 ## Backend API
 
@@ -187,7 +187,7 @@ In our application, we are using cookies to store the `userId` of the currently 
 
 The flow of cookie data looks like this:
 
-![](readme-img/cookies-session-userid-diagram.svg)
+![](/documentation/readme-img/cookies-session-userid-diagram.svg)
 
 1. When a request comes in for signup/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
 2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
@@ -212,7 +212,7 @@ The reason this route is used instead of `GET /api/users/:id` is two fold.
 
 ## Do not trust the front end
 
-Remember, **DO NOT TRUST THE FRONTEND**. Validate everything on the server. Just because you block a form in the GUI doesn't mean a nefarious actor couldn't just pop open a console and make a `fetch` request. Also, the frontend can be buggy and mistakes can happen.
+Remember, **DO NOT TRUST THE FRONTEND**. Validate everything on the server. Just because you write logic to prevent a form from submitting on the frontend doesn't mean a nefarious actor couldn't just pop open a console and make a `fetch` request there. Also, the frontend can be buggy and mistakes can happen.
 
 ## Be wary of errors
 
