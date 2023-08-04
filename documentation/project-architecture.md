@@ -25,10 +25,6 @@ This is the project architecture for a simple todo app. The app will have a fron
 * Task Model: A `Task` model will define the structure of a `task` and the methods to interact with the PostgreSQL database.
 * PostgreSQL Connection: The back-end will establish a connection to the PostgreSQL database using Knex to perform CRUD (Create, Read, Update, Delete) operations on tasks.
 
-### Database Design (PostgreSQL):
-* Users Table: The database will have a table to store users. Each user row will include a user id (PK), username, and hashed password
-* Tasks Table: The database will have a table to store todo tasks. Each task row will include a task id (PK), user id (FK), task title, task description, completion status, and timestamp
-
 ### Interaction Flow:
 * When a user opens the app, the front-end will load and send an API request to fetch all tasks from the back-end. 
     * The back-end will retrieve the tasks from the database and return them as a response to the front-end.
