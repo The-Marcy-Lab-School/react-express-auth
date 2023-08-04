@@ -1,6 +1,8 @@
-### 📱 Product Overview
+### 🏙️ Mission Statement
 Clearly state the purpose and objectives of the project in a straightforward manner. Avoid unnecessary jargon or technical language that might confuse readers.
 * Keep it concise (1-3 sentences)
+
+*Example:* At Prints For A Purpose, our mission is to connect individuals in need of assistive devices with a compassionate global community of skilled builders. Using 3D printing technology, we can create affordable solutions that enhance independence and transform lives.
 ___
 
 ### 🚀 Problem Statement
@@ -9,6 +11,8 @@ Clearly define the problem or challenge your project aims to address. Explain wh
 * Who the application's audience is
 * What the application does for the user
 * Why the user would use the application
+
+*Example:* Our application would mainly serve individuals with disability or mobility issues under financial or physical constraints. A priority would be those who live in underprivileged communities, conflict-affected areas, or communities with limited healthcare infrastructure. Our product will leverage the power of technology and community collaboration to make assistive devices more accessible and affordable to those in need. This is done by connecting individuals to a network of builders who facilitate the creation and distribution of affordable, 3D-printed devices.
 ___
 
 
