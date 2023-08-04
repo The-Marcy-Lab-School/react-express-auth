@@ -6,8 +6,13 @@ Provide an overview of how the different components of your project will interac
 This is the project architecture for a simple todo app. The app will have a front-end implemented using React, a back-end using Node.js with Express, and a database using PostgreSQL. Here’s how the components will interact and work together:
 
 ### Front-End Components (React):
-* **User Interface (UI)**: The front-end will consist of various components like a task list, input form for adding tasks, buttons for completing or deleting tasks, etc.
-* **State Management**: React components will manage the state of the application, including the list of tasks, their completion status, and any user input.
+* **User Interface (UI)**: The front-end will consist of the following components:
+   *  A task list
+   *  An input form for adding tasks
+   *  Each task will display the task title and description and have buttons for completing or deleting tasks
+* **State Management**:
+   * The task list component will manage the state of the list of tasks. Each task will be an object with the tasks id, title, description, and completion status
+   * The input form will manage the user input
 * **Communication with Back-End**: The front-end will make API calls to the back-end to retrieve tasks, add new tasks, mark tasks as completed, or delete tasks.
 
 ### Back-End Components (Node.js with Express):
@@ -16,9 +21,9 @@ This is the project architecture for a simple todo app. The app will have a fron
     * `POST /tasks`
     * `PATCH /tasks/:taskID`
     * `DELETE /tasks/:taskID`
-* Task Controller: A controller module will process incoming API requests, interact with the database, and send appropriate responses back to the front-end.
-* Task Model: A data model will define the structure of a task and the methods to interact with the PostgreSQL database.
-PostgreSQL Connection: The back-end will establish a connection to the PostgreSQL database using Knex to perform CRUD (Create, Read, Update, Delete) operations on tasks.
+* Task Controller: A `taskControllers` module will process incoming API requests, interact with the database, and send appropriate responses back to the front-end.
+* Task Model: A `Task` model will define the structure of a `task` and the methods to interact with the PostgreSQL database.
+* PostgreSQL Connection: The back-end will establish a connection to the PostgreSQL database using Knex to perform CRUD (Create, Read, Update, Delete) operations on tasks.
 
 ### Database Design (PostgreSQL):
 * Users Table: The database will have a table to store users. Each user row will include a user id (PK), username, and hashed password
