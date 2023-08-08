@@ -11,17 +11,10 @@ ___
 
 
 ### 📝 Features & User Stories
-* Describes all the features and their purpose.
-* For each feature, outline the user flow.
-* Identify features required for a MVP
-
-
-Example: 
-
-* **User Profile Page (MVP)**: Users can sign into the application to see their home page. The home page will display all of their blog posts and settings for updating their profile.
-* **Other User Profile Page (MVP)**: Users can see a directory of all users in the application. Clicking on their name will take the user to view the profile of that user.
-* **Live Chat (MVP)**: Users can start a chat with another user. This chat will have live updates and all messages will be saved.
-* **Chatbot (Stretch)**: Users can navigate to the `/chat` page to interact with a chatbot powered by ChatGPT.
+* **Craete Post**: The user could create a post for food/water, clothes, and shelter.
+* **View all Posts**: The user would be able to see all post made by other users.
+* **Delete a Post**: The user could delete any post they had made.
+* **Sort a Posts**: The user could sort posts by food/water, clothes, and shelter.
 
 ___
 
@@ -44,7 +37,7 @@ ___
 ### 💽 Data Sources (if applicable): 
 If your project involves using specific data sources or APIs, mention them and explain how you plan to integrate them into your project.
 
-*Example:* This application will utilize the WeatherAPI API to retrieve live weather data based on the user's current location. We will use the WebLocation API to get the user's current location.
+*Example:* This application will utilize the an Upload API to upload a post with a picture as a preview.
 ___
 
 ### 🤝 Team and Responsibilities (if applicable): 
