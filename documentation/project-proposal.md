@@ -28,19 +28,17 @@ ___
 
 ### 📚 Tech Stack: 
 Clearly state the technologies, frameworks, and tools you intend to use for the front-end and back-end development.
+We Intend on Using React, for Front-End Development, While using Node.js and express for Back-End Development. We also intend on using TailWind for Styling, while using PostgreSQL for our DataBase. 
 
 *Example:* We intend on using React for the front end, Node.js and Express for the backend, and PostgreSQL for the database. We will also incorporate Socket.io to implement the live chat feature and ChatGPT to implement the chatbot feature.
 
 ___
 
 ### 🗓️ Milestones and Timeline: 
-Break down the project into smaller milestones and outline a timeline for achieving them. Which features will you prioritize and by when will you complete them? Remember, you will have 5 weeks to complete this project. The first week will be spent planning and the remaining 4 will be spent building.
 
-*Example:* 
-* By June 5: the MVP will be complete. Users will be able to post blogs and see them appear on their profile
-* By June 15: the chat feature will be complete. Users will be able to chat with other users.
-* By June 25: the chatbot powered by ChatGPT will be complete.
-* By June 31: the final CSS styling will be applied.
+By Augest 11: The Project Proposal, Wireframe, and Project ERD Will be complete.
+By Augest 12: The MVP Features, Deployment of Project will be Completed, while Program Architecture Document will be updated.
+by Augest 25: ...
 ___
 
 ### 💽 Data Sources (if applicable): 
