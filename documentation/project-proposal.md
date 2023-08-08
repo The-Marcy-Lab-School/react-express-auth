@@ -1,8 +1,5 @@
 ### 🏙️ Mission Statement
-Clearly state the purpose and objectives of the project in a straightforward manner. Avoid unnecessary jargon or technical language that might confuse readers.
-* Keep it concise (1-3 sentences)
-
-*Example:* At Prints For A Purpose, our mission is to connect individuals in need of assistive devices with a compassionate global community of skilled builders. Using 3D printing technology, we can create affordable solutions that enhance independence and transform lives.
+At BloomCare, our mission is to empower individuals in need by providing easy access to essential resources such as clothing, food, and shelter. Through our application, we aim to bridge the gap between those requiring assistance and the resources that can uplift their lives, fostering a stronger, more connected community.
 ___
 
 ### 🚀 Problem Statement
