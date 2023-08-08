@@ -40,15 +40,13 @@ ___
 ___
 
 ### 💽 Data Sources (if applicable): 
-If your project involves using specific data sources or APIs, mention them and explain how you plan to integrate them into your project.
-
-*Example:* This application will utilize the an Upload API to upload a post with a picture as a preview.
+We will be using the UploadCare API to help with storing photos that users has uploaded to the applications.
 ___
 
 ### 🤝 Team and Responsibilities (if applicable): 
 If you are working in a team, specify the roles and responsibilities of each team member and how you will collaborate throughout the project.
 
-*Example:* The team working on this project will consist of Ben Spector and Reuben Ogbonna. We will collaborate using Github Project boards to manage our tasks, Slack for communication, and Github to manage changes to the codebase. Reuben will primarily focus on building the blog feature while Ben will focus on building the live chat feature.
+*Example:* The team working on this project will consist of Luis Rivera and Ivon Herrera. We will collaborate using Github Project boards to manage our tasks, Slack/discord/tandem/iMessage for communication, and Github to manage changes to the codebase.
 
 ___
 
