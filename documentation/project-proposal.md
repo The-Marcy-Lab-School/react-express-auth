@@ -11,10 +11,15 @@ ___
 
 
 ### 📝 Features & User Stories
-* **Craete Post**: The user could create a post for food/water, clothes, and shelter.
+* **Create Post**: The user could create a post for food/water, clothes, and shelter.
 * **View all Posts**: The user would be able to see all post made by other users.
 * **Delete a Post**: The user could delete any post they had made.
 * **Sort a Posts**: The user could sort posts by food/water, clothes, and shelter.
+* **Create An Event**: The user could create an Event.
+* **Join Even**: A User can Join an Event.
+* **View Events**: Users can View all Events made.
+* **Delete An Event**: A User can Delete an Event they have created.
+* **Updating Events**: A User can Update an Event they have Created. 
 
 ___
 
