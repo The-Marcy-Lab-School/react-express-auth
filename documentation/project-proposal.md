@@ -38,7 +38,7 @@ ___
 
 * **By Augest 11**: The Project Proposal, Wireframe, and Project ERD Will be complete.
 * **By Augest 12**: The MVP Features, Deployment of Project will be Completed, while Program Architecture Document will be updated.
-by Augest 25: ...
+* **By Augest 25**: ...
 ___
 
 ### 💽 Data Sources (if applicable): 
