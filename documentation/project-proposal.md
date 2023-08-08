@@ -4,12 +4,9 @@ ___
 
 ### 🚀 Problem Statement
 
-Clearly define the problem or challenge your project aims to address. Explain why this problem is important and how your project will provide a solution.
-* Who the application's audience is
-* What the application does for the user
-* Why the user would use the application
 
-*Example:* Our application would mainly serve individuals with disability or mobility issues under financial or physical constraints. A priority would be those who live in underprivileged communities, conflict-affected areas, or communities with limited healthcare infrastructure. Our product will leverage the power of technology and community collaboration to make assistive devices more accessible and affordable to those in need. This is done by connecting individuals to a network of builders who facilitate the creation and distribution of affordable, 3D-printed devices.
+Our application is tailored to serve families with lower income, offering them a lifeline to essential resources that can alleviate their day-to-day struggles. BloomCare delivers a comprehensive suite of resources, catering to the specific needs of our users. From clothing and food assistance to access to shelter options, our application stands as a reliable partner in times of need. By utilizing BloomCare, users gain access to crucial guidance and resources without any financial burden. Our application empowers individuals to improve their circumstances, offering valuable assistance at no cost."
+
 ___
 
 
