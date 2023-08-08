@@ -44,10 +44,20 @@ We will be using the UploadCare API to help with storing photos that users has u
 ___
 
 ### 🤝 Team and Responsibilities (if applicable): 
-If you are working in a team, specify the roles and responsibilities of each team member and how you will collaborate throughout the project.
 
 *Example:* The team working on this project will consist of Luis Rivera and Ivon Herrera. We will collaborate using Github Project boards to manage our tasks, Slack/discord/tandem/iMessage for communication, and Github to manage changes to the codebase.
 
+Ivon- 
+* create a post for food/water, shelter, clothes
+* delete a post
+* create an event (stretch)
+
+Luis- 
+* user will be able to see all post
+* create a sort post by food/water, shelter, clothes
+* upload pfp (stretch)
+Ivon+Luis-
+* work on direct messages (stretch)
 ___
 
 ### 📓 References and Citations: 
