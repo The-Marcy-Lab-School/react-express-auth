@@ -56,6 +56,7 @@ Luis-
 * user will be able to see all post
 * create a sort post by food/water, shelter, clothes
 * upload pfp (stretch)
+
 Ivon+Luis-
 * work on direct messages (stretch)
 ___
