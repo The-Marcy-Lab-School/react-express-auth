@@ -5,7 +5,7 @@ ___
 ### 🚀 Problem Statement
 
 
-Our application is tailored to serve families with lower income, offering them a lifeline to essential resources that can alleviate their day-to-day struggles. BloomCare delivers a comprehensive suite of resources, catering to the specific needs of our users. From clothing and food assistance to access to shelter options, our application stands as a reliable partner in times of need. By utilizing BloomCare, users gain access to crucial guidance and resources without any financial burden. Our application empowers individuals to improve their circumstances, offering valuable assistance at no cost."
+Our application is tailored to serve families with lower income, offering them a lifeline to essential resources that can alleviate their day-to-day struggles. BloomCare delivers a comprehensive suite of resources, catering to the specific needs of our users. From clothing and food assistance to access to shelter options, our application stands as a reliable partner in times of need. BloomCare Also Provides an enviroment for those who wish to Give Back to their community by providing any resources that may help someone and might not have a use for.By utilizing BloomCare, users gain access to crucial guidance and resources without any financial burden. Our application empowers individuals to improve their circumstances, offering valuable assistance at no cost.
 
 ___
 
