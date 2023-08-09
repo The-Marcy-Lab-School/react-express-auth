@@ -5,7 +5,7 @@ ___
 ### 🚀 Problem Statement
 
 
-Our application is tailored to serve families with lower income, offering them a lifeline to essential resources that can alleviate their day-to-day struggles. BloomCare delivers a comprehensive suite of resources, catering to the specific needs of our users. From clothing and food assistance to access to shelter options, our application stands as a reliable partner in times of need. BloomCare Also Provides an enviroment for those who wish to Give Back to their community by providing any resources that may help someone and might not have a use for.By utilizing BloomCare, users gain access to crucial guidance and resources without any financial burden. Our application empowers individuals to improve their circumstances, offering valuable assistance at no cost.
+Our application is tailored to serve families with lower income, offering them a lifeline to essential resources that can alleviate their day-to-day struggles. BloomCare delivers a comprehensive suite of resources, catering to the specific needs of our users. From clothing and food assistance to access to shelter options, our application stands as a reliable partner in times of need. BloomCare Also Provides an enviroment for those who wish to Give Back to their community, by providing any resources that may help someone and might not have a use for.By utilizing BloomCare, users gain access to crucial guidance and resources without any financial burden. Our application empowers individuals to improve their circumstances, offering valuable assistance at no cost.
 
 ___
 
@@ -15,11 +15,11 @@ ___
 * **View all Posts**: The user would be able to see all post made by other users.
 * **Delete a Post**: The user could delete any post they had made.
 * **Sort a Posts**: The user could sort posts by food/water, clothes, and shelter.
-* **Create An Event**: The user could create an Event.
-* **Join Even**: A User can Join an Event.
-* **View Events**: Users can View all Events made.
-* **Delete An Event**: A User can Delete an Event they have created.
-* **Updating Events**: A User can Update an Event they have Created. 
+* **Create An Event(stretch)**: The user could create an Event.
+* **Join Even(stretch)**: A User can Join an Event.
+* **View Events(stretch)**: Users can View all Events made.
+* **Delete An Event(stretch)**: A User can Delete an Event they have created.
+* **Updating Events(stretch)**: A User can Update an Event they have Created. 
 
 ___
 
