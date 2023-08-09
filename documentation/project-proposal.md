@@ -11,10 +11,10 @@ ___
 
 
 ### 📝 Features & User Stories
-* **Create Post**: The user could create a post for food/water, clothes, and shelter.
-* **View all Posts**: The user would be able to see all post made by other users.
-* **Delete a Post**: The user could delete any post they had made.
-* **Sort a Posts**: The user could sort posts by food/water, clothes, and shelter.
+* **Create Post(MVP)**: The user could create a post for food/water, clothes, and shelter.
+* **View all Posts(MVP)**: The user would be able to see all post made by other users.
+* **Delete a Post(MVP)**: The user could delete any post they had made.
+* **Sort a Posts(MVP)**: The user could sort posts by food/water, clothes, and shelter.
 * **Create An Event(stretch)**: The user could create an Event.
 * **Join Even(stretch)**: A User can Join an Event.
 * **View Events(stretch)**: Users can View all Events made.
