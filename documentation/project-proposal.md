@@ -14,10 +14,10 @@ ___
 * **Create Post(MVP)**: The user could create a post for food/water, clothes, and shelter.
 * **View all Posts(MVP)**: The user would be able to see all post made by other users.
 * **Delete a Post(MVP)**: The user could delete any post they had made.
-* **Sort a Posts(MVP)**: The user could sort posts by food/water, clothes, and shelter.
+* **Sort Posts(MVP)**: The user could sort posts by food/water, clothes, and shelter.
 * **marked as Claimed(stretch)**: A User can Update a post they have Created to be "Claimed".
 * **Create An Event(stretch)**: A User is allowed to Host A Custom Event, These Events are Voluntary.
-* **Join Even(stretch)**: A User can Join an Event.
+* **Join Event(stretch)**: A User can Join an Event.
 * **View Events(stretch)**: Users can View all Events made.
 * **Delete An Event(stretch)**: A User can Delete an Event they have created.
 * **Updating Events(stretch)**: A User can Update an Event they have Created.
