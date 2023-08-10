@@ -1,81 +1,39 @@
-# Mission Statement
-My mission is to create an intuitive concert platform that seamlessly connects music enthusiasts with their favorite artists and bands. By offering a user-friendly experience and comprehensive features, our application aims to revolutionize the way concert-goers discover, engage, and immerse themselves in live music events.
+# Project Architecture: 
 
-## Problem Statement
-The lack of a centralized platform for concert information and fan engagement has hindered the live music experience. Our project addresses this issue by providing a user-centric application that empowers users to effortlessly explore upcoming concerts, interact with fellow fans, and purchase tickets. This is crucial as music lovers seek a unified space to enhance their concert-going journey.
+Provide an overview of how the different components of your project will interact and work together. This includes database design, APIs, and front-end components.
 
-## Features & User Stories
+## Example: 
+This is the project architecture for a simple todo app. The app will have a front-end implemented using React, a back-end using Node.js with Express, and a database using PostgreSQL. Here's how the components will interact and work together:
 
-**User Registration and Authentication:**
-- As a user, I want to effortlessly register and log in to access concert information.
+### Front-End Components (React):
+* **User Interface (UI)**: The front-end will consist of the following components:
+   *  A task list
+   *  An input form for adding tasks
+   *  Each task will display the task title and description and have buttons for completing or deleting tasks
+* **State Management**:
+   * The task list component will manage the state of the list of tasks. Each task will be an object with the tasks id, title, description, and completion status
+   * The input form will manage the user input
+* **Communication with Back-End**: The front-end will make API calls to the back-end to retrieve tasks, add new tasks, mark tasks as completed, or delete tasks.
 
-**Concert Listings:**
-- As a user, I want to explore a list of upcoming concerts with essential details.
+### Back-End Components (Node.js with Express):
+* **API Endpoints**: The back-end will expose several API endpoints to handle different actions such as fetching all tasks, adding a new task, updating a task's status, and deleting a task. These include:
+    * `GET /tasks`
+    * `POST /tasks`
+    * `PATCH /tasks/:taskID`
+    * `DELETE /tasks/:taskID`
+* Task Controller: A `taskControllers` module will process incoming API requests, interact with the database, and send appropriate responses back to the front-end.
+* Task Model: A `Task` model will define the structure of a `task` and the methods to interact with the PostgreSQL database.
+* PostgreSQL Connection: The back-end will establish a connection to the PostgreSQL database using Knex to perform CRUD (Create, Read, Update, Delete) operations on tasks.
 
-**Fan Community:**
-- As a user, I want to engage in a vibrant fan community to discuss and share excitement about concerts.
+### Interaction Flow:
+* When a user opens the app, the front-end will load and send an API request to fetch all tasks from the back-end. 
+    * The back-end will retrieve the tasks from the database and return them as a response to the front-end.
+    * The front-end will display the tasks on the UI.
+* When a user adds a new task, the front-end will send a request to the back-end's API endpoint to create a new task in the database.
+    * The back-end will receive the request, ensuring that the required data is provided (user id, task title, task description). The back-end will generate the task id and timestamp and set the completion to `false`. It will then create the new task and store it in the database. The new task will be sent to the front-end as a response.
+    * The front-end will update the UI based on the responses from the back-end.
+* When a user marks a task as completed or deletes a task, the front-end will send requests to the respective back-end API endpoints to update or remove the task from the database.
+    * The back-end will receive these requests, ensuring that the required data is provided (user id, task id). The back-end will perform the appropriate action and send back a success/fail message in response.
+    * The front-end will update the UI based on the responses from the back-end.
 
-**Ticket Purchase:**
-- As a user, I want to buy tickets seamlessly for my preferred concerts.
-
-**User Profiles:**
-- As a user, I want to create a profile showcasing my favorite artists and attended concerts.
-
-**Artist/Band Profiles:**
-- As a user, I want to delve into detailed profiles of artists/bands, including bios and social media links.
-
-**Notifications:**
-- As a user, I want to receive notifications about concert updates and discussions.
-
-**Social Sharing:**
-- As a user, I want to effortlessly share concert details with friends on social media.
-
-**Interactive Maps:**
-- As a user, I want to access interactive maps to locate venues and nearby attractions.
-
-**MVP Features:**
-- User Registration and Authentication
-- User Profiles
-- Concert Listings
-- Fan Community
-- Ticket Purchase
-
-**Stretch Features:**
-- Artist/Band Profiles
-- Notifications
-- Social Sharing
-- Interactive Maps
-
-## Tech Stack
-- Front-end: React with Redux for state management
-- Back-end: Node.js and Express, MongoDB for the database (TBD)
-- Payment Gateway: Stripe for secure transactions (TBD)
-- Interactive Maps: Google Maps API
-- Authentication: JWT (JSON Web Tokens) (TBD)
-
-## Milestones and Timeline
-1. Project Planning and Setup (1 week)
-2. User Authentication and Registration (1 week)
-3. Concert Listings and Fan Community (1 week)
-4. Ticket Purchase and Stripe Integration (1 week)
-5. User Profiles and Artist/Band Profiles (1 week)
-6. Notifications and Social Sharing (1 week)
-7. Interactive Maps and Final Testing (1 week)
-8. Some of these can be combined into the same week
-
-## Data Sources/APIs
-- Concert details: External API for concert information
-- Artist/band profiles: Custom database entries
-- Interactive maps: Google Maps API for venue locations
-
-## Team and Responsibilities
-- Jackie: Front-end development, UI/UX design
-- Jackie: Back-end development, database management
-- Jackie: Payment gateway integration, testing
-- Jackie: Project management, documentation
-
-Regular team meetings and version control with Jackie ensure efficient collaboration.
-
-## References and Citations
-- Bandsintown and Songkick for concert platform inspiration (TBD)
-- Research on user engagement in fan communities
+Please note that this is a simplified architecture for a basic todo app. In real-world projects, you might consider adding authentication, validation, error handling, and other features to enhance security and usability. Additionally, for larger projects, you may use additional technologies like Redux for state management or implement more complex database schemas and relationships.
