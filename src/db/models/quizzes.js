@@ -29,17 +29,34 @@ class Quizzes {
     }
   }
 
+
   static async create(topic) {
+    console.log("topics:" + topic);
     try {
-      const query = `INSERT INTO quizzes (topic)
-        VALUES (?) RETURNING *`;
-      const { rows: [quizzes] } = await knex.raw(query, [topic]);
-      return new Quizzes(quizzes);
-    } catch(error) {
-      console.log(error);
-      return null;
+        const query = `
+            INSERT INTO quizzes (topic)
+            VALUES (?) RETURNING *
+        `;
+        const [quizzes] = await knex.raw(query, [topic]);
+        return new Quizzes(quizzes);
+    } catch (error) {
+        console.log(error);
+        return null;
     }
-  }
+}
+
+  // static async create(topic) {
+  //   console.log("topics:" + topic)
+  //   try {
+  //     const query = `INSERT INTO quizzes (topic)
+  //       VALUES (?) RETURNING *`;
+  //     const { rows: [quizzes] } = await knex.raw(query, [topic]);
+  //     return new Quizzes(quizzes);
+  //   } catch(error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  // }
   static async deleteAll() {
     try {
       return knex('quizzes').del();
