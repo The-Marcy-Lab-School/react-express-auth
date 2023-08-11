@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = (knex) => {
-    return knex.schema.createTable('quiz_topic', (table) => {
+    return knex.schema.createTable('quizzes', (table) => {
       table.increments();
       table.string('topic_name').notNullable();
       table.timestamps(true, true);
@@ -15,6 +15,6 @@ exports.up = (knex) => {
    * @returns { Promise<void> }
    */
   exports.down = (knex) => {
-    return knex.schema.dropTable('quiz_topic');
+    return knex.schema.dropTable('quizzes');
   };
   

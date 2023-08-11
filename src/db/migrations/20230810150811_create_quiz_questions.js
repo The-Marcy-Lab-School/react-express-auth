@@ -11,7 +11,7 @@ exports.up = (knex) => {
         table.string('wrong_answer_2').notNullable();   
         table.string('wrong_answer_3').notNullable();
         table.integer('quiz_id').notNullable();
-        table.foreign('quiz_id').references('id').inTable('quiz_topic');
+        table.foreign('quiz_id').references('id').inTable('quizzes');
         table.timestamps(true, true);
     })
 };
