@@ -46,6 +46,7 @@ class QuizAttempts {
   // }
 
   static async create(user_id, quiz_id, percentage, score_count) {
+    console.log("question attemt" + user_id, quiz_id, percentage, score_count)
     try {
       const query = `
         INSERT INTO quiz_attempts (user_id, quiz_id, percentage, score_count)
