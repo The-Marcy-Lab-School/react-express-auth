@@ -66,6 +66,8 @@ class Quizzes {
     }
   }  
 
+  
 }
+
 
 module.exports = Quizzes;
