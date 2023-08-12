@@ -8,7 +8,7 @@ const createQuizAttempts = async (req, res) => {
     // TODO: check if username is taken, what should you return?
     const attempts= await QuizAttempts.create(userId, quiz_id, percentage, score_count);
     // session.userId = user.id;
-    console.log("quiz attempts" + attempts)
+    console.log("user Id " + userId)
     res.send(attempts);
   };
   

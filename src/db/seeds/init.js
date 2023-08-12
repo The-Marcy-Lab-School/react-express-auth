@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Quizzes = require('../models/quizzes')
 const QuizAttempts = require('../models/questions_attempts')
+const QuizQuestions = require('../models/')
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -18,6 +19,12 @@ exports.seed = async (knex) => {
 };
 
 exports.seed = async (knex) => {
-  await QuizAttempts.create(7, 7, 7, 7);
+  await QuizAttempts.create(1,1, 1, 1);
+  // await QuizAttempts.create('jijinwowow');
+};
+
+
+exports.seed = async (knex) => {
+  await QuizAttempts.create(1,1, 1, 1);
   // await QuizAttempts.create('jijinwowow');
 };

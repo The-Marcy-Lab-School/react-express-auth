@@ -32,15 +32,31 @@ class QuizAttempts {
     }
   }
 
+  // static async create(user_id, quiz_id, percentage, score_count) {
+  //   console.log(user_id, quiz_id, percentage, score_count)
+  //   try {
+  //     const query = `INSERT INTO quiz_attempts (user_id, quiz_id, percentage, score_count)
+  //                    VALUES (?, ?, ?, ?) RETURNING *`;
+  //     const [quiz_attempts] = await knex.raw(query, [user_id, quiz_id, percentage,score_count]);
+  //     return new QuizAttempts(quiz_attempts); // Corrected instance creation
+  //   } catch (error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  // }
+
   static async create(user_id, quiz_id, percentage, score_count) {
-    console.log("testing create" + user_id )
     try {
-      const query = `INSERT INTO quiz_attempts (user_id, quiz_id, percentage, score_count)
-                     VALUES (?, ?, ?, ?) RETURNING *`;
-      const [quiz_attempts] = await knex.raw(query, [user_id, quiz_id, percentage,score_count]);
-      return new QuizAttempts(quiz_attempts); // Corrected instance creation
+      const query = `
+        INSERT INTO quiz_attempts (user_id, quiz_id, percentage, score_count)
+        VALUES (?, ?, ?, ?)
+        RETURNING *`;
+      
+      const [quiz_attempt] = await knex.raw(query, [user_id, quiz_id, percentage, score_count]);
+      console.Console.log("quiz array" + quiz_attempt)
+      return quiz_attempt; // Return the inserted row
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return null;
     }
   }
@@ -56,10 +72,10 @@ class QuizAttempts {
 }
 
 //YOU CAN RUN THIS AND PASS THINGS INTO IT TEST WHATS GONNA BE DISPLAYED IN THE TERMINAL AND IN YOUR TABLEPLUS
-const test = async () => {
-  const attempt = await QuizAttempts.create(1, 2, 3, 4); // Corrected method call
-  console.log(attempt);
-};
-test();
+// const test = async () => {
+//   const attempt = await QuizAttempts.create(1, 2, 3, 4); // Corrected method call
+//   console.log(attempt);
+// };
+// test();
 
 module.exports = QuizAttempts;
