@@ -22,7 +22,7 @@ exports.seed = async (knex) => {
 
 exports.seed = async (knex) => {
   await QuizQuestions.create('uyowow','T','YU','FG','GH',1);
-  await QuizQuestions.create('testing quiz','T','YU','FG','GH',1);
+  await QuizQuestions.create('What is one in spanish','Uno','Dos','Cinco','Bien',1);
   //await Quizzes.create('jijinwowow');
 };
 
