@@ -50,6 +50,7 @@ class QuizQuestions {
     }
   }
   static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id) {
+    console.log("quzzes" + question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
     try {
       const query = `
         INSERT INTO quiz_questions (question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
