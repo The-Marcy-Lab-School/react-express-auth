@@ -10,23 +10,30 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 
+import Use from './pages/Test'
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
-  return <>
+  return (
+    <>
     <SiteHeadingAndNav />
-    <main>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/users' element={<UsersPage />} />
-        <Route path='/users/:id' element={<UserPage />} />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
-    </main>
-  </>;
+    <Use/>
+    </>
+  )
+  // return <>
+  //   <SiteHeadingAndNav />
+  //   <main>
+  //     <Routes>
+  //       <Route path='/' element={<Home />} />
+  //       <Route path='/login' element={<LoginPage />} />
+  //       <Route path='/sign-up' element={<SignUpPage />} />
+  //       <Route path='/users' element={<UsersPage />} />
+  //       <Route path='/users/:id' element={<UserPage />} />
+  //       <Route path='*' element={<NotFoundPage />} />
+  //     </Routes>
+  //   </main>
+  // </>;
 }

@@ -13,6 +13,7 @@ class User {
   static async list() {
     const query = 'SELECT * FROM users';
     const { rows } = await knex.raw(query);
+    console.log("rows users" + rows.map((user) => new User(user)))
     return rows.map((user) => new User(user));
   }
 
