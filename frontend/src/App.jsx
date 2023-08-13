@@ -11,12 +11,14 @@ import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import QuizLessonPage from './pages/QuizLesson';
 
+import Use from './pages/Test'
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
+<<<<<<< HEAD
   return(
     <>
       <QuizLessonPage/>    
@@ -25,6 +27,14 @@ export default function App() {
     </>
   );
 
+=======
+  return (
+    <>
+    <SiteHeadingAndNav />
+    <Use/>
+    </>
+  )
+>>>>>>> duojay
   // return <>
   //   <SiteHeadingAndNav />
   //   <main>

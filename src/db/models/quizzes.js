@@ -11,6 +11,7 @@ class Quizzes {
     try {
       const query = 'SELECT * FROM quizzes';
       const { rows } = await knex.raw(query);
+      console.log("model list quiz" + rows.map((quizzes) => new Quizzes(quizzes)))
       return rows.map((quizzes) => new Quizzes(quizzes));
     } catch(error) {
       console.log(error);
@@ -18,6 +19,12 @@ class Quizzes {
     }
   }
 
+
+  // static async list() {
+  //   const query = 'SELECT * FROM users';
+  //   const { rows } = await knex.raw(query);
+  //   return rows.map((user) => new User(user));
+  // }
   static async find(id) {
     try {
       const query = 'SELECT * FROM quizzes WHERE id = ?';

@@ -12,6 +12,7 @@ export const getAllUsers = async () => {
   return users || [];
 };
 
+
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const updateUsername = async ({ id, username }) => (

@@ -19,7 +19,7 @@ Router.get('/me', userController.showMe);
 
 //routes for quiizes
 Router.post('/quiz', quizController.create)
-Router.get('/quizzes', quizController.list)
+Router.get('/q', quizController.list)
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.

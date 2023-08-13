@@ -21,11 +21,11 @@ exports.seed = async (knex) => {
 
 
 exports.seed = async (knex) => {
-  await QuizQuestions.create('wowow','T','YU','FG','GH',1);
+  await QuizQuestions.create('uyowow','T','YU','FG','GH',1);
   //await Quizzes.create('jijinwowow');
 };
 
-exports.seed = async (knex) => {
-  await QuizAttempts.create(1,1,1,1);
-  // await Quizzes.create('jijinwowow');
-};
+// exports.seed = async (knex) => {
+//   await QuizAttempts.create(1,1,1,1);
+//   // await Quizzes.create('jijinwowow');
+// };

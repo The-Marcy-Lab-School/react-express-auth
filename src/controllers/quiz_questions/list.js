@@ -4,7 +4,7 @@ const listQuiz = async (req, res) => {
     } = req; 
   
     const quizzes = await Quizzes.list();
-    console.log(quizzes)
+    console.log("quiz list" + quizzes)
     res.send(quizzes);
   };
   
