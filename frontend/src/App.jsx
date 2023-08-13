@@ -9,6 +9,7 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import QuizLessonPage from './pages/QuizLesson';
 
 import Use from './pages/Test'
 export default function App() {
@@ -20,7 +21,8 @@ export default function App() {
   return (
     <>
     <SiteHeadingAndNav />
-    <Use/>
+    {/* <Use/> */}
+    <QuizLessonPage/>
     </>
   )
   // return <>

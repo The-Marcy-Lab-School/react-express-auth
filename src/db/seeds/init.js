@@ -21,7 +21,8 @@ exports.seed = async (knex) => {
 
 
 exports.seed = async (knex) => {
-  await QuizQuestions.create('stace','T','YU','FG','GH',1);
+  await QuizQuestions.create('uyowow','T','YU','FG','GH',1);
+  await QuizQuestions.create('testing quiz','T','YU','FG','GH',1);
   //await Quizzes.create('jijinwowow');
 };
 
