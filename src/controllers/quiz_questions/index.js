@@ -9,8 +9,8 @@ const create = require('./create');
 // const showMe = require('./show-me');
 
 module.exports = {
-//   list,
-  create,
+  list,
+  create
   // show,
   // update,
 

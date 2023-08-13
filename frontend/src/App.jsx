@@ -18,23 +18,13 @@ export default function App() {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
-<<<<<<< HEAD
-  return(
-    <>
-      <QuizLessonPage/>    
-    
-    
-    </>
-  );
-
-=======
   return (
     <>
     <SiteHeadingAndNav />
-    <Use/>
+    {/* <Use/> */}
+    <QuizLessonPage/>
     </>
   )
->>>>>>> duojay
   // return <>
   //   <SiteHeadingAndNav />
   //   <main>
