@@ -13,9 +13,11 @@ class QuizQuestions {
   }
 
   static async list() {
+    console.log("question list")
     try {
       const query = 'SELECT * FROM quiz_questions';
       const { rows } = await knex.raw(query);
+      console.log("rows from list" + rows)
       return rows.map((quiz_questions) => new QuizQuestions(quiz_questions));
     } catch(error) {
       console.log(error);
@@ -78,7 +80,7 @@ class QuizQuestions {
 }
 
 // const test = async () => {
-//   const postObj = await QuizQuestions.create('dog.png',"ds","dsds","dsds","Dsds",1)
+//   const postObj = await QuizQuestions.list()
 //   console.log(postObj)
 // }
 // test()

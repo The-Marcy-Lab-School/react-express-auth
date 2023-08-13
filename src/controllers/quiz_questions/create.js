@@ -9,8 +9,8 @@ const createQuestion = async (req, res) => {
     // TODO: check if username is taken, what should you return?
     const questions = await QuizQuestions.create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id);
     // session.userId = user.id;
-    console.log("quiz questionr" + question)
-    res.send(questions);
+    console.log("quiz questionr" + questions)
+    //res.send(questions);
   };
   
   module.exports = createQuestion;
