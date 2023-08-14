@@ -53,6 +53,13 @@ console.log("useNmae" + username)
   isValidPassword = async (password) => (
     isValidPassword(password, this.#passwordHash)
   );
+
+  
 }
 
+// const test = async () => {
+//   const postObj = await User.list()
+//   console.log(postObj)
+// }
+// test()
 module.exports = User;

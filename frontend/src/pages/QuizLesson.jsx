@@ -158,18 +158,21 @@ import React, { useEffect, useState } from 'react';
 function UserList() {
   const [users, setUsers] = useState([]);
 
+  const [questions, setQuestions] = useState([]); // Use appropriate state variable name
+
+
   useEffect(() => {
-    fetch('api/questions') // Ensure this points to the correct API endpoint
+    // Fetch data from the API and set it in the state
+    fetch('api/questions')
       .then(response => response.json())
       .then(data => {
-        console.log("lesson data", data);
-        setUsers(data);
+        console.log("question data", data);
+        setQuestions(data); // Use setQuestions to update the state
       })
       .catch(error => console.error(error));
   }, []);
   
-  console.log("users", users); // Use a comma to separate the string and the variable
-  
+  console.log("questions", questions); // Use a comma to separate the string and the variable  
 
   return (
     <div>
