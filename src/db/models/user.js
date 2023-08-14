@@ -38,7 +38,7 @@ class User {
   }
 
   static async deleteAll() {
-    return knex.raw('TRUNCATE users;');
+    return knex.raw('TRUNCATE users CASCADE;');
   }
 
   update = async (username) => { // dynamic queries are easier if you add more properties
