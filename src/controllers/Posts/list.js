@@ -1,15 +1,15 @@
-const createPost = async (req, res) => {
+const list = async (req, res) => {
     const {
       session, // this req.session property is put here by the handleCookieSessions middleware
       db: { Post }, // this req.db.User property is put here by the addModelsToRequest middleware
-      body: { Description, img_url, Owner_id, Address, Category }, // this req.body property is put here by the client
+      body: { username, password }, // this req.body property is put here by the client
     } = req;
   
     // TODO: check if username is taken, what should you return?
-    const post = await Post.create(Description, img_url, Owner_id, Address, Category);
+    const post = await Post.list(username, password);
     // session.userId = post.id;
   
     res.send(post);
   };
   
-  module.exports = createPost;
+  module.exports = list;
