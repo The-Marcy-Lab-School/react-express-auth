@@ -2,17 +2,17 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = (knex) => knex.schema.createTable('Posts', (table) =>{
+exports.up = (knex) => knex.schema.createTable('posts', (table) =>{
     table.increments('id').primary();
-    table.string('Description').notNullable();
+    table.string('description').notNullable();
     table.string('img_url').notNullable();
-    table.integer('Owner_id').references('id').inTable('users');
-    table.string('Address').notNullable();
-    table.string('Category').notNullable()
+    table.integer('owner_id').references('id').inTable('users');
+    table.string('address').notNullable();
+    table.string('category').notNullable()
 });
 
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = (knex) => knex.schema.dropTable('Posts');
+exports.down = (knex) => knex.schema.dropTable('posts');
