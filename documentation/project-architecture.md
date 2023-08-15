@@ -13,7 +13,6 @@ This is the project architecture for a simple todo app. The app will have a fron
 * **State Management**:
    * The task list component will manage the state of the list of tasks. Each task will be an object with the tasks id, title, description, and completion status
    * The input form will manage the user input
-* **Communication with Back-End**: The front-end will make API calls to the back-end to retrieve tasks, add new tasks, mark tasks as completed, or delete tasks.
 
 ### Back-End Components (Node.js with Express):
 * **API Endpoints**: The back-end will expose several API endpoints to handle different actions such as fetching all tasks, adding a new task, updating a task's status, and deleting a task. These include:
@@ -21,9 +20,6 @@ This is the project architecture for a simple todo app. The app will have a fron
     * `POST /tasks`
     * `PATCH /tasks/:taskID`
     * `DELETE /tasks/:taskID`
-* Task Controller: A `taskControllers` module will process incoming API requests, interact with the database, and send appropriate responses back to the front-end.
-* Task Model: A `Task` model will define the structure of a `task` and the methods to interact with the PostgreSQL database.
-* PostgreSQL Connection: The back-end will establish a connection to the PostgreSQL database using Knex to perform CRUD (Create, Read, Update, Delete) operations on tasks.
 
 ### Interaction Flow:
 * When a user opens the app, the front-end will load and send an API request to fetch all tasks from the back-end. 
