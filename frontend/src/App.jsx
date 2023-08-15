@@ -10,9 +10,8 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import QuizLessonPage from './pages/QuizLesson';
-
 import Use from './pages/Test'
-import QuizTestPage from './pages/QuizTestPage';
+// import QuizTestPage from './pages/QuizTestPage';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function App() {
     <>
     <SiteHeadingAndNav />
     {/* <Use/> */}
-    <QuizTestPage/>
+    <Use/>
     </>
   )
   // return <>
