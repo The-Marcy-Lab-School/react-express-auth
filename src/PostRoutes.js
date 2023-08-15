@@ -6,9 +6,10 @@ const checkAuthentication = require('./middleware/check-authentication');
 const PostRouter = express.Router();
 PostRouter.use(addModelsToRequest);
 
-PostRouter.post("./createPost", PostsController.create) 
-PostRouter.get("./listPost", PostsController.list)
-PostRouter.delete("./deletePost", PostsController.deletePost)
+PostRouter.post("/createPost", PostsController.create) 
+PostRouter.get("/listPost", PostsController.list)
+PostRouter.delete("/deletePost/:id", PostsController.deletePost)
+PostRouter.get("/listPost/:id", PostsController.show)
 
 
 module.exports = PostRouter;
