@@ -4,6 +4,7 @@ const handleCookieSessions = require('./middleware/handle-cookie-sessions');
 const router = require('./router');
 const logRoutes = require('./middleware/log-routes');
 const PostRouter = require('./PostRoutes')
+const LikesRouter = require('./LikesRoutes')
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(express.static(path.join(__dirname, '..', 'public'))); // Serve static a
 
 app.use('/api', router);
 app.use('/api', PostRouter);
-
+app.use('/api', LikesRouter)
 // Requests meant for the API will be sent along to the router.
 // For all other requests, send back the index.html file in the public folder.
 app.get('*', (req, res, next) => {
