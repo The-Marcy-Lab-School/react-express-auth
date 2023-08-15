@@ -1,6 +1,6 @@
 const createPost = async (req, res) => {
     const {
-      session, // this req.session property is put here by the handleCookieSessions middleware
+      // session, // this req.session property is put here by the handleCookieSessions middleware
       db: { Post }, // this req.db.User property is put here by the addModelsToRequest middleware
       body: { Description, img_url, Owner_id, Address, Category }, // this req.body property is put here by the client
     } = req;
