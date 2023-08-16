@@ -12,37 +12,30 @@ class QuizQuestions {
     this.quiz_id = quiz_id;
   }
 
-
-
-
-  static async find(id) {
+  static async list() {
     try {
-      const query = 'SELECT * FROM quiz_questions WHERE id = ?';
-      const { rows: [quiz_questions] } = await knex.raw(query, [id]);
-      return quiz_questions ? new QuizQuestions(quiz_questions) : null;
+      const query = 'SELECT * FROM quiz_questions';
+      const { rows } = await knex.raw(query);
+      return rows.map((quiz_questions) => new QuizQuestions(quiz_questions));
     } catch(error) {
       console.log(error);
       return null;
     }
   }
 
-  // static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id) {
-  //   try {
-  //     const query = `
-  //       INSERT INTO quiz_questions (question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
-  //       VALUES (?, ?, ?, ?, ?, ?)
-  //       RETURNING *
-  //     `;
-  
-  //     const [quiz_questions] = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
-  //     return new QuizQuestions(quiz_questions);
-  //   } catch(error) {
-  //     console.log(error);
-  //     return null;
-  //   }
-  // }
+  static async find(id) {
+    try {
+      const query = 'SELECT * FROM quiz_questions WHERE id = ?';
+      const { rows: [quiz_question] } = await knex.raw(query, [id]);
+      return quiz_question ? new QuizQuestions(quiz_question) : null;
+    } catch(error) {
+      console.log(error);
+      return null;
+    }
+  }
+
   static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id) {
-    console.log("quzzes" + question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
+    console.log("quzzes", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
     try {
       const query = `
         INSERT INTO quiz_questions (question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
@@ -50,7 +43,7 @@ class QuizQuestions {
         RETURNING *
       `;
   
-      const { rows: [quiz_questions]} = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
+      const [quiz_questions] = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
       return new QuizQuestions(quiz_questions);
     } catch(error) {
       console.log(error);
@@ -83,20 +76,10 @@ class QuizQuestions {
 
 }
 
-const test = async () => {
-  const postObj = await QuizQuestions.list()
-  console.log("list" + postObj)
-}
-test()
+// const test = async () => {
+//   const postObj = await QuizQuestions.create('dog.png',"ds","dsds","dsds","Dsds",1)
+//   console.log(postObj)
+// }
+// test()
 
 module.exports = QuizQuestions;
-
-
-/*
-Duojay makes change on duojay branch
-duojay makes PR
-merge duojay into main
-staceyann pulls into main
-staceyann merges main into staceyann branch
-
-*/

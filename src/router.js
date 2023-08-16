@@ -5,7 +5,11 @@ const checkAuthentication = require('./middleware/check-authentication');
 
 //responsilbe for calling on the quiz  controller
 const quizController = require('./controllers/quizzes')
-const questionsController = require('./controllers/quiz_questions')
+const questionController = require('./controllers/questions')
+
+
+
+
 
 const Router = express.Router();
 Router.use(addModelsToRequest);
@@ -22,8 +26,9 @@ Router.get('/me', userController.showMe);
 Router.post('/quiz', quizController.create)
 Router.get('/q', quizController.list)
 
+Router.get('/questions', questionController.list)
 ///qiestion routes
-Router.get('/questions', questionsController.list)
+//Router.get('/questions', questionsController.list);
 
 
 // These actions require authentication (only valid logged in users can do these things)
