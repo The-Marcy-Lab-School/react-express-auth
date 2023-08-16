@@ -53,7 +53,7 @@ class QuizAttempts {
         VALUES (?, ?, ?, ?)
         RETURNING *`;
       
-      const [quiz_attempt] = await knex.raw(query, [user_id, quiz_id, percentage, score_count]);
+      const {rows: [quiz_attempt]} = await knex.raw(query, [user_id, quiz_id, percentage, score_count]);
       console.Console.log("quiz array" + quiz_attempt)
       return quiz_attempt; // Return the inserted row
     } catch (error) {
