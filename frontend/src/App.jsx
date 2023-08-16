@@ -9,7 +9,10 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
-import QuizLessonPage from './pages/QuizLesson';
+import QuizTestPage from './pages/QuizTestPage';
+import SelectedlanguagePage from './pages/SelectedlanguagePage';
+
+
 
 import Use from './pages/Test'
 export default function App() {
@@ -20,9 +23,10 @@ export default function App() {
 
   return (
     <>
-    <SiteHeadingAndNav />
+    {/* <SiteHeadingAndNav /> */}
     {/* <Use/> */}
-    <QuizLessonPage/>
+    {/* <SelectedlanguagePage/> */}
+    <QuizTestPage/>
     </>
   )
   // return <>

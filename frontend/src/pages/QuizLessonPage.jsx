@@ -1,6 +1,10 @@
 export default function QuizLessonPage() {
-    return <>
-      <h1>Quiz Lesson Page</h1>
-      <p>Put something interesting here!</p>
-    </>;
+    return (
+      <div className="centered-container">
+        <h1>Spanish Lessons</h1>
+        <button className="lesson-button">Spanish Lesson 1</button>
+        <button className="lesson-button">Spanish Lesson 2</button>
+      </div>
+    );
   }
+  

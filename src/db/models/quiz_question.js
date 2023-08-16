@@ -50,7 +50,7 @@ class QuizQuestions {
         RETURNING *
       `;
   
-      const [quiz_questions] = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
+      const { rows: [quiz_questions]} = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
       return new QuizQuestions(quiz_questions);
     } catch(error) {
       console.log(error);
@@ -68,11 +68,11 @@ class QuizQuestions {
   }  
 
   static async list() {
-    console.log("questiona list")
+    console.log("question list")
     try {
       const query = 'SELECT * FROM quiz_questions';
       const { rows } = await knex.raw(query);
-      console.log("questiona list rows" + rows)
+      console.log("question list rows" + rows)
       return rows.map((quiz_questions) => new QuizQuestions(quiz_questions));
     } catch(error) {
       console.log(error);
@@ -83,10 +83,20 @@ class QuizQuestions {
 
 }
 
-// const test = async () => {
-//   const postObj = await QuizQuestions.list()
-//   console.log("list" + postObj)
-// }
-// test()
+const test = async () => {
+  const postObj = await QuizQuestions.list()
+  console.log("list" + postObj)
+}
+test()
 
 module.exports = QuizQuestions;
+
+
+/*
+Duojay makes change on duojay branch
+duojay makes PR
+merge duojay into main
+staceyann pulls into main
+staceyann merges main into staceyann branch
+
+*/
