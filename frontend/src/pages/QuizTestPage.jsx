@@ -62,30 +62,23 @@
 // }
 
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function QuizTestPage() {
   const [showFinalResults, setFinalResults] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [questions, setQuestions] = useState([]);
 
-  const questions = [
-    {
-      id: 3,
-      answer: 'Madrid',
-      question: 'What is the capital of France?',
-      wrong_answer_1: 'Berlin',
-      wrong_answer_2: 'Madrid',
-    },
-    {
-      id: 3,
-      answer: 'Fried Chicken',
-      question: 'What is the capital of America?',
-      wrong_answer_1: 'Fried Chicken',
-      wrong_answer_2: 'Madrid',
-    },
-    // Add more questions here if needed
-  ];
+  useEffect(() => {
+    fetch('api/questions')
+      .then(response => response.json())
+      .then(data => {
+        console.log("question data", data);
+        setQuestions(data); 
+      })
+      .catch(error => console.error(error));
+  }, []);
 
   const optionClicked = (selectedAnswer) => {
     const correctAnswer = questions[currentQuestion].answer;
@@ -120,19 +113,23 @@ export default function QuizTestPage() {
       ) : (
         <div className="question-card">
           <h2>Question {currentQuestion + 1} out of {questions.length}</h2>
-          <h3 className="question-text">{questions[currentQuestion].question}</h3>
+          <h3 className="question-text">{questions[currentQuestion]?.question}</h3>
           <ul>
-            <li onClick={() => optionClicked(questions[currentQuestion].wrong_answer_1)}>
-              {questions[currentQuestion].wrong_answer_1}
+            <li onClick={() => optionClicked(questions[currentQuestion]?.wrong_answer_1)}>
+              {questions[currentQuestion]?.wrong_answer_1}
             </li>
-            <li onClick={() => optionClicked(questions[currentQuestion].wrong_answer_2)}>
-              {questions[currentQuestion].wrong_answer_2}
+            <li onClick={() => optionClicked(questions[currentQuestion]?.wrong_answer_2)}>
+              {questions[currentQuestion]?.wrong_answer_2}
             </li>
-            {/* Add other options here */}
+            <li onClick={() => optionClicked(questions[currentQuestion]?.wrong_answer_3)}>
+              {questions[currentQuestion]?.wrong_answer_3}
+            </li>
+            <li onClick={() => optionClicked(questions[currentQuestion]?.answer)}>
+              {questions[currentQuestion]?.answer}
+            </li>
           </ul>
         </div>
       )}
     </div>
   );
 }
-
