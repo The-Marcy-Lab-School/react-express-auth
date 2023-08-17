@@ -1,66 +1,81 @@
-### 🏙️ Mission Statement
-Clearly state the purpose and objectives of the project in a straightforward manner. Avoid unnecessary jargon or technical language that might confuse readers.
-* Keep it concise (1-3 sentences)
+# Mission Statement
+My mission is to create an intuitive concert platform that seamlessly connects music enthusiasts with their favorite artists and bands. By offering a user-friendly experience and comprehensive features, our application aims to revolutionize the way concert-goers discover, engage, and immerse themselves in live music events.
 
-*Example:* At Prints For A Purpose, our mission is to connect individuals in need of assistive devices with a compassionate global community of skilled builders. Using 3D printing technology, we can create affordable solutions that enhance independence and transform lives.
-___
+## Problem Statement
+The lack of a centralized platform for concert information and fan engagement has hindered the live music experience. Our project addresses this issue by providing a user-centric application that empowers users to effortlessly explore upcoming concerts, interact with fellow fans, and purchase tickets. This is crucial as music lovers seek a unified space to enhance their concert-going journey.
 
-### 🚀 Problem Statement
+## Features & User Stories
 
-Clearly define the problem or challenge your project aims to address. Explain why this problem is important and how your project will provide a solution.
-* Who the application's audience is
-* What the application does for the user
-* Why the user would use the application
+**User Registration and Authentication:**
+- As a user, I want to effortlessly register and log in to access concert information.
 
-*Example:* Our application would mainly serve individuals with disability or mobility issues under financial or physical constraints. A priority would be those who live in underprivileged communities, conflict-affected areas, or communities with limited healthcare infrastructure. Our product will leverage the power of technology and community collaboration to make assistive devices more accessible and affordable to those in need. This is done by connecting individuals to a network of builders who facilitate the creation and distribution of affordable, 3D-printed devices.
-___
+**Concert Listings:**
+- As a user, I want to explore a list of upcoming concerts with essential details.
 
+**Fan Community:**
+- As a user, I want to engage in a vibrant fan community to discuss and share excitement about concerts.
 
-### 📝 Features & User Stories
-* Describes all the features and their purpose.
-* For each feature, outline the user flow.
-* Identify features required for a MVP
+**Ticket Purchase:**
+- As a user, I want to buy tickets seamlessly for my preferred concerts.
 
+**User Profiles:**
+- As a user, I want to create a profile showcasing my favorite artists and attended concerts.
 
-Example: 
+**Artist/Band Profiles:**
+- As a user, I want to delve into detailed profiles of artists/bands, including bios and social media links.
 
-* **User Profile Page (MVP)**: Users can sign into the application to see their home page. The home page will display all of their blog posts and settings for updating their profile.
-* **Other User Profile Page (MVP)**: Users can see a directory of all users in the application. Clicking on their name will take the user to view the profile of that user.
-* **Live Chat (MVP)**: Users can start a chat with another user. This chat will have live updates and all messages will be saved.
-* **Chatbot (Stretch)**: Users can navigate to the `/chat` page to interact with a chatbot powered by ChatGPT.
+**Notifications:**
+- As a user, I want to receive notifications about concert updates and discussions.
 
-___
+**Social Sharing:**
+- As a user, I want to effortlessly share concert details with friends on social media.
 
+**Interactive Maps:**
+- As a user, I want to access interactive maps to locate venues and nearby attractions.
 
-### 📚 Tech Stack: 
-Clearly state the technologies, frameworks, and tools you intend to use for the front-end and back-end development.
+**MVP Features:**
+- User Registration and Authentication
+- User Profiles
+- Concert Listings
+- Fan Community
+- Ticket Purchase
 
-*Example:* We intend on using React for the front end, Node.js and Express for the backend, and PostgreSQL for the database. We will also incorporate Socket.io to implement the live chat feature and ChatGPT to implement the chatbot feature.
+**Stretch Features:**
+- Artist/Band Profiles
+- Notifications
+- Social Sharing
+- Interactive Maps
 
-___
+## Tech Stack
+- Front-end: React with Redux for state management
+- Back-end: Node.js and Express, MongoDB for the database (TBD)
+- Payment Gateway: Stripe for secure transactions (TBD)
+- Interactive Maps: Google Maps API
+- Authentication: JWT (JSON Web Tokens) (TBD)
 
-### 🗓️ Milestones and Timeline: 
-Break down the project into smaller milestones and outline a timeline for achieving them. Which features will you prioritize and by when will you complete them? Remember, you will have 5 weeks to complete this project. The first week will be spent planning and the remaining 4 will be spent building.
+## Milestones and Timeline
+1. Project Planning and Setup (1 week)
+2. User Authentication and Registration (1 week)
+3. Concert Listings and Fan Community (1 week)
+4. Ticket Purchase and Stripe Integration (1 week)
+5. User Profiles and Artist/Band Profiles (1 week)
+6. Notifications and Social Sharing (1 week)
+7. Interactive Maps and Final Testing (1 week)
+8. Some of these can be combined into the same week
 
-*Example:* 
-* By June 5: the MVP will be complete. Users will be able to post blogs and see them appear on their profile
-* By June 15: the chat feature will be complete. Users will be able to chat with other users.
-* By June 25: the chatbot powered by ChatGPT will be complete.
-* By June 31: the final CSS styling will be applied.
-___
+## Data Sources/APIs
+- Concert details: External API for concert information
+- Artist/band profiles: Custom database entries
+- Interactive maps: Google Maps API for venue locations
 
-### 💽 Data Sources (if applicable): 
-If your project involves using specific data sources or APIs, mention them and explain how you plan to integrate them into your project.
+## Team and Responsibilities
+- Jackie: Front-end development, UI/UX design
+- Jackie: Back-end development, database management
+- Jackie: Payment gateway integration, testing
+- Jackie: Project management, documentation
 
-*Example:* This application will utilize the WeatherAPI API to retrieve live weather data based on the user's current location. We will use the WebLocation API to get the user's current location.
-___
+Regular team meetings and version control with Jackie ensure efficient collaboration.
 
-### 🤝 Team and Responsibilities (if applicable): 
-If you are working in a team, specify the roles and responsibilities of each team member and how you will collaborate throughout the project.
-
-*Example:* The team working on this project will consist of Ben Spector and Reuben Ogbonna. We will collaborate using Github Project boards to manage our tasks, Slack for communication, and Github to manage changes to the codebase. Reuben will primarily focus on building the blog feature while Ben will focus on building the live chat feature.
-
-___
-
-### 📓 References and Citations: 
-If you have taken inspiration from existing projects or research, provide proper references and citations to give credit to the original sources.
+## References and Citations
+- Bandsintown and Songkick for concert platform inspiration (TBD)
+- Research on user engagement in fan communities
