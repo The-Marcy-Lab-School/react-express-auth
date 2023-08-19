@@ -158,6 +158,26 @@ export default function QuizTestPage() {
   const [questions, setQuestions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [wrongAnswersList, setWrongAnswersList] = useState([]);
+  const [timeRemaining, setTimeRemaining] = useState(60);
+
+
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (timeRemaining > 0) {
+        setTimeRemaining(timeRemaining - 1);
+      } else {
+        clearInterval(timer);
+        setFinalResults(true);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [timeRemaining]);
+
 
   useEffect(() => {
     fetch('api/questions')
@@ -206,12 +226,14 @@ export default function QuizTestPage() {
     setCurrentQuestion(0);
     setFinalResults(false);
     setWrongAnswersList([]);
+    setTimeRemaining(60);
   };
 
   return (
     <div className="quiz-test">
       <h1>Spanish Quiz</h1>
       <h2>Current Score: {score}</h2>
+      <h2>Time Remaining: {timeRemaining} seconds</h2>
       {showFinalResults ? (
         <div className="final-results">
           <h1>Final Results</h1>
