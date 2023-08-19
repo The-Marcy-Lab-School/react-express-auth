@@ -232,12 +232,12 @@ export default function QuizTestPage() {
   return (
     <div className="quiz-test">
       <h1>Spanish Quiz</h1>
-      <h2>Current Score: {score}</h2>
+      <h2>Current Score: {score} </h2>
       <h2>Time Remaining: {timeRemaining} seconds</h2>
       {showFinalResults ? (
         <div className="final-results">
           <h1>Final Results</h1>
-          <h2>{score} out of {questions.length} correct - ({(score / questions.length) * 100}%)</h2>
+          <h2>{score} out of {questions.length} correct - ({Math.ceil((score / questions.length) * 100)}%)</h2>
           <div>
             <h3>Wrong Answers:</h3>
             <ul>
@@ -255,18 +255,12 @@ export default function QuizTestPage() {
           <ul>
             {questions[currentQuestion]?.options.map((option, index) => (
               <li
-                key={index}
-                onClick={() => optionClicked(option)}
-                className={
-                  selectedOption === option
-                    ? option === questions[currentQuestion]?.answer
-                      ? "selected-correct"
-                      : "selected-wrong"
-                    : ""
-                }
-              >
-                {option}
-              </li>
+              key={index}
+              onClick={() => optionClicked(option)}
+              className={selectedOption === option ? "selected-option" : ""}
+            >
+              {option}
+            </li>
             ))}
           </ul>
         </div>
