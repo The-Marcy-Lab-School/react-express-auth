@@ -151,7 +151,9 @@ export default function QuizTestPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null); // New state for tracking selected option
+  const [wrongAnswersList, setWrongAnswersList] = useState([]);
 
+  // This is fectching questions form the database
   useEffect(() => {
     fetch('api/questions')
       .then(response => response.json())
@@ -164,6 +166,10 @@ export default function QuizTestPage() {
 
   const optionClicked = (selectedAnswer) => {
     const correctAnswer = questions[currentQuestion].answer;
+
+    if (selectedAnswer !== correctAnswer) {
+      setWrongAnswersList((prevList) => [...prevList, selectedAnswer]); // Add the selected wrong answer to the list
+    }
 
     if (selectedAnswer === correctAnswer) {
       setScore(score + 1);
@@ -183,6 +189,7 @@ export default function QuizTestPage() {
     setScore(0);
     setCurrentQuestion(0);
     setFinalResults(false);
+    setWrongAnswersList([]);
   };
 
   return (
@@ -193,6 +200,14 @@ export default function QuizTestPage() {
         <div className="final-results">
           <h1>Final Results</h1>
           <h2>{score} out of {questions.length} correct - ({(score / questions.length) * 100}%)</h2>
+                  <div>
+              <h3>Wrong Answers:</h3>
+              <ul>
+                {wrongAnswersList.map((wrongAnswer, index) => (
+                  <li key={index}>{wrongAnswer}</li>
+                ))}
+              </ul>
+            </div>
           <button onClick={restartQuiz}>Restart Quiz</button>
         </div>
       ) : (
