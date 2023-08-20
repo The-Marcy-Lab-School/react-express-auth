@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Quizzes = require('../models/quizzes')
-const QuizQuestions  = require('../models/quiz_question')
+const QuizQuestions  = require('../models/question')
 const QuizAttempts = require('../models/questions_attempts')
 
 /**
@@ -25,6 +25,18 @@ exports.seed = async (knex) => {
   await QuizQuestions.create(
     'What is "thank you" in Spanish?', 'gracias', 'hola', 'adiós', 'por favor', 1
   );
+   
+  await QuizQuestions.create(
+    `What is "hello" in French?`, 'bonjour', 'au revoir', 'merci', `s'il vous plaît`, 2
+  );
+  await QuizQuestions.create(
+    `What is "goodbye" in French?`, 'au revoir', 'bonjour', 'merci', `s'il vous plaît`, 2
+  );
+  await QuizQuestions.create(
+    `What is "thank you" in French?`, 'merci', 'bonjour', 'au revoir', `s'il vous plaît`, 2
+  );
+
+
 
 };
 

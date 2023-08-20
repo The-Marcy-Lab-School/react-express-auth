@@ -45,7 +45,7 @@ class Quizzes {
             INSERT INTO quizzes (topic)
             VALUES (?) RETURNING *
         `;
-        const [quizzes] = await knex.raw(query, [topic]);
+        const { rows: [quizzes] }= await knex.raw(query, [topic]);
         return new Quizzes(quizzes);
     } catch (error) {
         console.log(error);

@@ -12,6 +12,7 @@ import UserPage from './pages/User';
 import QuizLessonPage from './pages/QuizLessonPage';
 // import Use from './pages/Test'
 import QuizTestPage from './pages/QuizTestPage';
+import SelectedlanguagePage from './pages/SelectedlanguagePage';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -23,7 +24,8 @@ export default function App() {
     {/* <SiteHeadingAndNav /> */}
     {/* <Use/> */}
     {/* <QuizTestPage/> */}
-    <QuizLessonPage />
+    {/* <QuizLessonPage /> */}
+    <SelectedlanguagePage/>
     </>
   )
   // return <>
