@@ -35,49 +35,41 @@
 
 
 ////A.I TEST
-import React, { useEffect } from "react";
+/*import React, { useEffect } from "react";
 import "regenerator-runtime/runtime"; // Import regenerator-runtime to support async/await
 import speech, { useSpeechRecognition } from "react-speech-recognition";
 const key = "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"
 function Test() {
   const { listening, transcript } = useSpeechRecognition();
 
-  async function callGpt3API(message) {
-    try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer  ${key}` // Replace with your actual API key
-        },
-        body: JSON.stringify({
-          messages: [{ role: "user", content: message }],
-          model: "gpt-3.5-turbo" // Update to the correct model name
-        })
-      });
+  const url = 'https://rapid-translate-multi-traduction.p.rapidapi.com/t';
 
-      const data = await response.json();
-      console.log(data)
-      return data;
-    } catch (error) {
-      console.error("Error:", error);
-      throw error;
-    }
-  }
+  // document.getElementById('translate-button').addEventListener('click', () => {
+  //   //const selectedLanguage = document.getElementById('language-select').value;
+    
+  //   const options = {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       'X-RapidAPI-Key': 'c93e3c76b1msh4fda92c5708b84bp15efbejsnd23ad28ec16b',
+  //       'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com'
+  //     },
+  //     body: JSON.stringify({
+  //       from: 'en',
+  //       to: 'es',
+  //       q: `${transcript}`,
+  //     })
+  //   };
+    
+  //   fetch(url, options)
+  //     .then(response => response.text())
+  //     .then(result => console.log(result))
+  //     .catch(error => console.error(error));
+  // });
+  
+console.log("translate" , transcript)
 
-  useEffect(() => {
-    if (!listening && transcript) {
-      callGpt3API(transcript)
-        .then(response => {
-          const speechSynthesis = window.speechSynthesis;
-          const utterance = new SpeechSynthesisUtterance(response);
-          speechSynthesis.speak(utterance);
-        })
-        .catch(error => {
-          console.error("Error:", error);
-        });
-    }
-  }, [transcript, listening]);
+
 
   return (
     <div>
@@ -103,3 +95,82 @@ export default Test;
 //   ]
 // })
 // .then (res => console.log(res))
+
+// import {Configurationn, OpenAIAPI} from "openai";
+// const configuration = new Configurationn ({
+//   organization : "org-MabACTtNENXNK3F2JLFEMX4r",
+//   apiKey : "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",
+// })
+// const openai = new OpenAIAPI(configuration);
+
+// const completion = await openai.createChatCompletion({
+//   model: "gpt-3.5-turbo",
+//   messages: [
+//     {role:"user", content:"Hello Word"},
+//   ]
+// })
+// console.log(completion.data.choices[0].messages)
+
+*/
+
+
+import React from "react";
+import "regenerator-runtime/runtime"; // Import regenerator-runtime to support async/await
+import speech, { useSpeechRecognition } from "react-speech-recognition";
+
+const Test = () => {
+  const { listening, transcript } = useSpeechRecognition();
+  let tt 
+  const translateText = async (text) => {
+    const url = 'https://rapid-translate-multi-traduction.p.rapidapi.com/t';
+    console.log(text)
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': 'c93e3c76b1msh4fda92c5708b84bp15efbejsnd23ad28ec16b',
+        'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com'
+      },
+      body: JSON.stringify({
+        from: 'en',
+        to: 'es', // Change this to the target language
+        q: text,
+      })
+
+    };
+    
+    try {
+      const response = await fetch(url, options);
+      const result = await response.text();
+      tt = result
+      console.log(result.toString());
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  // This will be called when speech recognition ends
+  // const handleSpeechEnd = () => {
+  //   if (transcript) {
+  //     translateText(transcript);
+  //   }
+  // };
+  
+  //speech.onEnd = handleSpeechEnd;
+
+  if (transcript) {
+    translateText(transcript);
+  }
+
+  return (
+    <div>
+      {listening ? <p>Listening...</p> : <p>Click to start speaking</p>}
+      <button onClick={() => speech.startListening()}>Start Listening</button>
+      {transcript && <div>{transcript}</div>}
+      <>{tt}</>
+    </div>
+
+  );
+};
+
+export default Test;
