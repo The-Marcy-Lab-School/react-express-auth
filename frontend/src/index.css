@@ -129,11 +129,3 @@ button {
 .lesson-button {
   margin: 10px; /* Add space around the buttons */
 }
-
-.selected-wrong {
-  background-color: red;
-}
-
-.selected-correct {
-  background-color: lightseagreen
-}
