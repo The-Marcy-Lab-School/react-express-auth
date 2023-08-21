@@ -1,6 +1,6 @@
 
 
-//CODE USE FOR TESTING FETCHING FROM DATABASE
+//////CODE USE FOR TESTING FETCHING FROM DATABASE/////////
 // import React, { useEffect, useState } from 'react';
 
 // function UserList() {
@@ -34,7 +34,7 @@
 
 
 
-////A.I TEST
+//////////////////A.I TEST////////////////
 /*import React, { useEffect } from "react";
 import "regenerator-runtime/runtime"; // Import regenerator-runtime to support async/await
 import speech, { useSpeechRecognition } from "react-speech-recognition";
@@ -177,47 +177,54 @@ export default Test;
 
 */
 
-import React, { useEffect } from "react";
-import "regenerator-runtime";
-import speech, { useSpeechRecognition } from "react-speech-recognition";
 
-function Test() {
-  const { listening, transcript } = useSpeechRecognition();
 
-  async function callGpt3API(message) {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer' 
-      },
-      body: JSON.stringify({
-        messages: [{ role: 'user', content: message }],
-        model: "gpt-3.5-turbo" 
-      })
-    });
 
-    const data = await response.json();
-    return data.choices[0].message.content;
-  }
+///////A.I THAT WORKS FOR ME///////////////
 
-  useEffect(() => {
-    if (!listening && transcript) {
-      callGpt3API(transcript).then((response) => {
-        const speechSynthesis = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(response);
-        speechSynthesis.speak(utterance);
-      });
-    }
-  }, [transcript, listening]);
+// import React, { useEffect } from "react";
+// import "regenerator-runtime";
+// import speech, { useSpeechRecognition } from "react-speech-recognition";
 
-  return (
-    <>
-      {listening ? <p>wrk</p> : <p>CLICK</p>}
-      <button onClick={() => speech.startListening()}>Ask</button>
-      {transcript && <div>{transcript}</div>}
-    </>
-  );
-}
+// function Test() {
+//   const { listening, transcript } = useSpeechRecognition();
 
-export default Test;
+//   async function callGpt3API(message) {
+//     const response = await fetch('https://api.openai.com/v1/chat/completions', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: 'Bearer' 
+//       },
+//       body: JSON.stringify({
+//         messages: [{ role: 'user', content: message }],
+//         model: "gpt-3.5-turbo" 
+//       })
+//     });
+
+//     const data = await response.json();
+//     return data.choices[0].message.content;
+//   }
+
+//   useEffect(() => {
+//     if (!listening && transcript) {
+//       callGpt3API(transcript).then((response) => {
+//         const speechSynthesis = window.speechSynthesis;
+//         const utterance = new SpeechSynthesisUtterance(response);
+//         speechSynthesis.speak(utterance);
+//       });
+//     }
+//   }, [transcript, listening]);
+
+//   return (
+//     <>
+//       {listening ? <p>wrk</p> : <p>CLICK</p>}
+//       <button onClick={() => speech.startListening()}>Ask</button>
+//       {transcript && <div>{transcript}</div>}
+//     </>
+//   );
+// }
+
+// export default Test;
+
+
