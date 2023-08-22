@@ -227,6 +227,7 @@ export default Test;
 
 
 import React, { useEffect, useState } from "react";
+import Chatbox from "./ChatBox";
 import "regenerator-runtime";
 import speech, { useSpeechRecognition } from "react-speech-recognition";
 
@@ -235,23 +236,6 @@ function Test() {
   const [userInput, setUserInput] = useState(""); // To store user's typed input
   const { listening, transcript } = useSpeechRecognition();
 
-  const [chats, setChatbox] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('api/gettMessages');
-        const data = await response.json();
-        setChatbox(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
-    fetchData();
-  }, []);
-  
-  console.log("chatboxs", chats);
   
 
 
@@ -347,6 +331,7 @@ function Test() {
         <button type="submit">Submit</button>
       </form>
       {transcript && <div>{transcript}</div>}
+      <Chatbox/>
     </>
   );
 }

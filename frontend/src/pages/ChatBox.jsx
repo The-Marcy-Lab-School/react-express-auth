@@ -1,13 +1,23 @@
-// import React, { useEffect, useState } from 'react';
-// const [chats, setChatbox] = useState([]); 
-// useEffect(() => {
-//   fetch('api/gettMessages')
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log("question data", data);
-//       setChatbox(data); 
-//     })
-//     .catch(error => console.error(error));
-// }, []);
+import React, { useEffect, useState } from "react";
 
-// console.log("questions", chats); 
+function FetchChatData() {
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('api/gettMessages');
+        const data = await response.json();
+        setChats(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("chatboxs", chats);
+}
+
+export default FetchChatData;

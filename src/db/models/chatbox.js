@@ -12,7 +12,7 @@ class Chatbox {
     try {
       const query = 'SELECT * FROM chatbox';
       const { rows } = await knex.raw(query);
-      return rows.map((chat) => new Chatbox(chat));
+      return rows;
     } catch(error) {
       console.log(error);
       return [];
@@ -30,7 +30,7 @@ class Chatbox {
  
       
       const { rows: [chat] }  = await knex.raw(query, [userid, ai_response, user_response]);
-      return new Chatbox(chat);
+      return new chat;
     } catch(error) {
       console.log(error);
       return null;
@@ -39,11 +39,13 @@ class Chatbox {
   
 
   static async find(id) {
+    console.log("chats found by id number", id)
     try {
       const query = 'SELECT * FROM chatbox WHERE userid = ?';
-      const { rows: [chats] } = await knex.raw(query, [id]);
-      console.log(chats)
-      return chats ? new Chatbox(chats) : null;
+      const { rows } = await knex.raw(query, [id]);
+      
+      console.log("chats found by id", rows)
+      return rows;
       //new Chatbox(chats);
 
     } catch(error) {
