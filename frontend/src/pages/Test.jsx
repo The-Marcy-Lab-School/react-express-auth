@@ -279,7 +279,7 @@ function Test() {
 
         // Send messages to the backend
         sendMessagesToBackend(response, inputToUse);
-       
+        setUserInput("")//Rest user input for other inputs
       });
     }
   }, [transcript, listening, userInput]);
