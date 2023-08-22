@@ -6,7 +6,7 @@ const checkAuthentication = require('./middleware/check-authentication');
 //responsilbe for calling on the quiz  controller
 const quizController = require('./controllers/quizzes')
 const questionController = require('./controllers/questions')
-
+const chatboxController = require('./controllers/chatbox')
 
 
 
@@ -30,6 +30,10 @@ Router.get('/questions', questionController.list)
 ///qiestion routes
 //Router.get('/questions', questionsController.list);
 
+
+/////ROUTES FOR A.I
+Router.post('/insertMessage', chatboxController.create)
+Router.get('/gettMessages', chatboxController.find)
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
