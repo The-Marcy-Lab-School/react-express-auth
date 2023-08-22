@@ -3,13 +3,20 @@
  * @returns { Promise<void> }
  */
 exports.up = (knex) => {
-
-};
-
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.down = (knex) => {
-
-};
+    return knex.schema.createTable('chatbox', (table) => {
+      table.increments('id').primary();
+      table.string('userid').notNullable();
+      table.text('ai_response').notNullable();
+      table.text('user_response').notNullable();
+      table.timestamps(true, true);
+    });
+  };
+  
+  /**
+   * @param { import("knex").Knex } knex
+   * @returns { Promise<void> }
+   */
+  exports.down = (knex) => {
+    return knex.schema.dropTable('chatbox');
+  };
+  
