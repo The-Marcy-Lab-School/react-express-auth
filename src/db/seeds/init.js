@@ -21,7 +21,7 @@ exports.seed = async (knex) => {
   await QuizQuestions.create('testing quiz','T','YU','FG','GH',1);
 
   //Chatbox input
-  await Chatbox.create(1,"test","test");
+  await Chatbox.create(10,"test","test");
 };
 
 // exports.seed = async (knex) => {

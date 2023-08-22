@@ -235,6 +235,21 @@ function Test() {
   const [userInput, setUserInput] = useState(""); // To store user's typed input
   const { listening, transcript } = useSpeechRecognition();
 
+  const [chats, setChatbox] = useState([]); 
+  useEffect(() => {
+    fetch('api/gettMessages')
+      .then(response => response.json())
+      .then(data => {
+        console.log("question data", data);
+        setChatbox(data); 
+      })
+      .catch(error => console.error(error));
+  }, []);
+  
+  console.log("questions", chats); 
+
+
+
   async function callGpt3API(message) {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',

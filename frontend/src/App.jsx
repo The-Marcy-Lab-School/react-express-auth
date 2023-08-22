@@ -18,24 +18,24 @@ export default function App() {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
-  return (
-    <>
-    <SiteHeadingAndNav />
-    {/* <Use/> */}
-    <Use/>
-    </>
-  )
-  // return <>
+  // return (
+  //   <>
   //   <SiteHeadingAndNav />
-  //   <main>
-  //     <Routes>
-  //       <Route path='/' element={<Home />} />
-  //       <Route path='/login' element={<LoginPage />} />
-  //       <Route path='/sign-up' element={<SignUpPage />} />
-  //       <Route path='/users' element={<UsersPage />} />
-  //       <Route path='/users/:id' element={<UserPage />} />
-  //       <Route path='*' element={<NotFoundPage />} />
-  //     </Routes>
-  //   </main>
-  // </>;
+  //   {/* <Use/> */}
+  //   <Use/>
+  //   </>
+  // )
+  return <>
+    <SiteHeadingAndNav />
+    <main>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/sign-up' element={<SignUpPage />} />
+        <Route path='/users' element={<Use />} />
+        <Route path='/users/:id' element={<UserPage />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </main>
+  </>;
 }
