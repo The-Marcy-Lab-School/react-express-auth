@@ -42,7 +42,7 @@ class Questions {
   }
 
   static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id) {
-    console.log("quzzes", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
+    //console.log("quzzes", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
     try {
       const query = `
         INSERT INTO quiz_questions (question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
@@ -50,7 +50,7 @@ class Questions {
         RETURNING *
       `;
   
-      const [quiz_question] = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
+      const{ rows: [quiz_question] }  = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
       return new Questions(quiz_question);
     } catch(error) {
       console.log(error);
