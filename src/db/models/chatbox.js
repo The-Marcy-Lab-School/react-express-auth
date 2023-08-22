@@ -42,7 +42,9 @@ class Chatbox {
     try {
       const query = 'SELECT * FROM chatbox WHERE id = ?';
       const { rows: [chats] } = await knex.raw(query, [id]);
-      return chats ? new Questions(chats) : null;
+      console.log(chats)
+      return chats ? new Chatbox(chats) : null;
+
     } catch(error) {
       console.log(error);
       return null;

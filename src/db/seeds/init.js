@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Quizzes = require('../models/quizzes')
 const QuizQuestions  = require('../models/quiz_question')
-const QuizAttempts = require('../models/questions_attempts')
+const Chatbox= require('../models/chatbox')
 
 /**
  * @param { import("knex").Knex } knex
@@ -20,7 +20,8 @@ exports.seed = async (knex) => {
   await QuizQuestions.create('testing quiz','T','YU','FG','GH',1);
   await QuizQuestions.create('testing quiz','T','YU','FG','GH',1);
 
-  //
+  //Chatbox input
+  await Chatbox.create(1,"test","test");
 };
 
 // exports.seed = async (knex) => {
