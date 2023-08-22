@@ -20,14 +20,14 @@ class Chatbox {
   }
 
   static async create(userid, ai_response, user_response) {
+    console.log("chatbox",userid, ai_response, user_response)
     try {
       const query = `
         INSERT INTO chatbox (userid, ai_response, user_response)
         VALUES (?, ?, ?)
         RETURNING *
       `;
-  
-      console.log(query, [userid, ai_response, user_response]); // Print the query
+ 
       
       const { rows: [chat] }  = await knex.raw(query, [userid, ai_response, user_response]);
       return new Chatbox(chat);
@@ -40,10 +40,11 @@ class Chatbox {
 
   static async find(id) {
     try {
-      const query = 'SELECT * FROM chatbox WHERE id = ?';
+      const query = 'SELECT * FROM chatbox WHERE userid = ?';
       const { rows: [chats] } = await knex.raw(query, [id]);
       console.log(chats)
       return chats ? new Chatbox(chats) : null;
+      //new Chatbox(chats);
 
     } catch(error) {
       console.log(error);
@@ -63,8 +64,8 @@ class Chatbox {
 }
 
 // const test = async () => {
-//   const attempt = await Chatbox.create(1,"testing","testing"); // Corrected method call
-//   console.log(attempt);
+//   const attempt = await Chatbox.find(10); // Corrected method call
+//   console.log("test chat model",attempt);
 // };
 // test();
 

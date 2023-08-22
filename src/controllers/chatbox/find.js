@@ -11,7 +11,7 @@ const findChat = async (req, res) => {
     const foundChats = await Chatbox.find(userId);
     //if (!user) return res.sendStatus(404);
   
-   es.send(foundChats);
+   res.send(foundChats);
   };
   
   module.exports = findChat;

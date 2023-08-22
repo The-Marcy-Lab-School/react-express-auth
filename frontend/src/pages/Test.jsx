@@ -235,19 +235,24 @@ function Test() {
   const [userInput, setUserInput] = useState(""); // To store user's typed input
   const { listening, transcript } = useSpeechRecognition();
 
-  const [chats, setChatbox] = useState([]); 
+  const [chats, setChatbox] = useState([]);
+
   useEffect(() => {
-    fetch('api/gettMessages')
-      .then(response => response.json())
-      .then(data => {
-        console.log("question data", data);
-        setChatbox(data); 
-      })
-      .catch(error => console.error(error));
+    const fetchData = async () => {
+      try {
+        const response = await fetch('api/gettMessages');
+        const data = await response.json();
+        setChatbox(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchData();
   }, []);
   
-  console.log("questions", chats); 
-
+  console.log("chatboxs", chats);
+  
 
 
   async function callGpt3API(message) {
@@ -255,7 +260,7 @@ function Test() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer YOUR_API_KEY_HERE' 
+        Authorization: 'Bearer ' 
       },
       body: JSON.stringify({
         messages: [{ role: 'user', content: message }],
@@ -264,25 +269,44 @@ function Test() {
     });
 
     const data = await response.json();
-    return "hello"
-    //data.choices[0].message.content;//A.I will read the responses after the fetch request
+    return data.choices[0].message.content;//A.I will read the responses after the fetch request
   }
 
 
   //This function will send messages to backend base on user and a.i response
-  async function sendMessagesToBackend(aiResponse, userResponse) {
-    const response = await fetch('/insertMessage', {
+  // async function sendMessagesToBackend(aiResponse, userResponse) {
+  //   try {
+  //     console.log("types response", aiResponse, userResponse);
+  //     const response = await fetch('/api/insertMessage', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ aiResponse, userResponse }),
+  //     });
+  
+  //     const data = await response.json();
+  //     console.log("response json", data);
+  //   } catch (error) {
+  //     console.error("Error sending data to backend:", error);
+  //   }
+  // }
+  
+
+  const sendMessagesToBackend = async (aiResponse, userResponse ) => {
+    const body = { userResponses:userResponse, aiResponses:aiResponse  };
+    console.log(body)
+    const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ aiResponse, userResponse }),
-    });
-
-    const data = await response.json();
-    console.log(data);
+      body: JSON.stringify(body),
+      credentials: 'include',
+    };
+    const response = await fetch('/api/insertMessage', options);
   }
-
+  
   useEffect(() => {
     console.log("user", userInput)
     if (!listening && (transcript || userInput)) {
