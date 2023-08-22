@@ -8,7 +8,6 @@ exports.up = (knex) => {
       table.string('userid').notNullable();
       table.text('ai_response').notNullable();
       table.text('user_response').notNullable();
-      table.timestamps(true, true);
     });
   };
   
