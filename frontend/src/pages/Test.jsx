@@ -1,5 +1,3 @@
-
-
 //////CODE USE FOR TESTING FETCHING FROM DATABASE/////////
 // import React, { useEffect, useState } from 'react';
 
@@ -34,7 +32,7 @@
 
 
 
-//////////////////A.I TEST////////////////
+//////////////////A.I TEST USING A NEW API FROM RAPID API///////////////
 /*import React, { useEffect } from "react";
 import "regenerator-runtime/runtime"; // Import regenerator-runtime to support async/await
 import speech, { useSpeechRecognition } from "react-speech-recognition";
@@ -82,7 +80,7 @@ console.log("translate" , transcript)
 
 export default Test;
 
-
+//RUNNING INSTALLATIONS TO TEST A.I
 // import{Configuration, OpenAIAPI} from "openai"
 // const completion = new OpenAIAPI(new Configuration({
 //   apiKey: "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"
@@ -228,3 +226,90 @@ export default Test;
 // export default Test;
 
 
+import React, { useEffect, useState } from "react";
+import "regenerator-runtime";
+import speech, { useSpeechRecognition } from "react-speech-recognition";
+
+function Test() {
+  const [responseInput, setResponseInput] = useState("");
+  const [userInput, setUserInput] = useState(""); // To store user's typed input
+  const { listening, transcript } = useSpeechRecognition();
+
+  async function callGpt3API(message) {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer YOUR_API_KEY_HERE' 
+      },
+      body: JSON.stringify({
+        messages: [{ role: 'user', content: message }],
+        model: "gpt-3.5-turbo" 
+      })
+    });
+
+    const data = await response.json();
+    return "hello"
+    //data.choices[0].message.content;//A.I will read the responses after the fetch request
+  }
+
+
+  //This function will send messages to backend base on user and a.i response
+  async function sendMessagesToBackend(aiResponse, userResponse) {
+    const response = await fetch('/insertMessage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ aiResponse, userResponse }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  }
+
+  useEffect(() => {
+    console.log("user", userInput)
+    if (!listening && (transcript || userInput)) {
+      const inputToUse = userInput || transcript;
+      callGpt3API(inputToUse).then((response) => {
+        const speechSynthesis = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(response);
+        speechSynthesis.speak(utterance);
+
+        // Send messages to the backend
+        sendMessagesToBackend(response, inputToUse);
+       
+      });
+    }
+  }, [transcript, listening, userInput]);
+
+  const handleResponseInputChange = (event) => {
+    setResponseInput(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setUserInput(responseInput); // Set the user's typed input
+    setResponseInput("");
+  };
+
+  return (
+    <>
+      {listening ? <p>wrk</p> : <p>CLICK</p>}
+      <button onClick={() => speech.startListening()}>Ask</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={responseInput}
+          onChange={handleResponseInputChange}
+          placeholder="Type your response..."
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {transcript && <div>{transcript}</div>}
+    </>
+  );
+}
+
+export default Test;
