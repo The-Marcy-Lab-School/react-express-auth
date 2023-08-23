@@ -41,7 +41,7 @@ class Questions {
     }
   }
 
-  static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id) {
+  static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id, level_id) {
     //console.log("quzzes", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
     try {
       const query = `
@@ -49,8 +49,7 @@ class Questions {
         VALUES (?, ?, ?, ?, ?, ?)
         RETURNING *
       `;
-  
-      const{ rows: [quiz_question] }  = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id]);
+      const{ rows: [quiz_question] }  = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id,level_id]);
       return new Questions(quiz_question);
     } catch(error) {
       console.log(error);

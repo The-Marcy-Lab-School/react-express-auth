@@ -2,11 +2,11 @@ const knex = require('../knex');
 
 class Chatbox {
 
-  constructor({ userid, ai_response, user_response}) {
-    this.userid = userid;
-    this.ai_response = ai_response;
-    this.user_response = user_response;
-  }
+//   constructor({ userid, ai_response, user_response}) {
+//     this.userid = userid;
+//     this.ai_response = ai_response;
+//     this.user_response = user_response;
+//   }
 
   static async list() {
     try {
