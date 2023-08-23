@@ -33,8 +33,8 @@ class Questions {
   static async find(id) {
     try {
       const query = 'SELECT * FROM quiz_questions WHERE id = ?';
-      const { rows: [quizzes] } = await knex.raw(query, [id]);
-      return quizzes ? new Questions(quizzes) : null;
+      const { rows} = await knex.raw(query, [id]);
+      return rows
     } catch(error) {
       console.log(error);
       return null;

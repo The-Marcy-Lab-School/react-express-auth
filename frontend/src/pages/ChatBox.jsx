@@ -18,6 +18,12 @@ function FetchChatData() {
   }, []);
 
   console.log("chatboxs", chats);
+
+  return (
+    <>
+    rtgr
+    </>
+  )
 }
 
 export default FetchChatData;
