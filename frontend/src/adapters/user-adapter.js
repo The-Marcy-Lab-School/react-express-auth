@@ -6,9 +6,9 @@ export const createUser = async ({ username, password }) => (
   fetchHandler(baseUrl, getPostOptions({ username, password }))
 );
 
-// eating errors here for simplicity
 export const getAllUsers = async () => {
-  const [users] = await fetchHandler(baseUrl);
+  const [users, error] = await fetchHandler(baseUrl);
+  console.log(error); // just logging errors here for simplicity
   return users || [];
 };
 
