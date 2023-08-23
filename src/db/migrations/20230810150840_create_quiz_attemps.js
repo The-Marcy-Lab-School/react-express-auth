@@ -36,8 +36,11 @@ exports.up = (knex) => {
         table.foreign('user_id').references('id').inTable('users');
         table.integer('quiz_id').notNullable();
         table.foreign('quiz_id').references('id').inTable('quizzes');
-        table.integer('percentage').notNullable();
         table.integer('score_count').notNullable();
+        // table.integer('percentage').notNullable();
+        table.integer('level_id').notNullable();
+        table.integer('score_count').notNullable();
+        // table.integer('level_id').notNullable();
         table.timestamps(true, true);
     })
 };
