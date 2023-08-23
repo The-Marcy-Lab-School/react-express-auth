@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
 function UserList() {
-  const [users, setUsers] = useState([]);
+  //const [users, setUsers] = useState([]);
 
-  const [questions, setQuestions] = useState([]); 
+  const [quiz_topics, setTopics] = useState([]); 
 
 
   useEffect(() => {
-    fetch('api/questions')
+    fetch('api/q')
       .then(response => response.json())
       .then(data => {
         console.log("question data", data);
-        setQuestions(data); 
+        setTopicss(data); 
       })
       .catch(error => console.error(error));
   }, []);
   
-  console.log("questions", questions); 
+  console.log("questions", quiz_topics); 
 
 
 

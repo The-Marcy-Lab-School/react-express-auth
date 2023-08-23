@@ -27,7 +27,8 @@ export default function App() {
   // )
   return <>
     <SiteHeadingAndNav />
-    <main>
+    <QuizLessonPage/>
+    {/* <main>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
@@ -36,6 +37,6 @@ export default function App() {
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
-    </main>
+    </main> */}
   </>;
 }

@@ -61,7 +61,7 @@ exports.up = (knex) => {
     return knex.schema.createTable('quiz_questions', (table) => {
         table.increments();
         table.string('question').notNullable().unique();;
-        table.string('answer').notNullable().unique();;
+        table.string('answer').notNullable();;
         table.string('wrong_answer_1').notNullable();
         table.string('wrong_answer_2').notNullable();   
         table.string('wrong_answer_3').notNullable();

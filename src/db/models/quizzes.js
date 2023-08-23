@@ -9,7 +9,7 @@ class Quizzes {
 
   static async list() {
     try {
-      const query = 'SELECT * FROM quiz_questions';
+      const query = 'SELECT * FROM quiz_topics';
       const { rows } = await knex.raw(query);
       console.log("model list quiz" + rows.map((quizzes) => new Quizzes(quizzes)))
       return rows

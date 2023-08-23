@@ -4,11 +4,16 @@ const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
 
 //responsilbe for calling on the quiz  controller
-const quizController = require('./controllers/quiz_topics')
+const quizTopicsController = require('./controllers/quiz_topics')
+
+//QUESTIONS CONTROLLER
 const questionController = require('./controllers/questions')
+
+//ROUTES FOR AI
 const chatboxController = require('./controllers/chatbox')
 
-
+//ROUTES FOR GETTING LESSONS
+const lessonsController = require('./controllers/lessons')
 
 
 const Router = express.Router();
@@ -23,8 +28,8 @@ Router.delete('/logout', userController.logout);
 Router.get('/me', userController.showMe);
 
 //routes for quiizes
-Router.post('/quiz', quizController.create)
-Router.get('/q', quizController.list)
+Router.post('/quiz', quizTopicsController.create)
+Router.get('/q', quizTopicsController.list)
 
 Router.get('/questions', questionController.list)
 ///qiestion routes

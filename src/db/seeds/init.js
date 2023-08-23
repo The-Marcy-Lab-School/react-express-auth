@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const Quizzes = require('../models/quizzes')
- const QuizQuestions  = require('../models/question')
+ const QuizQuestions  = require('../models/questions')
 const Chatbox= require('../models/chatbox')
+const Lessons = require('../models/lessons')
 
 /**
  * @param { import("knex").Knex } knex
@@ -22,6 +23,9 @@ exports.seed = async (knex) => {
 
   // //Chatbox input
   // await Chatbox.create(10,"test","test");
+
+   // //Lessons input
+  await Lessons.create("lessons 1",1,1);
 };
 
 // exports.seed = async (knex) => {
