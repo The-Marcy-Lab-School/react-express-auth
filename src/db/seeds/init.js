@@ -14,14 +14,14 @@ exports.seed = async (knex) => {
   await User.create('wowow', '1234');
 
   //  await Quizzes.create('wowow');
-  await Quizzes.create('jijinwowow');
+  await Quizzes.create('French');
 
-  //  await QuizQuestions.create('uyowow','T','YU','FG','GH',1);
-  await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
-  await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
+  // //  await QuizQuestions.create('uyowow','T','YU','FG','GH',1);
+  // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
+  // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
 
-  //Chatbox input
-  await Chatbox.create(10,"test","test");
+  // //Chatbox input
+  // await Chatbox.create(10,"test","test");
 };
 
 // exports.seed = async (knex) => {

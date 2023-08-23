@@ -60,13 +60,13 @@
 exports.up = (knex) => {
     return knex.schema.createTable('quiz_questions', (table) => {
         table.increments();
-        table.string('question').notNullable();
-        table.string('answer').notNullable();
+        table.string('question').notNullable().unique();;
+        table.string('answer').notNullable().unique();;
         table.string('wrong_answer_1').notNullable();
         table.string('wrong_answer_2').notNullable();   
         table.string('wrong_answer_3').notNullable();
         table.integer('quiz_id').unsigned().notNullable(); // Use unsigned here
-        table.foreign('quiz_id').references('id').inTable('quizzes');
+        table.foreign('quiz_id').references('id').inTable('quiz_topics');
         table.integer('level_id').unsigned().notNullable();
         table.timestamps(true, true);
     });

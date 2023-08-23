@@ -5,7 +5,7 @@
 exports.up = (knex) => {
     return knex.schema.createTable('quiz_topics', (table) => {
       table.increments();
-      table.string('topic').notNullable();
+      table.string('topic').notNullable().unique();
       table.timestamps(true, true);
     });
   };

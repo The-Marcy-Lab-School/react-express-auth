@@ -28,7 +28,7 @@ class Quizzes {
   // }
   static async find(id) {
     try {
-      const query = 'SELECT * FROM quizzes WHERE id = ?';
+      const query = 'SELECT * FROM quiz_topics WHERE id = ?';
       const { rows: [quizzes] } = await knex.raw(query, [id]);
       return quizzes ? new Quizzes(quizzes) : null;
     } catch(error) {
@@ -42,7 +42,7 @@ class Quizzes {
     console.log("topics:" + topic);
     try {
         const query = `
-            INSERT INTO quizzes (topic)
+            INSERT INTO quiz_topics (topic)
             VALUES (?) RETURNING *
         `;
         const {rows: [quiz]} = await knex.raw(query, [topic]);
