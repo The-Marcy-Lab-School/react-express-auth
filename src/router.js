@@ -4,7 +4,7 @@ const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
 
 //responsilbe for calling on the quiz  controller
-const quizController = require('./controllers/quizzes')
+const quizController = require('./controllers/quiz_topics')
 const questionController = require('./controllers/questions')
 const chatboxController = require('./controllers/chatbox')
 
