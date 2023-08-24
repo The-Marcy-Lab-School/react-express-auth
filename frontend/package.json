@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/parallax": "^9.7.3",
+    "@react-spring/web": "^9.7.3",
+    "add": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "react-spring": "^9.7.2",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

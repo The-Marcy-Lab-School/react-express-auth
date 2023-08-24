@@ -157,34 +157,12 @@ export default function QuizTestPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [wrongAnswersList, setWrongAnswersList] = useState([]);
-  const [timeRemaining, setTimeRemaining] = useState(60);
-
-
-
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (timeRemaining > 0) {
-        setTimeRemaining(timeRemaining - 1);
-      } else {
-        clearInterval(timer);
-        setFinalResults(true);
-      }
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [timeRemaining]);
-
+  const [userAnswers, setUserAnswers] = useState([]);
 
   useEffect(() => {
     fetch('api/questions')
       .then(response => response.json())
       .then(data => {
-        console.log("question data", data);
-
         const questionsWithShuffledOptions = data.map(question => ({
           ...question,
           options: shuffleArray([
@@ -196,6 +174,7 @@ export default function QuizTestPage() {
         }));
 
         setQuestions(questionsWithShuffledOptions);
+        setUserAnswers(new Array(questionsWithShuffledOptions.length).fill(null));
       })
       .catch(error => console.error(error));
   }, []);
@@ -203,15 +182,13 @@ export default function QuizTestPage() {
   const optionClicked = (selectedAnswer) => {
     const correctAnswer = questions[currentQuestion].answer;
 
-    if (selectedAnswer !== correctAnswer) {
-      setWrongAnswersList((prevList) => [...prevList, selectedAnswer]);
-    }
-
     if (selectedAnswer === correctAnswer) {
       setScore(score + 1);
-    } else {
-      setSelectedOption(selectedAnswer);
     }
+
+    const updatedAnswers = [...userAnswers];
+    updatedAnswers[currentQuestion] = selectedAnswer;
+    setUserAnswers(updatedAnswers);
 
     if (currentQuestion + 1 < questions.length) {
       setCurrentQuestion(currentQuestion + 1);
@@ -225,24 +202,24 @@ export default function QuizTestPage() {
     setScore(0);
     setCurrentQuestion(0);
     setFinalResults(false);
-    setWrongAnswersList([]);
-    setTimeRemaining(60);
+    setUserAnswers(new Array(questions.length).fill(null));
   };
 
   return (
     <div className="quiz-test">
       <h1>Spanish Quiz</h1>
       <h2>Current Score: {score} </h2>
-      <h2>Time Remaining: {timeRemaining} seconds</h2>
       {showFinalResults ? (
         <div className="final-results">
           <h1>Final Results</h1>
           <h2>{score} out of {questions.length} correct - ({Math.ceil((score / questions.length) * 100)}%)</h2>
           <div>
-            <h3>Wrong Answers:</h3>
+            <h3>Your Answers:</h3>
             <ul>
-              {wrongAnswersList.map((wrongAnswer, index) => (
-                <li key={index}>{wrongAnswer}</li>
+              {userAnswers.map((userAnswer, index) => (
+                <li key={index}>
+                  Question {index + 1}: {userAnswer === null ? "Not answered" : userAnswer}
+                </li>
               ))}
             </ul>
           </div>
@@ -255,12 +232,12 @@ export default function QuizTestPage() {
           <ul>
             {questions[currentQuestion]?.options.map((option, index) => (
               <li
-              key={index}
-              onClick={() => optionClicked(option)}
-              className={selectedOption === option ? "selected-option" : ""}
-            >
-              {option}
-            </li>
+                key={index}
+                onClick={() => optionClicked(option)}
+                className={selectedOption === option ? "selected-option" : ""}
+              >
+                {option}
+              </li>
             ))}
           </ul>
         </div>
@@ -268,6 +245,7 @@ export default function QuizTestPage() {
     </div>
   );
 }
+
 
 
 
