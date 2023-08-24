@@ -30,16 +30,31 @@ class Questions {
   //   const { rows } = await knex.raw(query);
   //   return rows.map((user) => new User(user));
   // }
+
   static async find(quiz_id, level_id) {
+    console.log("questions model find parameters", quiz_id,level_id)
     try {
-      const query = 'SELECT * FROM quiz_questions WHERE id = ?';
-      const { rows} = await knex.raw(query, [id]);
-      return rows
-    } catch(error) {
+      const query = 'SELECT * FROM quiz_questions WHERE quiz_id = ? AND level_id = ?';
+      const { rows } = await knex.raw(query, [quiz_id, level_id]);
+      return rows;
+    } catch (error) {
       console.log(error);
       return null;
     }
   }
+  
+
+
+  // static async find(quiz_id, level_id) {
+  //   try {
+  //     const query = 'SELECT * FROM quiz_questions WHERE id = ?';
+  //     const { rows} = await knex.raw(query, [id]);
+  //     return rows
+  //   } catch(error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  // }
 
   static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id, level_id) {
   console.log("questinon model", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id,level_id)

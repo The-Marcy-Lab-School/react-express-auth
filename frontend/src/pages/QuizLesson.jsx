@@ -149,9 +149,11 @@ function QuizLesson() {
   const fetchLessonData = (quizId, levelId) => {
 
     console.log("button clickedq", quizId,levelId)
-    fetch(`api/lessons/${quizId}/${levelId}`)
+    fetch(`api/lessons-quizzes/${quizId}-${levelId}`)
       .then(response => response.json())
       .then(data => {
+        
+        // Update quizData with the new data
        // setQuizData(prevData => [...prevData, ...data]);
       })
       .catch(error => console.error(error));

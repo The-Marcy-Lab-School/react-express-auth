@@ -27,11 +27,14 @@ Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
 Router.get('/me', userController.showMe);
 
-//routes for quiizes
+//Routes For Quiz Topics
 Router.post('/quiz', quizTopicsController.create)
 Router.get('/q', quizTopicsController.list)
 
+
+//ROUTES FOR QUIZ QUESTIONS 
 Router.get('/questions', questionController.list)
+Router.get('/lessons-quizzes/:id', questionController.find)
 ///qiestion routes
 //Router.get('/questions', questionsController.list);
 
