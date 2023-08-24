@@ -30,7 +30,7 @@ class Questions {
   //   const { rows } = await knex.raw(query);
   //   return rows.map((user) => new User(user));
   // }
-  static async find(id) {
+  static async find(quiz_id, level_id) {
     try {
       const query = 'SELECT * FROM quiz_questions WHERE id = ?';
       const { rows} = await knex.raw(query, [id]);
@@ -42,15 +42,16 @@ class Questions {
   }
 
   static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id, level_id) {
-    //console.log("quzzes", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
+  console.log("questinon model", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id,level_id)
     try {
       const query = `
-        INSERT INTO quiz_questions (question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO quiz_questions (question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id,level_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         RETURNING *
       `;
       const{ rows: [quiz_question] }  = await knex.raw(query, [question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id,level_id]);
-      return new Questions(quiz_question);
+      console.log("quiz retunred from DB", quiz_question)
+      return new quiz_question;
     } catch(error) {
       console.log(error);
       return null;

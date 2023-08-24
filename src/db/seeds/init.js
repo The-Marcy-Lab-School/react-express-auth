@@ -17,7 +17,7 @@ exports.seed = async (knex) => {
   //  await Quizzes.create('wowow');
   await Quizzes.create('French');
 
-   await QuizQuestions.create('What does is Bonjour in French ','Hello','Goodbye','Why','GH',1);
+   await QuizQuestions.create('What does is Bonjour in French ','Hello','Goodbye','Why','French',1,1);
   // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
   // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
 
