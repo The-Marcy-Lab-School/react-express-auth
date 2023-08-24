@@ -12,8 +12,8 @@ import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import QuizLessonPage from './pages/QuizLesson';
 import SelectLanguages from './pages/SelectLanguage';
-//import QuizTestPage from './pages/QuizTestPage';
-import QuizContextProvider from './pages/Test'
+import TestPage from './pages/Test';
+//import QuizContextProvider from './pages/SelectLanguage.jsx';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -29,10 +29,20 @@ export default function App() {
   // )
   return (<>
     <SiteHeadingAndNav />
-    <QuizContextProvider/>
+    {/* <QuizContextProvider/> */}
     {/* <SelectLanguages/> */}
   
-
-
+    <main>
+      <Routes>
+      {/* <QuizLessonPage/> */}
+        <Route path='/' element={<SelectLanguages />} />
+        <Route path='/lessons' element={<QuizLessonPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/sign-up' element={<SignUpPage />} />
+        {/* <Route path='/users' element={<Use />} /> */}
+        <Route path='/users/:id' element={<UserPage />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </main>
   </>);
 }

@@ -120,18 +120,52 @@
 
 // export default UserList;
 
-import React, { useState, useContext  } from 'react';
-import Context from '../contexts/quiz-data-conext'
+// import React, { useState, useContext  } from 'react';
+// import Context from '../contexts/quiz-data-conext'
+
+// function QuizLesson() {
+//   const { quizData} = useContext(Context);
+//   console.log("quizData from lessons page", quizData )
+//   return (
+//     <div>
+//       <h2>Quiz lessons</h2>
+//       <ul>
+//         {quizData.map(item => (
+//           <li key={item.id}>{item.lessons}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default QuizLesson;
+
+import React, { useState, useContext } from 'react';
+import Context from '../contexts/quiz-data-conext';
 
 function QuizLesson() {
-  const { quizData} = useContext(Context);
-  console.log("quizData from lessons page", quizData )
+  const { quizData, setQuizData } = useContext(Context);
+
+  const fetchLessonData = (quizId, levelId) => {
+
+    console.log("button clickedq", quizId,levelId)
+    fetch(`api/lessons/${quizId}/${levelId}`)
+      .then(response => response.json())
+      .then(data => {
+       // setQuizData(prevData => [...prevData, ...data]);
+      })
+      .catch(error => console.error(error));
+  };
+
   return (
     <div>
       <h2>Quiz lessons</h2>
       <ul>
         {quizData.map(item => (
-          <li key={item.id}>{item.lessons}</li>
+          <li key={item.id}>
+             <button onClick={() => fetchLessonData(item.quiz_id, item.level_id)}>{item.lessons}</button>
+          </li>
+          
         ))}
       </ul>
     </div>

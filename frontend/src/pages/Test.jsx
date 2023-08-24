@@ -244,7 +244,7 @@ function Test() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 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' 
+        Authorization: 'Bearer ' 
       },
       body: JSON.stringify({
         messages: [{ role: 'user', content: message }],

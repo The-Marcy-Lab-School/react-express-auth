@@ -22,10 +22,11 @@ class Lessons {
       }
 
       static async find(id) {
+        console.log("lessons id", id)
         try {
           const query = 'SELECT * FROM lessons WHERE quiz_id = ?';
           const { rows} = await knex.raw(query, [id]);
-          // console.log("question find rows" + rows)
+          console.log("question find rows" + rows)
           return rows
         } catch(error) {
           console.log(error);
@@ -44,7 +45,7 @@ class Lessons {
         try {
             const query = `
                 INSERT INTO lessons (lessons, quiz_id, level_id)
-                VALUES (?, ?,)
+                VALUES (?, ?,?)
                 RETURNING *
             `;
             const { rows } = await knex.raw(query, [lessons, quiz_id, level_id]);
