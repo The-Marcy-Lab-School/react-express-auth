@@ -40,6 +40,9 @@ Router.get('/questions', questionController.list)
 Router.post('/insertMessage', chatboxController.create)
 Router.get('/gettMessages', chatboxController.find)
 
+//ROUTES FOR LESSONS 
+Router.get('/lessons/:id', lessonsController.find)
+
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
 Router.patch('/users/:id', checkAuthentication, userController.update);

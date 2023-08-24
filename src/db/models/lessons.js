@@ -21,23 +21,30 @@ class Lessons {
         }
       }
 
-    static async find(id) {
+      static async find(id) {
         try {
-            const query = 'SELECT * FROM lessons WHERE id = ?';
-            const { rows } = await knex.raw(query, [id]);
-            return rows.map((lesson) => new Lessons(lesson));
+          const query = 'SELECT * FROM lessons WHERE quiz_id = ?';
+          const { rows} = await knex.raw(query, [id]);
+          // console.log("question find rows" + rows)
+          return rows
         } catch(error) {
-            console.log(error);
-            return null;
+          console.log(error);
+          return null;
         }
-    }
+      }
+    
+    
+    
+    
+    
+    
 
     static async create(lessons, quiz_id, level_id) {
         console.log("lessons info in model", lessons, quiz_id, level_id)
         try {
             const query = `
                 INSERT INTO lessons (lessons, quiz_id, level_id)
-                VALUES (?, ?, ?)
+                VALUES (?, ?,)
                 RETURNING *
             `;
             const { rows } = await knex.raw(query, [lessons, quiz_id, level_id]);

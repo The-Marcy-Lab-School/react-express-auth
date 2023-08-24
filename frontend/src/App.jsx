@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+//import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUpPage from './pages/SignUp';
 import LoginPage from './pages/Login';
@@ -10,8 +11,9 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import QuizLessonPage from './pages/QuizLesson';
-import Use from './pages/Test'
+import SelectLanguages from './pages/SelectLanguage';
 // import QuizTestPage from './pages/QuizTestPage';
+//import QuizContextProvider from './pages/SelectLanguage.jsx';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -25,18 +27,22 @@ export default function App() {
   //   <Use/>
   //   </>
   // )
-  return <>
+  return (<>
     <SiteHeadingAndNav />
-    <QuizLessonPage/>
-    {/* <main>
+    {/* <QuizContextProvider/> */}
+    {/* <SelectLanguages/> */}
+  
+    <main>
       <Routes>
-        <Route path='/' element={<Home />} />
+      {/* <QuizLessonPage/> */}
+        <Route path='/' element={<SelectLanguages />} />
+        <Route path='/lessons' element={<QuizLessonPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/users' element={<Use />} />
+        {/* <Route path='/users' element={<Use />} /> */}
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
-    </main> */}
-  </>;
+    </main>
+  </>);
 }
