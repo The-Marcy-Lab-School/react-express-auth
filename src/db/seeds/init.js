@@ -16,9 +16,10 @@ exports.seed = async (knex) => {
 
   //  await Quizzes.create('wowow');
   await Quizzes.create('French');
+  await Quizzes.create('Spanish')
 
    await QuizQuestions.create('What does is Bonjour in French ','Hello','Goodbye','Why','French',1,1);
-  // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
+  await QuizQuestions.create('What is one in spanish','Uno','Dos','Five','Si',8,1);
   // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
 
   // //Chatbox input
@@ -26,6 +27,7 @@ exports.seed = async (knex) => {
 
    // //Lessons input
   await Lessons.create("lessons 1",1,1);
+  await Lessons.create("lessons 2",8,1);
 };
 
 // exports.seed = async (knex) => {

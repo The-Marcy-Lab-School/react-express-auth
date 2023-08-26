@@ -230,6 +230,7 @@ import React, { useEffect, useState } from "react";
 import Chatbox from "./ChatBox";
 import "regenerator-runtime";
 import speech, { useSpeechRecognition } from "react-speech-recognition";
+import key from '../'
 
 function Test() {
   const [responseInput, setResponseInput] = useState("");
@@ -301,7 +302,7 @@ function Test() {
         speechSynthesis.speak(utterance);
 
         // Send messages to the backend
-        sendMessagesToBackend(response, inputToUse);
+        sendMessagesToBackend(inputToUse, response);
         setUserInput("")//Rest user input for other inputs
       });
     }

@@ -13,7 +13,7 @@ import UserPage from './pages/User';
 import QuizLessonPage from './pages/QuizLesson';
 import SelectLanguages from './pages/SelectLanguage';
 import TestPage from './pages/Test';
-//import QuizContextProvider from './pages/SelectLanguage.jsx';
+import Quiz from './pages//QuizTestPage';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -35,7 +35,9 @@ export default function App() {
     <main>
       <Routes>
       {/* <QuizLessonPage/> */}
-        <Route path='/' element={<SelectLanguages />} />
+      <Route path='/' element={<SelectLanguages />} />
+
+        <Route path='/quiz' element={<Quiz />} />
         <Route path='/lessons' element={<QuizLessonPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />

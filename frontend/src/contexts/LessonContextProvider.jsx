@@ -2,9 +2,9 @@ import { useState } from 'react';
 import LessonsContext from './lesson-context';
 
 export default function LessonsDataContextProvider({ children }) {
-  const [questionsData, setQuestionsData] = useState(null);
+  const [questions, setQuestionsData] = useState(null);
 
-  const context = { questionsData, setQuestionsData};
+  const context = { questions, setQuestionsData};
 
   return (
     <LessonsContext.Provider value={ context }>

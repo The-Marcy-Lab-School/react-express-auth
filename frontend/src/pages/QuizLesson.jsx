@@ -142,17 +142,20 @@
 
 import React, { useState, useContext } from 'react';
 import Context from '../contexts/quiz-data-conext';
-
+import LessonContext from '../contexts/lesson-context'
+import { useNavigate } from "react-router-dom";
 function QuizLesson() {
   const { quizData, setQuizData } = useContext(Context);
-
+  const {setQuestionsData} = useContext(LessonContext )
+  const navigate = useNavigate();
   const fetchLessonData = (quizId, levelId) => {
 
     console.log("button clickedq", quizId,levelId)
     fetch(`api/lessons-quizzes/${quizId}-${levelId}`)
       .then(response => response.json())
       .then(data => {
-        
+        setQuestionsData(data)
+        navigate("/quiz");
         // Update quizData with the new data
        // setQuizData(prevData => [...prevData, ...data]);
       })
@@ -167,7 +170,6 @@ function QuizLesson() {
           <li key={item.id}>
              <button onClick={() => fetchLessonData(item.quiz_id, item.level_id)}>{item.lessons}</button>
           </li>
-          
         ))}
       </ul>
     </div>
