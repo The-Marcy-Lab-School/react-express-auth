@@ -53,24 +53,6 @@ form {
   font-style: italic;
 }
 
-.quiz-test{
-  text-align: center;
-}
-
-.question-card{
-  margin: 0;
-
-  background-color: #EEBC32;
-  padding: 16px;
-  border-radius: 16px;
-  color: #000;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-
-  width: auto;
-  height: auto;
-
-}
 
 ul{
   list-style: none;
@@ -84,37 +66,79 @@ li{
   font-size: 20px;
   margin-top: 8px;
 }
+/* QuizTestPage.css */
 
-.question-text{
-  font-size: 24px;
-}
-
-.final-results{
-  margin: 0;
-
-  background-color: #EEBC32;
-  padding: 16px;
-  border-radius: 16px;
-  color: #000;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-
-  width: auto;
-  height: auto;
-}
-
-button {
-  background-color: #FF965E ; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 24px;
+.quiz-test {
+  font-family: Arial, sans-serif;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 20px;
+}
 
-  border-radius: 24px;
+.quiz-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.score {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.final-results {
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+}
+
+.results-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.results-score {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.answer-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.answer-table th,
+.answer-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.answer-table th {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+.user-answer-cell {
+  color: #e74c3c; /* Red color for user's wrong answers */
+}
+
+.correct-answer-cell {
+  color: #2ecc71; /* Green color for correct answers */
+}
+
+.restart-button {
+  background-color: #FF965E;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.restart-button:hover {
+  background-color: #ffdc50;
 }
 
 

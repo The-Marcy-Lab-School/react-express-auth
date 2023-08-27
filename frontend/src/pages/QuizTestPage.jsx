@@ -158,6 +158,8 @@ export default function QuizTestPage() {
   const [questions, setQuestions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [userAnswers, setUserAnswers] = useState([]);
+  const [timeRemaining, setTimeRemaining] = useState(60); // Initial time in seconds
+  const initialTime = 60;
 
   useEffect(() => {
     fetch('api/questions')
@@ -178,6 +180,19 @@ export default function QuizTestPage() {
       })
       .catch(error => console.error(error));
   }, []);
+  
+    useEffect(() => {
+      if (timeRemaining > 0 && !showFinalResults) {
+        const timer = setInterval(() => {
+          setTimeRemaining(timeRemaining - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+      } else if (timeRemaining === 0) {
+        setFinalResults(true); // Show final results when time is up
+      }
+    }, [timeRemaining, showFinalResults]);
+
 
   const optionClicked = (selectedAnswer) => {
     const correctAnswer = questions[currentQuestion].answer;
@@ -203,33 +218,56 @@ export default function QuizTestPage() {
     setCurrentQuestion(0);
     setFinalResults(false);
     setUserAnswers(new Array(questions.length).fill(null));
+    setTimeRemaining(initialTime); // Reset the timer
+    setFinalResults(false); // Reset the final results
+    // Add other reset logic as needed
   };
 
   return (
     <div className="quiz-test">
-      <h1>Spanish Quiz</h1>
-      <h2>Current Score: {score} </h2>
+      <h1 className="quiz-title">Spanish Quiz</h1>
+      <h2 className="score">Current Score: {score}</h2>
       {showFinalResults ? (
         <div className="final-results">
-          <h1>Final Results</h1>
-          <h2>{score} out of {questions.length} correct - ({Math.ceil((score / questions.length) * 100)}%)</h2>
-          <div>
+          <h1 className="results-title">Final Results</h1>
+          <h2 className="results-score">
+            {score} out of {questions.length} correct - (
+            {Math.ceil((score / questions.length) * 100)}%)
+          </h2>
+          <div className="answer-list">
             <h3>Your Answers:</h3>
-            <ul>
-              {userAnswers.map((userAnswer, index) => (
-                <li key={index}>
-                  Question {index + 1}: {userAnswer === null ? "Not answered" : userAnswer}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <button onClick={restartQuiz}>Restart Quiz</button>
-        </div>
+            <table className="answer-table">
+           <thead>
+             <tr>
+               <th>Question</th>
+               <th>Your Answer</th>
+               <th>Correct Answer</th>
+             </tr>
+           </thead>
+           <tbody>
+               {userAnswers.map((userAnswer, index) => (
+              <tr key={index}>
+              <td>{index + 1}</td>
+              <td className={`user-answer-cell ${userAnswer === questions[index]?.answer ? "correct-answer-cell" : ""}`}>
+                {userAnswer === null ? "Not answered" : userAnswer}
+              </td>
+              <td className="correct-answer-cell">{questions[index]?.answer}</td>
+            </tr>
+          ))}
+        </tbody>
+        </table>
+       </div>
+       <button className="restart-button" onClick={restartQuiz}>
+            Restart Quiz
+          </button>
+     </div>
+     
       ) : (
         <div className="question-card">
-          <h2>Question {currentQuestion + 1} out of {questions.length}</h2>
+          <h2 className="question-count">Question {currentQuestion + 1} out of {questions.length}</h2>
           <h3 className="question-text">{questions[currentQuestion]?.question}</h3>
-          <ul>
+          <p>Time Remaining: {timeRemaining} seconds</p>
+          <ul className="options-list">
             {questions[currentQuestion]?.options.map((option, index) => (
               <li
                 key={index}
