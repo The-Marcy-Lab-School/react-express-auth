@@ -245,16 +245,20 @@ export default function QuizTestPage() {
              </tr>
            </thead>
            <tbody>
-               {userAnswers.map((userAnswer, index) => (
-              <tr key={index}>
-              <td>{index + 1}</td>
-              <td className={`user-answer-cell ${userAnswer === questions[index]?.answer ? "correct-answer-cell" : ""}`}>
-                {userAnswer === null ? "Not answered" : userAnswer}
-              </td>
-              <td className="correct-answer-cell">{questions[index]?.answer}</td>
-            </tr>
-          ))}
-        </tbody>
+                {userAnswers.map((userAnswer, index) => (
+                  <tr key={index}>
+                    <td>{questions[index]?.question}</td> {/* Display question text */}
+                    <td
+                      className={`user-answer-cell ${
+                        userAnswer === questions[index]?.answer ? "correct-answer-cell" : ""
+                      }`}
+                    >
+                      {userAnswer === null ? "Not answered" : userAnswer}
+                    </td>
+                    <td className="correct-answer-cell">{questions[index]?.answer}</td>
+                  </tr>
+                ))}
+              </tbody>
         </table>
        </div>
        <button className="restart-button" onClick={restartQuiz}>
