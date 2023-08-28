@@ -160,6 +160,7 @@ export default function QuizTestPage() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [timeRemaining, setTimeRemaining] = useState(60); // Initial time in seconds
   const initialTime = 60;
+  const totalScore = Math.ceil((score / questions.length) * 100);
 
   useEffect(() => {
     fetch('api/questions')
@@ -226,7 +227,7 @@ export default function QuizTestPage() {
   return (
     <div className="quiz-test">
       <h1 className="quiz-title">Spanish Quiz</h1>
-      <h2 className="score">Current Score: {score}</h2>
+      {/* <h2 className="score">Current Score: {score}</h2> */}
       {showFinalResults ? (
         <div className="final-results">
           <h1 className="results-title">Final Results</h1>
@@ -243,6 +244,7 @@ export default function QuizTestPage() {
                <th>Your Answer</th>
                <th>Correct Answer</th>
              </tr>
+
            </thead>
            <tbody>
                 {userAnswers.map((userAnswer, index) => (
