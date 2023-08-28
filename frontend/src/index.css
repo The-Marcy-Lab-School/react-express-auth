@@ -154,6 +154,50 @@ li{
   margin: 10px; /* Add space around the buttons */
 }
 
+
+
+/* .final-results{
+  margin: 0;
+
+  background-color: #EEBC32;
+  padding: 16px;
+  border-radius: 16px;
+  color: #000;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+  width: auto;
+  height: auto;
+} */
+
+button {
+  background-color: #FF965E ; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+
+  border-radius: 24px;
+}
+
+
+/* .centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* This ensures the container takes the full viewport height */
+/* } */
+
+.lesson-button {
+  margin: 10px; /* Add space around the buttons */
+}
+
+
 /* .animation_layer {
   background-position: bottom center;
   background-size: auto 1038px;
