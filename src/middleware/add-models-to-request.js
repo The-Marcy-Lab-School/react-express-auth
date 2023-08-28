@@ -3,7 +3,7 @@ const  Quizzes = require('../db/models/quizzes');
 const  Questions = require('../db/models/questions');
 const Chatbox = require('../db/models/chatbox')
 const Lessons = require('../db/models/lessons')
-
+const DiscussionBoard = require('../db/models/discussion_board')
 const addModelsToRequest = (req, res, next) => {
   req.db = {
     User,
@@ -11,6 +11,7 @@ const addModelsToRequest = (req, res, next) => {
     Questions,
     Chatbox,
     Lessons,
+    DiscussionBoard,
   };
   next();
 };

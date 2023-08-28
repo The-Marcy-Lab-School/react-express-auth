@@ -35,7 +35,8 @@ export default function App() {
     <main>
       <Routes>
       {/* <QuizLessonPage/> */}
-      <Route path='/' element={<SelectLanguages />} />
+      <Route path='/' element={<TestPage/>} />
+      <Route path='/u' element={<SelectLanguages />} />
 
         <Route path='/quiz' element={<Quiz />} />
         <Route path='/lessons' element={<QuizLessonPage />} />

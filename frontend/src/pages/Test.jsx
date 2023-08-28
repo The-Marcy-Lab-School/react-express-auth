@@ -225,12 +225,12 @@ export default Test;
 
 // export default Test;
 
-
+/*
 import React, { useEffect, useState } from "react";
 import Chatbox from "./ChatBox";
 import "regenerator-runtime";
 import speech, { useSpeechRecognition } from "react-speech-recognition";
-import key from '../'
+// import key from '../'
 
 function Test() {
   const [responseInput, setResponseInput] = useState("");
@@ -318,9 +318,39 @@ function Test() {
     setResponseInput("");
   };
 
+  ////////////////////
+  const [topic, setTopic] = useState('');
+  const [ discussion, setDescription] = useState('');
+
+  const handleubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/discussion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ topic, discussion}),
+      });
+
+      if (response.ok) {
+        // Discussion board created successfully, reset input fields
+        setTopic('');
+        setDescription('');
+        console.log('Discussion board created');
+      } else {
+        console.error('Failed to create discussion board');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
   return (
     <>
-      {listening ? <p>wrk</p> : <p>CLICK</p>}
+      {/* {listening ? <p>wrk</p> : <p>CLICK</p>}
       <button onClick={() => speech.startListening()}>Ask</button>
       <form onSubmit={handleSubmit}>
         <input
@@ -332,9 +362,147 @@ function Test() {
         <button type="submit">Submit</button>
       </form>
       {transcript && <div>{transcript}</div>}
-      <Chatbox/>
-    </>
+      <Chatbox/> */
+
+
+//       <div>
+//       <h2>Create a New Discussion Board</h2>
+//       <form onSubmit={handleubmit}>
+//         <div>
+//           <label>Topic:</label>
+//           <input type="text" value={topic} onChange={(e) => setTopic(e.target.value)} required />
+//         </div>
+//         <div>
+//           <label>Description:</label>
+//           <textarea value={ discussion} onChange={(e) => setDescription(e.target.value)} required />
+//         </div>
+//         <button type="submit">Create Discussion Board</button>
+//       </form>
+//     </div>
+//     </>
+//   );
+// }
+
+// export default Test;
+// //
+
+// import React, { useState } from 'react';
+// import DiscussionBoardBox from './Discussion';
+
+// function App() {
+//   const [searchTerm, setSearchTerm] = useState('');
+//   const [discussionBoards, setDiscussionBoards] = useState([]);
+
+//   const handleSearch = () => {
+//     // Implement the logic to search for discussion boards based on searchTerm
+//     // Set the filtered discussion boards in the state
+//   };
+//   console.log(discussionBoards)
+
+//   const handleDiscussionBoardCreated = (newDiscussionBoard) => {
+//     setDiscussionBoards([...discussionBoards, newDiscussionBoard]);
+//   };
+
+//   return (
+//     <div>
+//       <h1>Discussion Board App</h1>
+//       <input
+//         type="text"
+//         placeholder="Search for discussion boards"
+//         value={searchTerm}
+//         onChange={(e) => setSearchTerm(e.target.value)}
+//       />
+//       <button onClick={handleSearch}>Search</button>
+
+//       <DiscussionBoardBox onDiscussionBoardCreated={handleDiscussionBoardCreated} />
+
+//       <div>
+//         {discussionBoards.map((board, index) => (
+//           <div key={index}>
+//             <h3>{board.topic}</h3>
+//             <p>{board.description}</p>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+import React, { useState } from 'react';
+
+const items = [
+  { id: 1, title: 'Item 1', description: 'Description for Item 1' },
+  { id: 2, title: 'Item 2', description: 'Description for Item 2' },
+  { id: 3, title: 'Item 3', description: 'Description for Item 3' },
+  { id: 4, title: 'Another Item', description: 'Another description' },
+  { id: 5, title: 'here', description: 'me' },
+];
+
+function AutocompleteSearch() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleInputChange = (event) => {
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filteredSuggestions = items.filter(item =>
+      item.title.toLowerCase().includes(value) || item.description.toLowerCase().includes(value)
+    );
+    setSearchSuggestions(filteredSuggestions);
+  };
+
+  const handleSearch = () => {
+    const matchingItems = items.filter(item =>
+      item.title.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm)
+    );
+
+    setSearchResults(matchingItems);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  return (
+    <div>
+      <h1>Autocomplete Search Bar</h1>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+        placeholder="Search..."
+      />
+      <button onClick={handleSearch}>Search</button>
+      
+      <div>
+        {searchSuggestions.map(suggestion => (
+          <div
+            key={suggestion.id}
+            className="search-suggestion"
+            onClick={() => setSearchTerm(suggestion.title)}
+          >
+            {suggestion.title}
+          </div>
+        ))}
+      </div>
+
+      <div>
+        {searchResults.map(result => (
+          <div key={result.id} className="search-card">
+            <p>{result.title} - {result.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
-export default Test;
+export default AutocompleteSearch;

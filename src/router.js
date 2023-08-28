@@ -15,6 +15,8 @@ const chatboxController = require('./controllers/chatbox')
 //ROUTES FOR GETTING LESSONS
 const lessonsController = require('./controllers/lessons')
 
+//ROUTES FOR DISCUSSION BOARD
+const discussionBoardController = require('./controllers/discussion_board')
 
 const Router = express.Router();
 Router.use(addModelsToRequest);
@@ -47,6 +49,8 @@ Router.get('/gettMessages', chatboxController.find)
 Router.get('/lessons/:id', lessonsController.find)
 Router.get('/lessons/:id', lessonsController.find)
 
+
+Router.post('/discussion',discussionBoardController.create)
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
 Router.patch('/users/:id', checkAuthentication, userController.update);

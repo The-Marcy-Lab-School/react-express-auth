@@ -3,7 +3,7 @@ const Quizzes = require('../models/quizzes')
  const QuizQuestions  = require('../models/questions')
 const Chatbox= require('../models/chatbox')
 const Lessons = require('../models/lessons')
-
+const DiscussionBoard = require('../models/discussion_board')
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -28,6 +28,8 @@ exports.seed = async (knex) => {
    // //Lessons input
   await Lessons.create("lessons 1",1,1);
   await Lessons.create("lessons 2",8,1);
+
+  await DiscussionBoard.create("porque","testing to see if you do")
 };
 
 // exports.seed = async (knex) => {
