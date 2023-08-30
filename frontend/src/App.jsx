@@ -19,25 +19,25 @@ export default function App() {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
-  return (
-    <>
-    < Home />
-    </>
-  )
-//   return <>
-//     <SiteHeadingAndNav />
-//     <main>
-//       <Routes>
-//         <Route path='/' element={<Home />} />
-//         <Route path='/login' element={<LoginPage />} />
-//         <Route path='/sign-up' element={<SignUpPage />} />
-//         <Route path='/users' element={<UsersPage />} />
-//         <Route path='/users/:id' element={<UserPage />} />
-//         <Route path='*' element={<NotFoundPage />} />
-//         <Route path='/quiz-test' element={<QuizTestPage />} />
-//         <Route path='/quiz-lesson' element={<QuizLessonPage />} />
-//         <Route path='/selected-language' element={<SelectedlanguagePage />} />
-//       </Routes>
-//     </main>
-//   </>;
+  // return (
+  //   <>
+  //   < Home />
+  //   </>
+  // )
+  return <>
+    <SiteHeadingAndNav />
+    <main>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/sign-up' element={<SignUpPage />} />
+        <Route path='/users' element={<UsersPage />} />
+        <Route path='/users/:id' element={<UserPage />} />
+        <Route path='*' element={<NotFoundPage />} />
+        <Route path='/quiz-test' element={<QuizTestPage />} />
+        <Route path='/quiz-lesson' element={<QuizLessonPage />} />
+        <Route path='/selected-language' element={<SelectedlanguagePage />} />
+      </Routes>
+    </main>
+  </>;
 }

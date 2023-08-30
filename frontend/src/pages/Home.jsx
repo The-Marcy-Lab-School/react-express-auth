@@ -30,9 +30,18 @@ export default function HomePage() {
       </ParallaxLayer>
       {/* Trying My Best Content */}
 
-      <ParallaxLayer offset={2} speed={0.5} style={{ backgroundImage: `url(https://cdn.dribbble.com/users/1129235/screenshots/10972507/media/aceb35a835198886faeaa8fa5e0836fb.gif)`, display: 'flex', textAlign: 'right', alignItems: 'center', backgroundPosition: "right", width: "50%" }}>
-        <h2>I'm trying my best lol</h2>
-      </ParallaxLayer>
+      <ParallaxLayer offset={2} speed={0.5} style={{ width: "100%", height: "100%" }}>
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%' }}>
+    <div style={{ flex: 1, padding: '2rem' }}>
+      <h2>I'm trying my best lol</h2>
+    </div>
+    <div style={{ flex: 1, background: `url(https://cdn.dribbble.com/users/1129235/screenshots/10972507/media/aceb35a835198886faeaa8fa5e0836fb.gif) right / cover no-repeat`, height: '100%' }}></div>
+  </div>
+</ParallaxLayer>
+
+
+
+
 
       </ParallaxLayer>
     </Parallax>
@@ -40,7 +49,6 @@ export default function HomePage() {
       
   )
 }
-
 
 
 

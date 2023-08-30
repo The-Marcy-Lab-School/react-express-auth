@@ -184,6 +184,54 @@ button {
   border-radius: 24px;
 }
 
+/* <!-- HTML !-->
+<button class="button-52" role="button">Button 52</button> */
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Adjust the gap as needed */
+  flex-wrap: wrap; /* Allow buttons to wrap to the next line if needed */
+}
+
+
+/* CSS */
+.button-52 {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-52:after {
+  content: "";
+  background-color: #ffe54c;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-52:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
+}
 
 /* .centered-container {
   display: flex;

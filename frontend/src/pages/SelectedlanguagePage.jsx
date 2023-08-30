@@ -27,16 +27,20 @@ export default function SelectedLanguagePage() {
       .catch(error => console.error(error));
   };
 
-  return (
-    <>
-      <div className="centered-container">
-        <h1>Selected language Page</h1>
+   return (
+    <div className="centered-container">
+      <h1>Selected language Page</h1>
+      <div className="button-container">
         {quizTopic.map(language => (
-          <button key={language.id} className="lesson-button" onClick={() => handleLanguageClick(language.id)}>
+          <button
+            key={language.id}
+            className="button-52"
+            onClick={() => handleLanguageClick(language.id)}
+          >
             {language.topic}
           </button>
         ))}
       </div>
-    </>
+    </div>
   );
 }
