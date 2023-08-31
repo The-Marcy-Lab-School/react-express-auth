@@ -32,21 +32,3 @@
 
 // export default UserList;
 import React from "react";
-import "regenerator-runtime";
-import speech, { useSpeechRecognition } from "react-speech-recognition";
-
-function Test() {
-  const { listening, transcript } = useSpeechRecognition();
-
-  return (
-    <>
-      {listening ? <p>wrk</p> : <p>CLICK</p>}
-      <button onClick={() => speech.startListening()}>Ask</button> 
-      {
-        transcript && < div> {transcript}</div>
-      }
-    </>
-  );
-}
-
-export default Test;
