@@ -2,7 +2,7 @@ const express = require('express');
 const userController = require('./controllers/user');
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
-
+const axios = require('axios');
 //responsilbe for calling on the quiz  controller
 const quizTopicsController = require('./controllers/quiz_topics')
 
@@ -51,6 +51,49 @@ Router.get('/lessons/:id', lessonsController.find)
 
 
 Router.post('/discussion',discussionBoardController.create)
+
+// Router.post('/authenticate', async (req, res) => {
+//   const fakeUsername = 'fakeUser'; // Change this to your desired fake username
+// console.log("api send")
+//   try {
+//     const response = await fetch('https://api.chatengine.io/users/', {
+//       method: 'POST', // Change to POST
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Private-Key': 'a2a6192c-5ee4-49e7-b3ee-d70b115f604e'
+//       },
+//       body: JSON.stringify({
+//         username: fakeUsername,
+//         secret: fakeUsername,
+//         first_name: fakeUsername
+//       })
+//     });
+
+//     const data = await response.json();
+//     return res.status(response.status).json(data);
+//   } catch (e) {
+//     return res.status(e.response.status).json(e.response.data);
+//   }
+// });
+
+
+// Router.post("/authenticate", async (req, res) => {
+//   console.log("chat")
+//   const { username } = req.body;
+//   return res.json({ username: username, secret: "sha256..." });
+//   try{
+//     const r = await axios.put(
+//       'https://api.chatengine.io/users/',
+//       {username:username, secret:username, first_name:username},
+//       {headers:{"private-key": "a2a6192c-5ee4-49e7-b3ee-d70b115f604e" }}
+//     )
+//       return res.status(r.status).json(r.data)
+//   }catch(e) {
+//     return res.status(e.response.status).json(e.response.data)
+//   }
+//   //return res.json({ username: username, secret: "sha256..." })
+// });
+
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
 Router.patch('/users/:id', checkAuthentication, userController.update);

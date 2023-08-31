@@ -5,10 +5,48 @@ const router = require('./router');
 const logRoutes = require('./middleware/log-routes');
 
 const app = express();
+const cors = require("cors");
+
 
 app.use(handleCookieSessions);  // adds a session property to each request representing the cookie
 app.use(logRoutes);       // print information about each incoming request
 app.use(express.json());  // parse incoming request bodies as JSON
+
+
+/////////
+app.use(cors({ origin: true }));
+//const express = require("express");
+// const cors = require("cors");
+// app.use(express.json());
+//app.use(cors({ origin: true }));
+
+// app.post("/authenticate", async (req, res) => {
+//   console.log("axios")
+//   const { username } = req.body;
+//   return res.json({ username: username, secret: "sha256..." });
+// });
+const axios = require("axios");
+
+app.post("/authenticate", async (req, res) => {
+  const { username } = req.body;
+  // Get or create user on Chat Engine!
+  console.log("axios")
+  try {
+    const r = await axios.put(
+      "https://api.chatengine.io/users/",
+      { username: username, secret: username, first_name: username },
+      { headers: { "Private-Key": "" } }
+    );
+    return res.status(r.status).json(r.data);
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data);
+  }
+});
+
+
+
+////////
+
 app.use(express.static(path.join(__dirname, '..', 'public'))); // Serve static assets from the public folder
 
 app.use('/api', router);

@@ -32,7 +32,7 @@ function DiscussionBoardBox({ onDiscussionBoardCreated }) {
 
   return (
     <div>
-      <h2>Create a New Discussion Board</h2>
+      <h2>Cdsreate a New Discussion Board</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Topic:</label>

@@ -65,10 +65,10 @@ class Chatbox {
   }
 }
 
-// const test = async () => {
-//   const attempt = await Chatbox.find(10); // Corrected method call
-//   console.log("test chat model",attempt);
-// };
-// test();
+const test = async () => {
+  const attempt = await Chatbox.find(10); // Corrected method call
+  console.log("test chat model",attempt);
+};
+test();
 
 module.exports = Chatbox;

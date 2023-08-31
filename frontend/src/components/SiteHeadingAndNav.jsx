@@ -4,7 +4,10 @@ import CurrentUserContext from "../contexts/current-user-context";
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
-
+console.log("current user context siteHeading page", currentUser)
+if(!currentUser){
+  console.log("not user")
+}
   return <header>
     <a id='logo' href='/'>Coming Soon...</a>
     <nav>

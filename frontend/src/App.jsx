@@ -8,12 +8,13 @@ import SiteHeadingAndNav from './components/SiteHeadingAndNav';
 import NotFoundPage from './pages/NotFound';
 import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
-import UsersPage from './pages/Users';
+import Homee from './pages/Home'
 import UserPage from './pages/User';
 import QuizLessonPage from './pages/QuizLesson';
-import SelectLanguages from './pages/SelectLanguage';
-import TestPage from './pages/Test';
+//import SelectLanguages from './pages/SelectLanguage';
+//import TestPage from './pages/Test';
 import Quiz from './pages//QuizTestPage';
+import MessagePage from './pages/MessagePage'
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -35,8 +36,8 @@ export default function App() {
     <main>
       <Routes>
       {/* <QuizLessonPage/> */}
-      <Route path='/' element={<TestPage/>} />
-      <Route path='/u' element={<SelectLanguages />} />
+      <Route path='/' element={<Homee />} />
+      <Route path='/e' element={<MessagePage />} />
 
         <Route path='/quiz' element={<Quiz />} />
         <Route path='/lessons' element={<QuizLessonPage />} />

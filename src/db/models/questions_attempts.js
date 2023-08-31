@@ -73,10 +73,10 @@ class QuizAttempts {
 }
 
 //YOU CAN RUN THIS AND PASS THINGS INTO IT TEST WHATS GONNA BE DISPLAYED IN THE TERMINAL AND IN YOUR TABLEPLUS
-// const test = async () => {
-//   const attempt = await QuizAttempts.create(1, 2, 3, 4); // Corrected method call
-//   console.log(attempt);
-// };
-// test();
+const test = async () => {
+  const attempt = await QuizAttempts.create(1, 2, 3, 4); // Corrected method call
+  console.log(attempt);
+};
+test();
 
 module.exports = QuizAttempts;
