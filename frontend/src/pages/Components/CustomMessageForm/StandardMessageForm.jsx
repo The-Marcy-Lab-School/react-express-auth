@@ -28,6 +28,7 @@ const StandardMessageForm = ({ props, activeChat }) => {
 
   return (
     <MessageFormUI
+   
       setAttachment={setAttachment}
       message={message}
       handleChange={handleChange}

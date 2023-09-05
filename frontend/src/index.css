@@ -96,6 +96,7 @@ html, body, #root, .app {
 .ce-chat-engine {
   color: var(--tertiary-50) !important;
   font-family: "Rubik" !important;
+  background-color: #0218b9;
 }
 
 /* Chat List */
@@ -209,5 +210,115 @@ html, body, #root, .app {
   color: var(--gray-300) !important
 }
 .ce-message-list{
-    background-color: #00b5e0;
+    background-color: #ae1cae;
+}
+
+
+
+/* Add custom styles for the chat card */
+.custom-chat-card {
+    background-color: #1b00a0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .custom-chat-card:hover {
+    background-color: #832323;
+  }
+  
+
+  #ce-message-list-201008{
+    /* height: 300px;
+    width: 300px; */
+    background-color: rgb(10, 46, 10) !important;
+    color: red
+  }
+  
+  .chatBox {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .chatSidebar {
+    width: 25%;
+    background-color: #f0f0f0; /* Adjust the background color as needed */
+    padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Add a shadow to the sidebar */
+     border:1px solid #ccc;
+  }
+  
+  .chatContent {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+    /* padding: 20px; */
+    background-color: #fff;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+  
+  .a.i {
+    background-color: #24a0ed; /* Background color for the AI bubble */
+    border-radius: 50%; /* Make it round */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Adjust spacing as needed */
+  }
+  
+  #ce-feed-container{
+    background-color: #ffffff !important
+  }
+
+
+
+
+  /* chat response */
+
+
+        /* Style for the chat container */
+        .chat-container {
+          width: 300px;
+          margin: 20px auto;
+          border: 1px solid #ccc;
+          padding: 10px;
+          background-color: #f0f0f0;
+      }
+
+      /* Style for individual chat messages */
+      .message {
+          margin: 10px 0;
+          padding: 5px 10px;
+          background-color: #ccc;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+      }
+
+      /* Style for user and assistant messages */
+      .user-message {
+          background-color: #e1ffc7;
+          text-align: left;
+      }
+
+      .assistant-message {
+          background-color: #c7e4ff;
+          text-align: right;
+      }
+
+     /* message container scroll */
+
+     /* Add this to your existing CSS */
+.messages-container {
+  /* height: 400px;  */
+  /* Adjust the height as needed */
+  overflow-y: auto;
+  padding: 10px; 
+}
+
+.messages-scroll {
+  /* padding: 10px; */
+   /* Add some padding for better scrolling appearance */
 }
