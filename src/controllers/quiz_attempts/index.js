@@ -1,7 +1,8 @@
 const list = require('./list');
 const create = require('./create');
+const find = require('./find');
+const update = require('./update');
 // const show = require('./show');
-// const update = require('./update');
 
 // const login = require('./login');
 // const logout = require('./logout');
@@ -10,8 +11,8 @@ const create = require('./create');
 module.exports = {
   list,
   create,
-  // show,
-  // update,
+  find,
+  update,
 
   // login,
   // logout,

@@ -1,3 +1,4 @@
+
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
@@ -66,79 +67,55 @@ li{
   font-size: 20px;
   margin-top: 8px;
 }
-/* QuizTestPage.css */
-
-.quiz-test {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
-}
-
-.quiz-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.score {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-.final-results {
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 10px;
-}
-
-.results-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.results-score {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-.answer-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.answer-table th,
-.answer-table td {
-  padding: 12px;
-  border: 1px solid #ccc;
+.quiz-test{
   text-align: center;
 }
 
-.answer-table th {
-  font-weight: bold;
-  background-color: #f2f2f2;
+.question-card{
+  margin: 0;
+  
+  background-color: #EEBC32;
+  padding: 16px;
+  border-radius: 16px;
+  color: #000;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  
+  width: auto;
+  height: auto;
+  
 }
 
-.user-answer-cell {
-  color: #e74c3c; /* Red color for user's wrong answers */
+.question-text{
+  font-size: 24px;
 }
 
-.correct-answer-cell {
-  color: #2ecc71; /* Green color for correct answers */
+.final-results{
+  margin: 0;
+  
+  background-color: #EEBC32;
+  padding: 16px;
+  border-radius: 16px;
+  color: #000;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  
+  width: auto;
+  height: auto;
 }
 
-.restart-button {
-  background-color: #FF965E;
-  color: white;
+button {
+  background-color: #FF965E ; /* Green */
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+  color: white;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 16px;
-  margin-top: 20px;
-}
-
-.restart-button:hover {
-  background-color: #ffdc50;
+  font-weight: bold;
+  
+  border-radius: 24px;
 }
 
 
@@ -153,44 +130,12 @@ li{
 .lesson-button {
   margin: 10px; /* Add space around the buttons */
 }
-
-
-
-/* .final-results{
-  margin: 0;
-
-  background-color: #EEBC32;
-  padding: 16px;
-  border-radius: 16px;
-  color: #000;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-
-  width: auto;
-  height: auto;
-} */
-
-button {
-  background-color: #FF965E ; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: bold;
-
-  border-radius: 24px;
-}
-
-/* <!-- HTML !-->
-<button class="button-52" role="button">Button 52</button> */
-
-.button-container {
+.top-center-container {
   display: flex;
-  gap: 10px; /* Adjust the gap as needed */
-  flex-wrap: wrap; /* Allow buttons to wrap to the next line if needed */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh; /* Set the container's height to 100% of the viewport height */
 }
 
 
@@ -233,17 +178,32 @@ button {
   }
 }
 
-/* .centered-container {
+.button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh; /* This ensures the container takes the full viewport height */
-/* } */
-
-.lesson-button {
-  margin: 10px; /* Add space around the buttons */
 }
+
+.button-52 {
+  margin: 5px; /* Add margin to the right of each button */
+  /* Add margin to the bottom of each button */
+}
+
+
+.diagonal-line {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid black; /* Adjust the color and size of the diagonal line */
+  margin: 5px; /* Adjust the margin to control spacing between the line and buttons */
+}
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 
 /* .animation_layer {

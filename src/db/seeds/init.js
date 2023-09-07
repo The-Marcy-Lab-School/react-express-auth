@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Quizzes = require('../models/quizzes')
 const QuizQuestions  = require('../models/question')
-const QuizAttempts = require('../models/questions_attempts')
+const QuizAttempts = require('../models/questionsAttempts')
 
 /**
  * @param { import("knex").Knex } knex
@@ -35,7 +35,8 @@ exports.seed = async (knex) => {
   await QuizQuestions.create(
     `What is "thank you" in French?`, 'merci', 'bonjour', 'au revoir', `s'il vous plaît`, 2
   );
-
+  
+  await QuizAttempts.create(14,1,1,1);
 
 
 };

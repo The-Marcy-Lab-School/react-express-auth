@@ -8,10 +8,12 @@ class Quizzes {
   }
 
   static async list() {
+    
     try {
-      const query = 'SELECT * FROM quiz_questions';
+      const query = 'SELECT * FROM quizzes';
       const { rows } = await knex.raw(query);
       console.log("model list quiz" + rows.map((quizzes) => new Quizzes(quizzes)))
+      // console.log("quiz topics model list", rows)
       return rows
       //.map((quizzes) => new Quizzes(quizzes));
     } catch(error) {

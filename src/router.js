@@ -6,7 +6,7 @@ const checkAuthentication = require('./middleware/check-authentication');
 //responsilbe for calling on the quiz  controller
 const quizController = require('./controllers/quizzes')
 const questionController = require('./controllers/questions')
-
+const quizAttemptController = require('./controllers/quiz_attempts')
 
 
 
@@ -24,11 +24,20 @@ Router.get('/me', userController.showMe);
 
 //routes for quiizes
 Router.post('/quiz', quizController.create)
+Router.get('/quiz/:id', quizController.find)
 Router.get('/q', quizController.list)
 
+
 Router.get('/questions', questionController.list)
+Router.get('/question/:id', questionController.find)
 ///qiestion routes
 //Router.get('/questions', questionsController.list);
+
+//Routes for the Quiz Attempts
+Router.post('/quiz_attempts', quizAttemptController.create)
+Router.get('/quiz_attempts', quizAttemptController.list)
+Router.get('/quiz_attempts/:id', quizAttemptController.find)
+Router.patch('/quiz_attempts/:id', quizAttemptController.update)
 
 
 // These actions require authentication (only valid logged in users can do these things)

@@ -15,7 +15,7 @@ class Questions {
     try {
       const query = 'SELECT * FROM quiz_questions';
       const { rows } = await knex.raw(query);
-      console.log("model list quiz" + rows.map((quizzes) => new Questions(quizzes)))
+      //console.log("model list quiz" + rows.map((quizzes) => new Questions(quizzes)))
       return rows
       //.map((quizzes) => new Quizzes(quizzes));
     } catch(error) {
@@ -32,17 +32,19 @@ class Questions {
   // }
   static async find(id) {
     try {
-      const query = 'SELECT * FROM quiz_questions WHERE id = ?';
-      const { rows: [quizzes] } = await knex.raw(query, [id]);
-      return quizzes ? new Questions(quizzes) : null;
+      const query = 'SELECT * FROM quiz_questions WHERE quiz_id = ?';
+      const { rows} = await knex.raw(query, [id]);
+      // console.log("question find rows" + rows)
+      return rows
     } catch(error) {
       console.log(error);
       return null;
     }
   }
+  
 
   static async create(question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id) {
-    console.log("quzzes", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
+    //console.log("quzzes", question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)
     try {
       const query = `
         INSERT INTO quiz_questions (question, answer, wrong_answer_1, wrong_answer_2, wrong_answer_3, quiz_id)

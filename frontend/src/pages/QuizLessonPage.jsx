@@ -37,13 +37,14 @@ export default function QuizLessonPage() {
     <div className="centered-container">
       <h1>Spanish Lessons</h1>
       <button
-        className="lesson-button show-modalbutton"
+    
+        className="lesson-button show-modalbutton button-52"
         onClick={() => setShowModal(true)}
       >
         Spanish Lesson 1
       </button>
       <button
-        className="lesson-button"
+        className="button-52"
         disabled={userProgress < 85} // Disable the button until progress reaches 85%
       >
         Spanish Lesson 2
