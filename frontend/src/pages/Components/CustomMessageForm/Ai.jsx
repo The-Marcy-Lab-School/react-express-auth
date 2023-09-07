@@ -15,11 +15,31 @@ import "regenerator-runtime";
 import speech, { useSpeechRecognition } from "react-speech-recognition";
 
 function SearchBar() {
+
+  // var divElement = document.getElementById("ce-upload-document-button");
+
+  // // Remove the class from the element
+  // divElement.classList.remove("ce-attachment-icon");
+
+  // // Remove the element from the DOM
+  // divElement.parentNode.removeChild(divElement);
+
   const [responseInput, setResponseInput] = useState("");
   const [userInput, setUserInput] = useState("");
   const { listening, transcript, resetTranscript } = useSpeechRecognition();
+const [modalVisible, setModalVisible] = useState(false); // Modal visibility state
+
+  // Function to show the modal and set a timeout to hide it
+  const showImageModal = () => {
+    setModalVisible(true);
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 23000); // 23 seconds in milliseconds
+  };
+
+
   const messages = [
-    { id: 1, userid: 14, ai_response: "helo", user_response: "he" },
+    { id: 1, userid: 14, ai_response: "helo", user_response: "im user" },
     { id: 2, userid: 14, ai_response: "ho", user_response: "hello" },
   ];
 
@@ -88,12 +108,26 @@ function SearchBar() {
   };
 
   return (
+  <>
+<>
+          <button onClick={showImageModal}>Show Image</button>
+          {modalVisible && (
+            <div className="modal">
+              <img
+                src="https://i.pinimg.com/originals/58/81/48/5881489fcde058a20cbc811d1a1cf9d7.gif" // Replace with your image path
+                alt="Your Image"
+                className="modal-content"
+              />
+            </div>
+          )}
+   </>   
+
     <div className="chatBox">
       <div className="chatSidebar">
         <div className="a.i">okm</div>
 
         {listening ? <p>wrk</p> : <p>CLICK</p>}
-        <button onClick={() => speech.startListening()}>Ask</button>
+       
 
         {transcript && <div>{transcript}</div>}
         {/* <ChatList {...chatProps} /> */}
@@ -107,17 +141,143 @@ function SearchBar() {
             </div>
           ))}
         </div>
+<div>
+<div style={{ display: "flex" }}>
+          <MessageForm
+            style={{
+              border: "1px solid #ccc",
+              width: "100%",
+            }}
+            onSubmit={(event) => handleSubmit(event.text)}
+          />
+          <button
+            onClick={() => {
+              // {showImageModal}
+              // Handle the button click action here
+              console.log("Button clicked!");
+              speech.startListening()
+              // You can add your custom logic here
+            }}
+          >
+            Your Button
+          </button>
+          
+        </div>
+</div>
 
-        <MessageForm
-          style={{
-            border: "1px solid #ccc",
-            width: "100%",
-          }}
-          onSubmit={(event) => handleSubmit(event.text)}
-        />
+
+
+
+
+
       </div>
     </div>
+</>
   );
 }
 
 export default SearchBar;
+
+
+
+// import React, { useState, useEffect } from "react";
+// import {
+//   useMultiChatLogic,
+//   MultiChatSocket,
+//   MultiChatWindow,
+//   ChatCard,
+//   ChatFeed,
+//   MessageList,
+//   ChatForm,
+//   PeopleSettings,
+//   ChatList,
+//   MessageForm,
+// } from "react-chat-engine-advanced";
+// import "regenerator-runtime";
+// import speech, { useSpeechRecognition } from "react-speech-recognition";
+
+// function SearchBar() {
+//   const [responseInput, setResponseInput] = useState("");
+//   const [userInput, setUserInput] = useState("");
+//   const { listening, transcript, resetTranscript } = useSpeechRecognition();
+//   const [modalVisible, setModalVisible] = useState(false); // Modal visibility state
+
+//   // Function to show the modal and set a timeout to hide it
+//   const showImageModal = () => {
+//     setModalVisible(true);
+//     setTimeout(() => {
+//       setModalVisible(false);
+//     }, 23000); // 23 seconds in milliseconds
+//   };
+
+//   const messages = [
+//     { id: 1, userid: 14, ai_response: "helo", user_response: "im user" },
+//     { id: 2, userid: 14, ai_response: "ho", user_response: "hello" },
+//   ];
+
+//   // Rest of your code...
+
+//   return (
+//     <div className="chatBox">
+//       <div className="chatSidebar">
+//         <div className="a.i">okm</div>
+
+//         {listening ? <p>wrk</p> : <p>CLICK</p>}
+
+//         {transcript && <div>{transcript}</div>}
+//         {/* <ChatList {...chatProps} /> */}
+//       </div>
+//       <div className="chatContent">
+//         <div className="messages-container">
+//           {messages.map((message) => (
+//             <div key={message.id}>
+//               <div className="message user-message">
+//                 {message.user_response}
+//               </div>
+//               <div className="message assistant-message">
+//                 {message.ai_response}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//         <div>
+//           <div style={{ display: "flex" }}>
+//             <MessageForm
+//               style={{
+//                 border: "1px solid #ccc",
+//                 width: "100%",
+//               }}
+//               onSubmit={(event) => handleSubmit(event.text)}
+//             />
+//             <button
+//               onClick={() => {
+//                 // {showImageModal}
+//                 // Handle the button click action here
+//                 console.log("Button clicked!");
+//                 speech.startListening();
+//                 // You can add your custom logic here
+//               }}
+//             >
+//               Your Button
+//             </button>
+//           </div>
+//         </div>
+
+//         <div className="App">
+//           <button onClick={showImageModal}>Show Image</button>
+//           {modalVisible && (
+//             <div className="modal">
+//               <img
+//                 src="https://i.pinimg.com/originals/58/81/48/5881489fcde058a20cbc811d1a1cf9d7.gif" // Replace with your image path
+//                 alt="Your Image"
+//                 className="modal-content"
+//               />
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default SearchBar;

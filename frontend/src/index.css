@@ -298,12 +298,12 @@ html, body, #root, .app {
       }
 
       /* Style for user and assistant messages */
-      .user-message {
+      .assistant-message {
           background-color: #e1ffc7;
           text-align: left;
       }
 
-      .assistant-message {
+      .user-message {  
           background-color: #c7e4ff;
           text-align: right;
       }
@@ -321,4 +321,54 @@ html, body, #root, .app {
 .messages-scroll {
   /* padding: 10px; */
    /* Add some padding for better scrolling appearance */
+}
+
+
+
+/* Add more styles as needed for the rest of your component */
+/* Modal Container */
+.modal-container {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top (adjust as needed) */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+  overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative; /* Allow close button to be positioned relative to this */
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #aaaaaa;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Modal Image */
+.modal-image {
+  width: 100%; /* Make sure the image expands to fit the modal */
+  height: auto;
 }
