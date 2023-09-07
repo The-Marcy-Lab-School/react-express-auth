@@ -7,4 +7,3 @@ POST http://localhost:3000/authenticate
 Content-Type: application/json
 
 {"username": "adam", "secret":"adam"}
-c

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 function FetchChatData() {
   const [chats, setChats] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

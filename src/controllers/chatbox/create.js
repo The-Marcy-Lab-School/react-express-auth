@@ -33,7 +33,7 @@ const createImg = async (req, res) => {
    console.log("url from controller",userResponses, aiResponses)
    const userId = session.userId; 
    //console.log("chatbox create controller",  ai_response, user_response )
-    const chats = await Chatbox.create(userId, userResponses, aiResponses);
+    const chats = await Chatbox.create(14, userResponses, aiResponses);
     res.send(chats);
   };
   

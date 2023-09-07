@@ -6,9 +6,9 @@ const findChat = async (req, res) => {
       //params: { id }, // this req.params.id is a part of the request URL
       //body: {userid }, 
     } = req;
-    const userId = session.userId; 
+    //const userId = session.userId; 
     //console.log("user id", userId)
-    const foundChats = await Chatbox.find(userId);
+    const foundChats = await Chatbox.find(14);
     //if (!user) return res.sendStatus(404);
   
    res.send(foundChats);

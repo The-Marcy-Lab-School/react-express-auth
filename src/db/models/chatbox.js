@@ -20,7 +20,7 @@ class Chatbox {
   }
 
   static async create(userid, ai_response, user_response) {
-    console.log("chatbox",userid, ai_response, user_response)
+    // console.log("chatbox",userid, ai_response, user_response)
     try {
       const query = `
         INSERT INTO chatbox (userid, ai_response, user_response)
@@ -39,12 +39,12 @@ class Chatbox {
   
 
   static async find(id) {
-    console.log("chats found by id number", id)
+    // console.log("chats found by id number", id)
     try {
       const query = 'SELECT * FROM chatbox WHERE userid = ?';
       const { rows } = await knex.raw(query, [id]);
       
-      console.log("chats found by id", rows)
+      // console.log("chats found by id", rows)
       return rows;
       //new Chatbox(chats);
 
