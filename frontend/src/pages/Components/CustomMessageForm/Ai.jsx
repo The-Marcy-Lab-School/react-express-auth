@@ -197,8 +197,8 @@ const speakMessage = (text) => {
             <option value="en-US">English</option>
           </select>
         </div>
-
-        {listening ? <p>wrk</p> : <p>CLICK</p>}
+{/* 
+        {listening ? <p>wrk</p> : <p>CLICK</p>} */}
        
 
         {transcript && <div>{transcript}</div>}
