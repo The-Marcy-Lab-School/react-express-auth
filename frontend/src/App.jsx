@@ -9,7 +9,7 @@ import NotFoundPage from './pages/NotFound';
 import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import Homee from './pages/Home'
-//import AI from './pages/Components/CustomMessageForm/Ai';
+import AI from './pages/Components/CustomMessageForm/Ai';
 //import QuizLessonPage from './pages/QuizLesson';
 //import SelectLanguages from './pages/SelectLanguage';
 //import TestPage from './pages/Test';
@@ -32,7 +32,7 @@ export default function App() {
   return (
   <>
 {/* <Video/> */}
-  <MessagePage/>
+  <AI/>
    </>
   )
 }
