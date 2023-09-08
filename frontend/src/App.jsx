@@ -9,13 +9,13 @@ import NotFoundPage from './pages/NotFound';
 import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import Homee from './pages/Home'
-import Use from './pages/Components/CustomMessageForm/Ai';
-import QuizLessonPage from './pages/QuizLesson';
+//import AI from './pages/Components/CustomMessageForm/Ai';
+//import QuizLessonPage from './pages/QuizLesson';
 //import SelectLanguages from './pages/SelectLanguage';
 //import TestPage from './pages/Test';
 // import Quiz from './pages//QuizTestPage';
-// import MessagePage from './pages/MessagePage'
-//import Video from './pages/Components/chats/Index'
+ import MessagePage from './pages/Components/chats/Index'
+import SearchDiscussions from './pages/Discussion'
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function App() {
   return (
   <>
 {/* <Video/> */}
-  <Use/>
+  <MessagePage/>
    </>
   )
 }

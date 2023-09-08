@@ -96,7 +96,7 @@ html, body, #root, .app {
 .ce-chat-engine {
   color: var(--tertiary-50) !important;
   font-family: "Rubik" !important;
-  background-color: #0218b9;
+  background-color: #ffffff;
 }
 
 /* Chat List */
@@ -324,49 +324,51 @@ html, body, #root, .app {
 }
 
 
+
+/* Add more styles as needed for the rest of your component */
 /* Modal Container */
 .modal-container {
-  display: none !important; /* Hidden by default */
-  position: fixed !important; /* Stay in place */
-  z-index: 9999 !important; /* Sit on top (adjust as needed) */
-  left: 0 !important;
-  top: 0 !important;
-  width: 100% !important; /* Full width */
-  height: 100% !important; /* Full height */
-  background-color: rgba(0, 0, 0, 0.4) !important; /* Semi-transparent background */
-  overflow: auto !important; /* Enable scroll if needed */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top (adjust as needed) */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+  overflow: auto; /* Enable scroll if needed */
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe !important;
-  margin: auto !important;
-  padding: 20px !important;
-  border: 1px solid #888 !important;
-  width: 80% !important;
-  position: relative !important; /* Allow close button to be positioned relative to this */
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2) !important;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative; /* Allow close button to be positioned relative to this */
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
 /* The Close Button */
 .close {
-  position: absolute !important;
-  top: 10px !important; 
-  right: 10px !important;
-  color: #aaaaaa !important;
-  font-size: 24px !important;
-  font-weight: bold !important;
-  cursor: pointer !important;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #aaaaaa;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
-  color: #000 !important;
-  text-decoration: none !important;
+  color: #000;
+  text-decoration: none;
 }
 
 /* Modal Image */
 .modal-image {
-  width: 100% !important; /* Make sure the image expands to fit the modal */
-  height: auto !important;
+  width: 100%; /* Make sure the image expands to fit the modal */
+  height: auto;
 }
