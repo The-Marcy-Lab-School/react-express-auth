@@ -20,7 +20,7 @@ class Comments {
 //   }
 
   static async create(content,user_id,discussion_board_id) {
-    console.log("cdiscussion",content,user_id,discussion_board_id)
+    console.log("c-Comments",content,user_id,discussion_board_id)
     try {
       const query = `
         INSERT INTO comments (content,user_id,discussion_board_id)
@@ -65,10 +65,10 @@ class Comments {
   }
 }
 
-// const test = async () => {
-//   const attempt = await Chatbox.find(10); // Corrected method call
-//   console.log("test chat model",attempt);
-// };
-// test();
+const test = async () => {
+  const attempt = await Comments.create("testing to comment",2,1); // Corrected method call
+  console.log("test comments model",attempt);
+};
+test();
 
 module.exports = Comments;
