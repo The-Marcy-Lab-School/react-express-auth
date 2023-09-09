@@ -92,8 +92,8 @@ useEffect(() => {
   })
 
   const data = await response.json();
-  return "hello response "
-  //ata.choices[0].message.content
+  return "me llamo "
+  //data.choices[0].message.content
   }
 
   const sendMessagesToBackend = async (aiResponse, userResponse) => {

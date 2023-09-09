@@ -14,8 +14,12 @@ import AI from './pages/Components/CustomMessageForm/Ai';
 //import SelectLanguages from './pages/SelectLanguage';
 //import TestPage from './pages/Test';
 // import Quiz from './pages//QuizTestPage';
- import MessagePage from './pages/Components/chats/Index'
+//import MessagePage from './pages/Components/chats/Index'
+import QuizTestPage from './pages/QuizTestPage';
+import QuizLesson from './pages/QuizLesson';
 import SearchDiscussions from './pages/Discussion'
+import SelectLanguage from './pages/SelectLanguage';
+import Test from './pages/Test';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -31,8 +35,15 @@ export default function App() {
   // )
   return (
   <>
-{/* <Video/> */}
-  <AI/>
+    <SiteHeadingAndNav />
+    <main>
+      <Routes>
+        <Route path='/' element={<SelectLanguage/>} />
+        <Route path='/lessons' element={<QuizLesson />} />
+        <Route path='/quiz' element={<QuizTestPage />} />
+        <Route path='test' element={<Test />} />
+      </Routes>
+    </main>
    </>
   )
 }

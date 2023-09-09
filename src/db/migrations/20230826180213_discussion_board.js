@@ -8,7 +8,7 @@ exports.up = function(knex) {
     table.string('topic').notNullable();
     table.text('description').notNullable();
     table.integer('user_id').unsigned().notNullable();
-    table.foreign('user_id').references('id').inTable('users');
+    //table.foreign('user_id').references('id').inTable('users');
     table.timestamps(true, true);
     });
   };
