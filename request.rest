@@ -1,0 +1,9 @@
+#  POST http://localhost:5173//authenticate
+#  Content-Type: application/json
+#  {"username": "adam"}
+
+
+POST http://localhost:3000/authenticate
+Content-Type: application/json
+
+{"username": "earth", "secret":"earth"}

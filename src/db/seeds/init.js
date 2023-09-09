@@ -1,8 +1,10 @@
 const User = require('../models/user');
 const Quizzes = require('../models/quizzes')
-const QuizQuestions  = require('../models/question')
-const QuizAttempts = require('../models/questionsAttempts')
-
+ const QuizQuestions  = require('../models/questions')
+const Chatbox= require('../models/chatbox')
+const Lessons = require('../models/lessons')
+const DiscussionBoard = require('../models/discussion_board')
+const Comments = require('../models/comments')
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -13,31 +15,26 @@ exports.seed = async (knex) => {
   await User.create('l33t-guy', '1234');
   await User.create('wowow', '1234');
 
-  await Quizzes.create('Spainsh');
+  //  await Quizzes.create('wowow');
   await Quizzes.create('French');
+  await Quizzes.create('Spanish')
 
-  await QuizQuestions.create(
-    'What is "hello" in Spanish?', 'hola', 'adiós', 'gracias', 'por favor', 1
-  );
-  await QuizQuestions.create(
-    'What is "goodbye" in Spanish?', 'adiós', 'hola', 'gracias', 'por favor', 1
-  );
-  await QuizQuestions.create(
-    'What is "thank you" in Spanish?', 'gracias', 'hola', 'adiós', 'por favor', 1
-  );
-   
-  await QuizQuestions.create(
-    `What is "hello" in French?`, 'bonjour', 'au revoir', 'merci', `s'il vous plaît`, 2
-  );
-  await QuizQuestions.create(
-    `What is "goodbye" in French?`, 'au revoir', 'bonjour', 'merci', `s'il vous plaît`, 2
-  );
-  await QuizQuestions.create(
-    `What is "thank you" in French?`, 'merci', 'bonjour', 'au revoir', `s'il vous plaît`, 2
-  );
-  
-  await QuizAttempts.create(14,1,1,1);
+   await QuizQuestions.create('What does is Bonjour in French ','Hello','Goodbye','Why','French',1,1);
+  await QuizQuestions.create('What is one in spanish','Uno','Dos','Five','Si',8,1);
+  // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
 
+  // //Chatbox input
+  // await Chatbox.create(10,"test","test");
+
+   // //Lessons input
+  await Lessons.create("lessons 1",1,1);
+  await Lessons.create("lessons 2",8,1);
+
+  await DiscussionBoard.create("porque","testing to see if you do")
+
+
+  //Comments Seeds
+  await Lessons.create("testing comment insertion",14,1);
 
 };
 

@@ -9,8 +9,8 @@ const find = require('./find');
 
 module.exports = {
   list,
-  find,
   create,
+  find,
   // update,
 
   // login,

@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+//import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUpPage from './pages/SignUp';
 import LoginPage from './pages/Login';
@@ -9,10 +10,12 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
-import QuizLessonPage from './pages/QuizLessonPage';
-// import Use from './pages/Test'
+import QuizLessonPage from './pages/QuizLesson'
+import Use from './pages/QuizTestPage'
 import QuizTestPage from './pages/QuizTestPage';
-import SelectedlanguagePage from './pages/SelectedlanguagePage';
+import SelectedlanguagePage from './pages/SelectLanguage'
+import AI from './pages/Components/CustomMessageForm/Ai'
+import Message from './pages/Components/chats/Index'
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -34,9 +37,12 @@ export default function App() {
         <Route path='/users' element={<UsersPage />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
-        <Route path='/quiz-test' element={<QuizTestPage />} />
+        <Route path='/quiz' element={<QuizTestPage />} />
         <Route path='/quiz-lesson' element={<QuizLessonPage />} />
         <Route path='/selected-language' element={<SelectedlanguagePage />} />
+        <Route path='/quiz-lesson' element={<QuizLessonPage />} />
+        <Route path='/ai' element={<AI/>} />
+        <Route path='/message' element={<Message/>} />
       </Routes>
     </main>
   </>;
