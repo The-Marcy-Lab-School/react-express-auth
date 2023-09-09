@@ -18,6 +18,9 @@ const lessonsController = require('./controllers/lessons')
 //ROUTES FOR DISCUSSION BOARD
 const discussionBoardController = require('./controllers/discussion_board')
 
+//ROUTES FOR COMMENTS
+const commentsController = require('./controllers/comments')
+
 const Router = express.Router();
 Router.use(addModelsToRequest);
 
@@ -51,6 +54,9 @@ Router.get('/lessons/:id', lessonsController.find)
 
 
 Router.post('/discussion',discussionBoardController.create)
+
+//COMMENTS/////////
+Router.get('/comments/:id', commentsController.find);
 
 // Router.post('/authenticate', async (req, res) => {
 //   const fakeUsername = 'fakeUser'; // Change this to your desired fake username

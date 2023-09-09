@@ -1,5 +1,5 @@
 //const list = require('./list');
-const create = require('./find');
+const find = require('./find');
 //const find = require('./find');
 // const update = require('./update');
 
@@ -9,7 +9,7 @@ const create = require('./find');
 
 module.exports = {
  // list,
-  find,
+  find
  // find,
   // update,
 

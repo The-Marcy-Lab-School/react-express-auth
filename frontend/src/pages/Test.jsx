@@ -93,7 +93,20 @@ function AutocompleteSearch() {
 
   const handleResultClick = (itemId) => {
     console.log(itemId)
-    setSelectedItemId(itemId);
+
+
+    fetch(`/api/comments/${itemId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      //setComments(data);
+    })
+    .catch((error) => {
+      console.error('Error fetching comments:', error);
+    });
+    // const clickedDiscussion = items.find((discussion) => discussion.id === itemId);
+    // console.log("discussion object",clickedDiscussion)
+    // setSelectedItemId(itemId);
   };
 
   return (

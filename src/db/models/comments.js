@@ -41,10 +41,10 @@ class Comments {
   static async find(id) {
     console.log("chats found by id number", id)
     try {
-      const query = 'SELECT * FROM comments WHERE id = ?';
+      const query = 'SELECT * FROM comments WHERE discussion_board_id = ?';
       const { rows } = await knex.raw(query, [id]);
       
-      console.log("chats found by id", rows)
+      console.log("chats found by id by model for comments", rows)
       return rows;
       //new Chatbox(chats);
 
@@ -65,10 +65,10 @@ class Comments {
   }
 }
 
-const test = async () => {
-  const attempt = await Comments.create("testing to comment",2,1); // Corrected method call
-  console.log("test comments model",attempt);
-};
-test();
+// const test = async () => {
+//   const attempt = await Comments.create("testing to comment",2,1); // Corrected method call
+//   console.log("test comments model",attempt);
+// };
+// test();
 
 module.exports = Comments;
