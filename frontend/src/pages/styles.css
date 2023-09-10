@@ -92,3 +92,19 @@ main {
     border-radius: 3px;
     cursor: pointer;
 }
+
+
+.reply {
+    background-color: #f2f2f2; /* Different background color for replies */
+    border: 1px solid #ccc; /* Adjust borders as needed */
+    margin: 5px 0; /* Adjust margin as needed */
+    padding: 5px 10px; /* Adjust padding as needed */
+  }
+  
+  .reply .reply-author {
+    font-weight: bold;
+  }
+  
+  .reply .reply-text {
+    margin-left: 10px; /* Indent reply text */
+  }
