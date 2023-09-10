@@ -10,13 +10,14 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
-import QuizLessonPage from './pages/QuizLesson'
+import QuizLessonPage from './pages/QuizLessonPage'
 import Use from './pages/QuizTestPage'
 import QuizTestPage from './pages/QuizTestPage';
 import SelectedlanguagePage from './pages/SelectedlanguagePage';
 import AI from './pages/Components/CustomMessageForm/Ai'
 import Message from './pages/Components/chats/Index'
 import SelectLanguages from './pages/SelectLanguage';
+import QuizLesson from './pages/QuizLesson';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -25,14 +26,14 @@ export default function App() {
 
   return (
     <>
-    <SelectedlanguagePage />
+    <QuizLessonPage />
     </>
   )
   // return <>
   //   <SiteHeadingAndNav />
   //   <main>
   //     <Routes>
-  //       {/* <Routes path='/lesson' element={<lesson />} */}
+
   //       <Route path='/' element={<Home />} />
   //       <Route path='/login' element={<LoginPage />} />
   //       <Route path='/sign-up' element={<SignUpPage />} />
@@ -45,6 +46,7 @@ export default function App() {
   //       <Route path='/quiz-lesson' element={<QuizLessonPage />} />
   //       <Route path='/ai' element={<AI/>} />
   //       <Route path='/message' element={<Message/>} />
+  //       <Route path='/lesson' element={<QuizLesson />} />
   //     </Routes>
   //   </main>
   // </>;

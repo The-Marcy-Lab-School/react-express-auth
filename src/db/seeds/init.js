@@ -30,11 +30,13 @@ exports.seed = async (knex) => {
   await Lessons.create("lessons 1",1,1);
   await Lessons.create("lessons 2",8,1);
 
+
   await DiscussionBoard.create("porque","testing to see if you do")
 
 
   //Comments Seeds
   await Lessons.create("testing comment insertion",14,1);
+  await Lessons.create("hi",2,2);
 
 };
 

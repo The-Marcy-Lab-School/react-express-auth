@@ -25,7 +25,7 @@ export default function SelectedLanguagePage({ children }) {
       .then(data => {
         console.log("fetch quiz data", data)
         setQuizData(data);
-        navigate("/lessons");
+        navigate("/lesson");
       })
       .catch(error => console.error(error));
   };
@@ -72,7 +72,7 @@ export default function SelectedLanguagePage({ children }) {
                         <p className="text-1xl mt-2 opacity-60 group-hover:opacity-70 ">About 45% of modern English words are of French origin</p>
                         <br />
                         <div className="relative px-3 py-5 font-bold text-black group inline-block">
-                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-orange-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-purple-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
                         <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
                         {quiz_topics.map(topic => (
                           <div key={topic.id}>
