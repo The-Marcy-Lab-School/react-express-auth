@@ -20,8 +20,10 @@ import QuizLesson from './pages/QuizLesson';
 import SearchDiscussions from './pages/Discussion'
 import SelectLanguage from './pages/SelectLanguage';
 import Test from './pages/Test';
+import CommentsPage from './pages/CommentsPage'
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
+  console.log("curent context", setCurrentUser)
   useEffect(() => {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
@@ -38,10 +40,12 @@ export default function App() {
     <SiteHeadingAndNav />
     <main>
       <Routes>
-        <Route path='/' element={<SelectLanguage/>} />
+        <Route path='/' element={<CommentsPage/>} />
         <Route path='/lessons' element={<QuizLesson />} />
         <Route path='/quiz' element={<QuizTestPage />} />
         <Route path='test' element={<Test />} />
+        <Route path='/Home' element={<Homee />} />
+        <Route path='/login' element={<SignUpPage />} />
       </Routes>
     </main>
    </>

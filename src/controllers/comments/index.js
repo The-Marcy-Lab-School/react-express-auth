@@ -1,6 +1,6 @@
 //const list = require('./list');
 const find = require('./find');
-//const find = require('./find');
+const create = require('./create');
 // const update = require('./update');
 
 // const login = require('./login');
@@ -9,8 +9,8 @@ const find = require('./find');
 
 module.exports = {
  // list,
-  find
- // find,
+  find,
+ create
   // update,
 
   // login,

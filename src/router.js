@@ -57,6 +57,7 @@ Router.post('/discussion',discussionBoardController.create)
 
 //COMMENTS/////////
 Router.get('/comments/:id', commentsController.find);
+Router.post('/comments', commentsController.create);
 
 // Router.post('/authenticate', async (req, res) => {
 //   const fakeUsername = 'fakeUser'; // Change this to your desired fake username
