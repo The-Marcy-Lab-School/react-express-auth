@@ -1,65 +1,89 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import QuizDataContext from '../contexts/quiz-data-conext';
+import { useNavigate } from "react-router-dom";
 
-
-export default function SelectedLanguagePage() {
-  const [quizTopic, setQuizTopic] = useState([]);
-
+export default function SelectedLanguagePage({ children }) {
+  const [quiz_topics, setTopics] = useState([]);
+  //const [selectedTopic, setSelectedTopic] = useState(null);
+  const { setQuizData } = useContext(QuizDataContext)
+ const navigate = useNavigate();
   useEffect(() => {
-    fetch("/api/q")
+    fetch('api/q')
       .then(response => response.json())
       .then(data => {
-        console.log("question data", data);
-        setQuizTopic(data); 
+        setTopics(data);
       })
       .catch(error => console.error(error));
   }, []);
 
-  console.log("quiz array data", quizTopic);
 
-  const handleLanguageClick = (languageId) => {
-    console.log(languageId)
-    fetch(`/api/question/${languageId}`)
+  const fetchQuizData = (quizId) => {
+    console.log("quizId", quizId)
+    fetch(`api/lessons/${quizId}`)
       .then(response => response.json())
       .then(data => {
-        console.log(`Language ${languageId} data`, data);
-        // Perform any necessary processing with the fetched data
+        console.log("fetch quiz data", data)
+        setQuizData(data);
+        navigate("/lessons");
       })
       .catch(error => console.error(error));
   };
-  {/* {quizTopic.map(language => (
-    <button key={language.id} className="button-52" onClick={() => handleLanguageClick(language.id)}>
-      {language.topic}
-    </button>
-  ))} */}
+ 
   return (
     <>
 <div style={{backgroundColor:"#fff8f4"}} className="h-full">
     <div className="container mx-auto  lg:px-20" >
         <div className='grid grid-cols-3 h-full pb-40'>
             <div className="border-r border-gray-300 mx-3 lg:pl-20">
-                <div className=" py-10 pb-3 mt-72 h-4/6 relative bg-purple-100 group hover:bg-purple-200 cursor-pointer transition ease-out duration-300"> 
+                <div className=" py-10 pb-3 mt-72 h-4/6 relative bg-green-100 group hover:bg-white-200 cursor-pointer transition ease-out duration-300"> 
                     <div>
                         <div className="w-4 h-1/5 bg-red-50	absolute right-0 -top-48 bg-purple-100 group-hover:bg-purple-50"></div>
-                        <img src="https://i.ibb.co/FzkhpcD/pngegg.png" alt="https://www.pngegg.com/en/png-nllal/download"/>
+                        <img src="https://d21buns5ku92am.cloudfront.net/65468/images/406053-Blog%20Post%20Spain-c0c9b0-large-1635929557.png"/>
                     </div>
-                    <div className="px-7 mt-20">
-                        <h1 className="text-3xl font-bold group-hover:text-purple-300 transition ease-out duration-300">01.</h1>
-                        <h2  className="text-1xl mt-4 font-bold">Roof light lamp</h2>
-                        <p className="mt-2 opacity-60 group-hover:opacity-70 ">Diverse collection of roof lights of quality</p>
+                    <div className="px-7 mt-5">
+                      <h1 className="text-3xl font-bold group-hover:text-purple-300 transition ease-out duration-300">Español</h1>
+                      <p className="mt-2 opacity-60 group-hover:opacity-70">Like most languages, Spanish has its own very unique words which can’t be translated in other languages</p>
+                      <br />
+                      <div className="relative px-3 py-5 font-bold text-black group inline-block">
+                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-green-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+                        <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+                        {quiz_topics.map(topic => (
+                          <div key={topic.id}>
+                            {topic.topic === 'Spanish' && (
+                              <span className="relative block text-center bg-transparent cursor-pointer" onClick={() => fetchQuizData(topic.id)}>
+                                Get Started
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                 </div>
             </div>
             <div className="border-r border-gray-300 mx-3 lg:pl-20">
-                <div className=" py-10  pb-3 mt-32 h-4/6 relative bg-indigo-100 group hover:bg-indigo-200 cursor-pointer transition ease-out duration-300"> 
+                <div className=" py-10  pb-3 mt-32 h-4/6 relative bg-orange-100 group hover:bg-indigo-200 cursor-pointer transition ease-out duration-300"> 
                     <div>
                         <div className="w-4 h-1/5 bg-red-50	absolute right-0 -top-48 bg-indigo-100  group-hover:bg-indigo-50"></div>
-                        <img src="https://i.ibb.co/JB4GWMJ/pngegg-1.png" alt="https://www.pngegg.com/en/png-zquqj/download"/>
+                        <img src="https://cdn.dribbble.com/users/2893989/screenshots/14742053/media/f85d6542e8f0a3d8bca3c5561a9f32a6.png?resize=400x0"/>
                     </div>
-                   <div className="px-7 mt-20">
-                        <h1 className="text-3xl font-bold group-hover:text-indigo-300 transition ease-out duration-300">02.</h1>
-                        <h2  className="text-1xl mt-4 font-bold">Lounge Chair</h2>
-                        <p className="mt-2 opacity-60 group-hover:opacity-70 ">Comfortable collection of perfect lounge chairs</p>
+                   <div className="px-7 mt-5">
+                        <h1 className="text-3xl font-bold group-hover:text-indigo-300 transition ease-out duration-300">Français</h1>
+                        <p className="text-1xl mt-2 opacity-60 group-hover:opacity-70 ">About 45% of modern English words are of French origin</p>
+                        <br />
+                        <div className="relative px-3 py-5 font-bold text-black group inline-block">
+                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-orange-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+                        <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+                        {quiz_topics.map(topic => (
+                          <div key={topic.id}>
+                            {topic.topic === 'French' && (
+                              <span className="relative block text-center bg-transparent cursor-pointer" onClick={() => fetchQuizData(topic.id)}>
+                                Get Started
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                 </div>
             </div>
@@ -67,12 +91,26 @@ export default function SelectedLanguagePage() {
                 <div className=" py-10 pb-3 mt-5 h-4/6 relative bg-red-100 group hover:bg-red-200 cursor-pointer transition ease-out duration-300"> 
                      <div>
                         <div className="w-4 h-1/5 bg-red-50	absolute right-0 -bottom-44 bg-red-100 group-hover:bg-red-50"></div>
-                        <img src="https://i.ibb.co/MgnH44p/pngegg-2.png" alt="https://www.pngegg.com/en/png-epwii/download"/>
+                        <img src="https://cdn.dribbble.com/users/916264/screenshots/7908122/japan.png" />
                     </div>
-                    <div className="px-7 mt-5">
-                        <h1 className="text-3xl font-bold group-hover:text-red-300 transition ease-out duration-300">03.</h1>
-                        <h2  className="text-1xl mt-4 font-bold">Scandinavia Couch</h2>
-                        <p className="mt-2 opacity-60 group-hover:opacity-70 ">Best selection of scandinavia couch for your home</p>
+                    <div className="px-7 mt-10">
+                        <h1 className="text-3xl font-bold group-hover:text-red-300 transition ease-out duration-300">日本語</h1>
+                        <p>(Nihongo/Japanese)</p>
+                        <p className=" text-sm mt-2 opacity-60 group-hover:opacity-70 ">Japanese is the ninth most spoken language in the world</p>
+                        <br />
+                        <div className="relative px-3 py-5 font-bold text-black group inline-block">
+                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-pink-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+                        <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+                        {quiz_topics.map(topic => (
+                          <div key={topic.id}>
+                            {topic.topic === 'Japanese' && (
+                              <span className="relative block text-center bg-transparent cursor-pointer" onClick={() => fetchQuizData(topic.id)}>
+                                Get Started
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                 </div>
             </div>

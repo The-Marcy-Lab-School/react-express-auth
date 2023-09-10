@@ -146,7 +146,8 @@
 
 
 import React, { useState, useEffect } from "react";
-
+import Context from '../contexts/lesson-context';
+import LessonContext from '../contexts/lesson-context'
 function shuffleArray(array) {
   return array.slice().sort(() => Math.random() - 0.5);
 }
@@ -155,7 +156,8 @@ export default function QuizTestPage() {
   const [showFinalResults, setFinalResults] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [questions, setQuestions] = useState([]);
+  // const [questions, setQuestions] = useState([]);
+  const { questions } = useContext(LessonContext)
   const [selectedOption, setSelectedOption] = useState(null);
   const [userAnswers, setUserAnswers] = useState([]);
   const [timeRemaining, setTimeRemaining] = useState(60); // Initial time in seconds

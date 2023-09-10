@@ -91,7 +91,22 @@ export default function SelectLanguages({ children }) {
             <button onClick={() => fetchQuizData(topic.id)}>Fetch Quiz Data</button>
           </li>
         ))}
-      </ul>    
+</ul>    
     </>
   );
 }
+
+
+{/* <a href="#_" className="relative px-3 py-5 font-bold text-black group" >
+<span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-green-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+<span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+  {quiz_topics.map(topic => (
+    <div key={topic.id}>
+    {topic.topic === 'Spanish' && (
+    <span className="relative" onClick={() => fetchQuizData(topic.id)}>
+      get started
+    </span>
+    )}
+  </div>
+))}
+</a> */}
