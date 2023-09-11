@@ -46,7 +46,7 @@ export default function App() {
   //       <Route path='/quiz-lesson' element={<QuizLessonPage />} />
   //       <Route path='/ai' element={<AI/>} />
   //       <Route path='/message' element={<Message/>} />
-  //       <Route path='/lesson' element={<QuizLesson />} />
+  //       <Route path='/lesson' element={<QuizLessonPage />} />
   //     </Routes>
   //   </main>
   // </>;
