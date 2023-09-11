@@ -3,12 +3,21 @@ import React, { useState, useEffect ,useContext} from "react";
 import Context from '../contexts/quiz-data-conext';
 import LessonContext from '../contexts/lesson-context'
 import { useNavigate } from "react-router-dom";
+import 'semantic-ui-css/semantic.min.css';
+import { Progress } from 'semantic-ui-react';
 
+
+// const ProgressExampleProgress = () => <Progress percent={44} progress />
+
+// export default ProgressExampleProgress
 export default function QuizLessonPage() {
   const [showModal, setShowModal] = useState(false);
   const { quizData, setQuizData } = useContext(Context);
   const {setQuestionsData} = useContext(LessonContext )
   const navigate = useNavigate();
+
+
+
   const fetchLessonData = (quizId, levelId) => {
  
     
@@ -74,6 +83,16 @@ export default function QuizLessonPage() {
     ))} */}
     return (
       <>
+            <>
+          {/* <div className="relative mb-5 py-9">
+            <div className="rounded-full border border-red-500 p-1">
+              <div className="flex h-6 items-center justify-center rounded-full bg-red-300 text-xs leading-none" style={{ width: "85%", height: "85%" }}>
+                <span className="p-1 text-white">1%</span>
+              </div>
+            </div>
+          </div> */}
+        </>
+        <br/>
         <div style={{ backgroundColor: "#fff8f4" }} className="h-full">
           <div className="container mx-auto lg:px-20">
             <div className="grid grid-cols-1 h-full pb-40">
