@@ -51,8 +51,10 @@
 
 // export default Test;
 
-import React, { useState } from 'react';
-
+import React, { useState,useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import DiscussionContext from '../contexts/discussion-context';
+import CommentsContext from '../contexts/comment-context';
 const items = [
   { id: 1, title: 'Item 1', description: 'Description for Item 1' },
   { id: 2, title: 'Item 2', description: 'Description for Item 2' },
@@ -66,6 +68,11 @@ function AutocompleteSearch() {
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const navigate = useNavigate();
+  //discussion context
+  const {setDiscussionsData} = useContext(DiscussionContext)
+  //comment context
+  //const {setCommentsData} = useContext(CommentsContext)
 
   const handleInputChange = (event) => {
     const value = event.target.value.toLowerCase();
@@ -99,6 +106,8 @@ function AutocompleteSearch() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      setDiscussionsData(data)
+      navigate("/");
       //setComments(data);
     })
     .catch((error) => {

@@ -49,28 +49,85 @@
 // }
 
 // export default DiscussionForum;
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './styles.css'; // Import your CSS file
 
+//discussion forum context 
+import DiscussionContext from '../contexts/discussion-context';
+//comment context
+import CommentsContext from '../contexts/comment-context';
 function DiscussionForum() {
   const [newComment, setNewComment] = useState('');
+  const [newReplies, setNewReplies] = useState('');
   //variable for replies and counts
   const [showReplies, setShowReplies] = useState({});
   const [replyCounts, setReplyCounts] = useState({});
+ // const navigate = useNavigate();
+ const [sortedComments, setComments] = useState([]);
+  const {discussionsData} = useContext(DiscussionContext)
+//   console.log("discussionsData info",discussionsData.id)
 
+  //const {commentsData}
+  //const { commentsData: comments }  = useContext(CommentsContext)
+  //
   //COMMENTS TO TEST 
-  const comments = [
-    { id: 1, author: 'John Doe', text: 'This is the first comment' },
-    { id: 2, author: 'Alice Smith', text: 'This is the second comment' },
-  ];
+//   const comments = [
+//     { id: 1, author: 'John Doe', text: 'This is the first comment' },
+//     { id: 2, author: 'Alice Smith', text: 'This is the second comment' },
+//   ];
   
-  const replies = [
-    { id: 1, commentId: 1, author: 'Jane', text: 'Reply to Comment 1' },
-    { id: 2, commentId: 1, author: 'Bob', text: 'Another reply to Comment 1' },
-    // Add more replies here
-  ];
+ ////Reples fetch 
+ const [replies, setReplies] = useState([]);
 
-  //CODE THAT ALLOWS DROP DOWN 
+console.log("discussion data",discussionsData[0].id)
+////////////////////////////////////////////////////////////////GET COMMENTS FROM BACKEND///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ useEffect(() => {
+    // Define your API endpoint for fetching comments by discussion ID
+  const apiUrl = `api/comments/${discussionsData[0].id}`;
+    // Fetch data from the API
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Assuming the data is an array of comments
+        setComments(data);
+       // setLoading(false); // Set loading to false after data is fetched
+      })
+      .catch((error) => {
+        console.error('Error fetching comments:', error);
+       // setLoading(false); // Set loading to false in case of an error
+      });
+  }, [sortedComments]); 
+
+  const comments = sortedComments.slice().sort((a, b) => b.timestamp - a.timestamp);
+//console.log("sortedComments",comments)
+
+
+
+////////////////////////////////////////////////////////////////GET REPLIES FROM BACKEND///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ useEffect(() => {
+   // Define your API endpoint
+   const apiUrl = 'api/get-replies';
+
+   // Fetch data from the API
+   fetch(apiUrl)
+     .then((response) => response.json())
+     .then((data) => {
+       // Assuming the data is an array of replies
+       setReplies(data);
+     })
+     .catch((error) => {
+       console.error('Error fetching replies:', error);
+     });
+ }, [replies]);
+//console.log("replies",replies)
+
+///////////////////////////////////////////////////////////////CODE FOR COMMENTS & REPLIES////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //CODE THAT ALLOWS DROP DOWN for Replies
   useEffect(() => {
     // Calculate and update reply counts for each comment
     const counts = {};
@@ -89,6 +146,9 @@ function DiscussionForum() {
     }));
   };
 
+  
+////////////////////////////////////////////////////////////SEND COMMENT BACKEND///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
   };
@@ -134,10 +194,57 @@ function DiscussionForum() {
       });
 
       setNewComment('');
-
-      // Clear the search input field after submission
-      setSearchValue('');
   };
+
+
+///////////////////////////////////////////////////////////////////////SEND REPLIES BACKEND////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//HANDLE CHANGE FOR REPLIES
+const handleRepliesChange = (event) => {
+    setNewReplies(event.target.value);
+  };
+
+
+
+  //SEND REPLIES TO BACKEND
+  const sendReplyBackend = (event, commentId) => {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Create an object with the data to send
+    const data = {
+        username: "repliying user",
+        commentId: commentId, // Replace with the actual discussion board ID
+        text: newReplies,
+    };
+    
+    console.log("send replies baclend", data)
+    // Send a POST request using the fetch API
+    fetch('api/replies', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+          setNewComment('');
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        // Handle the response here (e.g., show a success message)
+        console.log('Data sent successfully:', responseData);
+
+        // Clear the comment field after submission
+      
+      })
+      .catch((error) => {
+        console.error('Error sending data:', error);
+      });
+      setNewReplies('');
+    }
 
   return (
     <div>
@@ -160,13 +267,13 @@ function DiscussionForum() {
   </form>
 
   {/* Individual Comments */}
-  {comments.map((comment) => (
+  {comments.reverse().map((comment) => (
     <div className="comment" key={comment.id}>
       <div className="comment-header">
-        <span className="comment-author">{comment.author}</span>
+        <span className="comment-author">{comment.username}</span>
         <span className="comment-date">2 hours ago</span>
       </div>
-      <div className="comment-content">{comment.text}</div>
+      <div className="comment-content">{comment.comment}</div>
       <div className="comment-actions">
         <button
           className="reply-button"
@@ -179,11 +286,20 @@ function DiscussionForum() {
       {/* Replies */}
       {showReplies[comment.id] && (
         <div className="replies">
+          {/* Reply Form */}
+            <form className="comment-form" onSubmit={(e) =>sendReplyBackend(event, comment.id)}>
+                <textarea
+                placeholder="Add a comment"
+                value={newReplies}
+                onChange={handleRepliesChange}
+                ></textarea>
+                <button type="submit">Submit</button>
+            </form>
           {replies
-            .filter((reply) => reply.commentId === comment.id)
+            .filter((reply) => reply.commentid === comment.id)
             .map((reply) => (
               <div className="reply" key={reply.id}>
-                <span className="reply-author">{reply.author}</span>
+                <span className="reply-author">{reply.username}</span>
                 <span className="reply-text">{reply.text}</span>
               </div>
             ))}
@@ -198,7 +314,7 @@ function DiscussionForum() {
       </main>
 
       <footer>
-        &copy; 2023 Discussion Forum
+        &copy; 2023 Discussion Forum WE EXIST
       </footer>
     </div>
   );

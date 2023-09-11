@@ -1,6 +1,6 @@
 const knex = require('../knex');
 
-class Comments {
+class Replies {
 
 //   constructor({ userid, ai_response, user_response}) {
 //     this.userid = userid;
@@ -8,29 +8,20 @@ class Comments {
 //     this.user_response = user_response;
 //   }
 
-//   static async list() {
-//     try {
-//       const query = 'SELECT * FROM chatbox';
-//       const { rows } = await knex.raw(query);
-//       return rows;
-//     } catch(error) {
-//       console.log(error);
-//       return [];
-//     }
-//   }
+ 
 
-  static async create(username,comment, discussion_board_id) {
-   // console.log("c-Comments",username,comment, discussion_board_id)
+  static async create(username, commentid, text) {
+   // console.log("replies",username,commentid, text)
     try {
       const query = `
-        INSERT INTO comments (username,comment, discussion_board_id)
+        INSERT INTO replies (username, commentid,text)
         VALUES (?, ?, ?)
         RETURNING *
       `;
       
-      const { rows: [comments] }  = await knex.raw(query, [username,comment, discussion_board_id]);
+      const { rows: [reply] }  = await knex.raw(query, [username, commentid, text]);
      // console.log("chats created by model for comments", comments)
-      return new comments;
+      return new reply;
     } catch(error) {
       console.log(error);
       return null;
@@ -39,18 +30,30 @@ class Comments {
   
 
   static async find(id) {
-    //console.log("chats found by id number", id)
+   // console.log("chats found by id number", id)
     try {
       const query = 'SELECT * FROM comments WHERE discussion_board_id = ?';
       const { rows } = await knex.raw(query, [id]);
       
-      //console.log("chats found by id by model for comments", rows)
+      console.log("chats found by id by model for comments", rows)
       return rows;
       //new Chatbox(chats);
 
     } catch(error) {
       console.log(error);
       return null;
+    }
+  }
+
+  static async list() {
+    try {
+      const query = 'SELECT * FROM replies';
+      const { rows } = await knex.raw(query);
+    //   console.log("list replies",rows)
+      return rows;
+    } catch(error) {
+      console.log(error);
+      return [];
     }
   }
 
@@ -71,4 +74,4 @@ class Comments {
 // };
 // test();
 
-module.exports = Comments;
+module.exports = Replies;

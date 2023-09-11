@@ -7,10 +7,10 @@ const createComment = async (req, res) => {
     } = req;
     // TODO: check if username is taken, what should you return?
    // const user_id = session.userId; 
-   // const discussions = await DiscussionBoard.create(topic, discussion,user_id);
+const comments = await Comments.create(username,comment, discussionBoardId);
     // session.userId = user.id;
-    console.log("comments create from controller" + username)
-    //res.send(questions);
+    //console.log("comments create from controller" + username)
+    res.send(comments);
   };
   
   module.exports = createComment;

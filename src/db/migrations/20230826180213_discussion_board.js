@@ -7,7 +7,7 @@ exports.up = function(knex) {
     table.increments('id').primary();
     table.string('topic').notNullable();
     table.text('description').notNullable();
-    table.integer('user_id').unsigned().notNullable();
+    table.string('username').notNullable()
     //table.foreign('user_id').references('id').inTable('users');
     table.timestamps(true, true);
     });

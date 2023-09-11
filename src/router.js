@@ -21,6 +21,9 @@ const discussionBoardController = require('./controllers/discussion_board')
 //ROUTES FOR COMMENTS
 const commentsController = require('./controllers/comments')
 
+//ROUTES FOR REPLY
+const repliesController = require('./controllers/replies')
+
 const Router = express.Router();
 Router.use(addModelsToRequest);
 
@@ -58,6 +61,13 @@ Router.post('/discussion',discussionBoardController.create)
 //COMMENTS/////////
 Router.get('/comments/:id', commentsController.find);
 Router.post('/comments', commentsController.create);
+
+
+//REPLIES/////////
+Router.post('/replies', repliesController.create);
+Router.get('/get-replies', repliesController.list);
+
+
 
 // Router.post('/authenticate', async (req, res) => {
 //   const fakeUsername = 'fakeUser'; // Change this to your desired fake username
