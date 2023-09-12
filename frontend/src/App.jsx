@@ -21,6 +21,7 @@ import SearchDiscussions from './pages/Discussion'
 import SelectLanguage from './pages/SelectLanguage';
 import Test from './pages/Test';
 import CommentsPage from './pages/CommentsPage'
+import Message from "./pages/Components/chats/Index"
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   console.log("curent context", setCurrentUser)
@@ -30,9 +31,10 @@ export default function App() {
 
   // return (
   //   <>
-  //   <SiteHeadingAndNav />
+  //   {/* <SiteHeadingAndNav /> */}
   //   {/* <Use/> */}
-  //   <Use/>
+  //   {/* <Use/> */}
+  //   <LoginPage/>
   //   </>
   // )
   return (
@@ -45,7 +47,8 @@ export default function App() {
         <Route path='/quiz' element={<QuizTestPage />} />
         <Route path='test' element={<Test />} />
         <Route path='/Home' element={<Homee />} />
-        <Route path='/login' element={<SignUpPage />} />
+        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
     </main>
    </>

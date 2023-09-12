@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
-
+import './loginSignUp.css';
 // Controlling the signup form is a good idea because we want to adde (eventually)
 // more validation and provide real time feedback to the user about usernames and passwords
 export default function SignUpPage() {
@@ -17,7 +17,7 @@ export default function SignUpPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  const handleSubmit = async (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
@@ -37,7 +37,7 @@ export default function SignUpPage() {
 
   return <>
     <h1>Sign Up</h1>
-    <form onSubmit={handleSubmit} onChange={handleChange}>
+    <form onSubmit={handleSignUp} onChange={handleChange}>
       <label htmlFor="username">Username</label>
       <input
         autoComplete="off"

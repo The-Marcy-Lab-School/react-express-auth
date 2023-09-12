@@ -372,3 +372,9 @@ html, body, #root, .app {
   width: 100%; /* Make sure the image expands to fit the modal */
   height: auto;
 }
+
+
+/* tailwind*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

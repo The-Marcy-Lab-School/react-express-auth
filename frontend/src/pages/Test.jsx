@@ -68,6 +68,7 @@ function AutocompleteSearch() {
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState(null);
+ //const [discussion,]
   const navigate = useNavigate();
   //discussion context
   const {setDiscussionsData} = useContext(DiscussionContext)
@@ -98,25 +99,44 @@ function AutocompleteSearch() {
     }
   };
 
+  // const handleResultClick = (itemId) => {
+  //   //console.log(itemId)
+
+
+  //   fetch(`/`)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     console.log("comments arry",data);
+  //     const clickedDiscussion = items.find((discussion) => discussion.id === itemId);
+  //     console.log("discussion object", clickedDiscussion);
+    
+  //     // Assuming that you have a context function setDiscussionData to set the clicked discussion data
+  //     setDiscussionsData(clickedDiscussion);
+  //     navigate("/");
+  //     //setComments(data);
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error fetching comments:', error);
+  //   });
+  //   // const clickedDiscussion = items.find((discussion) => discussion.id === itemId);
+  //   // console.log("discussion object",clickedDiscussion)
+  //   // setSelectedItemId(itemId);
+  // };
+
+
   const handleResultClick = (itemId) => {
-    console.log(itemId)
+  console.log(itemId);
 
+  const clickedDiscussion = items.find((discussion) => discussion.id === itemId);
+  console.log("discussion object", clickedDiscussion);
 
-    fetch(`/api/comments/${itemId}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      setDiscussionsData(data)
-      navigate("/");
-      //setComments(data);
-    })
-    .catch((error) => {
-      console.error('Error fetching comments:', error);
-    });
-    // const clickedDiscussion = items.find((discussion) => discussion.id === itemId);
-    // console.log("discussion object",clickedDiscussion)
-    // setSelectedItemId(itemId);
-  };
+  // Assuming that you have a context function setDiscussionData to set the clicked discussion data
+  setDiscussionsData(clickedDiscussion);
+
+  // Redirect to another page here, for example, a page with the discussion details
+  navigate(`/`);
+};
+
 
   return (
     <div>
