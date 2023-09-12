@@ -1,0 +1,53 @@
+.ce-chat-engine {
+    color: #ff965e !important;
+    font-family: "Rubik" !important;
+    background-color: #fbf4d4;
+    
+}
+
+.ce-chat-list-column{
+
+    background-color: #fbf4d4 !important;
+}
+
+.ce-chat-list{
+    background-color: #fbf4d4 !important;
+}
+/* 
+.ce-chat-form{
+display :none !important
+} */
+.ce-chat-form-html-form{
+   
+}
+
+
+.ce-their-message-body{
+    background-color: #08346b !important;
+    color: white !important;
+}
+
+
+.ce-chat-card-title{
+    color: white !important;
+}
+.ce-message-list{
+   background-color: #fbf4d4 !important;
+}
+
+.ce-chat-header{
+    background-color: #fbf4d4 !important;
+
+}
+.ce-my-message-body{
+
+    background-color: #f35c11 !important;
+}
+
+.ce-chat-header-title{
+    color: #b5d7f0 !important;
+}
+
+.ce-chat-header-subtitle{
+    color: #ff965e !important
+}

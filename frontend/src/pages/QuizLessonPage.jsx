@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Progress } from 'semantic-ui-react';
 
 
-// const ProgressExampleProgress = () => <Progress percent={44} progress />
+
 
 // export default ProgressExampleProgress
 export default function QuizLessonPage() {
@@ -15,6 +15,7 @@ export default function QuizLessonPage() {
   const { quizData, setQuizData } = useContext(Context);
   const {setQuestionsData} = useContext(LessonContext )
   const navigate = useNavigate();
+  const ProgressExampleProgress = () => <Progress percent={44} progress />
 
 
 
@@ -83,7 +84,9 @@ export default function QuizLessonPage() {
     ))} */}
     return (
       <>
+     
             <>
+            <ProgressExampleProgress />
           {/* <div className="relative mb-5 py-9">
             <div className="rounded-full border border-red-500 p-1">
               <div className="flex h-6 items-center justify-center rounded-full bg-red-300 text-xs leading-none" style={{ width: "85%", height: "85%" }}>

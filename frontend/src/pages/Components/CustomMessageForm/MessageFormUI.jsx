@@ -124,6 +124,7 @@ const MessageFormUI = ({
   });
 
   return (
+    
     <div className="message-form-container">
       {preview && (
         <div className="message-form-preview">

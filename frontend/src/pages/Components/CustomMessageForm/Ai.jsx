@@ -13,6 +13,7 @@ import {
 } from "react-chat-engine-advanced";
 import "regenerator-runtime";
 import speech, { useSpeechRecognition } from "react-speech-recognition";
+import Sidebar from "./sidebar";
 
 function SearchBar() {
 
@@ -26,6 +27,7 @@ function SearchBar() {
 
   const [responseInput, setResponseInput] = useState("");
   const [userInput, setUserInput] = useState("");
+  const [userText, setUserText] = useState("")
   const { listening, transcript, resetTranscript } = useSpeechRecognition();
   const [modalVisible, setModalVisible] = useState(false); // Modal visibility state
   const [selectedLanguage, setSelectedLanguage] = useState("es-ES");//language accent selection
@@ -69,6 +71,11 @@ useEffect(() => {
     setTimeout(() => {
       setModalVisible(false);
     }, 23000); // 23 seconds in milliseconds
+  };
+
+  // Step 2: Update the state variable as the user types
+  const handleTextChange = (event) => {
+    setUserText(event.target.value);
   };
 
 
@@ -142,10 +149,12 @@ useEffect(() => {
 
 
   const handleSubmit = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
 
     // Set the user's typed input and clear responseInput
-    setUserInput(event);
+    setUserInput(userText);
+    setUserText("")
+
     setResponseInput("");
   };
 
@@ -190,13 +199,56 @@ const speakMessage = (text) => {
 
     <div className="chatBox">
       <div className="chatSidebar">
-        <div className="a.i"> 
+        {/* <div className="a.i"> 
             <select value={selectedLanguage} onChange={handleLanguageChange}>
             <option value="es-ES">Spanish</option>
             <option value="fr-FR">French</option>
             <option value="en-US">English</option>
           </select>
-        </div>
+        </div> */}
+        <div className="relative">
+  <select
+    value={selectedLanguage}
+    onChange={handleLanguageChange}
+    className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+  >
+    <option
+      value="es-ES"
+      className="text-blue-500 hover:bg-blue-100"
+    >
+      Spanish
+    </option>
+    <option
+      value="fr-FR"
+      className="text-green-500 hover:bg-green-100"
+    >
+      French
+    </option>
+    <option
+      value="en-US"
+      className="text-red-500 hover:bg-red-100"
+    >
+      English
+    </option>
+  </select>
+  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+    <svg
+      className="fill-current h-4 w-4"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+    >
+      <path
+        fillRule="evenodd"
+        d="M8.293 11.293a1 1 0 011.414 0L12 13.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+        clipRule="evenodd"
+      />
+    </svg>
+  </div>
+</div>
+        
+
+
+
 {/* 
         {listening ? <p>wrk</p> : <p>CLICK</p>} */}
        
@@ -218,15 +270,49 @@ const speakMessage = (text) => {
 
         </div>
 <div>
-<div style={{ display: "flex" }}>
-          <MessageForm
+
+<div>
+          {/* <MessageForm
             style={{
               border: "1px solid #ccc",
               width: "100%",
             }}
             onSubmit={(event) => handleSubmit(event.text)}
-          />
-          <button
+          /> */}
+
+
+<form id='message-form' onSubmit={(event) => handleSubmit(event)}>
+   <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+       <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+           <label for="comment" class="sr-only">Your comment</label>
+           <textarea id="comment" rows="4" onChange={handleTextChange} class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." value={userText} required></textarea>
+       </div>
+       <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+           <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+               Post comment
+           </button>
+           <div class="flex pl-0 space-x-1 sm:pl-2">
+               <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path></svg>
+                   <span class="sr-only">Attach file</span>
+               </button>
+             
+               <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600" onClick={() => {
+              // {showImageModal}
+              // Handle the button click action here
+              console.log("Button clicked!");
+              speech.startListening()
+              // You can add your custom logic here
+            }}>
+<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" style={{fill: '#ffa200'}}><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>                   <span class="sr-only">Upload image</span>
+               </button>
+           </div>
+       </div>
+   </div>
+</form>
+<p class="ml-auto text-xs text-gray-500 dark:text-gray-400">Remember, contributions to this topic should follow our <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>.</p>
+
+          {/* <button
             onClick={() => {
               // {showImageModal}
               // Handle the button click action here
@@ -236,10 +322,11 @@ const speakMessage = (text) => {
             }}
           >
             Your Button
-          </button>
+          </button> */}
           
         </div>
 </div>
+
 
 
 

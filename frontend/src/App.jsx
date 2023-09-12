@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <>
-    <AI />
+    <AI/>
     </>
   )
   // return <>

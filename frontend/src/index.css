@@ -305,8 +305,9 @@ html, body, #root, .app {
       }
 
       .user-message {  
-          background-color: #c7e4ff;
-          text-align: right;
+        background-color: #c7e4ff;
+        text-align: right;
+        border-radius: 0;
       }
 
      /* message container scroll */
@@ -441,6 +442,10 @@ form {
   border: 1px solid #CCC;
   width: 15rem;
   margin: 1rem auto;
+}
+
+#message-form{
+  width: 100%;
 }
 
 /* automatically added by NavLink component */
