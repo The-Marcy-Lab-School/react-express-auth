@@ -163,7 +163,7 @@ html, body, #root, .app {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  
   gap: 8px;
 }
 
@@ -214,7 +214,9 @@ html, body, #root, .app {
     background-color: #ae1cae;
 }
 
-
+.ce-chat-feed-column{
+     overflow-y: none;
+}
 
 /* Add custom styles for the chat card */
 .custom-chat-card {
@@ -445,7 +447,7 @@ form {
 }
 
 #message-form{
-  width: 100%;
+  width: 100vh;
 }
 
 /* automatically added by NavLink component */

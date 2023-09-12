@@ -13,7 +13,9 @@ import {
 } from "react-chat-engine-advanced";
 import "regenerator-runtime";
 import speech, { useSpeechRecognition } from "react-speech-recognition";
-import Sidebar from "./sidebar";
+// import Sidebar from "./sidebar";
+import "../CustomMessageForm/Chatbox.css"
+
 
 function SearchBar() {
 
@@ -281,36 +283,33 @@ const speakMessage = (text) => {
           /> */}
 
 
-<form id='message-form' onSubmit={(event) => handleSubmit(event)}>
-   <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-       <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
-           <label for="comment" class="sr-only">Your comment</label>
-           <textarea id="comment" rows="4" onChange={handleTextChange} class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." value={userText} required></textarea>
-       </div>
-       <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-           <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-               Post comment
-           </button>
-           <div class="flex pl-0 space-x-1 sm:pl-2">
-               <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path></svg>
-                   <span class="sr-only">Attach file</span>
-               </button>
-             
-               <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600" onClick={() => {
-              // {showImageModal}
-              // Handle the button click action here
-              console.log("Button clicked!");
-              speech.startListening()
-              // You can add your custom logic here
-            }}>
-<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" style={{fill: '#ffa200'}}><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>                   <span class="sr-only">Upload image</span>
-               </button>
-           </div>
-       </div>
-   </div>
-</form>
-<p class="ml-auto text-xs text-gray-500 dark:text-gray-400">Remember, contributions to this topic should follow our <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>.</p>
+        <form id='message-form' onSubmit={(event) => handleSubmit(event)}>
+          <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+              <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                  <label for="comment" class="sr-only">Your comment</label>
+                  <textarea id="comment" rows="4" onChange={handleTextChange} class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." value={userText} required></textarea>
+              </div>
+              <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                  <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                      Post comment
+                  </button>
+                  <div class="flex pl-0 space-x-1 sm:pl-2">
+                      
+                    
+                      <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600" onClick={() => {
+                      // {showImageModal}
+                      // Handle the button click action here
+                      console.log("Button clicked!");
+                      speech.startListening()
+                      // You can add your custom logic here
+                    }}>
+        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" style={{fill: '#ffa200'}}><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>                   <span class="sr-only">Upload image</span>
+                      </button>
+                  </div>
+              </div>
+          </div>
+        </form>
+        <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">Remember, contributions to this topic should follow our <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>.</p>
 
           {/* <button
             onClick={() => {

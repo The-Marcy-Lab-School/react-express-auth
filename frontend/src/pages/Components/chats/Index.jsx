@@ -1,5 +1,4 @@
 import React from "react";
-import "../CustomMessageForm/Message.css";
 import {
   useMultiChatLogic,
   MultiChatSocket,

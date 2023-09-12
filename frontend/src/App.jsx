@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <>
-    <AI/>
+    <Message/>
     </>
   )
   // return <>

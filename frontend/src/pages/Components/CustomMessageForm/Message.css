@@ -18,7 +18,7 @@
 display :none !important
 } */
 .ce-chat-form-html-form{
-   
+   display: none !important;
 }
 
 
@@ -51,3 +51,13 @@ display :none !important
 .ce-chat-header-subtitle{
     color: #ff965e !important
 }
+.ce-chat-settings{
+    background-color: #fbf4d4 !important;
+}
+
+.ce-dropdown-label{
+   background-color: #fbf4d4 !important;
+}
+
+.ce-chat-form{
+        background-color: #fbf4d4 !important;}
