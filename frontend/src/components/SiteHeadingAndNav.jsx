@@ -55,7 +55,7 @@ function classNames(...classes) {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://cdn.pixabay.com/photo/2016/08/25/07/30/orange-1618917_1280.png"
                     alt="Your Company"
                   />
                 </div>
@@ -91,15 +91,28 @@ function classNames(...classes) {
               <li>
                 <NavLink to="/quiz-lesson">Quiz Lesson</NavLink>
               </li>
+              <li>
+                <NavLink to="/ai">AI</NavLink>
+              </li>
+              <li>
+                <NavLink to="/message">Message</NavLink>
+              </li>
+              <li>
+                <NavLink to="/lesson">Discussion</NavLink>
+              </li>
             </>
                    : 
                 <>
+              <li>
+              <NavLink to="/">Home</NavLink>
+              </li>
               <li>
                 <NavLink to="/login">Login</NavLink>
               </li>
               <li>
                 <NavLink to="/sign-up">Sign Up</NavLink>
               </li>
+              
             </>
               //       <>
 

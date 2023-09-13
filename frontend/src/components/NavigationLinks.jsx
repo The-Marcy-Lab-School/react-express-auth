@@ -15,6 +15,10 @@ function NavigationLinks() {
     { path: "/quiz-lesson", text: "Quiz Lesson" },
     { path: "/login", text: "Login" },
     { path: "/sign-up", text: "Sign Up" },
+    { path: "/ai", text: "AI" },
+    { path: "/message", text: "Message" },
+    { path: "/lesson", text: "Lesson" },
+
   ];
 
   return (
