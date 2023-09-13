@@ -3,6 +3,11 @@ const path = require('path');
 const handleCookieSessions = require('./middleware/handle-cookie-sessions');
 const router = require('./router');
 const logRoutes = require('./middleware/log-routes');
+// import { useContext, useEffect } from 'react';
+// import UserContext from './contexts/current-user-context';
+// const { setCurrentUser } = useContext(UserContext);
+// console.log("curent context", setCurrentUser)
+
 
 const app = express();
 const cors = require("cors");
@@ -27,10 +32,11 @@ app.use(cors({ origin: true }));
 // });
 const axios = require("axios");
 
-app.post("/authenticate", async (req, res) => {
-  const { setCurrentUser } = req.body;
+app.post("/s", async (req, res) => {
+  const { username } = req.body;
   // Get or create user on Chat Engine!
-  console.log("axios", setCurrentUser)
+  console.log("axios", req.body)
+  console.log("axios user", username)
   try {
     const r = await axios.put(
       "https://api.chatengine.io/users/",

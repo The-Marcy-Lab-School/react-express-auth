@@ -42,7 +42,7 @@ exports.seed = async (knex) => {
 
   //Comments Seeds
   await Lessons.create("testing comment insertion",14,1);
-  await QuizAttempts.create(1,1,1,1);
+  await QuizAttempts.create(1,1,30,1);
 
 };
 

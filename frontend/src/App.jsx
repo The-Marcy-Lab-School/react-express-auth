@@ -55,56 +55,56 @@ export default function App() {
   //     console.error('An error occurred during sign-in:', error);
   //   });
 
-  const signInData = {
-    username: 'unfortunatelyEve',
-    secret: 'unfortunatelyEve'
-  };
+//   const signInData = {
+//     username: 'unfortunatelyEve',
+//     secret: 'unfortunatelyEve'
+//   };
 
-  axios.post('http://localhost:3000/authenticate', signInData, {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then((response) => {
-    if (response.status === 200) {
-      // Successfully signed in, handle the response here if needed
-      console.log('Sign-in successful');
-      // Perform any other actions you need after sign-in
-    } else {
-      // Handle other status codes or errors here
-      console.error('Sign-in failed');
-    }
-  })
-  .catch((error) => {
-    // Handle network or other errors here
-    console.error('An error occurred during sign-in:', error);
-  });
-};
+//   axios.post('http://localhost:3000/authenticate', signInData, {
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//   .then((response) => {
+//     if (response.status === 200) {
+//       // Successfully signed in, handle the response here if needed
+//       console.log('Sign-in successful');
+//       // Perform any other actions you need after sign-in
+//     } else {
+//       // Handle other status codes or errors here
+//       console.error('Sign-in failed');
+//     }
+//   })
+//   .catch((error) => {
+//     // Handle network or other errors here
+//     console.error('An error occurred during sign-in:', error);
+//   });
+// };
 
 
-  return (
-    <>
-    {/* <SiteHeadingAndNav /> */}
-    {/* <Use/> */}
-    {/* <Use/> */}
-    <Message/>
-    </>
-  )
   // return (
-  // <>
-  //   <SiteHeadingAndNav />
-  //   <main>
-  //     <Routes>
-  //       <Route path='/' element={<CommentsPage/>} />
-  //       <Route path='/lessons' element={<QuizLesson />} />
-  //       <Route path='/quiz' element={<QuizTestPage />} />
-  //       <Route path='test' element={<Test />} />
-  //       <Route path='/Home' element={<Homee />} />
-  //       <Route path='/signup' element={<SignUpPage />} />
-  //       <Route path='/login' element={<LoginPage />} />
-  //       <Route path='/message' element={<Message />} />
-  //     </Routes>
-  //   </main>
-  //  </>
+  //   <>
+  //   {/* <SiteHeadingAndNav /> */}
+  //   {/* <Use/> */}
+  //   {/* <Use/> */}
+  //   <Test2/>
+  //   </>
   // )
+  return (
+  <>
+    <SiteHeadingAndNav />
+    <main>
+      <Routes>
+        <Route path='/' element={<CommentsPage/>} />
+        <Route path='/lessons' element={<QuizLesson />} />
+        <Route path='/quiz' element={<QuizTestPage />} />
+        <Route path='test' element={<Test2 />} />
+        <Route path='/Home' element={<Homee />} />
+        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/message' element={<Message />} />
+      </Routes>
+    </main>
+   </>
+  )
 }

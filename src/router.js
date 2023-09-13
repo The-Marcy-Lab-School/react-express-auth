@@ -24,6 +24,9 @@ const commentsController = require('./controllers/comments')
 //ROUTES FOR REPLY
 const repliesController = require('./controllers/replies')
 
+//Quiz Attempts
+const quizAttemptsController = require('./controllers/quiz_attempts')
+
 const Router = express.Router();
 Router.use(addModelsToRequest);
 
@@ -68,7 +71,10 @@ Router.post('/comments', commentsController.create);
 Router.post('/replies', repliesController.create);
 Router.get('/get-replies', repliesController.list);
 
-
+//ROUTES FOR QUIZ ATTEMPTS
+Router.post('/quiz-attempts', quizAttemptsController.create);
+Router.get('/get-quiz-attempts/:id', quizAttemptsController.find);
+Router.get('/list-attempts', quizAttemptsController.list)
 
 // Router.post('/authenticate', async (req, res) => {
 //   const fakeUsername = 'fakeUser'; // Change this to your desired fake username

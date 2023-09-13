@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
@@ -17,13 +17,49 @@ export default function SignUpPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  const handleSignUp = async (event) => {
-    event.preventDefault();
+
+console.log("current user",currentUser)
+
+//console.log("Setcurrent user",setCurrentUser.username)
+
+
+
+const handleSignUp = async (event) => {
+  event.preventDefault();
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
 
     const [user, error] = await createUser({ username, password });
     if (error) return setErrorText(error.statusText);
+    
+    // console.log("im a user", user.username)
+    const messageSignUp = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/s', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({"username": `${user.username}`, "secret": `${user.username}`}),
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          // Assuming data contains the score count, update the state
+         // setScoreCount(data.scoreCount);
+        } else {
+          console.error('Failed to fetch quiz score');
+        }
+      } catch (error) {
+        console.error('An error occurred while fetching quiz score:', error);
+      }
+    };
+    messageSignUp();
+    // useEffect(() => {
+    //   // Call the fetchQuizScore function when the component mounts
+    //   messageSignUp();
+    // }, []);
+
 
     setCurrentUser(user);
     navigate('/');
