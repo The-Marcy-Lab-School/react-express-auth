@@ -145,7 +145,7 @@
 
 
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Context from '../contexts/lesson-context';
 import LessonContext from '../contexts/lesson-context'
 function shuffleArray(array) {

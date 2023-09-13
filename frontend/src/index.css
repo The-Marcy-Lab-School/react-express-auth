@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* .ce-chat-list{
     background-color:aqua
 } */
@@ -435,7 +438,7 @@ header {
   color: #FFF;
 }
 
-nav ul {
+/* nav ul {
   display: flex;
   gap: 1rem;
   padding: 0;
@@ -446,7 +449,7 @@ nav ul {
 nav a {
   display: block;
   color: #FFF;
-}
+} */
 
 form {
   padding: 1rem;
@@ -471,14 +474,14 @@ ul{
   list-style: none;
 }
 
-li{
+/* li{
   background-color: antiquewhite;
   padding: 16px;
   border: 3px solid white;
   border-radius: 20px;
   font-size: 20px;
   margin-top: 8px;
-}
+} */
 .quiz-test{
   text-align: center;
 }
@@ -624,9 +627,6 @@ button {
 
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 
 
