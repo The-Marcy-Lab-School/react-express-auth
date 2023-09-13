@@ -69,10 +69,11 @@ useEffect(() => {
 
   // Function to show the modal and set a timeout to hide it
   const showImageModal = () => {
+    speech.startListening()
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
-    }, 23000); // 23 seconds in milliseconds
+    }, 60000000); // 23 seconds in milliseconds
   };
 
   // Step 2: Update the state variable as the user types
@@ -186,18 +187,6 @@ const speakMessage = (text) => {
 
   return (
   <>
-<>
-          <button onClick={showImageModal}>Show Image</button>
-          {modalVisible && (
-            <div className="modal">
-              <img
-                src="https://i.pinimg.com/originals/58/81/48/5881489fcde058a20cbc811d1a1cf9d7.gif" // Replace with your image path
-                alt="Your Image"
-                className="modal-content"
-              />
-            </div>
-          )}
-   </>   
 
     <div className="chatBox">
       <div className="chatSidebar">
@@ -206,8 +195,8 @@ const speakMessage = (text) => {
             <option value="es-ES">Spanish</option>
             <option value="fr-FR">French</option>
             <option value="en-US">English</option>
-          </select>
-        </div> */}
+            </select>
+          </div> */}
         <div className="relative">
   <select
     value={selectedLanguage}
@@ -300,10 +289,23 @@ const speakMessage = (text) => {
                       // {showImageModal}
                       // Handle the button click action here
                       console.log("Button clicked!");
-                      speech.startListening()
+                      // speech.startListening()
                       // You can add your custom logic here
                     }}>
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" style={{fill: '#ffa200'}}><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>                   <span class="sr-only">Upload image</span>
+        {/* <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" style={{fill: '#ffa200'}}><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>                   <span class="sr-only">Upload image</span> */}
+          <>
+                    <button onClick={showImageModal}><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" style={{fill: '#ffa200'}}><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>                   <span class="sr-only">Upload image</span></button>
+                    {modalVisible && (
+                      <div className="modal">
+                        <img
+                          src="https://i.pinimg.com/originals/ec/61/2c/ec612c4085582da4f5b8a7c2cc575bf9.gif" // Replace with your image path
+                          alt="Your Image"
+                          sizes="(max-width: 600px) 100vw, 50vw" 
+                          className="modal-content"
+                        />
+                      </div>
+                    )}
+             </>   
                       </button>
                   </div>
               </div>

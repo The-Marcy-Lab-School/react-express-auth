@@ -15,7 +15,7 @@ export default function QuizLessonPage() {
   const { quizData, setQuizData } = useContext(Context);
   const {setQuestionsData} = useContext(LessonContext )
   const navigate = useNavigate();
-  const ProgressExampleProgress = () => <Progress percent={44} progress />
+  const ProgressExampleProgress = () => <Progress percent={2} progress />
 
 
 

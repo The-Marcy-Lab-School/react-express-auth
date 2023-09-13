@@ -45,15 +45,15 @@ class QuizAttempts {
   //   }
   // }
 
-  static async create(user_id, quiz_id, percentage, score_count) {
-    console.log("question attemt" + user_id, quiz_id, percentage, score_count)
+  static async create(user_id, quiz_id, score_count,level_id) {
+    console.log("question attemt" + user_id, quiz_id, score_count,level_id)
     try {
       const query = `
-        INSERT INTO quiz_attempts (user_id, quiz_id, percentage, score_count)
+        INSERT INTO quiz_attempts (user_id, quiz_id, score_count,level_id)
         VALUES (?, ?, ?, ?)
         RETURNING *`;
       
-      const {rows: [quiz_attempt]} = await knex.raw(query, [user_id, quiz_id, percentage, score_count]);
+      const {rows: [quiz_attempt]} = await knex.raw(query, [user_id, quiz_id, score_count,level_id]);
       console.Console.log("quiz array" + quiz_attempt)
       return quiz_attempt; // Return the inserted row
     } catch (error) {

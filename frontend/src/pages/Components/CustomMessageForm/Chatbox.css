@@ -1,82 +1,40 @@
 /* ChatSidebar.css */
 
-
-
-
 .chatSidebar {
-    background-color: #b5d7f0 !important;
-    color: black;
-    width: 250px;
-    height: 100%;
-    top: 0;
-    left: 0;
-    padding: 20px;
-  }
-  
-  .a.i {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #ccc;
-  }
-  
-  select {
-    width: 100%;
-    padding: 10px;
-    background-color: #444;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  select:focus {
-    outline: none;
-  }
-  
-  h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-  
-  .messages-container {
-    height: 100vh;
-    overflow-y: auto;
-    padding: 10px;
-    background-color: #fbf4d4;
-  }
-  
-  .messages-scroll {
-    padding: 1px;
-    /* Add some padding for better scrolling appearance */
-  }
-  
-  .message {
-    margin: 10px 0;
-    padding: 5px 10px;
-    background-color: #ccc;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+  background-color: #333;
+  color: black;
+  width: 250px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
 
-  .user-message {
-    Background-color: #ff965e !important;
-    text-align: right;
-    border-radius: 5px !important;
-    color:#fff !important;
-  }
-  
-.assistant-message{
-    background-color: #b5d7f0 !important; 
-    color: #fff;
-    }
+.a.i {
+  margin-bottom: 20px;
+}
 
-/* #root{ */
-    /* background-color: #fbf4d4 !important;} */
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ccc;
+}
 
-.message-form{
-    background-color: #fbf4d4 !important;
+select {
+  width: 100%;
+  padding: 10px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+select:focus {
+  outline: none;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #fff;
 }

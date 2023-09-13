@@ -2,12 +2,28 @@ const knex = require('../knex');
 
 class QuizAttempts {
 
-  constructor({ id, user_id, quiz_id, percentage, score_count }) {
-    this.id = id;
-    this.user_id = user_id;
-    this.quiz_id = quiz_id;
-    this.percentage = percentage;
-    this.score_count = score_count;
+  // constructor({ id, user_id, quiz_id, percentage, score_count }) {
+  //   this.id = id;
+  //   this.user_id = user_id;
+  //   this.quiz_id = quiz_id;
+  //   this.percentage = percentage;
+  //   this.score_count = score_count;
+  // }
+  static async create(user_id, quiz_id, percentage, score_count) {
+    console.log("c-attempts create",content,user_id,discussion_board_id)
+    try {
+      const query = `
+        INSERT INTO quiz_attempts (user_id, quiz_id, score_count, score_count)
+        VALUES (?, ?, ?, ?)
+        RETURNING *
+      `;
+      const { rows: [comments] }  = await knex.raw(query, [user_id, quiz_id, score_count, score_count]);
+      console.log("comments but attempts",comments)
+      return new comments;
+    } catch(error) {
+      console.log(error);
+      return null;
+    }
   }
 
   static async list() {
@@ -32,21 +48,24 @@ class QuizAttempts {
     }
   }
 
-  static async create(user_id, quiz_id, percentage, score_count) {
-    try {
-      const query = `
-        INSERT INTO quiz_attempts (user_id, quiz_id, percentage, score_count)
-        VALUES (?, ?, ?, ?)
-        RETURNING *
-      `;
+  // static async create(user_id, quiz_id, percentage, score_count) {
+  //   console.log("quiz attemt create" + user_id, quiz_id, percentage, score_count)
+  //   try {
+  //     const query = `
+  //       INSERT INTO quiz_attempts (user_id, quiz_id, percentage, score_count)
+  //       VALUES (?, ?, ?, ?)
+  //       RETURNING *
+  //     `;
 
-      const { rows: [quiz_attempt] } = await knex.raw(query, [user_id, quiz_id, percentage, score_count]);
-      return new QuizAttempts(quiz_attempt);
-    } catch(error) {
-      console.error("Error creating quiz attempt:", error);
-      throw error;
-    }
-  }
+  //     const { rows: [quiz_attempt] } = await knex.raw(query, [user_id, quiz_id, percentage, score_count]);
+  //     return new QuizAttempts(quiz_attempt);
+  //   } catch(error) {
+  //     console.error("Error creating quiz attempt:", error);
+  //     throw error;
+  //   }
+  // }
+
+
 
   static async deleteAll() {
     try {
@@ -59,15 +78,15 @@ class QuizAttempts {
 }
 
 // Testing function
-const test = async () => {
-  try {
-    const attempt = await QuizAttempts.create(1, 2, 3, 4);
-    console.log("Created quiz attempt:", attempt);
-  } catch (error) {
-    console.error("Test error:", error);
-  }
-};
+// const test = async () => {
+//   try {
+//     const attempt = await QuizAttempts.create(1, 2, 3, 4);
+//     console.log("Created quiz attempt:", attempt);
+//   } catch (error) {
+//     console.error("Test error:", error);
+//   }
+// };
 
-test();
+//test();
 
 module.exports = QuizAttempts;
