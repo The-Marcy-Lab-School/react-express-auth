@@ -4,7 +4,7 @@ const listQuizAttempts = async (req, res) => {
     } = req; 
   
     const attempt = await QuizAttempts.list();
-    console.log(attempt)
+    console.log("were listing",attempt)
     res.send(attempt);
   };
   

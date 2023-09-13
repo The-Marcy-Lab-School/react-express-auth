@@ -10,16 +10,32 @@ class QuizAttempts {
   //   this.score_count = score_count;
   // }
 
+  // static async list() {
+  //   console.log("list from attempts")
+  //   try {
+  //     const query = 'SELECT * FROM quiz_attempts';
+  //     const { rows } = await knex.raw(query);
+  //     return rows
+  //     //
+  //     .map((quiz_attempts) => new QuizAttempts(quiz_attempts)); // Corrected instance creation
+  //   } catch(error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  // }
+
+
   static async list() {
     try {
       const query = 'SELECT * FROM quiz_attempts';
       const { rows } = await knex.raw(query);
-      return rows.map((quiz_attempts) => new QuizAttempts(quiz_attempts)); // Corrected instance creation
+      return rows;
     } catch(error) {
       console.log(error);
-      return null;
+      return [];
     }
   }
+
 
   // static async find(id) {
   //   try {
@@ -33,9 +49,11 @@ class QuizAttempts {
   // }
 
   static async find(user_id, quiz_id) {
+    console.log("find attempts model", user_id, quiz_id)
     try {
       const query = 'SELECT * FROM quiz_attempts WHERE user_id = ? AND quiz_id = ?'; // Adjust the query
       const { rows: [quiz_attempts] } = await knex.raw(query, [user_id, quiz_id]);
+      console.log("everything", quiz_attempts)
       return quiz_attempts
 // ? new QuizAttempts(quiz_attempts) : null;
     } catch(error) {
