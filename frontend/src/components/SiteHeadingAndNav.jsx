@@ -16,7 +16,15 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
     { name: 'login', href: '/login', current: true },
     { name: 'Team', href: '/team', current: false },
     { name: 'Projects', href: '/projects', current: false },
-    { name: 'Calendar', href: '/calendar', current: false },
+    // { name: 'Calendar', href: '/calendar', current: false },
+    // { name: "/", href: '/projects', text: "Home" },
+    // { name: "/users", text: "Users", end: true },
+    // { path: `/users/${currentUser?.id}`, text: currentUser?.username },
+    // { path: "/quiz-test", text: "Quiz Test" },
+    // { path: "/selected-language", text: "Selected Language" },
+    // { path: "/quiz-lesson", text: "Quiz Lesson" },
+    // { path: "/login", text: "Login" },
+    // { path: "/sign-up", text: "Sign Up" },
   ];
 
 

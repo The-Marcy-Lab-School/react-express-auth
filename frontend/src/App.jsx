@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <>
-    <QuizTestPage />
+    < Home/>
     </>
   )
   // return <>

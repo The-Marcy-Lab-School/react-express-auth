@@ -1,12 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /* .ce-chat-list{
-    background-color:aqua
+  background-color:aqua
 } */
 
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
-@import 'semantic-ui-css/semantic.min.css';
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+@import 'semantic-ui-css/semantic.min.css'; */
 
 /* Colors */
 :root {
@@ -218,12 +215,12 @@ html, body, #root, .app {
   color: var(--gray-300) !important
 }
 .ce-message-list{
-    background-color: #ae1cae;
-    overflow:  none !important;
+  background-color: #ae1cae;
+  overflow:  none !important;
 }
 
 /* .ce-chat-feed-column{
-     overflow-y: none !important;
+  overflow-y: none !important;
 } */
 .ce-chat-feed-column {
   overflow-y: hidden !important;
@@ -231,74 +228,74 @@ html, body, #root, .app {
 
 /* Add custom styles for the chat card */
 .custom-chat-card {
-    background-color: #1b00a0;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .custom-chat-card:hover {
-    background-color: #832323;
-  }
-  
+  background-color: #1b00a0;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px;
+  cursor: pointer;
+}
 
-  #ce-message-list-201008{
-    /* height: 300px;
-    width: 300px; */
-    
-    background-color: rgb(10, 46, 10) !important;
-    color: red
-  }
-  
-  .chatBox {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .chatSidebar {
-    width: 25%;
-    background-color: #f0f0f0; /* Adjust the background color as needed */
-    padding: 20px;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Add a shadow to the sidebar */
-     border:1px solid #ccc;
-  }
-  
-  .chatContent {
-    flex: 1;
-    display: flex;
-    overflow-y: auto;
-    /* padding: 20px; */
-    background-color: #fff;
-    justify-content: flex-end;
-    flex-direction: column;
-  }
-  
-  .a.i {
-    background-color: #24a0ed; /* Background color for the AI bubble */
-    border-radius: 50%; /* Make it round */
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px; /* Adjust spacing as needed */
-  }
-  
-  #ce-feed-container{
-    background-color: #ffffff !important
-  }
+.custom-chat-card:hover {
+  background-color: #832323;
+}
 
 
+#ce-message-list-201008{
+  /* height: 300px;
+  width: 300px; */
+  
+  background-color: rgb(10, 46, 10) !important;
+  color: red
+}
+
+.chatBox {
+  display: flex;
+  height: 100vh;
+}
+
+.chatSidebar {
+  width: 25%;
+  background-color: #f0f0f0; /* Adjust the background color as needed */
+  padding: 20px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Add a shadow to the sidebar */
+  border:1px solid #ccc;
+}
+
+.chatContent {
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  /* padding: 20px; */
+  background-color: #fff;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.a.i {
+  background-color: #24a0ed; /* Background color for the AI bubble */
+  border-radius: 50%; /* Make it round */
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* Adjust spacing as needed */
+}
+
+#ce-feed-container{
+  background-color: #ffffff !important
+}
 
 
-  /* chat response */
 
 
-        /* Style for the chat container */
-        .chat-container {
-          width: 300px;
-          margin: 20px auto;
-          border: 1px solid #ccc;
+/* chat response */
+
+
+/* Style for the chat container */
+.chat-container {
+  width: 300px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
           padding: 10px;
           background-color: #f0f0f0;
       }
@@ -626,7 +623,9 @@ button {
 }
 
 
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 
 
