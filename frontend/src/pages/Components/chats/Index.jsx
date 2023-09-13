@@ -6,8 +6,8 @@ export default function App() {
   return (
     <PrettyChatWindow
       projectId="94e5be9a-acd1-49a6-840f-ccbbca1be304"
-      username="john_smith"
-      secret="pass1234"
+      username="earth"
+      secret="earth"
       style={{ height: '100vh' }}
     />
   );

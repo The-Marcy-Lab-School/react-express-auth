@@ -30,12 +30,64 @@ export default function App() {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
+  
+  // fetch('http://localhost:3000/authenticate', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(setCurrentUser)
+  // })
+  //   .then((response) => {
+  //     if (response.ok) {
+  //       return response.json();
+  //     } else {
+  //       throw new Error('Sign-in failed');
+  //     }
+  //   })
+  //   .then((userData) => {
+  //     // Successfully signed in, handle the response here if needed
+  //    // setCurrentUser(userData);
+  //     // Perform any other actions you need after sign-in
+  //   })
+  //   .catch((error) => {
+  //     // Handle errors here
+  //     console.error('An error occurred during sign-in:', error);
+  //   });
+
+  const signInData = {
+    username: 'unfortunatelyEve',
+    secret: 'unfortunatelyEve'
+  };
+
+  axios.post('http://localhost:3000/authenticate', signInData, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then((response) => {
+    if (response.status === 200) {
+      // Successfully signed in, handle the response here if needed
+      console.log('Sign-in successful');
+      // Perform any other actions you need after sign-in
+    } else {
+      // Handle other status codes or errors here
+      console.error('Sign-in failed');
+    }
+  })
+  .catch((error) => {
+    // Handle network or other errors here
+    console.error('An error occurred during sign-in:', error);
+  });
+};
+
+
   return (
     <>
     {/* <SiteHeadingAndNav /> */}
     {/* <Use/> */}
     {/* <Use/> */}
-    <Test2/>
+    <Message/>
     </>
   )
   // return (

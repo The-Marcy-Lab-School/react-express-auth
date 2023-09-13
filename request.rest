@@ -1,7 +1,8 @@
 #  POST http://localhost:5173//authenticate
 #  Content-Type: application/json
 #  {"username": "adam"}
-
+import UserContext from './contexts/current-user-context';
+  const { setCurrentUser } = useContext(UserContext);
 
 POST http://localhost:3000/authenticate
 Content-Type: application/json
