@@ -10,7 +10,7 @@ class DiscussionBoard {
 
   static async list() {
     try {
-      const query = 'SELECT * FROM chatbox';
+      const query = 'SELECT * FROM discussion_boards';
       const { rows } = await knex.raw(query);
       return rows;
     } catch(error) {
@@ -19,17 +19,17 @@ class DiscussionBoard {
     }
   }
 
-  static async create(topic, description,user_id) {
-    console.log("cdiscussion",topic, description)
+  static async create(topic, description,username) {
+    console.log("cdiscussion",topic, description,username)
     try {
       const query = `
-        INSERT INTO discussion_boards (topic, description,user_id)
+        INSERT INTO discussion_boards (topic, description,username)
         VALUES (?, ?, ?)
         RETURNING *
       `;
  
       
-      const { rows: [discussion] }  = await knex.raw(query, [topic, description,user_id]);
+      const { rows: [discussion] }  = await knex.raw(query, [topic, description,username]);
       return new discussion;
     } catch(error) {
       console.log(error);

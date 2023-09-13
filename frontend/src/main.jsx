@@ -7,7 +7,7 @@ import LessonContext from './contexts/LessonContextProvider.jsx'
 import DiscussionProvider from './contexts/DisccussionContextProvider.jsx'
 import CommentsDataContextProvider from './contexts/CommentProviderContext.jsx';
 
-import './index.css';
+// import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <UserContextProvider>

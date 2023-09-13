@@ -15,6 +15,7 @@ import AI from './pages/Components/CustomMessageForm/Ai';
 //import TestPage from './pages/Test';
 // import Quiz from './pages//QuizTestPage';
 //import MessagePage from './pages/Components/chats/Index'
+
 import QuizTestPage from './pages/QuizTestPage';
 import QuizLesson from './pages/QuizLesson';
 import SearchDiscussions from './pages/Discussion'
@@ -49,6 +50,7 @@ export default function App() {
         <Route path='/Home' element={<Homee />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/message' element={<Message />} />
       </Routes>
     </main>
    </>

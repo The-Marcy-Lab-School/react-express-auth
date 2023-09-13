@@ -9,12 +9,18 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh; */
+    
   /* } */ 
-  body {
+
+  /* main{
+    background-color: none;
+  } */
+
+  #ccontianer {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('https://cdn.dribbble.com/users/1273747/screenshots/4666662/final.gif');
+    background-image: url('https://cdn.dribbble.com/users/1273747/screenshots/4666662/final.gif')!important;
     background-size: cover; /* Adjust as needed */
     background-repeat: no-repeat; /* Adjust as needed */
     display: flex;
@@ -75,27 +81,22 @@
   button:hover {
     background-color: #70c1ff;
   }
-
-  
-/* CSS */
-.signup-link {
-  color: #007bff; /* Change the color to your preferred highlight color */
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-/* To highlight the button on hover */
-.signup-button:hover {
-  background-color: #e1981b; /* Change the color to your preferred highlight color */
-  color: white;
-  border: none; /* Optional: Remove the button border on hover */
-}
-
   
   @media (max-width: 480px) {
     .card {
       width: 100%;
       max-width: 350px;
     }
+  }
+  
+
+  .sign {
+    color: #498ffc; /* Change the color to your desired highlight color */
+    text-decoration: underline;
+  }
+  
+  .sign:hover {
+    background-color: #498ffc; /* Change to your desired highlight color on hover */
+    color: #fff; /* Change to your desired text color on hover */
   }
   

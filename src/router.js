@@ -55,8 +55,9 @@ Router.get('/gettMessages', chatboxController.find)
 Router.get('/lessons/:id', lessonsController.find)
 Router.get('/lessons/:id', lessonsController.find)
 
-
+//ROUTES FOR DISCUSSION
 Router.post('/discussion',discussionBoardController.create)
+Router.get('/get-discussion', discussionBoardController.list)
 
 //COMMENTS/////////
 Router.get('/comments/:id', commentsController.find);

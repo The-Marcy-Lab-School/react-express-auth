@@ -27,7 +27,9 @@ export default function LoginPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  return <>
+  return (
+    <div id ="ccontainer">
+  <div className="bodyContainer">
   <div className="container">
   <div className="card">
     <h1>Login</h1>
@@ -36,7 +38,7 @@ export default function LoginPage() {
       <input type="text" autoComplete="username" id="username" name="username" placeholder="Enter your username" />
 
       <label htmlFor="password">Password</label>
-      <input type="password" autoComplete="current-password" id="password" name="password" />
+      <input type="password" autoComplete="current-password" id="password" name="password" placeholder="Enter your password" />
 
       <button>Log in!</button>
 
@@ -44,9 +46,6 @@ export default function LoginPage() {
 
        <div>
       {/* Your other content */}
-      <p onClick={() => handleButtonClick()}>
-        Don't have an account? <span className="signup-link">Sign Up</span>
-      </p>
     </div>
 
 
@@ -54,7 +53,12 @@ export default function LoginPage() {
     { !!errorText && <p>{errorText}</p> }
     </div>
     </div>
-  </>;
+  </div>
+      <p onClick={() => handleButtonClick()}>
+        Don't have an account? <span className="sign">Sign Up</span>
+      </p>
+  </div>
+  )
 }
 // import React from 'react';
 // import './loginSignUp.css';

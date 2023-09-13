@@ -36,9 +36,12 @@ export default function SignUpPage() {
   };
 
   return <>
+  <div className="bodyContainer">
+  <div className="container">
+  <div className="card">
     <h1>Sign Up</h1>
     <form onSubmit={handleSignUp} onChange={handleChange}>
-      <label htmlFor="username">Username</label>
+      <label htmlFor="username">Create Username</label>
       <input
         autoComplete="off"
         type="text"
@@ -46,9 +49,10 @@ export default function SignUpPage() {
         name="username"
         onChange={handleChange}
         value={username}
+        placeholder="Enter your username" 
       />
 
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password">Create Password</label>
       <input
         autoComplete="off"
         type="password"
@@ -56,6 +60,7 @@ export default function SignUpPage() {
         name="password"
         onChange={handleChange}
         value={password}
+        placeholder="Enter your password" 
       />
 
       {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
@@ -63,9 +68,12 @@ export default function SignUpPage() {
         <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
       */}
 
-      <button>Sign Up Now!</button>
+      <button className="sign">Sign Up Now!</button>
     </form>
+    </div>
+  </div>
+</div>
     { !!errorText && <p>{errorText}</p> }
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
+    <p>Already have an account with us? <Link to="/login" className="sign">Log in!</Link></p>
   </>;
 }

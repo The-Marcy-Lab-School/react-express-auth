@@ -2,10 +2,10 @@
     background-color:aqua
 } */
 
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap"); */
 
 /* Colors */
-:root {
+/* :root {
   --gray-300: #953030;
   --gray-400: #670909;
   --primary-400: #35596c;
@@ -19,17 +19,17 @@
   --tertiary-50: #78590a;
   --tertiary-100: #0218b9;
   --quaternary-500: #fb8500;
-}
+} */
 
-html, body, #root, .app {
+/* html, body, #root, .app {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
   font-family: "Rubik", sans-serif;
-}
+} */
 
-.layout {
+/* .layout {
   width: 100%;
   display: flex;
 }
@@ -90,7 +90,7 @@ html, body, #root, .app {
   text-decoration: underline;
   color: var(--tertiary-100);
   cursor: pointer;
-}
+} */
 
 /* Chat Styling */
 .ce-chat-engine {
@@ -374,7 +374,4 @@ html, body, #root, .app {
 }
 
 
-/* tailwind*/
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* tail*/

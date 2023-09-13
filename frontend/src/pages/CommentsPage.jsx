@@ -51,7 +51,6 @@
 // export default DiscussionForum;
 import React, { useState, useEffect, useContext } from 'react';
 import './styles.css'; // Import your CSS file
-
 //discussion forum context 
 import DiscussionContext from '../contexts/discussion-context';
 //comment context
@@ -65,7 +64,7 @@ function DiscussionForum() {
  // const navigate = useNavigate();
  const [sortedComments, setComments] = useState([]);
   const {discussionsData} = useContext(DiscussionContext)
-console.log("discussionsData info",discussionsData)
+console.log("discussionsData info",discussionsData.id)
   //const {commentsData}
   //const { commentsData: comments }  = useContext(CommentsContext)
   //
@@ -81,60 +80,60 @@ console.log("discussionsData info",discussionsData)
 //console.log("discussion data",discussionsData[0].id)
 ////////////////////////////////////////////////////////////////GET COMMENTS FROM BACKEND///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//  useEffect(() => {
-//     // Define your API endpoint for fetching comments by discussion ID
-//   const apiUrl = `api/comments/${discussionsData.id}`;
-//     // Fetch data from the API
-//     fetch(apiUrl)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         // Assuming the data is an array of comments
-//         console.log("comments data",data)
-//         setComments(data);
-//        // setLoading(false); // Set loading to false after data is fetched
-//       })
-//       .catch((error) => {
-//         console.error('Error fetching comments:', error);
-//        // setLoading(false); // Set loading to false in case of an error
-//       });
-//   }, [sortedComments]); 
-
-//   const comments = sortedComments.slice().sort((a, b) => b.timestamp - a.timestamp);
-// console.log("sortedComments",comments) 
-
-
-  // Function to fetch comments by discussion ID
-  const fetchCommentsByDiscussionId = (discussionId) => {
-    const apiUrl = `api/comments/${discussionId}`;
+ useEffect(() => {
+    // Define your API endpoint for fetching comments by discussion ID
+  const apiUrl = `api/comments/${discussionsData.id}`;
     // Fetch data from the API
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
+        // Assuming the data is an array of comments
+        console.log("comments data",data)
         setComments(data);
-        // Save both the discussion ID and its data in local storage
-        localStorage.setItem('discussionId', discussionId);
-        localStorage.setItem('discussionData', JSON.stringify(data));
+       // setLoading(false); // Set loading to false after data is fetched
       })
       .catch((error) => {
         console.error('Error fetching comments:', error);
+       // setLoading(false); // Set loading to false in case of an error
       });
-  };
+  }, [sortedComments]); 
 
-  useEffect(() => {
-    const storedDiscussionId = localStorage.getItem('discussionId');
-    const storedDiscussionData = localStorage.getItem('discussionData');
-    const currentDiscussionId = discussionsData.id;
-
-    if (!storedDiscussionId || storedDiscussionId !== currentDiscussionId) {
-      // If the stored ID is different or doesn't exist, fetch comments for the current discussion
-      fetchCommentsByDiscussionId(currentDiscussionId);
-    } else {
-      // If the ID matches, use the data from local storage
-      setComments(JSON.parse(storedDiscussionData));
-    }
-  }, [discussionsData]);
-    const comments = sortedComments.slice().sort((a, b) => b.timestamp - a.timestamp);
+  const comments = sortedComments.slice().sort((a, b) => b.timestamp - a.timestamp);
 console.log("sortedComments",comments) 
+
+
+  // Function to fetch comments by discussion ID
+//   const fetchCommentsByDiscussionId = (discussionId) => {
+//     const apiUrl = `api/comments/${discussionId}`;
+//     // Fetch data from the API
+//     fetch(apiUrl)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         setComments(data);
+//         // Save both the discussion ID and its data in local storage
+//         localStorage.setItem('discussionId', discussionId);
+//         localStorage.setItem('discussionData', JSON.stringify(data));
+//       })
+//       .catch((error) => {
+//         console.error('Error fetching comments:', error);
+//       });
+//   };
+
+//   useEffect(() => {
+//     const storedDiscussionId = localStorage.getItem('discussionId');
+//     const storedDiscussionData = localStorage.getItem('discussionData');
+//     const currentDiscussionId = discussionsData.id;
+
+//     if (!storedDiscussionId || storedDiscussionId !== currentDiscussionId) {
+//       // If the stored ID is different or doesn't exist, fetch comments for the current discussion
+//       fetchCommentsByDiscussionId(currentDiscussionId);
+//     } else {
+//       // If the ID matches, use the data from local storage
+//       setComments(JSON.parse(storedDiscussionData));
+//     }
+//   }, [discussionsData]);
+//     const comments = sortedComments.slice().sort((a, b) => b.timestamp - a.timestamp);
+// console.log("sortedComments",comments) 
 ////////////////////////////////////////////////////////////////GET REPLIES FROM BACKEND///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
