@@ -62,3 +62,16 @@
     margin: 20px auto;
   }
   
+
+
+  .card .circle {
+    border-radius: 3px;
+    width: 150px;
+    height: 150px;
+    background: black;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    border-bottom-left-radius: 170px;
+  }

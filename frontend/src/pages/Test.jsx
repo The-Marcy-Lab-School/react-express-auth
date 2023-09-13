@@ -1,4 +1,4 @@
-import '../pages/Components/cardsDesign.css';
+//import '../pages/Components/cardsDesign.css';
 import './test.css';
 //CODE USE FOR TESTING FETCHING FROM DATABASE
 // import React, { useEffect, useState } from 'react';
@@ -568,6 +568,7 @@ console.log("sent data",data)
         </ul>
       )}
       {searchResults.map(result => (
+        
         <div
           key={result.id}
           className={`search-card ${selectedItemId === result.id ? 'selected' : ''}`}
