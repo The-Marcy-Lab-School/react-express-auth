@@ -13,18 +13,18 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
    const { currentUser } = useContext(CurrentUserContext);
 
   const navigation = [
-    { name: 'login', href: '/login', current: true },
-    { name: 'Team', href: '/team', current: false },
-    { name: 'Projects', href: '/projects', current: false },
-    // { name: 'Calendar', href: '/calendar', current: false },
-    // { name: "/", href: '/projects', text: "Home" },
-    // { name: "/users", text: "Users", end: true },
-    // { path: `/users/${currentUser?.id}`, text: currentUser?.username },
-    // { path: "/quiz-test", text: "Quiz Test" },
-    // { path: "/selected-language", text: "Selected Language" },
-    // { path: "/quiz-lesson", text: "Quiz Lesson" },
-    // { path: "/login", text: "Login" },
-    // { path: "/sign-up", text: "Sign Up" },
+  //   { name: 'login', href: '/login', current: true },
+  //   { name: 'Team', href: '/team', current: false },
+  //   { name: 'Projects', href: '/projects', current: false },
+  //   { name: 'Calendar', href: '/calendar', current: false },
+  //   { name: "/", href: '/projects', current: false},
+  //  // { name: "Users", href: "/users", current: false},
+  //   { path: `/users/${currentUser?.id}`, href: currentUser?.username, current: false },
+  //   { path: " Quiz Test", href: "/quiz-test", current: false },
+  //   { path: "Selected Language", href: "/selected-language", current: false},
+  //   { path: "/quiz-lesson", href: "Quiz Lesson", current: false },
+  //   { path: "/login", href: "Login", current: false },
+  //   { path: "/sign-up", href: "Sign Up" , current: false },
   ];
 
 
@@ -62,46 +62,81 @@ function classNames(...classes) {
                 <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4 list-none">
                   {currentUser ? 
-                    navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        to={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium list-none'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))
-                   : 
+
+                    // navigation.map((item) => (
+                    //   <a
+                    //     key={item.name}
+                    //     to={item.href}
+                    //     className={classNames(
+                    //       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    //       'rounded-md px-3 py-2 text-sm font-medium list-none'
+                    //     )}
+                    //     aria-current={item.current ? 'page' : undefined}
+                    //   >
+                    //     {item.name}
+                    //   </a>
+                    // ))
                     <>
-                      <li>
-                        <a className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' to="/login" >Login</a>
-                      </li>
-                      <li>
-                        <a  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' to="/sign-up">Sign Up</a>
-                      </li>
-                    </>
+              <li>
+                <NavLink to={`/users/${currentUser.id}`}>
+                  {currentUser.username}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/quiz-test">Quiz Test</NavLink>
+              </li>
+              <li>
+                <NavLink to="/selected-language">Selected Language</NavLink>
+              </li>
+              <li>
+                <NavLink to="/quiz-lesson">Quiz Lesson</NavLink>
+              </li>
+            </>
+                   : 
+                <>
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>
+              <li>
+                <NavLink to="/sign-up">Sign Up</NavLink>
+              </li>
+            </>
+              //       <>
+
+              //         <li>
+              //           <a className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' href="/login" >Login</a>
+              //         </li>
+              //         <li>
+              //           <a  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' to="/sign-up">Sign Up</a>
+              //         </li>
+              //         <li>
+              //           <a  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' to="/quiz-test">Quiz Test</a>
+              //         </li>
+              //         <li>
+              //           <a  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' to="/users" end={true}>
+              // Users</a>
+              //         </li>
+              //         <li>
+              //           <a  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' href="/selected-language">Selected Language</a>
+              //         </li>
+              //         <li>
+              //           <a  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' to="/quiz-lesson">Quiz Lesson</a>
+              //         </li>
+              //         <li>
+              //           <a  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium list-none' to="/sign-up">Sign Up</a>
+              //         </li>
+              //       </>
                   }
                 </div>
 
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+              
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  <div>
+                  {/* <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
@@ -111,7 +146,7 @@ function classNames(...classes) {
                         alt=""
                       />
                     </Menu.Button>
-                  </div>
+                  </div> */}
                   <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"
