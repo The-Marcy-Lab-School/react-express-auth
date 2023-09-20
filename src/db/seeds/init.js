@@ -21,15 +21,24 @@ exports.seed = async (knex) => {
   await Quizzes.create('Spanish')
 
    await QuizQuestions.create('What does is Bonjour in French ','Hello','Goodbye','Why','French',1,1);
-  await QuizQuestions.create('What is one in spanish','Uno','Dos','Five','Si',8,1);
+  await QuizQuestions.create('What is one in spanish','Uno','Dos','Five','Si',1,1);
   // await QuizQuestions.create('testing quiz','T','YU','FG','GH',1,3);
 
   // //Chatbox input
   // await Chatbox.create(10,"test","test");
 
+await QuizQuestions.create('What does "Bonjour" mean in French?', 'Hello', 'Goodbye', 'Why', 'French', 2, 1);
+await QuizQuestions.create('How do you say "Thank you" in French?', 'Merci', 'Bonjour', 'Oui', 'Non', 2, 1);
+await QuizQuestions.create('What is the capital of France?', 'Paris', 'Madrid', 'Berlin', 'London', 2, 1);
+
+
    // //Lessons input
   await Lessons.create("lessons 1",1,1);
-  await Lessons.create("lessons 2",8,1);
+  await Lessons.create("lessons 2",2,2);
+
+  await Lessons.create("lessons 1",2,1);
+  await Lessons.create("lessons 2",2,2);
+
 
   await DiscussionBoard.create("Why Spanish?","Honestly im the omnly one that literall Love spanish ","john");
   await DiscussionBoard.create("Uunderstanding Grammar For French","Im a bit confused about how I should structure things in French","stacey");

@@ -1,7 +1,7 @@
 exports.up = (knex) => {
     return knex.schema.createTable('lessons', (table) => {
         table.increments();
-        table.string('lessons').notNullable().unique();
+        table.string('lessons').notNullable()
         table.integer('quiz_id')
         table.foreign('quiz_id').references('id').inTable('quiz_topics');
         table.integer('level_id').unsigned().notNullable();

@@ -83,7 +83,7 @@ useEffect(() => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer ' 
+              Authorization: 'Bearer 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' 
             },
             body: JSON.stringify({
               messages: [{ role: 'user', content: message }],
@@ -92,8 +92,7 @@ useEffect(() => {
   })
 
   const data = await response.json();
-  return "me llamo "
-  //data.choices[0].message.content
+  return data.choices[0].message.content
   }
 
   const sendMessagesToBackend = async (aiResponse, userResponse) => {

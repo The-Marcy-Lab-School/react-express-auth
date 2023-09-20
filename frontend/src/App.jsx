@@ -98,11 +98,14 @@ export default function App() {
         <Route path='/' element={<CommentsPage/>} />
         <Route path='/lessons' element={<QuizLesson />} />
         <Route path='/quiz' element={<QuizTestPage />} />
-        <Route path='test' element={<Test2 />} />
+        <Route path='test' element={<Test />} />
         <Route path='/Home' element={<Homee />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/message' element={<Message />} />
+        <Route path='/select' element={<SelectLanguage />} />
+        <Route path='/ai' element={<AI />} />
+
       </Routes>
     </main>
    </>
