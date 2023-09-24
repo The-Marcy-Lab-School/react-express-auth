@@ -8,12 +8,10 @@ class Quizzes {
   }
 
   static async list() {
-    
     try {
       const query = 'SELECT * FROM quiz_topics';
       const { rows } = await knex.raw(query);
       console.log("model list quiz" + rows.map((quizzes) => new Quizzes(quizzes)))
-      // console.log("quiz topics model list", rows)
       return rows
       //.map((quizzes) => new Quizzes(quizzes));
     } catch(error) {
@@ -47,8 +45,8 @@ class Quizzes {
             INSERT INTO quiz_topics (topic)
             VALUES (?) RETURNING *
         `;
-        const { rows: [quizzes] }= await knex.raw(query, [topic]);
-        return new Quizzes(quizzes);
+        const {rows: [quiz]} = await knex.raw(query, [topic]);
+        return new Quizzes(quiz);
     } catch (error) {
         console.log(error);
         return null;

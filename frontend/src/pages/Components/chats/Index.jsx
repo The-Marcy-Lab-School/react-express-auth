@@ -13,8 +13,8 @@ import StandardMessageForm from "../CustomMessageForm/StandardMessageForm";
 const Chat = ({ user, secret }) => {
   const chatProps = useMultiChatLogic(
     '94e5be9a-acd1-49a6-840f-ccbbca1be304',
-    'adam',
-    'adam'
+    'stacey',
+    'stacey'
   );
 
   return (

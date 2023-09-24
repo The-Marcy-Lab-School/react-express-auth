@@ -26,7 +26,7 @@ class Lessons {
         try {
           const query = 'SELECT * FROM lessons WHERE quiz_id = ?';
           const { rows} = await knex.raw(query, [id]);
-          console.log(" find lessons with quiz id " + rows)
+          console.log("question find rows" + rows)
           return rows
         } catch(error) {
           console.log(error);

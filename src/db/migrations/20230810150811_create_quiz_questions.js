@@ -66,7 +66,7 @@ exports.up = (knex) => {
         table.string('wrong_answer_2').notNullable();   
         table.string('wrong_answer_3').notNullable();
         table.integer('quiz_id').unsigned().notNullable(); // Use unsigned here
-      //  table.foreign('quiz_id').references('id').inTable('quiz_topics');
+        table.foreign('quiz_id').references('id').inTable('quiz_topics');
         table.integer('level_id').unsigned().notNullable();
         table.timestamps(true, true);
     });

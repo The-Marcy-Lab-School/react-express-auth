@@ -145,6 +145,7 @@
 
 
 
+
 import React, { useState, useEffect, useContext } from "react";
 import Context from '../contexts/lesson-context';
 import LessonContext from '../contexts/lesson-context'
@@ -156,33 +157,61 @@ export default function QuizTestPage() {
   const [showFinalResults, setFinalResults] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  // const [questions, setQuestions] = useState([]);
-  const { questions } = useContext(LessonContext)
+  const [questions, setQuestions] = useState([]);
+  const { questionData } = useContext(LessonContext)
   const [selectedOption, setSelectedOption] = useState(null);
   const [userAnswers, setUserAnswers] = useState([]);
   const [timeRemaining, setTimeRemaining] = useState(60); // Initial time in seconds
+  console.log('look at me', questionData)
   const initialTime = 60;
   const totalScore = Math.ceil((score / questions.length) * 100);
 
+  
+  
+  // useEffect(() => {
+  //   console.log("hey there handsome",question)
+  //   fetch('api/questions')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const questionsWithShuffledOptions = data.map(question => ({
+  //         ...question,
+  //         options: shuffleArray([
+  //           question.answer,
+  //           question.wrong_answer_1,
+  //           question.wrong_answer_2,
+  //           question.wrong_answer_3,
+  //         ]),
+  //       }));
+  
+  //       setQuestions(questionsWithShuffledOptions);
+  //       setUserAnswers(new Array(questionsWithShuffledOptions.length).fill(null));
+  //     })
+  //     .catch(error => console.error(error));
+  // }, []);
+  
   useEffect(() => {
-    fetch('api/questions')
-      .then(response => response.json())
-      .then(data => {
-        const questionsWithShuffledOptions = data.map(question => ({
-          ...question,
-          options: shuffleArray([
-            question.answer,
-            question.wrong_answer_1,
-            question.wrong_answer_2,
-            question.wrong_answer_3,
-          ]),
-        }));
-
-        setQuestions(questionsWithShuffledOptions);
-        setUserAnswers(new Array(questionsWithShuffledOptions.length).fill(null));
-      })
-      .catch(error => console.error(error));
+    // Replace this with your actual data or context
+    const data = [
+      // Your data here...
+    ];
+  
+    const questionsWithShuffledOptions = questionData.map(question => ({
+      ...question,
+      options: shuffleArray([
+        question.answer,
+        question.wrong_answer_1,
+        question.wrong_answer_2,
+        question.wrong_answer_3,
+      ]),
+    }));
+  
+    setQuestions(questionsWithShuffledOptions);
+    setUserAnswers(new Array(questionsWithShuffledOptions.length).fill(null));
   }, []);
+  
+  
+
+
   
     useEffect(() => {
       if (timeRemaining > 0 && !showFinalResults) {

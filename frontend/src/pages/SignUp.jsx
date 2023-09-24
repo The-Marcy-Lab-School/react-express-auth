@@ -36,7 +36,7 @@ export default function SignUpPage() {
   };
 
   return <>
-    <h1>Sign Up</h1>
+    
     <form onSubmit={handleSubmit} onChange={handleChange}>
       <label htmlFor="username">Username</label>
       <input

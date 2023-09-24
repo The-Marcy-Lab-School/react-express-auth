@@ -11,29 +11,25 @@ import { Progress } from 'semantic-ui-react';
 
 // export default ProgressExampleProgress
 export default function QuizLessonPage() {
-  const [showModal, setShowModal] = useState(false);
   const { quizData, setQuizData } = useContext(Context);
   const {setQuestionsData} = useContext(LessonContext )
   const navigate = useNavigate();
-  const ProgressExampleProgress = () => <Progress percent={2} progress />
-
-
-
   const fetchLessonData = (quizId, levelId) => {
  
     
     console.log("button clickedq", quizId,levelId)
     fetch(`api/lessons-quizzes/${quizId}-${levelId}`)
-      .then(response => response.json())
-      .then(data => {
-        setQuestionsData(data)
-        navigate("/quiz");
-        // Update quizData with the new data
-       // setQuizData(prevData => [...prevData, ...data]);
-      })
-      .catch(error => console.error(error));
+    .then(response => response.json())
+    .then(data => {
+      setQuestionsData(data)
+      navigate("/quiz");
+      // Update quizData with the new data
+      // setQuizData(prevData => [...prevData, ...data]);
+    })
+    .catch(error => console.error(error));
   };
 
+  
   const renderModal = () => {
     if (showModal) {
       return (
@@ -86,7 +82,7 @@ export default function QuizLessonPage() {
       <>
      
             <>
-            <ProgressExampleProgress />
+            {/* <ProgressExampleProgress /> */}
           {/* <div className="relative mb-5 py-9">
             <div className="rounded-full border border-red-500 p-1">
               <div className="flex h-6 items-center justify-center rounded-full bg-red-300 text-xs leading-none" style={{ width: "85%", height: "85%" }}>
@@ -115,15 +111,54 @@ export default function QuizLessonPage() {
                     <div href="#_" className="relative flex items-center justify-center px-8 py-4 font-bold text-black group mt-3">
                       <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-purple-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
                       <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
-                      <div>
+{/*                       
+                      {quizData.map(topic => (
+                          <div key={topic.id}>
+                            {topic.lesson === 'lesson 1' && (
+                              <span className="relative block text-center bg-transparent cursor-pointer" onClick={() => fetchLessonData(topic.quiz_id, topic.level_id)}>
+                                {topic.lessons}
+                              </span>
+                            )}
+                          </div>
+                        ))} */}
+{/* 
+{quizData.map((topic) => (
+  <div key={topic.id}>
+    {topic.lessons === 'lessons 1' && (
+      <span
+        className="relative block text-center bg-transparent cursor-pointer"
+        onClick={() => fetchLessonData(topic.quiz_id, topic.level_id)}
+      >
+        {topic.lessons}
+      </span>
+    )}
+  </div>
+))} */}
+{quizData.map((topic) => (
+  <div key={topic.id}>
+    {console.log("topic",topic)}
+    {topic.lessons === 'lessons 1' && topic.quiz_id === 1 && (
+      <span
+        className="relative block text-center bg-transparent cursor-pointer"
+        onClick={() => fetchLessonData(topic.quiz_id, topic.level_id)}
+      >
+        {topic.lessons}
+      </span>
+    )}
+  </div>
+))}
+
+
+                      
+                      {/* <div>
                       <button className="showModalbutton" onClick={() => setShowModal(true)}>
                         Show Modal
                       </button>
                       {console.log("showModal state:", showModal)}
 
                       {/* Call the renderModal function */}
-                    {renderModal()}
-                    </div>
+                    {/* {renderModal()} */}
+                    </div> 
                     </div>
                   </div>
                 </div>
@@ -154,9 +189,8 @@ export default function QuizLessonPage() {
               </div>
             </div>
           </div>
-        </div>
     
-                      {showModal && <Modal closeModal={() => setShowModal(false)} />}
+                      {/* {showModal && <Modal closeModal={() => setShowModal(false)} />} */}
       </>
     );
   }
