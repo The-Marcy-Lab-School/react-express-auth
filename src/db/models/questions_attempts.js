@@ -86,7 +86,7 @@ class QuizAttempts {
       
       const {rows: [quiz_attempt]} = await knex.raw(query, [user_id, quiz_id, score_count,level_id]);
       console.Console.log("quiz array" + quiz_attempt)
-      return quiz_gattempt; // Return the inserted row
+      return quiz_attempt; // Return the inserted row
     } catch (error) {
       console.error(error);
       return null;

@@ -98,7 +98,10 @@ function classNames(...classes) {
                 <NavLink to="/message">Message</NavLink>
               </li>
               <li>
-                <NavLink to="/lesson">Discussion</NavLink>
+                <NavLink to="/discussion">Discussion</NavLink>
+              </li>
+              <li>
+                <NavLink to="/auto-search">AutoSearch</NavLink>
               </li>
             </>
                    : 

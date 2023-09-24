@@ -18,6 +18,8 @@ function NavigationLinks() {
     { path: "/ai", text: "AI" },
     { path: "/message", text: "Message" },
     { path: "/lesson", text: "Lesson" },
+    { path: "/discussion", text: "Discussion" },
+    { path: "/auto-search", text: "Auto Search" },
 
   ];
 

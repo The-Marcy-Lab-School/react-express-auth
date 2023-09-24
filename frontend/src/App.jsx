@@ -16,6 +16,9 @@ import QuizTestPage from './pages/QuizTestPage';
 import SelectedlanguagePage from './pages/SelectedlanguagePage';
 import AI from './pages/Components/CustomMessageForm/Ai'
 import Message from './pages/Components/chats/Index'
+import Comments from './pages/CommentsPage';
+import AutoSearch from './pages/Test';
+import DiscussionBoardBox from './pages/Discussion';
 // import SelectLanguages from './pages/SelectLanguage';
 // import QuizLesson from './pages/QuizLesson';
 export default function App() {
@@ -26,7 +29,7 @@ export default function App() {
 
   // return (
   //   <>
-  //   < AI/>
+  //   < AutoSearch/>
   //   </>
   // )
   return <>
@@ -47,6 +50,9 @@ export default function App() {
         <Route path='/ai' element={<AI/>} />
         <Route path='/message' element={<Message/>} />
         <Route path='/lesson' element={<QuizLessonPage />} />
+        <Route path='/comments' element={<Comments />} />
+        <Route path='/auto-search' element={<AutoSearch />} />
+        <Route path='/discussion' element={<DiscussionBoardBox />} />
       </Routes>
     </main>
   </>;

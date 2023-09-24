@@ -18,6 +18,15 @@ const lessonsController = require('./controllers/lessons')
 //ROUTES FOR DISCUSSION BOARD
 const discussionBoardController = require('./controllers/discussion_board')
 
+//ROUTES FOR COMMENTS
+const commentsController = require('./controllers/comments')
+
+//ROUTES FOR REPLY
+const repliesController = require('./controllers/replies')
+
+//Quiz Attempts
+const quizAttemptsController = require('./controllers/quiz_attempts')
+
 const Router = express.Router();
 Router.use(addModelsToRequest);
 
@@ -47,10 +56,25 @@ Router.get('/gettMessages', chatboxController.find)
 
 //ROUTES FOR LESSONS 
 Router.get('/lessons/:id', lessonsController.find)
-Router.get('/lessons/:id', lessonsController.find)
+//Router.get('/lessons/:id', lessonsController.find)
 
-
+//ROUTES FOR DISCUSSION
 Router.post('/discussion',discussionBoardController.create)
+Router.get('/get-discussion', discussionBoardController.list)
+
+//COMMENTS/////////
+Router.get('/comments/:id', commentsController.find);
+Router.post('/comments', commentsController.create);
+
+
+//REPLIES/////////
+Router.post('/replies', repliesController.create);
+Router.get('/get-replies', repliesController.list);
+
+//ROUTES FOR QUIZ ATTEMPTS
+Router.post('/quiz-attempts', quizAttemptsController.create);
+Router.get('/get-quiz-attempts/:id', quizAttemptsController.find);
+Router.get('/list-attempts', quizAttemptsController.list)
 
 // Router.post('/authenticate', async (req, res) => {
 //   const fakeUsername = 'fakeUser'; // Change this to your desired fake username
