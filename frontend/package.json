@@ -24,6 +24,7 @@
     "react-spring": "^9.7.2",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
+    "styled-components": "^6.0.8",
     "yarn": "^1.22.19"
   },
   "devDependencies": {

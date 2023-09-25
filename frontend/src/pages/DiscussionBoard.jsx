@@ -379,6 +379,7 @@
 import React, { useState,useContext,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import DiscussionContext from '../contexts/discussion-context';
+import './discussionBoard.css';
 
 function AutoSearch() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -548,7 +549,79 @@ console.log("sent data",data)
 
 ////////////////////////////////////////////////////////////////////////////
   return ( 
-  <div>
+    <>
+     <div>
+      {/* Include the Google Fonts link in the head of your HTML or your CSS */}
+      {/* <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> */}
+      <div className="wrapper">
+        <div className="label">Submit your search</div>
+        <div className="searchBar">
+          <input
+            id="searchQueryInput"
+            type="text"
+            name="searchQueryInput"
+            placeholder="Search"
+            value={searchTerm}
+             onChange={handleInputChange}
+          />
+          <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+            <svg
+              style={{ width: '24px', height: '24px' }}
+              viewBox="0 0 24 24"
+              fill="#666666"
+            >
+              <path
+                d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                fill="#666666"
+              />
+            </svg>
+          </button>
+        </div>
+        
+      </div>
+    </div>
+    <div className="container">
+    <div className="card">
+      <div className="title">
+        <h1>Search</h1>
+        
+        <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleInputChange}
+      />
+      </div>
+      <div className="content">
+        <div className="social">
+          <i className="fab fa-codepen"></i>
+           <button onClick={handleSearch}>Search</button>
+      {suggestions.length > 0 && (
+        <ul>
+          {suggestions.map((item, index) => (
+            <li key={item.id} onClick={() => handleItemClick(item)}>
+              {item.topic}
+            </li>
+          ))}
+        </ul>
+      )}
+      {searchResults.map(result => (
+        
+        <div
+          key={result.id}
+          className={`search-card ${selectedItemId === result.id ? 'selected' : ''}`}
+         onClick={() => handleResultClick(result)}
+        >
+          < div className="search">{result.topic}</div>
+        </div>
+      ))}
+        </div>
+      </div>
+      <div className="circle"></div>
+    </div>
+  </div>
+
+  {/* <div>
     <div>
       <h1>Auto Search</h1>
       <input
@@ -579,7 +652,7 @@ console.log("sent data",data)
       ))}
       
 
-    </div>
+    </div> */}
 
 <div>
       <h2>Cdsreate a New Discussion Board</h2>
@@ -595,7 +668,7 @@ console.log("sent data",data)
         <button type="submit">Create Discussion Board</button>
       </form>
 </div>
-    </div>
+    </>
   );
 }
 

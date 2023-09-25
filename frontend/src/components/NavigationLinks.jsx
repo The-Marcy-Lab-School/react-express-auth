@@ -10,16 +10,16 @@ function NavigationLinks() {
     { path: "/", text: "Home" },
     { path: "/users", text: "Users", end: true },
     { path: `/users/${currentUser?.id}`, text: currentUser?.username },
-    { path: "/quiz-test", text: "Quiz Test" },
+    // { path: "/quiz-test", text: "Quiz Test" },
     { path: "/selected-language", text: "Selected Language" },
-    { path: "/quiz-lesson", text: "Quiz Lesson" },
+    // { path: "/quiz-lesson", text: "Quiz Lesson" },
     { path: "/login", text: "Login" },
     { path: "/sign-up", text: "Sign Up" },
     { path: "/ai", text: "AI" },
     { path: "/message", text: "Message" },
-    { path: "/lesson", text: "Lesson" },
-    { path: "/discussion", text: "Discussion" },
-    { path: "/auto-search", text: "Auto Search" },
+    // { path: "/lesson", text: "Lesson" },
+    // { path: "/discussion", text: "Discussion" },
+    { path: "/auto-search", text: "Discussion" },
 
   ];
 

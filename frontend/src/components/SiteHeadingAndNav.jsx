@@ -78,19 +78,22 @@ function classNames(...classes) {
                     // ))
                     <>
               <li>
+              <NavLink to="/">Home</NavLink>
+              </li>      
+              <li>
                 <NavLink to={`/users/${currentUser.id}`}>
                   {currentUser.username}
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/quiz-test">Quiz Test</NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink to="/selected-language">Selected Language</NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/quiz-lesson">Quiz Lesson</NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink to="/ai">AI</NavLink>
               </li>
@@ -98,11 +101,11 @@ function classNames(...classes) {
                 <NavLink to="/message">Message</NavLink>
               </li>
               <li>
-                <NavLink to="/discussion">Discussion</NavLink>
+                <NavLink to="/auto-search">Discussion</NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/auto-search">AutoSearch</NavLink>
-              </li>
+              </li> */}
             </>
                    : 
                 <>

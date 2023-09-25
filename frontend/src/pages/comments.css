@@ -1,0 +1,104 @@
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+form{
+    width: 100%;
+}
+.main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.topic-section {
+    margin-bottom: 20px;
+}
+
+.topic-section h2 {
+    font-size: 24px;
+}
+
+.description {
+    color: #777;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.comment-form button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.comment .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.comment .comment-author {
+    font-weight: bold;
+}
+
+.comment .comment-date {
+    color: #777;
+}
+
+.comment .comment-content {
+    margin-bottom: 10px;
+}
+
+.comment .comment-actions {
+    text-align: right;
+}
+
+.comment .reply-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+.reply {
+    background-color: #f2f2f2; /* Different background color for replies */
+    border: 1px solid #ccc; /* Adjust borders as needed */
+    margin: 5px 0; /* Adjust margin as needed */
+    padding: 5px 10px; /* Adjust padding as needed */
+  }
+  
+  .reply .reply-author {
+    font-weight: bold;
+  }
+  
+  .reply .reply-text {
+    margin-left: 10px; /* Indent reply text */
+  }

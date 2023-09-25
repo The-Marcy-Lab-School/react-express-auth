@@ -52,6 +52,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 //import './styles.css'; // Import your CSS file
 //discussion forum context 
+import './comments.css';
 import DiscussionContext from '../contexts/discussion-context';
 //comment context
 ///import CommentsContext from '../contexts/comment-context';
@@ -276,12 +277,12 @@ const handleRepliesChange = (event) => {
     }
 
   return (
-    <div>
-      <header>
+    <div > 
+      <div className='header'>
         <h1>Discussion Forum</h1>
-      </header>
+      </div>
 
-      <main>
+      <div className='main'>
         {/* Comment Section */}
 <div className="comment-section">
   <h2>Comments</h2>
@@ -340,7 +341,7 @@ const handleRepliesChange = (event) => {
   {/* More comments can be added here */}
 </div>
 
-      </main>
+      </div>
 
       <footer>
         &copy; 2023 Discussion Forum WE EXIST

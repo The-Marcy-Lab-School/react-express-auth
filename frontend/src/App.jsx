@@ -17,8 +17,8 @@ import SelectedlanguagePage from './pages/SelectedlanguagePage';
 import AI from './pages/Components/CustomMessageForm/Ai'
 import Message from './pages/Components/chats/Index'
 import Comments from './pages/CommentsPage';
-import AutoSearch from './pages/Test';
-import DiscussionBoardBox from './pages/Discussion';
+import AutoSearch from './pages/DiscussionBoard';
+import DiscussionBoardBox from './pages/DiscussionBoard';
 // import SelectLanguages from './pages/SelectLanguage';
 // import QuizLesson from './pages/QuizLesson';
 export default function App() {
@@ -29,7 +29,7 @@ export default function App() {
 
   // return (
   //   <>
-  //   < AutoSearch/>
+  //   < LoginPage/>
   //   </>
   // )
   return <>

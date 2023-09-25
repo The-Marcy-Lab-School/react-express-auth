@@ -1,0 +1,107 @@
+/* @import url('https://cdn.dribbble.com/users/1273747/screenshots/4666662/final.gif'); */
+/* body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-image:'https://cdn.dribbble.com/users/1273747/screenshots/4666662/final.gif' !important;  */
+    /* linear-gradient(to bottom right, #70c1ff, #498ffc);  */
+     /* display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    
+  } */
+  
+  /* .bodyContainer {
+    background-image:'https://cdn.dribbble.com/users/1273747/screenshots/4666662/final.gif'; 
+  } */ 
+
+  /* main{
+    background-color: none;
+  } */
+
+  #ccontianer {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-image: url('https://cdn.dribbble.com/users/1273747/screenshots/4666662/final.gif')!important; */
+    /* background-size: cover; Adjust as needed */
+    /* background-repeat: no-repeat; Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+  }
+  
+ .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* background-image:'https://cdn.dribbble.com/users/1273747/screenshots/4666662/final.gif' !important;  */
+  }
+  
+  .card {
+    width: 350px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+  
+  label {
+    color: black;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #fff;
+    color: #498ffc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #70c1ff;
+  }
+  
+  @media (max-width: 480px) {
+    .card {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+  
+
+.sign {
+    color: #498ffc; /* Change the color to your desired highlight color */
+    text-decoration: underline;
+  }
+  .sign:hover {
+    background-color: #498ffc;
+      color: #fff; 
+  }
+  
