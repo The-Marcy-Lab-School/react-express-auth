@@ -65,7 +65,7 @@ function DiscussionForum() {
  // const navigate = useNavigate();
  const [sortedComments, setComments] = useState([]);
   const {discussionsData} = useContext(DiscussionContext)
-console.log("discussionsData info",discussionsData.id)
+// console.log("discussionsData info",discussionsData.id)
   //const {commentsData}
   //const { commentsData: comments }  = useContext(CommentsContext)
   //
@@ -89,7 +89,7 @@ console.log("discussionsData info",discussionsData.id)
       .then((response) => response.json())
       .then((data) => {
         // Assuming the data is an array of comments
-        console.log("comments data",data)
+        // console.log("comments data",data)
         setComments(data);
        // setLoading(false); // Set loading to false after data is fetched
       })
@@ -100,7 +100,7 @@ console.log("discussionsData info",discussionsData.id)
   }, [sortedComments]); 
 
   const comments = sortedComments.slice().sort((a, b) => b.timestamp - a.timestamp);
-console.log("sortedComments",comments) 
+// console.log("sortedComments",comments) 
 
 
   // Function to fetch comments by discussion ID
@@ -193,6 +193,7 @@ console.log("sortedComments",comments)
       comment: newComment,
       discussionBoardId: discussionsData.id, // Replace with the actual discussion board ID
     };
+    console.log("Here I am",discussionsData)
 
     // Send a POST request using the fetch API
     fetch('api/comments', {
@@ -276,17 +277,39 @@ const handleRepliesChange = (event) => {
       setNewReplies('');
     }
 
+    const styles = {
+      container: {
+        textAlign: 'center',
+        padding: '20px',
+        backgroundColor: '#f0f0f0',
+        borderRadius: '10px',
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+      },
+      heading: {
+        fontSize: '28px',
+        color: '#333',
+        marginBottom: '10px',
+      },
+      description: {
+        fontSize: '18px',
+        color: '#666',
+      },
+    };
+    
+
   return (
     <div > 
       <div className='header'>
         <h1>Discussion Forum</h1>
       </div>
+      <div style={styles.container}>
+          <h1 style={styles.heading}>{discussionsData.topic}</h1>
+          <h3 style={styles.description}>{discussionsData.description}</h3>
+      </div>
 
       <div className='main'>
         {/* Comment Section */}
 <div className="comment-section">
-  <h2>Comments</h2>
-
   <form className="comment-form" onSubmit={handleSubmit}>
     <textarea
       placeholder="Add a comment"
@@ -301,7 +324,7 @@ const handleRepliesChange = (event) => {
     <div className="comment" key={comment.id}>
       <div className="comment-header">
         <span className="comment-author">{comment.username}</span>
-        <span className="comment-date">2 hours ago</span>
+        <span className="comment-date">{comment.created_at}</span>
       </div>
       <div className="comment-content">{comment.comment}</div>
       <div className="comment-actions">
@@ -323,7 +346,7 @@ const handleRepliesChange = (event) => {
                 value={newReplies}
                 onChange={handleRepliesChange}
                 ></textarea>
-                <button type="submit">Submit</button>
+                <button type="submit">Add a Reply</button>
             </form>
           {replies
             .filter((reply) => reply.commentid === comment.id)

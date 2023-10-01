@@ -570,6 +570,7 @@ console.log("sent data",data)
               viewBox="0 0 24 24"
               fill="#666666"
             >
+              <button onClick={handleSearch}>Search</button>
               <path
                 d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
                 fill="#666666"
@@ -580,46 +581,42 @@ console.log("sent data",data)
         
       </div>
     </div>
-    <div className="container">
+    {/* <div className="container">
     <div className="card">
       <div className="title">
-        <h1>Search</h1>
+        <h1>Search</h1> */}
         
-        <input
+        {/* <input
         type="text"
         placeholder="Search..."
         value={searchTerm}
         onChange={handleInputChange}
-      />
-      </div>
+      /> */}
+  
       <div className="content">
         <div className="social">
-          <i className="fab fa-codepen"></i>
-           <button onClick={handleSearch}>Search</button>
       {suggestions.length > 0 && (
         <ul>
           {suggestions.map((item, index) => (
-            <li key={item.id} onClick={() => handleItemClick(item)}>
+            <li className="container card title"key={item.id} onClick={() => handleItemClick(item)}>
               {item.topic}
             </li>
           ))}
         </ul>
       )}
+          {/* <i className="fab fa-codepen"></i> */}
       {searchResults.map(result => (
         
         <div
           key={result.id}
-          className={`search-card ${selectedItemId === result.id ? 'selected' : ''}`}
+          className={`search-card content social circle ${selectedItemId === result.id ? 'selected' : ''}`}
          onClick={() => handleResultClick(result)}
         >
-          < div className="search">{result.topic}</div>
+          < div className="search content social circle">{result.topic}</div>
         </div>
       ))}
-        </div>
-      </div>
       <div className="circle"></div>
-    </div>
-  </div>
+        </div>
 
   {/* <div>
     <div>
@@ -655,7 +652,7 @@ console.log("sent data",data)
     </div> */}
 
 <div>
-      <h2>Cdsreate a New Discussion Board</h2>
+      <h2>Create a New Discussion Board</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Topic:</label>
@@ -667,6 +664,7 @@ console.log("sent data",data)
         </div>
         <button type="submit">Create Discussion Board</button>
       </form>
+</div>
 </div>
     </>
   );

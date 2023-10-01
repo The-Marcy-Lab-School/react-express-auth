@@ -121,6 +121,9 @@ body {
   #searchQuerySubmit:hover {
     cursor: pointer;
   }
-  
+
+form{
+    width: 100%;
+}
   
   

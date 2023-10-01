@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 
 export default function HomePage() {
