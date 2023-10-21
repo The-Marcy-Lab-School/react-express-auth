@@ -71,15 +71,17 @@ export default function SelectLanguages({ children }) {
     }, []);
   
     const fetchQuizData = (quizId) => {
-      console.log("quizId", quizId)
-      fetch(`api/lessons/${quizId}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log("fetch quiz data", data)
-          setQuizData(data);
-          navigate("/lessons");
-        })
-        .catch(error => console.error(error));
+      console.log("id of button clicked",quizId)
+      setQuizData(quizId);
+      // console.log("quizId", quizId)
+      // fetch(`api/lessons/${quizId}`)
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     console.log("fetch quiz data", data)
+      //     setQuizData(data);
+      //     navigate("/lessons");
+      //   })
+      //   .catch(error => console.error(error));
     };
 
   return (<>

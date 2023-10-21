@@ -83,7 +83,7 @@ useEffect(() => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer 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' 
+              Authorization: 'Bearer' 
             },
             body: JSON.stringify({
               messages: [{ role: 'user', content: message }],
