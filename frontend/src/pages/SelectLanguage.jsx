@@ -73,6 +73,7 @@ export default function SelectLanguages({ children }) {
     const fetchQuizData = (quizId) => {
       console.log("id of button clicked",quizId)
       setQuizData(quizId);
+      navigate("/lessons");
       // console.log("quizId", quizId)
       // fetch(`api/lessons/${quizId}`)
       //   .then(response => response.json())

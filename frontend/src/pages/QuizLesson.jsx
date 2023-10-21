@@ -148,6 +148,7 @@ function QuizLesson() {
   const { quizData, setQuizData } = useContext(Context);
   const {setQuestionsData} = useContext(LessonContext )
   const navigate = useNavigate();
+  console.log("quiz data retrieve,", quizData);
   const fetchLessonData = (quizId, levelId) => {
  
     
@@ -167,11 +168,12 @@ function QuizLesson() {
     <div>
       <h2>Quiz lessons</h2>
       <ul>
-        {quizData.map(item => (
-          <li key={item.id}>
-             <button onClick={() => fetchLessonData(item.quiz_id, item.level_id)}>{item.lessons}</button>
+        {
+          <li>
+             <button onClick={() => fetchLessonData(quizData, 1)}>lesson 1 </button>
+             <button onClick={() => fetchLessonData(quizData, 2)}>lesson 2 </button>
           </li>
-        ))}
+       }
       </ul>
     </div>
   );
