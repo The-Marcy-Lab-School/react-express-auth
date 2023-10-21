@@ -6,7 +6,7 @@
 @import 'semantic-ui-css/semantic.min.css'; */
 
 /* Colors */
-:root {
+/* :root {
   --gray-300: #953030;
   --gray-400: #670909;
   --primary-400: #35596c;
@@ -20,15 +20,15 @@
   --tertiary-50: #78590a;
   --tertiary-100: #0218b9;
   --quaternary-500: #fb8500;
-}
-
-html, body, #root, .app {
+} */
+ 
+/* html, body, #root, .app {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
   font-family: "Rubik", sans-serif;
-}
+}  */
 
 .layout {
   width: 100%;
@@ -219,11 +219,15 @@ html, body, #root, .app {
   overflow:  none !important;
 }
 
+/* #message-form {
+  width: 10px;
+} */
+
 /* .ce-chat-feed-column{
   overflow-y: none !important;
 } */
 .ce-chat-feed-column {
-  overflow-y: hidden !important;
+  /* overflow-y: hidden !important; */
 }
 
 /* Add custom styles for the chat card */
@@ -451,12 +455,12 @@ nav a {
 form {
   padding: 1rem;
   border: 1px solid #CCC;
-  width: 15rem;
+  width: 40rem;
   margin: 1rem auto;
 }
 
 #message-form{
-  width: 100vh;
+  width: 50rem;
 }
 
 /* automatically added by NavLink component */
@@ -620,6 +624,13 @@ button {
   width: 25%;
   position: relative;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding-top: 12rem;
 }
 
 

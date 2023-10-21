@@ -36,16 +36,14 @@ class Lessons {
     
     
     
-    
-    
-    
+  
 
     static async create(lessons, quiz_id, level_id) {
         console.log("lessons info in model", lessons, quiz_id, level_id)
         try {
             const query = `
                 INSERT INTO lessons (lessons, quiz_id, level_id)
-                VALUES (?, ?,?)
+                VALUES (?,?,?)
                 RETURNING *
             `;
             const { rows } = await knex.raw(query, [lessons, quiz_id, level_id]);

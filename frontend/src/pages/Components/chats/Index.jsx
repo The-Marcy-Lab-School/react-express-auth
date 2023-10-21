@@ -6,15 +6,17 @@ import {
 } from "react-chat-engine-advanced";
 //import Header from "@/components/customHeader";
 import StandardMessageForm from "../CustomMessageForm/StandardMessageForm";
+import CurrentUserContext from "../../../contexts/current-user-context";
+console.log("curent context", CurrentUserContext);
 //import Ai from "@/components/customMessageForms/Ai";
 //import AiCode from "@/components/customMessageForms/AiCode";
 //import AiAssist from "@/components/customMessageForms/AiAssist";
 
 const Chat = ({ user, secret }) => {
   const chatProps = useMultiChatLogic(
-    '94e5be9a-acd1-49a6-840f-ccbbca1be304',
-    'stacey',
-    'stacey'
+    'e2be6ec8-5253-4d31-852d-2471fd09b2c6',
+    'lori',
+    'lori'
   );
 
   return (

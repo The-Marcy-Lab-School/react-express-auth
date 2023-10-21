@@ -158,11 +158,11 @@ export default function QuizTestPage() {
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [questions, setQuestions] = useState([]);
-  const { questionData } = useContext(LessonContext)
+  const { questionsData } = useContext(LessonContext)
   const [selectedOption, setSelectedOption] = useState(null);
   const [userAnswers, setUserAnswers] = useState([]);
   const [timeRemaining, setTimeRemaining] = useState(60); // Initial time in seconds
-  console.log('look at me', questionData)
+  console.log('look at me', questionsData)
   const initialTime = 60;
   const totalScore = Math.ceil((score / questions.length) * 100);
 
@@ -195,7 +195,7 @@ export default function QuizTestPage() {
       // Your data here...
     ];
   
-    const questionsWithShuffledOptions = questionData.map(question => ({
+    const questionsWithShuffledOptions = questionsData.map(question => ({
       ...question,
       options: shuffleArray([
         question.answer,

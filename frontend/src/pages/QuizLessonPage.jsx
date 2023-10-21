@@ -12,16 +12,18 @@ import { Progress } from 'semantic-ui-react';
 // export default ProgressExampleProgress
 export default function QuizLessonPage() {
   const { quizData, setQuizData } = useContext(Context);
+  console.log("quizData from lessons page", quizData )
   const {setQuestionsData} = useContext(LessonContext )
   const navigate = useNavigate();
   const fetchLessonData = (quizId, levelId) => {
  
-    
+    console.log("i was quicked")
     console.log("button clickedq", quizId,levelId)
     fetch(`api/lessons-quizzes/${quizId}-${levelId}`)
     .then(response => response.json())
     .then(data => {
       setQuestionsData(data)
+      console.log("data being fetch", data)
       navigate("/quiz");
       // Update quizData with the new data
       // setQuizData(prevData => [...prevData, ...data]);
@@ -111,6 +113,19 @@ export default function QuizLessonPage() {
                     <div href="#_" className="relative flex items-center justify-center px-8 py-4 font-bold text-black group mt-3">
                       <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-purple-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
                       <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+                      {quizData.map((topic) => (
+                        <div key={topic.id}>
+                          {console.log("topic",topic)}
+                          {topic.lessons === 'lessons 1 basic' && topic.quiz_id === 1 && (
+                            <span
+                              className="relative block text-center bg-transparent cursor-pointer"
+                              onClick={() => fetchLessonData(topic.quiz_id, topic.level_id)}
+                            >
+                              {topic.lessons}
+                            </span>
+                          )}
+                        </div>
+                      ))}
 {/*                       
                       {quizData.map(topic => (
                           <div key={topic.id}>
@@ -134,19 +149,6 @@ export default function QuizLessonPage() {
     )}
   </div>
 ))} */}
-{quizData.map((topic) => (
-  <div key={topic.id}>
-    {console.log("topic",topic)}
-    {topic.lessons === 'lessons 1' && topic.quiz_id === 1 && (
-      <span
-        className="relative block text-center bg-transparent cursor-pointer"
-        onClick={() => fetchLessonData(topic.quiz_id, topic.level_id)}
-      >
-        {topic.lessons}
-      </span>
-    )}
-  </div>
-))}
 
 
                       

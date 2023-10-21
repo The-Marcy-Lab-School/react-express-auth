@@ -93,7 +93,7 @@ useEffect(() => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer ' 
+             
             },
             body: JSON.stringify({
               messages: [{ role: 'user', content: message }],
@@ -102,7 +102,7 @@ useEffect(() => {
   })
 
   const data = await response.json();
-  return "hello response "
+  return data.choices[0].message.content
   //ata.choices[0].message.content
   }
 

@@ -147,6 +147,8 @@ import { useNavigate } from "react-router-dom";
 function QuizLesson() {
   const { quizData, setQuizData } = useContext(Context);
   const {setQuestionsData} = useContext(LessonContext )
+console.log("setQuestionsData",setQuestionsData);
+console.log("quizData from lessons page", quizData );
   const navigate = useNavigate();
   const fetchLessonData = (quizId, levelId) => {
  
@@ -156,7 +158,8 @@ function QuizLesson() {
       .then(response => response.json())
       .then(data => {
         setQuestionsData(data)
-        navigate("/quiz");
+        console.log("data being fetch", data)
+        //navigate("/quiz");
         // Update quizData with the new data
        // setQuizData(prevData => [...prevData, ...data]);
       })

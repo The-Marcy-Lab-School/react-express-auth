@@ -125,5 +125,13 @@ body {
 form{
     width: 100%;
 }
-  
+
+/* textarea {
+  resize: vertical;
+  width: 100%;
+}
+
+input{
+  width: 100%;
+} */
   

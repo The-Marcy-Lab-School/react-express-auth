@@ -117,7 +117,6 @@ export default function SelectedLanguagePage({ children }) {
         </div>
     </div>
 </div>
-
     </>
   );
 }
