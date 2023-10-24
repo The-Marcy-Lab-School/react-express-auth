@@ -32,7 +32,7 @@ export default function LoginPage() {
   <div className="container" style={{display: 'flex' , justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
   <div className="rounded-[calc(1.5rem-1px)] bg-white px-10 p-12 dark:bg-gray-900 card" style={{  width: '350px', backgroundColor: 'white', borderRadius: '15px', padding: '40px', backdropFilter: 'blur(10px)', boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)'}}>
     <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', border: 'none'}}>
-    <h1 className="text-xl font-semibold text-gray-800 dark:text-white" style={{ textAlign: 'center', color: 'black', marginBottom: '20px'}}>Login</h1>
+    <h1 className="text-xl font-semibold text-gray-800 dark:text-white" style={{ textAlign: 'center', color: 'black', marginBottom: '20px'}}>Log In!</h1>
       <label htmlFor="username" style={{color: 'black'}}>Username</label>
       <input  type="text" autoComplete="username" id="username" name="username" placeholder="Enter your username" />
 

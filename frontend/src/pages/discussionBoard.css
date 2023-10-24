@@ -122,8 +122,8 @@ body {
     cursor: pointer;
   }
 
-form{
-    width: 100%;
+.form{
+    width: 40%;
 }
 
 /* textarea {

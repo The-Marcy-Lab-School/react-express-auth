@@ -455,7 +455,7 @@ nav a {
 form {
   padding: 1rem;
   border: 1px solid #CCC;
-  width: 40rem;
+  /* width: 40rem; */
   margin: 1rem auto;
 }
 

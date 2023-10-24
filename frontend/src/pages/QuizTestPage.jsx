@@ -257,7 +257,7 @@ export default function QuizTestPage() {
 
   return (
     <div className="quiz-test">
-      <h1 className="quiz-title">Spanish Quiz</h1>
+      {/* <h1 className="quiz-title">Spanish Quiz</h1> */}
       {/* <h2 className="score">Current Score: {score}</h2> */}
       {showFinalResults ? (
         <div className="final-results">

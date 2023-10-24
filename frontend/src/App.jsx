@@ -10,7 +10,7 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
-//import QuizLessonPage from './pages/QuizLessonPage'
+import QuizLessonPage from './pages/QuizLessonPage'
 import Use from './pages/QuizTestPage'
 import QuizTestPage from './pages/QuizTestPage';
 import SelectedlanguagePage from './pages/SelectedlanguagePage';
@@ -20,7 +20,7 @@ import Comments from './pages/CommentsPage';
 import AutoSearch from './pages/DiscussionBoard';
 import DiscussionBoardBox from './pages/DiscussionBoard';
 // import SelectLanguages from './pages/SelectLanguage';
-import QuizLesson from './pages/QuizLesson';
+// import QuizLesson from './pages/QuizLesson';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -44,12 +44,12 @@ export default function App() {
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
         <Route path='/quiz' element={<QuizTestPage />} />
-        <Route path='/quiz-lesson' element={<QuizLesson />} />
+        <Route path='/quiz-lesson' element={<QuizLessonPage />} />
         <Route path='/selected-language' element={<SelectedlanguagePage />} />
-        <Route path='/quiz-lesson' element={<QuizLesson />} />
+        <Route path='/quiz-lesson' element={<QuizLessonPage />} />
         <Route path='/ai' element={<AI/>} />
         <Route path='/message' element={<Message/>} />
-        <Route path='/lesson' element={<QuizLesson />} />
+        <Route path='/lesson' element={<QuizLessonPage />} />
         <Route path='/comments' element={<Comments />} />
         <Route path='/auto-search' element={<AutoSearch />} />
         <Route path='/discussion' element={<DiscussionBoardBox />} />

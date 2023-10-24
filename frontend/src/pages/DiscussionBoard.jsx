@@ -653,7 +653,7 @@ console.log("sent data",data)
 
 <div>
       <h2>Create a New Discussion Board</h2>
-      <form onSubmit={handleSubmit}>
+      <form  className="form"onSubmit={handleSubmit}>
         <div>
           <label>Topic:</label>
           <input type="text" value={topic} onChange={(e) => setTopic(e.target.value)} required />

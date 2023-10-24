@@ -19,15 +19,19 @@ export default function SelectedLanguagePage({ children }) {
 
 
   const fetchQuizData = (quizId) => {
-    console.log("quizId", quizId)
-    fetch(`api/lessons/${quizId}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log("fetch quiz data", data)
-        setQuizData(data);
-        navigate("/lesson");
-      })
-      .catch(error => console.error(error));
+    // console.log("quizId", quizId)
+    // fetch(`api/lessons/${quizId}`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log("fetch quiz data", data)
+    //     setQuizData(data);
+    //     navigate("/lesson");
+    //   })
+    //   .catch(error => console.error(error));
+    console.log("id of button clicked",quizId)
+      setQuizData(quizId);
+      navigate("/quiz-lesson");
+
   };
  
   return (
@@ -84,6 +88,7 @@ export default function SelectedLanguagePage({ children }) {
                           </div>
                         ))}
                       </div>
+                      
                     </div>
                 </div>
             </div>
@@ -93,7 +98,7 @@ export default function SelectedLanguagePage({ children }) {
                         <div className="w-4 h-1/5 bg-red-50	absolute right-0 -bottom-44 bg-red-100 group-hover:bg-red-50"></div>
                         <img src="https://cdn.dribbble.com/users/916264/screenshots/7908122/japan.png" />
                     </div>
-                    <div className="px-7 mt-10">
+                    <div className="px-7 mt-5">
                         <h1 className="text-3xl font-bold group-hover:text-red-300 transition ease-out duration-300">日本語</h1>
                         <p>(Nihongo/Japanese)</p>
                         <p className=" text-sm mt-2 opacity-60 group-hover:opacity-70 ">Japanese is the ninth most spoken language in the world</p>

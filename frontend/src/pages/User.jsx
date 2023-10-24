@@ -40,25 +40,27 @@ export default function UserPage() {
   return(
 
         <>
-      <div style={{backgroundColor:"#fbf4d4"}}>
-        <div className="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-md p-5">
-          <img
-            className="w-32 h-32 rounded-full mx-auto"
-            src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
-            alt="Profile picture"
-          />
-          <h2 className="text-center text-2xl font-semibold mt-3 text-gray-800">{profileUsername}</h2>
-          <p className="text-center text-gray-600 mt-1">Language Learner</p>
-          <div className="mt-5">
-            <h3 className="text-xl font-semibold">Bio</h3>
-            <p className="text-gray-600 mt-2">
-              Hi there! My name is Staceyann and I am a native English speaker. I am currently learning French.
-            </p>
-          <div className="flex justify-center mt-5">
-            <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">
-            {isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
-            </a>
-          </div>
+      <div style={{backgroundColor:"#fbf4d4", height:"100vh"}}>
+      <div className="flex justify-center items-center min-h-screen">
+            <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-5">
+              <img
+                className="w-32 h-32 rounded-full mx-auto"
+                src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+                alt="Profile picture"
+              />
+              <h2 className="text-center text-2xl font-semibold mt-3 text-gray-800">{profileUsername}</h2>
+              <p className="text-center text-gray-600 mt-1">Language Learner</p>
+              <div className="mt-5">
+                <h3 className="text-xl font-semibold">Bio</h3>
+                <p className="text-gray-600 mt-2">
+                  Hi there! My name is {profileUsername} and I am a native English speaker. I am currently learning French.
+                </p>
+                <div className="flex justify-center mt-5">
+                  <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">
+                    {isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
+                  </a>
+                </div>
+              </div>
           </div>
         </div>
       </div>

@@ -113,19 +113,18 @@ export default function QuizLessonPage() {
                     <div href="#_" className="relative flex items-center justify-center px-8 py-4 font-bold text-black group mt-3">
                       <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-purple-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
                       <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
-                      {quizData.map((topic) => (
-                        <div key={topic.id}>
-                          {console.log("topic",topic)}
-                          {topic.lessons === 'lessons 1 basic' && topic.quiz_id === 1 && (
                             <span
                               className="relative block text-center bg-transparent cursor-pointer"
-                              onClick={() => fetchLessonData(topic.quiz_id, topic.level_id)}
+                              onClick={() => fetchLessonData(quizData, 1)}
                             >
-                              {topic.lessons}
+                            lesson 1
                             </span>
-                          )}
-                        </div>
-                      ))}
+                    </div>
+                      {/* <button onClick={() => fetchLessonData(quizData, 1)}>lesson 1 </button> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
 {/*                       
                       {quizData.map(topic => (
                           <div key={topic.id}>
@@ -160,11 +159,6 @@ export default function QuizLessonPage() {
 
                       {/* Call the renderModal function */}
                     {/* {renderModal()} */}
-                    </div> 
-                    </div>
-                  </div>
-                </div>
-              </div>
     
               <div className="border-r border-gray-300 mx-3 lg:pl-20">
                 <div className="py-10 pb-3 mt-5 h-4/6 relative bg-blue-200 group hover:bg-indigo-200 cursor-pointer transition ease-out duration-300 flex flex-col items-center justify-center">
@@ -184,7 +178,7 @@ export default function QuizLessonPage() {
                     <div href="#_" className="relative flex items-center justify-center px-8 py-4 font-bold text-black group mt-3">
                       <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-indigo-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
                       <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
-                      <span className="relative text-lg"> Get Started</span>
+                      <span className="relative text-lg" onClick={() => fetchLessonData(quizData, 2)}> lesson 2</span>
                     </div>
                   </div>
                 </div>
