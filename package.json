@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
-    "build": "npm i && npm run migrate:rollback && npm run migrate && npm run seed && cd frontend && vite build",
+    "build": "npm i && npm run migrate:rollback && npm run migrate && npm run seed",
     "start": "nodemon src/index.js",
     "dev": "nodemon ./src/index.js",
     "console": "node -r ./src/db/models/console.js",
@@ -18,8 +18,8 @@
     "play:bcrypt": "nodemon ./playground-examples/bcrypt-example.js",
     "lint": "eslint . --fix",
     "dev:frontend": "cd frontend && npm run dev"
-  },  
-  
+    
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
