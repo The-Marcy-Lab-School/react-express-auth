@@ -17,7 +17,8 @@
     "seed:make": "knex seed:make",
     "play:bcrypt": "nodemon ./playground-examples/bcrypt-example.js",
     "lint": "eslint . --fix",
-    "dev:frontend": "cd frontend && npm run dev"
+    "dev:frontend": "cd frontend && npm run dev",
+    
   },
   "keywords": [],
   "author": "",
