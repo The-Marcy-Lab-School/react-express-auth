@@ -5,10 +5,19 @@
   "main": "index.js",
   "scripts": {
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
-    "build": "npm i && npm run migrate:rollback && npm run migrate && npm run seed && cd frontend && npm run build",
-    "start": "node src/index.js", 
+    "build": "npm i && && npm run migrate:rollback && npm run migrate && npm run seed",
+    "start": "nodemon src/index.js",
     "dev": "nodemon ./src/index.js",
-    "dev:frontend": "cd frontend && npm i && npm run dev"
+    "console": "node -r ./src/db/models/console.js",
+    "connect": "psql -U postgres -d auth_example",
+    "migrate": "knex migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "seed:make": "knex seed:make",
+    "play:bcrypt": "nodemon ./playground-examples/bcrypt-example.js",
+    "lint": "eslint . --fix",
+    "dev:frontend": "cd frontend && npm run dev"
   },
   "keywords": [],
   "author": "",
@@ -36,7 +45,8 @@
     "react-chat-engine-pretty": "^0.1.8",
     "react-dropzone": "^14.2.3",
     "react-speech-recognition": "^3.10.0",
-    "regenerator-runtime": "^0.14.0"
+    "regenerator-runtime": "^0.14.0",
+    "vite": "^2.9.16"
   },
   "devDependencies": {
     "eslint": "^8.39.0",
