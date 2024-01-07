@@ -16,14 +16,14 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #000;
+  background: #000000;
 }
 
 #logo {
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
-  color: #FFF;
+  color: #ffffff98;
 }
 
 nav ul {
@@ -44,11 +44,94 @@ form {
   border: 1px solid #CCC;
   width: 15rem;
   margin: 1rem auto;
+  background-color: #19deec;
 }
 
 /* automatically added by NavLink component */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgb(255, 255, 255);
+  background-color: #b79c25;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .active {
   color: #EEBC32;
   font-weight: bold;
   font-style: italic;
+}
+
+h1 {
+  font-size: 2.5em;
+  line-height: 1.1;
+  margin: 2em;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px;
+  margin: 1em;
+  background-color: #a88f22;
+  color: rgb(255, 255, 255);
+  border:color-mix(in hwb decreasing hue, color percentage, color percentage);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1em;
+  color: #000000;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+  margin: 1em;
+  list-style:circle;
+  padding: 0;
+  width: 5em;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20em;
+  margin: 1em;
+  padding: 1em;
+  background-color: #19deec;
+  border-radius: 10px;
+  color: rgb(194, 15, 15);
+  font-size: 1.1em;
+  text-align: left;
+}
+
+h1 {
+  color: rgb(106, 10, 10);
+}
+
+button {
+  border-radius: 6px;
+  border: 0.1em solid #a88f22;
+  display:inline-block;
+  font-size: 0.8em;
+  padding: 0.25em 1em;
+  margin: 0.6em;
+  background-color: #ffffffc2;
+}
+
+.delete-button {
+  display: inline-block;
+  border-radius: 6px;
 }
