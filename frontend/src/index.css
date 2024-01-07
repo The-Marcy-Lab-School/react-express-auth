@@ -15,7 +15,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   background: #000000;
 }
 
@@ -42,9 +42,13 @@ nav a {
 form {
   padding: 1rem;
   border: 1px solid #CCC;
-  width: 15rem;
+  width: 20rem;
   margin: 1rem auto;
   background-color: #19deec;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* automatically added by NavLink component */
@@ -83,6 +87,8 @@ h1 {
   background-color: #a88f22;
   color: rgb(255, 255, 255);
   border:color-mix(in hwb decreasing hue, color percentage, color percentage);
+  width: 10rem;
+  justify-content: center;
 }
 
 .form-row {
@@ -91,16 +97,6 @@ h1 {
   justify-content: center;
   gap: 1em;
   color: #000000;
-}
-
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1em;
-  margin: 1em;
-  list-style:circle;
-  padding: 0;
-  width: 5em;
 }
 
 .todo-list {
@@ -115,6 +111,26 @@ h1 {
   color: rgb(194, 15, 15);
   font-size: 1.1em;
   text-align: left;
+}
+
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+  margin-left: 1em;
+  list-style:circle;
+  padding: 0;
+  width: 10em;
+}
+
+li {
+  display: flex;
+  gap: 2em;
+}
+
+label {
+  display: flex;
 }
 
 h1 {
