@@ -100,19 +100,26 @@ h1 {
 }
 
 .todo-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 20em;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* justify-content: space-evenly; */
+  align-items:center;
+  width: 25em;
   margin: 1em;
   padding: 1em;
   background-color: #19deec;
   border-radius: 10px;
-  color: rgb(194, 15, 15);
+  color: rgb(3, 3, 3);
   font-size: 1.1em;
   text-align: left;
 }
 
+
+.taskTitle {
+  font-size:x-large;
+  color: rgb(144, 22, 22)
+}
 
 .list {
   display: grid;

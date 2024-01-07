@@ -36,39 +36,39 @@ export default function HomePage() {
   return (
   <>
     <h1>RemindME</h1>
-          <form onSubmit={handleSubmit} className="new-task">
-            <div className="form-row">
-              <label htmlFor="item">New Task</label>
+    <form onSubmit={handleSubmit} className="new-task">
+      <div className="form-row">
+        <label htmlFor="item">New Task</label>
+        <input
+        value={newItem}
+        onChange={(e) => setNewItem(e.target.value)}
+        type="text"
+        id="item"
+        />
+      </div>
+      <button className='btn'>Add Task</button>
+    </form>
+    <div className="todo-list">
+      <h1 className="taskTitle">Current Tasks</h1>
+      <ul className="list">
+        {todos.length === 0 && <p>No tasks found.</p>}
+        {todos.map((item) => (
+          <li key={item.id}>
+            <label>
               <input
-              value={newItem}
-              onChange={(e) => setNewItem(e.target.value)}
-              type="text"
-              id="item"
+                type="checkbox"
+                checked={item.completed}
+                onChange={(e) => toggleTodo(item.id, e.target.checked)}
               />
+              {item.title}
+            </label>
+            <div className="delete-button">
+              <button onClick={() => deleteTodo(item.id)}>Delete</button>
             </div>
-            <button className='btn'>Add Task</button>
-          </form>
-          <div className="todo-list">
-            <h1 className="header">Current Tasks</h1>
-            <ul className="list">
-              {todos.length === 0 && <p>No tasks found.</p>}
-              {todos.map((item) => (
-                <li key={item.id}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={item.completed}
-                      onChange={(e) => toggleTodo(item.id, e.target.checked)}
-                    />
-                    {item.title}
-                  </label>
-                  <div className="delete-button">
-                    <button onClick={() => deleteTodo(item.id)}>Delete</button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-           </div>
-    </>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </>
   );
 }
