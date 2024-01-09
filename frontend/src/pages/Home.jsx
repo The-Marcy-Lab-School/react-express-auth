@@ -35,7 +35,7 @@ export default function HomePage() {
 
   return (
   <>
-    <h1>RemindME</h1>
+    <h1>RemindMe</h1>
     <form onSubmit={handleSubmit} className="new-task">
       <div className="form-row">
         <label htmlFor="item">New Task</label>
