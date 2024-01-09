@@ -44,7 +44,7 @@ form {
   border: 1px solid #CCC;
   width: 20rem;
   margin: 1rem auto;
-  background-color: #19deec;
+  background-color: #09dae9;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@ form {
 
   color-scheme: light dark;
   color: rgb(255, 255, 255);
-  background-color: #b79c25;
+  background-color: #bcbcdf;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -84,7 +84,7 @@ h1 {
 .btn {
   padding: 10px;
   margin: 1em;
-  background-color: #a88f22;
+  background-color: #d8b61d;
   color: rgb(255, 255, 255);
   border:color-mix(in hwb decreasing hue, color percentage, color percentage);
   width: 10rem;
@@ -108,7 +108,7 @@ h1 {
   width: 25em;
   margin: 1em;
   padding: 1em;
-  background-color: #19deec;
+  background-color: #09dae9;
   border-radius: 10px;
   color: rgb(3, 3, 3);
   font-size: 1.1em;
@@ -118,7 +118,7 @@ h1 {
 
 .taskTitle {
   font-size:x-large;
-  color: rgb(144, 22, 22)
+  color: rgb(108, 7, 155)
 }
 
 .list {
@@ -141,7 +141,7 @@ label {
 }
 
 h1 {
-  color: rgb(106, 10, 10);
+  color: rgb(108, 7, 155)
 }
 
 button {
