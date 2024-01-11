@@ -12,8 +12,8 @@ export default function LoginPage() {
     event.preventDefault();
     setErrorText('');
     const formData = new FormData(event.target);
-    const [user, error] = await logUserIn(Object.fromEntries(formData.entries()));
-    if (error) return setErrorText(error.statusText);
+    const [user, error] = await logUserIn(Object.fromEntries(formData));
+    if (error) return setErrorText(error.message);
     setCurrentUser(user);
     navigate(`/users/${user.id}`);
   };
@@ -22,7 +22,8 @@ export default function LoginPage() {
 
   return <>
     <h1>Login</h1>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} aria-labelledby="login-heading">
+      <h2 id='login-heading'>Log back in!</h2>
       <label htmlFor="username">Username</label>
       <input type="text" autoComplete="username" id="username" name="username" />
 

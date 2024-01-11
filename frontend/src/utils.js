@@ -22,15 +22,18 @@ export const getPatchOptions = (body) => ({
   body: JSON.stringify(body),
 });
 
-export const fetchHandler = async (url, options = basicFetchOptions) => {
+export const fetchHandler = async (url, options = {}) => {
   try {
-    const res = await fetch(url, options);
-    if (!res.ok) return [null, { status: res.status, statusText: res.statusText }];
-    if (res.status === 204) return [true, null];
+    const response = await fetch(url, options);
+    const { ok, status, headers } = response;
+    if (!ok) throw new Error(`Fetch failed with status - ${status}`, { cause: status });
 
-    const data = await res.json();
-    return [data, null];
+    const isJson = (headers.get('content-type') || '').includes('application/json');
+    const responseData = await (isJson ? response.json() : response.text());
+
+    return [responseData, null];
   } catch (error) {
+    console.warn(error);
     return [null, error];
   }
 };

@@ -1,8 +1,8 @@
 {
-  "name": "auth-example-bcyrpt-sessions",
+  "name": "react-express-auth-template",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
     "build": "npm i && && npm run migrate:rollback && npm run migrate && npm run seed",

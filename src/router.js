@@ -1,5 +1,5 @@
 const express = require('express');
-const userController = require('./controllers/user/index');  // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
+const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
 

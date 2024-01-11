@@ -43,7 +43,7 @@ In order to update this built version of your React application, you will need t
 
 If you would like to work on the front-end without having to constantly rebuild the project, start a Vite dev server by running the `npm run dev` command _from the `front-end/` folder_.
 
-If you look in the `vite.config.js` file, you will see that we've already configured the dev server to proxy any reqeusts made to `/api` to the back-end server.
+If you look in the `vite.config.js` file, you will see that we've already configured the dev server to proxy any requests made to `/api` to the back-end server.
 
 
 # Understanding the Code
@@ -66,24 +66,27 @@ The front-end React application's entrypoint is the `index.html` file which load
 
 ### Fetching Pattern: [data, error]
 
-All of the adapters make use of the `fetchHandlder` helper function defined in the `frontend/src/utils.js` file:
+All of the adapters make use of the `fetchHandler` helper function defined in the `frontend/src/utils.js` file:
 
 ```js
-export const fetchHandler = async (url, options = basicFetchOptions) => {
+export const fetchHandler = async (url, options = {}) => {
   try {
-    const res = await fetch(url, options);
-    if (!res.ok) return [null, { status: res.status, statusText: res.statusText }];
-    if (res.status === 204) return [true, null];
+    const response = await fetch(url, options);
+    const { ok, status, headers } = response;
+    if (!ok) throw new Error(`Fetch failed with status - ${status}`, { cause: status });
 
-    const data = await res.json();
-    return [data, null];
+    const isJson = (headers.get('content-type') || '').includes('application/json');
+    const responseData = await (isJson ? response.json() : response.text());
+
+    return [responseData, null];
   } catch (error) {
+    console.warn(error);
     return [null, error];
   }
 };
 ```
 
-This function standardizes the way that fetched data will be packaged and returned by the adapters. This function will ALWAYS return a "tuple" — an array with two values. 
+This function standardizes the way that fetched data will be packaged and returned by the adapters. This function will ALWAYS return a "tuple" — an array with two values.
 * The first value is the fetched `data` (if present)
 * The second value is the `error` (if present).
 
@@ -137,7 +140,7 @@ export default function UsersPage() {
 ```
 
 * The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
-* The `useEffect` hook initialiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
+* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
 * The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
 
 ## Back-end
@@ -184,7 +187,7 @@ app.use("/api", routes);
 
 - `routes` is the Router exported from `src/routes.js`. We are telling Express to send any requests starting with `/api` to that Router.
 
-**Custom Middlware**
+**Custom Middleware**
 
 ```js
 app.use(handleCookieSessions);
@@ -217,7 +220,7 @@ However, if they wanted to update their profile info, we'd need to make sure the
 
 ### Cookies
 
-In the context of computing and the internet, a **acookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
+In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
 
 **Cookies contain information about your preferences and interactions with the website**, such as login information, shopping cart contents, or browsing history.
 
@@ -231,7 +234,7 @@ The flow of cookie data looks like this:
 
 ![](/documentation/readme-img/cookies-session-userid-diagram.svg)
 
-1. When a request comes in for signup/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
+1. When a request comes in for sign up/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
 2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
 3. When we get the `User` back from the model, we store the `user.id` in that cookie (`session.userId = user.id`)
 4. Now, that cookie lives with every request made by that user (`req.session`) and the client can check if it is logged in using the `/api/me` endpoint (see below).
@@ -287,7 +290,7 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
        - Add a `PG_CONNECTION_STRING` variable. Its value should be the `Internal Database URL` value from your Postgres page (created in step 2)
        - Add a `NODE_ENV` variable with the value `'production'`
        - The contents should look like this:
-      
+
         ```env
         SESSION_SECRET='AS12FD42FKJ42FIE3WOIWEUR1283'
         PG_CONNECTION_STRING='postgresql://user:password@host/dbname'
