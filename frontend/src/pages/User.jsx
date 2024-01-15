@@ -52,23 +52,23 @@ export default function UserPage() {
     ? currentUser.username
     : userProfile.username;
 
-  return (
-    <>
-      <h1>{profileUsername}</h1>
-      {!!isCurrentUserProfile && (
-        <button onClick={handleLogout}>Log Out</button>
-      )}
-      <p>If the user had any data, here it would be</p>
-      <p>Fake Bio or something</p>
-      <p>yeh</p>
-      <p>Thats that</p>
-      <Editor />
-      {!!isCurrentUserProfile && (
-        <UpdateUsernameForm
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
-        />
-      )}
-    </>
-  );
+  return <>
+    <h1>{profileUsername}</h1>
+    { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
+    <p>If the user had any data, here it would be</p>
+    <p>Fake Bio or something</p>
+    <p>yeh</p>
+    <p>Thats that</p>
+
+          <button onClick={handleEditorButtonClick}>
+        {true ? 'init editor' : 'Show Editor'}
+      </button>
+
+      
+      {isEditorInitialized &&  <Editor />}
+    {
+      !!isCurrentUserProfile
+        && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+    }
+  </>;
 }
