@@ -11,6 +11,16 @@ export default function UserPage() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
+  const [isEditorInitialized, setIsEditorInitialized] = useState(false);
+  const [isNeedRerender, setIsNeedRerendered] = useState(false);
+
+
+  const handleEditorButtonClick = () => {
+    if (!isEditorInitialized) {
+      setIsEditorInitialized(true);
+    }
+    // setIsEditorVisible(!isEditorVisible);
+  };
 
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
@@ -46,7 +56,13 @@ export default function UserPage() {
     <p>Fake Bio or something</p>
     <p>yeh</p>
     <p>Thats that</p>
-    <Editor  />
+          {/* Button to toggle the visibility of the Editor */}
+          <button onClick={handleEditorButtonClick}>
+        {true ? 'init editor' : 'Show Editor'}
+      </button>
+
+      {/* Conditionally render the Editor based on the state */}
+      {isEditorInitialized &&  <Editor />}
     {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
