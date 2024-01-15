@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
-import{ createPage} from "../adapters/page-adapter/";
+
+
 
 const Editor = () => {
   const ejInstance = useRef();
@@ -10,20 +11,14 @@ const Editor = () => {
   const idpage = useRef(4); 
 
   const initEditor = async () => {
-    // await createNewPage();
-    await createPage("titletest",  {
-        "time": 1705173292465,
-        "blocks": [],
-        "version": "2.28.2"
-      }, 3)
-    console.log("What is goiingh on")
+    await createNewPage();
     const editor = new EditorJS({
       holder: "editorjs",
       onReady: () => {
         ejInstance.current = editor;
       },
       autofocus: true,
-      placeholder: 'test placeholeder',
+      placeholder: 'test placeholder',
       onChange: async () => {
         let content = await editor.saver.save();
         console.log(content);
@@ -50,7 +45,7 @@ const Editor = () => {
             "blocks": [],
             "version": "2.28.2"
           },
-          "userID": 3  // Will make dynamic with cookie soon
+          "user_id": 3  // Will make dynamic with cookie soon
         }),
       });
 
@@ -59,10 +54,8 @@ const Editor = () => {
       const zap = data;
       console.log("zap: " + zap);
 
-      console.log(data);
       pageId.current = zap;
-      idpage.current = zap;
-      await mightdelete(zap);
+
       console.log(pageId.current);
 
     } catch (error) {
@@ -70,9 +63,7 @@ const Editor = () => {
     }
   };
 
-  const mightdelete = async (jap) => {
-    pageId.current = jap;
-  };
+
 
   const savePage = async (content) => {
     console.log(pageId.current);
@@ -95,7 +86,8 @@ const Editor = () => {
   };
 
   useEffect(() => {
-    if (ejInstance.current === null) {
+    console.log(ejInstance.current)
+    if (!ejInstance.current) {
       initEditor();
     }
 
@@ -108,6 +100,7 @@ const Editor = () => {
   return (
     <>
       <div id='editorjs'></div>
+      {console.log("ok")}
     </>
   );
 };

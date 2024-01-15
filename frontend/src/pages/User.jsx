@@ -11,6 +11,7 @@ export default function UserPage() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
+
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
@@ -45,7 +46,7 @@ export default function UserPage() {
     <p>Fake Bio or something</p>
     <p>yeh</p>
     <p>Thats that</p>
-    <Editor />
+    <Editor  />
     {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
