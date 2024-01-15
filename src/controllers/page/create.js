@@ -4,11 +4,11 @@ const createPage = async (req, res) => {
     body: { title, content, user_id },
   } = req;
 
-  const page = await Page.create(title, content, user_id);
+  const pageID = await Page.create(title, content, user_id);
   console.log('yo');
 
-  page
-    ? res.status(201).send(page)
+  pageID
+    ? res.status(201).json(pageID)
     : res.status(500).send({ err: "Can't create" });
 };
 

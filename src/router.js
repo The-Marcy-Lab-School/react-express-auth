@@ -20,6 +20,7 @@ Router.get('/me', userController.showMe);
 // Pages Routes
 Router.get('/pages', pageController.list);
 Router.post('/pages', pageController.create);
+Router.patch("/pages", pageController.update);
 
 // Tags routes
 Router.get('/tags', tagController.list);
