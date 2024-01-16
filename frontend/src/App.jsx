@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUpPage from './pages/SignUp';
@@ -12,13 +12,20 @@ import UserPage from './pages/User';
 import SideBar from './components/SideBar';
 
 export default function App() {
-  const { setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [userName, setUserName] = useState('Log In');
+  const isLoggedIn = !!currentUser;
   useEffect(() => {
     checkForLoggedInUser().then(setCurrentUser);
-  }, [setCurrentUser]);
+    if (isLoggedIn) {
+      setUserName(`Welcome back ${currentUser.username}`);
+    } else {
+      setUserName('Log In');
+    }
+  }, [setCurrentUser, isLoggedIn]);
 
   return (
-    <SideBar>
+    <SideBar name={userName}>
       <SiteHeadingAndNav />
       <main>
         <Routes>
