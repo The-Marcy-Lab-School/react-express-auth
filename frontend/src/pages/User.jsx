@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import CurrentUserContext from "../contexts/current-user-context";
-import { getUser } from "../adapters/user-adapter";
-import { logUserOut } from "../adapters/auth-adapter";
-import UpdateUsernameForm from "../components/UpdateUsernameForm";
-import Editor from "../components/Editor";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
+import { getUser } from '../adapters/user-adapter';
+import { logUserOut } from '../adapters/auth-adapter';
+import UpdateUsernameForm from '../components/UpdateUsernameForm';
+import Editor from '../components/Editor';
+import SideBar from '../components/SideBar';
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -47,25 +48,27 @@ export default function UserPage() {
   // What parts of state would change if we altered our currentUser context?
   // Ideally, this would update if we mutated it
   // But we also have to consider that we may NOT be on the current users page
-  const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
+  const profileUsername = isCurrentUserProfile
+    ? currentUser.username
+    : userProfile.username;
 
-  return <>
-    <h1>{profileUsername}</h1>
-    { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-    <p>If the user had any data, here it would be</p>
-    <p>Fake Bio or something</p>
-    <p>yeh</p>
-    <p>Thats that</p>
-          {/* Button to toggle the visibility of the Editor */}
-          <button onClick={handleEditorButtonClick}>
-        {true ? 'init editor' : 'Show Editor'}
-      </button>
-
-      {/* Conditionally render the Editor based on the state */}
-      {isEditorInitialized &&  <Editor />}
-    {
-      !!isCurrentUserProfile
-        && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-    }
-  </>;
+  return (
+    <SideBar name={profileUsername}>
+      <h1>{profileUsername}</h1>
+      {!!isCurrentUserProfile && (
+        <button onClick={handleLogout}>Log Out</button>
+      )}
+      <p>If the user had any data, here it would be</p>
+      <p>Fake Bio or something</p>
+      <p>yeh</p>
+      <p>Thats that</p>
+      <Editor />
+      {!!isCurrentUserProfile && (
+        <UpdateUsernameForm
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+        />
+      )}
+    </SideBar>
+  );
 }
