@@ -42,6 +42,7 @@ export default function UserPage() {
     { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
     <p>If the user had any data, here it would be</p>
     <p>Fake Bio or something</p>
+    <p>Samuels Ass</p>
     {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
