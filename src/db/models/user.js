@@ -23,7 +23,7 @@ class User {
     const args = [id];
     const { rows } = await knex.raw(query, args);
     const user = rows[0];
-    return user ? new User(user) : null; 
+    return user ? new User(user) : null;
   }
 
   static async findByUsername(username) {

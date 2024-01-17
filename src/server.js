@@ -6,9 +6,9 @@ const logRoutes = require('./middleware/log-routes');
 
 const app = express();
 
-app.use(handleCookieSessions);  // adds a session property to each request representing the cookie
-app.use(logRoutes);       // print information about each incoming request
-app.use(express.json());  // parse incoming request bodies as JSON
+app.use(handleCookieSessions); // adds a session property to each request representing the cookie
+app.use(logRoutes); // print information about each incoming request
+app.use(express.json()); // parse incoming request bodies as JSON
 app.use(express.static(path.join(__dirname, '..', 'public'))); // Serve static assets from the public folder
 
 app.use('/api', router);
