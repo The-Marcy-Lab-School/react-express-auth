@@ -6,8 +6,8 @@ exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('moods').del()
   await knex('moods').insert([
-    {Mood: 'Happy', Level: 'High'},
-    {Mood: 'Sad', Level: 'Low'},
-    {Mood: 'Neutral', Level: 'Medium'}
+    {mood: 'Happy', level: 'High', user_id: 1},
+    {mood: 'Sad', level: 'Low', user_id: 1},
+    {mood: 'Neutral', level: 'Medium', user_id: 1}
   ]);
 };
