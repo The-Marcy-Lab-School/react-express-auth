@@ -26,7 +26,13 @@ class User {
     const user = rows[0];
     return user ? new User(user) : null;
   }
-
+ /**/ static async delete(id) {
+    const query = 'DELETE FROM users WHERE id = ?;'
+    const args = [id];
+    const { rows } = await knex.raw(query, args);
+    const user = rows[0];
+    return user ? new User(user) : null;
+  }
   static async findByUsername(username) {
     const query = 'SELECT * FROM users WHERE username = ?';
     const args = [username];
@@ -34,6 +40,7 @@ class User {
     const user = rows[0];
     return user ? new User(user) : null;
   }
+  
 
   static async create(username, password) {
     const passwordHash = await hashPassword(password);
@@ -45,6 +52,7 @@ class User {
     const user = rows[0];
     return new User(user);
   }
+
 
   static async deleteAll() {
     return knex.raw('TRUNCATE users;');
