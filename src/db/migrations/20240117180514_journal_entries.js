@@ -4,12 +4,10 @@
  * @returns { Promise<void> }
  */
 exports.up = (knex) => knex.schema.createTable('journal_entries', (table) => {
-    table.increments().primary();
+            table.increments('id', {primaryKey: true});
             table.string('content').notNullable();
             table.string('date').notNullable();
-
             table.integer('user_id');
-            
             table.foreign('user_id').references('id').inTable('users');
   });
   
