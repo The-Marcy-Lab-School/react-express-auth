@@ -6,8 +6,8 @@
     table.increments();
     table.string('task_name').notNullable()
      table.string('description').notNullable();
-     table.integer('user')
-     table.foreign('user').references('id').inTable('users');
+    //  table.integer('user')
+    //  table.foreign('user').references('id').inTable('users');
     
     table.timestamps(true, true);
   });
