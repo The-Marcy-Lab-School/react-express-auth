@@ -20,7 +20,7 @@ class JournalEntry {
         const query = 'SELECT * FROM journal_entries WHERE user_id = ?';
         const args = [userId];
         const { rows } = await knex.raw(query, args);
-        return rows.map((entry) => new JournalEntry(entry))2;
+        return rows.map((entry) => new JournalEntry(entry))
     }
 
     static async delete(id) {
