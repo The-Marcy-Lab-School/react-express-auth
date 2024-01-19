@@ -6,7 +6,7 @@ const Task = require('../models/task');
  */
 exports.seed = async function(knex) {
   // Deletes ALL existing entries
-    await Task.deleteAll();
+   // await Task.deleteAll();
     await Task.create('task1', 'do something');
     await Task.create('task2', 'fix this');
     await Task.create('task3', '1234');

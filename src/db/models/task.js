@@ -5,7 +5,9 @@ class Task {
         const query = 'INSERT INTO task (task_name, description, user) VALUES (?, ?, ?) RETURNING *;';
         const args = [name, description, user];
         const { rows } = await knex.raw(query)
-        return rows.map((user) =>  new Task(user))
+        
+     return rows.map(row => new Task(row.id, row.task_name, row.description, row.user));
+
         
     }
 

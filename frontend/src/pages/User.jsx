@@ -4,15 +4,19 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
-import { deleteUser } from '../adapters/user-adapter'
-
+import { createTask } from  '../adapters/task-adapter'
 export default function UserPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
-  const [task, setTask] = useState({})
+  const [task, setTask] = useState({
+    taskname: '',
+    description:''
+    
 
+  })
+  
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
@@ -22,7 +26,7 @@ export default function UserPage() {
       if (error) return setErrorText(error.message);
       setUserProfile(user);
     };
-
+                          
     loadUser();
   }, [id]);
 
@@ -31,18 +35,21 @@ export default function UserPage() {
     setCurrentUser(null);
     navigate('/');
   };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setTask(prevtask => ({
+      ...prevtask,
+      [name]: value
+    }));
+  };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorText('');
-    const formData = new FormData(event.target).entries();
-    console.log(formData)
-    // const [user, error] = await logUserIn(Object.fromEntries(formData));
-    // if (error) return setErrorText(error.message);
-    // setCurrentUser(user);
-    // navigate(`/users/${user.id}`);
-    for (let [key, value] of formData) {
-      console.log(key, value);
-  }
+    setCreatedTask(task);
+    setTask({ taskname: '', description: '' }); 
+    
   };
 
   if (!userProfile && !errorText) return null;
@@ -69,16 +76,16 @@ export default function UserPage() {
 <form onSubmit={handleSubmit} aria-labelledby="login-heading">
       <h2 id='login-heading'>Log back in!</h2>
       <label htmlFor="task">task</label>
-      <input type="text" autoComplete="task" id="task" name="username" />
+      <input value={task.taskname} onChange={handleChange} type="text" autoComplete="task" id="task" name="taskname" />
 
       <label htmlFor="description">description</label>
-      <input type="text" autoComplete="current-password" id="description" name="description" />
+      <input value={task.description} onChange={handleChange} type="text" autoComplete="current-password" id="description" name="description" />
 
       <button>Log in!</button>
     </form>
 
     <section>
-      {}
+     
       </section>
   </>;
 }
