@@ -4,7 +4,7 @@ class Task {
     static async create(name, description, user) {
         const query = 'INSERT INTO task (task_name, description, user) VALUES (?, ?, ?) RETURNING *;';
         const args = [name, description, user];
-        const { rows } = await knex.raw(query)
+        const { rows } = await knex.raw(query, args)
         
      return rows.map(row => new Task(row.id, row.task_name, row.description, row.user));
 

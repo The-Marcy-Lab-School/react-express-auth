@@ -118,7 +118,7 @@ export default function UserPage() {
     </form>
 
     <section>
-     
-      </section>
+
+    </section>
   </>;
 }
