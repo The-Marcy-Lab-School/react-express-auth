@@ -17,6 +17,7 @@ export default function UserPage() {
 
   })
   
+  
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
@@ -45,14 +46,20 @@ export default function UserPage() {
   };
 
 
-  /*const handleSubmit = async (event) => {
-    event.preventDefault();
-    setCreatedTask(task);
-    setTask({ taskname: '', description: '' }); 
-    
-  };*/
-
   const handleSubmit = async (event) => {
+    event.preventDefault();
+    let form = new FormData(event.target)
+    console.log(form)
+
+    setTask({ taskname: '', description: '' });
+    for (const [task, description] of form) {
+      
+        console.log(task,description)
+    }
+    
+  };
+
+  /*const handleSubmit = async (event) => {
     event.preventDefault();
     if (!task.taskname || !task.description) {
       return setErrorText('Missing task name or description');
@@ -64,7 +71,7 @@ export default function UserPage() {
             description: task.description,
             userId: currentUser.id // Add the userId if your task is related to the user
         });
-
+   console.log(newTask)
         // Handle the response here. For example, you can clear the form.
         setTask({ taskname: '', description: '' });
 
@@ -74,7 +81,7 @@ export default function UserPage() {
     } catch (error) {
         setErrorText(error.message || 'Failed to create task');
     }
-};
+};*/
 
   
 
@@ -92,13 +99,12 @@ export default function UserPage() {
     { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
      <button> Delete Account</button>
     <p>If the user had any data, here it would be</p>
-    <p>Fake Bio or something</p>
+    <p>Fake Bios or something</p>
     {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
 
-    
 
 <form onSubmit={handleSubmit} aria-labelledby="login-heading">
       <h2 id='login-heading'>Log back in!</h2>
