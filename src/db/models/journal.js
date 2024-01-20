@@ -23,24 +23,24 @@ class JournalEntry {
             }
         }
 
-        static async addJournalEntry(userId, date, content) {
+        static async addJournalEntry(content, date, user_id) {
         try{
-        const query = `INSERT INTO journal_entries (user_id, date, content) VALUES (?, ?, ?) RETURNING *`;
-        const args = [userId, date, content];
-        const { rows } = await knex.raw(query, args);
-        return rows[0];
+            const query = `INSERT INTO journal_entries (user_id, date, content) VALUES (?, ?, ?) RETURNING *`;
+            const args = [content, date, user_id];
+            const { rows } = await knex.raw(query, args);
+            return rows[0];
         } catch (err) {
             console.log(err);
             return null;
         }
     }
 
-    static async readJournalEntries(userId) {
+    static async readJournalEntries(user_id) {
         try{
-        const query = 'SELECT * FROM journal_entries WHERE user_id = ?';
-        const args = [userId];
-        const { rows } = await knex.raw(query, args);
-        return rows;
+            const query = 'SELECT * FROM journal_entries WHERE user.id = ?';
+            const args = [user_id];
+            const { rows } = await knex.raw(query, args);
+            return rows;
         } catch (err) {
             console.log(err);
             return [];
@@ -49,15 +49,27 @@ class JournalEntry {
 
     static async delete(id) {
         try{
-        const query = 'Delete FROM journal_entries WHERE id = ? RETURNING *';
-        const args = [id];
-        const { rows } = await knex.raw(query, args);
-        return rows[0] || null;
+            const query = 'Delete FROM journal_entries WHERE id = ? RETURNING *';
+            const args = [id];
+            const { rows } = await knex.raw(query, args);
+            return rows[0] || null;
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    }
+
+    static async update(entryId, updatedContent) {
+        try {
+            const query = 'UPDATE journal_entries SET content = ? WHERE id = ? RETURNING *';
+            const args = [updatedContent, entryId];
+            const { rows } = await knex.raw(query, args);
+            const updatedEntry = rows[0];
+            return updatedEntry || null;
         } catch (err) {
             console.log(err);
             return null;
         }
     }
 }
-
 module.exports = JournalEntry;
