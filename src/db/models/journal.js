@@ -13,13 +13,21 @@ class JournalEntry {
         }
     
         static async getJournalEntryById(id){
-
+            try {
+                const query = 'SELECT * FROM users JOIN journal_entries ON users.id = journal_entries.id WHERE users.id = ?';
+                const { rows } = await knex.raw(query, args);
+                return rows;
+                } catch (err) {
+                    console.log(err);
+                    return null;
+            }
         }
-    static async getJournalById(id) {
-        try {
-            const query = 'SELECT * FROM users JOIN journal_entries ON users.id = journal_entries.user_id WHERE users.id = ?';
-            const { rows } = await knex.raw(query, args);
-            return rows;
+
+        static async getJournalById(id) {
+            try {
+                const query = 'SELECT * FROM users JOIN journal_entries ON users.id = journal_entries.user_id WHERE users.id = ?';
+                const { rows } = await knex.raw(query, args);
+                return rows;
             } catch (err) {
                 console.log(err);
                 return null;
