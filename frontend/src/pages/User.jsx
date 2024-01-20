@@ -106,15 +106,15 @@ export default function UserPage() {
     }
 
 
-<form onSubmit={handleSubmit} aria-labelledby="login-heading">
-      <h2 id='login-heading'>Log back in!</h2>
+<form onSubmit={handleSubmit} aria-labelledby="task-form">
+      <h2 id='task-form'>Add a task!</h2>
       <label htmlFor="task">task</label>
       <input value={task.taskname} onChange={handleChange} type="text" autoComplete="task" id="task" name="taskname" />
 
       <label htmlFor="description">description</label>
       <input value={task.description} onChange={handleChange} type="text" autoComplete="current-password" id="description" name="description" />
 
-      <button>Log in!</button>
+      <button>Add Task!</button>
     </form>
 
     <section>
