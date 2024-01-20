@@ -1,7 +1,7 @@
 const knex = require('../knex');
 
 class Moods {
-    static async getAllMoods() {
+    static async listAllMoods() {
         try {
             const query = 'SELECT * FROM users JOIN moods ON users.id = moods.user_id';
             // const query = 'SELECT * FROM moods';
@@ -24,9 +24,9 @@ class Moods {
         }
     }
 
-    static async addMood(mood, user_id) {
+    static async createMood(mood, user_id) {
         try {
-            const query = 'INSERT INTO moods (mood, user_id) VALUES (?, ?)';
+            const query = 'INSERT INTO moods (mood, user_id) VALUES (?, ?) RETURNING *';
             const { rows } = await knex.raw(query, [mood, user_id]);
             return rows;
         } catch (err) {
@@ -34,6 +34,20 @@ class Moods {
             return null
         }
     }
+
+   updateMood = async (mood, level, user_id) => {
+  try {
+    const rows = await knex('moods')
+      .where({ user_id })
+      .update({ mood, level })
+      .returning('*');
+
+    return rows.length > 0 ? rows[0] : null;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
 
     static async deleteMood(id) {
         try {

@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
+const moodsController = require('./controllers/moods/index');
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
 
@@ -13,6 +14,11 @@ Router.get('/users/:id', userController.show);
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
 Router.get('/me', userController.showMe);
+
+Router.get('/moods', moodsController.list);
+Router.post('/moods', moodsController.create);
+// Router.patch('/moods/:id', moodsController.update);
+Router.delete('/moods/:id', moodsController.deleted);
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
