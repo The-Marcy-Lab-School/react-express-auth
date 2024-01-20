@@ -46,14 +46,6 @@ class User {
     return new User(user);
   }
 
-  static async delete(id) {
-    const query = 'DELETE FROM users WHERE id = ? RETURNING *';
-    const args = [id];
-    const { rows } = await knex.raw(query, args);
-    const deletedUser = rows[0];
-    return deletedUser ? new User(deletedUser[0]) : null;
-  }
-
   static async deleteAll() {
     return knex.raw('TRUNCATE users;');
   }
