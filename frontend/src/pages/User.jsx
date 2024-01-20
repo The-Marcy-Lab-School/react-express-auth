@@ -44,12 +44,22 @@ export default function UserPage() {
     }));
   };
 
+  // const deleteAccount = async (userId) => {
+  //   deleteUser(userId);
+  //   setCurrentUser(null);
+  //   navigate('/');
+  // }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setCreatedTask(task);
-    setTask({ taskname: '', description: '' }); 
-    
+    let form = new FormData(event.target)
+    console.log(form)
+
+    setTask({ taskname: '', description: '' });
+    for (const [task, description] of form) {
+      
+        console.log(task,description)
+    }
   };
 
   if (!userProfile && !errorText) return null;
