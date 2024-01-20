@@ -1,6 +1,12 @@
 const knex = require('../knex');
 class Task {
-
+    constructor(id, taskName, description, user) {
+        this.id = id;
+        this.taskName = taskName;
+        this.description = description;
+        this.user = user;
+    }
+    
     static async create(name, description, user) {
         const query = 'INSERT INTO task (task_name, description, user) VALUES (?, ?, ?) RETURNING *;';
         const args = [name, description, user];
@@ -36,4 +42,5 @@ class Task {
 
 
 }
+
 module.exports = Task;
