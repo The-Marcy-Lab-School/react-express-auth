@@ -23,18 +23,7 @@ class JournalEntry {
             }
         }
 
-        static async getJournalById(id) {
-            try {
-                const query = 'SELECT * FROM users JOIN journal_entries ON users.id = journal_entries.user_id WHERE users.id = ?';
-                const { rows } = await knex.raw(query, args);
-                return rows;
-            } catch (err) {
-                console.log(err);
-                return null;
-            }
-        }
-
-    static async addJournalEntry(userId, date, content) {
+        static async addJournalEntry(userId, date, content) {
         try{
         const query = `INSERT INTO journal_entries (user_id, date, content) VALUES (?, ?, ?) RETURNING *`;
         const args = [userId, date, content];
