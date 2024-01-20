@@ -20,20 +20,20 @@ class JournalEntry {
                 } catch (err) {
                     console.log(err);
                     return null;
+                }
             }
-        }
 
         static async addJournalEntry(content, date, user_id) {
-        try{
+          try{
             const query = `INSERT INTO journal_entries (user_id, date, content) VALUES (?, ?, ?) RETURNING *`;
             const args = [content, date, user_id];
             const { rows } = await knex.raw(query, args);
             return rows[0];
-        } catch (err) {
+          } catch (err) {
             console.log(err);
             return null;
+          }
         }
-    }
 
     static async readJournalEntries(user_id) {
         try{
