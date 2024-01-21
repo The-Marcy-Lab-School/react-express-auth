@@ -13,6 +13,7 @@ Router.get('/users/:id', userController.show);
 
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
+Router.delete('/users/:id', userController.deleteUser);
 Router.get('/me', userController.showMe);
 
 

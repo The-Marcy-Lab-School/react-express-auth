@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
+import { deleteUser } from "../adapters/user-adapter"
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
 import { createTask } from  '../adapters/task-adapter'
 export default function UserPage() {
@@ -13,10 +14,8 @@ export default function UserPage() {
   const [task, setTask] = useState({
     taskname: '',
     description:''
-    
-
   })
-  
+
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
@@ -26,7 +25,7 @@ export default function UserPage() {
       if (error) return setErrorText(error.message);
       setUserProfile(user);
     };
-                          
+                     
     loadUser();
   }, [id]);
 
@@ -57,8 +56,7 @@ export default function UserPage() {
 
     setTask({ taskname: '', description: '' });
     for (const [task, description] of form) {
-      
-        console.log(task,description)
+      console.log(task,description)
     }
   };
 
