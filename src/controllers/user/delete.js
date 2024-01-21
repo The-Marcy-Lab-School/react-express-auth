@@ -1,4 +1,4 @@
-
+const User = require("../../db/models/user");
 const deleteUser = async (req, res) => {
     try {
         const userId = req.session.userId; // or req.params.userId, based on your setup

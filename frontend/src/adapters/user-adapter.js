@@ -7,7 +7,7 @@ export const createUser = async ({ username, password }) => (
 );
 
 export const deleteUser = async (userId) => {
-  return await fetchHandler(`${baseUrl}/:${userId}`, deleteOptions);
+  return await fetchHandler(`${baseUrl}/${userId}`, deleteOptions);
 };
 
 export const getAllUsers = async () => {
