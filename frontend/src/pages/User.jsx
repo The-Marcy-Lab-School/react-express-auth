@@ -3,7 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
+import { createMood } from "../adapters/mood-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
+
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -19,10 +21,22 @@ export default function UserPage() {
       if (error) return setErrorText(error.message);
       setUserProfile(user);
     };
-
+    
     loadUser();
   }, [id]);
-
+    
+  
+  useEffect(() => {
+    const createNewMood = async () => {
+      const [mood, error] = await createMood();
+      if (error) return setErrorText(error.message);
+      setUserProfile(mood);
+    }
+    
+    createNewMood();
+    
+  }, [userProfile]);
+  
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
@@ -40,7 +54,12 @@ export default function UserPage() {
   return <>
     <h1>{profileUsername}</h1>
     { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-    <p>If the user had any data, here it would be</p>
+
+
+    <h2>Moods</h2>
+    <p>Write a new mood</p>
+    <p></p>
+
     <p>Fake Bio or something</p>
     {
       !!isCurrentUserProfile
