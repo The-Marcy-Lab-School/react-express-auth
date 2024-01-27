@@ -9,14 +9,12 @@ async function updateTask(req, res) {
             return res.status(401).send('User not authenticated');
         }
 
-        // Assuming Task.getTask returns the task with the specified ID
         const task = await Task.getTask(taskId);
 
         if (!task) {
             return res.status(404).send('Task not found');
         }
 
-        // Check if the task belongs to the authenticated user
         if (task.userId !== authenticatedUserId) {
             return res.status(403).send('Unauthorized to update this task');
         }

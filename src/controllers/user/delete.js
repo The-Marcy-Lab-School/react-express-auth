@@ -1,9 +1,8 @@
 const deleteUser = async (req, res) => {
     try {
         const userIdToDelete = req.params.userId;
-        const authenticatedUserId = req.session.userId; // Use userId from session
+        const authenticatedUserId = req.session.userId;
 
-        // Check if the authenticated user is the same as the user to be deleted
         if (userIdToDelete !== authenticatedUserId) {
             return res.status(403).send('Unauthorized to delete this user');
         }
