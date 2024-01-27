@@ -3,8 +3,10 @@ const path = require('path');
 const handleCookieSessions = require('./middleware/handle-cookie-sessions');
 const router = require('./router');
 const logRoutes = require('./middleware/log-routes');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 app.use(handleCookieSessions); // adds a session property to each request representing the cookie
 app.use(logRoutes); // print information about each incoming request

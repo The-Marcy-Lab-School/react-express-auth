@@ -8,6 +8,7 @@ const update = require('./update');
 const login = require('./login');
 const logout = require('./logout');
 const showMe = require('./show-me');
+const deleteUser = require('./delete')
 
 module.exports = {
   list,
@@ -18,4 +19,5 @@ module.exports = {
   login,
   logout,
   showMe,
+  deleteUser
 };

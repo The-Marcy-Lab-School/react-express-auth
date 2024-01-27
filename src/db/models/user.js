@@ -47,7 +47,7 @@ class User {
   }
 
   static async deleteAll() {
-    return knex.raw('TRUNCATE users;');
+    return knex.raw('TRUNCATE TABLE users CASCADE;');
   }
 
   update = async (username) => { // dynamic queries are easier if you add more properties
@@ -63,6 +63,14 @@ class User {
   isValidPassword = async (password) => (
     isValidPassword(password, this.#passwordHash)
   );
+
+   // Method to delete user
+   static async deleteUser(userId) {
+    const query = 'DELETE FROM users WHERE id = ?';
+    const args = [userId];
+    await knex.raw(query, args);
+}
+
 }
 
 module.exports = User;
