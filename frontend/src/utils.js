@@ -3,10 +3,12 @@ const basicFetchOptions = {
   credentials: 'include',
 };
 
-export const deleteOptions = {
+export const deleteOptions = (body) => ({
   method: 'DELETE',
   credentials: 'include',
-};
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(body)
+});
 
 export const getPostOptions = (body) => ({
   method: 'POST',
@@ -37,3 +39,13 @@ export const fetchHandler = async (url, options = {}) => {
     return [null, error];
   }
 };
+
+export const timeObject =  {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
+  timeZone: 'UTC', 
+}
