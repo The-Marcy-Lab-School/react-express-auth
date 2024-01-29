@@ -170,7 +170,7 @@ class Event {
         console.error(err);
         return null;
       
-    }
+    } 
   }
   static async tags(event_id, event_tag_ids) {
     try {
