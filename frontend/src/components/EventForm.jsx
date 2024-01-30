@@ -5,14 +5,6 @@ export default function EventForm({ id }) {
   const [err, setErr] = useState({ color: null, text: null });
   const [selectedTags, setSelectedTags] = useState([]);
 
-  const exercises = {
-    yoga: 1,
-    running: 2,
-    biking: 3,
-    'weight-lifting': 4,
-    calisthenics: 5,
-  };
-
   const submit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -51,7 +43,7 @@ export default function EventForm({ id }) {
 
     await addTags({
       event_id: event[0],
-      event_tag_ids: selectedTags.map((tag) => exercises[tag]),
+      event_tag_ids: selectedTags,
     });
 
     await joinAnEvent({ user_id: id, event_id: event[0] });
@@ -64,9 +56,10 @@ export default function EventForm({ id }) {
   const min = new Date().toISOString().split('T')[0];
 
   const handleCheckboxChange = (event) => {
-    const { value } = event.target;
+    const value = Number(event.target.value); // Convert value to number
     const isChecked = event.target.checked;
 
+    // Update the selectedTags array based on the checkbox change
     if (isChecked) {
       setSelectedTags((prevSelectedTags) => [...prevSelectedTags, value]);
     } else {
@@ -142,10 +135,10 @@ export default function EventForm({ id }) {
             <label key={tag}>
               <input
                 type="checkbox"
-                id={idx}
+                id={tag}
                 name="tags"
-                value={tag}
-                checked={selectedTags.includes(tag)}
+                value={idx + 1}
+                checked={selectedTags.includes(idx + 1)}
                 onChange={handleCheckboxChange}
               />
               {tag}

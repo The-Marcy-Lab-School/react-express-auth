@@ -21,7 +21,7 @@ class Event {
     GROUP BY
       events.id, events.title, users.name, users.profile_pic
     ORDER BY
-      events.date DESC
+      events.date ASC
     LIMIT 50;
     `;
     const { rows } = await knex.raw(query);
