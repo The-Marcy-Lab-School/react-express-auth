@@ -16,7 +16,7 @@ import Map from './Map';
 const Event = (props) => {
   const { currentUser } = useContext(CurrentUserContext);
 
-  const { event, loadJoinedEvents, joinedEvents } = props;
+  const { event, loadJoinedEvents, joinedEvents, deleteEvent } = props;
   const [commentsinit, setCommentsInit] = useState(false);
   const [placeholderInit, setplaceholderInit] = useState(false);
   const [attendeeAmount, setAttendeeAmount] = useState(0);
@@ -32,11 +32,6 @@ const Event = (props) => {
     minute: '2-digit',
   });
 
-  // return `${newDate.toDateString()} ${newDate.toLocaleTimeString([], {
-  //   hour: '2-digit',
-  //   minute: '2-digit',
-  // })}`;
-
   const toggleComments = () => {
     setCommentsInit(!commentsinit);
     console.log(`changed comments status on event ${event.id}`);
@@ -47,13 +42,13 @@ const Event = (props) => {
   };
 
   const joinEvent = async () => {
-    let user_id = currentUser.id;
-    let event_id = event.id;
+    const user_id = currentUser.id;
+    const event_id = event.id;
     if (!(event.id in joinedEvents)) await joinAnEvent({ user_id, event_id });
     else await leaveAnEvent({ user_id, event_id });
     setTimeout(async () => {
       await loadJoinedEvents();
-    }, 100); //This is so it fetches after sign in has settled in,, should add a loading MUST RE VIST
+    }, 100); // This is so it fetches after sign in has settled in,, should add loading MUST RE VIST
     // await loadJoinedEvents()
     setTimeout(async () => {
       const attendentAmount = await fetchAttendeesAmount(event.id);
@@ -70,6 +65,11 @@ const Event = (props) => {
 
   return (
     <div className="event">
+      {currentUser && currentUser.id === event.user_id ? (
+        <button onClick={deleteEvent}>Delete Event</button>
+      ) : (
+        <p></p>
+      )}
       <h3>guy who made it: {event.user_name}</h3>
       <h3>Title: {event.title}</h3>
       <h3>Location: {event.location}</h3>

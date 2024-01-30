@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import {
   fetchRecentEvents,
   fetchCommentsOnEvent,
+  destroyEvent,
 } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
@@ -13,14 +14,6 @@ export default function HomePage() {
   const [joinedEvents, setJoinedEvents] = useState({});
 
   useEffect(() => {
-    // const loadEvents = async () => {
-    //   const eventArr = await fetchRecentEvents();
-    //   const [res, error] = await fetchRecentEvents();
-    //   setEvents(eventArr);
-    //   fetchRecentEvents().then(setEvents);
-    // };
-    // loadEvents();
-
     fetchRecentEvents().then(setEvents);
   }, []);
 
@@ -28,7 +21,7 @@ export default function HomePage() {
     if (currentUser) {
       const signedEvents = await fetchJoinedEvents(currentUser.id);
       console.log('signed Events: ', signedEvents);
-      let obj = {};
+      const obj = {};
       signedEvents.forEach((event) => {
         obj[event.id] = true;
       });
@@ -42,6 +35,11 @@ export default function HomePage() {
 
   console.log(events);
 
+  const deleteEvent = async (id) => {
+    destroyEvent({ event_id: id });
+    fetchRecentEvents().then(setEvents);
+  };
+
   return (
     <>
       <h1>Home</h1>
@@ -52,6 +50,7 @@ export default function HomePage() {
           return (
             <Event
               key={event.id - 800}
+              deleteEvent={() => deleteEvent(event.id)}
               event={event}
               loadJoinedEvents={loadJoinedEvents}
               joinedEvents={joinedEvents}

@@ -67,6 +67,10 @@ export const addTags = async ({ event_id, event_tag_ids }) => {
   );
 };
 
+export const destroyEvent = async ({ event_id }) => {
+  fetchHandler(`${baseUrl}/${event_id}`, deleteOptions({ event_id }));
+};
+
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const updateUsername = async ({ id, username }) =>

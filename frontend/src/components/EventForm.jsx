@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { addTags, createEvent, joinAnEvent } from '../adapters/event-adapter';
 
 export default function EventForm({ id }) {
-  const [err, setErr] = useState({ color: null, text: null });
+  const [err, setErr] = useState({
+    color: null,
+    timeText: null,
+    tagText: null,
+    tagColor: null,
+  });
   const [selectedTags, setSelectedTags] = useState([]);
 
   const submit = async (e) => {
@@ -15,20 +20,44 @@ export default function EventForm({ id }) {
 
     if (startTime > endTime) {
       setErr({
+        ...err,
         color: 'red',
-        text: 'You cannot have a start time later than an end time',
+        timeText: 'You cannot have a start time later than an end time',
       });
       throw new Error('You cannot have a start time later than an end time');
     } else if (startTime === endTime) {
       setErr({
         color: 'red',
-        text: 'You cannot have a start time ending at the same time',
+        timeText: 'You cannot have a start time ending at the same time',
       });
 
       throw new Error('You cannot have a start time ending at the same time');
+    } else {
+      console.log('ok');
+      setErr({
+        ...err,
+        color: null,
+        timeText: null,
+      });
     }
 
-    setErr({ color: null, text: null });
+    if (selectedTags.length === 0) {
+      setErr({
+        ...err,
+        tagColor: 'red',
+        tagText: 'You must select at least one tag for your event',
+      });
+
+      throw new Error('You must select a tag for your event');
+    } else {
+      setErr({
+        ...err,
+        tagColor: null,
+        tagText: null,
+      });
+    }
+
+    setErr({ color: null, timeText: null, tagText: null, tagColor: null });
 
     const event = await createEvent({
       title,
@@ -126,26 +155,34 @@ export default function EventForm({ id }) {
         style={{ color: err.color }}
       />
 
-      <p style={{ color: 'red' }}>{err.text}</p>
+      <p style={{ color: 'red' }}>{err.timeText}</p>
 
-      <fieldset>
+      <fieldset style={{ color: err.tagColor }}>
         <legend>Select Tags:</legend>
-        {['yoga', 'running', 'biking', 'weight-lifting', 'calisthenics'].map(
-          (tag, idx) => (
-            <label key={tag}>
-              <input
-                type="checkbox"
-                id={tag}
-                name="tags"
-                value={idx + 1}
-                checked={selectedTags.includes(idx + 1)}
-                onChange={handleCheckboxChange}
-              />
-              {tag}
-            </label>
-          )
-        )}
+        {[
+          'yoga',
+          'running',
+          'biking',
+          'weight-lifting',
+          'calisthenics',
+          'coaching',
+          'jogging',
+        ].map((tag, idx) => (
+          <label key={tag}>
+            <input
+              type="checkbox"
+              id={tag}
+              name="tags"
+              value={idx + 1}
+              checked={selectedTags.includes(idx + 1)}
+              onChange={handleCheckboxChange}
+            />
+            {tag}
+          </label>
+        ))}
       </fieldset>
+
+      <p style={{ color: 'red' }}>{err.tagText}</p>
 
       <label htmlFor="description">Description:</label>
       <textarea id="description" name="description" rows="2"></textarea>

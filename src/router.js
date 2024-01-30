@@ -27,6 +27,7 @@ Router.post('/events/tags/:eventId', eventController.addTags);
 Router.post('/events/:eventId/comments', commentController.postComment);
 Router.post('/events/relations/:eventId', eventController.joinEvent);
 Router.delete('/events/relations/:eventId', eventController.leaveEvent);
+Router.delete('/events/:eventId', eventController.destroyEvent);
 
 Router.get('/comments/:userId', commentController.getCommentsByUser);
 
