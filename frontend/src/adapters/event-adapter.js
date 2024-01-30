@@ -60,6 +60,13 @@ export const fetchCommentsOnEvent = async (eventId) => {
   return comments || [];
 };
 
+export const addTags = async ({ event_id, event_tag_ids }) => {
+  fetchHandler(
+    `${baseUrl}/tags/${event_id}`,
+    getPostOptions({ event_tag_ids })
+  );
+};
+
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const updateUsername = async ({ id, username }) =>

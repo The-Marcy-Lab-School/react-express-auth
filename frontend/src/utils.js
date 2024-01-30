@@ -7,7 +7,7 @@ export const deleteOptions = (body) => ({
   method: 'DELETE',
   credentials: 'include',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(body)
+  body: JSON.stringify(body),
 });
 
 export const getPostOptions = (body) => ({
@@ -28,9 +28,14 @@ export const fetchHandler = async (url, options = {}) => {
   try {
     const response = await fetch(url, options);
     const { ok, status, headers } = response;
-    if (!ok) throw new Error(`Fetch failed with status - ${status}`, { cause: status });
+    if (!ok)
+      throw new Error(`Fetch failed with status - ${status}`, {
+        cause: status,
+      });
 
-    const isJson = (headers.get('content-type') || '').includes('application/json');
+    const isJson = (headers.get('content-type') || '').includes(
+      'application/json'
+    );
     const responseData = await (isJson ? response.json() : response.text());
 
     return [responseData, null];
@@ -40,12 +45,10 @@ export const fetchHandler = async (url, options = {}) => {
   }
 };
 
-export const timeObject =  {
+export const timeObject = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric',
-  timeZone: 'UTC', 
-}
+  hour: '2-digit',
+  minute: '2-digit',
+};

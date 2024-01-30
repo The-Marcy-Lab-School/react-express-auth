@@ -182,7 +182,7 @@ class Event {
 
       const query = `
         INSERT INTO event_tags_events (event_id, event_tag_id)
-        VALUES ${placeholders}
+        VALUES ${placeholders} RETURNING *
       `;
 
       // makes an event_id and tag id pair for each tag id

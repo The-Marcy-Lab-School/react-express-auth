@@ -1,11 +1,19 @@
 import { useState } from 'react';
-import { createEvent } from '../adapters/event-adapter';
+import { addTags, createEvent, joinAnEvent } from '../adapters/event-adapter';
 
 export default function EventForm({ id }) {
   const [err, setErr] = useState({ color: null, text: null });
   const [selectedTags, setSelectedTags] = useState([]);
 
-  const submit = (e) => {
+  const exercises = {
+    yoga: 1,
+    running: 2,
+    biking: 3,
+    'weight-lifting': 4,
+    calisthenics: 5,
+  };
+
+  const submit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const { title, location, description, date, startTime, endTime } =
@@ -30,7 +38,7 @@ export default function EventForm({ id }) {
 
     setErr({ color: null, text: null });
 
-    createEvent({
+    const event = await createEvent({
       title,
       location,
       description,
@@ -38,6 +46,15 @@ export default function EventForm({ id }) {
       end_date: `${date} ${endTime}`,
       user_id: id,
     });
+
+    console.log(event);
+
+    await addTags({
+      event_id: event[0],
+      event_tag_ids: selectedTags.map((tag) => exercises[tag]),
+    });
+
+    await joinAnEvent({ user_id: id, event_id: event[0] });
 
     setSelectedTags([]);
 
@@ -120,27 +137,21 @@ export default function EventForm({ id }) {
 
       <fieldset>
         <legend>Select Tags:</legend>
-        {[
-          'yoga',
-          'running',
-          'biking',
-          'weight-lifting',
-          'calisthenics',
-          'jogging',
-          'cardio',
-        ].map((tag) => (
-          <label key={tag}>
-            <input
-              type="checkbox"
-              id={tag}
-              name="tags"
-              value={tag}
-              checked={selectedTags.includes(tag)}
-              onChange={handleCheckboxChange}
-            />
-            {tag}
-          </label>
-        ))}
+        {['yoga', 'running', 'biking', 'weight-lifting', 'calisthenics'].map(
+          (tag, idx) => (
+            <label key={tag}>
+              <input
+                type="checkbox"
+                id={idx}
+                name="tags"
+                value={tag}
+                checked={selectedTags.includes(tag)}
+                onChange={handleCheckboxChange}
+              />
+              {tag}
+            </label>
+          )
+        )}
       </fieldset>
 
       <label htmlFor="description">Description:</label>

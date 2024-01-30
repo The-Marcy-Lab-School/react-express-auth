@@ -1,14 +1,15 @@
 const addTags = async (req, res) => {
   const {
     db: { Event },
-    body: { event_id, event_tag_ids },
+    params: { eventId },
+    body: { event_tag_ids },
   } = req;
 
-  const eventId = await Event.tags(event_id, event_tag_ids);
-  console.log('yo');
+  const event = await Event.tags(eventId, event_tag_ids);
+  console.log(eventId, event_tag_ids);
 
-  eventId
-    ? res.status(201).json(eventId)
+  event
+    ? res.status(201).json(event)
     : res.status(500).send({ err: "Can't create" });
 };
 

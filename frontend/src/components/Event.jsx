@@ -27,10 +27,15 @@ const Event = (props) => {
     'en-US',
     timeObject
   );
-  const formattedEndDate = new Date(event.end_date).toLocaleString(
-    'en-US',
-    timeObject
-  );
+  const formattedEndDate = new Date(event.end_date).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  // return `${newDate.toDateString()} ${newDate.toLocaleTimeString([], {
+  //   hour: '2-digit',
+  //   minute: '2-digit',
+  // })}`;
 
   const toggleComments = () => {
     setCommentsInit(!commentsinit);
