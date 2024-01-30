@@ -1,70 +1,64 @@
 const knex = require('../knex');
-const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 
 class Post {
-  #passwordHash = null; // a private property
 
-  // Why have a constructor here? We need a way to take the raw data returned from
-  // the database and hide the passwordHash before sending it back to the controller
-  constructor({ id, username, password_hash, profile_image, bio }) {
+  constructor({ id, user_id, title, description, location, image}) {
     this.id = id;
-    this.username = username;
-    this.#passwordHash = password_hash;
-    this.profile_image = profile_image;
-    this.bio = bio;
+    this.user_id = user_id;
+    this.title = title;
+    this.description = description;
+    this.location = location;
+    this.image = image;
   }
 
-  static async list() {
-    const query = 'SELECT * FROM users';
+  static async listAllPost() {
+    const query = 'SELECT * FROM posts';
     const { rows } = await knex.raw(query);
     // use the constructor to hide each user's passwordHash
-    return rows.map((user) => new User(user));
+    return rows.map((post) => new Post(post));
   }
 
-  static async find(id) {
-    const query = 'SELECT * FROM users WHERE id = ?';
+  static async findSinglePost(id) {
+    const query = 'SELECT * FROM posts WHERE id = ?';
     const args = [id];
     const { rows } = await knex.raw(query, args);
-    const user = rows[0];
-    return user ? new User(user) : null;
+    const post = rows[0];
+    return post ? new Post(post) : null;
   }
 
-  static async findByUsername(username) {
-    const query = 'SELECT * FROM users WHERE username = ?';
-    const args = [username];
+  static async findAllPostByUser(user_id) {
+    const query = 'SELECT * FROM users WHERE user_id = ?';
+    const args = [user_id];
     const { rows } = await knex.raw(query, args);
-    const user = rows[0];
-    return user ? new User(user) : null;
+    const post = rows[0];
+    return post ? new Post(post) : null;
   }
 
-  static async create(username, password, profile_image, bio) {
-    const passwordHash = await hashPassword(password);
-
-    const query = `INSERT INTO users (username, password_hash, profile_image, bio)
-      VALUES (?, ?, ?, ?) RETURNING *`;
-    const args = [username, passwordHash, profile_image, bio];
+  static async createPost(id, user_id, title, description, location, image) {
+    const query = `INSERT INTO posts (id, user_id, title, description, location, image)
+      VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
+    const args = [id, user_id, title, description, location, image];
     const { rows } = await knex.raw(query, args);
-    const user = rows[0];
-    return new User(user);
+    const post = rows[0];
+    return new Post(post);
   }
 
-  static async deleteAll() {
-    return knex.raw('TRUNCATE users;');
+  static async updatePost(id, user_id, title, description, location, image) {
+    const query = `UPDATE posts
+      SET user_id = ?, title = ?, description = ?, location = ?, image = ?
+      WHERE id = ? RETURNING *`;
+    const args = [user_id, title, description, location, image, id];
+    const { rows } = await knex.raw(query, args);
+    const post = rows[0];
+    return new Post(post);
   }
-
-  update = async (username) => { // dynamic queries are easier if you add more properties
-    const rows = await knex('users')
-      .where({ id: this.id })
-      .update({ username })
-      .returning('*');
-
-    const updatedUser = rows[0];
-    return updatedUser ? new User(updatedUser) : null;
-  };
-
-  isValidPassword = async (password) => (
-    isValidPassword(password, this.#passwordHash)
-  );
+  static async deletePost(id) {
+    const query = `DELETE FROM posts WHERE id = ? RETURNING *`;
+    const args = [id];
+    const { rows } = await knex.raw(query, args);
+    const post = rows[0];
+    return new Post(post);
+  }
 }
 
 module.exports = Post;
