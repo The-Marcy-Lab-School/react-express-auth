@@ -199,6 +199,17 @@ class Event {
       return null;
     }
   }
+
+  static async destroyEvent(event_id) {
+    try {
+      const query = `DELETE FROM events WHERE id = (?)`;
+      const res = await knex.raw(query, [event_id]);
+      return res.rows || null;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
 }
 
 module.exports = Event;
