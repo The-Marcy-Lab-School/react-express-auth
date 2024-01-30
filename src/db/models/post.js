@@ -60,5 +60,4 @@ class Post {
     return new Post(post);
   }
 }
-
 module.exports = Post;
