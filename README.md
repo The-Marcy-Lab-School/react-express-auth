@@ -37,7 +37,9 @@
 From within the root directory:
 
 ```sh
-<COMMANDS_HERE>
+Create an .env and add in your own postgress information
+
+run "npm run kickstart"
 ```
 
 ### Roadmap
