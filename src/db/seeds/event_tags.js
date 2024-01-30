@@ -9,7 +9,7 @@ let event_tags = [
   { name: 'biking' },
   { name: 'weight-lifting' },
   { name: 'calisthenics' },
-  { name: 'orgy' },
+  { name: 'coaching' },
   { name: 'jogging' },
   { name: 'small' },
   { name: 'massive' },
@@ -17,6 +17,7 @@ let event_tags = [
 ];
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
+  await knex.raw('ALTER SEQUENCE event_tags_id_seq RESTART WITH 1')
   await knex('event_tags').del();
   await knex('event_tags').insert(event_tags);
 };
