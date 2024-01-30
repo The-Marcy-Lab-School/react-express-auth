@@ -14,7 +14,7 @@ let events    =      [{
 },
 
 { 
-  title: 'Naked Cardio',
+  title: 'Intense Cardio',
   location: 'Prospect Park',
   description: '😏😏😏',
   date: '2024-02-01T15:30:00Z', 
@@ -32,6 +32,7 @@ let events    =      [{
 ]
 exports.seed = async function(knex) {
   // Deletes ALL existing entries
+  await knex.raw('ALTER SEQUENCE events_id_seq RESTART WITH 1')
   await knex('events').del()
   await knex('events').insert(events);
 };
