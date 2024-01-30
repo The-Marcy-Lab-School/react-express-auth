@@ -21,7 +21,7 @@ export default function HomePage() {
     if (currentUser) {
       const signedEvents = await fetchJoinedEvents(currentUser.id);
       console.log('signed Events: ', signedEvents);
-      let obj = {};
+      const obj = {};
       signedEvents.forEach((event) => {
         obj[event.id] = true;
       });

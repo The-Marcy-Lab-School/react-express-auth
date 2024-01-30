@@ -27,12 +27,18 @@ export default function EventForm({ id }) {
       throw new Error('You cannot have a start time later than an end time');
     } else if (startTime === endTime) {
       setErr({
-        ...err,
         color: 'red',
         timeText: 'You cannot have a start time ending at the same time',
       });
 
       throw new Error('You cannot have a start time ending at the same time');
+    } else {
+      console.log('ok');
+      setErr({
+        ...err,
+        color: null,
+        timeText: null,
+      });
     }
 
     if (selectedTags.length === 0) {
@@ -153,21 +159,27 @@ export default function EventForm({ id }) {
 
       <fieldset style={{ color: err.tagColor }}>
         <legend>Select Tags:</legend>
-        {['yoga', 'running', 'biking', 'weight-lifting', 'calisthenics'].map(
-          (tag, idx) => (
-            <label key={tag}>
-              <input
-                type="checkbox"
-                id={tag}
-                name="tags"
-                value={idx + 1}
-                checked={selectedTags.includes(idx + 1)}
-                onChange={handleCheckboxChange}
-              />
-              {tag}
-            </label>
-          )
-        )}
+        {[
+          'yoga',
+          'running',
+          'biking',
+          'weight-lifting',
+          'calisthenics',
+          'coaching',
+          'jogging',
+        ].map((tag, idx) => (
+          <label key={tag}>
+            <input
+              type="checkbox"
+              id={tag}
+              name="tags"
+              value={idx + 1}
+              checked={selectedTags.includes(idx + 1)}
+              onChange={handleCheckboxChange}
+            />
+            {tag}
+          </label>
+        ))}
       </fieldset>
 
       <p style={{ color: 'red' }}>{err.tagText}</p>

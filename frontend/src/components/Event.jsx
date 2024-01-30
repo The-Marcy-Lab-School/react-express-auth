@@ -4,7 +4,6 @@ import {
   joinAnEvent,
   leaveAnEvent,
   fetchAttendeesAmount,
-  destroyEvent,
 } from '../adapters/event-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import './styles/Event.css';
@@ -32,11 +31,6 @@ const Event = (props) => {
     hour: '2-digit',
     minute: '2-digit',
   });
-
-  // return `${newDate.toDateString()} ${newDate.toLocaleTimeString([], {
-  //   hour: '2-digit',
-  //   minute: '2-digit',
-  // })}`;
 
   const toggleComments = () => {
     setCommentsInit(!commentsinit);
@@ -69,14 +63,9 @@ const Event = (props) => {
     }, 1200);
   };
 
-  // const deleteEvent = async () => {
-  //   destroyEvent({ event_id: event.id });
-  //   await loadJoinedEvents();
-  // };
-
   return (
     <div className="event">
-      {currentUser.id === event.user_id ? (
+      {currentUser && currentUser.id === event.user_id ? (
         <button onClick={deleteEvent}>Delete Event</button>
       ) : (
         <p></p>
