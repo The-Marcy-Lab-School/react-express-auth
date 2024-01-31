@@ -8,13 +8,14 @@ const update = require('./update');
 const login = require('./login');
 const logout = require('./logout');
 const showMe = require('./show-me');
+const destroyUser = require('./destroyUser');
 
 module.exports = {
   list,
   create,
   show,
   update,
-
+  destroyUser,
   login,
   logout,
   showMe,

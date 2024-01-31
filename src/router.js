@@ -11,11 +11,13 @@ Router.use(addModelsToRequest);
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);
+Router.delete('/users/:id', userController.destroyUser);
 Router.get('/users/events/:userId/signed', eventController.getSignedUpEvents);
 Router.get('/users/events/:userId', eventController.getEventsOfUser);
 
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
+
 Router.get('/me', userController.showMe);
 
 Router.get('/events/relations/:eventId', eventController.countAttendees);
