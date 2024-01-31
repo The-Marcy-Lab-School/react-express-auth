@@ -52,6 +52,13 @@ class User {
     return knex.raw('TRUNCATE users;');
   }
 
+  static async delete(id){
+    const query = 'DELETE FROM users WHERE id = ? RETURNING *';
+    const args = [id];
+    const { rows: [deletedUser] } = await knex.raw(query, args);
+    return deletedUser ? new User(deletedUser) : null; // to see the instance of the deleted user
+  }
+
   update = async (username) => { // dynamic queries are easier if you add more properties
     const rows = await knex('users')
       .where({ id: this.id })

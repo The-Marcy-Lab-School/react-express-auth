@@ -4,6 +4,7 @@ const list = require('./list');
 const create = require('./create');
 const show = require('./show');
 const update = require('./update');
+const remove = require('./delete');
 
 const login = require('./login');
 const logout = require('./logout');
@@ -14,6 +15,7 @@ module.exports = {
   create,
   show,
   update,
+  remove,
 
   login,
   logout,
