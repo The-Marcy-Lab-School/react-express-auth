@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const handleCookieSessions = require('./middleware/handle-cookie-sessions');
 const router = require('./router');
 const logRoutes = require('./middleware/log-routes');
-const cors = require("cors")
 
 const app = express();
 
@@ -11,8 +11,7 @@ app.use(handleCookieSessions); // adds a session property to each request repres
 app.use(logRoutes); // print information about each incoming request
 app.use(express.json()); // parse incoming request bodies as JSON
 app.use(express.static(path.join(__dirname, '..', 'public'))); // Serve static assets from the public folder
-app.use(cors())
-
+app.use(cors());
 
 app.use('/api', router);
 
