@@ -90,6 +90,7 @@ const Event = (props) => {
       {/*ill see if I need the && later*/}
       <button onClick={togglePlaceHolder}>Init Placeholder</button>
       {placeholderInit && <Placeholder />}
+      {commentsinit && <Comments eventId={event.id} userId={currentUser.id} />}
       <button onClick={toggleComments}>Init Comments</button>
       {commentsinit && <Comments eventId={event.id} />}
     </div>
