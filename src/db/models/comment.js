@@ -24,10 +24,10 @@ class Comment {
     return comment ? new Comment(comment) : null;
   }
 
-  static async createComment(id, post_id, user_id, content, time) {
-    const query = `INSERT INTO comments (id, post_id, user_id, content, time)
-      VALUES (?, ?, ?, ?, ?) RETURNING *`;
-    const args = [id, post_id, user_id, content, time];
+  static async createComment(post_id, user_id, content, time) {
+    const query = `INSERT INTO comments (post_id, user_id, content, time)
+      VALUES (?, ?, ?, ?) RETURNING *`;
+    const args = [post_id, user_id, content, time];
     const { rows } = await knex.raw(query, args);
     const comment = rows[0];
     return new Comment(comment);

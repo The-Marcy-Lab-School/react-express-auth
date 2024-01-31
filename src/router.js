@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
+const commentController = require('./controllers/comment/index');
 
 const Router = express.Router();
 Router.use(addModelsToRequest);
@@ -14,6 +15,24 @@ Router.delete('/users/:id', userController.remove);
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
 Router.get('/me', userController.showMe);
+
+//comment routes
+Router.post('/users/:user_id/posts/:post_id/comments', commentController.create); // does not work YET
+//
+//
+//
+
+//post routes
+//
+//
+//
+//
+
+//likes routes
+//
+//
+//
+//
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
