@@ -1,0 +1,26 @@
+.join-event {
+    background-color: #4caf50; 
+    color: #fff; 
+    padding: 10px 15px; 
+    border: none;
+    border-radius: 10px; 
+    cursor: pointer;
+    font-size: 14px; 
+}
+.join-event:hover {
+    background-color: #45a049; 
+  }
+
+  .leave-event {
+    background-color: #ff4444; 
+    color: #fff; 
+    padding: 10px 15px; 
+    border: none;
+    border-radius: 10px; 
+    cursor: pointer;
+    font-size: 14px; 
+  }
+  
+  .leave-event:hover {
+    background-color: #cc0000; 
+  }

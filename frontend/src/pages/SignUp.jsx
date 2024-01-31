@@ -11,6 +11,8 @@ export default function SignUpPage() {
   const [errorText, setErrorText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setfullName] = useState('')
+  const [email, setEmail] = useState('')
   // We could also use a single state variable for the form data:
   // const [formData, setFormData] = useState({ username: '', password: '' });
   // What would be the pros and cons of that?
@@ -21,8 +23,11 @@ export default function SignUpPage() {
     event.preventDefault();
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
+    if (!fullName || !password) return setErrorText('Missing name');
+    if(!email) return setErrorText('Missing email');
 
-    const [user, error] = await createUser({ username, password });
+    const [user, error] =  await createUser({ username, password, fullName, email });
+    console.log(user)
     if (error) return setErrorText(error.message);
 
     setCurrentUser(user);
@@ -33,6 +38,8 @@ export default function SignUpPage() {
     const { name, value } = event.target;
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
+    if (name === 'name') setfullName(value);
+    if (name === 'email') setEmail(value);
   };
 
   return <>
@@ -57,6 +64,24 @@ export default function SignUpPage() {
         name="password"
         onChange={handleChange}
         value={password}
+      />
+      <label htmlFor="name">Name</label>
+      <input
+        autoComplete="off"
+        type="name"
+        id="name"
+        name="name"
+        onChange={handleChange}
+        value={fullName}
+      />
+            <label htmlFor="email">Email</label>
+      <input
+        autoComplete="off"
+        type="email"
+        id="email"
+        name="email"
+        onChange={handleChange}
+        value={email}
       />
 
       {/* In reality, we'd want a LOT more validation on signup, so add more things if you have time
