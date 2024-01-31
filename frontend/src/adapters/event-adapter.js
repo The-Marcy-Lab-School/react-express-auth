@@ -75,3 +75,11 @@ export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const updateUsername = async ({ id, username }) =>
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }));
+
+export const postComment = async ({ user_id, event_id, text }) => {
+    return fetchHandler(
+      `${baseUrl}/${event_id}/comments`, 
+      getPostOptions({ user_id, event_id, text })
+    );
+  };
+  
