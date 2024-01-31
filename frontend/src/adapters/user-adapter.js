@@ -23,6 +23,11 @@ export const fetchJoinedEvents = async (userId) => {
   return events || [];
 };
 
+export const fetchUserEvents = async (userId) => {
+  const [events] = await fetchHandler(`${baseUrl}/events/${userId}`);
+  return events || [];
+};
+
 export const getAllUsers = async () => {
   const [users] = await fetchHandler(baseUrl);
   return users || [];

@@ -80,7 +80,7 @@ const Event = (props) => {
       <h3>Time: {formattedStartDate}</h3>
       <h3>Ends: {formattedEndDate}</h3>
       <h3>Attendents: {attendeeAmount || event.attendee_count}</h3>
-      {event.id && (
+      {currentUser.id !== event.user_id && event.id && (
         <JoinButton
           joinEvent={joinEvent}
           eventId={event.id}

@@ -46,17 +46,15 @@ export default function HomePage() {
       <p>Put something interesting here!</p>
       {currentUser && console.log(currentUser.id)}
       {events[0] &&
-        events.map((event) => {
-          return (
-            <Event
-              key={event.id - 800}
-              deleteEvent={() => deleteEvent(event.id)}
-              event={event}
-              loadJoinedEvents={loadJoinedEvents}
-              joinedEvents={joinedEvents}
-            />
-          );
-        })}
+        events.map((event) => (
+          <Event
+            key={event.id - 800}
+            deleteEvent={() => deleteEvent(event.id)}
+            event={event}
+            loadJoinedEvents={loadJoinedEvents}
+            joinedEvents={joinedEvents}
+          />
+        ))}
     </>
   );
 }
