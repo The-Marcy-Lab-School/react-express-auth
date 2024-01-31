@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { addTags, createEvent, joinAnEvent } from '../adapters/event-adapter';
 
-export default function EventForm({ id }) {
+export default function EventForm({ id, loadUserEvents }) {
   const [err, setErr] = useState({
     color: null,
     timeText: null,
@@ -80,6 +80,8 @@ export default function EventForm({ id }) {
     setSelectedTags([]);
 
     e.target.reset();
+
+    loadUserEvents();
   };
 
   const min = new Date().toISOString().split('T')[0];
@@ -101,7 +103,7 @@ export default function EventForm({ id }) {
   console.log(selectedTags);
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} style={{ width: '400px' }}>
       <label htmlFor="title">Title for your event:</label>
       <input type="text" id="title" name="title" required />
 

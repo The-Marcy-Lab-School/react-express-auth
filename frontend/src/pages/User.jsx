@@ -1,16 +1,26 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CurrentUserContext from '../contexts/current-user-context';
-import { destroyUser, getUser } from '../adapters/user-adapter';
+import {
+  destroyUser,
+  fetchJoinedEvents,
+  fetchUserEvents,
+  getUser,
+} from '../adapters/user-adapter';
 import { logUserOut } from '../adapters/auth-adapter';
 import UpdateUsernameForm from '../components/UpdateUsernameForm';
 import EventForm from '../components/EventForm';
+import Event from '../components/Event';
+import { destroyEvent } from '../adapters/event-adapter';
 
 export default function UserPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [joinedEvents, setJoinedEvents] = useState({});
+
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
@@ -21,8 +31,12 @@ export default function UserPage() {
       setUserProfile(user);
     };
 
+    fetchUserEvents(id).then(setEvents);
+
     loadUser();
   }, [id]);
+
+  console.log(events);
 
   const handleLogout = async () => {
     logUserOut();
@@ -46,6 +60,24 @@ export default function UserPage() {
     ? currentUser.username
     : userProfile.username;
 
+  const deleteEvent = async (evId) => {
+    destroyEvent({ event_id: evId });
+    fetchUserEvents(id).then(setEvents);
+  };
+
+  const loadJoinedEvents = async () => {
+    if (currentUser) {
+      const signedEvents = await fetchJoinedEvents(currentUser.id);
+      console.log('signed Events: ', signedEvents);
+      const obj = {};
+      signedEvents.forEach((event) => {
+        obj[event.id] = true;
+      });
+      setJoinedEvents(obj);
+      console.log(obj);
+    }
+  };
+
   return (
     <>
       <h1>{profileUsername}</h1>
@@ -58,7 +90,23 @@ export default function UserPage() {
       <p>If the user had any data, here it would be</p>
       <p>Fake Bio or something</p>
 
-      <EventForm id={id} />
+      <EventForm
+        id={id}
+        loadUserEvents={() => fetchUserEvents(id).then(setEvents)}
+      />
+
+      {events[0] && <p>My events</p>}
+      {events[0] &&
+        events.map((event) => (
+          <Event
+            key={event.id - 800}
+            deleteEvent={() => deleteEvent(event.id)}
+            event={event}
+            loadJoinedEvents={loadJoinedEvents}
+            joinedEvents={joinedEvents}
+          />
+        ))}
+
       {!!isCurrentUserProfile && (
         <UpdateUsernameForm
           currentUser={currentUser}
