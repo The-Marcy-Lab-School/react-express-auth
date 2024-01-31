@@ -9,7 +9,7 @@
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js",
     "console": "node -r ./src/db/models/console.js",
-    "connect": "psql -U postgres -d auth_example",
+    "connect": "psql -U postgres -d react_auth_example",
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
     "migrate:rollback": "knex migrate:rollback",
