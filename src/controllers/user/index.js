@@ -9,14 +9,16 @@ const login = require('./login');
 const logout = require('./logout');
 const showMe = require('./show-me');
 const destroyUser = require('./destroyUser');
+const patch_pic = require('./patch_pic')
 
 module.exports = {
   list,
   create,
   show,
   update,
-  destroyUser,
+
   login,
   logout,
   showMe,
+  patch_pic
 };

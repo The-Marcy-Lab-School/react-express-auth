@@ -22,6 +22,7 @@ export default function UserPage() {
 
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+  // const imagePath = process.env.PUBLIC_URL + '/upload/1706815235258wowow.png'
 
   useEffect(() => {
     const loadUser = async () => {
@@ -78,6 +79,10 @@ export default function UserPage() {
   //   }
   // }
 
+    const profilePic = isCurrentUserProfile
+    ? currentUser.profile_pic
+    : userProfile.profile_pic;
+
   return (
     <>
       <h1>{profileUsername}</h1>
@@ -111,6 +116,11 @@ export default function UserPage() {
           setCurrentUser={setCurrentUser}
         />
       )}
-    </>
+      {console.log(userProfile)}
+      <img src='/upload/1706824948115wowow.png' alt="img"/>
+      { userProfile.profile_pic &&<img src={`../public/upload/${profilePic}`}></img>}
+      {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
+    </> // /upload/${userProfile.profile_pic}
   );
 }
+
