@@ -8,7 +8,6 @@ exports.up = (knex) => knex.schema.createTable('entries', (table) => {
     table.integer('log_id');
     table.foreign('user_id').references('id').inTable('users');
     table.foreign('log_id').references('id').inTable('logs');
-    table.timestamps(true, true);
 });
 
 /**
