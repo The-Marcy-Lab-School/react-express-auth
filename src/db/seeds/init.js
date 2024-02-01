@@ -4,6 +4,7 @@ const User = require('../models/user');
  * @returns { Promise<void> }
  */
 exports.seed = async (knex) => {
+  // Before you have models you can always just do `await knex('table_name').del`
   await User.deleteAll();
   await User.create('cool_cat', '1234');
   await User.create('l33t-guy', '1234');
