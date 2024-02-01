@@ -43,15 +43,17 @@ class Post {
     return new Post(post);
   }
 
-  static async updatePost(user_id, title, description, location, image) {
+  static async updatePost(title, description, location, image, id) {
     const query = `UPDATE posts
       SET title = ?, description = ?, location = ?, image = ?
       WHERE id = ? RETURNING *`;
-    const args = [user_id, title, description, location, image, id];
+    const args = [title, description, location, image, id];
+    console.log(args, "rihgr")
     const { rows } = await knex.raw(query, args);
     const post = rows[0];
     return new Post(post);
   }
+
   static async deletePost(id) {
     const query = `DELETE FROM posts WHERE id = ? RETURNING *`;
     const args = [id];
