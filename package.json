@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seedAll && npm run dev",
+    "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
     "build": "npm i && && npm run migrate:rollback && npm run migrate && npm run seed",
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js",
@@ -13,7 +13,7 @@
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
     "migrate:rollback": "knex migrate:rollback",
-    "seedAll": "npm run seed -- --specific=init.js && npm run seed -- --specific=post.js && npm run seed -- --specific=comment.js && npm run seed -- --specific=like.js",
+    "seed": "knex seed:run",
     "seed:make": "knex seed:make",
     "play:bcrypt": "nodemon ./playground-examples/bcrypt-example.js",
     "lint": "eslint . --fix"
