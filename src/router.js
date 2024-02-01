@@ -3,15 +3,15 @@ const userController = require('./controllers/user/index'); // the "/index" part
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
 const commentController = require('./controllers/comment/index');
-
+const postController = require('./controllers/post/index');
 const Router = express.Router();
 Router.use(addModelsToRequest);
 
+//users routes
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);
 Router.delete('/users/:id', userController.remove);
-
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
 Router.get('/me', userController.showMe);
@@ -23,6 +23,10 @@ Router.post('/users/:user_id/posts/:post_id/comments', commentController.create)
 //
 
 //post routes
+Router.get('/users/:user_id/posts', postController.showAllPosts); 
+Router.get('/users/:user_id/posts/:post_id', postController.showASinglePost); // does not work YET
+Router.get('/users/:user_id/posts/all', postController.showAllUserPosts); // does not work YET
+Router.post('/users/:user_id/posts', postController.create);
 //
 //
 //

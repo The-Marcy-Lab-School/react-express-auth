@@ -42,18 +42,18 @@ class Post {
     return post ? new Post(post) : null;
   }
 
-  static async createPost(id, user_id, title, description, location, image) {
-    const query = `INSERT INTO posts (id, user_id, title, description, location, image)
-      VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
-    const args = [id, user_id, title, description, location, image];
+  static async createPost(user_id, title, description, location, image) {
+    const query = `INSERT INTO posts (user_id, title, description, location, image)
+      VALUES (?, ?, ?, ?, ?) RETURNING *`;
+    const args = [user_id, title, description, location, image];
     const { rows } = await knex.raw(query, args);
     const post = rows[0];
     return new Post(post);
   }
 
-  static async updatePost(id, user_id, title, description, location, image) {
+  static async updatePost(user_id, title, description, location, image) {
     const query = `UPDATE posts
-      SET user_id = ?, title = ?, description = ?, location = ?, image = ?
+      SET title = ?, description = ?, location = ?, image = ?
       WHERE id = ? RETURNING *`;
     const args = [user_id, title, description, location, image, id];
     const { rows } = await knex.raw(query, args);
