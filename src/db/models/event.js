@@ -1,5 +1,5 @@
 const knex = require('../knex');
-
+//
 class Event {
   static async recentEvents() {
     const query = `SELECT

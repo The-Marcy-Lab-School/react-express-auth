@@ -16,7 +16,7 @@ module.exports = {
   create,
   show,
   update,
-
+  destroyUser,
   login,
   logout,
   showMe,
