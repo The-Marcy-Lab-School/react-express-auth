@@ -5,10 +5,10 @@ export default function Hero(){
     return <>
         <section id="hero">
             <img id="hero-img" src={HeroImg} alt="hero image" />
-            <container id="hero-text">
+            <div id="hero-text">
                 <h1>WE OUT HERE YESSIR</h1>
                 <p>Trash, Trash, Trash</p>
-            </container>
+            </div>
         </section>
     </>
 }
