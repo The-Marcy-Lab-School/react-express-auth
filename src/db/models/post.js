@@ -23,14 +23,6 @@ class Post {
     const args = [id];
     const { rows } = await knex.raw(query, args);
     const post = rows[0];
-    return post ? new User(post) : null;
-  }
-
-  static async findSinglePost(id) {
-    const query = 'SELECT * FROM posts WHERE id = ?';
-    const args = [id];
-    const { rows } = await knex.raw(query, args);
-    const post = rows[0];
     return post ? new Post(post) : null;
   }
 
