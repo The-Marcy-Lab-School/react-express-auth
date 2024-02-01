@@ -31,8 +31,10 @@ class Event {
   static async getEventsFromUser(user_id) {
     const query = `SELECT
     events.*,
+    users.name AS user_name,
+    users.profile_pic AS user_profile_pic,
     STRING_AGG(DISTINCT event_tags.name, ', ') AS tag_names,
-    COUNT(event_relations.user_id) AS attendee_count
+    COUNT(DISTINCT event_relations.user_id) AS attendee_count
   FROM
     events
   JOIN
@@ -41,14 +43,16 @@ class Event {
     event_tags ON event_tags_events.event_tag_id = event_tags.id
   LEFT JOIN
     event_relations ON events.id = event_relations.event_id
-  WHERE
-    events.user_id = ?
+  LEFT JOIN
+    users ON events.user_id = users.id
+    WHERE
+      events.user_id = ?
   GROUP BY
-    events.id, events.title
+    events.id, events.title, users.name, users.profile_pic
   ORDER BY
-    events.date DESC
+    events.date ASC
   LIMIT 50;
-  `;
+`;
     const args = [user_id];
     console.log(args);
     const { rows } = await knex.raw(query, args);
@@ -89,7 +93,9 @@ class Event {
     const query = `SELECT
     events.*,
     STRING_AGG(DISTINCT event_tags.name, ', ') AS tag_names,
-    COUNT(event_relations.user_id) AS member_count
+    COUNT(DISTINCT event_relations.user_id) AS attendee_count,
+    users.name AS user_name,
+    users.profile_pic AS user_profile_pic
   FROM
     events
   JOIN
@@ -102,13 +108,15 @@ class Event {
     event_tags ON event_tags_events.event_tag_id = event_tags.id
   WHERE
     users.id = ?
+  AND NOT
+    events.user_id = ?
   GROUP BY
-    events.id, events.title
+    events.id, events.title, users.name, users.profile_pic
   ORDER BY
     events.date DESC
   LIMIT 50;
   `;
-    const args = [user_id];
+    const args = [user_id, user_id];
     const { rows } = await knex.raw(query, args);
     return rows || [];
   }

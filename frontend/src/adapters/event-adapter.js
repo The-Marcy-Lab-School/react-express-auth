@@ -51,7 +51,7 @@ export const fetchRecentEvents = async () => {
 export const fetchAttendeesAmount = async (eventId) => {
   console.log('fetching attendees amount');
   const amount = await fetchHandler(`${baseUrl}/relations/${eventId}`);
-  console.log('attendees :' + amount);
+  console.log(`attendees :${amount}`);
   return amount || 0;
 };
 
@@ -73,13 +73,13 @@ export const destroyEvent = async ({ event_id }) => {
 
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
-export const updateUsername = async ({ id, username }) =>
+export const updateUsername = async ({ id, username }) => {
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }));
+};
 
 export const postComment = async ({ user_id, event_id, text }) => {
-    return fetchHandler(
-      `${baseUrl}/${event_id}/comments`, 
-      getPostOptions({ user_id, event_id, text })
-    );
-  };
-  
+  fetchHandler(
+    `${baseUrl}/${event_id}/comments`,
+    getPostOptions({ user_id, event_id, text })
+  );
+};

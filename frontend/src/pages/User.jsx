@@ -19,7 +19,6 @@ export default function UserPage() {
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
   const [events, setEvents] = useState([]);
-  const [joinedEvents, setJoinedEvents] = useState({});
 
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
@@ -65,18 +64,19 @@ export default function UserPage() {
     fetchUserEvents(id).then(setEvents);
   };
 
-  const loadJoinedEvents = async () => {
-    if (currentUser) {
-      const signedEvents = await fetchJoinedEvents(currentUser.id);
-      console.log('signed Events: ', signedEvents);
-      const obj = {};
-      signedEvents.forEach((event) => {
-        obj[event.id] = true;
-      });
-      setJoinedEvents(obj);
-      console.log(obj);
-    }
-  };
+  // eslint-disable-next-line func-style
+  // async function loadJoinedEvents() {
+  //   if (currentUser) {
+  //     const signedEvents = await fetchJoinedEvents(currentUser.id);
+  //     console.log('signed Events: ', signedEvents);
+  //     const obj = {};
+  //     signedEvents.forEach((event) => {
+  //       obj[event.id] = true;
+  //     });
+  //     setJoinedEvents(obj);
+  //     console.log(obj);
+  //   }
+  // }
 
   return (
     <>
@@ -95,15 +95,13 @@ export default function UserPage() {
         loadUserEvents={() => fetchUserEvents(id).then(setEvents)}
       />
 
-      {events[0] && <p>My events</p>}
+      {events[0] && <p style={{ fontSize: '30px' }}>My events</p>}
       {events[0] &&
         events.map((event) => (
           <Event
             key={event.id - 800}
             deleteEvent={() => deleteEvent(event.id)}
             event={event}
-            loadJoinedEvents={loadJoinedEvents}
-            joinedEvents={joinedEvents}
           />
         ))}
 
