@@ -26,7 +26,6 @@ Router.post('/users/:user_id/posts/:post_id/comments', commentController.create)
 //
 //
 //
-//
 
 //likes routes
 //
