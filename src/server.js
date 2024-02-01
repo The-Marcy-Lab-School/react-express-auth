@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer')
 const path = require('path');
 const handleCookieSessions = require('./middleware/handle-cookie-sessions');
 const router = require('./router');
@@ -12,6 +13,8 @@ app.use(logRoutes); // print information about each incoming request
 app.use(express.json()); // parse incoming request bodies as JSON
 app.use(express.static(path.join(__dirname, '..', 'public'))); // Serve static assets from the public folder
 app.use(cors())
+
+
 
 
 app.use('/api', router);

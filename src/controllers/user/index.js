@@ -8,14 +8,16 @@ const update = require('./update');
 const login = require('./login');
 const logout = require('./logout');
 const showMe = require('./show-me');
+const patch_pic = require('./patch_pic')
 
 module.exports = {
   list,
   create,
   show,
   update,
-
+//////////////////
   login,
   logout,
   showMe,
+  patch_pic
 };

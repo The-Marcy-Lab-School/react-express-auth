@@ -28,6 +28,10 @@ export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 export const updateUsername = async ({ id, username }) =>
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }));
 
+  export const updateProfilePic = async ({ id, profile_pic }) => {
+  console.log(profile_pic)
+    return fetchHandler(`${baseUrl}/profilePic/${id}`, getPatchOptions({ id, profile_pic }));
+}
 // const app = ({
 
-// })
+// })////////
