@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import SignUpPage from './pages/SignUp';
 import LoginPage from './pages/Login';
 import SiteHeadingAndNav from './components/SiteHeadingAndNav';
+import Footer from './components/Footer';
 import NotFoundPage from './pages/NotFound';
 import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
@@ -28,5 +29,6 @@ export default function App() {
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </main>
+    <Footer />
   </>;
 }
