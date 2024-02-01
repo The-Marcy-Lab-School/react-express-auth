@@ -80,7 +80,7 @@ const Event = (props) => {
       <h3>Time: {formattedStartDate}</h3>
       <h3>Ends: {formattedEndDate}</h3>
       <h3>Attendents: {attendeeAmount || event.attendee_count}</h3>
-      {currentUser.id !== event.user_id && event.id && (
+      {currentUser && currentUser.id !== event.user_id && event.id && (
         <JoinButton
           joinEvent={joinEvent}
           eventId={event.id}
@@ -88,8 +88,6 @@ const Event = (props) => {
         />
       )}{' '}
       {/*ill see if I need the && later*/}
-      <button onClick={togglePlaceHolder}>Init Placeholder</button>
-      {placeholderInit && <Placeholder />}
       {commentsinit && <Comments eventId={event.id} userId={currentUser.id} />}
       <button onClick={toggleComments}>Init Comments</button>
       {commentsinit && <Comments eventId={event.id} />}
