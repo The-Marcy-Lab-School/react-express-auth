@@ -9,6 +9,14 @@ class Like {
     this.likes_amount = likes_amount;
   }
 
+  static async find(id) {
+    const query = 'SELECT * FROM likes WHERE id = ?';
+    const args = [id];
+    const { rows } = await knex.raw(query, args);
+    const like = rows[0];
+    return like ? new Like(like) : null;
+  }
+
   static async addLike() {
     const query = `INSERT INTO likes (post_id, user_id, likes_amount)
       VALUES (?, ?, ?) RETURNING *`;
@@ -35,7 +43,7 @@ class Like {
     return like ? new Like(like) : null;
   }
 
-  static async deleteComment(id) {
+  static async deleteLike(id) {
     const query = `DELETE FROM likes WHERE id = ? RETURNING *`;
     const args = [id];
     const { rows } = await knex.raw(query, args);
