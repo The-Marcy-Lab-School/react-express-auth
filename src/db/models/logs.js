@@ -28,9 +28,6 @@ class Log {
         return logEntry; // Assuming you have a LogEntry class to handle the log object
     }
 
-    static async delete(logId) {
-        return knex.raw('DELETE FROM logs WHERE id = ?;');
-    }
     static async update(logId, userId, mood, abdominal_pain, backpain, nausea, fatigue) {
         const query = `UPDATE logs SET 
           mood = ?,
