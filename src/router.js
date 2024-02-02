@@ -4,6 +4,8 @@ const eventController = require('./controllers/event/index');
 const commentController = require('./controllers/comment/index');
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
+const fs = require('fs');
+
 const path = require("path")
 const multer = require('multer')
 
@@ -27,6 +29,26 @@ Router.post('/upload', upload.single("file"), (req, res) => {
   console.log(file)
   res.status(200).json(file.filename)
 })
+Router.delete('/delete/:filename', (req, res) => {
+  const filenameToDelete = req.params.filename;
+  const filePath = path.resolve(__dirname, `../frontend/public/upload/${filenameToDelete}`);
+
+  // Check if the file exists
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    // If the file exists, attempt to delete it
+    fs.unlink(filePath, (unlinkErr) => {
+      if (unlinkErr) {
+        return res.status(500).json({ message: 'Error deleting file' });
+      }
+
+      res.status(200).json({ message: 'File deleted successfully' });
+    });
+  });
+});
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);

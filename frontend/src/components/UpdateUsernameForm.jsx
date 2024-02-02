@@ -27,6 +27,23 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
       console.log(err)
     }
   }
+  const deletePrevPic = async (prevPic) => {
+    if (prevPic) {
+      try {
+        const response = await fetch(`/api/delete/${prevPic}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          console.log(`File ${prevPic} deleted successfully.`);
+        } else {
+          console.error(`Failed to delete file ${prevPic}.`);
+        }
+      } catch (error) {
+        console.error('Error deleting file:', error);
+      }
+    }
+  };
   const handleASubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -44,7 +61,10 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
   };
   const handlePicSubmit = async (event) => {
     event.preventDefault();
-    let form = event.target
+    let prevPic = currentUser.profile_pic
+    if(prevPic){
+      deletePrevPic(prevPic)
+    }
     console.log("clicked")
     console.log(currentUser)
     if(newProfilePic !== null){
