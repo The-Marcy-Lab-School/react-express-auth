@@ -52,11 +52,13 @@ Router.delete('/delete/:filename', (req, res) => {
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);
+Router.delete('/users/:id', userController.destroyUser);
 Router.get('/users/events/:userId/signed', eventController.getSignedUpEvents);
 Router.get('/users/events/:userId', eventController.getEventsOfUser);
 
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
+
 Router.get('/me', userController.showMe);
 
 Router.get('/events/relations/:eventId', eventController.countAttendees);
@@ -68,6 +70,7 @@ Router.post('/events/tags/:eventId', eventController.addTags);
 Router.post('/events/:eventId/comments', commentController.postComment);
 Router.post('/events/relations/:eventId', eventController.joinEvent);
 Router.delete('/events/relations/:eventId', eventController.leaveEvent);
+Router.delete('/events/:eventId', eventController.destroyEvent);
 
 Router.get('/comments/:userId', commentController.getCommentsByUser);
 

@@ -45,17 +45,29 @@ class User {
     const query = `INSERT INTO users (username, password_hash, name, email)
       VALUES (?, ?, ?, ?) RETURNING *`;
     const args = [username, passwordHash, name, email];
-    console.log(args)
+    console.log(args);
     const { rows } = await knex.raw(query, args);
     const user = rows[0];
     return new User(user);
+  }
+
+  static async destroyUser(id) {
+    try {
+      const query = `DELETE FROM users WHERE id = (?)`;
+      const res = await knex.raw(query, [id]);
+      return res.rows || null;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
   }
 
   static async deleteAll() {
     return knex.raw('TRUNCATE users;');
   }
 
-  update = async (username) => { // dynamic queries are easier if you add more properties
+  update = async (username) => {
+    // dynamic queries are easier if you add more properties
     const rows = await knex('users')
       .where({ id: this.id })
       .update({ username })
@@ -76,9 +88,19 @@ class User {
     return updatedUser ? new User(updatedUser) : null;
   };
 
-  isValidPassword = async (password) => (
-    isValidPassword(password, this.#passwordHash)
-  );
+  patchPic = async (profile_pic) => { // dynamic queries are easier if you add more properties
+    console.log(profile_pic)
+    const rows = await knex('users')
+      .where({ id: this.id })
+      .update({ profile_pic })
+      .returning('*');
+
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
+  };
+
+  isValidPassword = async (password) =>
+    isValidPassword(password, this.#passwordHash);
 }
 
 module.exports = User;

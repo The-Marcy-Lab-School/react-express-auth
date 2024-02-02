@@ -7,6 +7,7 @@
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
     "build": "npm i && && npm run migrate:rollback && npm run migrate && npm run seed",
     "start": "node src/index.js",
+    "test": "jest --watch --verbose",
     "dev": "nodemon ./src/index.js",
     "console": "node -r ./src/db/models/console.js",
     "connect": "psql -U postgres -d auth_example",
@@ -41,6 +42,8 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "nodemon": "^2.0.22"
+    "jest": "^29.7.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.4"
   }
 }

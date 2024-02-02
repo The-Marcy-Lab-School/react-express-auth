@@ -1,31 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import {  fetchCommentsOnEvent } from "../adapters/event-adapter";
-import Comment from './Comment'
+import React, { useState, useEffect } from 'react';
+import { fetchCommentsOnEvent, postComment } from "../adapters/event-adapter";
+import Comment from './Comment';
 
-const Comments = (props) => {
-    const {eventId} = props
-    const [comments, setComments] = useState([])
-    useEffect(()=> {
-        const loadCommentsOnEvent = async () => {
+const Comments = ({ eventId, userId }) => {
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState('');
+    const [showCommentBox, setShowCommentBox] = useState(false);
+
+    useEffect(() => {
+        const loadComments = async () => {
             const commentsArr = await fetchCommentsOnEvent(eventId);
-            console.log(commentsArr)
-            setComments(commentsArr)
-          };
+            setComments(commentsArr);
+        };
+        loadComments();
+    }, [eventId]);
 
-          loadCommentsOnEvent()
-    }, [])
+    const handleCommentSubmit = async () => {
+        await postComment({ user_id: userId, event_id: eventId, text: newComment });
+        setNewComment('');
+        setShowCommentBox(false);
+        const updatedComments = await fetchCommentsOnEvent(eventId);
+        setComments(updatedComments);
+    };
+
     return (
         <div className="comments">
-            <h6>Comments: </h6>
-            { comments.map(comment => (
-                <Comment comment = {comment} key = {comment.id}/>
-            )
+            <h6>Comments:</h6>
+            {showCommentBox && (
+                <div>
+                    <textarea
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                    />
+                    <button onClick={handleCommentSubmit}>Submit</button>
+                </div>
             )}
-            {comments.length === 0 &&  (<p>Event: {eventId} has 0 comments</p>)}
-        </div> 
-        // <div>Comments here</div>
-    )
-  
+            <button onClick={() => setShowCommentBox(!showCommentBox)}>
+                {showCommentBox ? 'Cancel' : 'Add Comment'}
+            </button>
+            {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+            {comments.length === 0 && (<p>No comments yet.</p>)}
+        </div>
+    );
 }
 
-export default Comments
+export default Comments;
