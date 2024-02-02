@@ -70,6 +70,8 @@ const Event = (props) => {
       ) : (
         <p></p>
       )}
+      {console.log(event)}
+      <div><h3>guy who made it: {event.user_name}</h3> <img src ={`../public/upload/${event.user_profile_pic || "default.jpg"}`} /></div>
       <h3>guy who made it: {event.user_name}</h3>
       <h3>Title: {event.title}</h3>
       <h3>Location: {event.location}</h3>
