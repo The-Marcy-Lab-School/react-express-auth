@@ -1,6 +1,19 @@
 .event {
     border: 0.5px solid #000000;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.38);
     max-width: 800px;
+}
+.user-details {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width : 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 8px;  /* ARTIFICAL MARGIN IS HERE */
+    margin-right: 20px;
 }

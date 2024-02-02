@@ -71,8 +71,7 @@ const Event = (props) => {
         <p></p>
       )}
       {console.log(event)}
-      <div><h3>guy who made it: {event.user_name}</h3> <img src ={`../public/upload/${event.user_profile_pic || "default.jpg"}`} /></div>
-      <h3>guy who made it: {event.user_name}</h3>
+      <div className='user-details'><img className='profile-pic' src ={`../public/upload/${event.user_profile_pic || "default.jpg"}`} /><h3>guy: {event.user_name}</h3> </div>
       <h3>Title: {event.title}</h3>
       <h3>Location: {event.location}</h3>
       {showMap ? map : <button onClick={mapHandler}>Load Map</button>}
