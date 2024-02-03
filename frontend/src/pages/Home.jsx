@@ -1,6 +1,15 @@
+
+import Header from '../components/HomeComponents/HomeHeader';
+import Mission from '../components/HomeComponents/HomeMission';
+import Features from '../components/HomeComponents/HomeFeatures';
+
 export default function HomePage() {
-  return <>
-    <h1>Home</h1>
-    <p>Put something interesting here!</p>
-  </>;
+  return (
+    <>
+      <Header />
+      <Mission />
+      <Features />
+
+    </>
+  );
 }
