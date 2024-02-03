@@ -49,4 +49,4 @@ class Logs {
       }
 }
 
-module.exports = User;
+module.exports = Logs;
