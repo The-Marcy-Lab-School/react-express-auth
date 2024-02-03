@@ -11,7 +11,7 @@ class Logs {
         this.abdominal_pain = abdominal_pain
         this.backpain = backpain,
         this.nauseau = nauseau,
-        this.nauseau = fatigue
+        this.fatigue = fatigue
       
       
     }
