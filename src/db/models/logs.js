@@ -2,7 +2,7 @@ const knex = require('../knex');
 
 
 class Logs {
-    #passwordHash = null; // a private property
+   
 
     constructor({ id, userId, mood, abdominal_pain, backpain, nauseau, fatigue }) {
         this.id = id;
@@ -10,8 +10,8 @@ class Logs {
         this.mood = mood;
         this.abdominal_pain = abdominal_pain
         this.backpain = backpain,
-            this.nauseau = nauseau,
-            this.nauseau = nauseau
+        this.nauseau = nauseau,
+        this.nauseau = fatigue
       
       
     }
@@ -19,7 +19,7 @@ class Logs {
     static async list() {
         const query = 'SELECT * FROM logs';
         const { rows } = await knex.raw(query);
-        return rows.map((user) => new Logs(user));
+        return rows.map((log) => new Logs(log));
     }
   
     static async create(userId, mood, abdominal_pain, backpain, nauseau, fatigue) {
@@ -28,12 +28,9 @@ class Logs {
         const args = [userId, mood, abdominal_pain, backpain, nauseau, fatigue];
         const { rows } = await knex.raw(query, args);
         const logEntry = rows[0];
-        return logEntry; // Assuming you have a LogEntry class to handle the log object
+        return logEntry; 
     }
 
-    static async deleteAll() {
-        return knex.raw('TRUNCATE users;');
-    }
     static async update(logId, userId, mood, abdominal_pain, backpain, nauseau, fatigue) {
         const query = `UPDATE logs SET 
           mood = ?,
