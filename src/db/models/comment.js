@@ -10,10 +10,10 @@ class Comment {
     this.time = time;
   }
 
-  static async listAllComments() {
+  static async list() {
     const query = 'SELECT * FROM comments';
     const { rows } = await knex.raw(query);
-    return rows.map((comments) => new Post(comments));
+    return rows.map((comments) => new Comment(comments));
   }
 
   static async findAllCommentsByUser(user_id) {
@@ -24,7 +24,7 @@ class Comment {
     return comment ? new Comment(comment) : null;
   }
 
-  static async createComment(post_id, user_id, content, time) {
+  static async create(post_id, user_id, content, time) {
     const query = `INSERT INTO comments (post_id, user_id, content, time)
       VALUES (?, ?, ?, ?) RETURNING *`;
     const args = [post_id, user_id, content, time];
@@ -33,7 +33,7 @@ class Comment {
     return new Comment(comment);
   }
 
-  static async updateComment(id, content, time) {
+  static async update(id, content, time) {
     const query = `UPDATE comments
       SET user_id = ?, content = ?, time = ?
       WHERE id = ? RETURNING *`;
@@ -42,7 +42,7 @@ class Comment {
     const comment = rows[0];
     return new Comment(comment);
   }
-  static async deleteComment(id) {
+  static async delete(id) {
     const query = `DELETE FROM comments WHERE id = ? RETURNING *`;
     const args = [id];
     const { rows } = await knex.raw(query, args);
