@@ -24,6 +24,14 @@ class Comment {
     return comment 
   }
 
+  static async find(id) {
+    const query = 'SELECT * FROM comments WHERE id = ?';
+    const args = [id];
+    const { rows } = await knex.raw(query, args);
+    const comment = rows[0];
+    return new Comment(comment);
+  }
+
   static async create(post_id, user_id, content, time) {
     const query = `INSERT INTO comments (post_id, user_id, content, time)
       VALUES (?, ?, ?, ?) RETURNING *`;
@@ -42,6 +50,7 @@ class Comment {
     const comment = rows[0];
     return new Comment(comment);
   }
+  
   static async delete(id) {
     const query = `DELETE FROM comments WHERE id = ? RETURNING *`;
     const args = [id];

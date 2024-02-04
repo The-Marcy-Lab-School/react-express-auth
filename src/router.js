@@ -20,6 +20,7 @@ Router.get('/me', userController.showMe);
 Router.post('/users/:user_id/posts/:post_id/comments', commentController.create); 
 Router.get('/users/:user_id/posts/:post_id/comments', commentController.list);
 Router.get('/users/:user_id/posts/:post_id/mycomments', commentController.showMe);
+Router.delete('/users/:user_id/posts/:post_id/comments/:id', commentController.remove);
 //
 //
 
