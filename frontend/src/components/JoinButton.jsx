@@ -1,8 +1,6 @@
-import React, { useState, useContext } from 'react';
-import CurrentUserContext from '../contexts/current-user-context';
 import './styles/button.css';
+
 const JoinButton = (props) => {
-  const { currentUser } = useContext(CurrentUserContext);
   const { eventId, joinEvent, joinedEvents } = props;
 
   return (

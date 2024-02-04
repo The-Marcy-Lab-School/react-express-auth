@@ -1,37 +1,39 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
 const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
 const eventController = require('./controllers/event/index');
 const commentController = require('./controllers/comment/index');
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
-const fs = require('fs');
-//////
-const path = require("path")
-const multer = require('multer')
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination(req, file, cb) {
     const uploadPath = path.resolve(__dirname, '../frontend/public/upload');
     cb(null, uploadPath);
   },
-  filename: function (req, file, cb) {
-    
-    cb(null, Date.now() + file.originalname)
-  }
-})
+  filename(req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage });
 
 const Router = express.Router();
 Router.use(addModelsToRequest);
-Router.post('/upload', upload.single("file"), (req, res) => {
-  const file = req.file
-  console.log(file)
-  res.status(200).json(file.filename)
-})
+
+Router.post('/upload', upload.single('file'), (req, res) => {
+  const { file } = req;
+  console.log(file);
+  res.status(200).json(file.filename);
+});
 Router.delete('/delete/:filename', (req, res) => {
   const filenameToDelete = req.params.filename;
-  const filePath = path.resolve(__dirname, `../frontend/public/upload/${filenameToDelete}`);
+  const filePath = path.resolve(
+    __dirname,
+    `../frontend/public/upload/${filenameToDelete}`
+  );
 
   // Check if the file exists
   fs.access(filePath, fs.constants.F_OK, (err) => {
@@ -49,6 +51,7 @@ Router.delete('/delete/:filename', (req, res) => {
     });
   });
 });
+
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);
@@ -77,7 +80,11 @@ Router.get('/comments/:userId', commentController.getCommentsByUser);
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
 Router.patch('/users/:id', checkAuthentication, userController.update);
-Router.patch('/users/profilePic/:id', checkAuthentication, userController.patch_pic);
+Router.patch(
+  '/users/profilePic/:id',
+  checkAuthentication,
+  userController.patch_pic
+);
 Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
   res.send({ msg: 'The secret is: there is no secret.' });
 });
