@@ -20,8 +20,8 @@ class Comment {
     const query = 'SELECT * FROM comments WHERE user_id = ?';
     const args = [user_id];
     const { rows } = await knex.raw(query, args);
-    const comment = rows[0];
-    return comment ? new Comment(comment) : null;
+    const comment = rows.map((comments) => new Comment(comments));;
+    return comment 
   }
 
   static async create(post_id, user_id, content, time) {
