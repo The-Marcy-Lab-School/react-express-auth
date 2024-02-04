@@ -50,6 +50,12 @@ class Like {
     const like = rows[0];
     return new Like(like);
   }
+
+  static async getAllLikes() {
+    const query = 'SELECT * FROM likes';
+    const { rows } = await knex.raw(query);
+    return rows.map(like => new Like(like));
+  }
 }
 
 module.exports = Like;
