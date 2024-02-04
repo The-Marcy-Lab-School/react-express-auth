@@ -4,7 +4,7 @@ const showOnePost = async (req, res) => {
       params: { id }, // this req.params.id is a part of the request URL
     } = req;
   
-    const post = await Post.findSinglePost(id);
+    const post = await Post.find(id);
     if (!post) return res.sendStatus(404);
   
     res.send(post);
