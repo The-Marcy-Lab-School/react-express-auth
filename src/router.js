@@ -17,8 +17,9 @@ Router.delete('/logout', userController.logout);
 Router.get('/me', userController.showMe);
 
 //comment routes
-Router.post('/users/:user_id/posts/:post_id/comments', commentController.create); // does not work YET
-//
+Router.post('/users/:user_id/posts/:post_id/comments', commentController.create); 
+Router.get('/users/:user_id/posts/:post_id/comments', commentController.list);
+Router.get('/users/:user_id/posts/:post_id/mycomments', commentController.showMe);
 //
 //
 
