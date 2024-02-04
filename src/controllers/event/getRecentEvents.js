@@ -5,6 +5,8 @@ const getRecentEvents = async (req, res) => {
   console.log('ok');
 
   const events = await Event.recentEvents();
+
+  if (!events) return res.sendStatus(404);
   res.send(events);
 };
 

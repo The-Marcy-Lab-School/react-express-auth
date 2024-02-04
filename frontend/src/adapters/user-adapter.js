@@ -42,10 +42,10 @@ export const destroyUser = async ({ id }) => {
   fetchHandler(`${baseUrl}/${id}`, deleteOptions({ id }));
 };
 
-  export const updateProfilePic = async ({ id, profile_pic }) => {
-  console.log(profile_pic)
-    return fetchHandler(`${baseUrl}/profilePic/${id}`, getPatchOptions({ id, profile_pic }));
-}
-// const app = ({
-
-// })////////
+export const updateProfilePic = async ({ id, profile_pic }) => {
+  console.log(profile_pic);
+  return fetchHandler(
+    `${baseUrl}/profilePic/${id}`,
+    getPatchOptions({ id, profile_pic })
+  );
+};

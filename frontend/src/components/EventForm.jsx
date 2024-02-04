@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addTags, createEvent, joinAnEvent } from '../adapters/event-adapter';
+import { validateTags, validateTime } from '../utils';
 
 export default function EventForm({ id, loadUserEvents }) {
   const [err, setErr] = useState({
@@ -10,6 +11,16 @@ export default function EventForm({ id, loadUserEvents }) {
   });
   const [selectedTags, setSelectedTags] = useState([]);
 
+  const tags = [
+    'yoga',
+    'running',
+    'biking',
+    'weight-lifting',
+    'calisthenics',
+    'coaching',
+    'jogging',
+  ];
+
   const submit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -18,43 +29,13 @@ export default function EventForm({ id, loadUserEvents }) {
     console.log(title, location, description, date, startTime, endTime);
     console.log(Object.fromEntries(formData));
 
-    if (startTime > endTime) {
-      setErr({
-        ...err,
-        color: 'red',
-        timeText: 'You cannot have a start time later than an end time',
-      });
-      throw new Error('You cannot have a start time later than an end time');
-    } else if (startTime === endTime) {
-      setErr({
-        color: 'red',
-        timeText: 'You cannot have a start time ending at the same time',
-      });
+    const timeValidation = validateTime(startTime, endTime);
+    const tagValidation = validateTags(selectedTags);
 
-      throw new Error('You cannot have a start time ending at the same time');
-    } else {
-      console.log('ok');
-      setErr({
-        ...err,
-        color: null,
-        timeText: null,
-      });
-    }
+    setErr({ ...timeValidation, ...tagValidation });
 
-    if (selectedTags.length === 0) {
-      setErr({
-        ...err,
-        tagColor: 'red',
-        tagText: 'You must select at least one tag for your event',
-      });
-
-      throw new Error('You must select a tag for your event');
-    } else {
-      setErr({
-        ...err,
-        tagColor: null,
-        tagText: null,
-      });
+    if (timeValidation.color || tagValidation.tagColor) {
+      return;
     }
 
     setErr({ color: null, timeText: null, tagText: null, tagColor: null });
@@ -100,8 +81,6 @@ export default function EventForm({ id, loadUserEvents }) {
     }
   };
 
-  console.log(selectedTags);
-
   return (
     <form onSubmit={submit} style={{ width: '400px' }}>
       <label htmlFor="title">Title for your event:</label>
@@ -134,6 +113,7 @@ export default function EventForm({ id, loadUserEvents }) {
         <option value="Bushwich Inlet Park, Brookly, NY">
           Bushwich Inlet Park
         </option>
+        <option value="Online Class">Online Class</option>
       </select>
 
       <label htmlFor="date">Visit Date:</label>
@@ -161,15 +141,7 @@ export default function EventForm({ id, loadUserEvents }) {
 
       <fieldset style={{ color: err.tagColor }}>
         <legend>Select Tags:</legend>
-        {[
-          'yoga',
-          'running',
-          'biking',
-          'weight-lifting',
-          'calisthenics',
-          'coaching',
-          'jogging',
-        ].map((tag, idx) => (
+        {tags.map((tag, idx) => (
           <label key={tag}>
             <input
               type="checkbox"

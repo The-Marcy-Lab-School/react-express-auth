@@ -1,7 +1,7 @@
 const knex = require('../knex');
 
 class Comment {
- static async create(user_id, event_id, text) {
+  static async create(user_id, event_id, text) {
     try {
       const query = `INSERT INTO comments (user_id, event_id, text)
     VALUES (?, ?, ?) RETURNING id`;
@@ -10,12 +10,12 @@ class Comment {
       const { rows } = await knex.raw(query, args);
       console.log(rows);
       return rows[0].id;
-      
     } catch (err) {
-        console.error(err);
-        return null;
-      }
+      console.error(err);
+      return null;
+    }
   }
+
   static async commentsOnEvent(event_id) {
     try {
       const query = `SELECT
@@ -35,15 +35,12 @@ class Comment {
       const { rows } = await knex.raw(query, args);
       console.log(rows);
       return rows || [];
-      
     } catch (err) {
-
-        
-        console.error(err);
-        return null;
-      
+      console.error(err);
+      return null;
     }
   }
+
   static async commentsByUser(user_id) {
     try {
       const query = `SELECT comments.*
@@ -55,18 +52,11 @@ class Comment {
       const { rows } = await knex.raw(query, args);
       console.log(rows);
       return rows || [];
-      
     } catch (err) {
-
-        
-        console.error(err);
-        return null;
-      
+      console.error(err);
+      return null;
     }
   }
-
 }
-//SELECT comments.*
-
 
 module.exports = Comment;
