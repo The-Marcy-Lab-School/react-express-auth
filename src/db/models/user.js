@@ -6,13 +6,20 @@ class User {
 
   // Why have a constructor here? We need a way to take the raw data returned from
   // the database and hide the passwordHash before sending it back to the controller
-  constructor({ id, username, password_hash, name, email, profile_pic=null }) {
+  constructor({
+    id,
+    username,
+    password_hash,
+    name,
+    email,
+    profile_pic = null,
+  }) {
     this.id = id;
     this.username = username;
-    this.#passwordHash = password_hash
-    this.name = name
-    this.email = email
-    this.profile_pic = profile_pic
+    this.#passwordHash = password_hash;
+    this.name = name;
+    this.email = email;
+    this.profile_pic = profile_pic;
   }
 
   static async list() {
@@ -27,7 +34,7 @@ class User {
     const args = [id];
     const { rows } = await knex.raw(query, args);
     const user = rows[0];
-    console.log(user)
+    console.log(user);
     return user ? new User(user) : null;
   }
 
@@ -77,8 +84,9 @@ class User {
     return updatedUser ? new User(updatedUser) : null;
   };
 
-  patchPic = async (profile_pic) => { // dynamic queries are easier if you add more properties
-    console.log(profile_pic)
+  patchPic = async (profile_pic) => {
+    // dynamic queries are easier if you add more properties
+    console.log(profile_pic);
     const rows = await knex('users')
       .where({ id: this.id })
       .update({ profile_pic })
@@ -88,19 +96,9 @@ class User {
     return updatedUser ? new User(updatedUser) : null;
   };
 
-  patchPic = async (profile_pic) => { // dynamic queries are easier if you add more properties
-    console.log(profile_pic)
-    const rows = await knex('users')
-      .where({ id: this.id })
-      .update({ profile_pic })
-      .returning('*');
-
-    const updatedUser = rows[0];
-    return updatedUser ? new User(updatedUser) : null;
-  };
-
-  isValidPassword = async (password) =>
+  isValidPassword = async (password) => {
     isValidPassword(password, this.#passwordHash);
+  };
 }
 
 module.exports = User;

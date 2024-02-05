@@ -52,3 +52,29 @@ export const timeObject = {
   hour: '2-digit',
   minute: '2-digit',
 };
+
+export const validateTime = (startTime, endTime) => {
+  if (startTime > endTime) {
+    return {
+      color: 'red',
+      timeText: 'Start time cannot be later than end time',
+    };
+  }
+  if (startTime === endTime) {
+    return {
+      color: 'red',
+      timeText: 'Start time cannot be the same as end time',
+    };
+  }
+  return { color: null, timeText: null };
+};
+
+export const validateTags = (chosenTags) => {
+  if (chosenTags.length === 0) {
+    return {
+      tagColor: 'red',
+      tagText: 'You must select at least one tag for your event',
+    };
+  }
+  return { tagColor: null, tagText: null };
+};

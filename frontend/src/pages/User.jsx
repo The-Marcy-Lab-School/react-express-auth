@@ -79,7 +79,7 @@ export default function UserPage() {
   //   }
   // }
 
-    const profilePic = isCurrentUserProfile
+  const profilePic = isCurrentUserProfile
     ? currentUser.profile_pic
     : userProfile.profile_pic;
 
@@ -117,10 +117,11 @@ export default function UserPage() {
         />
       )}
       {console.log(userProfile)}
-      <img src='/upload/1706824948115wowow.png' alt="img"/>
-      { userProfile.profile_pic &&<img src={`../public/upload/${profilePic}`}></img>}
+      <img src="/upload/1706824948115wowow.png" alt="img" />
+      {userProfile.profile_pic && (
+        <img src={`../public/upload/${profilePic}`}></img>
+      )}
       {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
     </> // /upload/${userProfile.profile_pic}
   );
 }
-
