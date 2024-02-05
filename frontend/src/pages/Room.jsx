@@ -91,6 +91,17 @@ const Room = () => {
     }
   }
 
+  const handleChatSubmit = (event) => {
+    event.preventDefault()
+    let form = event.target 
+    console.log(form.chat_message.value)
+    if(form.chat_message.value.length > 0){
+        console.log("sending it")
+        socket.emit('message', form.chat_message.value )
+        event.target.reset();
+    }
+  }
+
   return (
     <div id="video-grid" ref={videoGrid}></div>
   );
