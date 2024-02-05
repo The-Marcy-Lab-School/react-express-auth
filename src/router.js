@@ -21,8 +21,6 @@ Router.post('/users/:user_id/posts/:post_id/comments', commentController.create)
 Router.get('/users/:user_id/posts/:post_id/comments', commentController.list);
 Router.get('/users/:user_id/posts/:post_id/mycomments', commentController.showMe);
 Router.delete('/users/:user_id/posts/:post_id/comments/:id', commentController.remove);
-//
-//
 
 //post routes
 Router.get('/users/:user_id/posts', postController.showAllPosts); 
@@ -32,15 +30,12 @@ Router.post('/users/:user_id/posts', postController.create);
 Router.delete('/users/:user_id/posts/:id', postController.remove);
 Router.patch('/users/:user_id/posts/:id', postController.update);
 
-//
-//
-//
 
 //likes routes
-//
-//
-//
-//
+Router.post('/users/:user_id/posts/:post_id/likes', likesController.create);
+Router.delete('/users/:user_id/posts/:post_id/likes/:id', likesController.remove);
+Router.get('/users/:user_id/posts/:post_id/allLikes', likesController.listLikes);
+Router.get('/users/:user_id/allLikes', likesController.userLikes)
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
