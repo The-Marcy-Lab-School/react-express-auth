@@ -102,6 +102,33 @@ const Room = () => {
     }
   }
 
+  const toggleMute = () => {
+    console.log(myVideo.current)
+    console.log(myVideo.current.setMediaKeys)
+    console.log(myStream.current.getAudioTracks()[0])
+    const bool = myStream.current.getAudioTracks()[0].enabled 
+    console.log(bool)
+    setMuted(!muted)
+    if(bool) {
+        myStream.current.getAudioTracks()[0].enabled = false
+    }else {
+        myStream.current.getAudioTracks()[0].enabled  = true
+    }
+  }
+
+  const toggleVideo = () => {
+    console.log(myVideo.current)
+    console.log(myStream.current.getVideoTracks()[0])
+    const bool = myStream.current.getVideoTracks()[0].enabled 
+    console.log(bool)
+    setHidden(!hidden)
+    if(bool) {
+        myStream.current.getVideoTracks()[0].enabled = false
+    }else {
+        myStream.current.getVideoTracks()[0].enabled  = true
+    }
+  }
+
   return (
     <div id="video-grid" ref={videoGrid}></div>
   );
