@@ -11,9 +11,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "peerjs": "^1.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2"
+    "react-icons": "^5.0.1",
+    "react-router-dom": "^6.11.2",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
