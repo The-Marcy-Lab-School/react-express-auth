@@ -1,9 +1,10 @@
 const listUserLikes = async (req, res) => {
     const { 
-      db: { Like }
+      db: { Like },
+      params : { user_id }
     } = req; 
   
-    const like = await Like.postLikes(req.params.user_id);
+    const like = await Like.userLikes(user_id);
     res.send(like);
   };
   

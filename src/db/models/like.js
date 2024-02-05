@@ -36,7 +36,7 @@ class Like {
 
 
   static async userLikes(user_id) {
-    const query = 'SELECT * FROM likes WHERE user_id = ?';
+    const query = 'SELECT post_id FROM likes WHERE user_id = ?';
     const args = [user_id];
     const { rows } = await knex.raw(query, args);
     return rows.map(like => new Like(like));
