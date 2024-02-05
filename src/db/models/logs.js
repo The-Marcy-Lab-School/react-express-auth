@@ -1,22 +1,25 @@
 const knex = require('../knex');
 
 
-class Log {
+class Logs {
    
-  constructor({ id, userId, mood, abdominal_pain, backpain, nausea, fatigue }) {
-    this.id = id;
-    this.userId = userId;
-    this.mood = mood;
-    this.abdominal_pain = abdominal_pain;
-    this.backpain = backpain;
-    this.nauseau = nausea;
-    this.nauseau = fatigue;
+
+    constructor({ id, userId, mood, abdominal_pain, backpain, nauseau, fatigue }) {
+        this.id = id;
+        this.userId = userId;
+        this.mood = mood;
+        this.abdominal_pain = abdominal_pain
+        this.backpain = backpain,
+        this.nauseau = nauseau,
+        this.fatigue = fatigue
+      
+      
     }
 
     static async list() {
         const query = 'SELECT * FROM logs';
         const { rows } = await knex.raw(query);
-        return rows.map((log) => new Log(log));
+        return rows.map((log) => new Logs(log));
     }
   
     static async create(userId, mood, abdominal_pain, backpain, nausea, fatigue) {
@@ -25,13 +28,10 @@ class Log {
         const args = [userId, mood, abdominal_pain, backpain, nausea, fatigue];
         const { rows } = await knex.raw(query, args);
         const logEntry = rows[0];
-        return logEntry; // Assuming you have a LogEntry class to handle the log object
+        return logEntry; 
     }
 
-    static async delete(logId) {
-        return knex.raw('DELETE FROM logs WHERE id = ?;');
-    }
-    static async update(logId, userId, mood, abdominal_pain, backpain, nausea, fatigue) {
+    static async update(logId, userId, mood, abdominal_pain, backpain, nauseau, fatigue) {
         const query = `UPDATE logs SET 
           mood = ?,
           abdominal_pain = ?,
@@ -46,4 +46,4 @@ class Log {
       }
 }
 
-module.exports = Log;
+module.exports = Logs;
