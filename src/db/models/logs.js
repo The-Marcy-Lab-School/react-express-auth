@@ -11,7 +11,7 @@ class Logs {
     }
   
     static async create(mood, abd_pain, back_pain, nausea, fatigue, user_id) {
-        const query = `INSERT INTO logs (mood, abd_pain, back_pain, nausea, fatigue, user_id, )
+        const query = `INSERT INTO logs (mood, abd_pain, back_pain, nausea, fatigue, user_id)
           VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
         const args = [mood, abd_pain, back_pain, nausea, fatigue, user_id];
         const { rows } = await knex.raw(query, args);
