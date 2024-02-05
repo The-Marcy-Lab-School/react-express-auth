@@ -148,7 +148,7 @@ const Room = () => {
              <div className="controls-button"  onClick={toggleMute}>
              {muted ? (
           <>
-            <FaMicrophoneSlash size={24} />
+            <FaMicrophoneSlash className='red' size={24} />
             <span>Unmute</span>
           </>
         ) : (
@@ -161,7 +161,7 @@ const Room = () => {
 
                 <div className="controls-button" onClick={toggleVideo}>
                     {hidden ? (<>
-                        <FaVideoSlash size={24} />
+                        <FaVideoSlash className='red' size={24} />
                     <span>Show Video</span>
                     
                     </>) : (<>
