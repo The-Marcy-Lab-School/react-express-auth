@@ -1,13 +1,13 @@
-const createEntrygit = async (req, res) => {
+const createEntry = async (req, res) => {
     const {
-      db: { Logs }, 
-      body: { mood, abd_pain, back_pain, nausea, fatigue, user_id }, 
+      db: { Entry }, 
+      body: { user_id, log_id }, 
     } = req;
   
   
-    const logs = await Logs.create( mood, abd_pain, back_pain, nausea, fatigue, user_id);
+    const entry = await Entry.create( user_id, log_id);
   
-    res.send(logs);
+    res.send(entry);
   };
   
-  module.exports = createLog;
+  module.exports = createEntry;
