@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Log = require('../models/logs');
+const logRoutes = require('../../middleware/log-routes');
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }

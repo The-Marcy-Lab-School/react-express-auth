@@ -1,11 +1,11 @@
 const createLog = async (req, res) => {
     const {
       db: { Logs }, 
-      body: { userId, mood, abdominal_pain, backpain, nauseau, fatigue }, 
+      body: { mood, abd_pain, back_pain, nausea, fatigue, user_id }, 
     } = req;
   
   
-    const logs = await Logs.create( userId ,mood, abdominal_pain, backpain, nauseau, fatigue);
+    const logs = await Logs.create( mood, abd_pain, back_pain, nausea, fatigue, user_id);
   
     res.send(logs);
   };
