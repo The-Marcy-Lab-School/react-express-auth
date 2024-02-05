@@ -5,7 +5,6 @@ const addModelsToRequest = (req, res, next) => {
   req.db = {
     User,
     Logs
-
   };
   next();
 };
