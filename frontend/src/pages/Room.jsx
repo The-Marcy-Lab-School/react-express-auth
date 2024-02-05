@@ -3,6 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import io from 'socket.io-client';
 import {  useSocket } from "../contexts/SocketProvider"
 import Peer from 'peerjs';
+import "./Room.css"
+import { FaMicrophone } from "react-icons/fa";
+import { FaMicrophoneSlash } from "react-icons/fa6";
+import { FaVideo } from "react-icons/fa";
+import { FaVideoSlash } from "react-icons/fa";
+import { IoChatbox } from "react-icons/io5";
 
 
 
