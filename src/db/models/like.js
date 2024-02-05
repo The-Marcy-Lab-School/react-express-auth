@@ -17,7 +17,7 @@ class Like {
     return like ? new Like(like) : null;
   }
 
-  static async addLike() {
+  static async addLike(post_id, user_id, likes_amount) {
     const query = `INSERT INTO likes (post_id, user_id, likes_amount)
       VALUES (?, ?, ?) RETURNING *`;
     const args = [post_id, user_id, likes_amount];

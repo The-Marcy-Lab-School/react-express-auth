@@ -5,8 +5,7 @@ const createLike = async (req, res) => {
     body: { likes_amount },
     } = req;
 
-    const like = await Like.createPost(post_id, user_id, likes_amount);
-    session.userId = user.id; // what is this doing ? 
+    const like = await Like.addLike(post_id, user_id, likes_amount);
   
     res.send(like);
 
