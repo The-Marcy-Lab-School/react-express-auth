@@ -1,9 +1,11 @@
 const express = require('express');
-const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
+const userController = require('./controllers/user/index');
 const commentController = require('./controllers/comment/index');
 const postController = require('./controllers/post/index');
+const likesController = require('./controllers/like/index');
+
 const Router = express.Router();
 Router.use(addModelsToRequest);
 
@@ -30,12 +32,10 @@ Router.post('/users/:user_id/posts', postController.create);
 Router.delete('/users/:user_id/posts/:id', postController.remove);
 Router.patch('/users/:user_id/posts/:id', postController.update);
 
-
 //likes routes
-Router.post('/users/:user_id/posts/:post_id/likes', likesController.create);
-Router.delete('/users/:user_id/posts/:post_id/likes/:id', likesController.remove);
-Router.get('/users/:user_id/posts/:post_id/allLikes', likesController.listLikes);
-Router.get('/users/:user_id/allLikes', likesController.userLikes)
+Router.post('/users/:user_id/posts/:post_id/likes', likesController.create); // makes a like 
+Router.delete('/users/:user_id/posts/:post_id/likes/:id', likesController.remove); // deletes a like 
+Router.get('/users/:user_id/posts/:post_id/allLikes', likesController.listLikes); // gets ALL likes
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
