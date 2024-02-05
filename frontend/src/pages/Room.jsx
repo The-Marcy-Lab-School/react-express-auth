@@ -136,7 +136,85 @@ const Room = () => {
   }
 
   return (
-    <div id="video-grid" ref={videoGrid}></div>
+    <>
+    
+    <div className='main'>
+    <div className='main-left'>
+        <div className='main-videos'>
+          <div id="video-grid" ref={videoGrid}></div>
+        </div>
+        <div className='main-controls'>
+            <div className="controls-block">
+             <div className="controls-button"  onClick={toggleMute}>
+             {muted ? (
+          <>
+            <FaMicrophoneSlash size={24} />
+            <span>Unmute</span>
+          </>
+        ) : (
+          <>
+            <FaMicrophone size={24} />
+            <span>Mute</span>
+          </>
+        )}
+             </div>
+
+                <div className="controls-button" onClick={toggleVideo}>
+                    {hidden ? (<>
+                        <FaVideoSlash size={24} />
+                    <span>Show Video</span>
+                    
+                    </>) : (<>
+                        <FaVideo size={24} />
+                    <span>Stop Video</span>
+                    </>)}
+
+                </div>
+
+            </div>
+            <div className="controls-block">
+                <div className="controls-button">
+                    <IoChatbox size={24}  />
+                    <span>Chat</span>
+                </div>
+
+            </div>
+            <div className="controls-block">
+            
+            <div className="controls-button">
+
+                <span className='leave-meeting'>Leave</span>
+                </div>
+            
+
+            </div>
+
+        </div>
+        
+    </div>
+    <div className='main-right'>
+        <div className='header'>
+            <h6>Chat</h6>
+        </div>
+        <div className="chat-window">
+        <ul className='messages'>
+        {messages.map((str, index) => (
+          <li key={index}>{str}</li>
+        ))}
+      </ul>
+        </div>
+        <div className='message-container'>
+            <form onSubmit={handleChatSubmit}>
+            <input id="chat_message" name="chat_message" type='text' placeholder='Type message here...'></input>
+            <button>Send</button>
+            </form>
+            {/* <input id="chat_message" type='text' placeholder='Type message here...'></input> */}
+        </div>
+    </div>
+    </div>
+
+    </>
+    
   );
 }
 
