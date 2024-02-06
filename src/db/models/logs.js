@@ -24,6 +24,16 @@ class Logs {
         return rows[0];
     }
 
+  
+  static async update(logId, user_id, mood, abd_pain, back_pain, nausea, fatigue,) {
+    const query = "UPDATE logs SET mood = ?, abd_pain = ?, back_pain = ?, nausea = ?, fatigue = ? WHERE id = ? AND user_id = ? RETURNING *;";
+    const args = [mood, abd_pain, back_pain, nausea, fatigue, logId, user_id];
+       const { rows } = await knex.raw(query, args);
+       const log = rows[0];
+       return log ? new Logs(log): null
+    }
+  
+  
 }
 
 
