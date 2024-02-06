@@ -27,11 +27,12 @@ class Post {
   }
 
   static async findAllPostByUser(user_id) {
-    const query = 'SELECT * FROM users WHERE user_id = ?';
+    const query = 'SELECT * FROM posts WHERE user_id = ?';
     const args = [user_id];
+    console.log(args)
     const { rows } = await knex.raw(query, args);
-    const post = rows[0];
-    return post ? new Post(post) : null;
+    const posts = rows.map(post => new Post(post));
+    return posts;
   }
 
   static async createPost(user_id, title, description, location, image) {
