@@ -17,9 +17,9 @@ class Logs {
         const logEntry = rows[0];
         return logEntry; 
     }
-    static async findAvg(user_id, field) {
-        const query = `SELECT AVG(${field}) FROM logs WHERE user_id = ?`;
-        const args = [user_id];
+    static async findAvg(field, user_id) {
+        const query = `SELECT AVG(?) FROM logs WHERE user_id = ?`;
+        const args = [field, user_id];
         const { rows } = await knex.raw(query, args);
         return rows[0];
     }
