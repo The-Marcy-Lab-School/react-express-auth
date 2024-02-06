@@ -1,11 +1,13 @@
 const create = require('./create-like');
 const remove = require('./delete-like');
-const postLikes = require('./post-likes');
-const userLikes = require('./user-likes');
+const listLikes = require('./list-likes');
+const totalPostLikes = require('./group-post-likes');
+const listUserPostLikes = require('./group-user-likes');
 
 module.exports = {
     create,
     remove,
-    postLikes,
-    userLikes
+    listLikes,
+    totalPostLikes,
+    listUserPostLikes,
 };
