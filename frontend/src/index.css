@@ -38,13 +38,13 @@ nav a {
   display: block;
   color: #FFF;
 }
-
+/* 
 form {
   padding: 1rem;
   border: 1px solid #CCC;
-  width: 15rem;
+  width: 20rem;
   margin: 1rem auto;
-}
+} */
 
 /* automatically added by NavLink component */
 .active {
