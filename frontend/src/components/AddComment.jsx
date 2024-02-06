@@ -26,7 +26,9 @@ export default function AddComment() {
           <ModalCloseButton />
 
           <ModalBody>
-            <Input placeholder='Add Comment' size='lg' mb='100px' />
+            <Input onSubmit={() => {
+              
+            }} placeholder='Add Comment' size='lg' mb='100px' />
           </ModalBody>
 
 
@@ -34,7 +36,7 @@ export default function AddComment() {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button onClick={(handleAddComment => {
+            <Button for='comment' onClick={(handleAddComment => {
                 onClose()
             })} variant='ghost'>Add</Button>
           </ModalFooter>
