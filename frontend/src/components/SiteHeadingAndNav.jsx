@@ -10,6 +10,7 @@ export default function SiteHeadingAndNav() {
     <nav>
       <ul>
         <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/post'>Post</NavLink></li>
         <li><NavLink to='/users' end={true}>Users</NavLink></li>
         {
           currentUser
