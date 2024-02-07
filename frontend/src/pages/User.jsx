@@ -12,13 +12,16 @@ import UpdateUsernameForm from '../components/UpdateUsernameForm';
 import EventForm from '../components/EventForm';
 import Event from '../components/Event';
 import { destroyEvent } from '../adapters/event-adapter';
+import { useErrorStore } from '../store/store';
 
 export default function UserPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
-  const [errorText, setErrorText] = useState(null);
   const [events, setEvents] = useState([]);
+
+  const errorText = useErrorStore((state) => state.errorText);
+  const setErrorText = useErrorStore((state) => state.setErrorText);
 
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
@@ -117,9 +120,10 @@ export default function UserPage() {
         />
       )}
       {console.log(userProfile)}
-      <img src="/upload/1706824948115wowow.png" alt="img" />
+      {/* <img src="/upload/1706824948115wowow.png" alt="img" /> */}
       {userProfile.profile_pic && (
-        <img src={`../public/upload/${profilePic}`}></img>
+        // <img src={`../public/upload/${profilePic}`}></img>
+        <h1>hi</h1>
       )}
       {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
     </> // /upload/${userProfile.profile_pic}
