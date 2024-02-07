@@ -1,6 +1,10 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
+  height: 100vh;
 }
 
 input, label {
@@ -9,6 +13,13 @@ input, label {
 
 input {
   margin-bottom: 1rem;
+}
+
+#app {
+  height: 100vh;
+  overflow: scroll;
+  display: flex;
+  flex-flow: column;
 }
 
 header {
@@ -29,6 +40,7 @@ footer {
   position: absolute;
   width: 100%;
   bottom: 0;
+  margin-top: auto;
 }
 
 #logo {
@@ -59,8 +71,8 @@ form {
 }
 
 /* automatically added by NavLink component */
-.active {
+/* .active {
   color: #EEBC32;
   font-weight: bold;
   font-style: italic;
-}
+} */
