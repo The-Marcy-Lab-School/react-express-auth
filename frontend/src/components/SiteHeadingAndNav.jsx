@@ -40,7 +40,7 @@ export default function SiteHeadingAndNav() {
                   {
                     <ul className={`m-2 w-20`}>
                       <li className="mb-1"><a href="/maps">Data Maps</a></li>
-                      <li className="mb-1"><a href="/Posts">Posts</a></li>
+                      <li className="mb-1"><a href="/post">Posts</a></li>
                     </ul>
                   }
                 </div>
