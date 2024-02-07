@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <UserContextProvider>
     <BrowserRouter>
       <ChakraProvider>
-        <App />
+      <App className="flex flex-col h-screen w-screen"/>
       </ChakraProvider>
     </BrowserRouter>
   </UserContextProvider>,
