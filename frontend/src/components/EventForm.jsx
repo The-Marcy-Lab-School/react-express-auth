@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { addTags, createEvent, joinAnEvent } from '../adapters/event-adapter';
 import { validateTags, validateTime } from '../utils';
+import { useTagStore } from '../store/store';
 
 export default function EventForm({ id, loadUserEvents }) {
   const [err, setErr] = useState({
@@ -10,6 +11,7 @@ export default function EventForm({ id, loadUserEvents }) {
     tagColor: null,
   });
   const [selectedTags, setSelectedTags] = useState([]);
+  // const {selectedTags, setSelectedTags} = useTagStore((state) => state.errorText);
 
   const tags = [
     'yoga',
