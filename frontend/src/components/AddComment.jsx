@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -11,10 +12,27 @@ import {
   Input,
 } from '@chakra-ui/react'
 
-
+const SubmittedText = ({ text }) => {
+  return <p>Submitted Text: {text}</p>;
+};
 
 export default function AddComment() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [inputValue, setInputValue] = useState('');
+  const [submittedValue, setSubmittedValue] = useState('');
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSubmittedValue(inputValue);
+    setInputValue(''); // Clear the input field after submission
+    onClose()
+  };
+
+
   return (
     <>
       <Button onClick={onOpen} flex='1' variant='ghost'>Comment</Button>
@@ -26,9 +44,7 @@ export default function AddComment() {
           <ModalCloseButton />
 
           <ModalBody>
-            <Input onSubmit={() => {
-              
-            }} placeholder='Add Comment' size='lg' mb='100px' />
+            <Input value={inputValue} onChange={handleChange} placeholder='Add Comment' size='lg' mb='100px' />
           </ModalBody>
 
 
@@ -36,12 +52,11 @@ export default function AddComment() {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button for='comment' onClick={(handleAddComment => {
-                onClose()
-            })} variant='ghost'>Add</Button>
+            <Button for='comment' onClick={handleSubmit} variant='ghost'>Add</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
+      {submittedValue && <SubmittedText text={submittedValue} />}
     </>
   )
 }
