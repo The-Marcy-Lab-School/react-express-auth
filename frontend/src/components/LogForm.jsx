@@ -12,6 +12,7 @@ export default function LoginPage() {
     event.preventDefault();
     setErrorText('');
     const formData = new FormData(event.target);
+    console.log(formData)
     // const [user, error] = await logUserIn(Object.fromEntries(formData));
     // if (error) return setErrorText(error.message);
     // setCurrentUser(user);

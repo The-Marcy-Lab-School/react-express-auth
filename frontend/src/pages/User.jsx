@@ -46,5 +46,71 @@ export default function UserPage() {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
+
+{/* <form onSubmit={handleSubmit} aria-labelledby="dailyLog-heading">
+      <h2 id='dailyLog-heading'>Welcome Back!</h2>
+      <h3>How are you feeling today?</h3>
+
+      <input type="radio" id="worst" name="mood" value = "1"/>
+      <label htmlFor="worst">Worst</label>
+
+      <input type="radio" id="notGood" name="mood" value="2"/>
+      <label for="notGood">Not Good</label>
+
+      <input type="radio" id="fine" name="mood" value="3"/>
+      <label for="fine">Fine</label>
+
+      <input type="radio" id="good" name="mood" value="4"/>
+      <label for="good">Good</label>
+
+      <input type="radio" id="veryGood" name="mood" value="5"/>
+      <label for="veryGood">Very Good</label>
+
+      <h3>Abdominal Pain</h3>
+      <input type="range" min="0" max="100" value="50" class="slider" id="abdPain"/>
+
+      <h3>Back Pain</h3>
+      <input type="range" min="0" max="100" value="50" class="slider" id="backPain"/>
+
+      <h3>Nausea</h3>
+      <input type="range" min="0" max="100" value="50" class="slider" id="nausea"/>
+
+      <h3>Fatigue</h3>
+      <input type="range" min="0" max="100" value="50" class="slider" id="fatigue"/>
+
+      <button>Submit</button>
+    </form> */}
+
+    <form aria-labelledby="dailyLog-heading">
+    <h2 id='dailyLog-heading'>Welcome Back!</h2>
+      <h3>How are you feeling today?</h3>
+      <input type="radio" id="worst" name="mood" value = "1"/>
+      <label htmlFor="worst">Worst</label>
+
+      <input type="radio" id="notGood" name="mood" value="2"/>
+      <label for="notGood">Not Good</label>
+
+      <input type="radio" id="fine" name="mood" value="3"/>
+      <label for="fine">Fine</label>
+
+      <input type="radio" id="good" name="mood" value="4"/>
+      <label for="good">Good</label>
+
+      <input type="radio" id="veryGood" name="mood" value="5"/>
+      <label for="veryGood">Very Good</label>
+
+      <h3>Abdominal Pain</h3>
+      <input type="range" min="0" max="100" id="abdPain"/>
+
+      <h3>Back Pain</h3>
+      <input type="range" min="0" max="100" id="backPain"/>
+
+      <h3>Nausea</h3>
+      <input type="range" min="0" max="100" id="nausea"/>
+
+      <h3>Fatigue</h3>
+      <input type="range" min="0" max="100" id="fatigue"/>
+      <button>Submit</button>
+    </form>
   </>;
 }
