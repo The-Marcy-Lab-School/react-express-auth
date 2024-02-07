@@ -1,14 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import HeroImg from "../imgs/cosmic-trash.jpeg";
 
 export default function Hero(){
     return <>
-        <section id="hero">
-            <img id="hero-img" src={HeroImg} alt="hero image" />
-            <div id="hero-text">
-                <h1>WE OUT HERE YESSIR</h1>
-                <p>Trash, Trash, Trash</p>
-            </div>
+        <section id="hero" >
+            <div className='h-screen w-full items-center justify-center z-0 bg-fixed bg-parallax bg-cover'></div>
         </section>
     </>
 }

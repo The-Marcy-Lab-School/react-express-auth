@@ -7,7 +7,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
     <UserContextProvider>
       <BrowserRouter>
-        <App />
+        <App className="flex flex-col h-screen w-screen"/>
       </BrowserRouter>
     </UserContextProvider>,
 );

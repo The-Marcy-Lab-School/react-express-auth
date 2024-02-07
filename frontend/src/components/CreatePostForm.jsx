@@ -16,6 +16,9 @@ export default function CreatePostForm() {
             <label for="Address">Add Address</label>
             <input type="text" name="address" id="address" placeholder="Address" required />
 
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required />
+
             <lable for='description'>Add Description</lable>
             <input type='text' id='description' name='picture' placeholder="Description"/>
 
