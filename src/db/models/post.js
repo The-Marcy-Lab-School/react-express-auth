@@ -23,23 +23,16 @@ class Post {
     const args = [id];
     const { rows } = await knex.raw(query, args);
     const post = rows[0];
-    return post ? new User(post) : null;
-  }
-
-  static async findSinglePost(id) {
-    const query = 'SELECT * FROM posts WHERE id = ?';
-    const args = [id];
-    const { rows } = await knex.raw(query, args);
-    const post = rows[0];
     return post ? new Post(post) : null;
   }
 
   static async findAllPostByUser(user_id) {
-    const query = 'SELECT * FROM users WHERE user_id = ?';
+    const query = 'SELECT * FROM posts WHERE user_id = ?';
     const args = [user_id];
+    console.log(args)
     const { rows } = await knex.raw(query, args);
-    const post = rows[0];
-    return post ? new Post(post) : null;
+    const posts = rows.map(post => new Post(post));
+    return posts;
   }
 
   static async createPost(user_id, title, description, location, image) {
@@ -51,15 +44,17 @@ class Post {
     return new Post(post);
   }
 
-  static async updatePost(user_id, title, description, location, image) {
+  static async updatePost(title, description, location, image, id) {
     const query = `UPDATE posts
       SET title = ?, description = ?, location = ?, image = ?
       WHERE id = ? RETURNING *`;
-    const args = [user_id, title, description, location, image, id];
+    const args = [title, description, location, image, id];
+    console.log(args, "rihgr")
     const { rows } = await knex.raw(query, args);
     const post = rows[0];
     return new Post(post);
   }
+
   static async deletePost(id) {
     const query = `DELETE FROM posts WHERE id = ? RETURNING *`;
     const args = [id];
