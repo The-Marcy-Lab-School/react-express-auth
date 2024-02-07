@@ -25,8 +25,8 @@ Router.get('/users/:user_id/posts/:post_id/mycomments', commentController.showMe
 Router.delete('/users/:user_id/posts/:post_id/comments/:id', commentController.remove);
 
 //post routes
-Router.get('/users/:user_id/posts', postController.showAllPosts); 
-Router.get('/users/:user_id/posts/:id', postController.showASinglePost); // stretch 
+Router.get('/posts', postController.showAllPosts); 
+Router.get('/posts/:id', postController.showASinglePost); // stretch 
 Router.get('/users/:user_id/myposts', postController.showAllUserPosts); // stretch
 Router.post('/users/:user_id/posts', postController.create);
 Router.delete('/users/:user_id/posts/:id', postController.remove);
