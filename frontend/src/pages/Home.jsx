@@ -7,15 +7,17 @@ import {
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import Event from '../components/Event';
+import { useEventsStore } from '../store/store';
 
 export default function HomePage() {
   const { currentUser } = useContext(CurrentUserContext);
-  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]);
   const [joinedEvents, setJoinedEvents] = useState({});
+  const { events, setRecentEvents } = useEventsStore((state) => state);
 
   useEffect(() => {
-    fetchRecentEvents().then(setEvents);
-  }, []);
+    setRecentEvents();
+  }, [setRecentEvents]);
 
   const loadJoinedEvents = async () => {
     if (currentUser) {
@@ -37,7 +39,7 @@ export default function HomePage() {
 
   const deleteEvent = async (id) => {
     destroyEvent({ event_id: id });
-    fetchRecentEvents().then(setEvents);
+    setRecentEvents();
   };
 
   return (

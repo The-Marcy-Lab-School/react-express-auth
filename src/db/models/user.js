@@ -97,7 +97,7 @@ class User {
   };
 
   isValidPassword = async (password) => {
-     return isValidPassword(password, this.#passwordHash);
+    return isValidPassword(password, this.#passwordHash);
   };
 }
 
