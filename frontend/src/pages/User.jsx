@@ -4,6 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import UserProfileCard from "../components/UserProfileCard";
 
 export default function UserPage() {
   // React hooks to access necessary functionality and state
@@ -58,9 +59,14 @@ export default function UserPage() {
   // JSX rendering based on the user's profile
   return (
     <>
-      <h1>{profileUsername}</h1>
-      <h2>{profileBio}</h2>
-      <img src={profileImage} alt="User Profile" />
+      {/* Use the UserProfileCard component */}
+    {userProfile && (
+      <UserProfileCard
+        username={profileUsername}
+        bio={profileBio}
+        profileimage={profileImage}  // Change to profileimage
+      />
+      )}
       { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
       <p>If the user had any data, here it would be</p>
       <p>Fake Bio or something ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
