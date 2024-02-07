@@ -37,12 +37,12 @@ class User {
     return user ? new User(user) : null;
   }
 
-  static async create(username, password, profile_image, bio) {
+  static async create(username, password) {
     const passwordHash = await hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash, profile_image, bio)
-      VALUES (?, ?, ?, ?) RETURNING *`;
-    const args = [username, passwordHash, profile_image, bio];
+    const query = `INSERT INTO users (username, password_hash)
+      VALUES (?, ?) RETURNING *`;
+    const args = [username, passwordHash];
     const { rows } = await knex.raw(query, args);
     const user = rows[0];
     return new User(user);
@@ -59,12 +59,11 @@ class User {
     return deletedUser ? new User(deletedUser) : null; // to see the instance of the deleted user
   }
 
-  update = async (username) => { // dynamic queries are easier if you add more properties
+  update = async (username, bio, profile_image) => { // dynamic queries are easier if you add more properties
     const rows = await knex('users')
       .where({ id: this.id })
-      .update({ username })
+      .update({ username, bio, profile_image })
       .returning('*');
-
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   };
