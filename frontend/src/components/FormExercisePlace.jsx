@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import exercises from '../data/exercises.json'
+import ExerciseList from './ExerciseList'
 
 const FormExercisePlace = () => {
     // const [selectedBodyPart, setSelectedBodyPart] = useState("")
@@ -84,10 +85,8 @@ const FormExercisePlace = () => {
       </select>
       <button>Update Exercises</button>
     </form>
-    {filteredExercises.map((exercise) => {
-         return (<p key={exercise.name + exercise.id}>{exercise.name + exercise.id}</p>)
-    })}
-    {filteredExercises.length === 0 && "No exercises 😹"}
+    <ExerciseList exercises={filteredExercises}/>
+
     </>
   )
 }
