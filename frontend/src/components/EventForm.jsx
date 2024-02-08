@@ -1,17 +1,12 @@
-import { useState } from 'react';
 import { addTags, createEvent, joinAnEvent } from '../adapters/event-adapter';
 import { validateTags, validateTime } from '../utils';
-import { useTagStore } from '../store/store';
+import { useEventFormStore } from '../store/store';
 
 export default function EventForm({ id, loadUserEvents }) {
-  const [err, setErr] = useState({
-    color: null,
-    timeText: null,
-    tagText: null,
-    tagColor: null,
-  });
-  const [selectedTags, setSelectedTags] = useState([]);
-  // const {selectedTags, setSelectedTags} = useTagStore((state) => state.errorText);
+  const { selectedTags, addTag, emptyTags, setSelectedTags, err, setErr } =
+    useEventFormStore((state) => state);
+
+  console.log(selectedTags);
 
   const tags = [
     'yoga',
@@ -60,7 +55,7 @@ export default function EventForm({ id, loadUserEvents }) {
 
     await joinAnEvent({ user_id: id, event_id: event[0] });
 
-    setSelectedTags([]);
+    emptyTags();
 
     e.target.reset();
 
@@ -75,11 +70,10 @@ export default function EventForm({ id, loadUserEvents }) {
 
     // Update the selectedTags array based on the checkbox change
     if (isChecked) {
-      setSelectedTags((prevSelectedTags) => [...prevSelectedTags, value]);
+      addTag(value);
     } else {
-      setSelectedTags((prevSelectedTags) =>
-        prevSelectedTags.filter((tag) => tag !== value)
-      );
+      const filtered = selectedTags.filter((tag) => tag !== value);
+      setSelectedTags(filtered);
     }
   };
 
