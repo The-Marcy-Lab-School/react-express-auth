@@ -1,27 +1,35 @@
 import { useContext, useEffect, useState } from "react";
-import { Card, CardBody, Heading, Text, Image, Stack } from '@chakra-ui/react'
+import { Card, CardBody, Heading, Text, Image, Stack, Avatar } from '@chakra-ui/react'
+import { getUser } from "../adapters/user-adapter";
 
 
-export default function Comment({src, text}) {
+export default function Comment({user_id, content}) {
+
+    const [userInfo, setUserInfo] = useState({})
+
+    useEffect(() => {
+        const loadUserInfo = async () => {
+            const [user, error] = await getUser(user_id);
+            if (error) return setErrorText(error.message);
+            setUserInfo(user);
+        };
+        loadUserInfo();
+    }, [user_id]);
+    
     return <>
         <Card
             direction={{ base: 'column', sm: 'row' }}
             overflow='hidden'
             variant='outline'
         >
-            <Image
-                objectFit='cover'
-                maxW={{ base: '100%', sm: '200px' }}
-                src={src}
-                alt='Caffe Latte'
-            />
+            <Avatar name={userInfo.username} src={userInfo.profile_pic}/>
 
             <Stack>
                 <CardBody>
-                    <Heading size='md'>Comment(username)</Heading>
+                    <Heading size='md'>{userInfo.username}</Heading>
 
                     <Text py='2'>
-                        {text}
+                        {content}
                     </Text>
                 </CardBody>
             </Stack>

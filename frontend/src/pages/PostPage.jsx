@@ -5,17 +5,30 @@ import AddComment from '../components/AddComment'
 import { Flex } from "@chakra-ui/react";
 
 import { useNavigate, useParams } from "react-router-dom";
+import { getCommentsFromPost } from "../adapters/user-adapter";
 
 export default function PostPage() {
 
+    const [errorText, setErrorText] = useState(null)
+    const [postComments, setPostComments] = useState([])
     const { id } = useParams();
+
+    useEffect(() => {
+        const getComments = async () => {
+            let [comments, error] = await getCommentsFromPost(id)
+            if(error) return setErrorText(error.text)
+            setPostComments(comments)
+        }
+        getComments()
+    }, [id])
    
     return <>
     <Flex alignContent={'center'}>
-       <Post id={id}/>
+       <Post id={id} comments={postComments} setComments={setPostComments}/>
        <ul>
-        <li><Comment src='https://wallpapers.com/images/featured/picture-en3dnh2zi84sgt3t.jpg' text={'this is a cool picture'}/></li>
-        <li><Comment src={'https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'} text={'Caffè latte is a coffee beverage of Italian origin made with espresso and steamed milk.'}/></li>
+        {postComments.map((comment) => {
+            return <Comment user_id={comment.user_id} content={comment.content} key='comment'/>
+        })}
        </ul>
        </Flex>
        
