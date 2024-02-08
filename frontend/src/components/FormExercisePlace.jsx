@@ -8,6 +8,7 @@ const FormExercisePlace = () => {
     // const [selectedEquipment, setSelectedEquipment] = useState("any")
     // const [selectedTarget, setSelectedTarget] = useState("any")
     const [filteredExercises, setFilteredExercises] = useState([])
+    const [exerciseIndex, setExerciseIndex] = useState(null)
     const filterExercises = (bodyPart, equipment='any', target='any') => {
         return exercises.filter(exercise => {
             return exercise.bodyPart === bodyPart &&
@@ -20,6 +21,7 @@ const FormExercisePlace = () => {
         const form = e.target
         console.log(form.bodyParts.value)
         const filteredArr = filterExercises(form.bodyParts.value, form.equipment.value, form.target.value)
+        setExerciseIndex(null)
         setFilteredExercises(filteredArr)
         console.log(filteredArr)
 
@@ -85,7 +87,11 @@ const FormExercisePlace = () => {
       </select>
       <button>Update Exercises</button>
     </form>
-    <ExerciseList exercises={filteredExercises}/>
+    <div style={{display : "flex"}}>
+    <ExerciseList exercises={filteredExercises} exerciseIndex={exerciseIndex} setExerciseIndex={setExerciseIndex}/>
+    <p style={{maxWidth : "500px"}}>{ exerciseIndex !== null && filteredExercises[exerciseIndex].instructions}</p>
+    </div>
+    
 
     </>
   )

@@ -2,8 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import "./styles/ExerciseList.css"
 const ExerciseList = (props) => {
-    const {exercises} = props
-    const [ExerciseIndex, setExerciseIndex] = useState(null)
+    const {exercises, exerciseIndex, setExerciseIndex } = props
     const handleExerciseClick = (index) => {
         setExerciseIndex(index);
     };
@@ -12,7 +11,7 @@ const ExerciseList = (props) => {
     <>
         <ul className='exercise-list'>
         {exercises.map((exercise, index) => {
-         return (<li className={`list-item ${ExerciseIndex === index ? 'active' : ''}`}
+         return (<li className={`list-item ${exerciseIndex === index ? 'active' : ''}`}
          bindex={index} 
          key={exercise.name + exercise.id}
          onClick={() => handleExerciseClick(index)}>{exercise.name}
