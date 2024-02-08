@@ -15,6 +15,8 @@ export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const getPost = async (id) => fetchHandler(`/api/posts/${id}`);
 
+export const getCommentsFromPost = async (id) => fetchHandler(`/api/comments/${id}`)
+
 export const updateUsername = async ({ id, username }) => (
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }))
 );
