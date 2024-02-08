@@ -15,6 +15,32 @@ class Notification {
             console.log(err)
         }
     }
+    static async readNotifications( userId,){
+        try {
+        const query = `SELECT text from notifications
+        Where recipient_id = ? `
+         const args = [userId]
+         const {rows} = await knex.raw(query, args)
+         console.log(rows)
+         return rows
+        }
+
+        catch (err){
+            console.log(err)
+        }
+    }
+
+    static async deleteNotifications(userId) {
+        try {
+            const query = `Delete  from notifications
+            Where recipient_id = ?`
+            const args = [userId]
+            const {rows} = await knex.raw(query, args)
+            return rows
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
 
 module.exports = Notification

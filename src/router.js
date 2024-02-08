@@ -77,7 +77,9 @@ Router.delete('/events/relations/:eventId', eventController.leaveEvent);
 Router.delete('/events/:eventId', eventController.destroyEvent);
 
 Router.get('/comments/:userId', commentController.getCommentsByUser);
+Router.get("/notifications/:userId", notificationController.getNotifications)
 Router.post('/notifications', notificationController.create)
+Router.delete("/notifications/:userId", notificationController.deleteNotifications)
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
