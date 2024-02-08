@@ -16,7 +16,6 @@ export default function PostPage() {
     useEffect(() => {
         const getComments = async () => {
             let [comments, error] = await getCommentsFromPost(id)
-            console.log(comments)
             if(error) return setErrorText(error.text)
             setPostComments(comments)
         }
@@ -25,10 +24,10 @@ export default function PostPage() {
    
     return <>
     <Flex alignContent={'center'}>
-       <Post id={id}/>
+       <Post id={id} comments={postComments} setComments={setPostComments}/>
        <ul>
         {postComments.map((comment) => {
-            return <Comment user_id={comment.user_id} content={comment.content}/>
+            return <Comment user_id={comment.user_id} content={comment.content} key='comment'/>
         })}
        </ul>
        </Flex>
