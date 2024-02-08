@@ -4,6 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import LogForm from "../components/LogForm";
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ export default function UserPage() {
   // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
+
   return <>
     <h1>{profileUsername}</h1>
     { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
@@ -46,5 +48,8 @@ export default function UserPage() {
       !!isCurrentUserProfile
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
+
+    <LogForm currentUser = {currentUser} />
+    
   </>;
 }
