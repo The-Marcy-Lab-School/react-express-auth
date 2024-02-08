@@ -1,3 +1,4 @@
+import Paginations from '../components/Pagination';
 import WorkoutsForm from '../components/WorkoutsForm';
 import { useWorkoutStore } from '../store/store';
 
@@ -16,6 +17,7 @@ export default function Workouts() {
       <WorkoutsForm onChange={formHandler} />
 
       <h3>{workout}</h3>
+      <Paginations />
     </>
   );
 }
