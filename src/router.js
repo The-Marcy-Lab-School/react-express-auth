@@ -21,6 +21,7 @@ Router.get('/me', userController.showMe); // shows user profile page
 //comment routes
 Router.post('/users/:user_id/posts/:post_id/comments', commentController.create); // creates a comment on a post 
 Router.get('/comments', commentController.list); // shows all comments without being signed in
+Router.get('/comments/:post_id', commentController.showPostComments); // shows all comments of a post
 Router.get('/users/:user_id/posts/:post_id/mycomments', commentController.showMe); // shows a user's comment's they made on posts
 Router.delete('/users/:user_id/posts/:post_id/comments/:id', commentController.remove); // deletes a comment from the post 
 
