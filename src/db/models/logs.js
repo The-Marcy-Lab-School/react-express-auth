@@ -39,4 +39,3 @@ class Logs {
 
 module.exports = Logs;
 
-0

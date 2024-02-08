@@ -1,6 +1,8 @@
 const express = require('express');
 const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
-const logController = require('./controllers/logs/index')
+const logController = require('./controllers/logs/index');
+const postController = require('./controllers/posts/index');
+const threadController = require('./controllers/threads/index');
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
 const { router } = require('./server');
@@ -8,6 +10,15 @@ const { router } = require('./server');
 const Router = express.Router();
 Router.use(addModelsToRequest);
 
+Router.get('/threads', threadController.list);
+Router.post('/threads', threadController.create);
+Router.get('/threads/:id', threadController.show);
+
+Router.get('/posts', postController.list);
+Router.post('/posts', postController.create);
+Router.patch('/posts/:id',postController.update)
+
+Router.get('/posts/:id', postController.show);
 
 Router.get('/logs', logController.list);
 Router.post('/logs', logController.create);
