@@ -1,0 +1,28 @@
+.exercise-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 400px;
+  }
+
+  .list-item {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  .list-item:hover {
+    color: #495057;
+    text-decoration: none;
+    background-color: #f8f9fa;
+  }
+
+  .list-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
