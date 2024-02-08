@@ -19,3 +19,10 @@
     text-decoration: none;
     background-color: #f8f9fa;
   }
+
+  .list-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
