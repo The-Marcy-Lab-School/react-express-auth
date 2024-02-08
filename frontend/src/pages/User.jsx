@@ -36,6 +36,13 @@ export default function UserPage() {
   // Ideally, this would update if we mutated it
   // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrorText('');
+    const formData = new FormData(event.target);
+    console.log(Object.fromEntries(formData))
+  };
 
   return <>
     <h1>{profileUsername}</h1>
@@ -81,29 +88,29 @@ export default function UserPage() {
       <button>Submit</button>
     </form> */}
 
-    <form aria-labelledby="dailyLog-heading">
+    <form onSubmit={handleSubmit} aria-labelledby="dailyLog-heading">
     <h2 id='dailyLog-heading'>Welcome Back!</h2>
       <h3>How are you feeling today?</h3>
       <input type="radio" id="worst" name="mood" value = "1"/>
       <label htmlFor="worst">Worst</label>
 
       <input type="radio" id="notGood" name="mood" value="2"/>
-      <label for="notGood">Not Good</label>
+      <label htmlFor="notGood">Not Good</label>
 
       <input type="radio" id="fine" name="mood" value="3"/>
-      <label for="fine">Fine</label>
+      <label htmlFor="fine">Fine</label>
 
       <input type="radio" id="good" name="mood" value="4"/>
-      <label for="good">Good</label>
+      <label htmlFor="good">Good</label>
 
       <input type="radio" id="veryGood" name="mood" value="5"/>
-      <label for="veryGood">Very Good</label>
+      <label htmlFor="veryGood">Very Good</label>
 
-      <h3>Abdominal Pain</h3>
-      <input type="range" min="0" max="100" id="abdPain"/>
+      <label htmlFor ="abd_pain">Abdominal Pain</label>
+      <input type="range" min="0" max="100" id="abd_pain" name = "abd_pain"/>
 
       <h3>Back Pain</h3>
-      <input type="range" min="0" max="100" id="backPain"/>
+      <input type="range" min="0" max="100" id="back_pain"/>
 
       <h3>Nausea</h3>
       <input type="range" min="0" max="100" id="nausea"/>
