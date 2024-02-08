@@ -2,35 +2,32 @@ import { useContext, useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button } from '@chakra-ui/react'
 import AddComment from "./AddComment";
 
-import { getUser } from "../adapters/user-adapter";
+import { getPost, getUser } from "../adapters/user-adapter";
 
-export default function Post({ user_id, post_id }) {
+export default function Post({ id }) {
 
-    const [userProfile, setUserProfile] = useState(null)
-    const [userPost, setUserPost] = useState(null)
+    const [userProfile, setUserProfile] = useState({})
+    const [userPost, setUserPost] = useState({})
+    const [errorText, setErrorText] = useState(null);
+
+
+    useEffect(() => {
+        const loadPost = async () => {
+            const [post, error] = await getPost(id);
+            if (error) return setErrorText(error.message);
+            setUserPost(post);
+        };
+        loadPost();
+    }, [id]);
 
     useEffect(() => {
         const loadUser = async () => {
-          const [user, error] = await getUser(user_id);
-          if (error) return setErrorText(error.message);
-          setUserProfile(user);
+            const [user, error] = await getUser(userPost.user_id);
+            if (error) return setErrorText(error.message);
+            setUserProfile(user);
         };
-    
-        loadUser();
-      }, [user_id]);
-
-      useEffect(() => {
-        const loadPost = async () => {
-          const [post, error] = await getPost(post_id);
-          if (error) return setErrorText(error.message);
-          setUserPost(post);
-        };
-    
-        loadPost();
-      }, [post_id]);
-
-
-      console.log(userProfile, userPost)
+        if (userPost.user_id) loadUser();
+    }, [userPost.user_id]);
 
     return (<>
         <Card maxW='md' mb='100px'>
@@ -41,20 +38,20 @@ export default function Post({ user_id, post_id }) {
 
                         <Box>
                             <Heading size='sm'>{userProfile.username}</Heading>
-                            <Text>{location}</Text>
+                            <Text>{userPost.location}</Text>
                         </Box>
                     </Flex>
                 </Flex>
             </CardHeader>
             <CardBody>
-                <Heading size='lg'>{title}</Heading>
+                <Heading size='lg'>{userPost.title}</Heading>
                 <Text>
-                    {description}
+                    {userPost.description}
                 </Text>
             </CardBody>
             <Image
                 objectFit='cover'
-                src={image}
+                src={userPost.image}
                 alt='No Pic'
             />
 

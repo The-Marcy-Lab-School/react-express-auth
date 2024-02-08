@@ -10,6 +10,7 @@ import {
   Button,
   useDisclosure,
   Input,
+  FormControl,
 } from '@chakra-ui/react'
 
 const SubmittedText = ({ text }) => {
@@ -26,6 +27,7 @@ export default function AddComment() {
   };
 
   const handleSubmit = (event) => {
+    
     event.preventDefault();
     setSubmittedValue(inputValue);
     setInputValue(''); // Clear the input field after submission
@@ -44,7 +46,9 @@ export default function AddComment() {
           <ModalCloseButton />
 
           <ModalBody>
+            <FormControl>
             <Input value={inputValue} onChange={handleChange} placeholder='Add Comment' size='lg' mb='100px' />
+            </FormControl>
           </ModalBody>
 
 
@@ -52,7 +56,7 @@ export default function AddComment() {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button for='comment' onClick={handleSubmit} variant='ghost'>Add</Button>
+            <Button  onClick={handleSubmit} variant='ghost'>Add</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
