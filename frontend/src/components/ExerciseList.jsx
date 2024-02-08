@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "./styles/ExerciseList.css"
 const ExerciseList = (props) => {
     const {exercises} = props
   return (
