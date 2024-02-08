@@ -2,7 +2,7 @@
 // import { updateUsername } from "../adapters/user-adapter";
 import { createLog } from "../adapters/log-adapter";
 
-export default function LogForm({ currentUser, setCurrentUser }) {
+export default function LogForm({ currentUser}) {
 //   const navigate = useNavigate();
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
@@ -43,18 +43,17 @@ const setRangeValues = (sliderInput) => {
     obj.back_pain = setRangeValues(obj.back_pain)
     obj.nausea = setRangeValues(obj.nausea)
     obj.fatigue = setRangeValues(obj.fatigue)
+    obj.user_id = Number(obj.user_id)
     console.log(obj)
-    await createLog(obj)
+    // await createLog(obj)
     
-    setCurrentUser(user);
-    console.log(obj)
     event.target.reset();
   };
 
   return <form onSubmit={handleSubmit} aria-labelledby="dailyLog-heading">
   <h2 id='dailyLog-heading'>Welcome Back!</h2>
   <h3>How are you feeling today?</h3>
-  <input type="radio" id="worst" name="mood" value = "1"/>
+  <input type="radio" id="worst" name="mood" value = "1" required/>
   <label htmlFor="worst">Worst</label>
 
   <input type="radio" id="notGood" name="mood" value="2"/>
@@ -81,7 +80,7 @@ const setRangeValues = (sliderInput) => {
   <h3>Fatigue</h3>
   <input type="range" min="0" max="100" id="fatigue" name = "fatigue"/>
 
-  <input type="hidden" name="id" value={currentUser.id} />
+  <input type="hidden" name="user_id" value={currentUser.id} />
   <button>Submit</button>
 </form>;
 }

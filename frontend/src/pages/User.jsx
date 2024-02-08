@@ -49,7 +49,7 @@ export default function UserPage() {
         && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
     }
 
-    <LogForm currentUser = {currentUser} setCurrentUser = {setCurrentUser}/>
+    <LogForm currentUser = {currentUser} />
     
   </>;
 }
