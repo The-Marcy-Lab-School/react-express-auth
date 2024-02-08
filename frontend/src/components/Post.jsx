@@ -4,11 +4,12 @@ import AddComment from "./AddComment";
 
 import { getPost, getUser } from "../adapters/user-adapter";
 
-export default function Post({ id }) {
+export default function Post({ id, comments, setComments }) {
 
     const [userProfile, setUserProfile] = useState({})
     const [userPost, setUserPost] = useState({})
     const [errorText, setErrorText] = useState(null);
+    const [input , setinput] = useState('')
 
 
     useEffect(() => {
@@ -67,7 +68,13 @@ export default function Post({ id }) {
                 <Button flex='1' variant='ghost'>
                     Like
                 </Button>
-                <AddComment />
+                <AddComment 
+                input={input} 
+                setinput={setinput} 
+                comments={comments} 
+                setComments={setComments}
+                post_id={id}
+                />
 
             </CardFooter>
         </Card>
