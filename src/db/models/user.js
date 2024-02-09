@@ -70,6 +70,14 @@ class User {
     return updatedUser ? new User(updatedUser) : null;
   };
 
+  static async uploadProfileImage(id, profile_image){
+    const query = 'UPDATE users SET profile_image = ? WHERE id = ? RETURNING *';
+    const args = [id, profile_image];
+    const { rows } = await knex.raw(query, args);
+    const user = rows[0];
+    return user ? new User(user) : null;
+  }
+
   isValidPassword = async (password) => (
     isValidPassword(password, this.#passwordHash)
   );
