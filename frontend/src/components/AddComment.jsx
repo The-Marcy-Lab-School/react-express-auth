@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -9,15 +10,49 @@ import {
   Button,
   useDisclosure,
   Input,
+  FormControl,
 } from '@chakra-ui/react'
 
+import { uploadComment } from "../adapters/user-adapter";
+import CurrentUserContext from "../contexts/current-user-context";
 
 
-export default function AddComment() {
+export default function AddComment({input, setinput, comments, setComments}) {
+
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [submittedValue, setSubmittedValue] = useState('');
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+
+  const handleChange = (event) => {
+    setinput(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    
+    event.preventDefault();
+    setSubmittedValue(input);
+
+
+
+    setinput('');
+    onClose()
+  };
+
+  const checkUserLogin = () => {
+    console.log(currentUser)
+  }
+
+  useEffect(() => {
+      const upload = async () => {
+        let comment = await uploadComment(submittedValue)
+      }
+
+      upload()
+  }, [submittedValue])
+
   return (
     <>
-      <Button onClick={onOpen} flex='1' variant='ghost'>Comment</Button>
+      <Button onClick={checkUserLogin} flex='1' variant='ghost'>Comment</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -26,9 +61,9 @@ export default function AddComment() {
           <ModalCloseButton />
 
           <ModalBody>
-            <Input onSubmit={() => {
-              
-            }} placeholder='Add Comment' size='lg' mb='100px' />
+            <FormControl>
+            <Input value={input} onChange={handleChange} placeholder='Add Comment' size='lg' mb='100px' />
+            </FormControl>
           </ModalBody>
 
 
@@ -36,9 +71,7 @@ export default function AddComment() {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button for='comment' onClick={(handleAddComment => {
-                onClose()
-            })} variant='ghost'>Add</Button>
+            <Button  onClick={handleSubmit} variant='ghost'>Add</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

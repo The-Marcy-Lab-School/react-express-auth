@@ -24,6 +24,14 @@ class Comment {
     return comment 
   }
 
+  static async findAllCommentsByPost(post_id) {
+    const query = 'SELECT * FROM comments WHERE post_id = ?';
+    const args = [post_id];
+    const { rows } = await knex.raw(query, args);
+    const comment = rows.map((comments) => new Comment(comments));;
+    return comment 
+  }
+
   static async find(id) {
     const query = 'SELECT * FROM comments WHERE id = ?';
     const args = [id];

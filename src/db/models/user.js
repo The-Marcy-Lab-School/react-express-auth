@@ -58,11 +58,13 @@ class User {
     const { rows: [deletedUser] } = await knex.raw(query, args);
     return deletedUser ? new User(deletedUser) : null; // to see the instance of the deleted user
   }
-
-  update = async (username, bio, profile_image) => { // dynamic queries are easier if you add more properties
+  
+  update = async ({ username, bio, profile_image }) => {
+    let updateObject = { username, bio };
+    if (profile_image) updateObject.profile_image = profile_image;
     const rows = await knex('users')
       .where({ id: this.id })
-      .update({ username, bio, profile_image })
+      .update(updateObject)
       .returning('*');
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
