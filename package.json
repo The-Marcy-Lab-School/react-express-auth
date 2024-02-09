@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
-    "workplease": "cd frontend && npm i && cd .. && npm i && npx knex migrate 20230423034706_create_users_table.js && npm run seed -- --specific=init.js && npx knex migrate 20240130194613_create_posts_table.js && npm run seed -- --specific=post.js && npx knex migrate 20240131005021_create_comments_table.js && npm run seed -- --specific=comment.js && npx knex migrate 20240130194613_create_posts_table.js && npm run seed -- --specific=post.js && npx knex migrate 20240131011620_create_likes_table.js.js && npm run seed -- --specific=like.js && npm run dev",
+    "workplease": "cd frontend && npm i && cd .. && npm i && npx knex migrate:up 20230423034706_create_users_table.js && npm run seed -- --specific=init.js && npx knex migrate:up 20240130194613_create_posts_table.js && npm run seed -- --specific=post.js && npx knex migrate:up 20240131005021_create_comments_table.js && npm run seed -- --specific=comment.js &&  npx knex migrate:up 20240131011620_create_likes_table.js && npm run seed -- --specific=like.js && npm run dev",
     "build": "npm i && && npm run migrate:rollback && npm run migrate && npm run seed",
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js",
