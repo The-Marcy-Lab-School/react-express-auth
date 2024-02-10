@@ -13,7 +13,7 @@ import {
   FormControl,
 } from '@chakra-ui/react'
 
-import { uploadComment } from "../adapters/user-adapter";
+import { createComment } from "../adapters/comment-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ export default function AddComment({post_id, comments, setComments}) {
     event.preventDefault();
     setContent('');
     const user_id = currentUser.id
-    let [comment, error] = await uploadComment({content, post_id, user_id})
+    let [comment, error] = await createComment({content, post_id, user_id})
     if (error) return setErrorText(error.message);
     setComments([...comments, comment])
     onClose()

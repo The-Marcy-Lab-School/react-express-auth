@@ -17,12 +17,13 @@ Router.delete('/users/:id', userController.remove); // deletes a user by the id
 Router.post('/login', userController.login); // login route 
 Router.delete('/logout', userController.logout); // sign out of cookie session 
 Router.get('/me', userController.showMe); // shows user profile page 
+Router.patch('/upload-image', userController.upload) // update a user's default profile image 
 
 //comment routes
 Router.post('/users/:user_id/posts/:post_id/comments', commentController.create); // creates a comment on a post 
 Router.get('/comments', commentController.list); // shows all comments without being signed in
 Router.get('/comments/:post_id', commentController.showPostComments); // shows all comments of a post
-Router.get('/users/:user_id/posts/:post_id/mycomments', commentController.showMe); // shows a user's comment's they made on posts
+Router.get('/users/:user_id/mycomments', commentController.showUserComments); // shows a user's comment's they made on posts
 Router.delete('/users/:user_id/posts/:post_id/comments/:id', commentController.remove); // deletes a comment from the post 
 
 //post routes

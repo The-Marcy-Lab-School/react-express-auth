@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
+    "workplease": "cd frontend && npm i && cd .. && npm i && npx knex migrate:up 20230423034706_create_users_table.js && npm run seed -- --specific=init.js && npx knex migrate:up 20240130194613_create_posts_table.js && npm run seed -- --specific=post.js && npx knex migrate:up 20240131005021_create_comments_table.js && npm run seed -- --specific=comment.js &&  npx knex migrate:up 20240131011620_create_likes_table.js && npm run seed -- --specific=like.js && npm run dev",
     "build": "npm i && && npm run migrate:rollback && npm run migrate && npm run seed",
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js",
@@ -33,10 +34,10 @@
     "cookie-session": "^2.0.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-session": "^1.17.3",
+    "express-session": "^1.18.0",
     "framer-motion": "^11.0.3",
-    "knex": "^2.4.2",
-    "pg": "^8.10.0",
+    "knex": "^2.5.1",
+    "pg": "^8.11.3",
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {

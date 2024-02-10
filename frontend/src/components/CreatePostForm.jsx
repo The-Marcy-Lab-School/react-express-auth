@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
-import { createPost } from "../adapters/user-adapter";
+import { createPost } from "../adapters/post-adapter";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   Modal,

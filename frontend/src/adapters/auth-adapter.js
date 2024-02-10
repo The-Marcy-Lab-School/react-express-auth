@@ -7,9 +7,9 @@ export const checkForLoggedInUser = async () => {
   return data;
 };
 
-export const logUserIn = async ({ username, password }) => (
-  fetchHandler(`${baseUrl}/login`, getPostOptions({ username, password }))
-);
+export const logUserIn = async ({ username, password }) => {
+  return await fetchHandler(`${baseUrl}/login`, getPostOptions({ username, password }))
+};
 
 // the logout route pretty much can't fail with our setup, but if yours can, change this
 export const logUserOut = async () => {

@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button } from '@chakra-ui/react'
 import AddComment from "./AddComment";
 
-import { getPost, getUser } from "../adapters/user-adapter";
+import { getUser } from "../adapters/user-adapter";
+import { getPost } from "../adapters/post-adapter";
 
 export default function Post({ id, comments, setComments }) {
 
     const [userProfile, setUserProfile] = useState({})
     const [userPost, setUserPost] = useState({})
     const [errorText, setErrorText] = useState(null);
-    const [input , setinput] = useState('')
 
 
     useEffect(() => {

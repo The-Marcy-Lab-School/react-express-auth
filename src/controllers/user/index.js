@@ -9,6 +9,7 @@ const remove = require('./delete');
 const login = require('./login');
 const logout = require('./logout');
 const showMe = require('./show-me');
+const upload = require('./upload-image')
 
 module.exports = {
   list,
@@ -20,4 +21,5 @@ module.exports = {
   login,
   logout,
   showMe,
+  upload,
 };
