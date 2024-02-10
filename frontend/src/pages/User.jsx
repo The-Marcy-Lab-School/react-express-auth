@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
-import UpdateUsernameForm from "../components/UpdateUsernameForm";
+// import UpdateUsernameForm from "../components/UpdateUsernameForm";
 import UserProfileCard from "../components/UserProfileCard";
 
 export default function UserPage() {
@@ -20,7 +20,7 @@ export default function UserPage() {
     const loadUser = async () => {
       // Fetch user data using the 'getUser' function from the adapter
       const [user, error] = await getUser(id);
-      
+
       // Handle errors during the API call
       if (error) {
         setErrorText(error.message);
@@ -36,11 +36,11 @@ export default function UserPage() {
   }, [id]);
 
   // Function to handle user logout
-  const handleLogout = async () => {
-    logUserOut(); // Call the 'logUserOut' function from the auth adapter
-    setCurrentUser(null); // Set the current user to null
-    navigate('/'); // Navigate to the home page
-  };
+  // const handleLogout = async () => {
+  //   logUserOut(); // Call the 'logUserOut' function from the auth adapter
+  //   setCurrentUser(null); // Set the current user to null
+  //   navigate('/'); // Navigate to the home page
+  // };
 
   // Conditional rendering based on the existence of user profile or errors
   if (!userProfile && !errorText) return null;
@@ -59,21 +59,23 @@ export default function UserPage() {
   // JSX rendering based on the user's profile
   return (
     <>
-      {/* Use the UserProfileCard component */}
-    {userProfile && (
-      <UserProfileCard
-        username={profileUsername}
-        bio={profileBio}
-        profileimage={profileImage}  // Change to profileimage
-      />
-      )}
-      { !!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button> }
-      <p>If the user had any data, here it would be</p>
-      <p>Fake Bio or something ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-      {/* {
-        !!isCurrentUserProfile
-          && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-      } */}
+      <div className="h-screen w-full flex flex-col justify-center items-center bg-[#E4E4E4] text-black">
+        <div className="w-full h-full">
+          {userProfile && (
+            <UserProfileCard
+              // className="flex flex-row items-center"
+              username={profileUsername}
+              profileimage={profileImage}  // Change to profileimage
+              bio={profileBio}
+
+            />
+          )}
+          {/* {
+            !!isCurrentUserProfile
+            && (<UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          )} */}
+        </div>
+      </div>
     </>
   );
 }
