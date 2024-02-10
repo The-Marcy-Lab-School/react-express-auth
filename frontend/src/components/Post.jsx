@@ -10,7 +10,6 @@ export default function Post({ id, comments, setComments }) {
     const [userProfile, setUserProfile] = useState({})
     const [userPost, setUserPost] = useState({})
     const [errorText, setErrorText] = useState(null);
-    const [input , setinput] = useState('')
 
 
     useEffect(() => {
@@ -69,9 +68,7 @@ export default function Post({ id, comments, setComments }) {
                 <Button flex='1' variant='ghost'>
                     Like
                 </Button>
-                <AddComment 
-                input={input} 
-                setinput={setinput} 
+                <AddComment  
                 comments={comments} 
                 setComments={setComments}
                 post_id={id}
