@@ -2,13 +2,13 @@
 const create = require('./create');
 const list = require('./list')
 const showPostComments = require('./list-post-comments')
-const showMe = require('./show-me');
+const showUserComments = require('./list-user-comments');
 const remove = require('./delete')
 
 module.exports = {
     create,
     list,
     showPostComments,
-    showMe,
+    showUserComments,
     remove,
 }
