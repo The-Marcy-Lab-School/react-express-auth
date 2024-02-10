@@ -13,7 +13,7 @@ import {
   FormControl,
 } from '@chakra-ui/react'
 
-import { uploadComment } from "../adapters/user-adapter";
+import { createComment } from "../adapters/comment-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 
 
@@ -44,7 +44,7 @@ export default function AddComment({input, setinput, comments, setComments}) {
 
   useEffect(() => {
       const upload = async () => {
-        let comment = await uploadComment(submittedValue)
+        let comment = await createComment(submittedValue)
       }
 
       upload()
