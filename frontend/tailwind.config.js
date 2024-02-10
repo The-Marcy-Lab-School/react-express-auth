@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'parallax': `url('/src/imgs/cosmic-trash.jpeg')`,
+        'community': `url('/src/imgs/LandingImg.jpg')`,
       },
       gradientColorStops: theme => ({
         ...theme('colors'),

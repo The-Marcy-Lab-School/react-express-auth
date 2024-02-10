@@ -5,7 +5,7 @@ import AddComment from '../components/AddComment'
 import { Flex } from "@chakra-ui/react";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { getCommentsFromPost } from "../adapters/user-adapter";
+import { getCommentsFromPost } from "../adapters/comment-adapter";
 
 export default function PostPage() {
 
@@ -25,11 +25,11 @@ export default function PostPage() {
     return <>
     <Flex alignContent={'center'}>
        <Post id={id} comments={postComments} setComments={setPostComments}/>
-       <ul>
+       {/* <ul>
         {postComments.map((comment) => {
             return <Comment user_id={comment.user_id} content={comment.content} key='comment'/>
         })}
-       </ul>
+       </ul> */}
        </Flex>
        
     </>
