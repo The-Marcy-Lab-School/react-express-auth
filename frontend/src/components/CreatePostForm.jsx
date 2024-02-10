@@ -2,7 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createPost } from "../adapters/user-adapter";
 import { Navigate, useNavigate } from "react-router-dom";
-
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react'
 
 export default function CreatePostForm() {
 
