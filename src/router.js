@@ -17,6 +17,7 @@ Router.delete('/users/:id', userController.remove); // deletes a user by the id
 Router.post('/login', userController.login); // login route 
 Router.delete('/logout', userController.logout); // sign out of cookie session 
 Router.get('/me', userController.showMe); // shows user profile page 
+Router.patch('/upload-image', userController.upload) // update a user's default profile image 
 
 //comment routes
 Router.post('/users/:user_id/posts/:post_id/comments', commentController.create); // creates a comment on a post 
