@@ -6,6 +6,7 @@ import { Flex } from "@chakra-ui/react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { getCommentsFromPost } from "../adapters/user-adapter";
+import CreatePostForm from "../components/CreatePostForm";
 
 export default function PostPage() {
 
@@ -30,7 +31,8 @@ export default function PostPage() {
             return <Comment user_id={comment.user_id} content={comment.content} key='comment'/>
         })}
        </ul>
-       </Flex>
+       <CreatePostForm/>
+    </Flex>
        
     </>
 }

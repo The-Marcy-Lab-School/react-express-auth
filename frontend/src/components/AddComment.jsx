@@ -15,40 +15,38 @@ import {
 
 import { uploadComment } from "../adapters/user-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
+import { useNavigate } from "react-router-dom";
 
 
-export default function AddComment({input, setinput, comments, setComments}) {
+export default function AddComment({post_id, comments, setComments}) {
 
+  const [content, setContent] = useState('')
+  //const [comments, setComments] = useState([]) //prop for all comments
+
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [submittedValue, setSubmittedValue] = useState('');
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const [errorText, setErrorText] = useState(null);
+  //const [newComment, setNewComment] = useState({})
 
   const handleChange = (event) => {
-    setinput(event.target.value);
+    setContent(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmittedValue(input);
-
-
-
-    setinput('');
+    setContent('');
+    const user_id = currentUser.id
+    let [comment, error] = await uploadComment({content, post_id, user_id})
+    if (error) return setErrorText(error.message);
+    setComments([...comments, comment])
     onClose()
   };
 
   const checkUserLogin = () => {
-    console.log(currentUser)
+    if(!currentUser) return navigate('/login')
+    onOpen()
   }
-
-  useEffect(() => {
-      const upload = async () => {
-        let comment = await uploadComment(submittedValue)
-      }
-
-      upload()
-  }, [submittedValue])
 
   return (
     <>
@@ -62,7 +60,7 @@ export default function AddComment({input, setinput, comments, setComments}) {
 
           <ModalBody>
             <FormControl>
-            <Input value={input} onChange={handleChange} placeholder='Add Comment' size='lg' mb='100px' />
+            <Input value={content} onChange={handleChange} placeholder='Add Comment' size='lg' mb='100px' />
             </FormControl>
           </ModalBody>
 

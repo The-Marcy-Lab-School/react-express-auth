@@ -68,9 +68,7 @@ export default function Post({ id, comments, setComments }) {
                 <Button flex='1' variant='ghost'>
                     Like
                 </Button>
-                <AddComment 
-                input={input} 
-                setinput={setinput} 
+                <AddComment  
                 comments={comments} 
                 setComments={setComments}
                 post_id={id}
