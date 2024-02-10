@@ -5,7 +5,7 @@ import AddComment from '../components/AddComment'
 import { Flex } from "@chakra-ui/react";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { getCommentsFromPost } from "../adapters/user-adapter";
+import { getCommentsFromPost } from "../adapters/comment-adapter";
 
 export default function PostPage() {
 

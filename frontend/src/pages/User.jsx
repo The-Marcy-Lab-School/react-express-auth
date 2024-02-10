@@ -59,22 +59,20 @@ export default function UserPage() {
   // JSX rendering based on the user's profile
   return (
     <>
-      <div className="h-screen w-full flex flex-col justify-center items-center bg-[#E4E4E4] text-black">
-        <div className="w-full h-full">
-          {userProfile && (
-            <UserProfileCard
-              // className="flex flex-row items-center"
-              username={profileUsername}
-              profileimage={profileImage}  // Change to profileimage
-              bio={profileBio}
+      <div className="w-full h-screen flex flex-col items-center justify-center bg-[#E4E4E4] text-black">
+        {userProfile && (
+          <UserProfileCard
+            // className="flex flex-row items-center"
+            username={profileUsername}
+            profileimage={profileImage}  // Change to profileimage
+            bio={profileBio}
 
-            />
-          )}
-          {/* {
+          />
+        )}
+        {/* {
             !!isCurrentUserProfile
             && (<UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
           )} */}
-        </div>
       </div>
     </>
   );

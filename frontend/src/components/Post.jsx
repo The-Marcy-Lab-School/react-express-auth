@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button } from '@chakra-ui/react'
 import AddComment from "./AddComment";
 
-import { getPost, getUser } from "../adapters/user-adapter";
+import { getUser } from "../adapters/user-adapter";
+import { getPost } from "../adapters/post-adapter";
 
 export default function Post({ id, comments, setComments }) {
 

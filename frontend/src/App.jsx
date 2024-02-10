@@ -11,6 +11,7 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import PostPage from './pages/PostPage';
+import CommunityPosts from './pages/CommunityPosts';
 import AboutUsPage from './pages/About-us';
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/users' element={<UsersPage />} />
         <Route path='/users/:id' element={<UserPage />} />
+        <Route path='/posts' element={<CommunityPosts />} />
         <Route path='/posts/:id' element={<PostPage/>} />
         <Route path='*' element={<NotFoundPage />} />
         <Route path='/About-us' element={<AboutUsPage />} />
