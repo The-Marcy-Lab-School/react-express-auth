@@ -6,12 +6,13 @@ class User {
 
   // Why have a constructor here? We need a way to take the raw data returned from
   // the database and hide the passwordHash before sending it back to the controller
-  constructor({ id, username, password_hash, profile_image, bio }) {
+  constructor({ id, username, password_hash, profile_image, bio, date_created }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
     this.profile_image = profile_image;
     this.bio = bio;
+    this.date_created = date_created;
   }
 
   static async list() {
