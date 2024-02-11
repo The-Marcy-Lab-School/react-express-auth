@@ -22,6 +22,5 @@ export default function CommunityPosts() {
                 }
             </ul> */}
         </div>
-
     </>;
 }

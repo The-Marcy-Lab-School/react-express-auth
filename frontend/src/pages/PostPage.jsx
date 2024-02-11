@@ -10,28 +10,28 @@ import CreatePostForm from "../components/CreatePostForm";
 export default function PostPage() {
 
     const [errorText, setErrorText] = useState(null)
-    const [postComments, setPostComments] = useState([])
-    const { id } = useParams();
+    const [postComments, setPostComments] = useState([]) //all comments on post
+    const { id } = useParams(); //grabs id from url
 
     useEffect(() => {
         const getComments = async () => {
-            let [comments, error] = await getCommentsFromPost(id)
+            let [comments, error] = await getCommentsFromPost(id) //gets all comments on post via post id
             if(error) return setErrorText(error.text)
-            setPostComments(comments)
+            setPostComments(comments) //sets fetched comments to arr
         }
         getComments()
     }, [id])
    
     return <>
     <Flex alignContent={'center'}>
-       <Post id={id} comments={postComments} setComments={setPostComments}/>
+       <Post id={id} comments={postComments} setComments={setPostComments}/> {/*pass in all comments arr as prop to 
+       create comments form so any recently made comments also gets added and displayed */}
        <ul>
-        {postComments.map((comment) => {
+        {postComments.map((comment) => { //maps through all comments arrs and displays
             return <Comment user_id={comment.user_id} content={comment.content} key='comment'/>
         })}
        </ul>
        </Flex>
-       <CreatePostForm/>
     </>
 }
 
