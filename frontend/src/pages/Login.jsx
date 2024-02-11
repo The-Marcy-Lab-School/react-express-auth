@@ -15,7 +15,7 @@ export default function LoginPage() {
     const [user, error] = await logUserIn(Object.fromEntries(formData));
     if (error) return setErrorText(error.message);
     setCurrentUser(user);
-    navigate(`/users/${user.id}`);
+    navigate(`/`);
   };
 
   if (currentUser) return <Navigate to="/" />;

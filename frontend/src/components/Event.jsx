@@ -78,7 +78,7 @@ const Event = (props) => {
       <div className="user-details">
         <img
           className="profile-pic"
-          src={`../public/upload/${event.user_profile_pic || 'default.jpg'}`}
+          src={`../upload/${event.user_profile_pic || 'default.jpg'}`}
         />
         <h3>guy: {event.user_name}</h3>
       </div>
@@ -105,8 +105,9 @@ const Event = (props) => {
       )}{' '}
       {/*ill see if I need the && later*/}
       {commentsinit && <Comments eventId={event.id} userId={currentUser.id} />}
-      <button onClick={toggleComments}>Init Comments</button>
-      {commentsinit && <Comments eventId={event.id} />}
+      <button onClick={toggleComments}>
+      {commentsinit ? "Hide Comments" : "Show Comments"}
+        </button>
     </div>
   );
 };
