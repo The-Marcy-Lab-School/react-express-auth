@@ -5,11 +5,11 @@ import { getUser } from "../adapters/user-adapter";
 
 export default function Comment({user_id, content}) {
 
-    const [userInfo, setUserInfo] = useState({})
+    const [userInfo, setUserInfo] = useState({}) //user info of who created the comment
 
     useEffect(() => {
         const loadUserInfo = async () => {
-            const [user, error] = await getUser(user_id);
+            const [user, error] = await getUser(user_id); //fetches user info of who made the comment
             if (error) return setErrorText(error.message);
             setUserInfo(user);
         };
