@@ -15,40 +15,39 @@ import {
 
 import { createComment } from "../adapters/comment-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
+import { useNavigate } from "react-router-dom";
 
 
-export default function AddComment({input, setinput, comments, setComments}) {
+export default function AddComment({post_id, comments, setComments}) {
 
+  const [content, setContent] = useState('') // comment content
+  //const [comments, setComments] = useState([]) //prop for all comments
+
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [submittedValue, setSubmittedValue] = useState('');
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext); //logged in user
+  const [errorText, setErrorText] = useState(null);
+  //const [newComment, setNewComment] = useState({})
 
   const handleChange = (event) => {
-    setinput(event.target.value);
+    setContent(event.target.value); //changes content to what the user inputs on every change
   };
 
-  const handleSubmit = (event) => {
-    
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmittedValue(input);
-
-
-
-    setinput('');
-    onClose()
+    setContent(''); //clears input
+    const user_id = currentUser.id //gets current user id from context
+    let [comment, error] = await createComment({content, post_id, user_id}) //post comment into db
+    if (error) return setErrorText(error.message);
+    setComments([...comments, comment]) //spreads all comments on post adding the recently made one to the end
+    onClose() // closes create comment model
   };
 
-  const checkUserLogin = () => {
-    console.log(currentUser)
+  //maybe add this function to utils since its in create post form too
+  const checkUserLogin = () => { //checks if theres a user logged in when comments button is clicked
+    if(!currentUser) return navigate('/login') //sends user to login if not logged in
+    onOpen() //opens model if theres a user logged in
   }
-
-  useEffect(() => {
-      const upload = async () => {
-        let comment = await createComment(submittedValue)
-      }
-
-      upload()
-  }, [submittedValue])
 
   return (
     <>
@@ -62,7 +61,7 @@ export default function AddComment({input, setinput, comments, setComments}) {
 
           <ModalBody>
             <FormControl>
-            <Input value={input} onChange={handleChange} placeholder='Add Comment' size='lg' mb='100px' />
+            <Input value={content} onChange={handleChange} placeholder='Add Comment' size='lg' mb='100px' />
             </FormControl>
           </ModalBody>
 

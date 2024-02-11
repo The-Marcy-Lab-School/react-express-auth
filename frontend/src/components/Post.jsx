@@ -7,28 +7,27 @@ import { getPost } from "../adapters/post-adapter";
 
 export default function Post({ id, comments, setComments }) {
 
-    const [userProfile, setUserProfile] = useState({})
-    const [userPost, setUserPost] = useState({})
+    const [userProfile, setUserProfile] = useState({}) //userinfo of who made post
+    const [userPost, setUserPost] = useState({}) //post data
     const [errorText, setErrorText] = useState(null);
-    const [input , setinput] = useState('')
 
 
-    useEffect(() => {
+    useEffect(() => { 
         const loadPost = async () => {
-            const [post, error] = await getPost(id);
+            const [post, error] = await getPost(id); //gets post via id from db
             if (error) return setErrorText(error.message);
-            setUserPost(post);
+            setUserPost(post); //sets user state to the post we fetched
         };
         loadPost();
     }, [id]);
 
     useEffect(() => {
         const loadUser = async () => {
-            const [user, error] = await getUser(userPost.user_id);
+            const [user, error] = await getUser(userPost.user_id); //gets the user info of who made the post 
             if (error) return setErrorText(error.message);
             setUserProfile(user);
         };
-        if (userPost.user_id) loadUser();
+        if (userPost.user_id) loadUser(); //waits until post data is fetched to fetch user info
     }, [userPost.user_id]);
 
     return (<>
@@ -69,11 +68,9 @@ export default function Post({ id, comments, setComments }) {
                 <Button flex='1' variant='ghost'>
                     Like
                 </Button>
-                <AddComment 
-                input={input} 
-                setinput={setinput} 
+                <AddComment  
                 comments={comments} 
-                setComments={setComments}
+                setComments={setComments} //pass in the comments prop so it updates when a new comment is made 
                 post_id={id}
                 />
 
