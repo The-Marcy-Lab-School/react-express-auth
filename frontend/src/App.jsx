@@ -10,6 +10,8 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import LandingPage from './pages/LandingPage'
+import Room from './pages/Room';
+import Workouts from './pages/Workouts';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -17,18 +19,22 @@ export default function App() {
     checkForLoggedInUser().then(setCurrentUser);
   }, [setCurrentUser]);
 
-  return <>
-    <SiteHeadingAndNav />
-    <main>
-      <Routes> 
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/community' element={<CommunityPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/users' element={<UsersPage />} />
-        <Route path='/users/:id' element={<UserPage />} />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
-    </main>
-  </>;
+  return (
+    <>
+      <SiteHeadingAndNav />
+      <main>
+        <Routes>
+          <Route path='/' element={<LandingPage />} /> 
+          <Route path='/community' element={<CommunityPage />} />
+          <Route path="/workouts" element={<Workouts />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/:id" element={<UserPage />} />
+          <Route path="/room/:roomid" element={<Room />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </>
+  );
 }

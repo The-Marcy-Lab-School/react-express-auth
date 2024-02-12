@@ -1,12 +1,14 @@
-import { useContext, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
-import { logUserIn } from "../adapters/auth-adapter";
-import CurrentUserContext from "../contexts/current-user-context";
+import { useContext } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { logUserIn } from '../adapters/auth-adapter';
+import CurrentUserContext from '../contexts/current-user-context';
+import { useErrorStore } from '../store/store';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [errorText, setErrorText] = useState('');
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const errorText = useErrorStore((state) => state.errorText);
+  const setErrorText = useErrorStore((state) => state.setErrorText);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,18 +22,30 @@ export default function LoginPage() {
 
   if (currentUser) return <Navigate to="/" />;
 
-  return <>
-    <h1>Login</h1>
-    <form onSubmit={handleSubmit} aria-labelledby="login-heading">
-      <h2 id='login-heading'>Log back in!</h2>
-      <label htmlFor="username">Username</label>
-      <input type="text" autoComplete="username" id="username" name="username" />
+  return (
+    <>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit} aria-labelledby="login-heading">
+        <h2 id="login-heading">Log back in!</h2>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          autoComplete="username"
+          id="username"
+          name="username"
+        />
 
-      <label htmlFor="password">Password</label>
-      <input type="password" autoComplete="current-password" id="password" name="password" />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          autoComplete="current-password"
+          id="password"
+          name="password"
+        />
 
-      <button>Log in!</button>
-    </form>
-    { !!errorText && <p>{errorText}</p> }
-  </>;
+        <button>Log in!</button>
+      </form>
+      {!!errorText && <p>{errorText}</p>}
+    </>
+  );
 }
