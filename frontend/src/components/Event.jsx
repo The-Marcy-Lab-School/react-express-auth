@@ -105,8 +105,9 @@ const Event = (props) => {
       )}{' '}
       {/*ill see if I need the && later*/}
       {commentsinit && <Comments eventId={event.id} userId={currentUser.id} />}
-      <button onClick={toggleComments}>Init Comments</button>
-      {commentsinit && <Comments eventId={event.id} />}
+      <button onClick={toggleComments}>
+      {commentsinit ? "Hide Comments" : "Show Comments"}
+        </button>
     </div>
   );
 };
