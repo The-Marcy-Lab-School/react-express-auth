@@ -50,7 +50,7 @@ export default function CreatePostForm() {
     if (name === 'description') setdescription(value);
   };
 
-  const checkUserLogin = () => { //checks if theres a user logged in when comments button is clicked
+  const checkUserLogin = () => { //checks if theres a user logged in when create post button is clicked
     if(!currentUser) return navigate('/login') //sends user to login if not logged in
     onOpen() //opens model if theres a user logged in
   }
@@ -76,7 +76,7 @@ export default function CreatePostForm() {
             <input onChange={handleChange} value={location} type="text" name="location" id="location" placeholder="location" required />
 
             {/* <label for="time">Time:</label>
-      <input type="time" id="time" name="time" required /> */}
+            <input type="time" id="time" name="time" required /> */}
 
             <lable for='description'>Add Description</lable>
             <input onChange={handleChange} value={description} type='text' id='description' name='description' placeholder="Description" />
