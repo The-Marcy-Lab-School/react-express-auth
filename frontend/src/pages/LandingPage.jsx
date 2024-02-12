@@ -19,7 +19,7 @@ function LandingPage() {
         {currentUser ? (
           <>
             <Link to="/community" className="Site-link">Community Page</Link>
-            <Link to={`/users/${currentUser.id}/create-event`} className="Site-link" style={{ marginLeft: '10px' }}>Create Event</Link>
+            <Link to={`/users/${currentUser.id}/users/:id`} className="Site-link" style={{ marginLeft: '10px' }}>Create Event</Link>
           </>
         ) : (
           <Link to="/sign-up" className="Site-link">Sign Up</Link>
