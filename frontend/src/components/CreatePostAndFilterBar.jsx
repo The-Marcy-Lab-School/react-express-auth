@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
+import CreatePostForm from "./CreatePostForm";
 
-export default function CreatePostAndFilterBar() {
+export default function CreatePostAndFilterBar({posts, setPosts}) {
     const [sortClick, setSortClick] = useState("");
     const [filterClick, setFilterClick] = useState("");
 
@@ -29,7 +30,7 @@ export default function CreatePostAndFilterBar() {
                     }
                 </button> */}
             </div>
-            <div className="basis-2/4 h-[5rem] bg-white"></div>
+            <div className="basis-2/4 h-[5rem] bg-white"><CreatePostForm posts={posts} setPosts={setPosts}/></div>
             <div className="basis-1/4 h-[5rem] bg-white p-4">
                 <h2>Filter By:</h2>
             </div>
