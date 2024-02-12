@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
-    "build": "npm i && && npm run migrate:rollback && npm run migrate && npm run seed",
+    "build": "npm i && npm run migrate:rollback && npm run migrate && npm run seed",
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js",
     "console": "node -r ./src/db/models/console.js",
