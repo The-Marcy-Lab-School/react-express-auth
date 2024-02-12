@@ -15,9 +15,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
-export default function CreatePostForm() {
+export default function CreatePostForm({posts, setPosts}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [newPost, setPost] = useState([]) //this will be a prop with all the post being displayed in the community post
   const navigate = useNavigate();
   const [errorText, setErrorText] = useState(null);
   const [title, setTitle] = useState('') //form inputs 
@@ -38,7 +37,7 @@ export default function CreatePostForm() {
     const user_id = currentUser.id
     const [post, error] = await createPost({ user_id, title, image, location, description }); //post data into db
     if (error) return setErrorText(error.message);
-    setPost([...newPost, post]); //spreads all current post in db and adds the recently made one
+    setPosts([post, ...posts]); //spreads all current post in db and adds the recently made one first
     onClose()
   };
 
@@ -92,6 +91,5 @@ export default function CreatePostForm() {
         </ModalFooter>
       </ModalContent>
     </Modal>
-    {newPost.length > 0 ? console.log(newPost) : console.log('nothing')}
   </>
 }
