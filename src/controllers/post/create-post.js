@@ -7,7 +7,7 @@ const createPost = async (req, res) => {
 
     const post = await Post.createPost(user_id, title, description, location, image, start_time, end_time, tags);
 
-    Post ? res.status(201).send(post) : res.status(500).send('Internal Server Error');
+    post ? res.status(201).send(post) : res.status(500).send('Internal Server Error');
   
 };
 
