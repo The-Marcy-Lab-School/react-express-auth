@@ -5,7 +5,6 @@ import { Flex } from "@chakra-ui/react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { getCommentsFromPost } from "../adapters/comment-adapter";
-import CreatePostForm from "../components/CreatePostForm";
 
 export default function PostPage() {
 
@@ -28,7 +27,7 @@ export default function PostPage() {
        create comments form so any recently made comments also gets added and displayed */}
        <ul>
         {postComments.map((comment) => { //maps through all comments arrs and displays
-            return <Comment user_id={comment.user_id} content={comment.content} key='comment'/>
+            return <Comment user_id={comment.user_id} content={comment.content} key={comment.id}/>
         })}
        </ul>
        </Flex>
