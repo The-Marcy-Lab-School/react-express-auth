@@ -18,6 +18,11 @@ export const getAllComments = async () => fetchHandler(baseUrl);
 // }
 export const getCommentsFromPost = async (id) => fetchHandler(`${baseUrl}/${id}`)
 
-export const getAllUserComments = async ({ user_id, post_id }) => fetchHandler(`/api/users/${user_id}/posts/${post_id}/mycomments`);
+// export const getAllUserComments = async ({ id }) => {
+//     const [ userComments ] = await fetchHandler(`/api/users/${id}/mycomments`)
+//     return userComments || [];
+// };
+
+export const getAllUserComments = async (id) => fetchHandler(`/api/users/${id}/mycomments`);
 
 export const deleteComment = async ({ user_id, post_id, comment_id }) => fetchHandler(`/api/users/${user_id}/posts/${post_id}/comments/${comment_id}`, getPatchOptions({ post_id }));
