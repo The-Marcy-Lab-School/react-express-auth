@@ -11,7 +11,7 @@ export default function SiteHeadingAndNav() {
   const isHomepage = location.pathname === '/';
   const isCommunityPage = location.pathname === '/posts';
 
-  const position = isHomepage ? 'fixed' : 'absolute';
+  const position = (isHomepage || isCommunityPage) ? 'fixed' : 'relative';
   const textColor = isCommunityPage ? 'black' : 'white';
   const calculatedOpacity = (isHomepage || isCommunityPage) ? `${bgOpacity}` : '1';
 

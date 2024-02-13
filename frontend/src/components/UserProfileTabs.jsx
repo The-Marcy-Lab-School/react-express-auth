@@ -16,7 +16,7 @@ const UserProfileTabs = ({ username, bio, userLikes, userPosts }) => {
                 <Tab>Likes</Tab>
             </TabList>
             <TabPanels>
-                <TabPanel>
+                <TabPanel overflow={"auto"} className="h-[20rem] ">
                     <ul className="flex flex-col">{
                         userPosts.length > 0 ?
                             userPosts.map((post, index) => {
@@ -45,7 +45,7 @@ const UserProfileTabs = ({ username, bio, userLikes, userPosts }) => {
                             : <p>No posts yet</p>
                     }</ul>
                 </TabPanel>
-                <TabPanel>
+                <TabPanel overflow={"auto"} className="h-[20rem] ">
                     <ul className="flex flex-col">{
                         userLikes.length > 0 ?
                             userLikes.map((post, index) => {
