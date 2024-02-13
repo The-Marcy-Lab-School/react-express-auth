@@ -39,21 +39,20 @@ class Post {
     return posts;
   }
 
-  static async createPost(user_id, title, description, location, image, start_time, end_time, tags) {
-    const query = `INSERT INTO posts (user_id, title, description, location, image, start_time, end_time, tags)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
-    const args = [user_id, title, description, location, image, start_time, end_time, tags];
+  static async createPost(user_id, title, description, location, image) {
+    const query = `INSERT INTO posts (user_id, title, description, location, image)
+      VALUES (?, ?, ?, ?, ?) RETURNING *`;
+    const args = [user_id, title, description, location, image];
     const { rows } = await knex.raw(query, args);
     const post = rows[0];
     return new Post(post);
   }
 
-  static async updatePost(title, description, location, image, id) {
+  static async updatePost(title, description, location, image, id, start_time, end_time, tags) {
     const query = `UPDATE posts
-      SET title = ?, description = ?, location = ?, image = ?
+      SET title = ?, description = ?, location = ?, image = ?, start_time = ?, end_time = ?, tags = ?
       WHERE id = ? RETURNING *`;
-    const args = [title, description, location, image, id];
-    console.log(args, "rihgr")
+    const args = [title, description, location, image, id, start_time, end_time, tags];
     const { rows } = await knex.raw(query, args);
     const post = rows[0];
     return new Post(post);
