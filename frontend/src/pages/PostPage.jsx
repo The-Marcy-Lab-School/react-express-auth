@@ -15,22 +15,22 @@ export default function PostPage() {
     useEffect(() => {
         const getComments = async () => {
             let [comments, error] = await getCommentsFromPost(id) //gets all comments on post via post id
-            if(error) return setErrorText(error.text)
+            if (error) return setErrorText(error.text)
             setPostComments(comments) //sets fetched comments to arr
         }
         getComments()
     }, [id])
-   
+
     return <>
-    <Flex alignContent={'center'}>
-       <Post id={id} comments={postComments} setComments={setPostComments}/> {/*pass in all comments arr as prop to 
+        <Flex alignContent={'center'} justifyContent={'center'}>
+            <Post id={id} comments={postComments} setComments={setPostComments} /> {/*pass in all comments arr as prop to 
        create comments form so any recently made comments also gets added and displayed */}
-       <ul>
-        {postComments.map((comment) => { //maps through all comments arrs and displays
-            return <Comment user_id={comment.user_id} content={comment.content} key={comment.id}/>
-        })}
-       </ul>
-       </Flex>
+            <ul>
+                {postComments.map((comment) => { //maps through all comments arrs and displays
+                    return <Comment user_id={comment.user_id} content={comment.content} key={comment.id} />
+                })}
+            </ul>
+        </Flex>
     </>
 }
 
