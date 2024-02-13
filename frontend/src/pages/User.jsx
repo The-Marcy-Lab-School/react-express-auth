@@ -1,7 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CurrentUserContext from '../contexts/current-user-context';
-import { destroyUser, getUser } from '../adapters/user-adapter';
+import {
+  destroyUser,
+  fetchJoinedEvents,
+  getUser,
+} from '../adapters/user-adapter';
 import { logUserOut } from '../adapters/auth-adapter';
 import UpdateUsernameForm from '../components/UpdateUsernameForm';
 import EventForm from '../components/EventForm';
@@ -21,6 +25,9 @@ export default function UserPage() {
     setErrorText,
   } = useUserStore((state) => state);
 
+  const [joinedEvents, setJoinedEvents] = useState({});
+  const [jEvents, setJEvents] = useState([]);
+
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
@@ -35,6 +42,25 @@ export default function UserPage() {
 
     loadUser();
   }, [id]);
+
+  const loadJoinedEvents = async () => {
+    if (currentUser) {
+      const signedEvents = await fetchJoinedEvents(currentUser.id);
+      console.log('signed Events: ', signedEvents);
+      setJEvents(signedEvents);
+      const obj = {};
+      signedEvents.forEach((event) => {
+        obj[event.id] = true;
+      });
+      setJoinedEvents(obj);
+      console.log(obj);
+    }
+  };
+  useEffect(() => {
+    loadJoinedEvents();
+  }, [currentUser]);
+
+  console.log(jEvents);
 
   const handleLogout = () => {
     logUserOut();
@@ -64,6 +90,8 @@ export default function UserPage() {
     ? currentUser.profile_pic
     : userProfile.profile_pic;
 
+  console.log(events);
+
   return (
     <>
       <h1>{profileUsername}</h1>
@@ -85,9 +113,21 @@ export default function UserPage() {
             key={event.id - 800}
             deleteEvent={() => deleteEvent(event.id)}
             event={event}
+            loadJoinedEvents={loadJoinedEvents}
+            joinedEvents={joinedEvents}
           />
         ))}
 
+      {jEvents && <p style={{ fontSize: '30px' }}>Joined events</p>}
+      {jEvents &&
+        jEvents.map((event) => (
+          <Event
+            key={event.id - 800}
+            event={event}
+            loadJoinedEvents={loadJoinedEvents}
+            joinedEvents={joinedEvents}
+          />
+        ))}
       {!!isCurrentUserProfile && (
         <UpdateUsernameForm
           currentUser={currentUser}

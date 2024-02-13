@@ -81,7 +81,7 @@ class Event {
   GROUP BY
     events.id, events.title, users.name, users.profile_pic
   ORDER BY
-    events.date DESC
+    events.date 
   LIMIT 50`;
     const args = [tagName];
     console.log(args);
@@ -92,29 +92,38 @@ class Event {
   static async signedUpEvents(user_id) {
     const query = `SELECT
     events.*,
+    (
+        SELECT name 
+        FROM users 
+        WHERE users.id = events.user_id
+    ) AS user_name,
+    (
+        SELECT profile_pic 
+        FROM users 
+        WHERE users.id = events.user_id
+    ) AS user_profile_pic,
     STRING_AGG(DISTINCT event_tags.name, ', ') AS tag_names,
-    COUNT(DISTINCT event_relations.user_id) AS attendee_count,
-    users.name AS user_name,
-    users.profile_pic AS user_profile_pic
+    (
+      SELECT COUNT(DISTINCT er.user_id)
+      FROM event_relations er
+      WHERE er.event_id = events.id
+    ) AS attendee_count
   FROM
     events
-  JOIN
-    event_relations ON events.id = event_relations.event_id
-  JOIN
-    users ON event_relations.user_id = users.id
   JOIN
     event_tags_events ON events.id = event_tags_events.event_id
   JOIN
     event_tags ON event_tags_events.event_tag_id = event_tags.id
+  JOIN
+    event_relations ON events.id = event_relations.event_id AND event_relations.user_id = ?
   WHERE
-    users.id = ?
-  AND NOT
-    events.user_id = ?
+    events.user_id != ?
   GROUP BY
-    events.id, events.title, users.name, users.profile_pic
+    events.id
   ORDER BY
-    events.date DESC
+    events.date ASC
   LIMIT 50;
+  
   `;
     const args = [user_id, user_id];
     const { rows } = await knex.raw(query, args);
