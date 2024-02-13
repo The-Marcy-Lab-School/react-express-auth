@@ -6,12 +6,13 @@ class User {
 
   // Why have a constructor here? We need a way to take the raw data returned from
   // the database and hide the passwordHash before sending it back to the controller
-  constructor({ id, username, password_hash, profile_image, bio }) {
+  constructor({ id, username, password_hash, profile_image, bio, date_created }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
     this.profile_image = profile_image;
     this.bio = bio;
+    this.date_created = date_created;
   }
 
   static async list() {
@@ -59,24 +60,15 @@ class User {
     return deletedUser ? new User(deletedUser) : null; // to see the instance of the deleted user
   }
   
-  update = async ({ username, bio, profile_image }) => {
-    let updateObject = { username, bio };
-    if (profile_image) updateObject.profile_image = profile_image;
+  update = async ( username, bio, profile_image ) => {
     const rows = await knex('users')
       .where({ id: this.id })
-      .update(updateObject)
+      .update({username, bio, profile_image})
       .returning('*');
+
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   };
-
-  static async uploadProfileImage(id, profile_image){
-    const query = 'UPDATE users SET profile_image = ? WHERE id = ? RETURNING *';
-    const args = [id, profile_image];
-    const { rows } = await knex.raw(query, args);
-    const user = rows[0];
-    return user ? new User(user) : null;
-  }
 
   isValidPassword = async (password) => (
     isValidPassword(password, this.#passwordHash)
