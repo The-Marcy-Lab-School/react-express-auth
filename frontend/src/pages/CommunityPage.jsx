@@ -42,6 +42,8 @@ export default function CommunityPage() {
     setRecentEvents();
   };
 
+  console.log(events);
+
   return (
     <>
       <h1>Community Page</h1>
