@@ -13,9 +13,11 @@ import {
   Button,
   FormControl,
   useDisclosure,
+  Input,
+  FormLabel,
 } from '@chakra-ui/react'
 
-export default function CreatePostForm({posts, setPosts}) {
+export default function CreatePostForm({ posts, setPosts }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
   const [errorText, setErrorText] = useState(null);
@@ -29,7 +31,6 @@ export default function CreatePostForm({posts, setPosts}) {
   // if(!currentUser) return <Navigate to='/login'/>
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!currentUser) return navigate('/login') //if user isnt login in then send them to login
     setTitle('')
     setPicture('') //resets/clears input
     setLocation('')
@@ -50,7 +51,7 @@ export default function CreatePostForm({posts, setPosts}) {
   };
 
   const checkUserLogin = () => { //checks if theres a user logged in when create post button is clicked
-    if(!currentUser) return navigate('/login') //sends user to login if not logged in
+    if (!currentUser) return navigate('/login') //sends user to login if not logged in
     onOpen() //opens model if theres a user logged in
   }
 
@@ -63,23 +64,22 @@ export default function CreatePostForm({posts, setPosts}) {
         <ModalHeader>Post</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl>
-          <form onSubmit={handleSubmit} onChange={handleChange} aria-label="post">
-            <label for='title'>Post Title:</label>
-            <input onChange={handleChange} value={title} type="text" id="title" name="title" required />
+          <FormControl isRequired>
+              <FormLabel>Title</FormLabel>
+              <Input onChange={handleChange} value={title} type="text" id="title" name="title"/>
 
-            <label for='image'>Picture</label>
-            <input onChange={handleChange} value={image} type="text" id="pic" name="image" placeholder="Picture URL" />
+              <FormLabel>Picture</FormLabel>
+              <Input onChange={handleChange} value={image} type="text" id="pic" name="image" placeholder="Picture URL" />
 
-            <label for='location'>Add location</label>
-            <input onChange={handleChange} value={location} type="text" name="location" id="location" placeholder="location" required />
+              <FormLabel>Location</FormLabel>
+              <Input onChange={handleChange} value={location} type="text" name="location" id="location" placeholder="Location"/>
 
-            {/* <label for="time">Time:</label>
+              {/* <label for="time">Time:</label>
             <input type="time" id="time" name="time" required /> */}
 
-            <lable for='description'>Add Description</lable>
-            <input onChange={handleChange} value={description} type='text' id='description' name='description' placeholder="Description" />
-          </form>
+              <FormLabel>Description</FormLabel>
+              <Input onChange={handleChange} value={description} type='text' id='description' name='description' placeholder="Description" />
+            
           </FormControl>
         </ModalBody>
 
@@ -87,7 +87,7 @@ export default function CreatePostForm({posts, setPosts}) {
           <Button colorScheme='blue' mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button onClick={handleSubmit}variant='ghost'>Upload</Button>
+          <Button onClick={handleSubmit} variant='ghost'>Upload</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
