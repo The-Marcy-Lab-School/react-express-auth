@@ -18,7 +18,7 @@ export default function SiteHeadingAndNav() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const newOpacity = Math.min(1, Math.round(scrollY / 20) * 0.03);
+      const newOpacity = Math.min(1, Math.round(scrollY / 20) * 0.7);
       setBgOpacity(newOpacity);
     };
 
@@ -28,7 +28,7 @@ export default function SiteHeadingAndNav() {
 
   return (
     <header
-      style={{ backgroundColor: `rgba(238, 144, 51, ${calculatedOpacity})` }}
+      style={{ backgroundColor: `rgb(68,137,96, ${calculatedOpacity})` }}
       className={`${textColor} md:flex md:justify-between md:items-center ${position} top-0 sm:px-12 px-4 py-2 w-full height-64`}
     >
       <a id='logo' href='/'>React/Express Auth</a>
@@ -38,7 +38,7 @@ export default function SiteHeadingAndNav() {
             <button onClick={() => setIsOpen(!isOpen)} className={`p-4 ${textColor}`}>
               Services
               {
-                isOpen && <div style={{ backgroundColor: `rgba(238, 144, 51, ${calculatedOpacity})` }} className={`${textColor} absolute top-[4rem]`}>
+                isOpen && <div style={{ backgroundColor: `rgba(68,137,96, ${calculatedOpacity})` }} className={`${textColor} absolute top-[4rem]`}>
                   {
                     <ul className={`m-2 w-20`}>
                       <li className="mb-1"><a href="/maps">Data Maps</a></li>

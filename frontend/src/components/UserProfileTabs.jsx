@@ -30,11 +30,11 @@ const UserProfileTabs = ({ username, bio, userLikes, userPosts }) => {
                                             <Text>Location: {post.location}</Text>
                                         </CardBody>
                                         <CardFooter>
-                                            <ButtonGroup spacing='2'>
-                                                <Button variant='solid' colorScheme='blue'>
+                                            <ButtonGroup spacing='2' colorScheme='green'>
+                                                <Button variant='solid' colorScheme='green'>
                                                     Edit
                                                 </Button>
-                                                <Button variant='ghost' colorScheme='blue'>
+                                                <Button variant='ghost' colorScheme='green'>
                                                     Delete
                                                 </Button>
                                             </ButtonGroup>
