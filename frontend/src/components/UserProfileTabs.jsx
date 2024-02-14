@@ -1,9 +1,29 @@
-import { NavLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import { Wrap, WrapItem, Avatar, Button, ButtonGroup } from "@chakra-ui/react";
 import { Box, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
+import { getAllUserPosts } from "../adapters/post-adapter";
+import { deletePost } from "../adapters/post-adapter";
 
-const UserProfileTabs = ({ username, bio, userLikes, userPosts }) => {
+const UserProfileTabs = ({ username, id, bio, userLikes }) => {
+    const [userPosts, setUserPosts] = useState([]);
+
+
+    const loadPosts = async () => {
+        const [result, error] = await getAllUserPosts(id);
+        if (error) return setErrorText(error.text);
+        setUserPosts(result);
+    }
+
+    const handleDelete = async (post_id) => {
+        await deletePost({ id, post_id });
+        setUserPosts(userPosts.filter(post => post.id !== post_id));
+    }
+
+    useEffect(() => {
+        loadPosts();
+    }, []);
 
     return <div className="h-full w-[40rem] flex flex-col space-y-0 left-0 pt-[5rem]">
         <div className="flex flex-col h-[13rem] w-full">
@@ -34,7 +54,7 @@ const UserProfileTabs = ({ username, bio, userLikes, userPosts }) => {
                                                 <Button variant='solid' colorScheme='green'>
                                                     Edit
                                                 </Button>
-                                                <Button variant='ghost' colorScheme='green'>
+                                                <Button onClick={() => handleDelete(post.id)} variant='ghost' colorScheme='green'>
                                                     Delete
                                                 </Button>
                                             </ButtonGroup>

@@ -4,7 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { logUserOut } from "../adapters/auth-adapter";
 import { getAllUserLikes } from "../adapters/like-adapter";
 import { getAllUserComments } from "../adapters/comment-adapter";
-import { getAllUserPosts, getPost } from "../adapters/post-adapter";
+import { getPost } from "../adapters/post-adapter";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react'
 import { Avatar, Button, ButtonGroup } from "@chakra-ui/react";
 import { Stack, StackDivider } from '@chakra-ui/react';
@@ -19,7 +19,7 @@ const UserProfileCard = ({ username, bio, profileimage }) => {
   const [userLikes, setUserLikes] = useState([]);
   // const [userLikedPosts, setUserLikedPosts] = useState([]);
   const [userComments, setUserComments] = useState([]);
-  const [userPosts, setUserPosts] = useState([]);
+  // const [userPosts, setUserPosts] = useState([]);
 
   const handleLogout = async () => {
     logUserOut(); // Call the 'logUserOut' function from the auth adapter
@@ -48,16 +48,16 @@ const UserProfileCard = ({ username, bio, profileimage }) => {
     setUserComments(result);
   }
 
-  const loadPosts = async () => {
-    const [result, error] = await getAllUserPosts(id);
-    if (error) return setErrorText(error.text);
-    setUserPosts(result);
-  }
+  // const loadPosts = async () => {
+  //   const [result, error] = await getAllUserPosts(id);
+  //   if (error) return setErrorText(error.text);
+  //   setUserPosts(result);
+  // }
 
   useEffect(() => {
     loadLikes(id);
     loadComments();
-    loadPosts();
+    // loadPosts();
   }, []);
 
   return (
@@ -92,7 +92,7 @@ const UserProfileCard = ({ username, bio, profileimage }) => {
           </Accordion>
         </CardBody>
       </Card>
-      <UserProfileTabs {...{ username, bio, userLikes, userPosts }} />
+      <UserProfileTabs {...{ username, id, bio, userLikes }} />
     </div>
   );
 };
