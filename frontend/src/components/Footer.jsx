@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 
 export default function Footer(){
-    return <footer className="bg-gray-900 text-white">
-    <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
+    return <footer className="bg-[#808080] text-white">
+    <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#989A99] py-7">
       <h1
         className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold
        md:w-2/5"
       >
         Let me 
-        <span className="text-teal-400"> COOK</span> 
+        <span className="text-[#448960]"> COOK</span> 
       </h1>
-      <div>
+      {/* <div>
         <input
           type="text"
           placeholder="Enter Your ph.no"
@@ -23,7 +23,7 @@ export default function Footer(){
         >
           Request Code
         </button>
-      </div>
+      </div> */}
     </div>
     <div
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10
