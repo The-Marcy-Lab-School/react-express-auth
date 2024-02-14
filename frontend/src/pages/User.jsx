@@ -2,9 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
-import { logUserOut } from "../adapters/auth-adapter";
-// import UpdateUsernameForm from "../components/UpdateUsernameForm";
 import UserProfileCard from "../components/UserProfileCard";
+import UserProfileTabs from "../components/UserProfileTabs";
 
 export default function UserPage() {
   // React hooks to access necessary functionality and state
@@ -35,13 +34,6 @@ export default function UserPage() {
     loadUser();
   }, [id]);
 
-  // Function to handle user logout
-  // const handleLogout = async () => {
-  //   logUserOut(); // Call the 'logUserOut' function from the auth adapter
-  //   setCurrentUser(null); // Set the current user to null
-  //   navigate('/'); // Navigate to the home page
-  // };
-
   // Conditional rendering based on the existence of user profile or errors
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
@@ -61,13 +53,16 @@ export default function UserPage() {
     <>
       <div className="w-full h-screen flex flex-col items-center justify-center bg-[#E4E4E4] text-black">
         {userProfile && (
-          <UserProfileCard
-            // className="flex flex-row items-center"
-            username={profileUsername}
-            profileimage={profileImage}  // Change to profileimage
-            bio={profileBio}
+          <div className="flex flex-row justify-center space-x-[3rem] pl-[10rem] items-center w-full h-full">
+            <UserProfileCard
+              // className="flex flex-row items-center"
+              username={profileUsername}
+              profileimage={profileImage}  // Change to profileimage
+              bio={profileBio}
 
-          />
+            />
+            <UserProfileTabs username={profileUsername} id={id} bio={profileBio} />
+          </div>
         )}
         {/* {
             !!isCurrentUserProfile

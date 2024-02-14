@@ -18,7 +18,7 @@ export const createPost = async ({ user_id, title, image, location, description 
     return fetchHandler(`/api/users/${user_id}/posts`, getPostOptions({ title, image, location, description }))
 }
 
-export const deletePost = async ({ id, post_id }) => await fetchHandler(`/api/users/${id}/posts/${post_id}`, deleteOptions);
+export const deletePost = async (id, post_id) => await fetchHandler(`/api/users/${id}/posts/${post_id}`, deleteOptions);
 
 export const updatePost = async ({ user_id, post_id, content }) => {
     return await fetchHandler(`/api/users/${user_id}/posts/${post_id}`, deleteOptions({ post_id, content }));

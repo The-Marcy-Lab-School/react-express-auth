@@ -4,11 +4,26 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react"
 import { Wrap, WrapItem, Avatar, Button, ButtonGroup } from "@chakra-ui/react";
 import { Box, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
 import { getAllUserPosts } from "../adapters/post-adapter";
+import { getAllUserLikes } from "../adapters/like-adapter";
+import { getPost } from "../adapters/post-adapter";
 import { deletePost } from "../adapters/post-adapter";
 
-const UserProfileTabs = ({ username, id, bio, userLikes }) => {
+const UserProfileTabs = ({ username, id, bio }) => {
     const [userPosts, setUserPosts] = useState([]);
+    const [userLikes, setUserLikes] = useState([]);
 
+    const loadLikes = async (id) => {
+        try {
+            const likes = await getAllUserLikes(id);
+            const posts = await Promise.all(likes.map(async (like) => {
+                const [post, error] = await getPost(like.post_id);
+                return post;
+            }));
+            setUserLikes(posts);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const loadPosts = async () => {
         const [result, error] = await getAllUserPosts(id);
@@ -17,12 +32,13 @@ const UserProfileTabs = ({ username, id, bio, userLikes }) => {
     }
 
     const handleDelete = async (post_id) => {
-        await deletePost({ id, post_id });
+        await deletePost(id, post_id);
         setUserPosts(userPosts.filter(post => post.id !== post_id));
     }
 
     useEffect(() => {
         loadPosts();
+        loadLikes(id);
     }, []);
 
     return <div className="h-full w-[40rem] flex flex-col space-y-0 left-0 pt-[5rem]">
