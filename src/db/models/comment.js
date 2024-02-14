@@ -2,12 +2,12 @@ const knex = require('../knex');
 
 class Comment {
 
-  constructor({ id, post_id, user_id, content, time}) {
+  constructor({ id, post_id, user_id, content, dateTime}) {
     this.id = id;
     this.post_id = post_id;
     this.user_id = user_id;
     this.content = content;
-    this.time = time;
+    this.dateTime = dateTime;
   }
 
   static async list() {
@@ -40,20 +40,20 @@ class Comment {
     return new Comment(comment);
   }
 
-  static async create(post_id, user_id, content, time) {
-    const query = `INSERT INTO comments (post_id, user_id, content, time)
-      VALUES (?, ?, ?, ?) RETURNING *`;
-    const args = [post_id, user_id, content, time];
+  static async create(post_id, user_id, content) {
+    const query = `INSERT INTO comments (post_id, user_id, content)
+      VALUES (?, ?, ?) RETURNING *`;
+    const args = [post_id, user_id, content];
     const { rows } = await knex.raw(query, args);
     const comment = rows[0];
     return new Comment(comment);
   }
 
-  static async update(id, content, time) {
+  static async update(id, content, post_id, user_id) {
     const query = `UPDATE comments
       SET user_id = ?, content = ?, time = ?
       WHERE id = ? RETURNING *`;
-    const args = [id, post_id, user_id, content, time];
+    const args = [id, post_id, user_id, content];
     const { rows } = await knex.raw(query, args);
     const comment = rows[0];
     return new Comment(comment);
