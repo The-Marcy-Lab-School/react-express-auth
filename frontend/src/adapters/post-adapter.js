@@ -7,9 +7,7 @@ export const getAllPosts = async () => {
     return allPosts || [];
 };
 
-export const getPost = async (id) => {
-    return await fetchHandler(`${baseUrl}/${id}`)
-};
+export const getPost = async (id) => await fetchHandler(`${baseUrl}/${id}`);
 
 export const getPostsFromUser = async (id) => {
     const [ postsFromUser ] = await fetchHandler(`/api/users/${id}/myposts`);
@@ -28,3 +26,4 @@ export const updatePost = async ({ user_id, post_id, content }) => {
     return await fetchHandler(`/api/users/${user_id}/posts/${post_id}`, getPatchOptions({ post_id, content }));
 }
 
+export const getAllUserPosts = async (id) => fetchHandler(`/api/users/${id}/myposts`);
