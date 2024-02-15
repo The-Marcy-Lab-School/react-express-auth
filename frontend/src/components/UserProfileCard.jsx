@@ -7,12 +7,12 @@ import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIco
 import { Avatar, Button, ButtonGroup } from "@chakra-ui/react";
 import { Stack, StackDivider } from '@chakra-ui/react';
 import { Box, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
+import UpdateUsernameForm from "./UpdateUsernameForm";
 
-const UserProfileCard = ({ username, profileimage }) => {
+const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const { id } = useParams();
-  const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   const [userComments, setUserComments] = useState([]);
 
   const handleLogout = async () => {
@@ -35,7 +35,13 @@ const UserProfileCard = ({ username, profileimage }) => {
     <Card background={'transparent'} border="0px" boxShadow="0">
       <CardHeader className="flex flex-col items-center space-y-[1rem]">
         <Avatar size="2xl" width="10rem" height="10rem" fontSize="5.5rem" name={username} src={profileimage} />
-        {!!isCurrentUserProfile && <Button onClick={handleLogout} className="w-[5rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Log Out</Button>}
+        {!!isCurrentUserProfile &&
+          (
+            <ButtonGroup>
+              <UpdateUsernameForm {...{ currentUser, setCurrentUser }} />
+              <Button onClick={handleLogout} className="w-[5rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Log Out</Button>
+            </ButtonGroup>
+          )}
       </CardHeader>
       <CardBody>
         <Accordion defaultIndex={[0]}>

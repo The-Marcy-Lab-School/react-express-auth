@@ -59,15 +59,11 @@ export default function UserPage() {
               username={profileUsername}
               profileimage={profileImage}  // Change to profileimage
               bio={profileBio}
-
+              isCurrentUserProfile={isCurrentUserProfile}
             />
             <UserProfileTabs username={profileUsername} id={id} bio={profileBio} />
           </div>
         )}
-        {/* {
-            !!isCurrentUserProfile
-            && (<UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
-          )} */}
       </div>
     </>
   );
