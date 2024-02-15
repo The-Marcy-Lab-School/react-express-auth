@@ -13,6 +13,7 @@ import UserPage from './pages/User';
 import PostPage from './pages/PostPage';
 import CommunityPosts from './pages/CommunityPosts';
 import AboutUsPage from './pages/About-us';
+import Maps from './pages/Maps';
 
 
 export default function App() {
@@ -32,8 +33,9 @@ export default function App() {
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='/posts' element={<CommunityPosts />} />
         <Route path='/posts/:id' element={<PostPage/>} />
-        <Route path='*' element={<NotFoundPage />} />
         <Route path='/About-us' element={<AboutUsPage />} />
+        <Route path='/maps' element={<Maps />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </main>
     <Footer />

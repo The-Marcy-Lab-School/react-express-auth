@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import { Wrap, WrapItem, Avatar, Button, ButtonGroup } from "@chakra-ui/react";
-import { Box, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
+import { Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
 import { getAllUserPosts } from "../adapters/post-adapter";
 import { getAllUserLikes } from "../adapters/like-adapter";
 import { getPost } from "../adapters/post-adapter";
