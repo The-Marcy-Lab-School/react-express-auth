@@ -1,15 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { updateUsername } from "../adapters/user-adapter";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  FormControl,
+  useDisclosure,
+} from '@chakra-ui/react'
 
 export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const [user, error] = await updateUsername(Object.fromEntries(formData));
-    // If our user isn't who they say they are
-    // (an auth error on update) log them out
-    // We added the httpStatus as a custom cause in our error
+
     if (error?.cause > 400 && error?.cause < 500) {
       setCurrentUser(null);
       return navigate('/');
@@ -19,12 +30,39 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
     event.target.reset();
   };
 
-  return <form onSubmit={handleSubmit} aria-labelledby="update-heading">
-    <h2 id="update-heading">Update User User</h2>
-    <label htmlFor='username'>New Username</label>
-    <input type='text' id='username' name='username'/>
-    <input type="hidden" name="id" value={currentUser.id} />
+  return (
+    <>
+      <Button onClick={onOpen} className="w-[7rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Update User</Button>
 
-    <button>Update Username</button>
-  </form>;
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Update Username</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form onSubmit={handleSubmit}>
+              <FormControl className="flex flex-col">
+                <label htmlFor="username">New Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder={currentUser.username}
+                  required
+                />
+                <label htmlFor="bio">New Bio</label>
+                <input
+                  type="text"
+                  name="bio"
+                  placeholder={currentUser.bio}
+                />
+              </FormControl>
+            </form>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme='green' mr={3} type="submit">Update</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
 }
