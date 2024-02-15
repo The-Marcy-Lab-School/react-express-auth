@@ -14,7 +14,6 @@ import PostPage from './pages/PostPage';
 import CommunityPosts from './pages/CommunityPosts';
 import AboutUsPage from './pages/About-us';
 import MapPage from './pages/MapPage';
-import ArticlesPage from './pages/ArticlesPage';
 
 
 export default function App() {
@@ -36,8 +35,6 @@ export default function App() {
         <Route path='/posts/:id' element={<PostPage/>} />
         <Route path='/About-us' element={<AboutUsPage />} />
         <Route path='/map' element={<MapPage/>} />
-        <Route path='/About-us' element={<AboutUsPage />} />
-        <Route path='/Articles' element={<ArticlesPage/>} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </main>
