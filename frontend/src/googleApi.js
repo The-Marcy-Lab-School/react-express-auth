@@ -1,11 +1,13 @@
 import { useJsApiLoader } from "@react-google-maps/api"
 
-const libraries = ['geocoding', "places"]
+const libraries = ["places"]
+const key = import.meta.env.VITE_GOOGLE_KEY;
+
 
 export const googleApi = () => {
 const  googleApi = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyC6KV_WibQcAJyBs7_a1tI7wutVGRER7Jo", //make into env var
+    googleMapsApiKey: key, //make into env var
     libraries: libraries
   })
 return googleApi
