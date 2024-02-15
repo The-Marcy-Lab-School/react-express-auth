@@ -31,7 +31,7 @@ export default function Post({ id, comments, setComments }) {
     }, [userPost.user_id]);
 
     return (<>
-        <Card maxW='md' >
+        <Card maxW='md'>
             <CardHeader>
                 <Flex spacing='4'>
                     <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>

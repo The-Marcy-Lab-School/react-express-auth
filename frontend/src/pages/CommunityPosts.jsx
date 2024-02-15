@@ -17,12 +17,12 @@ export default function CommunityPosts() {
 
 
     return <>
-        <div className="h-screen w-full bg-[#D9D9D9]">
+        <div className="w-full bg-[#D9D9D9]">
             <div className={`h-[15rem] w-full bg-community z-0 bg-cover bg-start flex align-middle content-center justify-center items-end overflow-visible`}>
                 <CreatePostAndFilterBar posts={posts} setPosts={setPosts}/>
             </div>
             <div className='h-screen w-full bg-[#1C1E1F]'>
-                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' className="pt-[4rem]">
                     { posts.map((post) => {
                     return <li key={post.id}>
                     <Card>
