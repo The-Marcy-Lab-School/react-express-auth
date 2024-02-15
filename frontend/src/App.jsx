@@ -33,6 +33,7 @@ export default function App() {
         <Route path='/users' element={<UsersPage />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='/posts' element={<CommunityPosts />} />
+        <Route path='/posts/:id' element={<PostPage/>} />
         <Route path='/map' element={<MapPage/>} />
         <Route path='*' element={<NotFoundPage />} />
         <Route path='/About-us' element={<AboutUsPage />} />
