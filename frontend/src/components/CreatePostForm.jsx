@@ -28,10 +28,6 @@ export default function CreatePostForm({ posts, setPosts }) {
   const [image, setPicture] = useState('')
   //const [location, setLocation] = useState('')
   const [description, setdescription] = useState('') //form inputs ^
-<<<<<<< HEAD
-
-=======
->>>>>>> main
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext); //current user 
 
   // if(!currentUser) return <Navigate to='/login'/>

@@ -32,12 +32,12 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="green" className="w-[7rem] h-[2rem] rounded-lg z-0">Edit User</Button>
+      <Button  colorScheme="green"  onClick={onOpen} className="w-[7rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Update User</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit User</ModalHeader>
+          <ModalHeader>Update Username</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <form onSubmit={handleSubmit}>
