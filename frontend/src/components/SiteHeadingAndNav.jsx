@@ -41,10 +41,10 @@ export default function SiteHeadingAndNav() {
                 isOpen && <div style={{ backgroundColor: `rgba(68,137,96, ${calculatedOpacity})` }} className={`${textColor} absolute top-[4rem]`}>
                   {
                     <ul className={`m-2 w-20`}>
-                      <li className="mb-1"><a href="/maps">Data Maps</a></li>
+                      <li><NavLink className='mb-1' to='/map'>Data Maps</NavLink></li>
                       <li><NavLink className='mb-1' to='/posts'>Posts</NavLink></li>
                       <li className="mb-1"><a href="/About-us">About Us</a></li>
-                      <li><NavLink className='mb-1' to='/posts/1'>Post - 1</NavLink></li>
+                      <li><NavLink className='mb-1' to='/Articles'>Articles</NavLink></li>
                     </ul>
                   }
                 </div>
