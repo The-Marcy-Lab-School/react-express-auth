@@ -12,6 +12,7 @@ import Comments from './Comments';
 import JoinButton from './JoinButton';
 import Map from './Map';
 
+
 const Event = (props) => {
   const { currentUser } = useContext(CurrentUserContext);
 

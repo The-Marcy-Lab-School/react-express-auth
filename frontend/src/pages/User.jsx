@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CurrentUserContext from '../contexts/current-user-context';
 import { destroyUser, getUser } from '../adapters/user-adapter';
@@ -7,7 +7,9 @@ import UpdateUsernameForm from '../components/UpdateUsernameForm';
 import EventForm from '../components/EventForm';
 import Event from '../components/Event';
 import { destroyEvent } from '../adapters/event-adapter';
+import { fetchNotifications, deleteNotifications, createANotification } from '../adapters/notification-adapter';
 import { useUserStore } from '../store/store';
+import { IoIosNotifications } from "react-icons/io";
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -20,9 +22,13 @@ export default function UserPage() {
     errorText,
     setErrorText,
   } = useUserStore((state) => state);
+  const [notifications , setNotifications] = useState([])
+  const [notifInit, setNotifInit] = useState(true)
+  const [seenNotif, setSeenNotif] = useState(false)
+  const [currUser, setCurrUser] = useState(1) 
 
   const { id } = useParams();
-  const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+  const isCurrentUserProfile = currentUser && currentUser.id === Number(id)
 
   useEffect(() => {
     const loadUser = async () => {
@@ -33,8 +39,20 @@ export default function UserPage() {
 
     setUserEvents(id);
 
-    loadUser();
+    loadUser()
+    ;
   }, [id]);
+
+  useEffect(() => {
+    const getNotifications = async () => {
+      const notifs = await fetchNotifications(id);
+      console.log(notifs)
+      setNotifications(notifs);
+    };
+
+
+    getNotifications(id);
+  }, []);
 
   const handleLogout = () => {
     logUserOut();
@@ -60,6 +78,10 @@ export default function UserPage() {
     setUserEvents(id);
   };
 
+  const removeNotification = async (userId) => {
+    deleteNotifications(userId)
+  }
+
   const profilePic = isCurrentUserProfile
     ? currentUser.profile_pic
     : userProfile.profile_pic;
@@ -74,7 +96,25 @@ export default function UserPage() {
         <button onClick={handleDelete}>Delete Account</button>
       )}
       <p>If the user had any data, here it would be</p>
-      <p>Fake Bio or something</p>
+      { isCurrentUserProfile && <div style={{ position: 'relative', display: 'inline-block' }}>
+  <IoIosNotifications size={35} onClick={ async () => {
+    setNotifInit(!notifInit); 
+    setSeenNotif(true)
+    console.log("HUH")
+    console.log(currentUser)
+    console.log(currentUser.id)
+    await removeNotification(id)
+  }
+    } />
+  {notifications.length >  0 && !seenNotif && 
+    <div style={{ position: 'absolute', top: '5%', right: '5px', width: '12px', height: '12px', backgroundColor: 'red', borderRadius: '50%' }}></div>
+  }
+</div>}
+
+      { isCurrentUserProfile && <h2>Notifications : {notifications.length}</h2>}
+      {notifInit && notifications.map((notif) => {
+         return (<p>{notif.text}</p> )
+      })}
 
       <EventForm id={id} loadUserEvents={() => setUserEvents(id)} />
 
@@ -100,6 +140,8 @@ export default function UserPage() {
         // <img src={`../public/upload/${profilePic}`}></img>
         <h1>hi</h1>
       )}
+      {console.log(notifications)}
+      
       {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
     </> // /upload/${userProfile.profile_pic}
   );

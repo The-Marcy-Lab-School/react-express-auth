@@ -33,6 +33,7 @@ export const createANotification = async ({
     return notications || [];
   };
 
-  export const deleteNotifications = async ({ userId }) => {
+  export const deleteNotifications = async ( userId ) => {
+    console.log(userId)
     fetchHandler(`${baseUrl}/${userId}`, deleteOptions({ userId }));
   };
