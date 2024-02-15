@@ -15,6 +15,7 @@ import CommunityPosts from './pages/CommunityPosts';
 import AboutUsPage from './pages/About-us';
 import MapPage from './pages/MapPage';
 
+
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
