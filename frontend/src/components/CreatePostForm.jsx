@@ -16,14 +16,17 @@ import {
   Input,
   FormLabel,
 } from '@chakra-ui/react'
+import { Autocomplete } from "@react-google-maps/api";
+import { googleApi } from "../googleApi";
 
 export default function CreatePostForm({ posts, setPosts }) {
+  const { isLoaded } = googleApi()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
   const [errorText, setErrorText] = useState(null);
   const [title, setTitle] = useState('') //form inputs 
   const [image, setPicture] = useState('')
-  const [location, setLocation] = useState('')
+  //const [location, setLocation] = useState('')
   const [description, setdescription] = useState('') //form inputs ^
 
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext); //curret user 
@@ -31,11 +34,13 @@ export default function CreatePostForm({ posts, setPosts }) {
   // if(!currentUser) return <Navigate to='/login'/>
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const user_id = currentUser.id
+    const location = document.getElementById('location').value
+    document.getElementById('location').value = ''
     setTitle('')
     setPicture('') //resets/clears input
-    setLocation('')
+    //setLocation('')
     setdescription('')
-    const user_id = currentUser.id
     const [post, error] = await createPost({ user_id, title, image, location, description }); //post data into db
     if (error) return setErrorText(error.message);
     setPosts([post, ...posts]); //spreads all current post in db and adds the recently made one first
@@ -46,7 +51,7 @@ export default function CreatePostForm({ posts, setPosts }) {
     const { name, value } = event.target;
     if (name === 'title') setTitle(value);
     if (name === 'image') setPicture(value);
-    if (name === 'location') setLocation(value);
+   // if (name === 'location') setLocation(value);
     if (name === 'description') setdescription(value);
   };
 
@@ -71,16 +76,18 @@ export default function CreatePostForm({ posts, setPosts }) {
               <FormLabel>Picture</FormLabel>
               <Input onChange={handleChange} value={image} type="text" id="pic" name="image" placeholder="Picture URL" />
 
-              <FormLabel>Location</FormLabel>
-              <Input onChange={handleChange} value={location} type="text" name="location" id="location" placeholder="Location"/>
-
-              {/* <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required /> */}
-
               <FormLabel>Description</FormLabel>
               <Input onChange={handleChange} value={description} type='text' id='description' name='description' placeholder="Description" />
+              </FormControl>
+              <FormLabel>Location</FormLabel>
+              {isLoaded && (
+                
+              <Autocomplete id='autocompleteBox'>
+                <Input name='location' id='location' type="text" onChange={handleChange} placeholder="Location"/>
+              </Autocomplete>
+              )}
             
-          </FormControl>
+        
         </ModalBody>
 
         <ModalFooter>
