@@ -12,3 +12,7 @@
   --s-accent: 80%;
   --l-accent: 51%;
 }
+
+.hiddenConfig {
+  display: none;
+}

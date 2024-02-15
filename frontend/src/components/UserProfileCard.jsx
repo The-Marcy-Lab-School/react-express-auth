@@ -1,27 +1,47 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams, NavLink } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { logUserOut } from "../adapters/auth-adapter";
+import { getAllUserLikes } from "../adapters/like-adapter";
 import { getAllUserComments } from "../adapters/comment-adapter";
+import { getAllUserPosts, getPost } from "../adapters/post-adapter";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react'
 import { Avatar, Button, ButtonGroup } from "@chakra-ui/react";
 import { Stack, StackDivider } from '@chakra-ui/react';
 import { Box, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
-import UpdateUsernameForm from "./UpdateUsernameForm";
-import UploadcareComponent from "./UploadCareClient";
-import { updateProfileImage } from '../adapters/user-adapter';
+import UserProfileTabs from "./UserProfileTabs";
 
-
-const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
+const UserProfileCard = ({ username, profileimage, isCurrentUserProfile, onProfileImageUpdate }) => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const { id } = useParams();
+  const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+  const [userLikes, setUserLikes] = useState([]);
+  // const [userLikedPosts, setUserLikedPosts] = useState([]);
   const [userComments, setUserComments] = useState([]);
+  const [updatedProfileImage, setUpdatedProfileImage] = useState(profileimage); // Added state for the updated profile image
+  const [errorText, setErrorText] = useState(null); // State for handling errors
+  const [userPosts, setUserPosts] = useState([]);
 
   const handleLogout = async () => {
-    logUserOut();
-    setCurrentUser(null);
-    navigate('/');
+    logUserOut(); // Call the 'logUserOut' function from the auth adapter
+    setCurrentUser(null); // Set the current user to null
+    navigate('/'); // Navigate to the home page
+  };
+  console.log(profileimage)
+  console.log(userLikes)
+
+  const loadLikes = async (id) => {
+    try {
+      const likes = await getAllUserLikes(id);
+      const posts = await Promise.all(likes.map(async (like) => {
+        const [post, error] = await getPost(like.post_id);
+        return post;
+      }));
+      setUserLikes(posts);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const loadComments = async () => {
@@ -41,8 +61,10 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
 
 
   useEffect(() => {
+    loadLikes(id);
     loadComments();
-  }, []);
+    loadPosts();
+  }, [id]);
 
   return (
     <Card background={'transparent'} border="0px" boxShadow="0">
@@ -73,7 +95,7 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <ul className="flex flex-col">
+              <ul>
                 {
                   userComments.length > 0 ?
                     userComments.map((comment, index) => <li key={index} className="text-l">{comment.content}</li>)
@@ -88,4 +110,4 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
   );
 };
 
-export default UserProfileCard;
+export default UserProfileCard
