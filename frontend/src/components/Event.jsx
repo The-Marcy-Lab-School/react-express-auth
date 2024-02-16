@@ -6,7 +6,7 @@ import {
   fetchAttendeesAmount,
   destroyEvent,
 } from '../adapters/event-adapter';
-import { createANotification } from '../adapters/notification-adapter';
+import { createANotification, deleteANotification } from '../adapters/notification-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import './styles/Event.css';
 import Comments from './Comments';
@@ -41,7 +41,11 @@ const Event = (props) => {
     const user_id = currentUser.id;
     const event_id = event.id;
     if (!(event.id in joinedEvents)) await joinAnEvent({ user_id, event_id });
-    else await leaveAnEvent({ user_id, event_id });
+    else {
+      await leaveAnEvent({ user_id, event_id })
+      deleteANotification( event.user_id,
+      user_id)
+    }
     setTimeout(async () => {
       await loadJoinedEvents();
     }, 100); // This is so it fetches after sign in has settled in,, should add loading MUST RE VIST
