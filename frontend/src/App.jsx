@@ -14,7 +14,7 @@ import PostPage from './pages/PostPage';
 import CommunityPosts from './pages/CommunityPosts';
 import AboutUsPage from './pages/About-us';
 import MapPage from './pages/MapPage';
-
+import ArticlesPage from './pages/ArticlesPage';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -34,6 +34,7 @@ export default function App() {
         <Route path='/posts' element={<CommunityPosts />} />
         <Route path='/posts/:id' element={<PostPage/>} />
         <Route path='/About-us' element={<AboutUsPage />} />
+        <Route path='/articles' element={<ArticlesPage />} />
         <Route path='/map' element={<MapPage/>} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

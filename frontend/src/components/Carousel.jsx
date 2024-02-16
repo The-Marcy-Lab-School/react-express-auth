@@ -31,7 +31,7 @@ export default function ArticlesCarousel() {
             <Button onClick={() => previous()} position="absolute" left={0} top="50%" transform="translateY(100%) translateX(100%)" zIndex="2">
               <ChevronLeftIcon />
             </Button>
-            <Button onClick={() => next()} position="absolute" right={0} top="50%" transform="translateY(100%) translateX(-120%)" zIndex="2">
+            <Button onClick={() => next()} position="absolute" right={0} top="50%" transform="translateY(100%) translateX(-130%)" zIndex="2">
               <ChevronRightIcon />
             </Button>
           </div>

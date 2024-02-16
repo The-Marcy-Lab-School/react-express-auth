@@ -8,10 +8,10 @@ import { BsChatSquareTextFill } from "react-icons/bs";
 export default function Hero() {
     return <>
         <section id="hero" className="flex flex-col justify-center items-center space-x-0 bg-[#E4E4E4] h-screen">
-            <div className='h-[30rem] w-[45rem] mr-[30rem] mt-[2.5rem] align-middle content-center items-center justify-center bg-fixed bg-community bg-fill'>
-                <div className="h-[25rem] w-[40rem] ml-[30rem] mt-[2.5rem] align-middle content-center items-center justify-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
-                    <h1 className="text-5xl">Welcome to the Community</h1>
-                    <p className="text-xl">Find the best resources for your next adventure</p>
+            <div className='h-[30rem] w-[45rem] mr-[30rem] mt-[4rem] align-middle content-center items-center justify-center bg-fixed bg-community bg-fill' style={{borderRadius: "10px"}}>
+                <div className="h-[25rem] w-[40rem] ml-[30rem] mt-[2.5rem] align-middle content-center items-center justify-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.5)", display: "flex", alignItems: "center", justifyContent: "center", alignContent: "center", flexDirection: "column", borderRadius: "10px"}}>
+                    <h1 className="text-5xl" style={{ fontWeight: "bold", fontSize: "5rem", display: "flex", alignItems: "center", justifyContent: "center", alignContent: "center" }}>PureLink</h1>
+                    <p className="text-xl" style={{ display: "flex", alignItems: "center", justifyContent: "center", alignContent: "center" }}>Find the best resources for your next adventure</p>
                 </div>
             </div>
 
