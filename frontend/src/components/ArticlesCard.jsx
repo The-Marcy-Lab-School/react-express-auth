@@ -16,8 +16,6 @@ export default function ArticlesComponent ({ filter }) {
 
       } catch (error) {
         console.error('Error fetching Articles:', error);
-        console.log(apiKey);
-        console.log(import.meta.env);
       }
     };
 
