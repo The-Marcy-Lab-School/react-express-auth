@@ -17,7 +17,7 @@ const Room = () => {
   const socket = useSocket();
   const myPeer = new Peer(undefined, {
     host: '/',
-    port: '3000',
+    port: '3001',
   });
   const videoGrid = useRef();
   const peers = useRef({});

@@ -12,6 +12,7 @@ import UserPage from './pages/User';
 import LandingPage from './pages/LandingPage'
 import Room from './pages/Room';
 import Workouts from './pages/Workouts';
+import About from './pages/About'
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -27,6 +28,8 @@ export default function App() {
           <Route path='/' element={<LandingPage />} /> 
           <Route path='/community' element={<CommunityPage />} />
           <Route path="/workouts" element={<Workouts />} />
+          <Route path="/about" element={<About />} />
+
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/users" element={<UsersPage />} />
