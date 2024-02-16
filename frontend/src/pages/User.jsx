@@ -25,7 +25,7 @@ export default function UserPage() {
   const [notifications , setNotifications] = useState([])
   const [notifInit, setNotifInit] = useState(true)
   const [seenNotif, setSeenNotif] = useState(false)
-  const [currUser, setCurrUser] = useState(1) 
+  const [joinedEvents, setJoinedEvents] = useState({});
 
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id)
@@ -35,6 +35,7 @@ export default function UserPage() {
       const [user, error] = await getUser(id);
       if (error) return setErrorText(error.message);
       setUserProfile(user);
+      if(isCurrentUserProfile) loadJoinedEvents(currentUser.id)
     };
 
     setUserEvents(id);
@@ -64,6 +65,18 @@ export default function UserPage() {
     setCurrentUser(null);
     navigate('/login');
     destroyUser({ id });
+  };
+  const loadJoinedEvents = async () => {
+    if (currentUser) {
+      const signedEvents = await fetchJoinedEvents(currentUser.id);
+      console.log('signed Events: ', signedEvents);
+      const obj = {};
+      signedEvents.forEach((event) => {
+        obj[event.id] = true;
+      });
+      setJoinedEvents(obj);
+      console.log(obj);
+    }
   };
 
   if (!userProfile && !errorText) return null;

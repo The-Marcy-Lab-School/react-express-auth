@@ -6,6 +6,7 @@ import {
   fetchAttendeesAmount,
   destroyEvent,
 } from '../adapters/event-adapter';
+import { createANotification } from '../adapters/notification-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import './styles/Event.css';
 import Comments from './Comments';
@@ -49,6 +50,8 @@ const Event = (props) => {
       const attendentAmount = await fetchAttendeesAmount(event.id);
       setAttendeeAmount(attendentAmount);
     }, 160);
+    createANotification({ event_id,  recipient_id : event.user_id, attendee_id : user_id, text : `
+    ${currentUser.name} joined Event ${event.title}`})
   };
 
   const mapHandler = () => {
