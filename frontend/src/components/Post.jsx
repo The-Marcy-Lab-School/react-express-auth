@@ -1,25 +1,61 @@
 import { useContext, useEffect, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button, ButtonGroup } from '@chakra-ui/react'
 import EditPostForm from "./EditPostForm";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { getPost } from "../adapters/post-adapter";
-
+import { uploadLike, getAllPostLikes, getAllUserLikes } from "../adapters/like-adapter";
 export default function Post({ id, comments, setComments }) {
     const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-    const [userProfile, setUserProfile] = useState({}) //userinfo of who made post
-    const [userPost, setUserPost] = useState({}) //post data
+    const [userProfile, setUserProfile] = useState({});
+    const [userPost, setUserPost] = useState({});
     const [errorText, setErrorText] = useState(null);
+    const [likes, setLikes] = useState([]);
+    const [userLiked, setUserLiked] = useState({});
 
+    const handleLike = async () => {
+        // const likes_amount = 1;
+        console.log(userLiked, likes)
+        // try {
+
+        //     await uploadLike({ post_id: userPost.id, user_id: currentUser.id, likes_amount });
+        //     console.log('Like uploaded successfully!');
+        //     // Optionally, you can update the UI or state to reflect the new like.
+        // } catch (error) {
+        //     console.error('Error uploading like:', error);
+        //     setErrorText(error.message);
+        // }
+    }
 
     useEffect(() => {
         const loadPost = async () => {
-            const [post, error] = await getPost(id); //gets post via id from db
+            const [post, error] = await getPost(id);
             if (error) return setErrorText(error.message);
-            setUserPost(post); //sets user state to the post we fetched
+            setUserPost(post);
         };
+
+        const loadLikes = async () => {
+            const [response, error] = await getAllPostLikes(id);
+            if (error) {
+                setErrorText(error);
+            } else {
+                setLikes(response);
+            }
+        };
+        const loadUserLiked = async () => {
+            try {
+                const userLikes = await getAllUserLikes(currentUser.id);
+                setUserLiked(userLikes); // Assuming userLikes is an array of liked items
+            } catch (error) {
+                setErrorText(error.message);
+            }
+        }
         loadPost();
+        loadLikes();
+        loadUserLiked();
     }, [id]);
+
 
     useEffect(() => {
         const loadUser = async () => {
@@ -35,10 +71,12 @@ export default function Post({ id, comments, setComments }) {
         <Card maxW='md'>
             <CardHeader>
                 <Flex spacing='4'>
-                    <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                        <Avatar name={userProfile.username} src={userProfile.profile_image} />
-                        <Heading size='sm'>{userProfile.username}</Heading>
-                    </Flex>
+                    <NavLink to={`/users/${userProfile.id}`}>
+                        <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
+                            <Avatar name={userProfile.username} src={userProfile.profile_image} />
+                            <Heading size='sm'>{userProfile.username}</Heading>
+                        </Flex>
+                    </NavLink>
                 </Flex>
             </CardHeader>
             <CardBody>
@@ -71,9 +109,7 @@ export default function Post({ id, comments, setComments }) {
                 }}
             >
                 <ButtonGroup>
-                    <Button flex='1' variant='ghost'>
-                        Like
-                    </Button>
+                    <Button onClick={handleLike} flex='1' variant='ghost'> Like: {likes.total_likes}</Button>
                     <EditPostForm /*post={userPost} setPost={setUserPost}*/ />
                 </ButtonGroup>
             </CardFooter>

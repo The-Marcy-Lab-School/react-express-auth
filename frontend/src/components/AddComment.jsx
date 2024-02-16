@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Button, Heading, useDisclosure, Input, FormControl } from '@chakra-ui/react'
 import { createComment } from "../adapters/comment-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import Comment from "./Comment";
 
 export default function AddComment({ post_id, comments, setComments }) {
@@ -42,7 +42,7 @@ export default function AddComment({ post_id, comments, setComments }) {
         <CardHeader className="flex flex-col items-start">
           <Heading>Voice Your Thoughts!</Heading>
         </CardHeader>
-        <CardBody>
+        <CardBody overflowY="auto">
           {
             comments.length > 0 ?
               comments.map((comment) => { //maps through all comments arrs and displays

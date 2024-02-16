@@ -8,7 +8,7 @@ import { getAllUserLikes } from "../adapters/like-adapter";
 import { getPost } from "../adapters/post-adapter";
 import { deletePost } from "../adapters/post-adapter";
 
-const UserProfileTabs = ({ username, id, bio }) => {
+const UserProfileTabs = ({ username, id, bio, isCurrentUserProfile }) => {
     const [userPosts, setUserPosts] = useState([]);
     const [userLikes, setUserLikes] = useState([]);
     const navigate = useNavigate();
@@ -55,34 +55,37 @@ const UserProfileTabs = ({ username, id, bio }) => {
                 <TabPanel overflow={"auto"} className="h-[20rem] ">
                     <ul className="flex flex-col">{
                         userPosts.length > 0 ?
-                        userPosts.map((post, index) => {
-                        return (
-                            <Card key={index} direction={'row'}>
-                                <CardHeader>
-                                    <Image src={post.image} alt="post image" />
-                                    <Text className="mt-[1em] text-gray-500">Location: {post.location}</Text>
-                                </CardHeader>
-                                <CardBody >
-                                    <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
-                                    <Text className="h-[60%]">{post.description}</Text>
-                                    
-                                    <ButtonGroup onClick="" spacing='2' colorScheme='green' className="bottom-0">
-                                        <Button onClick={() => navigate(`/posts/${post.id}`)} variant='solid' colorScheme='green'>
-                                            Edit
-                                        </Button>
-                                        <Button onClick={() => handleDelete(post.id)} variant='ghost' colorScheme='green'>
-                                            Delete
-                                        </Button>
-                                    </ButtonGroup>
-                                </CardBody>
-                                <CardFooter className="text-gray-500 flex flex-col">
-                                    <Text className="w-[6em]">Start: {post.start_time}</Text>
-                                    <Text className="w-[6em]">End: {post.end_time}</Text>
-                                </CardFooter>
-                            </Card>
-                        )
-                    })
-                    : <p>No posts yet</p>
+                            userPosts.map((post, index) => {
+                                return (
+                                    <Card key={index} direction={'row'}>
+                                        <CardHeader>
+                                            <Image src={post.image} alt="post image" />
+                                            <Text className="mt-[1em] text-gray-500">Location: {post.location}</Text>
+                                        </CardHeader>
+                                        <CardBody >
+                                            <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
+                                            <Text className="h-[60%]">{post.description}</Text>
+                                            {!!isCurrentUserProfile &&
+                                                (
+                                                    <ButtonGroup spacing='2' colorScheme='green' className="bottom-0">
+                                                        <Button onClick={() => navigate(`/posts/${post.id}`)} variant='solid' colorScheme='green'>
+                                                            Edit
+                                                        </Button>
+                                                        <Button onClick={() => handleDelete(post.id)} variant='ghost' colorScheme='green'>
+                                                            Delete
+                                                        </Button>
+                                                    </ButtonGroup>
+                                                )
+                                            }
+                                        </CardBody>
+                                        <CardFooter className="text-gray-500 flex flex-col">
+                                            <Text className="w-[6em]">Start: {post.start_time}</Text>
+                                            <Text className="w-[6em]">End: {post.end_time}</Text>
+                                        </CardFooter>
+                                    </Card>
+                                )
+                            })
+                            : <p>No posts yet</p>
                     }</ul>
                 </TabPanel>
                 <TabPanel overflow={"auto"} className="h-[20rem] ">
