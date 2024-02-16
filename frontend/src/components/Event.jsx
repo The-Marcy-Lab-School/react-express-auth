@@ -7,11 +7,13 @@ import {
   fetchAttendeesAmount,
   destroyEvent,
 } from '../adapters/event-adapter';
+import { createANotification, deleteANotification } from '../adapters/notification-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import './styles/Event.css';
 import Comments from './Comments';
 import JoinButton from './JoinButton';
 import Map from './Map';
+
 
 const Event = (props) => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -53,7 +55,11 @@ const Event = (props) => {
     const user_id = currentUser.id;
     const event_id = event.id;
     if (!(event.id in joinedEvents)) await joinAnEvent({ user_id, event_id });
-    else await leaveAnEvent({ user_id, event_id });
+    else {
+      await leaveAnEvent({ user_id, event_id })
+      deleteANotification( event.user_id,
+      user_id)
+    }
     setTimeout(async () => {
       await loadJoinedEvents();
     }, 100); // This is so it fetches after sign in has settled in,, should add loading MUST RE VIST
@@ -62,6 +68,8 @@ const Event = (props) => {
       const attendentAmount = await fetchAttendeesAmount(event.id);
       setAttendeeAmount(attendentAmount);
     }, 160);
+    createANotification({ event_id,  recipient_id : event.user_id, attendee_id : user_id, text : `
+    ${currentUser.name} joined Event ${event.title}`})
   };
 
   const mapHandler = () => {

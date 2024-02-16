@@ -5,6 +5,7 @@ const multer = require('multer');
 const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
 const eventController = require('./controllers/event/index');
 const commentController = require('./controllers/comment/index');
+const notificationController = require('./controllers/notification/index')
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
 const Comment = require('./db/models/comment')
@@ -77,6 +78,10 @@ Router.delete('/events/relations/:eventId', eventController.leaveEvent);
 Router.delete('/events/:eventId', eventController.destroyEvent);
 
 Router.get('/comments/:userId', commentController.getCommentsByUser);
+Router.get("/notifications/:userId", notificationController.getNotifications)
+Router.post('/notifications', notificationController.create)
+Router.delete("/notifications/:userId", notificationController.deleteNotifications)
+Router.delete("/notifications", notificationController.deleteANotification)
 
 Router.patch('/comments/:commentId/hide', checkAuthentication, async (req, res) => {
   const { commentId } = req.params;
