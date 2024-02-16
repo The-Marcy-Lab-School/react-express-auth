@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, NavLink, useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import { Wrap, WrapItem, Avatar, Button, ButtonGroup } from "@chakra-ui/react";
 import { Image, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
@@ -11,7 +11,7 @@ import { deletePost } from "../adapters/post-adapter";
 const UserProfileTabs = ({ username, id, bio }) => {
     const [userPosts, setUserPosts] = useState([]);
     const [userLikes, setUserLikes] = useState([]);
-
+    const navigate = useNavigate();
     const loadLikes = async (id) => {
         try {
             const likes = await getAllUserLikes(id);
@@ -55,33 +55,34 @@ const UserProfileTabs = ({ username, id, bio }) => {
                 <TabPanel overflow={"auto"} className="h-[20rem] ">
                     <ul className="flex flex-col">{
                         userPosts.length > 0 ?
-                            userPosts.map((post, index) => {
-                                return (
-                                    <Card key={index} direction={'row'}>
-                                        <CardHeader>
-                                            <Image src={post.image} alt="post image" />
-                                            <Text className="mt-[1em] text-gray-500">Location: {post.location}</Text>
-                                        </CardHeader>
-                                        <CardBody >
-                                            <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
-                                            <Text className="h-[60%]">{post.description}</Text>
-                                            <ButtonGroup spacing='2' colorScheme='green' className="bottom-0">
-                                                <Button variant='solid' colorScheme='green'>
-                                                    Edit
-                                                </Button>
-                                                <Button onClick={() => handleDelete(post.id)} variant='ghost' colorScheme='green'>
-                                                    Delete
-                                                </Button>
-                                            </ButtonGroup>
-                                        </CardBody>
-                                        <CardFooter className="text-gray-500 flex flex-col">
-                                            <Text className="w-[6em]">Start: {post.start_time}</Text>
-                                            <Text className="w-[6em]">End: {post.end_time}</Text>
-                                        </CardFooter>
-                                    </Card>
-                                )
-                            })
-                            : <p>No posts yet</p>
+                        userPosts.map((post, index) => {
+                        return (
+                            <Card key={index} direction={'row'}>
+                                <CardHeader>
+                                    <Image src={post.image} alt="post image" />
+                                    <Text className="mt-[1em] text-gray-500">Location: {post.location}</Text>
+                                </CardHeader>
+                                <CardBody >
+                                    <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
+                                    <Text className="h-[60%]">{post.description}</Text>
+                                    
+                                    <ButtonGroup onClick="" spacing='2' colorScheme='green' className="bottom-0">
+                                        <Button onClick={() => navigate(`/posts/${post.id}`)} variant='solid' colorScheme='green'>
+                                            Edit
+                                        </Button>
+                                        <Button onClick={() => handleDelete(post.id)} variant='ghost' colorScheme='green'>
+                                            Delete
+                                        </Button>
+                                    </ButtonGroup>
+                                </CardBody>
+                                <CardFooter className="text-gray-500 flex flex-col">
+                                    <Text className="w-[6em]">Start: {post.start_time}</Text>
+                                    <Text className="w-[6em]">End: {post.end_time}</Text>
+                                </CardFooter>
+                            </Card>
+                        )
+                    })
+                    : <p>No posts yet</p>
                     }</ul>
                 </TabPanel>
                 <TabPanel overflow={"auto"} className="h-[20rem] ">

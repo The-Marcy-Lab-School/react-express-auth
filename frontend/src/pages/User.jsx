@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import UserProfileCard from "../components/UserProfileCard";
@@ -7,7 +7,6 @@ import UserProfileTabs from "../components/UserProfileTabs";
 
 export default function UserPage() {
   // React hooks to access necessary functionality and state
-  const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);

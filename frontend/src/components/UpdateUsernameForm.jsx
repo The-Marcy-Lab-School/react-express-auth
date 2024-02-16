@@ -19,8 +19,8 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: "",
-    bio: ""
+    username: currentUser.username,
+    bio: currentUser.bio
   });
 
   console.log(id, currentUser.id);
@@ -49,7 +49,7 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
       username: '',
       bio: ''
     });
-    onClose(); // Close modal after form submission
+    onClose();
   };
 
 
@@ -76,7 +76,6 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
                 <input
                   type="text"
                   name="bio"
-                  // value={formData.bio}
                   placeholder={currentUser.bio}
                   onChange={handleChange}
                 />

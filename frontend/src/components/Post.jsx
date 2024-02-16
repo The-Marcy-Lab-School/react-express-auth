@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button } from '@chakra-ui/react'
-import AddComment from "./AddComment";
-
+import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button, ButtonGroup } from '@chakra-ui/react'
+import EditPostForm from "./EditPostForm";
+import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { getPost } from "../adapters/post-adapter";
 
 export default function Post({ id, comments, setComments }) {
-
+    const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
     const [userProfile, setUserProfile] = useState({}) //userinfo of who made post
     const [userPost, setUserPost] = useState({}) //post data
     const [errorText, setErrorText] = useState(null);
 
 
-    useEffect(() => { 
+    useEffect(() => {
         const loadPost = async () => {
             const [post, error] = await getPost(id); //gets post via id from db
             if (error) return setErrorText(error.message);
@@ -31,30 +31,35 @@ export default function Post({ id, comments, setComments }) {
     }, [userPost.user_id]);
 
     return (<>
+
         <Card maxW='md'>
             <CardHeader>
                 <Flex spacing='4'>
                     <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
                         <Avatar name={userProfile.username} src={userProfile.profile_image} />
-
-                        <Box>
-                            <Heading size='sm'>{userProfile.username}</Heading>
-                            <Text>{userPost.location}</Text>
-                        </Box>
+                        <Heading size='sm'>{userProfile.username}</Heading>
                     </Flex>
                 </Flex>
             </CardHeader>
             <CardBody>
-                <Heading size='lg'>{userPost.title}</Heading>
-                <Text>
-                    {userPost.description}
-                </Text>
+                <Box className="flex flex-row justify-between">
+                    <Heading size='lg'>{userPost.title}</Heading>
+                    <Box className="flex flex-row w-[5em] space-x-[1em] mr-[1.5em]">
+                        <Text>Start: {userPost.start_time}</Text>
+                        <Text>End: {userPost.end_time}</Text>
+                    </Box>
+                </Box>
+                <Text className="text-gray-600">{userPost.location}</Text>
+                <Image objectFit='cover' src={userPost.image} alt='No Pic' />
+                <Box className="flex flex-row">
+                    <Text fontSize='md' className="h-[6em] w-[75%] m-[1em]">{userPost.description}</Text>
+                    <ul className="mt-[1.2em]">
+                        {
+                            userPost.tags && userPost.tags.split(",").map((tag, index) => <Text key={index}>{tag}</Text>)
+                        }
+                    </ul>
+                </Box>
             </CardBody>
-            <Image
-                objectFit='cover'
-                src={userPost.image}
-                alt='No Pic'
-            />
 
             <CardFooter
                 justify='space-between'
@@ -65,15 +70,12 @@ export default function Post({ id, comments, setComments }) {
                     },
                 }}
             >
-                <Button flex='1' variant='ghost'>
-                    Like
-                </Button>
-                <AddComment  
-                comments={comments} 
-                setComments={setComments} //pass in the comments prop so it updates when a new comment is made 
-                post_id={id}
-                />
-
+                <ButtonGroup>
+                    <Button flex='1' variant='ghost'>
+                        Like
+                    </Button>
+                    <EditPostForm /*post={userPost} setPost={setUserPost}*/ />
+                </ButtonGroup>
             </CardFooter>
         </Card>
     </>)
