@@ -37,3 +37,7 @@ export const createANotification = async ({
     console.log(userId)
     fetchHandler(`${baseUrl}/${userId}`, deleteOptions({ userId }));
   };
+  export const deleteANotification = async ( userId, attendeeId ) => {
+    console.log(userId)
+    fetchHandler(`${baseUrl}`, deleteOptions({ userId, attendeeId }));
+  };

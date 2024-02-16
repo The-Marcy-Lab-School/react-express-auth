@@ -23,7 +23,7 @@ export default function UserPage() {
     setErrorText,
   } = useUserStore((state) => state);
   const [notifications , setNotifications] = useState([])
-  const [notifInit, setNotifInit] = useState(true)
+  const [notifInit, setNotifInit] = useState(false)
   const [seenNotif, setSeenNotif] = useState(false)
   const [joinedEvents, setJoinedEvents] = useState({});
 
