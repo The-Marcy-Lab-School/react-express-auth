@@ -41,6 +41,17 @@ class Notification {
             console.log(err)
         }
     }
+    static async removeANotification(userId, attendeeId) {
+        try {
+            const query = `Delete  from notifications
+            Where recipient_id = ? AND attendee_id = ?`
+            const args = [userId, attendeeId]
+            const {rows} = await knex.raw(query, args)
+            return rows
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
 
 module.exports = Notification
