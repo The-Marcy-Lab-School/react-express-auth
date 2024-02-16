@@ -8,6 +8,7 @@ const commentController = require('./controllers/comment/index');
 const notificationController = require('./controllers/notification/index')
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
+const Comment = require('./db/models/comment')
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -81,6 +82,16 @@ Router.get("/notifications/:userId", notificationController.getNotifications)
 Router.post('/notifications', notificationController.create)
 Router.delete("/notifications/:userId", notificationController.deleteNotifications)
 Router.delete("/notifications", notificationController.deleteANotification)
+
+Router.patch('/comments/:commentId/hide', checkAuthentication, async (req, res) => {
+  const { commentId } = req.params;
+  const success = await Comment.hideComment(commentId);
+  if (success) {
+    res.json({ message: "Comment hidden successfully." });
+  } else {
+    res.status(500).json({ error: "Failed to hide the comment." });
+  }
+});
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
