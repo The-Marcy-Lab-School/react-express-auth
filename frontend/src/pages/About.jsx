@@ -171,10 +171,10 @@ export default function Workouts() {
             </div>
             <div className="h-[1000px] bg-red-100 text-lg">
             <div class="relative top-28 left-0 ml-40 text-lg font-medium w-50">
-                <img class="rounded-sm" src="https://cdn0.iconfinder.com/data/icons/fat-obese-overweight-woman-stick-figure/251/fat-obese-obesity-woman-12-1024.png" alt="Smiley face" width="52" height="40" />
+                {/* <img class="rounded-sm" src="https://cdn0.iconfinder.com/data/icons/fat-obese-overweight-woman-stick-figure/251/fat-obese-obesity-woman-12-1024.png" alt="Smiley face" width="52" height="40" /> */}
                 <div className='font-medium'>
                   <p className='text-gray-500 text-base'>The Problem.</p>
-                  <h1 className='counter text-9xl mt-7'>  
+                  <h1 className='counter text-9xl mt-7 text-red-600'>  
                     {counters.map((target, index) => (
                       <Counter key={index} target={target} />
                     ))} 
@@ -184,7 +184,10 @@ export default function Workouts() {
                 </div>
               
                 {/* <p className='text-8xl mt-2'>OBEsity</p> */}
-                <div className='relative top-2 -left-0 -ml-48 ' style={{ width: '120%' }}>
+              
+                
+              </div>
+              <div className='relative top-12 -left-0 font-medium' style={{ width: '98%'  }}>
                   <section class="early">
                   <article>
                     <p class="example-right">A study by the U.S. Centers for Disease Control and Prevention (CDC) revealed an “alarming” increase in obesity among American children and teenagers during the COVID-19 pandemic. Before the pandemic, children who were a healthy weight gained an average of 3.4 pounds per year. However, during the pandemic, this increased to 5.4 pounds. The rate of obesity rose significantly in kids aged 6 to 11, who were more dependent on their parents and may have been affected when schools suspended in-person classes.</p>
@@ -203,8 +206,6 @@ export default function Workouts() {
               
                   </section>
                 </div>
-                
-              </div>
               
             </div>
 
@@ -231,7 +232,7 @@ export default function Workouts() {
                     <div class="w-1/2">
                       <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link ml-8"></a>Marvin</p>
                       <p class="text-black ml-8">
-                          Full-Stack Developer & <span class="text-red-500">Team Lead</span>
+                          Full-Stack Developer & <span class="text-red-600">Team Lead</span>
                       </p>
                     </div>
                   </div>

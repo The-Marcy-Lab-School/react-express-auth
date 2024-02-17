@@ -88,11 +88,11 @@
 
 
           article {
-            max-width: 90000px;
+            max-width: 8000px;
             margin: 1em auto;
             overflow: hidden;
             position: relative;
-            min-height: 6em;
+            min-height: 7em;
             transform: rotate(-15deg);
           }
           

@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <SiteHeadingAndNav />
+      {/* <SiteHeadingAndNav /> */}
       <main>
         <Routes>
           <Route path='/' element={<LandingPage />} /> 
