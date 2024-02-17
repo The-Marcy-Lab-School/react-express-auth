@@ -67,8 +67,7 @@ export default function Post({ id, comments, setComments }) {
     }, [userPost.user_id]);
 
     return (<>
-
-        <Card maxW='md'>
+        <Card maxW='md' >
             <CardHeader>
                 <Flex spacing='4'>
                     <NavLink to={`/users/${userProfile.id}`}>
