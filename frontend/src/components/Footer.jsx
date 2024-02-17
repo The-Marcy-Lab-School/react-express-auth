@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 export default function Footer(){
-    return <footer className="bg-[#808080] text-white">
+    return <footer className="bg-[#808080] text-white bottom-0 relative">
     <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#989A99] py-7">
       <h1
         className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold

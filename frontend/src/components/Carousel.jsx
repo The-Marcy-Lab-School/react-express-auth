@@ -1,35 +1,76 @@
-import { useState } from "react"
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
+import React, { useState, useEffect } from 'react';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import CarouselCard from './CarouselCards';
+import { Button } from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
-export default function Carousel({ slides }) {
-    let [current, setCurrent] = useState(0);
-    let previousSlide = () => {
-        if (current === 0) setCurrent(slides.length - 1);
-        else setCurrent(current - 1);
-    }
-    let nextSlide = () => {
-        if (current === slides.length - 1) setCurrent(0);
-        else setCurrent(current + 1);
-    }
+export default function ArticlesCarousel() {
+    const responsive = {
+        superLargeDesktop: {
+          breakpoint: { max: 4000, min: 3000 },
+          items: 5
+        },
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 3 //3 items showing
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+    };
+
+    const CustomButtonGroup = ({ next, previous, ...rest }) => {
+        return (
+          <div {...rest}>
+            <Button onClick={() => previous()} position="absolute" left={0} top="50%" transform="translateY(100%) translateX(100%)" zIndex="2">
+              <ChevronLeftIcon />
+            </Button>
+            <Button onClick={() => next()} position="absolute" right={0} top="50%" transform="translateY(100%) translateX(-130%)" zIndex="2">
+              <ChevronRightIcon />
+            </Button>
+          </div>
+        );
+      };
+
+    const [articles, setArticles] = useState([]);
+    const [filter, setFilter] = useState('help environment recycling');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+              const apiKey = import.meta.env.VITE_ARTICLES_API_KEY;
+              const response = await fetch(`https://newsapi.org/v2/everything?q=${filter}&apiKey=${apiKey}`);
+              const data = await response.json();
+              const validArticles = data.articles.filter(article => article.urlToImage != null);
+              setArticles(validArticles);
+      
+            } catch (error) {
+              console.error('Error fetching Articles:', error);
+            }
+          };
+
+        fetchData();
+    }, [filter]);
 
     return (
-        <div className="h-screen w-full flex flex-col justify-center items-center bg-[#1C1E1F]">
-            <h1 className="text-5xl text-center mb-40 text-white">Carousel</h1>
-            <div className="overflow-hidden h-96 relative mb-20 bg-[#989A99] rounded-lg">
-                <div className={`flex transition ease-in-out duration-40`} style={{ transform: `translateX(-${current * 100}%)` }}>
-                    {slides.map((s, i) => {
-                        return (
-                            <div key={i} className="flex flex-shrink-0 mt-20 h-full w-full justify-center items-center">
-                                <img src={s} className="object-cover" />
-                            </div>
-                        )
-                    })}
-                </div>
-                <div className="absolute top-0 h-full w-full justify-between items-center flex text-3xl text-white">
-                    <button onClick={previousSlide}><IoIosArrowBack /></button>
-                    <button onClick={nextSlide}><IoIosArrowForward /></button>
-                </div>
-            </div>
+        <div className='articlesCarousel' style={{ position: 'relative', padding: '0 8rem', marginLeft: '1rem', marginTop: '12rem', marginBottom: '5rem' }}>
+            <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '5rem', textAlign: 'center' }}>Learn More</h1>
+            <Carousel
+                responsive={responsive}
+                arrows={false}
+                renderButtonGroupOutside={true}
+                customButtonGroup={<CustomButtonGroup />}
+            >
+                {articles.map((article, index) => (
+                    <CarouselCard key={index} article={article} />
+                ))}
+            </Carousel>
         </div>
-    )
+    );
 }

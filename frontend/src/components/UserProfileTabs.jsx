@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import { Wrap, WrapItem, Avatar, Button, ButtonGroup } from "@chakra-ui/react";
-import { Box, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
+import { Image, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
 import { getAllUserPosts } from "../adapters/post-adapter";
 import { getAllUserLikes } from "../adapters/like-adapter";
 import { getPost } from "../adapters/post-adapter";
@@ -40,7 +40,7 @@ const UserProfileTabs = ({ username, id, bio }) => {
         loadPosts();
         loadLikes(id);
     }, []);
-
+    console.log(userPosts)
     return <div className="h-full w-[40rem] flex flex-col space-y-0 left-0 pt-[5rem]">
         <div className="flex flex-col h-[13rem] w-full">
             <h1 className="text-3xl">{username}</h1>
@@ -57,16 +57,15 @@ const UserProfileTabs = ({ username, id, bio }) => {
                         userPosts.length > 0 ?
                             userPosts.map((post, index) => {
                                 return (
-                                    <Card key={index}>
+                                    <Card key={index} direction={'row'}>
                                         <CardHeader>
-                                            <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
+                                            <Image src={post.image} alt="post image" />
+                                            <Text className="mt-[1em] text-gray-500">Location: {post.location}</Text>
                                         </CardHeader>
-                                        <CardBody>
-                                            <Text>{post.description}</Text>
-                                            <Text>Location: {post.location}</Text>
-                                        </CardBody>
-                                        <CardFooter>
-                                            <ButtonGroup spacing='2' colorScheme='green'>
+                                        <CardBody >
+                                            <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
+                                            <Text className="h-[60%]">{post.description}</Text>
+                                            <ButtonGroup spacing='2' colorScheme='green' className="bottom-0">
                                                 <Button variant='solid' colorScheme='green'>
                                                     Edit
                                                 </Button>
@@ -74,6 +73,10 @@ const UserProfileTabs = ({ username, id, bio }) => {
                                                     Delete
                                                 </Button>
                                             </ButtonGroup>
+                                        </CardBody>
+                                        <CardFooter className="text-gray-500 flex flex-col">
+                                            <Text className="w-[6em]">Start: {post.start_time}</Text>
+                                            <Text className="w-[6em]">End: {post.end_time}</Text>
                                         </CardFooter>
                                     </Card>
                                 )
@@ -88,11 +91,11 @@ const UserProfileTabs = ({ username, id, bio }) => {
                                 return (
                                     <Card key={index}>
                                         <CardHeader>
-                                            <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
+                                            <Text>Location: {post.location}</Text>
                                         </CardHeader>
                                         <CardBody>
+                                            <Heading size='md'><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></Heading>
                                             <Text>{post.description}</Text>
-                                            <Text>Location: {post.location}</Text>
                                         </CardBody>
                                     </Card>
                                 )

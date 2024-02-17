@@ -16,7 +16,6 @@ import AboutUsPage from './pages/About-us';
 import MapPage from './pages/MapPage';
 import ArticlesPage from './pages/ArticlesPage';
 
-
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
@@ -34,10 +33,10 @@ export default function App() {
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='/posts' element={<CommunityPosts />} />
         <Route path='/posts/:id' element={<PostPage/>} />
+        <Route path='/About-us' element={<AboutUsPage />} />
+        <Route path='/articles' element={<ArticlesPage />} />
         <Route path='/map' element={<MapPage/>} />
         <Route path='*' element={<NotFoundPage />} />
-        <Route path='/About-us' element={<AboutUsPage />} />
-        <Route path='/Articles' element={<ArticlesPage/>} />
       </Routes>
     </main>
     <Footer />
