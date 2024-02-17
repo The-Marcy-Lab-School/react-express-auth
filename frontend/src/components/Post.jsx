@@ -1,25 +1,61 @@
 import { useContext, useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button } from '@chakra-ui/react'
-import AddComment from "./AddComment";
-
+import { NavLink, useParams } from "react-router-dom";
+import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, Image, Button, ButtonGroup } from '@chakra-ui/react'
+import EditPostForm from "./EditPostForm";
+import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { getPost } from "../adapters/post-adapter";
-
+import { uploadLike, getAllPostLikes, getAllUserLikes } from "../adapters/like-adapter";
 export default function Post({ id, comments, setComments }) {
-
-    const [userProfile, setUserProfile] = useState({}) //userinfo of who made post
-    const [userPost, setUserPost] = useState({}) //post data
+    const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+    const [userProfile, setUserProfile] = useState({});
+    const [userPost, setUserPost] = useState({});
     const [errorText, setErrorText] = useState(null);
+    const [likes, setLikes] = useState([]);
+    const [userLiked, setUserLiked] = useState({});
 
+    const handleLike = async () => {
+        // const likes_amount = 1;
+        console.log(userLiked, likes)
+        // try {
 
-    useEffect(() => { 
+        //     await uploadLike({ post_id: userPost.id, user_id: currentUser.id, likes_amount });
+        //     console.log('Like uploaded successfully!');
+        //     // Optionally, you can update the UI or state to reflect the new like.
+        // } catch (error) {
+        //     console.error('Error uploading like:', error);
+        //     setErrorText(error.message);
+        // }
+    }
+
+    useEffect(() => {
         const loadPost = async () => {
-            const [post, error] = await getPost(id); //gets post via id from db
+            const [post, error] = await getPost(id);
             if (error) return setErrorText(error.message);
-            setUserPost(post); //sets user state to the post we fetched
+            setUserPost(post);
         };
+
+        const loadLikes = async () => {
+            const [response, error] = await getAllPostLikes(id);
+            if (error) {
+                setErrorText(error);
+            } else {
+                setLikes(response);
+            }
+        };
+        const loadUserLiked = async () => {
+            try {
+                const userLikes = await getAllUserLikes(currentUser.id);
+                setUserLiked(userLikes); // Assuming userLikes is an array of liked items
+            } catch (error) {
+                setErrorText(error.message);
+            }
+        }
         loadPost();
+        loadLikes();
+        loadUserLiked();
     }, [id]);
+
 
     useEffect(() => {
         const loadUser = async () => {
@@ -31,31 +67,37 @@ export default function Post({ id, comments, setComments }) {
     }, [userPost.user_id]);
 
     return (<>
-        <Card maxW='md'>
+        <Card maxW='md' >
             <CardHeader>
                 <Flex spacing='4'>
-                    <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                        <Avatar name={userProfile.username} src={userProfile.profile_image} />
-
-                        <Box>
+                    <NavLink to={`/users/${userProfile.id}`}>
+                        <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
+                            <Avatar name={userProfile.username} src={userProfile.profile_image} />
                             <Heading size='sm'>{userProfile.username}</Heading>
-                            <Text>{userPost.location}</Text>
-                            <Text>{userPost.start_time}-{userPost.end_time}</Text>
-                        </Box>
-                    </Flex>
+                        </Flex>
+                    </NavLink>
+
                 </Flex>
             </CardHeader>
             <CardBody>
-                <Heading size='lg'>{userPost.title}</Heading>
-                <Text>
-                    {userPost.description}
-                </Text>
+                <Box className="flex flex-row justify-between">
+                    <Heading size='lg'>{userPost.title}</Heading>
+                    <Box className="flex flex-row w-[5em] space-x-[1em] mr-[1.5em]">
+                        <Text>Start: {userPost.start_time}</Text>
+                        <Text>End: {userPost.end_time}</Text>
+                    </Box>
+                </Box>
+                <Text className="text-gray-600">{userPost.location}</Text>
+                <Image objectFit='cover' src={userPost.image} alt='No Pic' />
+                <Box className="flex flex-row">
+                    <Text fontSize='md' className="h-[6em] w-[75%] m-[1em]">{userPost.description}</Text>
+                    <ul className="mt-[1.2em]">
+                        {
+                            userPost.tags && userPost.tags.split(",").map((tag, index) => <Text key={index}>{tag}</Text>)
+                        }
+                    </ul>
+                </Box>
             </CardBody>
-            <Image
-                objectFit='cover'
-                src={userPost.image}
-                alt='No Pic'
-            />
 
             <CardFooter
                 justify='space-between'
@@ -66,15 +108,10 @@ export default function Post({ id, comments, setComments }) {
                     },
                 }}
             >
-                <Button flex='1' variant='ghost'>
-                    Like
-                </Button>
-                <AddComment  
-                comments={comments} 
-                setComments={setComments} //pass in the comments prop so it updates when a new comment is made 
-                post_id={id}
-                />
-
+                <ButtonGroup>
+                    <Button onClick={handleLike} flex='1' variant='ghost'> Like: {likes.total_likes}</Button>
+                    <EditPostForm /*post={userPost} setPost={setUserPost}*/ />
+                </ButtonGroup>
             </CardFooter>
         </Card>
     </>)
