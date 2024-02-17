@@ -76,6 +76,7 @@ export default function Post({ id, comments, setComments }) {
                             <Heading size='sm'>{userProfile.username}</Heading>
                         </Flex>
                     </NavLink>
+
                 </Flex>
             </CardHeader>
             <CardBody>
