@@ -22,7 +22,7 @@ export default function Comment({user_id, content}) {
             overflow='hidden'
             variant='outline'
         >
-            <Avatar name={userInfo.username} src={userInfo.profile_pic}/>
+            <Avatar name={userInfo.username} src={userInfo.profile_image}/>
 
             <Stack>
                 <CardBody>

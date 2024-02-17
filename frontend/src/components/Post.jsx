@@ -40,6 +40,7 @@ export default function Post({ id, comments, setComments }) {
                         <Box>
                             <Heading size='sm'>{userProfile.username}</Heading>
                             <Text>{userPost.location}</Text>
+                            <Text>{userPost.start_time}-{userPost.end_time}</Text>
                         </Box>
                     </Flex>
                 </Flex>

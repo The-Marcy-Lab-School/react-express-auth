@@ -15,9 +15,12 @@ import {
   useDisclosure,
   Input,
   FormLabel,
+  Box,
+  Flex,
 } from '@chakra-ui/react'
 import { Autocomplete } from "@react-google-maps/api";
-import { googleApi } from "../googleApi";
+import { geoCode, googleApi } from "../googleApi";
+import { fromAddress } from "react-geocode";
 
 export default function CreatePostForm({ posts, setPosts }) {
   const { isLoaded } = googleApi()
@@ -26,31 +29,50 @@ export default function CreatePostForm({ posts, setPosts }) {
   const [errorText, setErrorText] = useState(null);
   const [title, setTitle] = useState('') //form inputs 
   const [image, setPicture] = useState('')
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
   //const [location, setLocation] = useState('')
   const [description, setdescription] = useState('') //form inputs ^
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext); //current user 
+  geoCode()
 
   // if(!currentUser) return <Navigate to='/login'/>
   const handleSubmit = async (event) => {
+    try{
     event.preventDefault();
     const user_id = currentUser.id
     const location = document.getElementById('location').value
+    const { results } = await fromAddress(location)
+    console.log(startTime, endTime)
     document.getElementById('location').value = ''
     setTitle('')
     setPicture('') //resets/clears input
-    //setLocation('')
     setdescription('')
-    const [post, error] = await createPost({ user_id, title, image, location, description }); //post data into db
+    setEndTime('')
+    setStartTime('')
+
+
+
+    const [post, error] = await createPost({ user_id, title, image, location, description, startTime, endTime }); //post data into db
     if (error) return setErrorText(error.message);
     setPosts([post, ...posts]); //spreads all current post in db and adds the recently made one first
     onClose()
+    }
+    catch(error){
+      setTimeout(() => {
+        document.getElementById('location').value = ''
+      }, 1000)
+      document.getElementById('location').value = 'Not a valid location'
+      console.error(error)
+    }
   };
 
   const handleChange = (event) => { //changes input on every change 
     const { name, value } = event.target;
     if (name === 'title') setTitle(value);
     if (name === 'image') setPicture(value);
-   // if (name === 'location') setLocation(value);
+    if (name === 'startTime') setStartTime(value);
+    if (name === 'endTime') setEndTime(value)
     if (name === 'description') setdescription(value);
   };
 
@@ -81,10 +103,18 @@ export default function CreatePostForm({ posts, setPosts }) {
               <FormLabel>Location</FormLabel>
               {isLoaded && (
                 
-              <Autocomplete id='autocompleteBox'>
+              <Autocomplete>
                 <Input name='location' id='location' type="text" onChange={handleChange} placeholder="Location"/>
               </Autocomplete>
               )}
+              <Box>
+                <Flex>
+                <FormLabel>Start</FormLabel>
+              <Input onChange={handleChange} value={startTime} type='time' id='startTime' name='startTime' />
+              <FormLabel>End</FormLabel>
+              <Input onChange={handleChange} value={endTime} type='time' id='endTime' name='endTime' />
+                </Flex>
+              </Box>
             
         
         </ModalBody>
