@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+// UploadCareClient.jsx
+
+import React, { useEffect, useRef } from 'react';
 import * as LR from '@uploadcare/blocks';
 import blocksStyles from '@uploadcare/blocks/web/lr-file-uploader-regular.min.css?url';
 
@@ -6,23 +8,21 @@ import '../index.css';
 
 LR.registerBlocks(LR);
 
-const UploadcareComponent = () => {
-  const [imageUrls, setImageUrls] = useState([]);
+const UploadcareComponent = ({ onUploadFinish }) => {
   const ctxProviderRef = useRef(null);
 
   useEffect(() => {
-    const handleUpload = (e) => {
-      console.log('File upload success event:', e.detail);
-      // Add logic to handle the uploaded files or update state, if needed
+    const handleUploadFinish = (e) => {
+      console.log(e);
+      console.log('CDN URL:', e.detail.fileInfo.cdnUrl)
+      if (onUploadFinish) {
+        onUploadFinish(e.detail.fileInfo.cdnUrl); // if there is a cdnURL which is the image one, we want to send it in the hook
+      }
     };
 
-    ctxProviderRef.current.addEventListener('file-upload-success', handleUpload);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      ctxProviderRef.current.removeEventListener('file-upload-success', handleUpload);
-    };
-  }, []);
+    ctxProviderRef.current.addEventListener('file-upload-success', handleUploadFinish);
+    
+  }, [onUploadFinish]);
 
   return (
     <div>
@@ -45,7 +45,5 @@ const UploadcareComponent = () => {
     </div>
   );
 };
-
-// need to put component in userprofilecard component to showcase file image uploader
 
 export default UploadcareComponent;
