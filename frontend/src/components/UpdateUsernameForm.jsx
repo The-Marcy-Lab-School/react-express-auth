@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { updateUsername } from "../adapters/user-adapter";
+import UploadcareComponent from "./UploadCareClient";
 import {
   Modal,
   ModalOverlay,
@@ -16,46 +16,24 @@ import {
 
 export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { id } = useParams();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: "",
-    bio: ""
-  });
-
-  console.log(id, currentUser.id);
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const [user, error] = await updateUsername(Object.fromEntries(formData));
 
-    console.log(formData);
-
-    const [user, error] = await updateUsername(id, formData.username, formData.bio);
-
-    if (error?.cause >= 400 && error?.cause < 500) {
-      setCurrentUser(null);1968
-
+    if (error?.cause > 400 && error?.cause < 500) {
+      setCurrentUser(null);
       return navigate('/');
     }
 
     setCurrentUser(user);
-    setFormData({
-      username: '',
-      bio: ''
-    });
-    onClose(); // Close modal after form submission
+    event.target.reset();
   };
-
 
   return (
     <>
-      <Button colorScheme="green" onClick={onOpen} className="w-[7rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Update User</Button>
+      <Button onClick={onOpen} className="w-[7rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Update User</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -70,22 +48,20 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
                   type="text"
                   name="username"
                   placeholder={currentUser.username}
-                  onChange={handleChange}
+                  required
                 />
                 <label htmlFor="bio">New Bio</label>
                 <input
                   type="text"
                   name="bio"
-                  // value={formData.bio}
                   placeholder={currentUser.bio}
-                  onChange={handleChange}
                 />
+                <UploadcareComponent />
               </FormControl>
-              <Button colorScheme='green' mr={3} type="submit">Update</Button>
             </form>
           </ModalBody>
           <ModalFooter>
-            <p>Lookin fly playa</p>
+            <Button colorScheme='green' mr={3} type="submit">Update</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

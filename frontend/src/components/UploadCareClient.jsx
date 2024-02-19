@@ -1,29 +1,51 @@
-import React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as LR from '@uploadcare/blocks';
-import '../index.css'; 
+import blocksStyles from '@uploadcare/blocks/web/lr-file-uploader-regular.min.css?url';
+
+import '../index.css';
+
+LR.registerBlocks(LR);
 
 const UploadcareComponent = () => {
-    LR.registerBlocks(LR);
+  const [imageUrls, setImageUrls] = useState([]);
+  const ctxProviderRef = useRef(null);
+
+  useEffect(() => {
+    const handleUpload = (e) => {
+      console.log('File upload success event:', e.detail);
+      // Add logic to handle the uploaded files or update state, if needed
+    };
+
+    ctxProviderRef.current.addEventListener('file-upload-success', handleUpload);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      ctxProviderRef.current.removeEventListener('file-upload-success', handleUpload);
+    };
+  }, []);
 
   return (
     <div>
       <lr-config
         ctx-name="my-uploader"
         pubkey="8bc71d5f25fde2ddd403"
-        max-local-file-size-bytes="10000000"
-        multiple="false"
-        img-only="true"
-        source-list="local, url, camera, dropbox, instagram"
-      ></lr-config>
+        maxLocalFileSizeBytes={10000000}
+        multiple={false}
+        imgOnly={true}
+        sourceList="local, url, camera, dropbox, instagram"
+      />
+
       <lr-file-uploader-regular
-        css-src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.32.0/web/lr-file-uploader-regular.min.css"
         ctx-name="my-uploader"
+        css-src={blocksStyles}
         class="my-config"
-      ></lr-file-uploader-regular>
+      />
+
+      <lr-upload-ctx-provider ref={ctxProviderRef} ctx-name="my-uploader" />
     </div>
   );
 };
 
-// need to put component in userprofilecard component to showcase file image uploader 
+// need to put component in userprofilecard component to showcase file image uploader
 
 export default UploadcareComponent;
