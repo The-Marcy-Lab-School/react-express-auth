@@ -1,9 +1,6 @@
-// UploadCareClient.jsx
-
 import React, { useEffect, useRef } from 'react';
 import * as LR from '@uploadcare/blocks';
 import blocksStyles from '@uploadcare/blocks/web/lr-file-uploader-regular.min.css?url';
-
 import '../index.css';
 
 LR.registerBlocks(LR);
@@ -11,18 +8,28 @@ LR.registerBlocks(LR);
 const UploadcareComponent = ({ onUploadFinish }) => {
   const ctxProviderRef = useRef(null);
 
+
   useEffect(() => {
     const handleUploadFinish = (e) => {
-      console.log(e);
-      console.log('CDN URL:', e.detail.fileInfo.cdnUrl)
+      console.log("event", e);
+      console.log('CDN URL:', e.detail.fileInfo.cdnUrl);
+
       if (onUploadFinish) {
-        onUploadFinish(e.detail.fileInfo.cdnUrl); // if there is a cdnURL which is the image one, we want to send it in the hook
+        console.log("hiih")
+        onUploadFinish(e.detail.fileInfo.cdnUrl); // if there is a cdnURL which is the image one, we want to send it in the prop
       }
     };
-
-    ctxProviderRef.current.addEventListener('file-upload-success', handleUploadFinish);
+  
+    const currentCtxProviderRef = ctxProviderRef.current;
+    currentCtxProviderRef.addEventListener('file-upload-success', handleUploadFinish);
+  
+    // Cleanup function to remove the event listener
+    return () => {
+      currentCtxProviderRef.removeEventListener('file-upload-success', handleUploadFinish);
+    };
     
-  }, [onUploadFinish]);
+  }, [onUploadFinish]); 
+  
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { updateUsername } from "../adapters/user-adapter";
-import UploadcareComponent from "./UploadCareClient";
+import { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -22,7 +22,7 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
     bio: currentUser.bio
   });
 
-  console.log(id, currentUser.id);
+ 
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -73,7 +73,6 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
                   name="bio"
                   placeholder={currentUser.bio}
                 />
-                <UploadcareComponent />
               </FormControl>
             </form>
           </ModalBody>
