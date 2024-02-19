@@ -41,7 +41,8 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
               <UpdateUsernameForm {...{ currentUser, setCurrentUser }} />
               <Button onClick={handleLogout} className="w-[5rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Log Out</Button>
             </ButtonGroup>
-          )}
+          )
+        }
       </CardHeader>
       <CardBody>
         <Accordion defaultIndex={[0]}>

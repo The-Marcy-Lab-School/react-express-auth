@@ -2,8 +2,8 @@ import { fetchHandler, getPostOptions, getPatchOptions } from "../utils";
 
 const baseUrl = `/api/users`;
 
-export const uploadLike = async ({ post_id, user_id }) => {
-    return await fetchHandler(`${baseUrl}/${user_id}/posts/${post_id}/likes`, getPostOptions({ post_id }));
+export const uploadLike = async ({ post_id, user_id, likes_amount }) => {
+    return await fetchHandler(`${baseUrl}/${user_id}/posts/${post_id}/likes`, getPostOptions({ likes_amount }));
 }
 
 export const deleteLike = async ({ post_id, user_id, like_id }) => {
@@ -11,7 +11,7 @@ export const deleteLike = async ({ post_id, user_id, like_id }) => {
 }
 
 export const getAllPostLikes = async (id) => {
-    const [postLikes] = await fetchHandler(`/api/posts/${id}/likes`);
+    const postLikes = await fetchHandler(`/api/posts/${id}/likes`);
     return postLikes || [];
     // console.log(postLikes)
 }

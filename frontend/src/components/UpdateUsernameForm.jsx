@@ -17,6 +17,19 @@ import {
 export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: currentUser.username,
+    bio: currentUser.bio
+  });
+
+  console.log(id, currentUser.id);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -28,7 +41,11 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
     }
 
     setCurrentUser(user);
-    event.target.reset();
+    setFormData({
+      username: '',
+      bio: ''
+    });
+    onClose();
   };
 
   return (
