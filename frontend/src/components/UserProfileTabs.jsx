@@ -40,7 +40,7 @@ const UserProfileTabs = ({ username, id, bio, isCurrentUserProfile }) => {
         loadPosts();
         loadLikes(id);
     }, []);
-    console.log(userPosts)
+    // console.log(userPosts)
     return <div className="h-full w-[40rem] flex flex-col space-y-0 left-0 pt-[5rem]">
         <div className="flex flex-col h-[13rem] w-full">
             <h1 className="text-3xl">{username}</h1>

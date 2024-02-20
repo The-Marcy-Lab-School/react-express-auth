@@ -41,11 +41,17 @@ export default function UserPage() {
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
   // Access the bio property from the currentUser object
+  // const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
+  // const profileImage = isCurrentUserProfile ? currentUser.profile_image : currentUser.profile_image;
+
+  // console.log("profileImage", profileImage)
+  // console.log("profileBio", profileBio); // Log the bio property to the console
+
   const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
   const profileImage = isCurrentUserProfile ? currentUser.profile_image : userProfile.profile_image;
 
-  console.log("profileImage", profileImage)
-  console.log("profileBio", profileBio); // Log the bio property to the console
+console.log("profileImage:", profileImage);
+// console.log("profileBio:", profileBio);
 
   // JSX rendering based on the user's profile
   return (
