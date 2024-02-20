@@ -7,13 +7,12 @@ LR.registerBlocks(LR);
 
 const UploadcareComponent = ({ onUploadFinish }) => {
   const ctxProviderRef = useRef(null);
-
+const uploadcareKey = import.meta.env.VITE_UPLOADCARE_KEY
 
   useEffect(() => {
     const handleUploadFinish = (e) => {
       console.log("event", e);
       console.log('CDN URL:', e.detail.fileInfo.cdnUrl);
-      const image = e.detail.fileInfo.cdnUrl;
 
       if (onUploadFinish) {
         console.log("did finish uploading")
@@ -36,7 +35,7 @@ const UploadcareComponent = ({ onUploadFinish }) => {
     <div>
       <lr-config
         ctx-name="my-uploader"
-        pubkey="8bc71d5f25fde2ddd403"
+        pubkey={uploadcareKey}
         maxLocalFileSizeBytes={10000000}
         multiple={false}
         imgOnly={true}
