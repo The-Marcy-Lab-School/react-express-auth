@@ -187,15 +187,17 @@ export default function Workouts() {
               
                 
               </div>
-              <div className='relative top-12 -left-0 font-medium' style={{ width: '98%'  }}>
+              <div className='relative top-12 left-0 font-medium' style={{ width: '99vw',
+  marginLeft: '-calc((-100vw + 100%) / 2)',
+  marginRight: '-calc((-100vw + 100%) / 2)',  }}>
                   <section class="early">
                   <article>
-                    <p class="example-right">A study by the U.S. Centers for Disease Control and Prevention (CDC) revealed an “alarming” increase in obesity among American children and teenagers during the COVID-19 pandemic. Before the pandemic, children who were a healthy weight gained an average of 3.4 pounds per year. However, during the pandemic, this increased to 5.4 pounds. The rate of obesity rose significantly in kids aged 6 to 11, who were more dependent on their parents and may have been affected when schools suspended in-person classes.</p>
+                    <p class="right">A study by the U.S. Centers for Disease Control and Prevention (CDC) revealed an “alarming” increase in obesity among American children and teenagers during the COVID-19 pandemic. Before the pandemic, children who were a healthy weight gained an average of 3.4 pounds per year. However, during the pandemic, this increased to 5.4 pounds. The rate of obesity rose significantly in kids aged 6 to 11, who were more dependent on their parents and may have been affected when schools suspended in-person classes.</p>
                   </article>
                   <article>
-                    <p class="example-left">A study released by the National Institute on Aging in 2022 highlighted that obesity rates among adults over 65 have doubled since the 1990s. Obesity is now the second leading cause of preventable death in the United States, with an estimated annual toll as high as 400,000.</p>
+                    <p class="left">A study released by the National Institute on Aging in 2022 highlighted that obesity rates among adults over 65 have doubled since the 1990s. Obesity is now the second leading cause of preventable death in the United States, with an estimated annual toll as high as 400,000.</p>
                     
-                    <p class="example-right">According to recent state Department of Health figures, nearly 59% of adults in Brooklyn are either overweight or obese. This startling statistic has prompted legislative efforts, such as Senator Kirsten Gillibrand’s proposal to ban trans-fats in public schools to combat childhood obesity, which often leads to adult obesity. </p>
+                    <p class="right">According to recent state Department of Health figures, nearly 59% of adults in Brooklyn are either overweight or obese. This startling statistic has prompted legislative efforts, such as Senator Kirsten Gillibrand’s proposal to ban trans-fats in public schools to combat childhood obesity, which often leads to adult obesity. </p>
                   </article>
 
                   <article>
@@ -220,7 +222,7 @@ export default function Workouts() {
               </div>
             </div>
 
-            <div className="h-[2480px] bg-red-100 text-lg">
+            <div className="h-[100%] bg-red-100 text-lg">
               <div class="relative top-32 left-0 ml-40 font-semibold text-lg w-50">
                 <p className='text-5xl mb-20'>Meet the Founders.</p>
                 {/* <p className='text-base mt-2'>What issue are we trying to solve?</p> */}
@@ -266,26 +268,21 @@ export default function Workouts() {
              
             </div>
 
-            <div class="h-[220px] bg-red-300 text-lg">
-              <div class="ml-5 mr-5 bg-white relative -top-7 left-0 p-8 h-full">
+            <div class="h-[200px] bg-red-300 text-lg">
+              <div class="ml-5 mr-5 bg-white relative -top-2 p-8 h-full">
                 <div class="-translate-y-3">
                   <div className='flex flex-row'>
                     <img class="rounded-sm mb-20 mt-8 ml-8" src={logo} alt="Smiley face" width="70" height="70" />
-                    <div className='grid grid-cols-2 w-28 max-h-7 absolute right-0 mt-8 mr-28 gap-5 text-lg'>
+                    <div className='grid grid-rows-2 gap-7 w-28 max-h-7 absolute right-0 mt-8 mr-28 gap-5 text-lg'>
                       <p> Events </p>
                       <p> Excersise </p>
                       <p> About </p>
                     </div>
-                    
                   </div>
-                  <div className='text-sm mb-2'>
-                    <p> A Marcy Lab School Project </p>
-                  </div>
-                 
                 </div>
-                
-                
-               
+                <div className='text-sm mb-2 left-9 bottom-0 absolute'>
+                  <p> A Marcy Lab School Project </p>
+                </div>
               </div>
             </div>
 

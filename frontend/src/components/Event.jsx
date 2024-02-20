@@ -8,7 +8,7 @@ import {
   destroyEvent,
 } from '../adapters/event-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
-import './styles/Event.css';
+// import './styles/Event.css';
 import Comments from './Comments';
 import JoinButton from './JoinButton';
 import Map from './Map';
@@ -21,6 +21,8 @@ const Event = (props) => {
   const [attendeeAmount, setAttendeeAmount] = useState(0);
   const [showMap, setShowMap] = useState(false);
   const [map, setMap] = useState('Loading...');
+  let tagsArray = event.tag_names.split(',').map(tag => tag.trim());
+
 
   const formattedStartDate = new Date(event.date).toLocaleString(
     'en-US',
@@ -113,37 +115,59 @@ const Event = (props) => {
     return <button onClick={mapHandler}>Load Map</button>;
   };
 
+
   return (
-    <div className="event">
-      {currentUser && currentUser.id === event.user_id ? (
+    
+    <div className="event max-w-xs p-4 relative">
+      {console.log(event)}
+      <NavLink to={`/event/${event.id}`}>
+        <img src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-950729835440706966/original/9fd156b5-afab-4b0e-9400-c007d52e2e96.jpeg?im_w=720" alt="Modern Glass-Walled House" class="w-full h-64 object-cover rounded-lg shadow-md mb-4"/>
+        <div class="absolute top-0 left-0 w-20 h-7 ml-8 mt-8 font-medium">
+          <div className='flex flex-col space-y-2'>
+          {tagsArray.map(tag => {
+            return <div className= 'bg-white text-center justify-center rounded-full w-20 h-7' key={tag}>{tag}</div>;
+          })}
+          </div>
+        </div>
+
+        <div class=" rounded-lg">
+          <h1 class="text-md font-semibold mb-4">{event.title}</h1>
+          <div className='text-sm font-normal text-gray-500'>
+            <p class="mb-2">{event.location}</p>
+            <p class="mb-2">{formattedStartDate} – {formattedEndDate}</p>
+            <p class="mb-4"></p>
+          </div>
+        </div>
+      </NavLink>
+      {/* {currentUser && currentUser.id === event.user_id ? (
         <button onClick={deleteEvent}>Delete Event</button>
       ) : (
         <p></p>
-      )}
-      <div className="user-details">
-        <img
+      )} */}
+      {/* <div className="user-details"> */}
+        {/* <img
           className="profile-pic"
           src={`../upload/${event.user_profile_pic || 'default.jpg'}`}
-        />
+        /> */}
 
-        <h3>guy: {event.user_name}</h3>
-      </div>
-      <h3>Title: {event.title}</h3>
-      <h3>Location: {event.location}</h3>
-      {showMapOrRoom()}
-      <h3>Description: {event.description}</h3>
-      <h3>ID: {event.id}</h3>
-      <h3>Tags: {event.tag_names}</h3>
-      <h3>Time: {formattedStartDate}</h3>
-      <h3>Ends: {formattedEndDate}</h3>
-      <h3>
+        {/* <h3>guy: {event.user_name}</h3>
+      </div> */}
+      {/* <h3>Title: {event.title}</h3> */}
+      {/* <h3>Location: {event.location}</h3>
+      {showMapOrRoom()} */}
+      {/* <h3>Description: {event.description}</h3> */}
+      {/* <h3>ID: {event.id}</h3> */}
+      {/* <h3>Tags: {event.tag_names}</h3> */}
+      {/* <h3>Time: {formattedStartDate}</h3> */}
+      {/* <h3>Ends: {formattedEndDate}</h3> */}
+      {/* <h3>
         Attendents: {attendeeAmount || event.attendee_count}
         {event.location === 'Online Class' && <span>/4</span>}
         {event.attendee_count > 3 && event.location === 'Online Class' && (
           <span> No open spots available</span>
         )}
-      </h3>
-      {currentUser &&
+      </h3> */}
+      {/* {currentUser &&
         currentUser.id !== event.user_id &&
         event.id &&
         checkOnlineAndAttendee() && (
@@ -152,12 +176,12 @@ const Event = (props) => {
             eventId={event.id}
             joinedEvents={joinedEvents}
           />
-        )}{' '}
+        )}{' '} */}
       {/* ill see if I need the && later */}
-      {commentsinit && <Comments eventId={event.id} userId={currentUser.id} />}
+      {/* {commentsinit && <Comments eventId={event.id} userId={currentUser.id} />}
       <button onClick={toggleComments}>
         {commentsinit ? 'Hide Comments' : 'Show Comments'}
-      </button>
+      </button> */}
     </div>
   );
 };

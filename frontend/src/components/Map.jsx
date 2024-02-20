@@ -1,8 +1,9 @@
 export default function Map({ location }) {
   return (
     <iframe
-      width="80%"
-      height="400"
+      className="mt-5"
+      width="100%"
+      height="500"
       allowFullScreen=""
       loading="async"
       referrerPolicy="no-referrer-when-downgrade"

@@ -13,6 +13,8 @@ import LandingPage from './pages/LandingPage'
 import Room from './pages/Room';
 import Workouts from './pages/Workouts';
 import About from './pages/About'
+import Event from './pages/EventPageu'
+
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -35,6 +37,8 @@ export default function App() {
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/:id" element={<UserPage />} />
           <Route path="/room/:roomid" element={<Room />} />
+          <Route path="/event/:eventid" element={<Event />} />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
