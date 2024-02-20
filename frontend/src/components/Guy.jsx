@@ -4,7 +4,7 @@ import { useGLTF } from "@react-three/drei";
 export const Guy = forwardRef((props, ref,) => {
   const { nodes, materials } = useGLTF("/Tibby.glb");
   return (
-    <group {...props} dispose={null}>
+    <group {...props}  ref={ref} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]} scale={0.175}>
         <skinnedMesh
           geometry={nodes.Arm_L.geometry}
