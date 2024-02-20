@@ -1,45 +1,65 @@
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../adapters/post-adapter";
-import CreatePostAndFilterBar from "../components/CreatePostAndFilterBar";
 import { SimpleGrid, Card, CardHeader, Heading, CardBody, Text, CardFooter, Button } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import CreatePostAndFilterBar from "../components/CreatePostAndFilterBar";
+import CommunityPostsCard from "../components/CommunityPostsCard";
+
 export default function CommunityPosts() {
     const [posts, setPosts] = useState([]);
-    const navigate = useNavigate();
+    const [filteredPosts, setFilteredPosts] = useState([]);
+    const [sortClick, setSortClick] = useState("latest");
+    const [filterClick, setFilterClick] = useState("");
+    const [boroughs, setBoroughs] = useState([]);
+    const [startTime, setStartTime] = useState("");
+    const [endTime, setEndTime] = useState("");
 
     useEffect(() => {
         const getPosts = async () => {
-            const allPosts = await getAllPosts()
-            setPosts(allPosts.sort((a,b) => b.id - a.id))
+            const allPosts = await getAllPosts();
+            let sortedPosts;
+            if (sortClick === "latest") {
+                sortedPosts = allPosts.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
+            } else if (sortClick === "oldest") {
+                sortedPosts = allPosts.sort((a, b) => new Date(a.date_created) - new Date(b.date_created));
+            }
+            setPosts(sortedPosts);
+            setFilteredPosts(sortedPosts);
+        };
+
+        getPosts();
+    }, [sortClick]);
+
+    useEffect(() => {
+        let updatedPosts = [...posts];
+
+        if (filterClick && startTime && endTime) {
+            updatedPosts = updatedPosts.filter(post => {
+                return post.start_time >= startTime && post.end_time <= endTime;
+            });
         }
-        getPosts()
-    }, [])
+
+        console.log(updatedPosts)
+        setFilteredPosts(updatedPosts);
+    }, [posts, filterClick, startTime, endTime]);
 
 
-    return <>
-        <div className="w-full bg-[#D9D9D9]">
-            <div className={`h-[15rem] w-full bg-community z-0 bg-cover bg-start flex align-middle content-center justify-center items-end overflow-visible`}>
-                <CreatePostAndFilterBar posts={posts} setPosts={setPosts}/>
+    return (
+        <>
+            <div className="w-full bg-[#D9D9D9]">
+                <CreatePostAndFilterBar
+                    setSortClick={setSortClick}
+                    setFilterClick={setFilterClick}
+                />
+                <CommunityPostsCard
+                    posts={filteredPosts}
+                    setPosts={setPosts}
+                    filterClick={filterClick}
+                    filteredPosts={filteredPosts}
+                    setFilteredPosts={setFilteredPosts}
+                    setStartTime={setStartTime}
+                    setEndTime={setEndTime}
+                />
             </div>
-            <div className='h-screen w-full bg-[#1C1E1F]'>
-                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' className="pt-[4rem]">
-                    { posts.map((post) => {
-                    return <li key={post.id}>
-                    <Card>
-                        <CardHeader>
-                            <Heading size='md'>{post.title}</Heading>
-                        </CardHeader>
-                        <CardBody>
-                            <Text>{post.description}</Text>
-                        </CardBody>
-                        <CardFooter>
-                            <Button onClick={()=>{navigate(`/posts/${post.id}`)}}>View here</Button>
-                        </CardFooter>
-                    </Card>
-                    </li>})
-                    }
-                </SimpleGrid>
-            </div>
-        </div>
-    </>;
+        </>
+    );
 }
