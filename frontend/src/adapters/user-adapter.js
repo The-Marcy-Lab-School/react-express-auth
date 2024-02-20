@@ -13,8 +13,13 @@ export const getAllUsers = async () => {
 
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
-export const updateUsername = async ( id, username, bio ) => {
-  return await fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username, bio }));
+export const updateUsername = async ( {id, username, bio} ) => {
+  return await fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username, bio}));
+};
+
+export const updateProfileImage = async ( id, profile_image ) => {
+  console.log("hi", id)
+  return await fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, profile_image}));
 };
 
 // export const updateBio = async ( id, bio ) => {

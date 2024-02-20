@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import UserProfileCard from "../components/UserProfileCard";
@@ -7,7 +7,6 @@ import UserProfileTabs from "../components/UserProfileTabs";
 
 export default function UserPage() {
   // React hooks to access necessary functionality and state
-  const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
   const [errorText, setErrorText] = useState(null);
@@ -42,11 +41,17 @@ export default function UserPage() {
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
   // Access the bio property from the currentUser object
-  const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
-  const profileImage = isCurrentUserProfile ? currentUser.profile_image : currentUser.profile_image;
+  // const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
+  // const profileImage = isCurrentUserProfile ? currentUser.profile_image : currentUser.profile_image;
 
-  console.log("profileImage", profileImage)
-  console.log("profileBio", profileBio); // Log the bio property to the console
+  // console.log("profileImage", profileImage)
+  // console.log("profileBio", profileBio); // Log the bio property to the console
+
+  const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
+  const profileImage = isCurrentUserProfile ? currentUser.profile_image : userProfile.profile_image;
+
+console.log("profileImage:", profileImage);
+// console.log("profileBio:", profileBio);
 
   // JSX rendering based on the user's profile
   return (
@@ -61,7 +66,7 @@ export default function UserPage() {
               bio={profileBio}
               isCurrentUserProfile={isCurrentUserProfile}
             />
-            <UserProfileTabs username={profileUsername} id={id} bio={profileBio} />
+            <UserProfileTabs username={profileUsername} id={id} bio={profileBio} isCurrentUserProfile={isCurrentUserProfile}/>
           </div>
         )}
       </div>

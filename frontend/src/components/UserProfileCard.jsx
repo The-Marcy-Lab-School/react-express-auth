@@ -8,6 +8,9 @@ import { Avatar, Button, ButtonGroup } from "@chakra-ui/react";
 import { Stack, StackDivider } from '@chakra-ui/react';
 import { Box, Card, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
 import UpdateUsernameForm from "./UpdateUsernameForm";
+import UploadcareComponent from "./UploadCareClient";
+import { updateProfileImage } from '../adapters/user-adapter';
+
 
 const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
   const navigate = useNavigate();
@@ -27,6 +30,16 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
     setUserComments(result);
   }
 
+  const handleProfileImageUpload = async (profile_image) => {
+    console.log("id in profile user card", currentUser.id)
+    console.log("imsge:", profile_image)
+    
+    if (currentUser) {
+      await updateProfileImage(currentUser.id, profile_image);
+    }
+  };
+  
+
   useEffect(() => {
     loadComments();
   }, []);
@@ -38,10 +51,12 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
         {!!isCurrentUserProfile &&
           (
             <ButtonGroup>
+              <UploadcareComponent onUploadFinish={handleProfileImageUpload} />
               <UpdateUsernameForm {...{ currentUser, setCurrentUser }} />
               <Button onClick={handleLogout} className="w-[5rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Log Out</Button>
             </ButtonGroup>
-          )}
+          )
+        }
       </CardHeader>
       <CardBody>
         <Accordion defaultIndex={[0]}>

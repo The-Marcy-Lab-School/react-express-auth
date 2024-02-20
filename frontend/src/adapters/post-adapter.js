@@ -14,8 +14,8 @@ export const getPostsFromUser = async (id) => {
     return postsFromUser || [];
 };
 
-export const createPost = async ({ user_id, title, image, location, description }) => {
-    return fetchHandler(`/api/users/${user_id}/posts`, getPostOptions({ title, image, location, description }))
+export const createPost = async ({ user_id, title, image, location, description, endTime, startTime }) => {
+    return fetchHandler(`/api/users/${user_id}/posts`, getPostOptions({ title, image, location, description, endTime, startTime }))
 }
 
 export const deletePost = async (id, post_id) => await fetchHandler(`/api/users/${id}/posts/${post_id}`, deleteOptions);

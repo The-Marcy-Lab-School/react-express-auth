@@ -42,21 +42,25 @@ export default function SiteHeadingAndNav() {
       <nav>
         <ul className={`md:flex md:space-x-1 md:items-center`}>
           <div className="relative flex flex-col items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className={`p-4 ${textColor}`}>
-              Services
-              {
-                isOpen && <div style={{ backgroundColor: `rgba(68,137,96, ${calculatedOpacity})` }} className={`${textColor} absolute top-[4rem]`}>
-                  {
-                    <ul className={`m-2 w-20`}>
-                      <li><NavLink className='mb-1' to='/map'>Data Maps</NavLink></li>
-                      <li><NavLink className='mb-1' to='/posts'>Posts</NavLink></li>
-                      <li className="mb-1"><a href="/About-us">About Us</a></li>
-                      <li><NavLink className='mb-1' to='/Articles'>Articles</NavLink></li>
-                    </ul>
-                  }
-                </div>
-              }
-            </button>
+            {
+              !isHomepage &&
+              <button onClick={() => setIsOpen(!isOpen)} className={`p-4 ${textColor}`}>
+                Services
+                {
+                  isOpen && <div style={{ backgroundColor: `rgba(68,137,96, ${calculatedOpacity})` }} className={`${textColor} absolute top-[4rem]`}>
+                    {
+                      <ul className={`m-2 w-20`}>
+                        <li><NavLink className='mb-1' to='/map'>Data Maps</NavLink></li>
+                        <li><NavLink className='mb-1' to='/posts'>Posts</NavLink></li>
+                        <li className="mb-1"><a href="/About-us">About Us</a></li>
+                        <li><NavLink className='mb-1' to='/Articles'>Articles</NavLink></li>
+                      </ul>
+                    }
+                  </div>
+                }
+              </button>
+
+            }
           </div>
           {currentUser
             ? <li><NavLink className={`p-4 ${textColor}`} to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
