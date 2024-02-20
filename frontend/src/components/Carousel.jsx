@@ -59,8 +59,8 @@ export default function ArticlesCarousel() {
     }, [filter]);
 
     return (
-        <div className='articlesCarousel' style={{ position: 'relative', padding: '0 8rem', marginLeft: '1rem', marginTop: '12rem', marginBottom: '5rem' }}>
-            <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '5rem', textAlign: 'center' }}>Learn More</h1>
+        <div className='articlesCarousel' style={{ position: 'relative', padding: '0 8rem', marginLeft: '1rem', marginTop: '2rem', marginBottom: '5rem' }}>
+            <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '2rem', textAlign: 'center' }}>Learn More</h1>
             <Carousel
                 responsive={responsive}
                 arrows={false}
