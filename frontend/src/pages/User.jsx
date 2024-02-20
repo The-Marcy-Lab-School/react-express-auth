@@ -12,6 +12,8 @@ import EventForm from '../components/EventForm';
 import Event from '../components/Event';
 import { destroyEvent } from '../adapters/event-adapter';
 import { useUserStore } from '../store/store';
+import Spline from '@splinetool/react-spline';
+import { NavLink } from 'react-router-dom';
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -94,8 +96,81 @@ export default function UserPage() {
   console.log(events);
   console.log(currentUser.profile_pic)
 
+  const showNav = () => {
+    const navigationElement = document.getElementsByClassName("navigation")[0];
+    navigationElement.classList.toggle("active");
+    const ham = document.getElementsByClassName("ham-btn")[0];
+    ham.classList.toggle("bg-blue-200");
+    
+  }
+
+  const showSpline = (value) => {
+    // var spline = document.createElement('div');
+    // spline.className = "h-screen bg-center bg-no-repeat bg-cover relative";
+    // spline.innerHTML = '<Spline scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />';
+    // document.body.appendChild(spline);
+    const navigationElement = document.getElementsByClassName("navigation")[0];
+    // const splineElement = document.getElementsByClassName("spline")[0];
+    // console.log(splineElement.className); 
+    // splineElement.classList.toggle("hidden")
+    console.log("test")
+    switch (value) {
+      case 'about':
+        navigationElement.classList.toggle("bg-red-300");
+        break;
+      case 'community':
+        navigationElement.classList.toggle("bg-orange-300");
+        // Expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      case 'workouts':
+        navigationElement.classList.toggle("bg-green-300");
+        // Expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      case 'profile':
+          navigationElement.classList.toggle("bg-blue-200");
+          // Expected output: "Mangoes and papayas are $2.79 a pound."
+          break;
+      default:
+        console.log(`Sorry, we are out of ${expr}.`);
+    }
+
+
+    
+  }
+
   return (
     <>
+        <div class='navigation'>
+        {/* <h1 class="text-white"> Logo </h1>  */}
+        <div class="fixed -translate-y-3">
+          {/* <img class="absolute rounded-sm ml-24 mt-5" src={logo} alt="Smiley face" width="72" height="72" /> */}
+          <Spline className="spline h-screen bg-center bg-no-repeat bg-cover relative" scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" /> 
+    
+        </div>
+        <div class="ham-btn" onClick={showNav}>
+          <span class="rounded-sm"></span>
+          <span class="rounded-sm"></span>
+        </div>
+        <div class="links">
+          <div class="link">
+            <NavLink onMouseOver={() => showSpline("community")} onMouseOut={() => showSpline("community")} to="/community">Events</NavLink>
+            {/* <a  href="#"> Events </a> */}
+          </div>
+          <div class="link">
+            <NavLink onMouseOver={() => showSpline("workouts")} onMouseOut={() => showSpline("workouts")} to="/workouts">Workouts</NavLink>
+            {/* <a onMouseOver={() => showSpline()} onMouseOut={() => showSpline()} href="#"> Excersise </a> */}
+          </div>
+          <div class="link">
+            <NavLink onMouseOver={() => showSpline("profile")} onMouseOut={() => showSpline("profile")} to={`/users/${currentUser.id}`}>Profile</NavLink>
+            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
+          </div>
+          <div class="link">
+            <NavLink onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} to="/about">About</NavLink>
+            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
+          </div>
+         
+        </div>
+      </div>
       {/* <h1>{profileUsername}</h1> */}
      
       {/* <p>If the user had any data, here it would be</p>
