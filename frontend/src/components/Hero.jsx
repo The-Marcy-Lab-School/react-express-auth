@@ -17,7 +17,7 @@ export default function Hero() {
 
             <Card className="w-[85%] mt-[2rem]" background={'transparent'} border="0px" boxShadow="0">
                 <CardBody className="flex flex-row justify-around">
-                    <NavLink to="/maps">
+                    <NavLink to="/map">
                         <Stack>
                             <FaMapLocationDot size={50} />
                             <Heading fontSize={'xl'} fontWeight={'bold'}>Maps</Heading>
