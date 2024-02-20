@@ -50,8 +50,8 @@ export default function UserPage() {
   const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
   const profileImage = isCurrentUserProfile ? currentUser.profile_image : userProfile.profile_image;
 
-console.log("profileImage", profileImage);
-console.log("profileBio", profileBio);
+console.log("profileImage:", profileImage);
+// console.log("profileBio:", profileBio);
 
   // JSX rendering based on the user's profile
   return (

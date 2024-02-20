@@ -13,9 +13,10 @@ const UploadcareComponent = ({ onUploadFinish }) => {
     const handleUploadFinish = (e) => {
       console.log("event", e);
       console.log('CDN URL:', e.detail.fileInfo.cdnUrl);
+      const image = e.detail.fileInfo.cdnUrl;
 
       if (onUploadFinish) {
-        console.log("hiih")
+        console.log("did finish uploading")
         onUploadFinish(e.detail.fileInfo.cdnUrl); // if there is a cdnURL which is the image one, we want to send it in the prop
       }
     };
@@ -40,8 +41,8 @@ const UploadcareComponent = ({ onUploadFinish }) => {
         multiple={false}
         imgOnly={true}
         sourceList="local, url, camera, dropbox, instagram"
-      />
-
+      />  
+     
       <lr-file-uploader-regular
         ctx-name="my-uploader"
         css-src={blocksStyles}

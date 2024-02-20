@@ -30,15 +30,13 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
     setUserComments(result);
   }
 
-  const handleProfileImageUpload = (imageUrl) => {
-    // Call the updateProfileImage function with userId and imageUrl
+  const handleProfileImageUpload = async (profile_image) => {
     console.log("id in profile user card", currentUser.id)
-    if (currentUser) {
-      updateProfileImage({
-       imageUrl});
-    }
+    console.log("imsge:", profile_image)
     
-
+    if (currentUser) {
+      await updateProfileImage(currentUser.id, profile_image);
+    }
   };
   
 
