@@ -1,36 +1,31 @@
-import { useContext, useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import logo from "../imgs/logo.png"
 
-export default function Footer(){
-    return <footer className="bg-[#808080] text-white bottom-0 relative">
-    <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#989A99] py-7">
-      <h1
-        className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold
-       md:w-2/5"
-      >
-        Let me 
-        <span className="text-[#448960]"> COOK</span> 
-      </h1>
-      {/* <div>
-        <input
-          type="text"
-          placeholder="Enter Your ph.no"
-          className="text-gray-800
-         sm:w-72 w-full sm:mr-5 mr-1 lg:mb-0 mb-4 py-2.5 rounded px-2 focus:outline-none"
-        />
-        <button
-          className="bg-teal-400 hover:bg-teal-500 duration-300 px-5 py-2.5 font-[Poppins]
-         rounded-md text-white md:w-auto w-full"
-        >
-          Request Code
-        </button>
-      </div> */}
-    </div>
-    <div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10
-    text-center pt-2 text-gray-400 text-sm pb-8"
-    >
-      <span>© 2024 PureLink. All rights reserved.</span>
-      <span>Terms · Privacy Policy</span>
-    </div>
-  </footer>
+export default function Footer() {
+  return (
+      <footer className="bg-[#808080] text-white bottom-0 relative">
+          <div style={{ backgroundColor: "#448960", display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <h1 className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold md:w-2/5">
+                  <div style={{ display: "flex", textAlign: "center", justifyContent: "center", alignItems: "center", flexDirection: "row", paddingRight: "4rem" }}>
+                    <a href="/" className="flex items-center">
+                      <img src={logo} className="h-10" alt="logo" />
+                      PureLink
+                    </a>
+                  </div>
+              </h1>
+              <ul style={{ display: "flex", textAlign: "center", justifyContent: "space-between", alignContent: "center", flexDirection: "row", marginBottom: "1rem" }}>
+                  <li><NavLink className="mr-10" to='/About-us'>About Us</NavLink></li>
+                  <li><NavLink className="mr-10" to='/Articles'>Learn More</NavLink></li>
+                  <li><NavLink className="mr-10" to='/posts'>Community Posts</NavLink></li>
+                  <li><NavLink className="mr-10" to='/map'>Maps</NavLink></li>
+              </ul>
+          </div>
+          <div>
+              <ul className="text-white" style={{ display: "flex", textAlign: "center", justifyContent: "space-between", alignContent: "center", flexDirection: "row", marginLeft: "5rem", marginRight: "5rem" }}>
+                  <li className="mb-4 mr-2">© 2022 PureLink. All rights reserved.</li>
+                  <li className="mb-4 ml-2">Terms · Privacy Policy</li>
+              </ul>
+          </div>
+      </footer>
+  );
 }
