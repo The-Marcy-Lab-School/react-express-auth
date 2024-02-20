@@ -1,6 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
+import logo from "../imgs/logo.png"
+import { Flex } from "@chakra-ui/react";
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -10,10 +12,11 @@ export default function SiteHeadingAndNav() {
   const location = useLocation();
   const isHomepage = location.pathname === '/';
   const isCommunityPage = location.pathname === '/posts';
+  const isArticlesPage = location.pathname === '/Articles';
 
-  const position = (isHomepage || isCommunityPage) ? 'fixed' : 'relative';
+  const position = (isHomepage || isCommunityPage || isArticlesPage) ? 'fixed' : 'relative';
   const textColor = isCommunityPage ? 'black' : 'white';
-  const calculatedOpacity = (isHomepage || isCommunityPage) ? `${bgOpacity}` : '1';
+  const calculatedOpacity = (isHomepage || isCommunityPage || isArticlesPage) ? `${bgOpacity}` : '1';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,10 +31,14 @@ export default function SiteHeadingAndNav() {
 
   return (
     <header
-      style={{ backgroundColor: `rgb(68,137,96, ${calculatedOpacity})` }}
-      className={`${textColor} md:flex md:justify-between md:items-center ${position} top-0 sm:px-12 px-4 py-2 w-full height-64`}
-    >
-      <a id='logo' href='/'>React/Express Auth</a>
+      style={{ backgroundColor: `rgb(68,137,96, ${calculatedOpacity})`, zIndex: '10' }}
+      className={`${textColor} md:flex md:justify-between md:items-center ${position} top-0 sm:px-12 px-4 py-2 w-full height-64`}>
+        <Flex align="center" className="PureLink">
+          <a href="/" className="flex items-center">
+            <img src={logo} className="h-10 mr-2" alt="logo" />
+            {!isHomepage && "PureLink"}
+          </a>
+        </Flex>
       <nav>
         <ul className={`md:flex md:space-x-1 md:items-center`}>
           <div className="relative flex flex-col items-center">
