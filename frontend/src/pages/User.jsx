@@ -33,20 +33,20 @@ export default function UserPage() {
     loadUser();
   }, [id]);
 
+  const handleProfileImageUpdate = (newImageUrl) => {
+    if (isCurrentUserProfile) {
+      setCurrentUser({ ...currentUser, profile_image: newImageUrl });
+    } else {
+      setUserProfile({ ...userProfile, profile_image: newImageUrl });
+    }
+  };
+
   // Conditional rendering based on the existence of user profile or errors
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
 
   // Determine the username to be displayed based on whether it's the current user's profile
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
-
-  // Access the bio property from the currentUser object
-  // const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
-  // const profileImage = isCurrentUserProfile ? currentUser.profile_image : currentUser.profile_image;
-
-  // console.log("profileImage", profileImage)
-  // console.log("profileBio", profileBio); // Log the bio property to the console
-
   const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
   const profileImage = isCurrentUserProfile ? currentUser.profile_image : userProfile.profile_image;
 
@@ -62,9 +62,10 @@ console.log("profileImage:", profileImage);
             <UserProfileCard
               // className="flex flex-row items-center"
               username={profileUsername}
-              profileimage={profileImage}  // Change to profileimage
+              profileimage={profileImage}  
               bio={profileBio}
               isCurrentUserProfile={isCurrentUserProfile}
+              onProfileImageUpdate={handleProfileImageUpdate}
             />
             <UserProfileTabs username={profileUsername} id={id} bio={profileBio} isCurrentUserProfile={isCurrentUserProfile}/>
           </div>

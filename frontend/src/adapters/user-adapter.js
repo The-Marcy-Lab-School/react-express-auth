@@ -18,10 +18,5 @@ export const updateUsername = async ( {id, username, bio} ) => {
 };
 
 export const updateProfileImage = async ( id, profile_image ) => {
-  console.log("hi", id)
   return await fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, profile_image}));
 };
-
-// export const updateBio = async ( id, bio ) => {
-//   return await fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, bio }));
-// };

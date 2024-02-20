@@ -7,7 +7,7 @@ LR.registerBlocks(LR);
 
 const UploadcareComponent = ({ onUploadFinish }) => {
   const ctxProviderRef = useRef(null);
-const uploadcareKey = import.meta.env.VITE_UPLOADCARE_KEY
+const uploadcareKey = import.meta.env.VITE_UPLOADCARE_KEY;
 
   useEffect(() => {
     const handleUploadFinish = (e) => {
@@ -34,6 +34,7 @@ const uploadcareKey = import.meta.env.VITE_UPLOADCARE_KEY
   return (
     <div>
       <lr-config
+        class="hiddenConfig"
         ctx-name="my-uploader"
         pubkey={uploadcareKey}
         maxLocalFileSizeBytes={10000000}
