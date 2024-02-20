@@ -31,7 +31,7 @@ export default function SiteHeadingAndNav() {
 
   return (
     <header
-      style={{ backgroundColor: `rgb(68,137,96, ${calculatedOpacity})`, zIndex: '10' }}
+      style={{ backgroundColor: `rgb(68,137,96, ${calculatedOpacity})`, zIndex: '10', alignItems: "center", height: "4rem" }}
       className={`${textColor} md:flex md:justify-between md:items-center ${position} top-0 sm:px-12 px-4 py-2 w-full height-64`}>
         <Flex align="center" className="PureLink">
           <a href="/" className="flex items-center">
@@ -66,7 +66,12 @@ export default function SiteHeadingAndNav() {
             ? <li><NavLink className={`p-4 ${textColor}`} to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
             : <>
               <li><NavLink className={`p-4 ${textColor}`} to='/login'>Login</NavLink></li>
-              <li><NavLink className={`p-4 ${textColor}`} to='/sign-up'>Sign Up</NavLink></li>
+              <li><NavLink
+                  style={{ backgroundColor: "#45885f", borderRadius: "10px" }}
+                  className={`p-4 ${textColor} hover:text-white`}
+                  to='/sign-up'>
+                  Sign Up
+                </NavLink></li>
             </>
           }
         </ul>

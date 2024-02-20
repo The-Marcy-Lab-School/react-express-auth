@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Card, CardBody, CardFooter, CardHeader, Heading, SimpleGrid, Text, Stack } from "@chakra-ui/react";
 import { FaMapLocationDot, FaPeopleGroup } from "react-icons/fa6";
 import { BsChatSquareTextFill } from "react-icons/bs";
+import { IoEarthSharp } from "react-icons/io5";
 
 
 export default function Hero() {
