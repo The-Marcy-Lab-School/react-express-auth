@@ -33,12 +33,12 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
   const handleProfileImageUpload = async (profile_image) => {
     console.log("id in profile user card", currentUser.id)
     console.log("imsge:", profile_image)
-    
+
     if (currentUser) {
       await updateProfileImage(currentUser.id, profile_image);
     }
   };
-  
+
 
   useEffect(() => {
     loadComments();
@@ -47,11 +47,14 @@ const UserProfileCard = ({ username, profileimage, isCurrentUserProfile }) => {
   return (
     <Card background={'transparent'} border="0px" boxShadow="0">
       <CardHeader className="flex flex-col items-center space-y-[1rem]">
-        <Avatar size="2xl" width="10rem" height="10rem" fontSize="5.5rem" name={username} src={profileimage} />
+        <Avatar size="2xl" width="10rem" height="10rem" fontSize="5.5rem" name={username} src={profileimage}>
+          {!!isCurrentUserProfile &&
+            <UploadcareComponent className="z-0" onUploadFinish={handleProfileImageUpload} />
+          }
+        </Avatar>
         {!!isCurrentUserProfile &&
           (
             <ButtonGroup>
-              <UploadcareComponent onUploadFinish={handleProfileImageUpload} />
               <UpdateUsernameForm {...{ currentUser, setCurrentUser }} />
               <Button onClick={handleLogout} className="w-[5rem] h-[2rem] bg-[#989A99] rounded-lg z-0">Log Out</Button>
             </ButtonGroup>
