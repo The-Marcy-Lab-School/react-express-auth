@@ -1,29 +1,57 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as LR from '@uploadcare/blocks';
-import '../index.css'; 
+import blocksStyles from '@uploadcare/blocks/web/lr-file-uploader-regular.min.css?url';
+import '../index.css';
 
-const UploadcareComponent = () => {
-    LR.registerBlocks(LR);
+LR.registerBlocks(LR);
+
+const UploadcareComponent = ({ onUploadFinish }) => {
+  const ctxProviderRef = useRef(null);
+
+
+  useEffect(() => {
+    const handleUploadFinish = (e) => {
+      console.log("event", e);
+      console.log('CDN URL:', e.detail.fileInfo.cdnUrl);
+      const image = e.detail.fileInfo.cdnUrl;
+
+      if (onUploadFinish) {
+        console.log("did finish uploading")
+        onUploadFinish(e.detail.fileInfo.cdnUrl); // if there is a cdnURL which is the image one, we want to send it in the prop
+      }
+    };
+  
+    const currentCtxProviderRef = ctxProviderRef.current;
+    currentCtxProviderRef.addEventListener('file-upload-success', handleUploadFinish);
+  
+    // Cleanup function to remove the event listener
+    return () => {
+      currentCtxProviderRef.removeEventListener('file-upload-success', handleUploadFinish);
+    };
+    
+  }, [onUploadFinish]); 
+  
 
   return (
     <div>
       <lr-config
         ctx-name="my-uploader"
         pubkey="8bc71d5f25fde2ddd403"
-        max-local-file-size-bytes="10000000"
-        multiple="false"
-        img-only="true"
-        source-list="local, url, camera, dropbox, instagram"
-      ></lr-config>
+        maxLocalFileSizeBytes={10000000}
+        multiple={false}
+        imgOnly={true}
+        sourceList="local, url, camera, dropbox, instagram"
+      />  
+     
       <lr-file-uploader-regular
-        css-src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.32.0/web/lr-file-uploader-regular.min.css"
         ctx-name="my-uploader"
+        css-src={blocksStyles}
         class="my-config"
-      ></lr-file-uploader-regular>
+      />
+
+      <lr-upload-ctx-provider ref={ctxProviderRef} ctx-name="my-uploader" />
     </div>
   );
 };
-
-// need to put component in userprofilecard component to showcase file image uploader 
 
 export default UploadcareComponent;
