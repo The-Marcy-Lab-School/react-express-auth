@@ -123,7 +123,6 @@ class Event {
   ORDER BY
     events.date ASC
   LIMIT 50;
-  
   `;
     const args = [user_id, user_id];
     const { rows } = await knex.raw(query, args);
