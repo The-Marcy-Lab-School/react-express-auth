@@ -1,119 +1,118 @@
 .Site {
-    text-align: center;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .Site-header {
-    background-color: #282c34;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 20px auto;
-    max-width: 800px;
-  }
-  
-  .Site-link {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .Site-link:hover {
-    background-color: #45a049;
-  }
-  
-  .bubbles-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: stretch;
-    width: 100%;
-    padding: 0 20px;
-    margin: 20px auto;
-  }
-  
-  .text-bubble {
-    background-color: #282c34; 
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    margin: 0 10px;
-    text-align: center; 
-    flex: 0 1 auto;
-    width: calc(33.333% - 20px); 
-    height: 350px; 
-    overflow-y: auto;
-    box-sizing: border-box;
-  }
-  
-  .founders-section {
-    background-color: #282c34;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    margin: 20px auto;
-    width: 80%;
-  }
-  
-  .founders-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .founder {
-    flex-basis: 22%;
-    margin: 10px;
-    text-align: center;
-  }
-  
-  .founder img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-  }
-  
-  .founder p {
-    margin: 0;
-    padding-top: 5px;
-  }
-  
-  .founder-link {
-    color: #fff; 
-    text-decoration: none; 
-  }
-  
-  .founder-link:hover {
-    text-decoration: underline; 
-  }
-  
-  .founder {
-    flex-basis: 22%;
-    margin: 10px;
-    text-align: center;
-    height: 300px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-  }
-  
-  .founder img {
-    width: 100%; 
-    height: 240px;
-    object-fit: cover;
-    border-radius: 4px; 
-    margin-bottom: 10px;
-  }
-  
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.Site-header {
+  background-color: #282c34;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.Site-link {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.Site-link:hover {
+  background-color: #45a049;
+}
+
+.bubbles-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  width: 100%;
+  padding: 0 20px;
+  margin: 20px auto;
+}
+
+.text-bubble {
+  background-color: #282c34; 
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 0 10px;
+  text-align: center; 
+  flex: 0 1 auto;
+  width: calc(33.333% - 20px); 
+  height: 350px; 
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.founders-section {
+  background-color: #282c34;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.founders-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.founder {
+  flex-basis: 22%;
+  margin: 10px;
+  text-align: center;
+}
+
+.founder img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.founder p {
+  margin: 0;
+  padding-top: 5px;
+}
+
+.founder-link {
+  color: #fff; 
+  text-decoration: none; 
+}
+
+.founder-link:hover {
+  text-decoration: underline; 
+}
+
+.founder {
+  flex-basis: 22%;
+  margin: 10px;
+  text-align: center;
+  height: 300px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.founder img {
+  width: 100%; 
+  height: 240px;
+  object-fit: cover;
+  border-radius: 4px; 
+  margin-bottom: 10px;
+}
