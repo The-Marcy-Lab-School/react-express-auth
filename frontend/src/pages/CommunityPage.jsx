@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { destroyEvent } from '../adapters/event-adapter';
+import { destroyEvent, findEvent } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import Event from '../components/Event';
