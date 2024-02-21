@@ -208,6 +208,11 @@ export default function EventPage() {
     return mapHandler();
   };
 
+  const style = {
+    background: '#eab308',
+    boxShadow:  '-5px 5px 10px #c79807, 5px -5px 10px #ffce09'
+  };
+
   return (
     <>
     
@@ -244,19 +249,8 @@ export default function EventPage() {
         </div>
       </div>
 
-     
-      {/* <div class="bg-red-500 text-white p-6">
-        <h1 class="text-4xl font-bold">RIOT SUPPORT</h1>
-        <p class="text-lg">Help center for all Riot Games Support Topics</p>
-      </div>
-      <div className='bg-red-500 -skew-y-1'>
-        <p> Yes</p>
-      </div>
-
-
-
-      <div class="mt-2 h-0.5 bg-gray-300"></div>
-			<div class="border-t-1"></div> */}
+      {/* <div class="mt-2 h-0.5 bg-gray-300"></div>
+			<div class="border-t-1"></div>  */}
 
       <div className='p-24 pt-12'>
         <h1 className='text-3xl font-medium mt-2'> {eventNum.title } </h1>
@@ -302,7 +296,7 @@ export default function EventPage() {
             })}
             </div>
             
-            <button className="bg-yellow-500 text-white font-bold py-2 px-4 w-full mt-5 h-12 rounded-lg"  style={calculatedStyles}>
+            <button className="bg-yellow-500 text-white font-bold py-2 px-4 w-full mt-5 h-12 rounded-lg"  style={style} >
               Attend
             </button>
           </div>         

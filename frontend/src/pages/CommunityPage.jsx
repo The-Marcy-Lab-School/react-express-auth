@@ -124,14 +124,6 @@ export default function CommunityPage() {
         </div>
       </div>
 
-      {/* <div class="bg-red-500 text-white p-6">
-        <h1 class="text-4xl font-bold">RIOT SUPPORT</h1>
-        <p class="text-lg">Help center for all Riot Games Support Topics</p>
-      </div>
-      <div className='bg-red-500 -skew-y-1'>
-        <p> Yes</p>
-      </div> */}
-
       <div className="h-[380px] bg-center bg-no-repeat bg-cover relative bg-orange-200" >
 
         <div class="fixed translate-y-3">
