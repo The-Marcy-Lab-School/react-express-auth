@@ -226,6 +226,38 @@ class Event {
       return null;
     }
   }
+
+  static async findEvent(eventId) {
+    try {
+      const query = `
+      SELECT
+      events.*,
+      users.name AS user_name,
+      users.profile_pic AS user_profile_pic,
+      STRING_AGG(DISTINCT event_tags.name, ', ') AS tag_names,
+      COUNT(DISTINCT event_relations.user_id) AS attendee_count
+    FROM
+      events
+    JOIN
+      event_tags_events ON events.id = event_tags_events.event_id
+    JOIN
+      event_tags ON event_tags_events.event_tag_id = event_tags.id
+    LEFT JOIN
+      event_relations ON events.id = event_relations.event_id
+    LEFT JOIN
+      users ON events.user_id = users.id
+    WHERE
+      events.id = ?
+    GROUP BY
+      events.id, events.title, users.name, users.profile_pic
+    `;
+      const res = await knex.raw(query, [eventId]);
+      return res.rows || null;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
 }
 
 module.exports = Event;
