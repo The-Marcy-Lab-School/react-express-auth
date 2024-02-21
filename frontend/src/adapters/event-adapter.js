@@ -97,6 +97,6 @@ export const hideComment = async (commentId) => {
 };
 
 export const findEvent = async (eventId) => {
-  const [event] = await fetchHandler(`baseUrl/${eventId}`);
-  return event || [];
+  const [event] = await fetchHandler(`${baseUrl}/${eventId}`);
+  return event[0] || {};
 };
