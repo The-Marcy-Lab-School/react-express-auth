@@ -1,4 +1,4 @@
-.popup-overlay {
+/* .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -63,4 +63,37 @@
 
 .hover-div:hover .hover-text {
   color: white;
+} */
+
+dialog {
+  /* Styles for divs that carry both modal and non-modal behaviors */
+}
+
+dialog:modal {
+  /* Styles for divs that carry modal behavior */
+}
+
+dialog:not(:modal) {
+  /* Styles for divs that carry non-modal behavior */
+}
+
+.modal {
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem 0.25rem hsl(0 0% 0% / 10%);
+  max-width: 50rem;
+  padding: 2rem;
+  position: relative;
+}
+
+.modal::backdrop {
+  background: hsl(0 0% 0% / 50%);
+}
+
+.modal-close-btn {
+  font-size: 0.75em;
+  position: absolute;
+  right: 0.25em;
+  top: 0.25em;
+  background-color: aqua;
 }

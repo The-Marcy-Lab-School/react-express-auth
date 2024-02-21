@@ -213,9 +213,27 @@ export default function EventPage() {
     boxShadow:  '-5px 5px 10px #c79807, 5px -5px 10px #ffce09'
   };
 
+  const myDialogModal = document.querySelector("#dialogModal");
+  const openBtnPopup = document.querySelector("#openModalBtn");
+  const CloseModalBtn = document.querySelector("#closeModalBtn");
+
+  if (myDialogModal) {
+    openBtnPopup &&
+    openBtnPopup.addEventListener("click", () => myDialogModal.showModal());
+
+    CloseModalBtn &&
+      CloseModalBtn.addEventListener("click", () => myDialogModal.close());
+  }
+
+
   return (
     <>
-    
+      <dialog id="dialogModal" class="modal">
+        <h1>My Modal</h1>
+        <p>Modal content...</p>
+        <p>Click the below button or press `ESC` key to close this.</p>
+        <button id="closeModalBtn" class="modal-close-btn">Close the modal</button>
+      </dialog>
 
       <div class='navigation'>
         {/* <h1 class="text-white"> Logo </h1>  */}
@@ -296,7 +314,7 @@ export default function EventPage() {
             })}
             </div>
             
-            <button className="bg-yellow-500 text-white font-bold py-2 px-4 w-full mt-5 h-12 rounded-lg"  style={style} >
+            <button id="openBtnPopup" className="bg-yellow-500 text-white font-bold py-2 px-4 w-full mt-5 h-12 rounded-lg"  style={style} >
               Attend
             </button>
           </div>         
