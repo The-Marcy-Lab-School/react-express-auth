@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { IoIosNotifications } from 'react-icons/io';
 import CurrentUserContext from '../contexts/current-user-context';
 import {
   destroyUser,
@@ -11,6 +12,11 @@ import UpdateUsernameForm from '../components/UpdateUsernameForm';
 import EventForm from '../components/EventForm';
 import Event from '../components/Event';
 import { destroyEvent } from '../adapters/event-adapter';
+import {
+  fetchNotifications,
+  deleteNotifications,
+  createANotification,
+} from '../adapters/notification-adapter';
 import { useUserStore } from '../store/store';
 import Spline from '@splinetool/react-spline';
 import { NavLink } from 'react-router-dom';
@@ -26,9 +32,11 @@ export default function UserPage() {
     errorText,
     setErrorText,
   } = useUserStore((state) => state);
-
+  const [notifications, setNotifications] = useState([]);
+  const [notifInit, setNotifInit] = useState(false);
+  const [seenNotif, setSeenNotif] = useState(false);
   const [joinedEvents, setJoinedEvents] = useState({});
-  const [jEvents, setJEvents] = useState([]);
+  const [jEvents, setJevents] = useState([]);
 
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
@@ -39,6 +47,7 @@ export default function UserPage() {
       const [user, error] = await getUser(id);
       if (error) return setErrorText(error.message);
       setUserProfile(user);
+      if (isCurrentUserProfile) loadJoinedEvents(currentUser.id);
     };
 
     setUserEvents(id);
@@ -46,24 +55,15 @@ export default function UserPage() {
     loadUser();
   }, [id]);
 
-  const loadJoinedEvents = async () => {
-    if (currentUser) {
-      const signedEvents = await fetchJoinedEvents(currentUser.id);
-      console.log('signed Events: ', signedEvents);
-      setJEvents(signedEvents);
-      const obj = {};
-      signedEvents.forEach((event) => {
-        obj[event.id] = true;
-      });
-      setJoinedEvents(obj);
-      console.log(obj);
-    }
-  };
   useEffect(() => {
-    loadJoinedEvents();
-  }, [currentUser]);
+    const getNotifications = async () => {
+      const notifs = await fetchNotifications(id);
+      console.log(notifs);
+      setNotifications(notifs);
+    };
 
-  console.log(jEvents);
+    getNotifications(id);
+  }, []);
 
   const handleLogout = () => {
     logUserOut();
@@ -77,6 +77,20 @@ export default function UserPage() {
     destroyUser({ id });
   };
 
+  const loadJoinedEvents = async () => {
+    if (currentUser) {
+      const signedEvents = await fetchJoinedEvents(currentUser.id);
+      console.log('signed Events: ', signedEvents);
+      setJevents(signedEvents);
+      const obj = {};
+      signedEvents.forEach((event) => {
+        obj[event.id] = true;
+      });
+      setJoinedEvents(obj);
+      console.log(obj);
+    }
+  };
+
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
 
@@ -87,6 +101,10 @@ export default function UserPage() {
   const deleteEvent = (evId) => {
     destroyEvent({ event_id: evId });
     setUserEvents(id);
+  };
+
+  const removeNotification = async (userId) => {
+    deleteNotifications(userId);
   };
 
   const profilePic = isCurrentUserProfile
@@ -140,41 +158,45 @@ export default function UserPage() {
 
   return (
     <>
-        <div class='navigation'>
-        {/* <h1 class="text-white"> Logo </h1>  */}
-        <div class="fixed -translate-y-3">
-          {/* <img class="absolute rounded-sm ml-24 mt-5" src={logo} alt="Smiley face" width="72" height="72" /> */}
-          <Spline className="spline h-screen bg-center bg-no-repeat bg-cover relative" scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" /> 
-    
+      <h1>{profileUsername}</h1>
+      {!!isCurrentUserProfile && (
+        <button onClick={handleLogout}>Log Out</button>
+      )}
+      {!!isCurrentUserProfile && (
+        <button onClick={handleDelete}>Delete Account</button>
+      )}
+      {isCurrentUserProfile && (
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <IoIosNotifications
+            size={35}
+            onClick={async () => {
+              setNotifInit(!notifInit);
+              setSeenNotif(true);
+              console.log('HUH');
+              console.log(currentUser);
+              console.log(currentUser.id);
+              await removeNotification(id);
+            }}
+          />
+          {notifications.length > 0 && !seenNotif && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '5%',
+                right: '5px',
+                width: '12px',
+                height: '12px',
+                backgroundColor: 'red',
+                borderRadius: '50%',
+              }}
+            ></div>
+          )}
         </div>
-        <div class="ham-btn" onClick={showNav}>
-          <span class="rounded-sm"></span>
-          <span class="rounded-sm"></span>
-        </div>
-        <div class="links">
-          <div class="link">
-            <NavLink onMouseOver={() => showSpline("community")} onMouseOut={() => showSpline("community")} to="/community">Events</NavLink>
-            {/* <a  href="#"> Events </a> */}
-          </div>
-          <div class="link">
-            <NavLink onMouseOver={() => showSpline("workouts")} onMouseOut={() => showSpline("workouts")} to="/workouts">Workouts</NavLink>
-            {/* <a onMouseOver={() => showSpline()} onMouseOut={() => showSpline()} href="#"> Excersise </a> */}
-          </div>
-          <div class="link">
-            <NavLink onMouseOver={() => showSpline("profile")} onMouseOut={() => showSpline("profile")} to={`/users/${currentUser.id}`}>Profile</NavLink>
-            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
-          </div>
-          <div class="link">
-            <NavLink onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} to="/about">About</NavLink>
-            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
-          </div>
-         
-        </div>
-      </div>
-      {/* <h1>{profileUsername}</h1> */}
-     
-      {/* <p>If the user had any data, here it would be</p>
-      <p>Fake Bio or something</p> */}
+      )}
+
+      {isCurrentUserProfile && <h2>Notifications : {notifications.length}</h2>}
+      {notifInit &&
+        notifications.map((notif, idx) => <p key={idx}>{notif.text}</p>)}
 
       {/* <div className='bg-gray-200 h-2 top-0 left-0 border-solid border-2 border-gray-400 '>
         <div className='profile flex flex-row'>
@@ -294,6 +316,8 @@ export default function UserPage() {
           // <img src={`../public/upload/${profilePic}`}></img>
           <h1>hi</h1>
         )}
+      {console.log(notifications)}
+
 
         {!!isCurrentUserProfile && (
           <button onClick={handleLogout}>Log Out</button>

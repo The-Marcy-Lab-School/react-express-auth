@@ -98,7 +98,7 @@ const FormExercisePlace = () => {
         <ExerciseList exercises={filteredExercises} />
         <p style={{ maxWidth: '500px' }}>
           {exerciseIndex !== null &&
-            filteredExercises[exerciseIndex].instructions}
+            filteredExercises[exerciseIndex]?.instructions}
         </p>
       </div>
     </>

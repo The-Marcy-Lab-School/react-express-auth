@@ -13,11 +13,30 @@ export const useWorkoutStore = create((set) => ({
   setWorkout: (workout) => set({ workout }),
 }));
 
-export const useEventsStore = create((set) => ({
+// community store
+export const useEventsStore = create((set, get) => ({
   events: [],
-  setRecentEvents: async () => set({ events: await fetchRecentEvents() }),
+  copiedEvents: [],
+
+  setRecentEvents: async () =>
+    set({
+      events: await fetchRecentEvents(),
+      copiedEvents: await fetchRecentEvents(),
+    }),
 
   setUserEvents: async (id) => set({ events: await fetchUserEvents(id) }),
+
+  filterEvents: async (value) => {
+    console.log(value);
+
+    const filteredEvents = get().copiedEvents.filter((event) =>
+      event.location.toLowerCase().includes(value.toLowerCase())
+    );
+
+    console.log(filteredEvents);
+
+    set({ events: filteredEvents });
+  },
 }));
 
 // EventForm store
@@ -73,4 +92,10 @@ export const usePaginationStore = create((set) => ({
 export const useExerciseStore = create((set) => ({
   exerciseIndex: null,
   setExerciseIndex: (value) => set({ exerciseIndex: value }),
+}));
+
+// hot event store
+export const useHotStore = create((set) => ({
+  hotEvent: null,
+  setHotEvent: (value) => set({ hotEvent: value }),
 }));

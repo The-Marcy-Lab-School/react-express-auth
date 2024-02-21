@@ -1,13 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-import {
-  fetchRecentEvents,
-  fetchCommentsOnEvent,
-  destroyEvent,
-} from '../adapters/event-adapter';
+import { destroyEvent, findEvent } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import Event from '../components/Event';
-import { useEventsStore } from '../store/store';
+import { useEventsStore, useHotStore } from '../store/store';
 import logo from './assets/images/Union.png';
 import Spline from '@splinetool/react-spline';
 import { NavLink } from 'react-router-dom';
@@ -15,13 +11,16 @@ import { NavLink } from 'react-router-dom';
 
 export default function CommunityPage() {
   const { currentUser } = useContext(CurrentUserContext);
-  // const [events, setEvents] = useState([]);
   const [joinedEvents, setJoinedEvents] = useState({});
-  const { events, setRecentEvents } = useEventsStore((state) => state);
+  const { events, setRecentEvents, filterEvents } = useEventsStore(
+    (state) => state
+  );
+  const { hotEvent, setHotEvent } = useHotStore((state) => state);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     setRecentEvents();
-  }, [setRecentEvents]);
+  }, []);
 
   const loadJoinedEvents = async () => {
     if (currentUser) {
@@ -35,6 +34,7 @@ export default function CommunityPage() {
       console.log(obj);
     }
   };
+
   useEffect(() => {
     loadJoinedEvents();
   }, [currentUser]);
@@ -46,7 +46,23 @@ export default function CommunityPage() {
     setRecentEvents();
   };
 
-  console.log(events);
+  useEffect(() => {
+    if (events[0]) {
+      const max = events.reduce((a, b) =>
+        a.attendee_count > b.attendee_count ? a : b
+      );
+      console.log(max);
+      setHotEvent(max);
+    }
+  }, [events]);
+
+  const onFilter = (event) => {
+    if (event.target.value.trim().length) {
+      filterEvents(event.target.value);
+    } else {
+      setRecentEvents();
+    }
+  };
 
   const showNav = () => {
     const navigationElement = document.getElementsByClassName("navigation")[0];
@@ -180,6 +196,24 @@ export default function CommunityPage() {
 
 
       <div class="grid grid-cols-4 left-0 h-screen ml-7">
+
+      <span>location</span>
+      <input type="text" onChange={onFilter}></input>
+
+      <div>HOT EVENT</div>
+      {hotEvent && (
+        <Event
+          key={hotEvent.id - 800}
+          deleteEvent={() => deleteEvent(hotEvent.id)}
+          event={hotEvent}
+          loadJoinedEvents={loadJoinedEvents}
+          joinedEvents={joinedEvents}
+        />
+      )}
+      <div>HOT EVENT</div>
+
+      <h1>Events</h1>
+
       {currentUser && console.log(currentUser.id)}
       {events[0] &&
         events.map((event) => (

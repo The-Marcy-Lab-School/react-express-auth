@@ -9,6 +9,7 @@ const addTags = require('./addTags');
 const countAttendees = require('./countAttendees');
 const getEventsOfTag = require('./getEventsOfTag');
 const destroyEvent = require('./destroyEvent');
+const findEvent = require('./findEvent');
 
 module.exports = {
   getEventsOfUser,
@@ -22,4 +23,5 @@ module.exports = {
   countAttendees,
   getEventsOfTag,
   destroyEvent,
+  findEvent,
 };
