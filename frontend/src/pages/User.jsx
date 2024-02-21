@@ -301,6 +301,7 @@ export default function UserPage() {
         {!!isCurrentUserProfile && (
           <button onClick={handleDelete}>Delete Account</button>
         )}
+          <EventForm id={id} loadUserEvents={() => setUserEvents(id)} />
       </div>
     );
   }

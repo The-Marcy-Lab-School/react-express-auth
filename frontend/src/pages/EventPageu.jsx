@@ -127,8 +127,9 @@ export default function EventPage() {
       console.log('No object found with the given ID');
   }
 
-  console.log(typeof(eventNum.tag_names))
+  // console.log(typeof(eventNum.tag_names))
 
+  
   let tagsArray = eventNum.tag_names.split(',').map(tag => tag.trim());
 
 
@@ -302,7 +303,7 @@ export default function EventPage() {
             </div>
             
             <button className="bg-yellow-500 text-white font-bold py-2 px-4 w-full mt-5 h-12 rounded-lg"  style={calculatedStyles}>
-              Click me
+              Attend
             </button>
           </div>         
         </div>
