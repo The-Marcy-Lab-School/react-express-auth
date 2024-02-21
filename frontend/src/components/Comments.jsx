@@ -61,7 +61,7 @@ const Comments = ({ eventId, userId }) => {
   
   return (
     <div className="comments">
-      <h6>Comments:</h6>
+      {/* <h6>Comments:</h6> */}
       <button onClick={() => setShowCommentBox(!showCommentBox)}>
         {showCommentBox ? 'Cancel' : 'Add Comment'}
       </button>
@@ -80,18 +80,21 @@ const Comments = ({ eventId, userId }) => {
           <button type="submit" className="submit-comment">Submit</button>
         </form>
       )}
-      {comments.length === 0 ? (
-        <p>No comments yet.</p>
-      ) : (
-        comments.map((comment) => (
-          <Comment 
-            key={comment.id} 
-            comment={comment} 
-            currentUser={currentUser}
-            refreshComments={refreshComments}
-          />
-        ))
-      )}
+      <div className='grid grid-cols-2 gap-2'>
+        {comments.length === 0 ? (
+          <p>No comments yet.</p>
+        ) : (
+          comments.map((comment) => (
+            <Comment 
+              key={comment.id} 
+              comment={comment} 
+              currentUser={currentUser}
+              refreshComments={refreshComments}
+            />
+          ))
+        )}
+      </div>
+     
     </div>
   );
         };  
