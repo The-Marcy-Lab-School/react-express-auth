@@ -5,10 +5,10 @@ const multer = require('multer');
 const userController = require('./controllers/user/index'); // the "/index" part of the path is technically not required here, by default, when provided with a folder, the index file will be imported
 const eventController = require('./controllers/event/index');
 const commentController = require('./controllers/comment/index');
-const notificationController = require('./controllers/notification/index')
+const notificationController = require('./controllers/notification/index');
 const addModelsToRequest = require('./middleware/add-models-to-request');
 const checkAuthentication = require('./middleware/check-authentication');
-const Comment = require('./db/models/comment')
+const Comment = require('./db/models/comment');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -70,6 +70,7 @@ Router.get('/events/relations/:eventId', eventController.countAttendees);
 Router.get('/events', eventController.getRecentEvents);
 Router.get('/events/tags', eventController.getEventsOfTag);
 Router.get('/events/:eventId/comments', commentController.getCommentsOnEvent);
+Router.get('/events/:eventId', eventController.findEvent);
 Router.post('/events', eventController.postEvent);
 Router.post('/events/tags/:eventId', eventController.addTags);
 Router.post('/events/:eventId/comments', commentController.postComment);
@@ -78,20 +79,27 @@ Router.delete('/events/relations/:eventId', eventController.leaveEvent);
 Router.delete('/events/:eventId', eventController.destroyEvent);
 
 Router.get('/comments/:userId', commentController.getCommentsByUser);
-Router.get("/notifications/:userId", notificationController.getNotifications)
-Router.post('/notifications', notificationController.create)
-Router.delete("/notifications/:userId", notificationController.deleteNotifications)
-Router.delete("/notifications", notificationController.deleteANotification)
+Router.get('/notifications/:userId', notificationController.getNotifications);
+Router.post('/notifications', notificationController.create);
+Router.delete(
+  '/notifications/:userId',
+  notificationController.deleteNotifications
+);
+Router.delete('/notifications', notificationController.deleteANotification);
 
-Router.patch('/comments/:commentId/hide', checkAuthentication, async (req, res) => {
-  const { commentId } = req.params;
-  const success = await Comment.hideComment(commentId);
-  if (success) {
-    res.json({ message: "Comment hidden successfully." });
-  } else {
-    res.status(500).json({ error: "Failed to hide the comment." });
+Router.patch(
+  '/comments/:commentId/hide',
+  checkAuthentication,
+  async (req, res) => {
+    const { commentId } = req.params;
+    const success = await Comment.hideComment(commentId);
+    if (success) {
+      res.json({ message: 'Comment hidden successfully.' });
+    } else {
+      res.status(500).json({ error: 'Failed to hide the comment.' });
+    }
   }
-});
+);
 
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.

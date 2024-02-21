@@ -7,20 +7,19 @@ export default function SiteHeadingAndNav() {
 
   return (
     <header>
-    <NavLink id='logo' to='/'>HealthSync</NavLink>
+      <NavLink id="logo" to="/">
+        HealthSync
+      </NavLink>
       <nav>
         <ul>
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
 
-          <li><NavLink to='/community'>Community</NavLink></li>
-
           <li>
-            <NavLink to="/users" end={true}>
-              Users
-            </NavLink>
+            <NavLink to="/community">Community</NavLink>
           </li>
+
           {currentUser ? (
             <>
               <NavLink to="/workouts">Workouts</NavLink>

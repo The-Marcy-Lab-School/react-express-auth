@@ -80,15 +80,23 @@ export const updateUsername = async ({ id, username }) => {
 export const postComment = async ({ user_id, event_id, text }) => {
   const endpoint = `${baseUrl}/${event_id}/comments`;
   try {
-    const [newComment, error] = await fetchHandler(endpoint, getPostOptions({ user_id, event_id, text }));
+    const [newComment, error] = await fetchHandler(
+      endpoint,
+      getPostOptions({ user_id, event_id, text })
+    );
     if (error) throw new Error('Failed to post comment');
     return newComment;
   } catch (error) {
-    console.error("Error posting comment:", error);
+    console.error('Error posting comment:', error);
     throw error;
   }
 };
 
 export const hideComment = async (commentId) => {
   return fetchHandler(`/api/comments/${commentId}/hide`, getPatchOptions({}));
+};
+
+export const findEvent = async (eventId) => {
+  const [event] = await fetchHandler(`${baseUrl}/${eventId}`);
+  return event[0] || {};
 };
