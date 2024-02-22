@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import Spline from '@splinetool/react-spline';
 import { NavLink, useParams } from 'react-router-dom';
 import {
   findEvent,
@@ -9,7 +8,6 @@ import {
 } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
-import logo from './assets/images/Union.png';
 import { timeObject } from '../utils';
 import Comments from '../components/Comments';
 import JoinButton from '../components/JoinButton';
@@ -19,6 +17,7 @@ import {
   createANotification,
   deleteANotification,
 } from '../adapters/notification-adapter';
+import Navigation from '../components/Navigation';
 
 export default function EventPage() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -57,44 +56,6 @@ export default function EventPage() {
   useEffect(() => {
     loadJoinedEvents();
   }, [currentUser]);
-
-  const showNav = () => {
-    const navigationElement = document.getElementsByClassName('navigation')[0];
-    navigationElement.classList.toggle('active');
-    const ham = document.getElementsByClassName('ham-btn')[0];
-    ham.classList.toggle('bg-red-100');
-  };
-
-  const showSpline = (value) => {
-    // var spline = document.createElement('div');
-    // spline.className = "h-screen bg-center bg-no-repeat bg-cover relative";
-    // spline.innerHTML = '<Spline scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />';
-    // document.body.appendChild(spline);
-    const navigationElement = document.getElementsByClassName('navigation')[0];
-    // const splineElement = document.getElementsByClassName("spline")[0];
-    // console.log(splineElement.className);
-    // splineElement.classList.toggle("hidden")
-
-    switch (value) {
-      case 'about':
-        navigationElement.classList.toggle('bg-red-300');
-        break;
-      case 'community':
-        navigationElement.classList.toggle('bg-orange-300');
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      case 'workouts':
-        navigationElement.classList.toggle('bg-green-300');
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      case 'profile':
-        navigationElement.classList.toggle('bg-blue-200');
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      default:
-        console.log(`Sorry, we are out of ${expr}.`);
-    }
-  };
 
   // const calculatedStyles = {
   //   x: `calc((100% - ${mousePosition.x}px) * 1%)`,
@@ -203,70 +164,9 @@ export default function EventPage() {
 
   return (
     <>
-      <div className="navigation">
-        {/* <h1 class="text-white"> Logo </h1>  */}
-        <div className="fixed -translate-y-3">
-          <img
-            className="absolute rounded-sm ml-24 mt-5"
-            src={logo}
-            alt="Smiley face"
-            width="72"
-            height="72"
-          />
-          <Spline
-            className="spline h-screen bg-center bg-no-repeat bg-cover relative"
-            scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode"
-          />
-        </div>
-        <div className="ham-btn" onClick={showNav}>
-          <span className="rounded-sm"></span>
-          <span className="rounded-sm"></span>
-        </div>
-        <div className="links">
-          <div className="link">
-            <NavLink
-              onMouseOver={() => showSpline('community')}
-              onMouseOut={() => showSpline('community')}
-              to="/community"
-            >
-              Events
-            </NavLink>
-            {/* <a  href="#"> Events </a> */}
-          </div>
-          <div className="link">
-            <NavLink
-              onMouseOver={() => showSpline('workouts')}
-              onMouseOut={() => showSpline('workouts')}
-              to="/workouts"
-            >
-              Workouts
-            </NavLink>
-            {/* <a onMouseOver={() => showSpline()} onMouseOut={() => showSpline()} href="#"> Excersise </a> */}
-          </div>
-          <div className="link">
-            <NavLink
-              onMouseOver={() => showSpline('profile')}
-              onMouseOut={() => showSpline('profile')}
-              to={`/users/${currentUser && currentUser.id}`}
-            >
-              Profile
-            </NavLink>
-            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
-          </div>
-          <div className="link">
-            <NavLink
-              onMouseOver={() => showSpline('about')}
-              onMouseOut={() => showSpline('about')}
-              to="/about"
-            >
-              About
-            </NavLink>
-            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
-          </div>
-        </div>
-      </div>
+      <Navigation currentUser={currentUser} />
 
-      <div className="p-24 pt-12">
+      <div className="p-24 pt-20">
         <h1 className="text-3xl font-medium mt-2"> {event.title} </h1>
 
         <img
@@ -296,14 +196,7 @@ export default function EventPage() {
                 <p> Hosted by {event.user_name} </p>
               </div>
             </div>
-            <p>
-              Attendents: {attendeeAmount || event.attendee_count}
-              {event.location === 'Online Class' && <span>/4</span>}
-              {event.attendee_count > 3 &&
-                event.location === 'Online Class' && (
-                  <span> No open spots available</span>
-                )}
-            </p>
+           
 
             <div className="mt-8 h-0.5 w-5/6   bg-gray-100"></div>
 
@@ -322,18 +215,32 @@ export default function EventPage() {
                   {tag}
                 </div>
               ))}
+
+             
             </div>
 
-            {currentUser &&
-              currentUser.id !== event.user_id &&
-              event.id &&
-              checkOnlineAndAttendee() && (
-                <JoinButton
-                  joinEvent={joinEvent}
-                  eventId={event.id}
-                  joinedEvents={joinedEvents}
-                />
-              )}
+            <p className='text-black mt-5'>
+                Attendents: {attendeeAmount || event.attendee_count}
+                {event.location === 'Online Class' && <span>/4</span>}
+                {event.attendee_count > 3 &&
+                  event.location === 'Online Class' && (
+                    <span> No open spots available</span>
+                  )}
+              </p>
+            
+            <div className='mt-5'>
+              {currentUser &&
+                currentUser.id !== event.user_id &&
+                event.id &&
+                checkOnlineAndAttendee() && (
+                  <JoinButton
+                    joinEvent={joinEvent}
+                    eventId={event.id}
+                    joinedEvents={joinedEvents}
+                  />
+                )}
+            </div>
+            
           </div>
         </div>
 
@@ -347,8 +254,6 @@ export default function EventPage() {
         <h2 className="mt-8 text-2xl font-semibold"> Event Location </h2>
         {event && showMapOrRoom()}
       </div>
-
-      <div className="grid grid-cols-4 left-0 h-screen ml-7"></div>
     </>
   );
 }

@@ -85,6 +85,11 @@ export default function CommunityPage() {
       myCloseModalBtn.addEventListener("click", () => myDialogModal.close());
   }
 
+  const styles2 = {
+    background: 'linear-gradient(225deg, #fed7aa, #eab308)',
+    boxShadow: '-11px 11px 18px #cacaca, 11px -11px 18px #f6f6f6',
+  };
+  
 
   return (
     <>
@@ -195,7 +200,7 @@ export default function CommunityPage() {
       </div>
 
       <div className="relative">
-        <button id='openModalBtn' className="fixed bottom-0 right-0 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
+        <button style={styles2} id='openModalBtn' className="fixed bottom-0 right-0 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
           +
         </button>
      </div>
