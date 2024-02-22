@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { destroyEvent, findEvent } from '../adapters/event-adapter';
+import { destroyEvent } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import Event from '../components/Event';
@@ -11,7 +11,6 @@ import { NavLink, useParams } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import './styles/popup.css';
 import Footer from '../components/Footer';
-
 
 
 export default function CommunityPage() {
@@ -116,29 +115,29 @@ export default function CommunityPage() {
           <p>Events</p>
         </div>
 
+        <Spline
+          className="h-screen bg-center bg-no-repeat bg-cover relative"
+          scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode"
+        />
 
-        <Spline className="h-screen bg-center bg-no-repeat bg-cover relative" scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />
+        <h1 className="absolute left-7 bottom-28 text-8xl mb-7">
+          Excercise with{' '}
+        </h1>
+        <h1 className="absolute left-7 bottom-24 text-4xl">
+          <span className="text-orange-600">Others</span>
+          <span className="text-black">.</span>
+        </h1>
 
-        
-        <h1 className="absolute left-7 bottom-28 text-8xl mb-7">Excercise with </h1>
-          <h1 className="absolute left-7 bottom-24 text-4xl">
-            <span className="text-orange-600">Others</span>
-            <span className="text-black">.</span>
-          </h1>
-
-
-          <div class="absolute left-0 -bottom-1">
-            <div class="p-8 w-full bg-white" style={{clipPath: "polygon(93% 0, 0% 0%, 0% 100%, 100% 100%)", width:"58vw"}}>
-            </div>
-
-          </div>
-     
-
-
+        <div class="absolute left-0 -bottom-1">
+          <div
+            class="p-8 w-full bg-white"
+            style={{
+              clipPath: 'polygon(93% 0, 0% 0%, 0% 100%, 100% 100%)',
+              width: '58vw',
+            }}
+          ></div>
+        </div>
       </div>
-
-
-
 
       <div class="flex items-center justify-center">
           <div class="relative w-96 h-16 mt-9 border border-gray-200 shadow-md bg-white rounded-full">
@@ -153,11 +152,7 @@ export default function CommunityPage() {
           </div>
       </div>
 
-
-
-
       <div class="mt-8 h-0.5  w-full   bg-gray-100"></div>
-
 
       <div class="grid grid-cols-4 left-0 h-4/5 ml-7">
 

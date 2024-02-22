@@ -7,13 +7,15 @@ import {
   fetchAttendeesAmount,
   destroyEvent,
 } from '../adapters/event-adapter';
-import { createANotification, deleteANotification } from '../adapters/notification-adapter';
+import {
+  createANotification,
+  deleteANotification,
+} from '../adapters/notification-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 // import './styles/Event.css';
 import Comments from './Comments';
 import JoinButton from './JoinButton';
 import Map from './Map';
-
 
 const Event = (props) => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -23,8 +25,7 @@ const Event = (props) => {
   const [attendeeAmount, setAttendeeAmount] = useState(0);
   const [showMap, setShowMap] = useState(false);
   const [map, setMap] = useState('Loading...');
-  let tagsArray = event.tag_names.split(',').map(tag => tag.trim());
-
+  const tagsArray = event.tag_names.split(',').map((tag) => tag.trim());
 
   const formattedStartDate = new Date(event.date).toLocaleString(
     'en-US',
@@ -58,9 +59,8 @@ const Event = (props) => {
     const event_id = event.id;
     if (!(event.id in joinedEvents)) await joinAnEvent({ user_id, event_id });
     else {
-      await leaveAnEvent({ user_id, event_id })
-      deleteANotification( event.user_id,
-      user_id)
+      await leaveAnEvent({ user_id, event_id });
+      deleteANotification(event.user_id, user_id);
     }
     setTimeout(async () => {
       await loadJoinedEvents();
@@ -70,8 +70,13 @@ const Event = (props) => {
       const attendentAmount = await fetchAttendeesAmount(event.id);
       setAttendeeAmount(attendentAmount);
     }, 160);
-    createANotification({ event_id,  recipient_id : event.user_id, attendee_id : user_id, text : `
-    ${currentUser.name} joined Event ${event.title}`})
+    createANotification({
+      event_id,
+      recipient_id: event.user_id,
+      attendee_id: user_id,
+      text: `
+    ${currentUser.name} joined Event ${event.title}`,
+    });
   };
 
   const mapHandler = () => {
@@ -123,42 +128,61 @@ const Event = (props) => {
     return <button onClick={mapHandler}>Load Map</button>;
   };
 
-
   return (
-    
     <div className="event max-w-xs p-4 relative">
       {console.log(event)}
       <NavLink to={`/event/${event.id}`}>
-        <img src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-950729835440706966/original/9fd156b5-afab-4b0e-9400-c007d52e2e96.jpeg?im_w=720" alt="Modern Glass-Walled House" class="w-full h-64 object-cover rounded-lg shadow-md mb-4"/>
-        <div class="absolute top-0 left-0 w-20 h-7 ml-8 mt-8 font-medium">
-          <div className='flex flex-col space-y-2'>
-          {tagsArray.map(tag => {
-            return <div className= 'bg-white text-center justify-center rounded-full w-20 h-7' key={tag}>{tag}</div>;
-          })}
+        <img
+          src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-950729835440706966/original/9fd156b5-afab-4b0e-9400-c007d52e2e96.jpeg?im_w=720"
+          alt="Modern Glass-Walled House"
+          className="w-full h-64 object-cover rounded-lg shadow-md mb-4"
+        />
+        <div className="absolute top-0 left-0 w-20 h-7 ml-8 mt-8 font-medium">
+          <div className="flex flex-col space-y-2">
+            {tagsArray.map((tag) => (
+              <div
+                className="bg-white text-center justify-center rounded-full w-20 h-7"
+                key={tag}
+              >
+                {tag}
+              </div>
+            ))}
           </div>
         </div>
 
-        <div class=" rounded-lg">
-          <h1 class="text-md font-semibold mb-4">{event.title}</h1>
-          <div className='text-sm font-normal text-gray-500'>
-            <p class="mb-2">{event.location}</p>
-            <p class="mb-2">{formattedStartDate} – {formattedEndDate}</p>
-            <p class="mb-4"></p>
+        <div className=" rounded-lg">
+          <h1 className="text-md font-semibold mb-4">{event.title}</h1>
+          <div className="text-sm font-normal text-gray-500">
+            <p className="mb-2">{event.location}</p>
+            <p className="mb-2">
+              {formattedStartDate} – {formattedEndDate}
+            </p>
+            <p className="mb-4"></p>
           </div>
         </div>
       </NavLink>
+      {currentUser &&
+        currentUser.id !== event.user_id &&
+        event.id &&
+        checkOnlineAndAttendee() && (
+          <JoinButton
+            joinEvent={joinEvent}
+            eventId={event.id}
+            joinedEvents={joinedEvents}
+          />
+        )}
       {/* {currentUser && currentUser.id === event.user_id ? (
         <button onClick={deleteEvent}>Delete Event</button>
       ) : (
         <p></p>
       )} */}
       {/* <div className="user-details"> */}
-        {/* <img
+      {/* <img
           className="profile-pic"
           src={`../upload/${event.user_profile_pic || 'default.jpg'}`}
         /> */}
 
-        {/* <h3>guy: {event.user_name}</h3>
+      {/* <h3>guy: {event.user_name}</h3>
       </div> */}
       {/* <h3>Title: {event.title}</h3> */}
       {/* <h3>Location: {event.location}</h3>

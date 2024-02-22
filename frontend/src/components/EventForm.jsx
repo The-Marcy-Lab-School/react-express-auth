@@ -96,7 +96,7 @@ export default function EventForm({ id, loadUserEvents }) {
         <option value="Marine Park, Brookly, NY">Marine Park</option>
         <option value="Sunset Park, Brookly, NY">Sunset Park</option>
         <option value="Domino Park, Brookly, NY">Domino Park</option>
-        <option value="Brooklyn Heights Promenade Park, Brookly, NY">
+        <option value="Brooklyn Heights Promenade Park, Brooklny, NY">
           Brooklyn Heights Promenade Park
         </option>
         <option value="Manhattan Beach Park, Brookly, NY">
