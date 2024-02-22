@@ -57,13 +57,17 @@ const Navigation = ({ currentUser}) => {
         <div className='navigation'>
             <div className="fixed -translate-y-3">
                 <img className="absolute rounded-sm ml-24 mt-5" src={logo} alt="Smiley face" width="72" height="72" />
-                <Spline className="spline h-screen bg-center bg-no-repeat bg-cover relative" scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />
             </div>
-            <div>
+
+            <div className='h-full w-full bg-center bg-no-repeat bg-cover relative'>
                 <div className="ham-btn" onClick={showNav}>
                     <span className="rounded-sm"></span>
                     <span className="rounded-sm"></span>
                  </div>
+                 <div className=' h-full w-[98.8%]'>
+                    <Spline className="spline h-full w-full " scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />
+                 </div>
+
             </div>
            
             <div className="links">
