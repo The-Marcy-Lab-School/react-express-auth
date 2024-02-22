@@ -3,11 +3,14 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, PresentationControls, Html   } from '@react-three/drei';
 import  Guy  from '../components/Guy';
 import FormExercisePlace from '../components/FormExercisePlace';
+import { usePartStore } from '../store/store';
 import Experience from '../components/Experience';
 
 export default function Workouts() {
   const [rotationX, setRotationX] = useState(0)
-  const [partSelected, setPartSelected] = useState("None")
+  const { 
+    partSelected, setPartSelected
+  } = usePartStore((state) => state);
 
   const handleClick = (event) => {
     // handleRaycast(event);
@@ -42,6 +45,7 @@ export default function Workouts() {
   return (
     <>
       <h1>THIS IS THE 3D MODEL AREA</h1>
+      <h5>Part selected: {partSelected}</h5>
       <div style={{maxWidth : "400px", height : "400px"}}>
       <Canvas   onClick={handleClick} >
       <ambientLight intensity={0.7} />
