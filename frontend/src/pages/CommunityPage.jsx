@@ -3,24 +3,34 @@ import { destroyEvent, findEvent } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import Event from '../components/Event';
+import EventForm from '../components/EventForm';
 import { useEventsStore, useHotStore } from '../store/store';
 import logo from './assets/images/Union.png';
 import Spline from '@splinetool/react-spline';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import Navigation from '../components/Navigation';
+import './styles/popup.css';
+import Footer from '../components/Footer';
+
 
 
 export default function CommunityPage() {
   const { currentUser } = useContext(CurrentUserContext);
   const [joinedEvents, setJoinedEvents] = useState({});
-  const { events, setRecentEvents, filterEvents } = useEventsStore(
+  const { events, setRecentEvents, filterEvents, setUserEvents } = useEventsStore(
     (state) => state
   );
+
   const { hotEvent, setHotEvent } = useHotStore((state) => state);
   const [searchValue, setSearchValue] = useState('');
-
+  
+  // console.log(currentUser)
   useEffect(() => {
-    setRecentEvents();
-  }, []);
+    if (currentUser) {
+      setRecentEvents();
+      setUserEvents(currentUser.id);
+    }
+  }, [currentUser]);
 
   const loadJoinedEvents = async () => {
     if (currentUser) {
@@ -41,9 +51,9 @@ export default function CommunityPage() {
 
   console.log(events);
 
-  const deleteEvent = async (id) => {
-    destroyEvent({ event_id: id });
-    setRecentEvents();
+  const deleteEvent = async (ev_id) => {
+    destroyEvent({ event_id: ev_id });
+    setRecentEvents(id);
   };
 
   useEffect(() => {
@@ -64,89 +74,43 @@ export default function CommunityPage() {
     }
   };
 
-  const showNav = () => {
-    const navigationElement = document.getElementsByClassName("navigation")[0];
-    navigationElement.classList.toggle("active");
-    const ham = document.getElementsByClassName("ham-btn")[0];
-    ham.classList.toggle("bg-orange-200");
-    
+  const myDialogModal = document.querySelector("#dialogModal");
+  const myOpenModalBtn = document.querySelector("#openModalBtn");
+  const myCloseModalBtn = document.querySelector("#closeModalBtn");
+
+  if (myDialogModal) {
+    myOpenModalBtn &&
+      myOpenModalBtn.addEventListener("click", () => myDialogModal.showModal());
+
+    myCloseModalBtn &&
+      myCloseModalBtn.addEventListener("click", () => myDialogModal.close());
   }
 
-  const showSpline = (value) => {
-    // var spline = document.createElement('div');
-    // spline.className = "h-screen bg-center bg-no-repeat bg-cover relative";
-    // spline.innerHTML = '<Spline scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />';
-    // document.body.appendChild(spline);
-    const navigationElement = document.getElementsByClassName("navigation")[0];
-    // const splineElement = document.getElementsByClassName("spline")[0];
-    // console.log(splineElement.className); 
-    // splineElement.classList.toggle("hidden")
-    console.log("test")
-    switch (value) {
-      case 'about':
-        navigationElement.classList.toggle("bg-red-300");
-        break;
-      case 'community':
-        navigationElement.classList.toggle("bg-orange-300");
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      case 'workouts':
-        navigationElement.classList.toggle("bg-green-300");
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      case 'profile':
-          navigationElement.classList.toggle("bg-blue-200");
-          // Expected output: "Mangoes and papayas are $2.79 a pound."
-          break;
-      default:
-        console.log(`Sorry, we are out of ${expr}.`);
-    }
-
-
-    
-  }
 
   return (
     <>
-      <div class='navigation'>
-        {/* <h1 class="text-white"> Logo </h1>  */}
-        <div class="fixed -translate-y-3">
-          <img class="absolute rounded-sm ml-24 mt-5" src={logo} alt="Smiley face" width="72" height="72" />
-          <Spline className="spline h-screen bg-center bg-no-repeat bg-cover relative" scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />
-    
-        </div>
-        <div class="ham-btn" onClick={showNav}>
-          <span class="rounded-sm"></span>
-          <span class="rounded-sm"></span>
-        </div>
-        <div class="links">
-          <div class="link">
-            <NavLink onMouseOver={() => showSpline("community")} onMouseOut={() => showSpline("community")} to="/community">Events</NavLink>
-            {/* <a  href="#"> Events </a> */}
-          </div>
-          <div class="link">
-            <NavLink onMouseOver={() => showSpline("workouts")} onMouseOut={() => showSpline("workouts")} to="/workouts">Workouts</NavLink>
-            {/* <a onMouseOver={() => showSpline()} onMouseOut={() => showSpline()} href="#"> Excersise </a> */}
-          </div>
-          <div class="link">
-           {currentUser && <NavLink onMouseOver={() => showSpline("profile")} onMouseOut={() => showSpline("profile")} to={`/users/${currentUser.id}`}>Profile</NavLink>}
-            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
-          </div>
-          <div class="link">
-            <NavLink onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} to="/about">About</NavLink>
-            {/* <a onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} href="#"> About </a> */}
-          </div>
-         
-        </div>
+      <div className='flex'>
+        <dialog id="dialogModal" class="modal">
+          <h1 className='text-xl font-bold'>Create an Event</h1>
+          {currentUser ? (
+        <EventForm id={currentUser.id} loadUserEvents={() => setUserEvents(currentUser.id)} />
+      ) : (
+        <div>Loading...</div> 
+      )}
+
+          <button id="closeModalBtn" class="modal-close-btn text-xl"> X </button>
+        </dialog>
       </div>
+
+      <Navigation currentUser={currentUser} />
 
       <div className="h-[380px] bg-center bg-no-repeat bg-cover relative bg-orange-200" >
 
-        <div class="fixed translate-y-3">
+        {/* <div class="fixed translate-y-3">
           <img class="rounded-sm ml-24" src={logo} alt="Smiley face" width="72" height="72" />
         
         </div>
-        
+         */}
 
         <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
           <p>Events</p>
@@ -178,7 +142,7 @@ export default function CommunityPage() {
 
       <div class="flex items-center justify-center">
           <div class="relative w-96 h-16 mt-9 border border-gray-200 shadow-md bg-white rounded-full">
-              <input class="absolute inset-0 m-3 ml-5 outline-none text-base" type="text" placeholder="Type something..." />
+              <input onChange={onFilter} class="absolute inset-0 m-3 ml-5 outline-none text-base" type="text" placeholder="Type something..." />
               <button class="absolute inset-y-0 right-0 w-14 h-5/6 mt-1 rounded-full bg-transparent border-none outline-none" type="submit" name="searchQuerySubmit">
                   <div class="w-10 h-10 m-2 bg-orange-200 rounded-full flex items-center justify-center">
                       <svg class="w-6 h-6" viewBox="0 0 24 24">
@@ -195,43 +159,54 @@ export default function CommunityPage() {
       <div class="mt-8 h-0.5  w-full   bg-gray-100"></div>
 
 
-      <div class="grid grid-cols-4 left-0 h-screen ml-7">
+      <div class="grid grid-cols-4 left-0 h-4/5 ml-7">
 
-      <span>location</span>
-      <input type="text" onChange={onFilter}></input>
+        {/* <span>location</span>
+        <input type="text" onChange={onFilter}></input> */}
 
-      <div>HOT EVENT</div>
-      {hotEvent && (
-        <Event
-          key={hotEvent.id - 800}
-          deleteEvent={() => deleteEvent(hotEvent.id)}
-          event={hotEvent}
-          loadJoinedEvents={loadJoinedEvents}
-          joinedEvents={joinedEvents}
-        />
-      )}
-      <div>HOT EVENT</div>
+        {/* <div>HOT EVENT</div> */}
+        {hotEvent && (
+          <div style={{ border: '3px solid red' }}>
+            <Event
+              key={hotEvent.id - 800}
+              deleteEvent={() => deleteEvent(hotEvent.id)}
+              event={hotEvent}
+              loadJoinedEvents={loadJoinedEvents}
+              joinedEvents={joinedEvents}
+            />
+          </div>
+        )}
 
-      <h1>Events</h1>
 
-      {currentUser && console.log(currentUser.id)}
-      {events[0] &&
-        events.map((event) => (
-          <Event
-            key={event.id - 800}
-            deleteEvent={() => deleteEvent(event.id)}
-            event={event}
-            loadJoinedEvents={loadJoinedEvents}
-            joinedEvents={joinedEvents}
-          />
-        ))}
+        {/* <div>HOT EVENT</div> */}
+
+        {/* <h1>Events</h1> */}
+
+      
+      </div>
+
+      <div class="grid grid-cols-4 left-0 h-4/5 ml-7 mb-28">
+        {currentUser && console.log(currentUser.id)}
+        {events[0] &&
+          events.map((event) => (
+            <Event
+              key={event.id - 800}
+              deleteEvent={() => deleteEvent(event.id)}
+              event={event}
+              loadJoinedEvents={loadJoinedEvents}
+              joinedEvents={joinedEvents}
+            />
+          ))}
       </div>
 
       <div className="relative">
-        <button className="absolute bottom-0 right-0 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full">
+        <button id='openModalBtn' className="fixed bottom-0 right-0 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
           +
         </button>
      </div>
+
+     <Footer />
+
 
       
 
