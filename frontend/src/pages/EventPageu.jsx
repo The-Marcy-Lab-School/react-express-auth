@@ -10,7 +10,7 @@ import {
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import logo from './assets/images/Union.png';
-import { timeObject } from '../utils';
+import { eventPictures, timeObject } from '../utils';
 import Comments from '../components/Comments';
 import JoinButton from '../components/JoinButton';
 import Map from '../components/Map';
@@ -201,6 +201,8 @@ export default function EventPage() {
     return <Map location={event.location} />;
   };
 
+  console.log(eventPictures(event.location));
+
   return (
     <>
       <div className="navigation">
@@ -270,8 +272,8 @@ export default function EventPage() {
         <h1 className="text-3xl font-medium mt-2"> {event.title} </h1>
 
         <img
-          src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-950729835440706966/original/9fd156b5-afab-4b0e-9400-c007d52e2e96.jpeg?im_w=720"
-          alt="Modern Glass-Walled House"
+          src={eventPictures(event.location)}
+          alt="Image for event location"
           className="w-full h-96 object-cover rounded-lg shadow-md mb-4 mt-7"
         />
 

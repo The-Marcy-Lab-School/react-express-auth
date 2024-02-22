@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { timeObject } from '../utils';
+import { eventPictures, timeObject } from '../utils';
 import {
   joinAnEvent,
   leaveAnEvent,
@@ -133,7 +133,7 @@ const Event = (props) => {
       {console.log(event)}
       <NavLink to={`/event/${event.id}`}>
         <img
-          src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-950729835440706966/original/9fd156b5-afab-4b0e-9400-c007d52e2e96.jpeg?im_w=720"
+          src={eventPictures(event.location)}
           alt="Modern Glass-Walled House"
           className="w-full h-64 object-cover rounded-lg shadow-md mb-4"
         />

@@ -112,49 +112,44 @@ export default function UserPage() {
     : userProfile.profile_pic;
 
   console.log(events);
-  console.log(currentUser.profile_pic)
 
   const showNav = () => {
-    const navigationElement = document.getElementsByClassName("navigation")[0];
-    navigationElement.classList.toggle("active");
-    const ham = document.getElementsByClassName("ham-btn")[0];
-    ham.classList.toggle("bg-blue-200");
-    
-  }
+    const navigationElement = document.getElementsByClassName('navigation')[0];
+    navigationElement.classList.toggle('active');
+    const ham = document.getElementsByClassName('ham-btn')[0];
+    ham.classList.toggle('bg-blue-200');
+  };
 
   const showSpline = (value) => {
     // var spline = document.createElement('div');
     // spline.className = "h-screen bg-center bg-no-repeat bg-cover relative";
     // spline.innerHTML = '<Spline scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />';
     // document.body.appendChild(spline);
-    const navigationElement = document.getElementsByClassName("navigation")[0];
+    const navigationElement = document.getElementsByClassName('navigation')[0];
     // const splineElement = document.getElementsByClassName("spline")[0];
-    // console.log(splineElement.className); 
+    // console.log(splineElement.className);
     // splineElement.classList.toggle("hidden")
-    console.log("test")
+    console.log('test');
     switch (value) {
       case 'about':
-        navigationElement.classList.toggle("bg-red-300");
+        navigationElement.classList.toggle('bg-red-300');
         break;
       case 'community':
-        navigationElement.classList.toggle("bg-orange-300");
+        navigationElement.classList.toggle('bg-orange-300');
         // Expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case 'workouts':
-        navigationElement.classList.toggle("bg-green-300");
+        navigationElement.classList.toggle('bg-green-300');
         // Expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case 'profile':
-          navigationElement.classList.toggle("bg-blue-200");
-          // Expected output: "Mangoes and papayas are $2.79 a pound."
-          break;
+        navigationElement.classList.toggle('bg-blue-200');
+        // Expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
       default:
         console.log(`Sorry, we are out of ${expr}.`);
     }
-
-
-    
-  }
+  };
 
   return (
     <>
@@ -214,55 +209,62 @@ export default function UserPage() {
         </div>
       </div> */}
 
-    <div className="h-[287px] bg-center bg-no-repeat bg-cover relative bg-blue-300">
-
-    <div className='profile flex flex-row absolute bottom-0 left-0 px-36'>
-      <div className='max-w-44 max-h-44 flex justify-center'>
-        <img
-          className="rounded-t-sm"
-          src={`../upload/${'default.jpg'}`}
-          width={'full'}
-          height={'full'}
-        />
-      </div>
-      <div className='flex justify-center items-end font-bold ml-5 mb-7 text-white'>
-        <h1> {profileUsername} </h1>
-      </div>    
+      <div className="h-[287px] bg-center bg-no-repeat bg-cover relative bg-blue-300">
+        <div className="profile flex flex-row absolute bottom-0 left-0 px-36">
+          <div className="max-w-44 max-h-44 flex justify-center">
+            <img
+              className="rounded-t-sm"
+              src={`../upload/${'default.jpg'}`}
+              width={'full'}
+              height={'full'}
+            />
+          </div>
+          <div className="flex justify-center items-end font-bold ml-5 mb-7 text-white">
+            <h1> {profileUsername} </h1>
+          </div>
         </div>
-    </div>
-    
-    <div className="flex flex-row items-center justify-center space-x-14 bg-white font-medium text-gray-500">
-      <button  
-        className={`w-20 h-10 flex items-center justify-center ${activeTab === 'overview' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
-        onClick={() => setActiveTab('overview')}
-      >
-        Overview
-      </button>
-      <button  
-        className={`w-20 h-10 flex items-center justify-center ${activeTab === 'events' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
-        onClick={() => setActiveTab('events')}
-      >
-        Events
-      </button>
-      <button  
-        className={`w-20 h-10 flex items-center justify-center ${activeTab === 'management' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
-        onClick={() => setActiveTab('management')}
-      >
-        Management
-      </button>
-    </div>
+      </div>
 
+      <div className="flex flex-row items-center justify-center space-x-14 bg-white font-medium text-gray-500">
+        <button
+          className={`w-20 h-10 flex items-center justify-center ${
+            activeTab === 'overview'
+              ? 'text-blue-600 font-medium'
+              : 'text-gray-500'
+          } hover:text-blue-200`}
+          onClick={() => setActiveTab('overview')}
+        >
+          Overview
+        </button>
+        <button
+          className={`w-20 h-10 flex items-center justify-center ${
+            activeTab === 'events'
+              ? 'text-blue-600 font-medium'
+              : 'text-gray-500'
+          } hover:text-blue-200`}
+          onClick={() => setActiveTab('events')}
+        >
+          Events
+        </button>
+        <button
+          className={`w-20 h-10 flex items-center justify-center ${
+            activeTab === 'management'
+              ? 'text-blue-600 font-medium'
+              : 'text-gray-500'
+          } hover:text-blue-200`}
+          onClick={() => setActiveTab('management')}
+        >
+          Management
+        </button>
+      </div>
 
-    {activeTab === 'overview' && <Overview />}
-    {activeTab === 'events' && <Events />}
-    {activeTab === 'management' && <Management />}
+      {activeTab === 'overview' && <Overview />}
+      {activeTab === 'events' && <Events />}
+      {activeTab === 'management' && <Management />}
 
-    {console.log(activeTab)}
+      {console.log(activeTab)}
 
       {/* <EventForm id={id} loadUserEvents={() => setUserEvents(id)} /> */}
-
-      
-      
 
       {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
     </> // /upload/${userProfile.profile_pic}
@@ -271,7 +273,7 @@ export default function UserPage() {
   function Overview() {
     return <div>This is the overview tab.</div>;
   }
-  
+
   function Events() {
     return (
       <div>
@@ -300,7 +302,7 @@ export default function UserPage() {
       </div>
     );
   }
-  
+
   function Management() {
     return (
       <div>
@@ -316,8 +318,7 @@ export default function UserPage() {
           // <img src={`../public/upload/${profilePic}`}></img>
           <h1>hi</h1>
         )}
-      {console.log(notifications)}
-
+        {console.log(notifications)}
 
         {!!isCurrentUserProfile && (
           <button onClick={handleLogout}>Log Out</button>
@@ -325,7 +326,7 @@ export default function UserPage() {
         {!!isCurrentUserProfile && (
           <button onClick={handleDelete}>Delete Account</button>
         )}
-          <EventForm id={id} loadUserEvents={() => setUserEvents(id)} />
+        <EventForm id={id} loadUserEvents={() => setUserEvents(id)} />
       </div>
     );
   }
