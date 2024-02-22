@@ -20,6 +20,8 @@ import {
 import { useUserStore } from '../store/store';
 import Spline from '@splinetool/react-spline';
 import { NavLink } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Navigation from '../components/Navigation';
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -158,45 +160,14 @@ export default function UserPage() {
 
   return (
     <>
-      <h1>{profileUsername}</h1>
-      {!!isCurrentUserProfile && (
+      {/* <h1>{profileUsername}</h1> */}
+      {/* {!!isCurrentUserProfile && (
         <button onClick={handleLogout}>Log Out</button>
       )}
       {!!isCurrentUserProfile && (
         <button onClick={handleDelete}>Delete Account</button>
-      )}
-      {isCurrentUserProfile && (
-        <div style={{ position: 'relative', display: 'inline-block' }}>
-          <IoIosNotifications
-            size={35}
-            onClick={async () => {
-              setNotifInit(!notifInit);
-              setSeenNotif(true);
-              console.log('HUH');
-              console.log(currentUser);
-              console.log(currentUser.id);
-              await removeNotification(id);
-            }}
-          />
-          {notifications.length > 0 && !seenNotif && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '5%',
-                right: '5px',
-                width: '12px',
-                height: '12px',
-                backgroundColor: 'red',
-                borderRadius: '50%',
-              }}
-            ></div>
-          )}
-        </div>
-      )}
-
-      {isCurrentUserProfile && <h2>Notifications : {notifications.length}</h2>}
-      {notifInit &&
-        notifications.map((notif, idx) => <p key={idx}>{notif.text}</p>)}
+      )} */}
+      
 
       {/* <div className='bg-gray-200 h-2 top-0 left-0 border-solid border-2 border-gray-400 '>
         <div className='profile flex flex-row'>
@@ -213,6 +184,8 @@ export default function UserPage() {
           </div>    
         </div>
       </div> */}
+
+  <Navigation currentUser={currentUser} />
 
     <div className="h-[287px] bg-center bg-no-repeat bg-cover relative bg-blue-300">
 
@@ -252,6 +225,8 @@ export default function UserPage() {
       </button>
     </div>
 
+    
+
 
     {activeTab === 'overview' && <Overview />}
     {activeTab === 'events' && <Events />}
@@ -263,70 +238,115 @@ export default function UserPage() {
 
       
       
+      <Footer />
 
       {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
     </> // /upload/${userProfile.profile_pic}
-  );
+    );
 
-  function Overview() {
-    return <div>This is the overview tab.</div>;
-  }
-  
-  function Events() {
-    return (
-      <div>
-        {events[0] && <p style={{ fontSize: '30px' }}>My events</p>}
-        {events[0] &&
-          events.map((event) => (
-            <Event
-              key={event.id - 800}
-              deleteEvent={() => deleteEvent(event.id)}
-              event={event}
-              loadJoinedEvents={loadJoinedEvents}
-              joinedEvents={joinedEvents}
-            />
-          ))}
+    function Overview() {
+      return <div className='mb-12'>This is the overview tab.</div>;
+    }
+    
+    function Events() {
+      return (
+        <div>
+          {events[0] && <p style={{ fontSize: '30px' }}>My events</p>}
+          <div className='grid grid-cols-3'>
+            {events[0] &&
+              events.map((event) => (
+                <Event
+                  key={event.id - 800}
+                  deleteEvent={() => deleteEvent(event.id)}
+                  event={event}
+                  loadJoinedEvents={loadJoinedEvents}
+                  joinedEvents={joinedEvents}
+                />
+              ))}
+          </div>
+        
 
-        {jEvents && <p style={{ fontSize: '30px' }}>Joined events</p>}
-        {jEvents &&
-          jEvents.map((event) => (
-            <Event
-              key={event.id - 800}
-              event={event}
-              loadJoinedEvents={loadJoinedEvents}
-              joinedEvents={joinedEvents}
+          {jEvents && <p className='mb-12' style={{ fontSize: '30px' }}>Joined events</p>}
+          <div className='grid grid-cols-3'>
+            {jEvents &&
+              jEvents.map((event) => (
+                <Event
+                  key={event.id - 800}
+                  event={event}
+                  loadJoinedEvents={loadJoinedEvents}
+                  joinedEvents={joinedEvents}
+                />
+              ))}
+          </div>
+        
+        </div>
+      );
+    }
+    
+    function Management() {
+      return (
+        <div className='mb-12'>
+          {!!isCurrentUserProfile && (
+            <UpdateUsernameForm
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
             />
-          ))}
-      </div>
+          )}
+          {console.log(userProfile)}
+          {/* <img src="/upload/1706824948115wowow.png" alt="img" /> */}
+          {/* {userProfile.profile_pic && (
+            // <img src={`../public/upload/${profilePic}`}></img>
+            <h1>hi</h1>
+          )} */}
+        {console.log(notifications)}
+
+        {isCurrentUserProfile && (
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <IoIosNotifications
+              size={35}
+              onClick={async () => {
+                setNotifInit(!notifInit);
+                setSeenNotif(true);
+                console.log('HUH');
+                console.log(currentUser);
+                console.log(currentUser.id);
+                await removeNotification(id);
+              }}
+            />
+            {notifications.length > 0 && !seenNotif && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '5%',
+                  right: '5px',
+                  width: '12px',
+                  height: '12px',
+                  backgroundColor: 'red',
+                  borderRadius: '50%',
+                }}
+              ></div>
+            )}
+          </div>
+        )}
+
+        {isCurrentUserProfile && <h2>Notifications : {notifications.length}</h2>}
+        {notifInit &&
+          notifications.map((notif, idx) => <p key={idx}>{notif.text}</p>)}
+
+
+          {!!isCurrentUserProfile && (
+            <button onClick={handleLogout}>Log Out</button>
+          )}
+          {!!isCurrentUserProfile && (
+            <button onClick={handleDelete}>Delete Account</button>
+          )}
+            {/* <EventForm id={id} loadUserEvents={() => setUserEvents(id)} /> */}
+        </div>
+
+        
     );
   }
   
-  function Management() {
-    return (
-      <div>
-        {!!isCurrentUserProfile && (
-          <UpdateUsernameForm
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
-          />
-        )}
-        {console.log(userProfile)}
-        {/* <img src="/upload/1706824948115wowow.png" alt="img" /> */}
-        {userProfile.profile_pic && (
-          // <img src={`../public/upload/${profilePic}`}></img>
-          <h1>hi</h1>
-        )}
-      {console.log(notifications)}
-
-
-        {!!isCurrentUserProfile && (
-          <button onClick={handleLogout}>Log Out</button>
-        )}
-        {!!isCurrentUserProfile && (
-          <button onClick={handleDelete}>Delete Account</button>
-        )}
-          <EventForm id={id} loadUserEvents={() => setUserEvents(id)} />
-      </div>
-    );
-  }
 }
+
+
