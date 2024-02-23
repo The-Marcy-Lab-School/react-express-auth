@@ -114,49 +114,44 @@ export default function UserPage() {
     : userProfile.profile_pic;
 
   console.log(events);
-  console.log(currentUser.profile_pic)
 
   const showNav = () => {
-    const navigationElement = document.getElementsByClassName("navigation")[0];
-    navigationElement.classList.toggle("active");
-    const ham = document.getElementsByClassName("ham-btn")[0];
-    ham.classList.toggle("bg-blue-200");
-    
-  }
+    const navigationElement = document.getElementsByClassName('navigation')[0];
+    navigationElement.classList.toggle('active');
+    const ham = document.getElementsByClassName('ham-btn')[0];
+    ham.classList.toggle('bg-blue-200');
+  };
 
   const showSpline = (value) => {
     // var spline = document.createElement('div');
     // spline.className = "h-screen bg-center bg-no-repeat bg-cover relative";
     // spline.innerHTML = '<Spline scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />';
     // document.body.appendChild(spline);
-    const navigationElement = document.getElementsByClassName("navigation")[0];
+    const navigationElement = document.getElementsByClassName('navigation')[0];
     // const splineElement = document.getElementsByClassName("spline")[0];
-    // console.log(splineElement.className); 
+    // console.log(splineElement.className);
     // splineElement.classList.toggle("hidden")
-    console.log("test")
+    console.log('test');
     switch (value) {
       case 'about':
-        navigationElement.classList.toggle("bg-red-300");
+        navigationElement.classList.toggle('bg-red-300');
         break;
       case 'community':
-        navigationElement.classList.toggle("bg-orange-300");
+        navigationElement.classList.toggle('bg-orange-300');
         // Expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case 'workouts':
-        navigationElement.classList.toggle("bg-green-300");
+        navigationElement.classList.toggle('bg-green-300');
         // Expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case 'profile':
-          navigationElement.classList.toggle("bg-blue-200");
-          // Expected output: "Mangoes and papayas are $2.79 a pound."
-          break;
+        navigationElement.classList.toggle('bg-blue-200');
+        // Expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
       default:
         console.log(`Sorry, we are out of ${expr}.`);
     }
-
-
-    
-  }
+  };
 
   return (
     <>
@@ -167,7 +162,6 @@ export default function UserPage() {
       {!!isCurrentUserProfile && (
         <button onClick={handleDelete}>Delete Account</button>
       )} */}
-      
 
       {/* <div className='bg-gray-200 h-2 top-0 left-0 border-solid border-2 border-gray-400 '>
         <div className='profile flex flex-row'>
@@ -185,168 +179,125 @@ export default function UserPage() {
         </div>
       </div> */}
 
-  <Navigation currentUser={currentUser} />
-
-    <div className="h-[287px] bg-center bg-no-repeat bg-cover relative bg-blue-300">
-
-    <div className='profile flex flex-row absolute bottom-0 left-0 px-36'>
-      <div className='max-w-44 max-h-44 flex justify-center'>
-        <img
-          className="rounded-t-sm"
-          src={`../upload/${'default.jpg'}`}
-          width={'full'}
-          height={'full'}
-        />
-      </div>
-      <div className='flex justify-center items-end font-bold ml-5 mb-7 text-white'>
-        <h1> {profileUsername} </h1>
-      </div>    
+      <div className="h-[287px] bg-center bg-no-repeat bg-cover relative bg-blue-300">
+        <div className="profile flex flex-row absolute bottom-0 left-0 px-36">
+          <div className="max-w-44 max-h-44 flex justify-center">
+            <img
+              className="rounded-t-sm"
+              src={`../upload/${'default.jpg'}`}
+              width={'full'}
+              height={'full'}
+            />
+          </div>
+          <div className="flex justify-center items-end font-bold ml-5 mb-7 text-white">
+            <h1> {profileUsername} </h1>
+          </div>
         </div>
-    </div>
-    
-    <div className="flex flex-row items-center justify-center space-x-14 bg-white font-medium text-gray-500">
-      <button  
-        className={`w-20 h-10 flex items-center justify-center ${activeTab === 'overview' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
-        onClick={() => setActiveTab('overview')}
-      >
-        Overview
-      </button>
-      <button  
-        className={`w-20 h-10 flex items-center justify-center ${activeTab === 'events' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
-        onClick={() => setActiveTab('events')}
-      >
-        Events
-      </button>
-      <button  
-        className={`w-20 h-10 flex items-center justify-center ${activeTab === 'management' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
-        onClick={() => setActiveTab('management')}
-      >
-        Management
-      </button>
-    </div>
+      </div>
 
-    
+      <div className="flex flex-row items-center justify-center space-x-14 bg-white font-medium text-gray-500">
+        <button
+          className={`w-20 h-10 flex items-center justify-center ${
+            activeTab === 'overview'
+              ? 'text-blue-600 font-medium'
+              : 'text-gray-500'
+          } hover:text-blue-200`}
+          onClick={() => setActiveTab('overview')}
+        >
+          Overview
+        </button>
+        <button
+          className={`w-20 h-10 flex items-center justify-center ${
+            activeTab === 'events'
+              ? 'text-blue-600 font-medium'
+              : 'text-gray-500'
+          } hover:text-blue-200`}
+          onClick={() => setActiveTab('events')}
+        >
+          Events
+        </button>
+        <button
+          className={`w-20 h-10 flex items-center justify-center ${
+            activeTab === 'management'
+              ? 'text-blue-600 font-medium'
+              : 'text-gray-500'
+          } hover:text-blue-200`}
+          onClick={() => setActiveTab('management')}
+        >
+          Management
+        </button>
+      </div>
 
+      {activeTab === 'overview' && <Overview />}
+      {activeTab === 'events' && <Events />}
+      {activeTab === 'management' && <Management />}
 
-    {activeTab === 'overview' && <Overview />}
-    {activeTab === 'events' && <Events />}
-    {activeTab === 'management' && <Management />}
-
-    {console.log(activeTab)}
+      {console.log(activeTab)}
 
       {/* <EventForm id={id} loadUserEvents={() => setUserEvents(id)} /> */}
 
-      
-      
-      <Footer />
-
       {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
     </> // /upload/${userProfile.profile_pic}
-    );
+  );
 
-    function Overview() {
-      return <div className='mb-12'>This is the overview tab.</div>;
-    }
-    
-    function Events() {
-      return (
-        <div>
-          {events[0] && <p style={{ fontSize: '30px' }}>My events</p>}
-          <div className='grid grid-cols-3'>
-            {events[0] &&
-              events.map((event) => (
-                <Event
-                  key={event.id - 800}
-                  deleteEvent={() => deleteEvent(event.id)}
-                  event={event}
-                  loadJoinedEvents={loadJoinedEvents}
-                  joinedEvents={joinedEvents}
-                />
-              ))}
-          </div>
-        
+  function Overview() {
+    return <div>This is the overview tab.</div>;
+  }
 
-          {jEvents && <p className='mb-12' style={{ fontSize: '30px' }}>Joined events</p>}
-          <div className='grid grid-cols-3'>
-            {jEvents &&
-              jEvents.map((event) => (
-                <Event
-                  key={event.id - 800}
-                  event={event}
-                  loadJoinedEvents={loadJoinedEvents}
-                  joinedEvents={joinedEvents}
-                />
-              ))}
-          </div>
-        
-        </div>
-      );
-    }
-    
-    function Management() {
-      return (
-        <div className='mb-12'>
-          {!!isCurrentUserProfile && (
-            <UpdateUsernameForm
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
+  function Events() {
+    return (
+      <div>
+        {events[0] && <p style={{ fontSize: '30px' }}>My events</p>}
+        {events[0] &&
+          events.map((event) => (
+            <Event
+              key={event.id - 800}
+              deleteEvent={() => deleteEvent(event.id)}
+              event={event}
+              loadJoinedEvents={loadJoinedEvents}
+              joinedEvents={joinedEvents}
             />
-          )}
-          {console.log(userProfile)}
-          {/* <img src="/upload/1706824948115wowow.png" alt="img" /> */}
-          {/* {userProfile.profile_pic && (
-            // <img src={`../public/upload/${profilePic}`}></img>
-            <h1>hi</h1>
-          )} */}
-        {console.log(notifications)}
+          ))}
 
-        {isCurrentUserProfile && (
-          <div style={{ position: 'relative', display: 'inline-block' }}>
-            <IoIosNotifications
-              size={35}
-              onClick={async () => {
-                setNotifInit(!notifInit);
-                setSeenNotif(true);
-                console.log('HUH');
-                console.log(currentUser);
-                console.log(currentUser.id);
-                await removeNotification(id);
-              }}
+        {jEvents && <p style={{ fontSize: '30px' }}>Joined events</p>}
+        {jEvents &&
+          jEvents.map((event) => (
+            <Event
+              key={event.id - 800}
+              event={event}
+              loadJoinedEvents={loadJoinedEvents}
+              joinedEvents={joinedEvents}
             />
-            {notifications.length > 0 && !seenNotif && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '5%',
-                  right: '5px',
-                  width: '12px',
-                  height: '12px',
-                  backgroundColor: 'red',
-                  borderRadius: '50%',
-                }}
-              ></div>
-            )}
-          </div>
-        )}
-
-        {isCurrentUserProfile && <h2>Notifications : {notifications.length}</h2>}
-        {notifInit &&
-          notifications.map((notif, idx) => <p key={idx}>{notif.text}</p>)}
-
-
-          {!!isCurrentUserProfile && (
-            <button onClick={handleLogout}>Log Out</button>
-          )}
-          {!!isCurrentUserProfile && (
-            <button onClick={handleDelete}>Delete Account</button>
-          )}
-            {/* <EventForm id={id} loadUserEvents={() => setUserEvents(id)} /> */}
-        </div>
-
-        
+          ))}
+      </div>
     );
   }
-  
+
+  function Management() {
+    return (
+      <div>
+        {!!isCurrentUserProfile && (
+          <UpdateUsernameForm
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
+        )}
+        {console.log(userProfile)}
+        {/* <img src="/upload/1706824948115wowow.png" alt="img" /> */}
+        {userProfile.profile_pic && (
+          // <img src={`../public/upload/${profilePic}`}></img>
+          <h1>hi</h1>
+        )}
+        {console.log(notifications)}
+
+        {!!isCurrentUserProfile && (
+          <button onClick={handleLogout}>Log Out</button>
+        )}
+        {!!isCurrentUserProfile && (
+          <button onClick={handleDelete}>Delete Account</button>
+        )}
+        <EventForm id={id} loadUserEvents={() => setUserEvents(id)} />
+      </div>
+    );
+  }
 }
-
-

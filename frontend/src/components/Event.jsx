@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { timeObject } from '../utils';
+import { eventPictures, timeObject } from '../utils';
 import {
   joinAnEvent,
   leaveAnEvent,
@@ -25,6 +25,7 @@ const Event = (props) => {
   const [attendeeAmount, setAttendeeAmount] = useState(0);
   const [showMap, setShowMap] = useState(false);
   const [map, setMap] = useState('Loading...');
+
   const tagsArray = event.tag_names.split(',').map((tag) => tag.trim());
 
   const formattedStartDate = new Date(event.date).toLocaleString(
@@ -86,15 +87,6 @@ const Event = (props) => {
     }, 1200);
   };
 
-  const checkOnlineAndAttendee = () => {
-    if (joinedEvents[event.id]) return true;
-
-    return (
-      (event.location === 'Online Class' && event.attendee_count < 4) ||
-      event.location !== 'Online Class'
-    );
-  };
-
   const showRoomTime = () => {
     const today = new Date().getTime();
     const startTime = new Date(event.date).getTime();
@@ -133,7 +125,7 @@ const Event = (props) => {
       {console.log(event)}
       <NavLink to={`/event/${event.id}`}>
         <img
-          src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-950729835440706966/original/9fd156b5-afab-4b0e-9400-c007d52e2e96.jpeg?im_w=720"
+          src={eventPictures(event.location)}
           alt="Modern Glass-Walled House"
           className="w-full h-64 object-cover rounded-lg shadow-md mb-4"
         />
@@ -160,22 +152,20 @@ const Event = (props) => {
             <p className="mb-4"></p>
           </div>
         </div>
+        <p>Attendents: {attendeeAmount || event.attendee_count}</p>
       </NavLink>
-      {currentUser &&
-        currentUser.id !== event.user_id &&
-        event.id &&
-        checkOnlineAndAttendee() && (
-          <JoinButton
-            joinEvent={joinEvent}
-            eventId={event.id}
-            joinedEvents={joinedEvents}
-          />
-        )}
-      {/* {currentUser && currentUser.id === event.user_id ? (
+      {currentUser && currentUser.id !== event.user_id && event.id && (
+        <JoinButton
+          joinEvent={joinEvent}
+          eventId={event.id}
+          joinedEvents={joinedEvents}
+        />
+      )}
+      {currentUser && currentUser.id === event.user_id ? (
         <button onClick={deleteEvent}>Delete Event</button>
       ) : (
         <p></p>
-      )} */}
+      )}
       {/* <div className="user-details"> */}
       {/* <img
           className="profile-pic"
