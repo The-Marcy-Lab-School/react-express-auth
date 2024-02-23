@@ -162,6 +162,21 @@ export default function EventPage() {
     return <Map location={event.location} />;
   };
 
+
+  const buttonStyles = {
+    borderRadius: '10px',
+    background: '#e0e0e0',
+    boxShadow: 'inset -20px 20px 60px #bebebe, inset 20px -20px 60px #ffffff',
+    width: '100%',
+    height: '80%',
+    color: 'white',
+    padding: '10px 15px',
+    border: 'none',
+    cursor: 'not-allowed',
+    fontSize: '14px',
+    transition: 'background 1ms ease-in',
+  };
+
   return (
     <>
       <Navigation currentUser={currentUser} />
@@ -209,10 +224,10 @@ export default function EventPage() {
             <div className="grid grid-cols-3 gap-2">
               {tagsArray.map((tag) => (
                 <div
-                  className="bg-yellow-600 text-center justify-center rounded-full w-20 h-7"
+                  className="bg-yellow-600  rounded-full w-10/12 h-7 text-sm"
                   key={tag}
                 >
-                  {tag}
+                  <p className='text-center justify-center mt-1'> {tag} </p>
                 </div>
               ))}
 
@@ -229,16 +244,19 @@ export default function EventPage() {
               </p>
             
             <div className='mt-5'>
-              {currentUser &&
-                currentUser.id !== event.user_id &&
-                event.id &&
-                checkOnlineAndAttendee() && (
-                  <JoinButton
-                    joinEvent={joinEvent}
-                    eventId={event.id}
-                    joinedEvents={joinedEvents}
-                  />
-                )}
+            {currentUser && currentUser.id !== event.user_id && event.id && checkOnlineAndAttendee() ? (
+              <JoinButton
+                joinEvent={joinEvent}
+                eventId={event.id}
+                joinedEvents={joinedEvents}
+              />
+            ) : (
+              <button style={buttonStyles}>
+                <p className='font-bold' > Own Event </p>
+              </button>
+            )}
+
+                <p className='text-black justify-center text-center mt-5 text-sm'> Remember don't over exert yourself. </p>
             </div>
             
           </div>

@@ -95,12 +95,12 @@ export default function CommunityPage() {
     <>
       <div className='flex'>
         <dialog id="dialogModal" class="modal">
-          <h1 className='text-xl font-bold'>Create an Event</h1>
+          <h1 className='text-xl font-bold text-center'>Create an Event</h1>
           {currentUser ? (
-        <EventForm id={currentUser.id} loadUserEvents={() => setUserEvents(currentUser.id)} />
-      ) : (
-        <div>Loading...</div> 
-      )}
+            <EventForm id={currentUser.id} loadUserEvents={() => setUserEvents(currentUser.id)} />
+          ) : (
+            <div>Loading...</div> 
+          )}
 
           <button id="closeModalBtn" class="modal-close-btn text-xl"> X </button>
         </dialog>
@@ -116,9 +116,9 @@ export default function CommunityPage() {
         </div>
          */}
 
-        <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
+        {/* <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
           <p>Events</p>
-        </div>
+        </div> */}
 
         <Spline
           className="h-screen bg-center bg-no-repeat bg-cover relative"
@@ -146,7 +146,7 @@ export default function CommunityPage() {
 
       <div class="flex items-center justify-center">
           <div class="relative w-96 h-16 mt-9 border border-gray-200 shadow-md bg-white rounded-full">
-              <input onChange={onFilter} class="absolute inset-0 m-3 ml-5 outline-none text-base" type="text" placeholder="Type something..." />
+              <input onChange={onFilter} class="absolute inset-0 m-3 ml-5 outline-none text-base" type="text" placeholder="Type Location..." />
               <button class="absolute inset-y-0 right-0 w-14 h-5/6 mt-1 rounded-full bg-transparent border-none outline-none" type="submit" name="searchQuerySubmit">
                   <div class="w-10 h-10 m-2 bg-orange-200 rounded-full flex items-center justify-center">
                       <svg class="w-6 h-6" viewBox="0 0 24 24">
@@ -159,7 +159,8 @@ export default function CommunityPage() {
 
       <div class="mt-8 h-0.5  w-full   bg-gray-100"></div>
 
-      <div class="grid grid-cols-4 left-0 h-4/5 ml-7">
+      <div className='h-full'>
+        <div class="grid grid-cols-4 left-0 h-4/5 ml-7">
 
         {/* <span>location</span>
         <input type="text" onChange={onFilter}></input> */}
@@ -182,10 +183,10 @@ export default function CommunityPage() {
 
         {/* <h1>Events</h1> */}
 
-      
-      </div>
 
-      <div class="grid grid-cols-4 left-0 h-4/5 ml-7 mb-28">
+        </div>
+
+        <div class="grid grid-cols-4 left-0 h-4/5 ml-7 mb-28">
         {currentUser && console.log(currentUser.id)}
         {events[0] &&
           events.map((event) => (
@@ -197,14 +198,15 @@ export default function CommunityPage() {
               joinedEvents={joinedEvents}
             />
           ))}
-      </div>
+        </div>
 
-      <div className="relative">
+        <div className="relative">
         <button style={styles2} id='openModalBtn' className="fixed bottom-0 right-0 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
           +
         </button>
-     </div>
-
+        </div>
+      </div>
+     
      <Footer />
 
 

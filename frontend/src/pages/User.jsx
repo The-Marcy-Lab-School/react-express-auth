@@ -42,7 +42,7 @@ export default function UserPage() {
 
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('events');
 
   useEffect(() => {
     const loadUser = async () => {
@@ -114,7 +114,7 @@ export default function UserPage() {
     : userProfile.profile_pic;
 
   console.log(events);
-  console.log(currentUser.profile_pic)
+  // console.log(currentUser.profile_pic)
 
   const showNav = () => {
     const navigationElement = document.getElementsByClassName("navigation")[0];
@@ -193,7 +193,7 @@ export default function UserPage() {
       <div className='max-w-44 max-h-44 flex justify-center'>
         <img
           className="rounded-t-sm"
-          src={`../upload/${'default.jpg'}`}
+          src={`../upload/${profilePic ? profilePic : 'default.jpg'}`}
           width={'full'}
           height={'full'}
         />
@@ -205,12 +205,12 @@ export default function UserPage() {
     </div>
     
     <div className="flex flex-row items-center justify-center space-x-14 bg-white font-medium text-gray-500">
-      <button  
+      {/* <button  
         className={`w-20 h-10 flex items-center justify-center ${activeTab === 'overview' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
         onClick={() => setActiveTab('overview')}
       >
         Overview
-      </button>
+      </button> */}
       <button  
         className={`w-20 h-10 flex items-center justify-center ${activeTab === 'events' ? 'text-blue-600 font-medium' : 'text-gray-500'} hover:text-blue-200`} 
         onClick={() => setActiveTab('events')}
@@ -228,7 +228,7 @@ export default function UserPage() {
     
 
 
-    {activeTab === 'overview' && <Overview />}
+    {/* {activeTab === 'overview' && <Overview />} */}
     {activeTab === 'events' && <Events />}
     {activeTab === 'management' && <Management />}
 
@@ -244,13 +244,13 @@ export default function UserPage() {
     </> // /upload/${userProfile.profile_pic}
     );
 
-    function Overview() {
-      return <div className='mb-12'>This is the overview tab.</div>;
-    }
+    // function Overview() {
+    //   return <div className='mb-12 h-screen'>This is the overview tab.</div>;
+    // }
     
     function Events() {
       return (
-        <div>
+        <div className='h-screen'>
           {events[0] && <p style={{ fontSize: '30px' }}>My events</p>}
           <div className='grid grid-cols-3'>
             {events[0] &&
@@ -285,7 +285,7 @@ export default function UserPage() {
     
     function Management() {
       return (
-        <div className='mb-12'>
+        <div className='mb-12 h-screen'>
           {!!isCurrentUserProfile && (
             <UpdateUsernameForm
               currentUser={currentUser}
@@ -308,8 +308,8 @@ export default function UserPage() {
                 setNotifInit(!notifInit);
                 setSeenNotif(true);
                 console.log('HUH');
-                console.log(currentUser);
-                console.log(currentUser.id);
+                // console.log(currentUser);
+                // console.log(currentUser.id);
                 await removeNotification(id);
               }}
             />

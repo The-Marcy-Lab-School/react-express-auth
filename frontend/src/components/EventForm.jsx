@@ -78,7 +78,7 @@ export default function EventForm({ id, loadUserEvents }) {
   };
 
   return (
-    <form onSubmit={submit} style={{ width: '400px' }}>
+    <form onSubmit={submit} style={{ width: '400px' }} className='outline-0'>
       <label htmlFor="title">Title for your event:</label>
       <input type="text" id="title" name="title" required />
 
@@ -137,26 +137,32 @@ export default function EventForm({ id, loadUserEvents }) {
 
       <fieldset style={{ color: err.tagColor }}>
         <legend>Select Tags:</legend>
-        {tags.map((tag, idx) => (
-          <label key={tag}>
-            <input
-              type="checkbox"
-              id={tag}
-              name="tags"
-              value={idx + 1}
-              checked={selectedTags.includes(idx + 1)}
-              onChange={handleCheckboxChange}
-            />
-            {tag}
-          </label>
-        ))}
+        <div className='flex flex-col'>
+          {tags.map((tag, idx) => (
+            <label key={tag} className='flex flex-row text-center'>
+              <input
+                type="checkbox"
+                id={tag}
+                name="tags"
+                className=' justify-center'
+                value={idx + 1}
+                checked={selectedTags.includes(idx + 1)}
+                onChange={handleCheckboxChange}
+              />
+              {tag}
+            </label>
+          ))}
+        </div>
+       
       </fieldset>
 
       <p style={{ color: 'red' }}>{err.tagText}</p>
 
-      <label htmlFor="description">Description:</label>
-      <textarea id="description" name="description" rows="2"></textarea>
-
+      <div className='h-20 mb-10'>
+        <label htmlFor="description">Description:</label>
+        <textarea className='resize-none w-full h-full' id="description" name="description" rows="2"></textarea>
+      </div>
+     
       <button type="submit">Submit</button>
     </form>
   );

@@ -14,9 +14,6 @@ import CurrentUserContext from '../contexts/current-user-context';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 
-
-
-import './styles/bar.css'
 import Spline from '@splinetool/react-spline';
 
 export default function Workouts() {
@@ -107,8 +104,8 @@ export default function Workouts() {
                 
               </div>
               <div className='relative top-12 left-0 font-medium' style={{ width: '99vw',
-  marginLeft: '-calc((-100vw + 100%) / 2)',
-  marginRight: '-calc((-100vw + 100%) / 2)',  }}>
+                  marginLeft: '-calc((-100vw + 100%) / 2)',
+                  marginRight: '-calc((-100vw + 100%) / 2)',  }}>
                   <section class="early">
                   <article>
                     <p class="right">A study by the U.S. Centers for Disease Control and Prevention (CDC) revealed an “alarming” increase in obesity among American children and teenagers during the COVID-19 pandemic. Before the pandemic, children who were a healthy weight gained an average of 3.4 pounds per year. However, during the pandemic, this increased to 5.4 pounds. The rate of obesity rose significantly in kids aged 6 to 11, who were more dependent on their parents and may have been affected when schools suspended in-person classes.</p>

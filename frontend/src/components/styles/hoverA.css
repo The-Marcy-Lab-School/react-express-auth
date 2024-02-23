@@ -1,0 +1,21 @@
+.link {
+    background: linear-gradient(#1095c1 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+    transition: 0.4s, background-position 0s;
+  }
+  .link:hover {
+    --p: 100%;
+    color: #fff;
+  }
+  
+ .links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .links .link a {
+    font-family: system-ui, sans-serif;
+  }
+  
