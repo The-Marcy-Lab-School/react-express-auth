@@ -99,3 +99,37 @@ export const useHotStore = create((set) => ({
   hotEvent: null,
   setHotEvent: (value) => set({ hotEvent: value }),
 }));
+
+export const useHoverStore = create((set) => ({
+  isHovered1: false,
+  setIsHovered1: (value) => set({ isHovered1: value }),
+  isHovered2: false,
+  setIsHovered2: (value) => set({ isHovered2: value }),
+  isHovered3: false,
+  setIsHovered3: (value) => set({ isHovered3: value }),
+  isHovered4: false,
+  setIsHovered4: (value) => set({ isHovered4: value }),
+  isHovered5: false,
+  setIsHovered5: (value) => set({ isHovered5: value }),
+  isHovered6: false,
+  setIsHovered6: (value) => set({ isHovered6: value }),
+  isHovered7: false,
+  setIsHovered7: (value) => set({ isHovered7: value }),
+  isHovered8: false,
+  setIsHovered8: (value) => set({ isHovered8: value }),
+  isHovered9: false,
+  setIsHovered9: (value) => set({ isHovered9: value }),
+  isHovered10: false,
+  setIsHovered10: (value) => set({ isHovered10: value }),
+  isHovered11: false,
+  setIsHovered11: (value) => set({ isHovered11: value }),
+  isHovered12: false,
+  setIsHovered12: (value) => set({ isHovered12: value }),
+  isHovered13: false,
+  setIsHovered13: (value) => set({ isHovered13: value }),
+}));
+
+export const usePartStore = create((set) => ({
+  partSelected: 'none',
+  setPartSelected: (value) => set({ partSelected: value }),
+}));

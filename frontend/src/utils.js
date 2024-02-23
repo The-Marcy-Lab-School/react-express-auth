@@ -87,23 +87,23 @@ const pictures = {
     'https://media.timeout.com/images/105683556/image.jpg',
   'McCarren Park, Brooklyn, NY':
     'https://media.cntraveler.com/photos/5ff637cd1cae1c5896a5f6c3/16:9/w_2560,c_limit/2C7FAW9.jpg',
-  'Fort Greene Park, Brookly, NY':
+  'Fort Greene Park, Brooklyn, NY':
     'https://images.ctfassets.net/1aemqu6a6t65/2KQqJk6ZV3Lsld5H8awzVr/871369d06ea46798e42483e22a3c0216/ftgreene23f?w=1200&h=800&q=75',
-  'Marine Park, Brookly, NY':
+  'Marine Park, Brooklyn, NY':
     'https://static.nycgovparks.org/images/photo_gallery/full_size/22933.jpg',
-  'Sunset Park, Brookly, NY':
+  'Sunset Park, Brooklyn, NY':
     'https://images.ctfassets.net/1aemqu6a6t65/3eUGLuY9k4IfQzy4Z6FcEJ/5157b4fb671eb9a46be0af9670df72f5/Sunset-Park-Brooklyn-NYC-Photo-Jordana-Berm__dez.jpg',
-  'Domino Park, Brookly, NY':
+  'Domino Park, Brooklyn, NY':
     'https://cdn.vox-cdn.com/thumbor/Hu91h6N8isy3qREZOYHHwPTCspw=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/59971589/180524_11_38_47_5DSR5465.0.jpg',
-  'Brooklyn Heights Promenade Park, Brooklny, NY':
+  'Brooklyn Heights Promenade Park, Brooklyn, NY':
     'https://www.tclf.org/sites/default/files/styles/crop_2000x700/public/thumbnails/image/NY_NYC_BrooklynHeightsPromenade_WikimediaCommons_2017_01_Hero.jpg?itok=0ESTJznT',
-  'Manhattan Beach Park, Brookly, NY':
+  'Manhattan Beach Park, Brooklyn, NY':
     'https://static.nycgovparks.org/images/photo_gallery/full_size/24748.jpg',
-  'WNYC Transmitter Park, Brookly, NY':
+  'WNYC Transmitter Park, Brooklyn, NY':
     'https://transmitterpark.org/wp-content/uploads/2022/09/13-29-04A-1400-xxx_q85-orig.jpg',
-  'Owls Head Park, Brookly, NY':
+  'Owls Head Park, Brooklyn, NY':
     'https://pbs.twimg.com/media/DbtxosvW4AAxuhV.jpg',
-  'Bushwich Inlet Park, Brookly, NY':
+  'Bushwich Inlet Park, Brooklyn, NY':
     'https://static.nycgovparks.org/images/photo_gallery/full_size/24722.jpg',
   'Online Class':
     'https://www.billboard.com/wp-content/uploads/2024/01/online-fitness-class-2024-billboard-1548.jpg?w=942&h=623&crop=1',

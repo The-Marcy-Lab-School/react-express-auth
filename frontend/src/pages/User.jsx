@@ -20,6 +20,8 @@ import {
 import { useUserStore } from '../store/store';
 import Spline from '@splinetool/react-spline';
 import { NavLink } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Navigation from '../components/Navigation';
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -153,45 +155,13 @@ export default function UserPage() {
 
   return (
     <>
-      <h1>{profileUsername}</h1>
-      {!!isCurrentUserProfile && (
+      {/* <h1>{profileUsername}</h1> */}
+      {/* {!!isCurrentUserProfile && (
         <button onClick={handleLogout}>Log Out</button>
       )}
       {!!isCurrentUserProfile && (
         <button onClick={handleDelete}>Delete Account</button>
-      )}
-      {isCurrentUserProfile && (
-        <div style={{ position: 'relative', display: 'inline-block' }}>
-          <IoIosNotifications
-            size={35}
-            onClick={async () => {
-              setNotifInit(!notifInit);
-              setSeenNotif(true);
-              console.log('HUH');
-              console.log(currentUser);
-              console.log(currentUser.id);
-              await removeNotification(id);
-            }}
-          />
-          {notifications.length > 0 && !seenNotif && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '5%',
-                right: '5px',
-                width: '12px',
-                height: '12px',
-                backgroundColor: 'red',
-                borderRadius: '50%',
-              }}
-            ></div>
-          )}
-        </div>
-      )}
-
-      {isCurrentUserProfile && <h2>Notifications : {notifications.length}</h2>}
-      {notifInit &&
-        notifications.map((notif, idx) => <p key={idx}>{notif.text}</p>)}
+      )} */}
 
       {/* <div className='bg-gray-200 h-2 top-0 left-0 border-solid border-2 border-gray-400 '>
         <div className='profile flex flex-row'>

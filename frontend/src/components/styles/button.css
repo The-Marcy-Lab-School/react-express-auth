@@ -1,18 +1,26 @@
-.join-event {
-    background-color: #4caf50; 
-    color: #fff; 
+  .join-event {
+    background: linear-gradient(225deg, #8be28b, #eab308);
+    box-shadow: -11px 11px 18px #cacaca, 
+    11px -11px 18px #f6f6f6;
+    
     padding: 10px 15px; 
     border: none;
     border-radius: 10px; 
     cursor: pointer;
     font-size: 14px; 
-}
-.join-event:hover {
-    background-color: #45a049; 
+
+    transition: background 1ms ease-in;
+  }
+  
+  .join-event:hover {
+    background: linear-gradient(225deg, #51b751, #eab308);
   }
 
+
   .leave-event {
-    background-color: #ff4444; 
+    background: linear-gradient(225deg, #ff6961, #eab308);
+    box-shadow: -11px 11px 18px #cacaca, 
+    11px -11px 18px #f6f6f6;
     color: #fff; 
     padding: 10px 15px; 
     border: none;

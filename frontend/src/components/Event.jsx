@@ -25,6 +25,7 @@ const Event = (props) => {
   const [attendeeAmount, setAttendeeAmount] = useState(0);
   const [showMap, setShowMap] = useState(false);
   const [map, setMap] = useState('Loading...');
+
   const tagsArray = event.tag_names.split(',').map((tag) => tag.trim());
 
   const formattedStartDate = new Date(event.date).toLocaleString(
@@ -84,15 +85,6 @@ const Event = (props) => {
     setTimeout(() => {
       setMap(<Map location={event.location} />);
     }, 1200);
-  };
-
-  const checkOnlineAndAttendee = () => {
-    if (joinedEvents[event.id]) return true;
-
-    return (
-      (event.location === 'Online Class' && event.attendee_count < 4) ||
-      event.location !== 'Online Class'
-    );
   };
 
   const showRoomTime = () => {
@@ -160,22 +152,20 @@ const Event = (props) => {
             <p className="mb-4"></p>
           </div>
         </div>
+        <p>Attendents: {attendeeAmount || event.attendee_count}</p>
       </NavLink>
-      {currentUser &&
-        currentUser.id !== event.user_id &&
-        event.id &&
-        checkOnlineAndAttendee() && (
-          <JoinButton
-            joinEvent={joinEvent}
-            eventId={event.id}
-            joinedEvents={joinedEvents}
-          />
-        )}
-      {/* {currentUser && currentUser.id === event.user_id ? (
+      {currentUser && currentUser.id !== event.user_id && event.id && (
+        <JoinButton
+          joinEvent={joinEvent}
+          eventId={event.id}
+          joinedEvents={joinedEvents}
+        />
+      )}
+      {currentUser && currentUser.id === event.user_id ? (
         <button onClick={deleteEvent}>Delete Event</button>
       ) : (
         <p></p>
-      )} */}
+      )}
       {/* <div className="user-details"> */}
       {/* <img
           className="profile-pic"
