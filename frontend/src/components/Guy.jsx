@@ -469,4 +469,3 @@ console.log(setPartSelected)
 
 export default Guy;
 
-useGLTF.preload("/Gipp.gltf");
