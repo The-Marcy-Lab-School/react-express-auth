@@ -515,4 +515,3 @@ const Guy = forwardRef((props, ref) => {
 
 export default Guy;
 
-useGLTF.preload('/Gipp.gltf');
