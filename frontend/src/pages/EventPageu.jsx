@@ -1,14 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, Navigate, useNavigate } from 'react-router-dom';
 import {
   findEvent,
   joinAnEvent,
   leaveAnEvent,
   fetchAttendeesAmount,
+  destroyEvent,
 } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
-import { timeObject } from '../utils';
+import logo from './assets/images/Union.png';
+import { eventPictures, timeObject } from '../utils';
 import Comments from '../components/Comments';
 import JoinButton from '../components/JoinButton';
 import Map from '../components/Map';
@@ -26,8 +28,8 @@ export default function EventPage() {
   const [attendeeAmount, setAttendeeAmount] = useState(0);
   const [showMap, setShowMap] = useState(false);
   const [map, setMap] = useState('Loading...');
-
   const [event, setEvent] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSingleEvent = async () => {
@@ -81,14 +83,10 @@ export default function EventPage() {
   const joinEvent = async () => {
     const user_id = currentUser.id;
     const event_id = event.id;
-    if (!(event.id in joinedEvents)) await joinAnEvent({ user_id, event_id });
-    else {
+    if (!(event.id in joinedEvents)) {
+      await joinAnEvent({ user_id, event_id });
+    } else {
       await leaveAnEvent({ user_id, event_id });
-      setJoinedEvents((prevJoinedEvents) => {
-        const newJoinedEvents = { ...prevJoinedEvents };
-        delete newJoinedEvents[event_id];
-        return newJoinedEvents;
-      });
       const updatedAttendeeAmount = await fetchAttendeesAmount(event_id);
       setAttendeeAmount(updatedAttendeeAmount);
       deleteANotification(event.user_id, user_id);
@@ -110,23 +108,6 @@ export default function EventPage() {
     });
   };
 
-  const mapHandler = () => {
-    setShowMap(true);
-    setTimeout(() => {
-      console.log(event.location);
-      setMap(<Map location={event.location} />);
-    }, 600);
-  };
-
-  const checkOnlineAndAttendee = () => {
-    if (joinedEvents[event.id]) return true;
-
-    return (
-      (event.location === 'Online Class' && event.attendee_count < 4) ||
-      (event.location !== 'Online Class' && <p>No</p>)
-    );
-  };
-
   const showRoomTime = () => {
     const today = new Date().getTime();
     const startTime = new Date(event.date).getTime();
@@ -144,8 +125,6 @@ export default function EventPage() {
 
   showRoomTime();
 
-  console.log(event.location);
-
   const showMapOrRoom = () => {
     const isHost = currentUser && currentUser.id === event.user_id;
     const hasJoined = joinedEvents[event.id];
@@ -162,6 +141,11 @@ export default function EventPage() {
     return <Map location={event.location} />;
   };
 
+  const deleteEvent = async () => {
+    destroyEvent({ event_id: event.id });
+    navigate('/community');
+  };
+
   return (
     <>
       <Navigation currentUser={currentUser} />
@@ -170,8 +154,8 @@ export default function EventPage() {
         <h1 className="text-3xl font-medium mt-2"> {event.title} </h1>
 
         <img
-          src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-950729835440706966/original/9fd156b5-afab-4b0e-9400-c007d52e2e96.jpeg?im_w=720"
-          alt="Modern Glass-Walled House"
+          src={eventPictures(event.location)}
+          alt="Image for event location"
           className="w-full h-96 object-cover rounded-lg shadow-md mb-4 mt-7"
         />
 
@@ -194,9 +178,14 @@ export default function EventPage() {
 
               <div className="flex justify-center items-center font-medium ml-2">
                 <p> Hosted by {event.user_name} </p>
+
+                {currentUser && currentUser.id === event.user_id ? (
+                  <button onClick={deleteEvent}>Delete Event</button>
+                ) : (
+                  <p></p>
+                )}
               </div>
             </div>
-           
 
             <div className="mt-8 h-0.5 w-5/6   bg-gray-100"></div>
 
@@ -215,32 +204,21 @@ export default function EventPage() {
                   {tag}
                 </div>
               ))}
-
-             
             </div>
 
-            <p className='text-black mt-5'>
-                Attendents: {attendeeAmount || event.attendee_count}
-                {event.location === 'Online Class' && <span>/4</span>}
-                {event.attendee_count > 3 &&
-                  event.location === 'Online Class' && (
-                    <span> No open spots available</span>
-                  )}
-              </p>
-            
-            <div className='mt-5'>
-              {currentUser &&
-                currentUser.id !== event.user_id &&
-                event.id &&
-                checkOnlineAndAttendee() && (
-                  <JoinButton
-                    joinEvent={joinEvent}
-                    eventId={event.id}
-                    joinedEvents={joinedEvents}
-                  />
-                )}
+            <p className="text-black mt-5">
+              Attendents: {attendeeAmount || event.attendee_count}
+            </p>
+
+            <div className="mt-5">
+              {currentUser && currentUser.id !== event.user_id && event.id && (
+                <JoinButton
+                  joinEvent={joinEvent}
+                  eventId={event.id}
+                  joinedEvents={joinedEvents}
+                />
+              )}
             </div>
-            
           </div>
         </div>
 

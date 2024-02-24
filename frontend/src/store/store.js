@@ -130,6 +130,6 @@ export const useHoverStore = create((set) => ({
 }));
 
 export const usePartStore = create((set) => ({
-  partSelected: "none",
+  partSelected: 'none',
   setPartSelected: (value) => set({ partSelected: value }),
 }));
