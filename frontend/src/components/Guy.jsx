@@ -1,7 +1,7 @@
 // import React, { forwardRef, useRef, useState } from "react";
 // import { useGLTF, Html } from "@react-three/drei";
 // import { useFrame, useThree } from "@react-three/fiber";
-// import * as THREE from "three"; 
+// import * as THREE from "three";
 // import { useHoverStore } from "../store/store";
 
 // const Guy = forwardRef((props, ref,) => {
@@ -31,21 +31,16 @@
 //     (state) => state
 //   );
 
-
-
 // console.log(setPartSelected)
 
-
 //   const handleClick = (event) => {
-    
+
 //     console.log('Click position:', clickPosition);
 //   };
 
-
-
 //   const { nodes, materials } = useGLTF("/Tibby.glb");
 //   return (
-//     <>    
+//     <>
 //     <group {...props} ref={ref} dispose={null}>
 //     <group rotation={[Math.PI / 2, 0, 0]} scale={0.225}> // 0.175
 //       {console.log(props)}
@@ -226,39 +221,47 @@
 
 // useGLTF.preload("/Gipp.gltf");
 
+import React, { forwardRef, useRef, useState } from 'react';
+import { useGLTF, Html } from '@react-three/drei';
+import { useFrame, useThree } from '@react-three/fiber';
+import * as THREE from 'three';
+import { useHoverStore, usePartStore } from '../store/store';
 
-import React, { forwardRef, useRef, useState } from "react";
-import { useGLTF, Html } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import * as THREE from "three"; 
-import { useHoverStore, usePartStore } from "../store/store";
-
-
-const Guy = forwardRef((props, ref,) => {
+const Guy = forwardRef((props, ref) => {
   // const { nodes, materials, scene } = useGLTF("/Gipp.gltf");
   // const { isHovered1, setIsHovered1 } = useHoverStore(
   //   (state) => state
   // );
-  const { 
-    isHovered1, setIsHovered1,
-    isHovered2, setIsHovered2,
-    isHovered3, setIsHovered3,
-    isHovered4, setIsHovered4,
-    isHovered5, setIsHovered5,
-    isHovered6, setIsHovered6,
-    isHovered7, setIsHovered7,
-    isHovered8, setIsHovered8,
-    isHovered9, setIsHovered9,
-    isHovered10, setIsHovered10,
-    isHovered11, setIsHovered11,
-    isHovered12, setIsHovered12,
+  const {
+    isHovered1,
+    setIsHovered1,
+    isHovered2,
+    setIsHovered2,
+    isHovered3,
+    setIsHovered3,
+    isHovered4,
+    setIsHovered4,
+    isHovered5,
+    setIsHovered5,
+    isHovered6,
+    setIsHovered6,
+    isHovered7,
+    setIsHovered7,
+    isHovered8,
+    setIsHovered8,
+    isHovered9,
+    setIsHovered9,
+    isHovered10,
+    setIsHovered10,
+    isHovered11,
+    setIsHovered11,
+    isHovered12,
+    setIsHovered12,
   } = useHoverStore((state) => state);
-  const { 
-    partSelected, setPartSelected
-  } = usePartStore((state) => state);
+  const { partSelected, setPartSelected } = usePartStore((state) => state);
   const [clickPosition, setClickPosition] = useState(null);
   // const [partSelected, setPartSelected] = useState("none")
-  const [isLeftLowerArmHovered, setIsLeftLowerArmHovered] = useState(false)
+  const [isLeftLowerArmHovered, setIsLeftLowerArmHovered] = useState(false);
   // const [isHovered1, setIsHovered1] = useState(false)
   // const [isHovered2, setIsHovered2] = useState(false)
   // const [isHovered3, setIsHovered3] = useState(false)
@@ -271,200 +274,243 @@ const Guy = forwardRef((props, ref,) => {
   // const [isHovered10, setIsHovered10] = useState(false)
   // const [isHovered11, setIsHovered11] = useState(false)
   // const [isHovered12, setIsHovered12] = useState(false)
-  const [isHovered13, setIsHovered13] = useState(false)
-  const [isHovered14, setIsHovered14] = useState(false)
-  const [isHovered15, setIsHovered15] = useState(false)
+  const [isHovered13, setIsHovered13] = useState(false);
+  const [isHovered14, setIsHovered14] = useState(false);
+  const [isHovered15, setIsHovered15] = useState(false);
 
   // const { hoverOne, setHoverOne } = useHoverStore(
   //   (state) => state
   // );
 
-
-
-console.log(setPartSelected)
-
+  console.log(setPartSelected);
 
   const handleClick = (event) => {
-    
     console.log('Click position:', clickPosition);
   };
 
-
-
-  const { nodes, materials } = useGLTF("/Model2222222.gltf");
+  const { nodes, materials } = useGLTF('/Model2222222.gltf');
   return (
     <>
-    <group {...props}  ref={ref} dispose={null}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M001.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered1(true)))}
-        onPointerLeave={() => setIsHovered1(false)}
-        onClick={() => setPartSelected("right shoulder")}
-        scale={0.225}
-      >
-          {isHovered1 && <meshStandardMaterial color={isHovered1? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M002.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered2(true)))}
-        onClick={() => setPartSelected("upper right arm")}
-        onPointerLeave={() => setIsHovered2(false)}
-        scale={0.225}
-      >
-          {isHovered2 && <meshStandardMaterial color={isHovered2? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M003.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered3(true)))}
-        onPointerLeave={() => (setIsHovered3(false), setPartSelected("none"))}
-        onClick={() => setPartSelected("lower right arm")}
-        scale={0.225}
-      >
-          {isHovered3 && <meshStandardMaterial color={isHovered3? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M004.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered4(true)))}
-        onPointerLeave={() => setIsHovered4(false)}
-        onClick={() => setPartSelected("left shoulder")}
-        scale={0.225}
-      >
-          {isHovered4 && <meshStandardMaterial color={isHovered4? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M005.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered5(true)))}
-        onPointerLeave={() => setIsHovered5(false)}
-        onClick={() => setPartSelected("left upper arm")}
-        scale={0.225}
-      >
-          {isHovered5 && <meshStandardMaterial color={isHovered5? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M006.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered6(true)))}
-        onPointerLeave={() => setIsHovered6(false)}
-        scale={0.225}
-        onClick={() => setPartSelected("left lower arm")}
-      >
-          {isHovered6 && <meshStandardMaterial color={isHovered6? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M007.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered7(true)))}
-        onPointerLeave={() => setIsHovered7(false)}
-        onClick={() => setPartSelected("back")}
-        scale={0.225}
-      >
-          {isHovered7 && <meshStandardMaterial color={isHovered7? "orange" : "lightblue"} />}
-      </mesh>
-      <group scale={0.225}>
+      <group {...props} ref={ref} dispose={null}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Mesh010.geometry}
+          geometry={nodes.BustUp__Body_M001.geometry}
           material={materials.Body_M}
-          >
-          </mesh>
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered1(true)
+          )}
+          onPointerLeave={() => setIsHovered1(false)}
+          onClick={() => setPartSelected('right shoulder')}
+          scale={0.225}
+        >
+          {isHovered1 && (
+            <meshStandardMaterial color={isHovered1 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Mesh010_1.geometry}
-          material={materials["Body_M.001"]}
-        />
+          geometry={nodes.BustUp__Body_M002.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered2(true)
+          )}
+          onClick={() => setPartSelected('upper right arm')}
+          onPointerLeave={() => setIsHovered2(false)}
+          scale={0.225}
+        >
+          {isHovered2 && (
+            <meshStandardMaterial color={isHovered2 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.BustUp__Body_M003.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered3(true)
+          )}
+          onPointerLeave={() => (setIsHovered3(false), setPartSelected('none'))}
+          onClick={() => setPartSelected('lower right arm')}
+          scale={0.225}
+        >
+          {isHovered3 && (
+            <meshStandardMaterial color={isHovered3 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.BustUp__Body_M004.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered4(true)
+          )}
+          onPointerLeave={() => setIsHovered4(false)}
+          onClick={() => setPartSelected('left shoulder')}
+          scale={0.225}
+        >
+          {isHovered4 && (
+            <meshStandardMaterial color={isHovered4 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.BustUp__Body_M005.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered5(true)
+          )}
+          onPointerLeave={() => setIsHovered5(false)}
+          onClick={() => setPartSelected('left upper arm')}
+          scale={0.225}
+        >
+          {isHovered5 && (
+            <meshStandardMaterial color={isHovered5 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.BustUp__Body_M006.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered6(true)
+          )}
+          onPointerLeave={() => setIsHovered6(false)}
+          scale={0.225}
+          onClick={() => setPartSelected('left lower arm')}
+        >
+          {isHovered6 && (
+            <meshStandardMaterial color={isHovered6 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.BustUp__Body_M007.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered7(true)
+          )}
+          onPointerLeave={() => setIsHovered7(false)}
+          onClick={() => setPartSelected('back')}
+          scale={0.225}
+        >
+          {isHovered7 && (
+            <meshStandardMaterial color={isHovered7 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <group scale={0.225}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Mesh010.geometry}
+            material={materials.Body_M}
+          ></mesh>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Mesh010_1.geometry}
+            material={materials['Body_M.001']}
+          />
+        </group>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.BustUp__Body_M009.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered8(true)
+          )}
+          onPointerLeave={() => setIsHovered8(false)}
+          onClick={() => setPartSelected('torso')}
+          scale={0.225}
+        >
+          {isHovered8 && (
+            <meshStandardMaterial color={isHovered8 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.BustUp__Body_M010.geometry}
+          material={materials.Body_M}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered9(true)
+          )}
+          onPointerLeave={() => setIsHovered9(false)}
+          onClick={() => setPartSelected('waist')}
+          scale={0.225}
+        >
+          {isHovered9 && (
+            <meshStandardMaterial color={isHovered9 ? 'orange' : 'lightblue'} />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Hair__Body_M001.geometry}
+          material={materials['Body_M.001']}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered10(true)
+          )}
+          onPointerLeave={() => setIsHovered10(false)}
+          onClick={() => setPartSelected('upper legs')}
+          scale={0.225}
+        >
+          {isHovered10 && (
+            <meshStandardMaterial
+              color={isHovered10 ? 'orange' : 'lightblue'}
+            />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Hair__Body_M002.geometry}
+          material={materials['Body_M.001']}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered11(true)
+          )}
+          onPointerLeave={() => setIsHovered11(false)}
+          onClick={() => setPartSelected('lower legs')}
+          scale={0.225}
+        >
+          {isHovered11 && (
+            <meshStandardMaterial
+              color={isHovered11 ? 'orange' : 'lightblue'}
+            />
+          )}
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Hair__Body_M003.geometry}
+          material={materials['Body_M.001']}
+          onPointerEnter={(event) => (
+            event.stopPropagation(), setIsHovered12(true)
+          )}
+          onPointerLeave={() => setIsHovered12(false)}
+          onClick={() => setPartSelected('cardio')}
+          scale={0.225}
+        >
+          {isHovered12 && (
+            <meshStandardMaterial
+              color={isHovered12 ? 'orange' : 'lightblue'}
+            />
+          )}
+        </mesh>
       </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M009.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered8(true)))}
-        onPointerLeave={() => setIsHovered8(false)}
-        onClick={() => setPartSelected("torso")}
-        scale={0.225}
-      >
-          {isHovered8 && <meshStandardMaterial color={isHovered8? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BustUp__Body_M010.geometry}
-        material={materials.Body_M}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered9(true)))}
-        onPointerLeave={() => setIsHovered9(false)}
-        onClick={() => setPartSelected("waist")}
-        scale={0.225}
-      >
-          {isHovered9 && <meshStandardMaterial color={isHovered9? "orange" : "lightblue"} />}
-          
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Hair__Body_M001.geometry}
-        material={materials["Body_M.001"]}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered10(true)))}
-        onPointerLeave={() => setIsHovered10(false)}
-        onClick={() => setPartSelected("upper legs")}
-        scale={0.225}
-      >
-          {isHovered10 && <meshStandardMaterial color={isHovered10? "orange" : "lightblue"} />}
-          
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Hair__Body_M002.geometry}
-        material={materials["Body_M.001"]}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered11(true)))}
-        onPointerLeave={() => setIsHovered11(false)}
-        onClick={() => setPartSelected("lower legs")}
-        scale={0.225}
-      >
-          {isHovered11 && <meshStandardMaterial color={isHovered11? "orange" : "lightblue"} />}
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Hair__Body_M003.geometry}
-        material={materials["Body_M.001"]}
-        onPointerEnter={((event) => (event.stopPropagation(), setIsHovered12(true)))}
-        onPointerLeave={() => setIsHovered12(false)}
-        onClick={() => setPartSelected("cardio")}
-        scale={0.225}
-        
-      >
-          {isHovered12 && <meshStandardMaterial color={isHovered12? "orange" : "lightblue"} />}
-      </mesh>
-    </group>
-       {/* <Html >  <h1
+      {/* <Html >  <h1
                  style={{  fontSize: " 36px",  color: "red",position: 'absolute', top: '1%', left: '60%', transform: 'translate(-50%, -50%)' }}
                 >{partSelected}</h1>
                </Html> */}
     </>
   );
-
 });
 
 export default Guy;
