@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import exercises from '../data/exercises.json';
 import ExerciseList from './ExerciseList';
-import { useExerciseStore, usePaginationStore } from '../store/store';
+import { useExerciseStore, usePaginationStore, usePartStore } from '../store/store';
 
 const FormExercisePlace = () => {
+  const { partSelected, setPartSelected } = usePartStore((state) => state);
   const [filteredExercises, setFilteredExercises] = useState([]);
+  const [equipmentSelected, setEquipmentSelected] = useState("any")
 
   const { exerciseIndex, setExerciseIndex } = useExerciseStore(
     (state) => state
@@ -20,45 +22,31 @@ const FormExercisePlace = () => {
         (target === 'any' || exercise.target === target)
     );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    console.log(form.bodyParts.value);
-    const filteredArr = filterExercises(
-      form.bodyParts.value,
-      form.equipment.value,
-      form.target.value
-    );
 
-    setExerciseIndex(null);
-    setFilteredExercises(filteredArr);
-    console.log(filteredArr);
 
-    setPageLength(Math.ceil(filteredArr.length / 6));
 
-    reset();
+  const handleEquipmentChange = (e) => {
+    setEquipmentSelected(e.target.value);
   };
+  useEffect(() => {
+    if(partSelected !== "none"){
+      console.log( "buh" + partSelected)
+      const filteredArr = filterExercises(
+        partSelected,
+        equipmentSelected,
+      );
+  
+      setExerciseIndex(null);
+      setFilteredExercises(filteredArr);
+      setPageLength(Math.ceil(filteredArr.length / 6));
+    }
+  },[partSelected, equipmentSelected])
 
   return (
     <>
-      <form onSubmit={handleSubmit} style={{ width: '400px' }}>
-        <label htmlFor="bodyParts">Select Body part:</label>
-        <select id="bodyParts" name="bodyParts" required defaultValue={''}>
-          <option value="" disabled>
-            Select a Body Part
-          </option>
-          <option value="back">back</option>
-          <option value="cardio">cardio</option>
-          <option value="chest">chest</option>
-          <option value="lower arms">lower arms</option>
-          <option value="lower legs">lower legs</option>
-          <option value="shoulders">shoulders</option>
-          <option value="upper arms">upper arms</option>
-          <option value="upper legs">upper legs</option>
-          <option value="waist">waist</option>
-        </select>
+      <form style={{ width: '400px' }}>
         <label htmlFor="equipment">Select Equipment:</label>
-        <select id="equipment" name="equipment" defaultValue={'any'}>
+        <select id="equipment" name="equipment" defaultValue={'any'} onChange={handleEquipmentChange} >
           <option value="any">any</option>
           <option value="body weight">body weight</option>
           <option value="medicine ball">medicine ball</option>
@@ -69,30 +57,7 @@ const FormExercisePlace = () => {
           <option value="resistance band">resistance band</option>
           <option value="wheel roller">wheel roller</option>
         </select>
-        <label htmlFor="target">Select target:</label>
-        <select id="target" name="target" defaultValue={'any'}>
-          <option value="" disabled>
-            Select a target
-          </option>
-          <option value="any">any</option>
-          <option value="abs">abs</option>
-          <option value="quads">quads</option>
-          <option value="calves">calves</option>
-          <option value="lats">lats</option>
-          <option value="pectorals">pectorals</option>
-          <option value="glutes">glutes</option>
-          <option value="cardiovascular system">cardiovascular system</option>
-          <option value="spine">spine</option>
-          <option value="upper back">upper back</option>
-          <option value="biceps">biceps</option>
-          <option value="triceps">triceps</option>
-          <option value="delts">delts</option>
-          <option value="forearms">forearms</option>
-          <option value="traps">traps</option>
-          <option value="adductors">adductors</option>
-          <option value="hamstrings">hamstrings</option>
-        </select>
-        <button>Update Exercises</button>
+        {/* <button>Update Exercises</button> */}
       </form>
       <div style={{ display: 'flex' }}>
         <ExerciseList exercises={filteredExercises} />

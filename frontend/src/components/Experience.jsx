@@ -11,10 +11,8 @@ const Experience = ({ rotationX }) => {
         guyGroup.current.rotation.x = 0 ;
         timer.current+= delta
         if(timer.current > 1){
-          // console.log(state.pointer)
           timer.current = 0
         }
-        // console.log(timer)
       }
     });
     return (

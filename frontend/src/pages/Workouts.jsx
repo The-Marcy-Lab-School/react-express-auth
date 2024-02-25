@@ -12,10 +12,7 @@ export default function Workouts() {
     partSelected, setPartSelected
   } = usePartStore((state) => state);
 
-  const handleClick = (event) => {
-    // handleRaycast(event);
-    console.log(partSelected);
-  };
+
  
 
   
@@ -47,15 +44,16 @@ export default function Workouts() {
       <h1>THIS IS THE 3D MODEL AREA</h1>
       <h5>Part selected: {partSelected}</h5>
       <div style={{maxWidth : "400px", height : "400px"}}>
-      <Canvas   onClick={handleClick} >
-      <ambientLight intensity={0.7} />
+      <Canvas  >
+      <ambientLight intensity={1.4} />
         <Suspense fallback={null}>
           <color attach="background" args={['#101010']} />
           <Experience rotationX={rotationX} />
 
         </Suspense>
-        <Html center>
+        <Html position={[0, -3, 0]} center>
     <div style={{
+      marginTop : "50px",
       width: "300px",
       fontSize: "10px",
       padding: "10px",
