@@ -30,6 +30,18 @@ const Landing2 = () => {
 
   const blackDivRef = useRef();
 
+  const startFuncs = () => {
+    const timer = setTimeout(() => {
+      blackDivRef.current.classList.add('fade-out');
+      document.querySelector('.move-me').classList.add('move-me-start');
+    }, 1000);
+    return () => clearTimeout(timer);
+  }
+
+  startFuncs();
+ 
+
+
   const handleClick = () => {
     blackDivRef.current.classList.add('fade-out');
     document.querySelector('.move-me').classList.add('move-me-start');
@@ -38,8 +50,10 @@ const Landing2 = () => {
     //   blackDivRef.current.classList.add('hidden');
     // }, 8000);
     // return () => clearTimeout(timer);
-  };  
-
+  };
+  
+  
+  
   const [animationCompleted, setAnimationCompleted] = useState(false);
 
   useEffect(() => {
