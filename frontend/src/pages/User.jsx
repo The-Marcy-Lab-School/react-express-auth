@@ -119,46 +119,42 @@ export default function UserPage() {
   // console.log(currentUser.profile_pic)
 
   const showNav = () => {
-    const navigationElement = document.getElementsByClassName("navigation")[0];
-    navigationElement.classList.toggle("active");
-    const ham = document.getElementsByClassName("ham-btn")[0];
-    ham.classList.toggle("bg-blue-200");
-    
-  }
+    const navigationElement = document.getElementsByClassName('navigation')[0];
+    navigationElement.classList.toggle('active');
+    const ham = document.getElementsByClassName('ham-btn')[0];
+    ham.classList.toggle('bg-blue-200');
+  };
 
   const showSpline = (value) => {
     // var spline = document.createElement('div');
     // spline.className = "h-screen bg-center bg-no-repeat bg-cover relative";
     // spline.innerHTML = '<Spline scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />';
     // document.body.appendChild(spline);
-    const navigationElement = document.getElementsByClassName("navigation")[0];
+    const navigationElement = document.getElementsByClassName('navigation')[0];
     // const splineElement = document.getElementsByClassName("spline")[0];
-    // console.log(splineElement.className); 
+    // console.log(splineElement.className);
     // splineElement.classList.toggle("hidden")
-    console.log("test")
+    console.log('test');
     switch (value) {
       case 'about':
-        navigationElement.classList.toggle("bg-red-300");
+        navigationElement.classList.toggle('bg-red-300');
         break;
       case 'community':
-        navigationElement.classList.toggle("bg-orange-300");
+        navigationElement.classList.toggle('bg-orange-300');
         // Expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case 'workouts':
-        navigationElement.classList.toggle("bg-green-300");
+        navigationElement.classList.toggle('bg-green-300');
         // Expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case 'profile':
-          navigationElement.classList.toggle("bg-blue-200");
-          // Expected output: "Mangoes and papayas are $2.79 a pound."
-          break;
+        navigationElement.classList.toggle('bg-blue-200');
+        // Expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
       default:
         console.log(`Sorry, we are out of ${expr}.`);
     }
-
-
-    
-  }
+  };
 
   return (
     <>
@@ -169,7 +165,6 @@ export default function UserPage() {
       {!!isCurrentUserProfile && (
         <button onClick={handleDelete}>Delete Account</button>
       )} */}
-      
 
       {/* <div className='bg-gray-200 h-2 top-0 left-0 border-solid border-2 border-gray-400 '>
         <div className='profile flex flex-row'>
@@ -245,17 +240,13 @@ export default function UserPage() {
     {activeTab === 'events' && <Events />}
     {activeTab === 'management' && <Management />}
 
-    {console.log(activeTab)}
+      {console.log(activeTab)}
 
       {/* <EventForm id={id} loadUserEvents={() => setUserEvents(id)} /> */}
 
-      
-      
-      <Footer />
-
       {/* { userProfile.profile_pic &&<img src={imagePath}></img>} */}
     </> // /upload/${userProfile.profile_pic}
-    );
+  );
 
     // function Overview() {
     //   return <div className='mb-12 h-screen'>This is the overview tab.</div>;
@@ -436,7 +427,4 @@ export default function UserPage() {
         
     );
   }
-  
 }
-
-

@@ -96,21 +96,21 @@ export default function EventForm({ id, loadUserEvents }) {
           Brooklyn Bridge Park
         </option>
         <option value="McCarren Park, Brooklyn, NY">McCarren Park</option>
-        <option value="Fort Greene Park, Brookly, NY">Fort Greene Park</option>
-        <option value="Marine Park, Brookly, NY">Marine Park</option>
-        <option value="Sunset Park, Brookly, NY">Sunset Park</option>
-        <option value="Domino Park, Brookly, NY">Domino Park</option>
-        <option value="Brooklyn Heights Promenade Park, Brooklny, NY">
+        <option value="Fort Greene Park, Brooklyn, NY">Fort Greene Park</option>
+        <option value="Marine Park, Brooklyn, NY">Marine Park</option>
+        <option value="Sunset Park, Brooklyn, NY">Sunset Park</option>
+        <option value="Domino Park, Brooklyn, NY">Domino Park</option>
+        <option value="Brooklyn Heights Promenade Park, Brooklyn, NY">
           Brooklyn Heights Promenade Park
         </option>
-        <option value="Manhattan Beach Park, Brookly, NY">
+        <option value="Manhattan Beach Park, Brooklyn, NY">
           Manhattan Beach Park
         </option>
-        <option value="WNYC Transmitter Park, Brookly, NY">
+        <option value="WNYC Transmitter Park, Brooklyn, NY">
           WNYC Transmitter Park
         </option>
-        <option value="Owls Head Park, Brookly, NY">Owls Head Park</option>
-        <option value="Bushwich Inlet Park, Brookly, NY">
+        <option value="Owls Head Park, Brooklyn, NY">Owls Head Park</option>
+        <option value="Bushwich Inlet Park, Brooklyn, NY">
           Bushwich Inlet Park
         </option>
         <option value="Online Class">Online Class</option>
