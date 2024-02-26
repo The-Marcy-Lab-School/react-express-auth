@@ -13,8 +13,8 @@ body {
     /* font-family: 'Poppins', sans-serif; */
     font-weight: 500;
     font-size: 15px;
-    line-height: 2;
-    padding: 20px;
+    /* line-height: 2; */
+    /* padding: 20px; */
   }
   
   .modal-btn{
@@ -28,20 +28,8 @@ body {
     border-radius: 4px;
     width: 240px;
     letter-spacing: 1px;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
     align-items: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
-    justify-content: center;
-    -ms-flex-pack: center;
     text-align: center;
-    -ms-flex-item-align: center;
     align-self: center;
     border: none;
     cursor: pointer;
@@ -70,11 +58,8 @@ body {
     align-items: center;
     position: fixed;
     display: block;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    -ms-flex-pack: center;
     justify-content: center;
     margin: 0 auto;
     top: 0;
@@ -102,7 +87,6 @@ body {
     overflow: hidden;
     padding-bottom: 20px;
     background-color: #fff;
-    -ms-flex-item-align: center;
     align-self: center;
     box-shadow: 0 12px 25px 0 rgba(199,175,189,.25);
     opacity: 0;
@@ -129,3 +113,6 @@ body {
         padding: 15px 20px 0 20px;
       }
   }
+
+
+  

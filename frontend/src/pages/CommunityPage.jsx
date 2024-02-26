@@ -91,7 +91,7 @@ export default function CommunityPage() {
   return (
     <>
       <div className="flex">
-        <dialog id="dialogModal" className="modal">
+        <dialog id="dialogModal" className="modalev">
           <h1 className="text-xl font-bold text-center">Create an Event</h1>
           {currentUser ? (
                 <EventForm
@@ -102,7 +102,7 @@ export default function CommunityPage() {
                 <div>Loading...</div>
               )}
 
-          <button id="closeModalBtn" className="modal-close-btn text-xl">
+          <button id="closeModalBtn" className="modalev-close-btn text-xl">
             X
           </button>
         </dialog>

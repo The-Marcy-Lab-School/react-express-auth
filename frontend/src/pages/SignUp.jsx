@@ -32,7 +32,7 @@ export default function SignUpPage() {
     if (error) return setErrorText(error.message);
 
     setCurrentUser(user);
-    navigate('/');
+    navigate('/community');
   };
 
   const handleChange = (event) => {

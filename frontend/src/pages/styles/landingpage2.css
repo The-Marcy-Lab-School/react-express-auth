@@ -45,10 +45,14 @@
 .button {
     border-radius: 5px;
     background: linear-gradient(225deg, #ff3126, #c30a00);
-    box-shadow: -11px 11px 18px #c30a00, 11px -11px 18px #ff3126;
+    /* box-shadow: -11px 11px 18px #c30a00, 11px -11px 18px #ff3126; */
+    box-shadow: -5px 5px 10px rgba(195, 10, 0, 0.5) , 5px -5px 10px  rgba(255, 49, 38, 0.5);
+
     transition: box-shadow 0.3s ease-in-out;
 }
 
 .button:hover {
-    box-shadow: -22px 22px 36px #c30a00, 22px -22px 36px #ff3126;
+    /* box-shadow: -22px 22px 36px #c30a00, 22px -22px 36px #ff3126; */
+    box-shadow: -5px 5px 10px rgba(195, 10, 0, 0.9) , 5px -5px 10px  rgba(255, 49, 38, 0.9);
+
 }

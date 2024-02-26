@@ -109,6 +109,15 @@ export default function EventPage() {
     });
   };
 
+  const checkOnlineAndAttendee = () => {
+    if (joinedEvents[event.id]) return true;
+
+    return (
+      (event.location === 'Online Class' && event.attendee_count < 4) ||
+      (event.location !== 'Online Class' && <p>No</p>)
+    );
+  };
+
   const showRoomTime = () => {
     const today = new Date().getTime();
     const startTime = new Date(event.date).getTime();

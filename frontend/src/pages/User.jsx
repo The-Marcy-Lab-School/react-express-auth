@@ -252,6 +252,8 @@ export default function UserPage() {
     //   return <div className='mb-12 h-screen'>This is the overview tab.</div>;
     // }
     
+    //The Function is there to take advantage of hoisting don't change to arrow function
+
     function Events() {
       return (
         <div className='h-screen font-bold px-52'>
@@ -272,7 +274,7 @@ export default function UserPage() {
 
           {jEvents && <p className='' style={{ fontSize: '42px' }}>Joined Events</p>}
           <div className='grid grid-cols-3'>
-            {jEvents.length < 0 ?
+            {jEvents.length > 0 ?
               jEvents.map((event) => (
                 <Event
                   key={event.id - 800}
