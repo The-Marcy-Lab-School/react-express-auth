@@ -103,8 +103,7 @@ export default function CommunityPage() {
               )}
 
           <button id="closeModalBtn" className="modal-close-btn text-xl">
-            {' '}
-            X{' '}
+            X
           </button>
         </dialog>
       </div>

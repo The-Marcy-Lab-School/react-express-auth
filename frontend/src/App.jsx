@@ -29,6 +29,8 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Landing2 />} />
+          <Route path="/dev" element={<LandingPage />} />
+
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/workouts" element={<Workouts />} />
           <Route path="/about" element={<About />} />

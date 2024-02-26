@@ -14,7 +14,7 @@ import CurrentUserContext from '../contexts/current-user-context';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 
-import Spline from '@splinetool/react-spline';
+// import Spline from '@splinetool/react-spline';
 import './styles/bar.css';
 
 export default function Workouts() {
@@ -62,7 +62,7 @@ export default function Workouts() {
            
            {/* transform translate-x-2 translate-y-28 */}
            
-              <h1 className="absolute left-7 bottom-32 text-9xl mb-7">About Our</h1>
+           <h1 className="absolute left-7 bottom-32 text-9xl mb-7">About Our</h1>
               <h1 className="absolute left-7 bottom-12 text-8xl">
                 <span className="text-red-600">Website</span>
                 <span className="text-black">.</span>
@@ -95,7 +95,7 @@ export default function Workouts() {
             {/* <img class="rounded-sm" src="https://cdn0.iconfinder.com/data/icons/fat-obese-overweight-woman-stick-figure/251/fat-obese-obesity-woman-12-1024.png" alt="Smiley face" width="52" height="40" /> */}
             <div className="font-medium">
               <p className="text-gray-500 text-2xl">The Problem.</p>
-              <h1 className="counter text-9xl mt-7 text-red-600">
+              <h1 className=" text-9xl mt-7 text-red-600">
                 {counters.map((target, index) => (
                   <Counter key={index} target={target} />
                 ))}

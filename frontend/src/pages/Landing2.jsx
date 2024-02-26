@@ -35,30 +35,7 @@ function Landing2() {
     //   blackDivRef.current.classList.add('hidden');
     // }, 8000);
     // return () => clearTimeout(timer);
-  };
-
-  const buttonStyles = {
-    borderRadius: '10px',
-    background: '#e0e0e0',
-    boxShadow: 'inset -20px 20px 60px #bebebe, inset 20px -20px 60px #ffffff',
-    width: '100%',
-    height: '80%',
-    color: 'white',
-    padding: '10px 15px',
-    border: 'none',
-    cursor: 'not-allowed',
-    fontSize: '14px',
-    transition: 'background 1ms ease-in',
-  };
-
-  const styles = {
-    borderRadius: "5px",
-    background: 'linear-gradient(225deg, #ff3126, #c30a00)',
-    boxShadow: '-11px 11px 18px #cacaca, 11px -11px 18px #f6f6f6',
-    transition: 'box-shadow 0.3s ease-in-out',
-  };
-
-  
+  };  
 
   const [animationCompleted, setAnimationCompleted] = useState(false);
 
@@ -121,10 +98,6 @@ function Landing2() {
 
       <div class="section full-height">
         {/* <button id="modal-btn" class="modal-btn">Open Modal <i class="uil uil-expand-arrows"></i></button> */}
-        
-
-         
-
           <div class="modal">    
             <div class="modal-wrap"> 
               <button ref={closeBtnRef} id="close-btn"> X </button>
@@ -150,7 +123,7 @@ function Landing2() {
         
           <div className='absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center'>
             {visitedBefore ? (
-              <h2 className='text-xl z-10'>You came back! Im proud of you!</h2>
+              <h2 className='text-xl z-10 font-semibold'>You came back! Im proud of you!</h2>
             ) : (
               <h2 className='text-2xl z-10'>Welcome to our website! Enjoy your stay!</h2>
             )}
