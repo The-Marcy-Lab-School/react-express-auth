@@ -18,6 +18,7 @@ import {
   deleteANotification,
 } from '../adapters/notification-adapter';
 import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 
 export default function EventPage() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -252,11 +253,11 @@ export default function EventPage() {
               />
             ) : (
               <button style={buttonStyles}>
-                <p className='font-bold' > Own Event </p>
+                <p className='font-bold' > Your Event </p>
               </button>
             )}
 
-                <p className='text-black justify-center text-center mt-5 text-sm'> Remember don't over exert yourself. </p>
+                <p className='text-black justify-center text-center mt-5 text-sm'> Remember, don't over exert yourself. </p>
             </div>
             
           </div>
@@ -272,6 +273,8 @@ export default function EventPage() {
         <h2 className="mt-8 text-2xl font-semibold"> Event Location </h2>
         {event && showMapOrRoom()}
       </div>
+
+      <Footer />
     </>
   );
 }

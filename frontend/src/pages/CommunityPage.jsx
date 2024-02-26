@@ -167,7 +167,7 @@ export default function CommunityPage() {
 
         {/* <div>HOT EVENT</div> */}
         {hotEvent && (
-          <div style={{ border: '3px solid red' }}>
+          <div className='mt-8 mb-10' style={{ border: '3px solid red' }}>
             <Event
               key={hotEvent.id - 800}
               deleteEvent={() => deleteEvent(hotEvent.id)}
@@ -201,9 +201,9 @@ export default function CommunityPage() {
         </div>
 
         <div className="relative">
-        <button style={styles2} id='openModalBtn' className="fixed bottom-0 right-0 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
-          +
-        </button>
+          <button style={styles2} id='openModalBtn' className="fixed bottom-5 right-5 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
+            <p className='text-center'> + </p>
+          </button>
         </div>
       </div>
      

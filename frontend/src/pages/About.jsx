@@ -53,9 +53,9 @@ export default function Workouts() {
       {/* style={ {backgroundColor: '#ff6961'}} */}
            <div className="h-screen bg-center bg-no-repeat bg-cover relative bg-red-300" >
 
-           <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
+           {/* <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
               <p>About</p>
-            </div>
+            </div> */}
           
            <Spline className="h-screen bg-center bg-no-repeat bg-cover relative" scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />
 
@@ -72,12 +72,12 @@ export default function Workouts() {
            </div>
            {/* bg-red-500 */}
             <div className="h-[1000px] bg-white text-lg">
-              <div class="relative top-32 left-0 ml-40 font-semibold text-lg w-50">
+              <div class="relative top-32 left-0 ml-28 font-bold text-2xl w-50">
                 <p>So, why did we decide to make this website?</p>
-                <p className='text-base mt-2'>What issue are we trying to solve?</p>
+                {/* <p className='text-base mt-2'>What issue are we trying to solve?</p> */}
               </div>
 
-              <div class="relative top-44 left-0 ml-40 font-sm text-3xl leading-loose">
+              <div class="relative top-44 left-0 ml-28 font-sm text-4xl max-w-[1750px] font-bold leading-loose">
                 <h1> At HealthSync, our mission is to empower individuals in Brooklyn on their fitness journey by fostering a community-driven platform focused on exercise events, education, and personal growth. </h1>
               </div>
 
@@ -85,25 +85,25 @@ export default function Workouts() {
                 <img class="rounded-sm" src="https://images.pexels.com/photos/944690/pexels-photo-944690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Smiley face" width="900" height="900" />
               </div>
             </div>
-            <div className="h-[1000px] bg-red-100 text-lg">
+            <div className="h-[1580px] bg-red-100 text-lg">
             <div class="relative top-28 left-0 ml-40 text-lg font-medium w-50">
                 {/* <img class="rounded-sm" src="https://cdn0.iconfinder.com/data/icons/fat-obese-overweight-woman-stick-figure/251/fat-obese-obesity-woman-12-1024.png" alt="Smiley face" width="52" height="40" /> */}
                 <div className='font-medium'>
-                  <p className='text-gray-500 text-base'>The Problem.</p>
+                  <p className='text-gray-500 text-2xl'>The Problem.</p>
                   <h1 className='counter text-9xl mt-7 text-red-600'>  
                     {counters.map((target, index) => (
                       <Counter key={index} target={target} />
                     ))} 
                   </h1>
                   <p className='text-5xl'> Of Brooklyn is considered obese </p>
-                  <p class="text-lg mt-12 leading-loose w-11/12">Brooklyn, a vibrant borough in New York City, grapples with higher obesity rates compared to many other neighborhoods. At HealthSync, we recognize the unique obstacles faced by Brooklynites on their wellness journeys. The lack of community support and motivation often hinders individuals from kickstarting and sustaining their fitness endeavors. Additionally, accessing reliable information that aligns with their lifestyle can be a challenge.</p>
+                  <p class="text-4xl mt-12 leading-loose w-11/12">Brooklyn, a vibrant borough in New York City, grapples with higher obesity rates compared to many other neighborhoods. At HealthSync, we recognize the unique obstacles faced by Brooklynites on their wellness journeys. The lack of community support and motivation often hinders individuals from kickstarting and sustaining their fitness endeavors. Additionally, accessing reliable information that aligns with their lifestyle can be a challenge.</p>
                 </div>
               
                 {/* <p className='text-8xl mt-2'>OBEsity</p> */}
               
                 
               </div>
-              <div className='relative top-12 left-0 font-medium' style={{ width: '99vw',
+              <div className='relative top-52 mt-8 left-0 font-medium text-2xl' style={{ width: '98vw',
                   marginLeft: '-calc((-100vw + 100%) / 2)',
                   marginRight: '-calc((-100vw + 100%) / 2)',  }}>
                   <section class="early">
@@ -129,8 +129,8 @@ export default function Workouts() {
 
             <div className="h-[580px] bg-white text-lg">
               <div className='mt-10 ml-40'>
-                <p className='text-gray-500 text-base '>Who we Serve.</p>
-                <p class="text-2xl mt-5 leading-loose w-11/12">Our service is tailored for individuals in Brooklyn who are new to fitness, particularly those with little to no prior exercise experience or knowledge, offering a nurturing community, easy-to-follow guidance, and accessible resources to confidently embark on their fitness journey.</p>
+                <p className='text-gray-500 text-2xl '>Who we Serve.</p>
+                <p class="text-4xl mt-5 leading-loose w-11/12">Our service is tailored for individuals in Brooklyn who are new to fitness, particularly those with little to no prior exercise experience or knowledge, offering a nurturing community, easy-to-follow guidance, and accessible resources to confidently embark on their fitness journey.</p>
               </div>
              
               <div class="relative top-16 left-0 font-sm text-3xl leading-loose ml-20">
@@ -139,41 +139,65 @@ export default function Workouts() {
             </div>
 
             <div className="h-[100%] bg-red-100 text-lg">
-              <div class="relative top-32 left-0 ml-40 font-semibold text-lg w-50">
-                <p className='text-5xl mb-20'>Meet the Founders.</p>
+              <div class="mt-28 ml-20 mr-20 font-semibold text-lg w-50 pb-28">
+                <p className='text-5xl pt-28 pb-20'>Meet the Founders.</p>
                 {/* <p className='text-base mt-2'>What issue are we trying to solve?</p> */}
-                <div class="flex flex-col">
-                  <div class="flex">
-                    <div class="w-1/2">
-                      <img className='rounded-lg' src={MarvPhoto} alt="Sammy" />
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20 max-w-full">
+                  <div class="flex flex-col max">
+                    <div class=" w-full">
+                      <img className='rounded-lg' width={'full'} height={'full'} src={MarvPhoto} alt="Sammy" />
                     </div>
-                    <div class="w-1/2">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link ml-8"></a>Marvin</p>
-                      <p class="text-black ml-8">
+                    <div class="flex flex-col text-center">
+                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Marvin</p>
+                      <p class="text-black">
                           Full-Stack Developer & <span class="text-red-600">Team Lead</span>
                       </p>
                     </div>
                   </div>
-                  <div class="flex">
-                    <div class="w-1/2 left-0">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Samuel</p>
-                      <p class="text-black">Full-Stack Developer</p>
-                    </div>
-                    <div class="w-1/2 ml-auto">
-                      <img className='rounded-lg' src={SammyPhoto} alt="" />
-                    </div>
-                  </div>
-                  <div class="flex">
-                    <div class="w-1/2">
-                      <img className='rounded-lg' src={MarcyPhoto} alt="Aj" />
-                    </div>
-                    <div class="w-1/2">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link ml-8"></a>Aj</p>
-                      <p class="text-black ml-8">Full-Stack Developer</p>
 
+                  <div class="flex flex-col max">
+                    <div class=" w-full">
+                      <img className='rounded-lg' width={'full'} height={'full'} src={SammyPhoto} alt="Sammy" />
+                    </div>
+                    <div class="flex flex-col text-center">
+                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Sammuel</p>
+                      <p class="text-black">
+                          Full-Stack Developer
+                      </p>
                     </div>
                   </div>
+
+                  <div class="flex flex-col max">
+                    <div class=" w-full">
+                      <img className='rounded-lg' width={'full'} height={'full'} src={MarcyPhoto} alt="Sammy" />
+                    </div>
+                    <div class="flex flex-col text-center">
+                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Aj</p>
+                      <p class="text-black">
+                          Full-Stack Developer 
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col max">
+                  <div class=" w-full">
+                      <img className='rounded-lg' width={'full'} height={'full'} src={logo} alt="Sammy" />
+                    </div>
+                    <div class="flex flex-col text-center">
+                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>K</p>
+                      <p class="text-black">
+                          Full-Stack Developer 
+                      </p>
+                    </div>
+                  </div>
+
+
+                  
+                  
+                 
                 </div>
+
+                
 
               </div>
 {/* 

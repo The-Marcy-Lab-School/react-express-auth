@@ -25,6 +25,8 @@ export default function EventForm({ id, loadUserEvents }) {
       Object.fromEntries(formData);
     console.log(title, location, description, date, startTime, endTime);
     console.log(Object.fromEntries(formData));
+    const myDialogModal = document.querySelector("#dialogModal");
+
 
     const timeValidation = validateTime(startTime, endTime);
     const tagValidation = validateTags(selectedTags);
@@ -60,6 +62,8 @@ export default function EventForm({ id, loadUserEvents }) {
     e.target.reset();
 
     loadUserEvents();
+    
+    myDialogModal.close();
   };
 
   const min = new Date().toISOString().split('T')[0];

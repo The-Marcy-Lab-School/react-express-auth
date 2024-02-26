@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#close-btn {
+    position: relative;
+    /* font-family: 'Poppins', sans-serif; */
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 2;
+    padding: 20px;
+  }
+  
+  .modal-btn{
+    position: relative;
+    /* font-family: 'Poppins', sans-serif; */
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 2;
+    height: 50px;
+    transition: all 200ms linear;
+    border-radius: 4px;
+    width: 240px;
+    letter-spacing: 1px;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    text-align: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    border: none;
+    cursor: pointer;
+    background-color: #102770;
+    color: #ffeba7;
+    box-shadow: 0 12px 35px 0 rgba(16,39,112,.25);
+    z-index: 1000;
+  }
+  .modal-btn:hover{
+    background-color: #ffeba7;
+    color: #102770;
+  }
+  .modal-btn .uil{
+    margin-left: 10px;
+    font-size: 18px;
+  }
+  
+  .modal{
+    position: fixed;
+    top: 0;
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    display: block;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    overflow-x: hidden;
+    background-color: rgba(31,32,41,.75);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out, pointer-events 250ms ease-in-out;
+    z-index: 1000;
+  }
+  
+  .modal-wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    background-color: #fff;
+    -ms-flex-item-align: center;
+    align-self: center;
+    box-shadow: 0 12px 25px 0 rgba(199,175,189,.25);
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 250ms 500ms ease, transform 350ms 500ms ease;
+    z-index: 1000;
+  }
+  .modal-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .modal-wrap p {
+    padding: 20px 30px 0 30px;
+  }
+  
+  
+  @media screen and (max-width: 500px) {
+      .modal-wrap {
+          width: calc(100% - 40px);
+          padding-bottom: 15px;
+      }
+      .modal-wrap p {
+        padding: 15px 20px 0 20px;
+      }
+  }

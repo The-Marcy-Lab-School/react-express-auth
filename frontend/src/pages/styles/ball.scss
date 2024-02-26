@@ -1,0 +1,185 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  $size: 25px;
+  $speed: 15s;
+  
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 400px;
+    perspective-origin: center calc(50% - #{$size * 4});
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .rise {
+    position: relative;
+    transform-style: preserve-3d;
+    animation: riseRotate $speed*2 infinite linear;
+  
+    @keyframes riseRotate {
+      from { transform: rotateX(90deg) rotate(0); }
+      to { transform: rotateX(90deg) rotate(-360deg); }
+    }
+  }
+  
+  .step {
+    position: absolute;
+    width: $size;
+    height: $size;
+    transform-style: preserve-3d;
+    animation: stepPosition $speed infinite linear;
+  
+    @for $i from 0 to 5 {
+      &:nth-child(#{$i + 1}) {
+        top: $size * -3;
+        left: ($i - 3) * $size;
+      }
+      &:nth-child(#{$i + 6}) {
+        top: ($i - 3) * $size;
+        left: 2 * $size;
+      }
+      &:nth-child(#{$i + 11}) {
+        top: 2 * $size;
+        left: (2 - $i) * $size;
+      }
+      &:nth-child(#{$i + 16}) {
+        top: (2 - $i) * $size;
+        left: -3 * $size;
+      }
+    }
+  
+    @for $i from 0 to 20 {
+      &:nth-child(#{$i + 1}) {
+        $delay: $i * 0.05 * $speed - $speed;
+        animation-delay: $delay;
+        background-color: hsl($i * 18, 75%, 75%);
+  
+        &::after {
+          animation-delay: $delay, $delay, 0s;
+        }
+      }
+    }
+  
+    @keyframes stepPosition {
+      0%   { transform: translateZ(600px); }
+      4%, 5%   { transform: translateZ($size * 4.5); }
+      85%, 87.5%  { transform: translateZ($size * -3.5); }
+      100% { transform: translateZ(-600px); }
+    }
+  
+    &::after {
+      content: '';
+      position: absolute;
+      width: $size;
+      height: $size;
+      background-image: radial-gradient(#000, #0000 75%);
+      animation:
+        shadowPosition $speed infinite linear,
+        shadowOpacity $speed/2 infinite alternate ease-in,
+        shadowAngle $speed infinite alternate step-end;
+      --rotate: 0deg;
+  
+      @keyframes shadowPosition {
+        0% { transform: rotateZ(var(--rotate)) translateX(-500%); }
+        100% { transform: rotateZ(var(--rotate)) translateX(500%); }
+      }
+  
+      @keyframes shadowOpacity {
+        0%, 85% { opacity: 0; }
+        100% { opacity: 0.4; }
+      }
+  
+      @keyframes shadowAngle {
+        0% { --rotate: 180deg; }
+        25% { --rotate: 270deg; }
+        50% { --rotate: 0deg; }
+        75% { --rotate: 90deg; }
+      }
+    }
+  
+    & > * {
+      position: absolute;
+      background-color: inherit;
+    }
+  
+    $tob:
+      linear-gradient(#0004, #0000 2px calc(100% - 2px), #0004),
+      linear-gradient(90deg, #0004, #0000 2px calc(100% - 2px), #0004);
+  
+    .top {
+      top: 0;
+      width: $size;
+      height: $size * 2;
+      background-image: #{$tob}, linear-gradient(to bottom, transparent, #0007);
+      transform: rotateX(-90deg);
+      transform-origin: top;
+    }
+    .bottom {
+      bottom: 0;
+      width: $size;
+      height: $size * 2;
+      background-image: #{$tob}, linear-gradient(to top, transparent, #0007);
+      transform: rotateX(90deg);
+      transform-origin: bottom;
+    }
+    .left {
+      left: 0;
+      width: $size * 2;
+      height: $size;
+      background-image: #{$tob}, linear-gradient(to right, transparent, #0007);
+      transform: rotateY(90deg);
+      transform-origin: left;
+    }
+    .right {
+      right: 0;
+      width: $size * 2;
+      height: $size;
+      background-image: #{$tob}, linear-gradient(to left, transparent, #0007);
+      transform: rotateY(-90deg);
+      transform-origin: right;
+    }
+  }
+  
+  .ball {
+    position: absolute;
+    width: $size;
+    height: $size;
+    transform-style: preserve-3d;
+    animation:
+      ballPosition $speed -0.5*$speed infinite linear,
+      ballAngle $speed*2 infinite linear;
+  
+    &::before {
+      content: '';
+      position: absolute;
+      width: $size;
+      height: $size;
+      background-image: radial-gradient(circle at bottom, #fff, #222);
+      border-radius: 50%;
+      animation: ballBounce $speed/40 infinite alternate ease-out;
+  
+      @keyframes ballBounce {
+        from { transform: rotateX(90deg) translateY($size * 0.5); }
+        to { transform: rotateX(90deg) translateY($size * 2); }
+      }
+    }
+  
+    @keyframes ballPosition {
+      0%, 100% { top: $size * -3; left: $size * -3; }
+      25% { top: $size * -3; left: $size * 2; }
+      50% { top: $size * 2; left: $size * 2; }
+      75% { top: $size * 2; left: $size * -3; }
+    }
+  
+    @keyframes ballAngle {
+      from { transform: rotate(-360deg); }
+      to { transform: rotate(0deg); }
+    }
+  }

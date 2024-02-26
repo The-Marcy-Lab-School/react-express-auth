@@ -8,5 +8,9 @@ export default {
     extend: {},
   },
   plugins: [],
+  
+  corePlugins: {
+    transform: true,
+  }
 }
 
