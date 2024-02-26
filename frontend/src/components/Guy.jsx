@@ -273,7 +273,7 @@ const Guy = forwardRef((props, ref) => {
             event.stopPropagation(), setIsHovered1(true)
           )}
           onPointerLeave={() => setIsHovered1(false)}
-          onClick={() => setPartSelected('shoulder')} // right shoulder
+          onClick={() => setPartSelected('shoulders')} // right shoulder
           scale={0.325}
         >
           {isHovered1 && (

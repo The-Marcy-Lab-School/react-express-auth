@@ -20,6 +20,7 @@ import {
   deleteANotification,
 } from '../adapters/notification-adapter';
 import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 
 export default function EventPage() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -108,6 +109,15 @@ export default function EventPage() {
     });
   };
 
+  const checkOnlineAndAttendee = () => {
+    if (joinedEvents[event.id]) return true;
+
+    return (
+      (event.location === 'Online Class' && event.attendee_count < 4) ||
+      (event.location !== 'Online Class' && <p>No</p>)
+    );
+  };
+
   const showRoomTime = () => {
     const today = new Date().getTime();
     const startTime = new Date(event.date).getTime();
@@ -144,6 +154,20 @@ export default function EventPage() {
   const deleteEvent = async () => {
     destroyEvent({ event_id: event.id });
     navigate('/community');
+  };
+
+  const buttonStyles = {
+    borderRadius: '10px',
+    background: '#e0e0e0',
+    boxShadow: 'inset -20px 20px 60px #bebebe, inset 20px -20px 60px #ffffff',
+    width: '100%',
+    height: '80%',
+    color: 'white',
+    padding: '10px 15px',
+    border: 'none',
+    cursor: 'not-allowed',
+    fontSize: '14px',
+    transition: 'background 1ms ease-in',
   };
 
   return (
@@ -198,26 +222,37 @@ export default function EventPage() {
             <div className="grid grid-cols-3 gap-2">
               {tagsArray.map((tag) => (
                 <div
-                  className="bg-yellow-600 text-center justify-center rounded-full w-20 h-7"
+                  className="bg-yellow-600  rounded-full w-10/12 h-7 text-sm"
                   key={tag}
                 >
-                  {tag}
+                  <p className='text-center justify-center mt-1'> {tag} </p>
                 </div>
               ))}
             </div>
 
-            <p className="text-black mt-5">
-              Attendents: {attendeeAmount || event.attendee_count}
-            </p>
+            <p className='text-black mt-5'>
+                Attendents: {attendeeAmount || event.attendee_count}
+                {event.location === 'Online Class' && <span>/4</span>}
+                {event.attendee_count > 3 &&
+                  event.location === 'Online Class' && (
+                    <span> No open spots available</span>
+                  )}
+              </p>
+            
+            <div className='mt-5'>
+            {currentUser && currentUser.id !== event.user_id && event.id && checkOnlineAndAttendee() ? (
+              <JoinButton
+                joinEvent={joinEvent}
+                eventId={event.id}
+                joinedEvents={joinedEvents}
+              />
+            ) : (
+              <button style={buttonStyles}>
+                <p className='font-bold' > Your Event </p>
+              </button>
+            )}
 
-            <div className="mt-5">
-              {currentUser && currentUser.id !== event.user_id && event.id && (
-                <JoinButton
-                  joinEvent={joinEvent}
-                  eventId={event.id}
-                  joinedEvents={joinedEvents}
-                />
-              )}
+                <p className='text-black justify-center text-center mt-5 text-sm'> Remember, don't over exert yourself. </p>
             </div>
           </div>
         </div>
@@ -232,6 +267,8 @@ export default function EventPage() {
         <h2 className="mt-8 text-2xl font-semibold"> Event Location </h2>
         {event && showMapOrRoom()}
       </div>
+
+      <Footer />
     </>
   );
 }

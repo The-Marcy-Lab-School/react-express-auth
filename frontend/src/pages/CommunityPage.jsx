@@ -91,20 +91,19 @@ export default function CommunityPage() {
   return (
     <>
       <div className="flex">
-        <dialog id="dialogModal" className="modal">
-          <h1 className="text-xl font-bold">Create an Event</h1>
+        <dialog id="dialogModal" className="modalev">
+          <h1 className="text-xl font-bold text-center">Create an Event</h1>
           {currentUser ? (
-            <EventForm
+                <EventForm
               id={currentUser.id}
               loadUserEvents={() => setUserEvents(currentUser.id)}
             />
-          ) : (
-            <div>Loading...</div>
-          )}
+              ) : (
+                <div>Loading...</div>
+              )}
 
-          <button id="closeModalBtn" className="modal-close-btn text-xl">
-            {' '}
-            X{' '}
+          <button id="closeModalBtn" className="modalev-close-btn text-xl">
+            X
           </button>
         </dialog>
       </div>
@@ -118,9 +117,9 @@ export default function CommunityPage() {
         </div>
          */}
 
-        <div className="relative top-20 left-0 ml-24 font-semibold text-2xl">
+        {/* <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
           <p>Events</p>
-        </div>
+        </div> */}
 
         <Spline
           className="h-screen bg-center bg-no-repeat bg-cover relative"
@@ -173,13 +172,14 @@ export default function CommunityPage() {
 
       <div className="mt-8 h-0.5  w-full   bg-gray-100"></div>
 
-      <div className="grid grid-cols-4 left-0 h-4/5 ml-7">
+      <div className='h-full'>
+        <div className="grid grid-cols-4 left-0 h-4/5 ml-7">
         {/* <span>location</span>
         <input type="text" onChange={onFilter}></input> */}
 
         {/* <div>HOT EVENT</div> */}
         {hotEvent && (
-          <div style={{ border: '3px solid red' }}>
+          <div className='mt-8 mb-10' style={{ border: '3px solid red' }}>
             <Event
               key={hotEvent.id - 800}
               deleteEvent={() => deleteEvent(hotEvent.id)}
@@ -189,9 +189,16 @@ export default function CommunityPage() {
             />
           </div>
         )}
-      </div>
 
-      <div className="grid grid-cols-4 left-0 h-4/5 ml-7 mb-28">
+
+        {/* <div>HOT EVENT</div> */}
+
+        {/* <h1>Events</h1> */}
+
+
+        </div>
+
+        <div className="grid grid-cols-4 left-0 h-4/5 ml-7 mb-28">
         {currentUser && console.log(currentUser.id)}
         {events[0] &&
           events.map((event) => (
@@ -203,18 +210,19 @@ export default function CommunityPage() {
               joinedEvents={joinedEvents}
             />
           ))}
-      </div>
+        </div>
 
-      <div className="relative">
-        <button
+        <div className="relative">
+          <button
           style={styles2}
           id="openModalBtn"
-          className="fixed bottom-0 right-0 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50"
+          className="fixed bottom-5 right-5 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50"
         >
-          +
-        </button>
-      </div>
-
+            <p className='text-center'> + </p>
+          </button>
+        </div>
+       </div>
+     
       <Footer />
     </>
   );

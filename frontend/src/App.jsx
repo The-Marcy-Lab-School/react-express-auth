@@ -10,6 +10,7 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 
 import UserPage from './pages/User';
 import LandingPage from './pages/LandingPage';
+import Landing2 from '../src/pages/Landing2'
 import Room from './pages/Room';
 import Workouts from './pages/Workouts';
 import About from './pages/About'
@@ -27,7 +28,9 @@ export default function App() {
       {/* <SiteHeadingAndNav /> */}
       <main>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Landing2 />} />
+          <Route path="/dev" element={<LandingPage />} />
+
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/workouts" element={<Workouts />} />
           <Route path="/about" element={<About />} />

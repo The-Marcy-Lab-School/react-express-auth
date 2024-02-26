@@ -84,27 +84,50 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
     }
   };
 
+  const buttonStyles = {
+    borderRadius: '5px',
+    background: '#3B82F6',
+    boxShadow: '-10px 10px 20px #bebebe, 10px -10px 20px #ffffff',
+    width: '100%',
+    height: '80%',
+    color: 'white',
+    padding: '10px 15px',
+    border: 'none',
+    fontSize: '14px',
+    transition: 'background 1ms ease-in',
+  };
+
   return (
     <>
-      <form onSubmit={handleASubmit} aria-labelledby="update-heading">
-        <h2 id="update-heading">Update Username</h2>
-        <label htmlFor="username">New Username</label>
-        <input type="text" id="username" name="username" />
-        <input type="hidden" name="id" value={currentUser.id} />
+        <div className='info w-56'>
+          <form  className='flex flex-col w-56 space-y-2' onSubmit={handleASubmit} aria-labelledby="update-heading">
+            <h2 className='mb-2 text-2xl' id="update-heading">Update Username</h2>
+            <label htmlFor="username">New Username</label>
+            <input className='h-12 border-2 border-black' type="text" id="username" name="username" />
+            <input className='h-18' type="hidden" name="id" value={currentUser.id} />
 
-        <button>Update Username</button>
-      </form>
+            <button className='mt-5' style={buttonStyles}>Update Username</button>
+          </form>
 
-      <form onSubmit={handlePicSubmit}>
-        <input
-          type="file"
-          id="profilePic"
-          name="profilePic"
-          onChange={(e) => setNewProfilePic(e.target.files[0])}
-        ></input>
-        <input type="hidden" name="id" value={currentUser.id} />
-        <button>Update profile Picture</button>
-      </form>
+          <form onSubmit={handlePicSubmit} className='flex flex-col w-56 space-y-2'>
+            <h1 className='mt-8 mb-2 text-2xl w-80'> Update Profile Picture </h1>
+            <input
+              type="file"
+              id="profilePic"
+              name="profilePic"
+              class="hidden" 
+              onChange={(e) => setNewProfilePic(e.target.files[0])}
+            />
+            <label
+              for="profilePic"
+              class="inline-block cursor-pointer bg-blue-200 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out"
+            >
+              <p className='w-80'> Choose Profile Picture </p>
+            </label>
+
+            <button style={buttonStyles}>Update profile Picture</button>
+          </form>
+        </div>
     </>
   );
 }
