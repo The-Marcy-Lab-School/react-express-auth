@@ -7,12 +7,12 @@ const comments = [
   {
     user_id: 2,
     event_id: 1,
-    text: 'Test comment',
+    text: `I'm ready for some yoga`,
   },
   {
     user_id: 3,
     event_id: 2,
-    text: 'YOOOOOOOOOOOOO',
+    text: `I don't think I'm ready to sweat this much`,
   },
 ];
 exports.seed = async function (knex) {

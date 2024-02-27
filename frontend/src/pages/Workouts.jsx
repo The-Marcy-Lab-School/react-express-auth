@@ -1,34 +1,13 @@
-import React, { Suspense, useRef, useState, forwardRef } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useGLTF, PresentationControls, Html } from '@react-three/drei';
-import Guy from '../components/Guy';
+import { Suspense, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 import FormExercisePlace from '../components/FormExercisePlace';
 import { usePartStore } from '../store/store';
 import Experience from '../components/Experience';
 
 export default function Workouts() {
   const [rotationX, setRotationX] = useState(0);
-  const { partSelected, setPartSelected } = usePartStore((state) => state);
-
-  // const Experience = ({ rotationX }) => {
-  //   const guyGroup = useRef();
-  //   let timer = useRef(0);
-  //   useFrame((state, delta) => {
-  //     if (guyGroup.current) {
-  //       guyGroup.current.rotation.y = rotationX;
-  //       guyGroup.current.rotation.x = 0 ;
-  //       timer.current+= delta
-  //       if(timer.current > 1){
-  //         // console.log(state.pointer)
-  //         timer.current = 0
-  //       }
-  //       // console.log(timer)
-  //     }
-  //   });
-  //   return (
-  //       <Guy ref={guyGroup}  />
-  //   );
-  // };
+  const { partSelected } = usePartStore((state) => state);
 
   const rotateGuy = (value) => {
     setRotationX(value);

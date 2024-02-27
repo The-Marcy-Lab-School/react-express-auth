@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
 import logo from '../pages/assets/images/Union.png';
+import '../pages/styles/bar.css'
+import './styles/hoverA.css'
 
 
 const Navigation = ({ currentUser}) => {
@@ -70,18 +72,18 @@ const Navigation = ({ currentUser}) => {
 
             </div>
            
-            <div className="links">
-                <div className="link">
-                <NavLink onMouseOver={() => showSpline("community")} onMouseOut={() => showSpline("community")} to="/community">Events</NavLink>
+            <div className="links ">
+                <div className="link"  onMouseOver={() => showSpline("community")} onMouseOut={() => showSpline("community")}>
+                  <NavLink to="/community" >Events</NavLink>
                 </div>
-                <div className="link">
-                <NavLink onMouseOver={() => showSpline("workouts")} onMouseOut={() => showSpline("workouts")} to="/workouts">Workouts</NavLink>
+                <div className="link-2" onMouseOver={() => showSpline("workouts")} onMouseOut={() => showSpline("workouts")}>
+                 <NavLink  to="/workouts">Workouts</NavLink>
                 </div>
-                <div className="link">
-                {currentUser && <NavLink onMouseOver={() => showSpline("profile")} onMouseOut={() => showSpline("profile")} to={`/users/${currentUser.id}`}>Profile</NavLink>}
+                <div className="link-3" onMouseOver={() => showSpline("profile")} onMouseOut={() => showSpline("profile")}>
+                 {currentUser && <NavLink  to={`/users/${currentUser.id}`}>Profile</NavLink>}
                 </div>
-                <div className="link">
-                <NavLink onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")} to="/about">About</NavLink>
+                <div className="link-4" onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")}>
+                  <NavLink  to="/about">About</NavLink>
                 </div>
             </div>
             </div>

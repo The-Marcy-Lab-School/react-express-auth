@@ -15,9 +15,8 @@ const JoinButton = (props) => {
       <button
         onClick={joinEvent}
         // style={styles}
-        className={joinedEvents[eventId] ? 'leave-event' : 'join-event'}
-      >
-        {joinedEvents && joinedEvents[eventId] ? 'Leave event' : 'Join Event'}
+        className={joinedEvents[eventId] ? 'leave-event' : 'join-event'} >
+        <p className='font-bold'>{joinedEvents && joinedEvents[eventId] ? 'Leave event' : 'Join Event'}</p>
       </button>
     </div>
   );

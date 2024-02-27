@@ -2,6 +2,9 @@
     background: linear-gradient(225deg, #8be28b, #eab308);
     box-shadow: -11px 11px 18px #cacaca, 
     11px -11px 18px #f6f6f6;
+    width: 100%;
+    height: 80%;
+    color:white;
     
     padding: 10px 15px; 
     border: none;
@@ -21,6 +24,10 @@
     background: linear-gradient(225deg, #ff6961, #eab308);
     box-shadow: -11px 11px 18px #cacaca, 
     11px -11px 18px #f6f6f6;
+
+    width: 100%;
+    height: 80%;
+
     color: #fff; 
     padding: 10px 15px; 
     border: none;
