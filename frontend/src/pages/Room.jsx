@@ -1,20 +1,15 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import CurrentUserContext from '../contexts/current-user-context';
-import io from 'socket.io-client';
-import { useSocket } from '../contexts/SocketProvider';
+import { useEffect, useRef, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import Peer from 'peerjs';
 import './Room.css';
-import { FaMicrophone } from 'react-icons/fa';
+import { FaMicrophone, FaVideo, FaVideoSlash } from 'react-icons/fa';
 import { FaMicrophoneSlash } from 'react-icons/fa6';
-import { FaVideo } from 'react-icons/fa';
-import { FaVideoSlash } from 'react-icons/fa';
 import { IoChatbox } from 'react-icons/io5';
+import { useSocket } from '../contexts/SocketProvider';
+import CurrentUserContext from '../contexts/current-user-context';
 
 const Room = () => {
   const { currentUser } = useContext(CurrentUserContext);
-  const random = Math.random() + ""
-  const currDate = new Date()
   const { roomid } = useParams();
   const roomId = roomid;
   const socket = useSocket();
@@ -27,46 +22,46 @@ const Room = () => {
   const [messages, setMessages] = useState([]);
   const [muted, setMuted] = useState(false);
   const [hidden, setHidden] = useState(false);
-  let myVideo = useRef({});
-  let myStream = useRef();
+  const myVideo = useRef({});
+  const myStream = useRef();
 
   useEffect(() => {
-    if(currentUser){
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((stream) => {
-        myVideo.current = document.createElement('video');
-        myVideo.current.muted = true;
-        myStream.current = stream;
-        addVideoStream(myVideo.current, stream, currentUser.username);
+    if (currentUser) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then((stream) => {
+          myVideo.current = document.createElement('video');
+          myVideo.current.muted = true;
+          myStream.current = stream;
+          addVideoStream(myVideo.current, stream, currentUser.username);
 
-        myPeer.on('call', (call) => {;
-          call.answer(stream);
-          const video = document.createElement('video');
-          call.on('stream', (userVideoStream) => {
-            addVideoStream(video, userVideoStream, currentUser.username);
+          myPeer.on('call', (call) => {
+            call.answer(stream);
+            const video = document.createElement('video');
+            call.on('stream', (userVideoStream) => {
+              addVideoStream(video, userVideoStream, currentUser.username);
+            });
+          });
+
+          socket.on('user-connected', (userId, username) => {
+            setTimeout(() => connectToNewUser(userId, stream, username), 1000);
           });
         });
 
-        socket.on('user-connected', (userId, username) => {
-          setTimeout(() => connectToNewUser(userId, stream, username), 1000);
-        });
+      socket.on('createMessage', (message, username) => {
+        const messageobj = { username, message };
+        setMessages((prevList) => [...prevList, messageobj]);
       });
 
-    socket.on('createMessage', (message, username) => {
-      let messageobj = {username, message}
-      setMessages((prevList) => [...prevList, messageobj]);
-    });
-
-    socket.on('user-disconnected', (userId) => {
-      if (peers.current[userId]) peers.current[userId].close();
-      removeEmptyVideoContainers()
-    });
-    myPeer.on('open', (id) => {
-      socket.emit('join-room', roomId, id, currentUser.username);
-    });
-  }
-  }, [ currentUser]);
+      socket.on('user-disconnected', (userId) => {
+        if (peers.current[userId]) peers.current[userId].close();
+        removeEmptyVideoContainers();
+      });
+      myPeer.on('open', (id) => {
+        socket.emit('join-room', roomId, id, currentUser.username);
+      });
+    }
+  }, [currentUser]);
 
   function connectToNewUser(userId, stream, username) {
     const call = myPeer.call(userId, stream);
@@ -75,8 +70,7 @@ const Room = () => {
       addVideoStream(video, userVideoStream, username);
     });
     call.on('close', () => {
-      video.parentNode.remove(); 
-      // video.remove();
+      video.parentNode.remove();
     });
 
     peers.current[userId] = call;
@@ -84,7 +78,7 @@ const Room = () => {
 
   function addVideoStream(video, stream, username) {
     video.srcObject = stream;
-    video.setAttribute('data-username', username)
+    video.setAttribute('data-username', username);
     video.addEventListener('loadedmetadata', () => {
       video.play();
     });
@@ -92,36 +86,26 @@ const Room = () => {
     if (grid) {
       const container = document.createElement('div');
       container.classList.add('video-container');
-  
+
       const usernameText = document.createElement('span');
       usernameText.innerText = username;
       usernameText.classList.add('username-text');
-      
-      // const track = stream.getVideoTracks()[0];
-      // if (track) {
-      //     h1.style.visibility = track.enabled ? 'hidden' : 'visible';
-      // } else {
-      //     // If no video track is found, hide the h1 tag
-      //     h1.style.visibility = 'hidden';
-      // }
+
       const h1 = document.createElement('h1');
-        h1.innerText = username; // Or any desired content
-  
+      h1.innerText = username; // Or any desired content
+
       container.appendChild(video);
       container.appendChild(usernameText);
-      container.appendChild(h1)
+      container.appendChild(h1);
 
-
-        grid.appendChild(container);
-
-
+      grid.appendChild(container);
     }
-    removeEmptyVideoContainers()
+    removeEmptyVideoContainers();
   }
 
   const handleChatSubmit = (event) => {
     event.preventDefault();
-    let form = event.target;
+    const form = event.target;
     if (form.chat_message.value.length > 0) {
       socket.emit('message', form.chat_message.value, currentUser.username);
       event.target.reset();
@@ -151,7 +135,7 @@ const Room = () => {
     const grid = videoGrid.current;
     if (grid) {
       const videoContainers = grid.querySelectorAll('.video-container');
-      videoContainers.forEach(container => {
+      videoContainers.forEach((container) => {
         if (!container.querySelector('video')) {
           container.remove();
         }
@@ -216,13 +200,18 @@ const Room = () => {
           <div className="chat-window">
             <ul className="messages">
               {messages.map((msgObj, index) => (
-                <li className='message-div' key={index}>
+                <li className="message-div" key={index}>
                   <div>
-                     <span className='chat-username'>{msgObj.username}</span>
-                     <span className='chat-message'>{msgObj.message}</span>
-                     <span className='chat-time'>{ new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
+                    <span className="chat-username">{msgObj.username}</span>
+                    <span className="chat-message">{msgObj.message}</span>
+                    <span className="chat-time">
+                      {new Date().toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </span>
                   </div>
-                  </li>
+                </li>
               ))}
             </ul>
           </div>
@@ -234,7 +223,7 @@ const Room = () => {
                 type="text"
                 placeholder="Type message here..."
               ></input>
-              <button className='send'>Send</button>
+              <button className="send">Send</button>
             </form>
           </div>
         </div>

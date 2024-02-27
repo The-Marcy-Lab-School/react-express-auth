@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "kickstart": "cd frontend && npm i && cd .. && npm i && npm run migrate && npm run seed && npm run dev",
-    "build": "npm i && npm run migrate:rollback && npm run migrate && npm run seed",
+    "build": "npm i && npm run migrate:rollback && npm run migrate && npm run seed -- --specific=init.js && npm run seed -- --specific=events.js && npm run seed -- --specific=event_tags.js && npm run seed -- --specific=event_tags_events.js && npm run seed -- --specific=event_relations.js && npm run seed -- --specific=comments.js",
     "start": "node src/index.js",
     "test": "jest --watch --verbose",
     "dev": "nodemon ./src/index.js",

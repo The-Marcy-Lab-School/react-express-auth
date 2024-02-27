@@ -1,11 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+
 import Spline from '@splinetool/react-spline';
-import Paginations from '../components/Pagination';
-import WorkoutsForm from '../components/WorkoutsForm';
 import { useWorkoutStore } from '../store/store';
-import FormExercisePlace from '../components/FormExercisePlace';
-import imgParallax from './assets/images/img_parallax.jpg';
 import SammyPhoto from './assets/images/SammyPhoto.png';
 import MarvPhoto from './assets/images/MarvPhoto.png';
 import MarcyPhoto from './assets/images/MarcyPhoto.png';
@@ -14,7 +10,6 @@ import CurrentUserContext from '../contexts/current-user-context';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 
-// import Spline from '@splinetool/react-spline';
 import './styles/bar.css';
 
 export default function Workouts() {
@@ -47,38 +42,31 @@ export default function Workouts() {
       <Navigation currentUser={currentUser} />
 
       <div>
-        {/* {backgroundImage: `url(${imgParallax})`, backgroundAttachment: 'fixed'} */}
+        <div className="h-screen bg-center bg-no-repeat bg-cover relative bg-red-300">
+          <Spline
+            className="h-screen bg-center bg-no-repeat bg-cover relative"
+            scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode"
+          />
 
-      {/* style={ {backgroundColor: '#ff6961'}} */}
-           <div className="h-screen bg-center bg-no-repeat bg-cover relative bg-red-300" >
+          <h1 className="absolute left-7 bottom-32 text-9xl mb-7">About Our</h1>
+          <h1 className="absolute left-7 bottom-12 text-8xl">
+            <span className="text-red-600">Website</span>
+            <span className="text-black">.</span>
+          </h1>
+        </div>
 
-           {/* <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
-              <p>About</p>
-            </div> */}
-          
-           <Spline className="h-screen bg-center bg-no-repeat bg-cover relative" scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />
+        <div className="h-[1000px] bg-white text-lg">
+          <div className="relative top-32 left-0 ml-28 font-bold text-2xl w-50">
+            <p>So, why did we decide to make this website?</p>
+          </div>
 
-        
-           
-           {/* transform translate-x-2 translate-y-28 */}
-           
-           <h1 className="absolute left-7 bottom-32 text-9xl mb-7">About Our</h1>
-              <h1 className="absolute left-7 bottom-12 text-8xl">
-                <span className="text-red-600">Website</span>
-                <span className="text-black">.</span>
-              </h1>
-
-           </div>
-           {/* bg-red-500 */}
-            <div className="h-[1000px] bg-white text-lg">
-              <div class="relative top-32 left-0 ml-28 font-bold text-2xl w-50">
-                <p>So, why did we decide to make this website?</p>
-                {/* <p className='text-base mt-2'>What issue are we trying to solve?</p> */}
-              </div>
-
-              <div class="relative top-44 left-0 ml-28 font-sm text-4xl max-w-[1750px] font-bold leading-loose">
-                <h1> At HealthSync, our mission is to empower individuals in Brooklyn on their fitness journey by fostering a community-driven platform focused on exercise events, education, and personal growth. </h1>
-              </div>
+          <div className="relative top-44 left-0 ml-28 font-sm text-4xl max-w-[1750px] font-bold leading-loose">
+            <h1>
+              At HealthSync, our mission is to empower individuals in Brooklyn
+              on their fitness journey by fostering a community-driven platform
+              focused on exercise events, education, and personal growth.
+            </h1>
+          </div>
 
           <div className="relative top-64 left-0 ml-20 font-sm text-3xl leading-loose">
             <img
@@ -92,7 +80,6 @@ export default function Workouts() {
         </div>
         <div className="h-[1580px] bg-red-100 text-lg">
           <div className="relative top-28 left-0 ml-40 text-lg font-medium w-50">
-            {/* <img class="rounded-sm" src="https://cdn0.iconfinder.com/data/icons/fat-obese-overweight-woman-stick-figure/251/fat-obese-obesity-woman-12-1024.png" alt="Smiley face" width="52" height="40" /> */}
             <div className="font-medium">
               <p className="text-gray-500 text-2xl">The Problem.</p>
               <h1 className=" text-9xl mt-7 text-red-600">
@@ -112,15 +99,13 @@ export default function Workouts() {
                 their lifestyle can be a challenge.
               </p>
             </div>
-
-            {/* <p className='text-8xl mt-2'>OBEsity</p> */}
           </div>
           <div
             className="relative top-52 mt-8 left-0 font-medium text-2xl"
             style={{
               width: '98vw',
-                              marginLeft: '-calc((-100vw + 100%) / 2)',
-                              marginRight: '-calc((-100vw + 100%) / 2)',
+              marginLeft: '-calc((-100vw + 100%) / 2)',
+              marginRight: '-calc((-100vw + 100%) / 2)',
             }}
           >
             <section className="early">
@@ -163,7 +148,7 @@ export default function Workouts() {
                   startling statistic has prompted legislative efforts, such as
                   Senator Kirsten Gillibrand’s proposal to ban trans-fats in
                   public schools to combat childhood obesity, which often leads
-                  to adult obesity.
+                  to adult obesity.{' '}
                 </marquee>
 
                 <marquee behavior="scroll" direction="right">
@@ -175,7 +160,7 @@ export default function Workouts() {
                   pandemic, this increased to 5.4 pounds. The rate of obesity
                   rose significantly in kids aged 6 to 11, who were more
                   dependent on their parents and may have been affected when
-                  schools suspended in-person classes.{' '}
+                  schools suspended in-person classes.
                 </marquee>
               </article>
             </section>
@@ -205,72 +190,111 @@ export default function Workouts() {
           </div>
         </div>
 
-            <div className="h-[100%] bg-red-100 text-lg">
-              <div class="mt-28 ml-20 mr-20 font-semibold text-lg w-50 pb-28">
-                <p className='text-5xl pt-28 pb-20'>Meet the Founders.</p>
-                {/* <p className='text-base mt-2'>What issue are we trying to solve?</p> */}
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20 max-w-full">
-                  <div class="flex flex-col max">
-                    <div class=" w-full">
-                      <img className='rounded-lg' width={'full'} height={'full'} src={MarvPhoto} alt="Sammy" />
-                    </div>
-                    <div class="flex flex-col text-center">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Marvin</p>
-                      <p class="text-black">
-                          Full-Stack Developer & <span class="text-red-600">Team Lead</span>
-                      </p>
-                    </div>
-                  </div>
+        <div className="h-[100%] bg-red-100 text-lg">
+          <div className="mt-28 ml-20 mr-20 font-semibold text-lg w-50 pb-28">
+            <p className="text-5xl pt-28 pb-20">Meet the Founders.</p>
 
-                  <div class="flex flex-col max">
-                    <div class=" w-full">
-                      <img className='rounded-lg' width={'full'} height={'full'} src={SammyPhoto} alt="Sammy" />
-                    </div>
-                    <div class="flex flex-col text-center">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Sammuel</p>
-                      <p class="text-black">
-                          Full-Stack Developer
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col max">
-                    <div class=" w-full">
-                      <img className='rounded-lg' width={'full'} height={'full'} src={MarcyPhoto} alt="Sammy" />
-                    </div>
-                    <div class="flex flex-col text-center">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Aj</p>
-                      <p class="text-black">
-                          Full-Stack Developer 
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col max">
-                  <div class=" w-full">
-                      <img className='rounded-lg' width={'full'} height={'full'} src={logo} alt="Sammy" />
-                    </div>
-                    <div class="flex flex-col text-center">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>K</p>
-                      <p class="text-black">
-                          Full-Stack Developer 
-                      </p>
-                    </div>
-                  </div>
-
-
-                  
-                  
-                 
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20 max-w-full">
+              <div className="flex flex-col max">
+                <div className=" w-full">
+                  <img
+                    className="rounded-lg"
+                    width={'full'}
+                    height={'full'}
+                    src={MarvPhoto}
+                    alt="Sammy"
+                  />
                 </div>
-
-                
-
+                <div className="flex flex-col text-center">
+                  <p>
+                    <a
+                      href=""
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="founder-link"
+                    ></a>
+                    Marvin
+                  </p>
+                  <p className="text-black">
+                    Full-Stack Developer &{' '}
+                    <span className="text-red-600">Scrum Master</span>
+                  </p>
+                </div>
               </div>
-{/* 
-              <div class="relative top-44 left-0 ml-40 font-sm text-3xl leading-loose">
-                <h1> At HealthSync, our mission is to empower individuals in Brooklyn on their fitness journey by fostering a community-driven platform focused on exercise events, education, and personal growth. </h1>
-              </div> */}
+
+              <div className="flex flex-col max">
+                <div className=" w-full">
+                  <img
+                    className="rounded-lg"
+                    width={'full'}
+                    height={'full'}
+                    src={SammyPhoto}
+                    alt="Sammy"
+                  />
+                </div>
+                <div className="flex flex-col text-center">
+                  <p>
+                    <a
+                      href=""
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="founder-link"
+                    ></a>
+                    Sammuel
+                  </p>
+                  <p className="text-black">Full-Stack Developer</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col max">
+                <div className=" w-full">
+                  <img
+                    className="rounded-lg"
+                    width={'full'}
+                    height={'full'}
+                    src={MarcyPhoto}
+                    alt="Sammy"
+                  />
+                </div>
+                <div className="flex flex-col text-center">
+                  <p>
+                    <a
+                      href=""
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="founder-link"
+                    ></a>
+                    Aj
+                  </p>
+                  <p className="text-black">Full-Stack Developer</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col max">
+                <div className=" w-full">
+                  <img
+                    className="rounded-lg"
+                    width={'full'}
+                    height={'full'}
+                    src={logo}
+                    alt="Sammy"
+                  />
+                </div>
+                <div className="flex flex-col text-center">
+                  <p>
+                    <a
+                      href=""
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="founder-link"
+                    ></a>
+                    K
+                  </p>
+                  <p className="text-black">Full-Stack Developer</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <Footer />
