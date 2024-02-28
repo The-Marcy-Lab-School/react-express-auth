@@ -268,53 +268,46 @@ export default function UserPage() {
                 </div>
               )}
 
-          {activeDiv === 'notifications' && (
-            <div>
-              {isCurrentUserProfile && (
-                <div style={{ position: 'relative', display: 'inline-block' }}>
-                  <IoIosNotifications
-                    size={35}
-                    onClick={async () => {
-                      setNotifInit(!notifInit);
-                      setSeenNotif(true);
-
-                      await removeNotification(id);
-                    }}
-                  />
-                  {notifications.length > 0 && !seenNotif && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '5%',
-                        right: '5px',
-                        width: '12px',
-                        height: '12px',
-                        backgroundColor: 'red',
-                        borderRadius: '50%',
-                      }}
-                    ></div>
+              {activeDiv === 'notifications' && (
+                <div className=''>
+                  {isCurrentUserProfile && (
+                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                      <IoIosNotifications
+                        size={35}
+                        onClick={async () => {
+                          setNotifInit(!notifInit);
+                          setSeenNotif(true);
+                          await removeNotification(id);
+                        }}
+                      />
+                      {notifications.length > 0 && !seenNotif && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: '5%',
+                            right: '5px',
+                            width: '12px',
+                            height: '12px',
+                            backgroundColor: 'red',
+                            borderRadius: '50%',
+                          }}
+                        ></div>
+                      )}
+                    </div>
                   )}
+
+                  {isCurrentUserProfile && (
+                    <h2>Notifications : {notifications.length}</h2>
+                  )}
+                  {notifInit &&
+                    notifications.map((notif, idx) => (
+                      <p key={idx}>{notif.text}</p>
+                    ))}
                 </div>
-              )}
-
-              {isCurrentUserProfile && (
-                <h2>Notifications : {notifications.length}</h2>
-              )}
-              {notifInit &&
-                notifications.map((notif, idx) => (
-                  <p key={idx}>{notif.text}</p>
-                ))}
-
-                  
-                  {/* <EventForm id={id} loadUserEvents={() => setUserEvents(id)} /> */}
-                </div>
-              )}
-
-             
+              )} 
             </div>
-          )}
         </div>
-      </div>
+      
     );
   }
 }
