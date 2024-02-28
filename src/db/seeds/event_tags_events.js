@@ -29,13 +29,25 @@ const event_tags_events = [
     event_tag_id: 5,
   },
   {
+    event_id: 4,
+    event_tag_id: 7,
+  },
+  {
     event_id: 5,
     event_tag_id: 2,
   },
   {
     event_id: 6,
     event_tag_id: 1,
-  }
+  },
+  {
+    event_id: 7,
+    event_tag_id: 4,
+  },
+  {
+    event_id: 7,
+    event_tag_id: 5,
+  },
 ];
 exports.seed = async function (knex) {
   // Deletes ALL existing entries

@@ -15,6 +15,12 @@ const Comments = ({ eventId, userId }) => {
     setComments(commentsArr);
   };
 
+  const styles = {
+    borderRadius: "5px",
+    background: 'linear-gradient(225deg, #8be28b, #eab308)',
+    boxShadow: '-5px 5px 18px #cacaca, 5px -5px 18px #f6f6f6',
+  };
+
   useEffect(() => {
     refreshComments();
   }, [eventId]);
@@ -62,7 +68,7 @@ const Comments = ({ eventId, userId }) => {
   return (
     <div className="comments">
       {/* <h6>Comments:</h6> */}
-      <button onClick={() => setShowCommentBox(!showCommentBox)}>
+      <button className='mt-2' onClick={() => setShowCommentBox(!showCommentBox)}>
         {showCommentBox ? 'Cancel' : 'Add Comment'}
       </button>
       {showCommentBox && (
@@ -74,10 +80,10 @@ const Comments = ({ eventId, userId }) => {
             onKeyDown={handleKeyDown}
             placeholder="Add a comment..."
             aria-label="Write a comment"
-            className="comment-textarea"
+            className="comment-textarea w-full mt-5 border-b-2 border-gray-500 max-h-10"
             style={{ resize: 'none' }}
           />
-          <button type="submit" className="submit-comment">Submit</button>
+          <button style={styles} type="submit" className="submit-comment p-2 px-5 text-white font-bold mt-3">Submit</button>
         </form>
       )}
       <div className='grid grid-cols-2 gap-2'>
