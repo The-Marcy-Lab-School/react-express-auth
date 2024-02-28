@@ -127,10 +127,10 @@ export default function CommunityPage() {
 
   return (
     <>
-    <div class="section full-height">
+    <div class="section full-height" >
         {/* <button id="modal-btn" class="modal-btn">Open Modal <i class="uil uil-expand-arrows"></i></button> */}
-          <div class="modal">    
-            <div class="modal-wrap"> 
+          <div class="modal" style={{zIndex: '99999999999'}}>    
+            <div class="modal-wrap" > 
               <button ref={closeBtnRef} id="close-btn"> X </button>
               <h1 className="text-xl font-bold text-center">Create an Event</h1>
                 {currentUser ? (
