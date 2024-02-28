@@ -18,6 +18,7 @@ const Room = () => {
   const { roomid } = useParams();
   const roomId = roomid;
   const socket = useSocket();
+  // const socket = io('http://localhost:3000')
   const myPeer = new Peer(undefined, {
     host: '/',
     port: '3001',
@@ -54,6 +55,7 @@ const Room = () => {
       });
 
     socket.on('createMessage', (message, username) => {
+      console.log("created a msg")
       let messageobj = {username, message}
       setMessages((prevList) => [...prevList, messageobj]);
     });
@@ -139,6 +141,7 @@ const Room = () => {
   };
 
   const toggleVideo = () => {
+    console.log(socket)
     const bool = myStream.current.getVideoTracks()[0].enabled;
     setHidden(!hidden);
     if (bool) {
