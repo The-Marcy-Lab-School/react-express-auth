@@ -56,7 +56,7 @@ video {
 
 .controls-button:hover {
   background-color: #343434;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 
 .controls-block {
@@ -64,7 +64,8 @@ video {
 }
 
 .leave-meeting {
-  color: #eb534b;
+  background-color: #EF4444;
+  color: white;
 }
 
 .header {
@@ -78,7 +79,7 @@ video {
 
 .chat-window {
   flex-grow: 1;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .message-container {
@@ -139,15 +140,16 @@ video {
   padding: 5px;
 }
 
-/* h1 {
-    color: red;
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    z-index: -1;
-} */
+
 
 .send {
   background-color: white;
+  background: none;
+  background: 'linear-gradient(225deg, #FED7AA, #F97316)';
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }

@@ -28,7 +28,7 @@ const ExerciseList = (props) => {
             {exercise.name}
           </li>
         ))}
-        {(exercises.length === 0 && 'No exercises 😹') || <Paginations />}
+        {(exercises.length === 0 && 'No exercises :[') || <Paginations />}
       </ul>
     </>
   );
