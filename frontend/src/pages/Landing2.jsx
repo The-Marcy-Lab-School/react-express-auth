@@ -162,7 +162,7 @@ const Landing2 = () => {
         {/* <button id="modal-btn" class="modal-btn">Open Modal <i class="uil uil-expand-arrows"></i></button> */}
         <div className="modal">
           <div className="modal-wrap">
-            <button  className=" px-3 h-8 bg-blue-300 ml-2 rounded-md mt-2 text-white" ref={closeBtnRef} id="close-btn">
+            <button  className=" px-3 h-8 bg-red-300 ml-2 rounded-md mt-2 text-white" ref={closeBtnRef} id="close-btn">
               {' '}
               X{' '}
             </button>
