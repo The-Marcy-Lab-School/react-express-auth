@@ -35,6 +35,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "postcss": "^8.4.35",
+    "sass": "^1.71.1",
     "tailwindcss": "^3.4.1",
     "vite": "^4.3.2",
     "vitest": "^1.2.2"

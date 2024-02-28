@@ -12,4 +12,8 @@ exports.seed = async (knex) => {
   await User.create('cool_cat', '1234', 'cool cat', 'cool_cat@gmail.com');
   await User.create('l33t-guy', '1234', 'Moe', 'l33t-guy@gmail.com');
   await User.create('wowow', '1234', 'wowow guy', 'wowow@gmail.com');
+  await User.create('marv', '1234', 'marv', 'm@gail.com');
+  await User.create('aj', '1234', 'aj', 'aj@gail.com');
+  await User.create('sam', '1234', 'sam', 'sam@gail.com');
+  await User.create('kory', '1234', 'kory', 'kory@gail.com');
 };
