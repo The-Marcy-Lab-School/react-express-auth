@@ -15,8 +15,8 @@ const Room = () => {
   const socket = useSocket();
   // const socket = io('http://localhost:3000')
   const myPeer = new Peer(undefined, {
-    host: '/',
-    port: '3001',
+    host: 'https://healthsync-9q0e.onrender.com',
+    port: '9000',
   });
   const videoGrid = useRef();
   const peers = useRef({});
@@ -49,11 +49,11 @@ const Room = () => {
           });
         });
 
-    socket.on('createMessage', (message, username) => {
-      console.log("created a msg")
-      let messageobj = {username, message}
-      setMessages((prevList) => [...prevList, messageobj]);
-    });
+      socket.on('createMessage', (message, username) => {
+        console.log('created a msg');
+        let messageobj = { username, message };
+        setMessages((prevList) => [...prevList, messageobj]);
+      });
 
       socket.on('user-disconnected', (userId) => {
         if (peers.current[userId]) peers.current[userId].close();
@@ -125,7 +125,7 @@ const Room = () => {
   };
 
   const toggleVideo = () => {
-    console.log(socket)
+    console.log(socket);
     const bool = myStream.current.getVideoTracks()[0].enabled;
     setHidden(!hidden);
     if (bool) {
@@ -191,7 +191,9 @@ const Room = () => {
             </div>
             <div className="controls-block">
               <div className="controls-button">
-                <span className="leave-meeting flex w-full justify-center rounded-md bg-red-600 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Leave</span>
+                <span className="leave-meeting flex w-full justify-center rounded-md bg-red-600 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                  Leave
+                </span>
               </div>
             </div>
           </div>

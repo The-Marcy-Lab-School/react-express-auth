@@ -94,14 +94,14 @@ export default function CommunityPage() {
       modal.style.pointerEvents = 'auto';
       modalWrap.style.opacity = 1;
       modalWrap.style.transform = 'scale(1)';
-    }
+    };
 
     const closeModal = () => {
       modal.style.opacity = 0;
       modal.style.pointerEvents = 'none';
       modalWrap.style.opacity = 0;
       modalWrap.style.transform = 'scale(0.6)';
-    }
+    };
 
     const modalBtn = modalBtnRef.current;
     const closeBtn = closeBtnRef.current;
@@ -123,26 +123,32 @@ export default function CommunityPage() {
         closeBtn.removeEventListener('click', closeModal);
       }
     };
-  }, []); 
+  }, []);
 
   return (
     <>
-    <div class="section full-height" >
-        {/* <button id="modal-btn" class="modal-btn">Open Modal <i class="uil uil-expand-arrows"></i></button> */}
-          <div class="modal" style={{zIndex: '99999999999'}}>    
-            <div class="modal-wrap" > 
-             <button  className=" px-3 h-8 bg-orange-200 ml-2 rounded-md mt-2 text-white" ref={closeBtnRef} id="close-btn"> X </button>
-              <h1 className="text-xl font-bold text-center">Create an Event</h1>
-                {currentUser ? (
-                      <EventForm
-                    id={currentUser.id}
-                    loadUserEvents={() => setRecentEvents()}
-                  />
-                    ) : (
-                      <div>Loading...</div>
-                    )}
-            </div>
+      <div className="section full-height">
+        <div className="modal" style={{ zIndex: '99999999999' }}>
+          <div className="modal-wrap">
+            <button
+              className=" px-3 h-8 bg-orange-200 ml-2 rounded-md mt-2 text-white"
+              ref={closeBtnRef}
+              id="close-btn"
+            >
+              {' '}
+              X{' '}
+            </button>
+            <h1 className="text-xl font-bold text-center">Create an Event</h1>
+            {currentUser ? (
+              <EventForm
+                id={currentUser.id}
+                loadUserEvents={() => setRecentEvents()}
+              />
+            ) : (
+              <div>Loading...</div>
+            )}
           </div>
+        </div>
       </div>
 
       <Navigation currentUser={currentUser} />
@@ -230,15 +236,16 @@ export default function CommunityPage() {
 
         <div className="relative">
           <button
-          style={styles2}
-          ref={modalBtnRef} 
-          id="modal-btn"
-          className="fixed bottom-5 right-5 max-h-11/12 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
-            <p className='text-center max-h-full'>+</p>
+            style={styles2}
+            ref={modalBtnRef}
+            id="modal-btn"
+            className="fixed bottom-5 right-5 max-h-11/12 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50"
+          >
+            <p className="text-center max-h-full">+</p>
           </button>
         </div>
-       </div>
-     
+      </div>
+
       {/* <Footer /> */}
     </>
   );
