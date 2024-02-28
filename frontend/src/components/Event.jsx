@@ -87,6 +87,15 @@ const Event = (props) => {
     }, 1200);
   };
 
+  const checkOnlineAndAttendee = () => {
+    if (joinedEvents[event.id]) return true;
+
+    return (
+      (event.location === 'Online Class' && event.attendee_count < 4) ||
+      event.location !== 'Online Class'
+    );
+  };
+
   const showRoomTime = () => {
     const today = new Date().getTime();
     const startTime = new Date(event.date).getTime();
@@ -154,13 +163,16 @@ const Event = (props) => {
         </div>
         <p>Attendents: {attendeeAmount || event.attendee_count}</p>
       </NavLink>
-      {currentUser && currentUser.id !== event.user_id && event.id && (
-        <JoinButton
-          joinEvent={joinEvent}
-          eventId={event.id}
-          joinedEvents={joinedEvents}
-        />
-      )}
+      {currentUser &&
+        currentUser.id !== event.user_id &&
+        event.id &&
+        checkOnlineAndAttendee() && (
+          <JoinButton
+            joinEvent={joinEvent}
+            eventId={event.id}
+            joinedEvents={joinedEvents}
+          />
+        )}
       {currentUser && currentUser.id === event.user_id ? (
         <button onClick={deleteEvent}>Delete Event</button>
       ) : (

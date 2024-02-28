@@ -92,19 +92,19 @@ input[type="password"] {
   padding: 0.5rem;
 }
 
-.modal {
+.modalev {
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   box-shadow: 0 0 0.5rem 0.25rem hsl(0 0% 0% / 10%);
   max-width: 50rem;
   padding: 2rem;
 }
 
-.modal::backdrop {
+.modalev::backdrop {
   background: hsl(0 0% 0% / 50%);
 }
 
-.modal-close-btn {
+.modalev-close-btn {
   font-size: 0.75em;
   position: absolute;
   right: 0.25em;
