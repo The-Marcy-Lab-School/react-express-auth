@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoIosNotifications } from 'react-icons/io';
 import CurrentUserContext from '../contexts/current-user-context';
@@ -38,7 +38,7 @@ export default function UserPage() {
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   const [activeTab, setActiveTab] = useState('events');
-  const [activeDiv, setActiveDiv] = useState(null);
+  const [activeDiv, setActiveDiv] = useState('profile');
 
   useEffect(() => {
     const loadUser = async () => {
@@ -105,35 +105,10 @@ export default function UserPage() {
     ? currentUser.profile_pic
     : userProfile.profile_pic;
 
-  const showNav = () => {
-    const navigationElement = document.getElementsByClassName('navigation')[0];
-    navigationElement.classList.toggle('active');
-    const ham = document.getElementsByClassName('ham-btn')[0];
-    ham.classList.toggle('bg-blue-200');
-  };
+  console.log(events);
+  // console.log(currentUser.profile_pic)
 
-  const showSpline = (value) => {
-    const navigationElement = document.getElementsByClassName('navigation')[0];
-
-    switch (value) {
-      case 'about':
-        navigationElement.classList.toggle('bg-red-300');
-        break;
-      case 'community':
-        navigationElement.classList.toggle('bg-orange-300');
-
-        break;
-      case 'workouts':
-        navigationElement.classList.toggle('bg-green-300');
-
-        break;
-      case 'profile':
-        navigationElement.classList.toggle('bg-blue-200');
-
-        break;
-      default:
-    }
-  };
+  
 
   return (
     <>
@@ -203,9 +178,9 @@ export default function UserPage() {
 
   function Events() {
     return (
-      <div className="h-screen font-bold px-52">
+      <div className="mb-12 max-h-full pb-32 h-screen font-bold px-52">
         {events[0] && (
-          <p className="mt-7 mb-7" style={{ fontSize: '42px' }}>
+          <p className="font-bold mt-7 mb-7" style={{ fontSize: '42px' }}>
             My Events
           </p>
         )}
@@ -221,7 +196,7 @@ export default function UserPage() {
               />
             ))}
         </div>
-
+        <div className=''>      
         {jEvents && (
           <p className="" style={{ fontSize: '42px' }}>
             Joined Events
@@ -244,6 +219,7 @@ export default function UserPage() {
           )}
         </div>
       </div>
+      </div>
     );
   }
 
@@ -254,7 +230,7 @@ export default function UserPage() {
           Management
         </h1>
         <div className="grid grid-cols-2 gap-4 w-80 w-44 text-xl">
-          <div className="bg-blue-200 h-56 font-medium">
+          <div className="bg-blue-300 h-56 font-semibold text-gray-800">
             <div
               className="profile flex flex-row"
               onClick={() => setActiveDiv('profile')}
@@ -267,65 +243,71 @@ export default function UserPage() {
               className="notifications flex flex-row"
               onClick={() => setActiveDiv('notifications')}
             >
-              <div className="border-r-4 border-gray-600 max-h-full"></div>
+              <div className="border-r-4 border-blue-500 max-h-full"></div>
               <p className="p-2 cursor-pointer"> Notification </p>
             </div>
           </div>
 
-          {activeDiv === 'profile' && !!isCurrentUserProfile && (
-            <UpdateUsernameForm
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
-            />
-          )}
-
-          {activeDiv === 'notifications' && (
-            <div>
-              {isCurrentUserProfile && (
-                <div style={{ position: 'relative', display: 'inline-block' }}>
-                  <IoIosNotifications
-                    size={35}
-                    onClick={async () => {
-                      setNotifInit(!notifInit);
-                      setSeenNotif(true);
-
-                      await removeNotification(id);
-                    }}
-                  />
-                  {notifications.length > 0 && !seenNotif && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '5%',
-                        right: '5px',
-                        width: '12px',
-                        height: '12px',
-                        backgroundColor: 'red',
-                        borderRadius: '50%',
-                      }}
-                    ></div>
+              {activeDiv === 'profile' && (
+                <div>
+                  {isCurrentUserProfile && (
+                    <UpdateUsernameForm
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
                   )}
+
+                  <div className='w-full mt-5'>
+                    {isCurrentUserProfile && (
+                      <button onClick={handleLogout}>Log Out</button>
+                    )}
+                    {isCurrentUserProfile && (
+                      <button onClick={handleDelete}>Delete Account</button>
+                    )}
+                  </div>  
                 </div>
               )}
 
-              {isCurrentUserProfile && (
-                <h2>Notifications : {notifications.length}</h2>
-              )}
-              {notifInit &&
-                notifications.map((notif, idx) => (
-                  <p key={idx}>{notif.text}</p>
-                ))}
+              {activeDiv === 'notifications' && (
+                <div className=''>
+                  {isCurrentUserProfile && (
+                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                      <IoIosNotifications
+                        size={35}
+                        onClick={async () => {
+                          setNotifInit(!notifInit);
+                          setSeenNotif(true);
+                          await removeNotification(id);
+                        }}
+                      />
+                      {notifications.length > 0 && !seenNotif && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: '5%',
+                            right: '5px',
+                            width: '12px',
+                            height: '12px',
+                            backgroundColor: 'red',
+                            borderRadius: '50%',
+                          }}
+                        ></div>
+                      )}
+                    </div>
+                  )}
 
-              {!!isCurrentUserProfile && (
-                <button onClick={handleLogout}>Log Out</button>
-              )}
-              {!!isCurrentUserProfile && (
-                <button onClick={handleDelete}>Delete Account</button>
-              )}
+                  {isCurrentUserProfile && (
+                    <h2>Notifications : {notifications.length}</h2>
+                  )}
+                  {notifInit &&
+                    notifications.map((notif, idx) => (
+                      <p key={idx}>{notif.text}</p>
+                    ))}
+                </div>
+              )} 
             </div>
-          )}
         </div>
-      </div>
+      
     );
   }
 }

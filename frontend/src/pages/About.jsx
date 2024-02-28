@@ -1,14 +1,18 @@
 import { useState, useEffect, useContext } from 'react';
 
 import Spline from '@splinetool/react-spline';
+import { NavLink } from 'react-router-dom';
 import { useWorkoutStore } from '../store/store';
 import SammyPhoto from './assets/images/SammyPhoto.png';
 import MarvPhoto from './assets/images/MarvPhoto.png';
 import MarcyPhoto from './assets/images/MarcyPhoto.png';
+import KorPhoto from './assets/images/MarcyHeadshots-128 (1).jpg'
 import logo from './assets/images/Union.png';
 import CurrentUserContext from '../contexts/current-user-context';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
+import Navigation_Desktop from '../components/Navigation_Desktop';
+
 
 import './styles/bar.css';
 
@@ -39,18 +43,23 @@ export default function Workouts() {
 
   return (
     <>
-      <Navigation currentUser={currentUser} />
+      <Navigation style={{display: 'none'}} currentUser={currentUser} />
+{/* 
+      <div className='flex justify-center'>
+        <Navigation_Desktop />
+      </div> */}
+    
 
       <div>
-        <div className="h-screen bg-center bg-no-repeat bg-cover relative bg-red-300">
+        <div className="h-screen bg-center bg-no-repeat bg-cover relative bg-red-300 z-0">
           <Spline
             className="h-screen bg-center bg-no-repeat bg-cover relative"
             scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode"
           />
 
-          <h1 className="absolute left-7 bottom-32 text-9xl mb-7">About Our</h1>
+          <h1 className="absolute left-7 bottom-32 text-9xl mb-7">Welcome to</h1>
           <h1 className="absolute left-7 bottom-12 text-8xl">
-            <span className="text-red-600">Website</span>
+            <span className="text-red-600">Health Sync</span>
             <span className="text-black">.</span>
           </h1>
         </div>
@@ -101,7 +110,7 @@ export default function Workouts() {
             </div>
           </div>
           <div
-            className="relative top-52 mt-8 left-0 font-medium text-2xl"
+            className="relative top-36 mt-3 left-0 font-medium text-xl"
             style={{
               width: '98vw',
               marginLeft: '-calc((-100vw + 100%) / 2)',
@@ -167,7 +176,7 @@ export default function Workouts() {
           </div>
         </div>
 
-        <div className="h-[580px] bg-white text-lg">
+        <div className="h-[890px] bg-white text-lg">
           <div className="mt-10 ml-40">
             <p className="text-gray-500 text-2xl ">Who we Serve.</p>
             <p className="text-4xl mt-5 leading-loose w-11/12">
@@ -213,7 +222,7 @@ export default function Workouts() {
                       rel="noopener noreferrer"
                       className="founder-link"
                     ></a>
-                    Marvin
+                    Marvin Siri
                   </p>
                   <p className="text-black">
                     Full-Stack Developer &{' '}
@@ -240,9 +249,9 @@ export default function Workouts() {
                       rel="noopener noreferrer"
                       className="founder-link"
                     ></a>
-                    Sammuel
+                    Samuel Pickering
                   </p>
-                  <p className="text-black">Full-Stack Developer</p>
+                  <p className="text-black">Backend Developer</p>
                 </div>
               </div>
 
@@ -264,7 +273,7 @@ export default function Workouts() {
                       rel="noopener noreferrer"
                       className="founder-link"
                     ></a>
-                    Aj
+                    Ajene Barton
                   </p>
                   <p className="text-black">Full-Stack Developer</p>
                 </div>
@@ -276,7 +285,7 @@ export default function Workouts() {
                     className="rounded-lg"
                     width={'full'}
                     height={'full'}
-                    src={logo}
+                    src={KorPhoto}
                     alt="Sammy"
                   />
                 </div>
@@ -288,16 +297,16 @@ export default function Workouts() {
                       rel="noopener noreferrer"
                       className="founder-link"
                     ></a>
-                    K
+                    Kory Telesford
                   </p>
-                  <p className="text-black">Full-Stack Developer</p>
+                  <p className="text-black">Front End Developer</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

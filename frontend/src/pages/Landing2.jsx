@@ -11,6 +11,8 @@ import MarcyPhoto from './assets/images/MarcyPhoto.png';
 import Spline from '@splinetool/react-spline';
 import style from './styles/popup2.css';
 import Form from '../components/formloginandout';
+import logo from '../pages/assets/images/Group_1.png';
+
 
 const Landing2 = () => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -160,7 +162,7 @@ const Landing2 = () => {
         {/* <button id="modal-btn" class="modal-btn">Open Modal <i class="uil uil-expand-arrows"></i></button> */}
         <div className="modal">
           <div className="modal-wrap">
-            <button ref={closeBtnRef} id="close-btn">
+            <button  className=" px-3 h-8 bg-red-300 ml-2 rounded-md mt-2 text-white" ref={closeBtnRef} id="close-btn">
               {' '}
               X{' '}
             </button>
@@ -171,10 +173,10 @@ const Landing2 = () => {
 
       <div className="move-me">
         <img
-          src="https://th.bing.com/th/id/R.08fd7b34ffdb61ed1cfae2cec5f0b1e8?rik=PlMfMNLrZFdIBQ&riu=http%3a%2f%2flofrev.net%2fwp-content%2fphotos%2f2016%2f06%2fred_cross_logo.png&ehk=edF%2fR1nH05RapyGxme3UnxfKMgkN6Bo2cRtVg2Lka30%3d&risl=&pid=ImgRaw&r=0"
+          src={logo}
           alt="Girl in a jacket"
-          width="80"
-          height="80"
+          width="140"
+          height="140"
         />
       </div>
 

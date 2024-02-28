@@ -44,28 +44,40 @@ const FormExercisePlace = () => {
 
   return (
     <>
-      <form style={{ width: '400px' }}>
-        <label htmlFor="equipment">Select Equipment:</label>
-        <select id="equipment" name="equipment" defaultValue={'any'} onChange={handleEquipmentChange} >
-          <option value="any">any</option>
-          <option value="body weight">body weight</option>
-          <option value="medicine ball">medicine ball</option>
-          <option value="stability ball">stability ball</option>
-          <option value="band">band</option>
-          <option value="dumbbell">dumbbell</option>
-          <option value="kettlebell">kettlebell</option>
-          <option value="resistance band">resistance band</option>
-          <option value="wheel roller">wheel roller</option>
-        </select>
-        {/* <button>Update Exercises</button> */}
-      </form>
-      <div style={{ display: 'flex' }}>
-        <ExerciseList exercises={filteredExercises} />
-        <p style={{ maxWidth: '500px' }}>
-          {exerciseIndex !== null &&
-            filteredExercises[exerciseIndex]?.instructions}
-        </p>
+      <div className='flex flex-col'>  
+        <div >
+          <ExerciseList exercises={filteredExercises} />
+        </div>
+
+        <div className='flex justify-center items-center rounded-sm shadow-md p-5 max-h-full text-white font-semibold bg-green-500 ' style={{ display: 'flex' }}>
+          <p>
+            {exerciseIndex !== null &&
+              filteredExercises[exerciseIndex]?.instructions}
+          </p>
+        </div>
+
+        {/* style={{ width: '800px' }} */}
+        <div className='w-full'>
+          <form  className='w-full'>
+            {/* <label htmlFor="equipment">Select Equipment:</label> */}
+            <select className='w-full' id="equipment" name="equipment" defaultValue={'any'} onChange={handleEquipmentChange} >
+              <option value="any">any</option>
+              <option value="body weight">body weight</option>
+              <option value="medicine ball">medicine ball</option>
+              <option value="stability ball">stability ball</option>
+              <option value="band">band</option>
+              <option value="dumbbell">dumbbell</option>
+              <option value="kettlebell">kettlebell</option>
+              <option value="resistance band">resistance band</option>
+              <option value="wheel roller">wheel roller</option>
+            </select>
+            {/* <button>Update Exercises</button> */}
+          </form>
+        </div>
       </div>
+
+      
+      
     </>
   );
 };
