@@ -90,7 +90,7 @@ export default function CommunityPage() {
           {currentUser ? (
             <EventForm
               id={currentUser.id}
-              loadUserEvents={() => setUserEvents(currentUser.id)}
+              loadUserEvents={() => setRecentEvents()}
             />
           ) : (
             <div>Loading...</div>
