@@ -98,7 +98,3 @@ export default function Workouts() {
     </>
   );
 }
-
-
-
-

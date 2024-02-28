@@ -1,149 +1,145 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .main {
-    height: 100vh;
-    display: flex;
+  height: 100vh;
+  display: flex;
 }
 
 .main-left {
-    flex: 0.8;
-    display: flex;
-    flex-direction: column;
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-right {
-    flex: 0.2;
-    display: flex;
-    flex-direction: column;
-    background-color: #242424;
-    border-left: 1px solid;
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  border-left: 1px solid;
 }
 
 video {
-    height: 300px;
-    width: 400px;
-    object-fit: cover;
+  height: 300px;
+  width: 400px;
+  object-fit: cover;
 }
 
 .main-videos {
-    flex-grow: 1;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex-grow: 1;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-controls {
-    display: flex;
-    background-color: #1C1E20 ;
-    color: white;
-    padding: 5px;
-    justify-content: space-between;
+  display: flex;
+  background-color: #1c1e20;
+  color: white;
+  padding: 5px;
+  justify-content: space-between;
 }
 
 .controls-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 10px ;
-    min-width: 80px;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  min-width: 80px;
+  cursor: pointer;
 }
 
 .controls-button:hover {
-    background-color: #343434;
-    border-radius: 5px;
+  background-color: #343434;
+  border-radius: 5px;
 }
 
 .controls-block {
-    display: flex;
+  display: flex;
 }
 
-
 .leave-meeting {
-    color: #EB534B
+  color: #eb534b;
 }
 
 .header {
-    color: #f5f5f5;
-    text-align: center;
+  color: #f5f5f5;
+  text-align: center;
 }
 
 .red {
-    color: red;
+  color: red;
 }
 
 .chat-window {
-    flex-grow: 1;
-    overflow-y: scroll;
+  flex-grow: 1;
+  overflow-y: scroll;
 }
 
 .message-container {
-    padding: 22px 12px;
-    display: flex;
-    max-width: 450px;
+  padding: 22px 12px;
+  display: flex;
+  max-width: 450px;
 }
 
 .message-container input {
-    flex-grow: 1;
-    background-color: transparent;
-    border: none;
-    color: #f5f5f5;
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  color: #f5f5f5;
 }
 
 .messages {
-    color: white;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  color: white;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-  
-  .message-div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .chat-username {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .chat-message {
-    max-width: 350px; /*  message  wrap after 350px */
-    padding: 10px;
-    border-radius: 10px;
-    word-wrap: break-word;
-  }
-  
-  .chat-time {
-    font-size: 0.8em;
-    color: #999;
-    margin-left: 10px;
-  }
+.message-div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
+.chat-username {
+  font-weight: bold;
+  margin-right: 10px;
+}
 
+.chat-message {
+  max-width: 350px; /*  message  wrap after 350px */
+  padding: 10px;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+
+.chat-time {
+  font-size: 0.8em;
+  color: #999;
+  margin-left: 10px;
+}
 
 .video-container {
-    position: relative; 
+  position: relative;
 }
 
 .username-text {
-    font-size: 25px;
-    color: white;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
-    padding: 5px; 
+  font-size: 25px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
 }
 
- /* h1 {
+/* h1 {
     color: red;
     position: absolute;
     top: 50%; 
@@ -153,5 +149,5 @@ video {
 } */
 
 .send {
-    background-color: white;
+  background-color: white;
 }

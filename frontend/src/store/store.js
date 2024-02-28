@@ -9,7 +9,6 @@ export const useErrorStore = create((set) => ({
 
 export const useWorkoutStore = create((set) => ({
   workout: '',
-
   setWorkout: (workout) => set({ workout }),
 }));
 

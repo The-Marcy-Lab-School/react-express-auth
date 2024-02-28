@@ -1,13 +1,11 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import Spline from '@splinetool/react-spline';
-import { NavLink, useParams } from 'react-router-dom';
 import { destroyEvent } from '../adapters/event-adapter';
 import { fetchJoinedEvents } from '../adapters/user-adapter';
 import CurrentUserContext from '../contexts/current-user-context';
 import Event from '../components/Event';
 import EventForm from '../components/EventForm';
 import { useEventsStore, useHotStore } from '../store/store';
-import logo from './assets/images/Union.png';
 import Navigation from '../components/Navigation';
 import './styles/popup.css';
 import Footer from '../components/Footer';
@@ -17,11 +15,9 @@ export default function CommunityPage() {
   const [joinedEvents, setJoinedEvents] = useState({});
   const { events, setRecentEvents, filterEvents, setUserEvents } =
     useEventsStore((state) => state);
-
   const { hotEvent, setHotEvent } = useHotStore((state) => state);
-  const [searchValue, setSearchValue] = useState('');
 
-  // console.log(currentUser)
+  // loading all events
   useEffect(() => {
     if (currentUser) {
       setRecentEvents();
@@ -29,16 +25,15 @@ export default function CommunityPage() {
     }
   }, [currentUser]);
 
+  // populating hashmap of events joined by user
   const loadJoinedEvents = async () => {
     if (currentUser) {
       const signedEvents = await fetchJoinedEvents(currentUser.id);
-      console.log('signed Events: ', signedEvents);
       const obj = {};
       signedEvents.forEach((event) => {
         obj[event.id] = true;
       });
       setJoinedEvents(obj);
-      console.log(obj);
     }
   };
 
@@ -46,23 +41,22 @@ export default function CommunityPage() {
     loadJoinedEvents();
   }, [currentUser]);
 
-  console.log(events);
-
   const deleteEvent = async (ev_id) => {
     destroyEvent({ event_id: ev_id });
     setRecentEvents();
   };
 
+  // logic for setting a hot event
   useEffect(() => {
     if (events[0]) {
       const max = events.reduce((a, b) =>
         a.attendee_count > b.attendee_count ? a : b
       );
-      console.log(max);
       setHotEvent(max);
     }
   }, [events]);
 
+  // search filter for events based on location
   const onFilter = (event) => {
     if (event.target.value.trim().length) {
       filterEvents(event.target.value);
@@ -154,13 +148,13 @@ export default function CommunityPage() {
         <dialog id="dialogModal" className="modal">
           <h1 className="text-xl font-bold text-center">Create an Event</h1>
           {currentUser ? (
-                <EventForm
+            <EventForm
               id={currentUser.id}
               loadUserEvents={() => setUserEvents(currentUser.id)}
             />
-              ) : (
-                <div>Loading...</div>
-              )}
+          ) : (
+            <div>Loading...</div>
+          )}
 
           <button id="closeModalBtn" className="modal-close-btn text-xl">
             X
@@ -171,23 +165,13 @@ export default function CommunityPage() {
       <Navigation currentUser={currentUser} />
 
       <div className="h-[380px] bg-center bg-no-repeat bg-cover relative bg-orange-200">
-        {/* <div class="fixed translate-y-3">
-          <img class="rounded-sm ml-24" src={logo} alt="Smiley face" width="72" height="72" />
-
-        </div>
-         */}
-
-        {/* <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
-          <p>Events</p>
-        </div> */}
-
         <Spline
           className="h-screen bg-center bg-no-repeat bg-cover relative"
           scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode"
         />
 
         <h1 className="absolute left-7 bottom-28 text-8xl mb-7">
-          Excercise with{' '}
+          Excercise with
         </h1>
         <h1 className="absolute left-7 bottom-24 text-4xl">
           <span className="text-orange-600">Others</span>
@@ -232,44 +216,33 @@ export default function CommunityPage() {
 
       <div className="mt-8 h-0.5  w-full   bg-gray-100"></div>
 
-      <div className='h-full'>
+      <div className="h-full">
         <div className="grid grid-cols-4 left-0 h-4/5 ml-7">
-        {/* <span>location</span>
-        <input type="text" onChange={onFilter}></input> */}
-
-        {/* <div>HOT EVENT</div> */}
-        {hotEvent && (
-          <div className='mt-8 mb-10' style={{ border: '3px solid red' }}>
-            <Event
-              key={hotEvent.id - 800}
-              deleteEvent={() => deleteEvent(hotEvent.id)}
-              event={hotEvent}
-              loadJoinedEvents={loadJoinedEvents}
-              joinedEvents={joinedEvents}
-            />
-          </div>
-        )}
-
-
-        {/* <div>HOT EVENT</div> */}
-
-        {/* <h1>Events</h1> */}
-
-
+          {hotEvent && (
+            <div className="mt-8 mb-10" style={{ border: '3px solid red' }}>
+              <Event
+                key={hotEvent.id - 800}
+                deleteEvent={() => deleteEvent(hotEvent.id)}
+                event={hotEvent}
+                loadJoinedEvents={loadJoinedEvents}
+                joinedEvents={joinedEvents}
+              />
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-4 left-0 h-4/5 ml-7 mb-28">
-        {currentUser && console.log(currentUser.id)}
-        {events[0] &&
-          events.map((event) => (
-            <Event
-              key={event.id - 800}
-              deleteEvent={() => deleteEvent(event.id)}
-              event={event}
-              loadJoinedEvents={loadJoinedEvents}
-              joinedEvents={joinedEvents}
-            />
-          ))}
+          {currentUser && console.log(currentUser.id)}
+          {events[0] &&
+            events.map((event) => (
+              <Event
+                key={event.id - 800}
+                deleteEvent={() => deleteEvent(event.id)}
+                event={event}
+                loadJoinedEvents={loadJoinedEvents}
+                joinedEvents={joinedEvents}
+              />
+            ))}
         </div>
 
         <div className="relative">
