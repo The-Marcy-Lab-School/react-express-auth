@@ -15,8 +15,8 @@ const Room = () => {
   const socket = useSocket();
   // const socket = io('http://localhost:3000')
   const myPeer = new Peer(undefined, {
-    host: 'https://healthsync-9q0e.onrender.com',
-    port: '9000',
+    host: '0.peerjs.com',
+    port: '443',
   });
   const videoGrid = useRef();
   const peers = useRef({});
