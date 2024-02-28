@@ -9,10 +9,12 @@ import imgParallax from './assets/images/img_parallax.jpg';
 import SammyPhoto from './assets/images/SammyPhoto.png';
 import MarvPhoto from './assets/images/MarvPhoto.png';
 import MarcyPhoto from './assets/images/MarcyPhoto.png';
+import KorPhoto from './assets/images/MarcyHeadshots-128 (1).jpg'
 import logo from './assets/images/Union.png';
 import CurrentUserContext from '../contexts/current-user-context';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
+import Navigation_Desktop from '../components/Navigation_Desktop';
 
 // import Spline from '@splinetool/react-spline';
 import './styles/bar.css';
@@ -44,13 +46,18 @@ export default function Workouts() {
 
   return (
     <>
-      <Navigation currentUser={currentUser} />
+      <Navigation style={{display: 'none'}} currentUser={currentUser} />
+{/* 
+      <div className='flex justify-center'>
+        <Navigation_Desktop />
+      </div> */}
+    
 
       <div>
         {/* {backgroundImage: `url(${imgParallax})`, backgroundAttachment: 'fixed'} */}
 
-      {/* style={ {backgroundColor: '#ff6961'}} */}
-           <div className="h-screen bg-center bg-no-repeat bg-cover relative bg-red-300" >
+        {/* style={ {backgroundColor: '#ff6961'}} */}
+           <div className="h-screen bg-center bg-no-repeat bg-cover relative bg-red-300  z-0" >
 
            {/* <div class="relative top-20 left-0 ml-24 font-semibold text-2xl">
               <p>About</p>
@@ -62,9 +69,9 @@ export default function Workouts() {
            
            {/* transform translate-x-2 translate-y-28 */}
            
-           <h1 className="absolute left-7 bottom-32 text-9xl mb-7">About Our</h1>
+           <h1 className="absolute left-7 bottom-32 text-9xl mb-7">Welcome to</h1>
               <h1 className="absolute left-7 bottom-12 text-8xl">
-                <span className="text-red-600">Website</span>
+                <span className="text-red-600">Health Sync</span>
                 <span className="text-black">.</span>
               </h1>
 
@@ -116,11 +123,11 @@ export default function Workouts() {
             {/* <p className='text-8xl mt-2'>OBEsity</p> */}
           </div>
           <div
-            className="relative top-52 mt-8 left-0 font-medium text-2xl"
+            className="relative top-36 mt-3 left-0 font-medium text-xl"
             style={{
               width: '98vw',
-                              marginLeft: '-calc((-100vw + 100%) / 2)',
-                              marginRight: '-calc((-100vw + 100%) / 2)',
+              marginLeft: '-calc((-100vw + 100%) / 2)',
+              marginRight: '-calc((-100vw + 100%) / 2)',
             }}
           >
             <section className="early">
@@ -229,7 +236,7 @@ export default function Workouts() {
                     <div class="flex flex-col text-center">
                       <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Sammuel</p>
                       <p class="text-black">
-                          Full-Stack Developer
+                          Backend Developer
                       </p>
                     </div>
                   </div>
@@ -248,12 +255,12 @@ export default function Workouts() {
 
                   <div class="flex flex-col max">
                   <div class=" w-full">
-                      <img className='rounded-lg' width={'full'} height={'full'} src={logo} alt="Sammy" />
+                      <img className='rounded-lg' width={'full'} height={'full'} src={KorPhoto} alt="" />
                     </div>
                     <div class="flex flex-col text-center">
-                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>K</p>
+                      <p><a href="" target="_blank" rel="noopener noreferrer" class="founder-link"></a>Kory Telesford</p>
                       <p class="text-black">
-                          Full-Stack Developer 
+                          Front End Developer
                       </p>
                     </div>
                   </div>

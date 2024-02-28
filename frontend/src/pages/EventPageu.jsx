@@ -202,12 +202,6 @@ export default function EventPage() {
 
               <div className="flex justify-center items-center font-medium ml-2">
                 <p> Hosted by {event.user_name} </p>
-
-                {currentUser && currentUser.id === event.user_id ? (
-                  <button onClick={deleteEvent}>Delete Event</button>
-                ) : (
-                  <p></p>
-                )}
               </div>
             </div>
 
@@ -240,19 +234,27 @@ export default function EventPage() {
               </p>
             
             <div className='mt-5'>
-            {currentUser && currentUser.id !== event.user_id && event.id && checkOnlineAndAttendee() ? (
-              <JoinButton
-                joinEvent={joinEvent}
-                eventId={event.id}
-                joinedEvents={joinedEvents}
-              />
-            ) : (
-              <button style={buttonStyles}>
-                <p className='font-bold' > Your Event </p>
-              </button>
-            )}
+              {currentUser && currentUser.id !== event.user_id && event.id && checkOnlineAndAttendee() ? (
+                <JoinButton
+                  joinEvent={joinEvent}
+                  eventId={event.id}
+                  joinedEvents={joinedEvents}
+                />
+              ) : (
+                <button style={buttonStyles}>
+                  <p className='font-bold' > Your Event </p>
+                </button>
+              )}
 
-                <p className='text-black justify-center text-center mt-5 text-sm'> Remember, don't over exert yourself. </p>
+              <div className='w-full flex justify-center items-center mt-5'>
+                {currentUser && currentUser.id === event.user_id ? (
+                  <button className='text-red-500' onClick={deleteEvent}>Delete Event</button>
+                ) : (
+                  <p></p>
+                )}
+              </div>
+
+              <p className='text-black justify-center text-center mt-5 text-sm'> Remember, don't over exert yourself. </p>
             </div>
           </div>
         </div>

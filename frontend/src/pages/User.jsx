@@ -118,43 +118,7 @@ export default function UserPage() {
   console.log(events);
   // console.log(currentUser.profile_pic)
 
-  const showNav = () => {
-    const navigationElement = document.getElementsByClassName('navigation')[0];
-    navigationElement.classList.toggle('active');
-    const ham = document.getElementsByClassName('ham-btn')[0];
-    ham.classList.toggle('bg-blue-200');
-  };
-
-  const showSpline = (value) => {
-    // var spline = document.createElement('div');
-    // spline.className = "h-screen bg-center bg-no-repeat bg-cover relative";
-    // spline.innerHTML = '<Spline scene="https://prod.spline.design/267PHsT9Kp1A2iJ6/scene.splinecode" />';
-    // document.body.appendChild(spline);
-    const navigationElement = document.getElementsByClassName('navigation')[0];
-    // const splineElement = document.getElementsByClassName("spline")[0];
-    // console.log(splineElement.className);
-    // splineElement.classList.toggle("hidden")
-    console.log('test');
-    switch (value) {
-      case 'about':
-        navigationElement.classList.toggle('bg-red-300');
-        break;
-      case 'community':
-        navigationElement.classList.toggle('bg-orange-300');
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      case 'workouts':
-        navigationElement.classList.toggle('bg-green-300');
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      case 'profile':
-        navigationElement.classList.toggle('bg-blue-200');
-        // Expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      default:
-        console.log(`Sorry, we are out of ${expr}.`);
-    }
-  };
+  
 
   return (
     <>
@@ -256,8 +220,8 @@ export default function UserPage() {
 
     function Events() {
       return (
-        <div className='h-screen font-bold px-52'>
-          {events[0] && <p className='mt-7 mb-7' style={{ fontSize: '42px' }}>My Events</p>}
+        <div className='mb-12 max-h-full pb-32 px-52'>
+          {events[0] && <p className='font-bold mt-7 mb-7' style={{ fontSize: '42px' }}>My Events</p>}
           <div className='grid grid-cols-3'>
             {events[0] &&
               events.map((event) => (
@@ -271,24 +235,26 @@ export default function UserPage() {
               ))}
           </div>
         
+          <div className=''>
+            {jEvents && <p className='font-bold mt-7 mb-7' style={{ fontSize: '42px' }}>Joined Events</p>}
+            <div className='grid grid-cols-3'>
+              {jEvents.length > 0 ?
+                jEvents.map((event) => (
+                  <Event
+                    key={event.id - 800}
+                    event={event}
+                    loadJoinedEvents={loadJoinedEvents}
+                    joinedEvents={joinedEvents}
+                  />
+                ))
+                : (<div className='max-w-xs relative flex'> <p className='s mt-7 mb-7'>No joined events :[</p> </div>)
+                
+                }
 
-          {jEvents && <p className='' style={{ fontSize: '42px' }}>Joined Events</p>}
-          <div className='grid grid-cols-3'>
-            {jEvents.length > 0 ?
-              jEvents.map((event) => (
-                <Event
-                  key={event.id - 800}
-                  event={event}
-                  loadJoinedEvents={loadJoinedEvents}
-                  joinedEvents={joinedEvents}
-                />
-              ))
-              : (<div className='max-w-xs relative flex'> <p className='s'>No joined events :[</p> </div>)
-              
-              }
-
-{/* <p>No events</p> */}
+  {/* <p>No events</p> */}
+            </div>
           </div>
+          
         
         </div>
       );
@@ -312,19 +278,29 @@ export default function UserPage() {
                   className='notifications flex flex-row' 
                   onClick={() => setActiveDiv('notifications')}
                 >
-                  <div className='border-r-4 border-gray-600 max-h-full'></div>
+                  <div className='border-r-4 border-blue-400 max-h-full'></div>
                   <p className='p-2 cursor-pointer'> Notification </p>
                 </div>
               </div>
 
               {activeDiv === 'profile' && (
-                // <div>Profile content</div>
-                !!isCurrentUserProfile && (
-                  <UpdateUsernameForm
-                    currentUser={currentUser}
-                    setCurrentUser={setCurrentUser}
-                  />
-                )
+                <div>
+                  {isCurrentUserProfile && (
+                    <UpdateUsernameForm
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  )}
+
+                  <div className='w-full mt-5'>
+                    {isCurrentUserProfile && (
+                      <button onClick={handleLogout}>Log Out</button>
+                    )}
+                    {isCurrentUserProfile && (
+                      <button onClick={handleDelete}>Delete Account</button>
+                    )}
+                  </div>  
+                </div>
               )}
 
               {activeDiv === 'notifications' && (
@@ -362,12 +338,7 @@ export default function UserPage() {
                   {notifInit &&
                     notifications.map((notif, idx) => <p key={idx}>{notif.text}</p>)}
 
-                  {!!isCurrentUserProfile && (
-                    <button onClick={handleLogout}>Log Out</button>
-                  )}
-                  {!!isCurrentUserProfile && (
-                    <button onClick={handleDelete}>Delete Account</button>
-                  )}
+                  
                   {/* <EventForm id={id} loadUserEvents={() => setUserEvents(id)} /> */}
                 </div>
               )}

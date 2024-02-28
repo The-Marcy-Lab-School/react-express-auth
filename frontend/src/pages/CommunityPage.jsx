@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import Spline from '@splinetool/react-spline';
 import { NavLink, useParams } from 'react-router-dom';
 import { destroyEvent } from '../adapters/event-adapter';
@@ -71,27 +71,87 @@ export default function CommunityPage() {
     }
   };
 
-  const myDialogModal = document.querySelector('#dialogModal');
-  const myOpenModalBtn = document.querySelector('#openModalBtn');
-  const myCloseModalBtn = document.querySelector('#closeModalBtn');
+  // const myDialogModal = document.querySelector('#dialogModal');
+  // const myOpenModalBtn = document.querySelector('#openModalBtn');
+  // const myCloseModalBtn = document.querySelector('#closeModalBtn');
 
-  if (myDialogModal) {
-    myOpenModalBtn &&
-      myOpenModalBtn.addEventListener('click', () => myDialogModal.showModal());
+  // if (myDialogModal) {
+  //   myOpenModalBtn &&
+  //     myOpenModalBtn.addEventListener('click', () => myDialogModal.showModal());
 
-    myCloseModalBtn &&
-      myCloseModalBtn.addEventListener('click', () => myDialogModal.close());
-  }
+  //   myCloseModalBtn &&
+  //     myCloseModalBtn.addEventListener('click', () => myDialogModal.close());
+  // }
 
   const styles2 = {
     background: 'linear-gradient(225deg, #fed7aa, #eab308)',
     boxShadow: '-11px 11px 18px #cacaca, 11px -11px 18px #f6f6f6',
   };
 
+  const modalBtnRef = useRef(null);
+  const closeBtnRef = useRef(null);
+
+  useEffect(() => {
+    const modal = document.querySelector('.modal');
+    const modalWrap = document.querySelector('.modal-wrap');
+
+    const openModal = () => {
+      modal.style.opacity = 1;
+      modal.style.pointerEvents = 'auto';
+      modalWrap.style.opacity = 1;
+      modalWrap.style.transform = 'scale(1)';
+    }
+
+    const closeModal = () => {
+      modal.style.opacity = 0;
+      modal.style.pointerEvents = 'none';
+      modalWrap.style.opacity = 0;
+      modalWrap.style.transform = 'scale(0.6)';
+    }
+
+    const modalBtn = modalBtnRef.current;
+    const closeBtn = closeBtnRef.current;
+
+    if (modalBtn) {
+      modalBtn.addEventListener('click', openModal);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    return () => {
+      if (modalBtn) {
+        modalBtn.removeEventListener('click', openModal);
+      }
+
+      if (closeBtn) {
+        closeBtn.removeEventListener('click', closeModal);
+      }
+    };
+  }, []); 
+
   return (
     <>
+    <div class="section full-height">
+        {/* <button id="modal-btn" class="modal-btn">Open Modal <i class="uil uil-expand-arrows"></i></button> */}
+          <div class="modal">    
+            <div class="modal-wrap"> 
+              <button ref={closeBtnRef} id="close-btn"> X </button>
+              <h1 className="text-xl font-bold text-center">Create an Event</h1>
+                {currentUser ? (
+                      <EventForm
+                    id={currentUser.id}
+                    loadUserEvents={() => setUserEvents(currentUser.id)}
+                  />
+                    ) : (
+                      <div>Loading...</div>
+                    )}
+            </div>
+          </div>
+      </div>
       <div className="flex">
-        <dialog id="dialogModal" className="modalev">
+        <dialog id="dialogModal" className="modal">
           <h1 className="text-xl font-bold text-center">Create an Event</h1>
           {currentUser ? (
                 <EventForm
@@ -102,7 +162,7 @@ export default function CommunityPage() {
                 <div>Loading...</div>
               )}
 
-          <button id="closeModalBtn" className="modalev-close-btn text-xl">
+          <button id="closeModalBtn" className="modal-close-btn text-xl">
             X
           </button>
         </dialog>
@@ -215,15 +275,15 @@ export default function CommunityPage() {
         <div className="relative">
           <button
           style={styles2}
-          id="openModalBtn"
-          className="fixed bottom-5 right-5 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50"
-        >
-            <p className='text-center'> + </p>
+          ref={modalBtnRef} 
+          id="modal-btn"
+          className="fixed bottom-5 right-5 max-h-11/12 mb-4 mr-4 text-5xl bg-orange-200 hover:bg-orange-500 text-white font-bold py-6 px-8 rounded-full z-50">
+            <p className='text-center max-h-full'>+</p>
           </button>
         </div>
        </div>
      
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
