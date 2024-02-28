@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 
 import Spline from '@splinetool/react-spline';
+import { NavLink } from 'react-router-dom';
 import { useWorkoutStore } from '../store/store';
 import SammyPhoto from './assets/images/SammyPhoto.png';
 import MarvPhoto from './assets/images/MarvPhoto.png';
@@ -11,6 +12,7 @@ import CurrentUserContext from '../contexts/current-user-context';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 import Navigation_Desktop from '../components/Navigation_Desktop';
+
 
 import './styles/bar.css';
 
@@ -174,7 +176,7 @@ export default function Workouts() {
           </div>
         </div>
 
-        <div className="h-[580px] bg-white text-lg">
+        <div className="h-[890px] bg-white text-lg">
           <div className="mt-10 ml-40">
             <p className="text-gray-500 text-2xl ">Who we Serve.</p>
             <p className="text-4xl mt-5 leading-loose w-11/12">
@@ -220,7 +222,7 @@ export default function Workouts() {
                       rel="noopener noreferrer"
                       className="founder-link"
                     ></a>
-                    Marvin
+                    Marvin Siri
                   </p>
                   <p className="text-black">
                     Full-Stack Developer &{' '}
@@ -247,7 +249,7 @@ export default function Workouts() {
                       rel="noopener noreferrer"
                       className="founder-link"
                     ></a>
-                    Sammuel
+                    Samuel Pickering
                   </p>
                   <p className="text-black">Backend Developer</p>
                 </div>
@@ -271,7 +273,7 @@ export default function Workouts() {
                       rel="noopener noreferrer"
                       className="founder-link"
                     ></a>
-                    Aj
+                    Ajene Barton
                   </p>
                   <p className="text-black">Full-Stack Developer</p>
                 </div>
@@ -304,7 +306,7 @@ export default function Workouts() {
           </div>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

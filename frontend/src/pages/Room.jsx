@@ -188,7 +188,7 @@ const Room = () => {
             </div>
             <div className="controls-block">
               <div className="controls-button">
-                <span className="leave-meeting">Leave</span>
+                <span className="leave-meeting flex w-full justify-center rounded-md bg-red-600 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Leave</span>
               </div>
             </div>
           </div>

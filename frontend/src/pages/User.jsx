@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoIosNotifications } from 'react-icons/io';
 import CurrentUserContext from '../contexts/current-user-context';
@@ -38,7 +38,7 @@ export default function UserPage() {
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
   const [activeTab, setActiveTab] = useState('events');
-  const [activeDiv, setActiveDiv] = useState(null);
+  const [activeDiv, setActiveDiv] = useState('profile');
 
   useEffect(() => {
     const loadUser = async () => {
@@ -230,7 +230,7 @@ export default function UserPage() {
           Management
         </h1>
         <div className="grid grid-cols-2 gap-4 w-80 w-44 text-xl">
-          <div className="bg-blue-200 h-56 font-medium">
+          <div className="bg-blue-300 h-56 font-semibold text-gray-800">
             <div
               className="profile flex flex-row"
               onClick={() => setActiveDiv('profile')}
@@ -243,7 +243,7 @@ export default function UserPage() {
               className="notifications flex flex-row"
               onClick={() => setActiveDiv('notifications')}
             >
-              <div className="border-r-4 border-gray-600 max-h-full"></div>
+              <div className="border-r-4 border-blue-500 max-h-full"></div>
               <p className="p-2 cursor-pointer"> Notification </p>
             </div>
           </div>

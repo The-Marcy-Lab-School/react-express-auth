@@ -78,8 +78,8 @@ export default function CommunityPage() {
   // }
 
   const styles2 = {
-    background: 'linear-gradient(225deg, #fed7aa, #eab308)',
-    boxShadow: '-11px 11px 18px #cacaca, 11px -11px 18px #f6f6f6',
+    background: 'linear-gradient(225deg, #FED7AA, #F97316)',
+    boxShadow: '-8px 8px 12px #F97316, 8px -8px 12px #FED7AA',
   };
 
   const modalBtnRef = useRef(null);
@@ -131,7 +131,7 @@ export default function CommunityPage() {
         {/* <button id="modal-btn" class="modal-btn">Open Modal <i class="uil uil-expand-arrows"></i></button> */}
           <div class="modal" style={{zIndex: '99999999999'}}>    
             <div class="modal-wrap" > 
-              <button ref={closeBtnRef} id="close-btn"> X </button>
+             <button  className=" px-3 h-8 bg-orange-200 ml-2 rounded-md mt-2 text-white" ref={closeBtnRef} id="close-btn"> X </button>
               <h1 className="text-xl font-bold text-center">Create an Event</h1>
                 {currentUser ? (
                       <EventForm
@@ -143,23 +143,6 @@ export default function CommunityPage() {
                     )}
             </div>
           </div>
-      </div>
-      <div className="flex">
-        <dialog id="dialogModal" className="modal">
-          <h1 className="text-xl font-bold text-center">Create an Event</h1>
-          {currentUser ? (
-            <EventForm
-              id={currentUser.id}
-              loadUserEvents={() => setUserEvents(currentUser.id)}
-            />
-          ) : (
-            <div>Loading...</div>
-          )}
-
-          <button id="closeModalBtn" className="modal-close-btn text-xl">
-            X
-          </button>
-        </dialog>
       </div>
 
       <Navigation currentUser={currentUser} />

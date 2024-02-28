@@ -1,10 +1,12 @@
   .join-event {
     background: linear-gradient(225deg, #8be28b, #eab308);
-    box-shadow: -11px 11px 18px #cacaca, 
-    11px -11px 18px #f6f6f6;
+    /* box-shadow: -11px 11px 18px #cacaca, 
+    11px -11px 18px #f6f6f6; */
     width: 100%;
     height: 80%;
     color:white;
+    
+
     
     padding: 10px 15px; 
     border: none;

@@ -1,11 +1,56 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { updateUsername, updateProfilePic } from '../adapters/user-adapter';
 
 export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState(currentUser.username);
   const [newProfilePic, setNewProfilePic] = useState(currentUser.profilePic);
+
+  const modalBtnRef = useRef(null);
+  const closeBtnRef = useRef(null);
+
+  useEffect(() => {
+    const modal = document.querySelector('.modal');
+    const modalWrap = document.querySelector('.modal-wrap');
+
+    const openModal = () => {
+      modal.style.opacity = 1;
+      modal.style.pointerEvents = 'auto';
+      modalWrap.style.opacity = 1;
+      modalWrap.style.transform = 'scale(1)';
+    }
+
+    const closeModal = () => {
+      modal.style.opacity = 0;
+      modal.style.pointerEvents = 'none';
+      modalWrap.style.opacity = 0;
+      modalWrap.style.transform = 'scale(0.6)';
+    }
+
+    const modalBtn = modalBtnRef.current;
+    const closeBtn = closeBtnRef.current;
+
+    if (modalBtn) {
+      modalBtn.addEventListener('click', openModal);
+    }
+    
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    return () => {
+      if (modalBtn) {
+        modalBtn.removeEventListener('click', openModal);
+      }
+
+      if (closeBtn) {
+        closeBtn.removeEventListener('click', closeModal);
+      }
+    };
+  }, []); 
+
 
   const upload = async (file) => {
     try {
@@ -102,18 +147,46 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
 
   return (
     <>
+     <div class="modal" style={{zIndex: '99999999999'}}>    
+            <div class="modal-wrap" > 
+              <button  className=" px-3 h-8 bg-blue-300 ml-2 rounded-md mt-2 text-white" ref={closeBtnRef} id="close-btn"> X </button>
+              <h1 className="text-xl font-bold text-center mb-10">Upload Profile Picture</h1>
+                <label
+                  htmlFor="profilePic"
+                  className="inline-block cursor-pointer hover:bg-blue-200 text-white font-semibold py-2 px-4 transition duration-200 ease-in-out"
+                >
+                    <img
+                      src='https://www.pngplay.com/wp-content/uploads/8/Upload-Icon-Logo-PNG-Photos.png'
+                      alt="Profile"
+                      className="inline-block cursor-pointer py-2 px-8 transition duration-200 ease-in-out"
+                    />
+                </label>
+
+                <div className='w-full flex justify-center items-center'>
+                  <button 
+                    className="flex w-3/4 mt-12 justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                    style={{
+                      borderRadius: '5px',
+                      background: 'linear-gradient(225deg, #93C5FD, #2563EB)',
+                      boxShadow: '-5px 5px 10px rgba(147, 197, 253, 0.5), 5px -5px 10px rgba(37, 99, 235, 0.5)',
+                      transition: 'boxShadow 0.3s ease-in-out'
+                    }}>Upload</button>
+                </div>
+              </div>
+                
+            </div>
       <div className="info w-56">
         <form
           className="flex flex-col w-56 space-y-2"
           onSubmit={handleASubmit}
           aria-labelledby="update-heading"
         >
-          <h2 className="mb-2 text-2xl" id="update-heading">
+          <h2 className="mb-2 text-2xl font-bold" id="update-heading">
             Update Username
           </h2>
           <label htmlFor="username">New Username</label>
           <input
-            className="h-12 border-2 border-black"
+            className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
             type="text"
             id="username"
             name="username"
@@ -125,7 +198,14 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
             value={currentUser.id}
           />
 
-          <button className="mt-5" style={buttonStyles}>
+          <button className="flex w-full mt-2 justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 mt-5" 
+            style={{
+              borderRadius: '5px',
+              background: 'linear-gradient(225deg, #93C5FD, #2563EB)',
+              boxShadow: '-5px 5px 10px rgba(147, 197, 253, 0.5), 5px -5px 10px rgba(37, 99, 235, 0.5)',
+              transition: 'boxShadow 0.3s ease-in-out'
+            }}
+          >
             Update Username
           </button>
         </form>
@@ -134,7 +214,7 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
           onSubmit={handlePicSubmit}
           className="flex flex-col w-56 space-y-2"
         >
-          <h1 className="mt-8 mb-2 text-2xl w-80"> Update Profile Picture </h1>
+          <h1 className="mt-8 mb-2 text-2xl w-80 font-bold"> Update Profile Picture </h1>
           <input
             type="file"
             id="profilePic"
@@ -142,15 +222,22 @@ export default function UpdateUsernameForm({ currentUser, setCurrentUser }) {
             className="hidden"
             onChange={(e) => setNewProfilePic(e.target.files[0])}
           />
-          <label
-            htmlFor="profilePic"
-            className="inline-block cursor-pointer bg-blue-200 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out"
-          >
-            <p className="w-80"> Choose Profile Picture </p>
-          </label>
-
-          <button style={buttonStyles}>Update profile Picture</button>
+        
         </form>
+
+        <button
+          ref={modalBtnRef} 
+          id="modal-btn"
+          className="flex w-full mt-2 justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+          style={{
+             borderRadius: '5px',
+             background: 'linear-gradient(225deg, #93C5FD, #2563EB)',
+             boxShadow: '-5px 5px 10px rgba(147, 197, 253, 0.5), 5px -5px 10px rgba(37, 99, 235, 0.5)',
+             transition: 'boxShadow 0.3s ease-in-out'
+          }}
+        >
+          Update profile picture
+        </button>
       </div>
     </>
   );

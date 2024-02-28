@@ -116,7 +116,12 @@ export default function EventPage() {
 
     if (startTime - today <= fiveMinutes) {
       return (
-        <NavLink to={`/room/${event.user_id}`}>Link to online room</NavLink>
+        <NavLink className={'flex w-full justify-center rounded-md bg-red-600 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'} style={{
+          borderRadius: '5px',
+          background: 'linear-gradient(225deg, #FED7AA, #F97316)',
+          // boxShadow: '-5px 5px 10px rgba(147, 197, 253, 0.5), 5px -5px 10px rgba(37, 99, 235, 0.5)',
+          transition: 'boxShadow 0.3s ease-in-out'
+        }} to={`/room/${event.user_id}`}>Link to online room</NavLink>
       );
     }
     return (
@@ -128,6 +133,24 @@ export default function EventPage() {
 
   // function to show map or room depending on event location
   const showMapOrRoom = () => {
+    // const isHost = currentUser && currentUser.id === event.user_id;
+    // const hasJoined = joinedEvents[event.id];
+    if(event.location === 'Online Class') {
+      return (
+        <div className='w-full flex justify-center items-center mt-8'>
+          <p className='font-semibold'> This is an Online Class </p>
+        </div>
+       
+      );
+    }
+
+    if (event && showMap && event.location !== 'Online Class') {
+      return map;
+    }
+    return <Map location={event.location} />;
+  };
+
+  const showRoom = () => {
     const isHost = currentUser && currentUser.id === event.user_id;
     const hasJoined = joinedEvents[event.id];
 
@@ -137,11 +160,7 @@ export default function EventPage() {
       }
       return <p></p>;
     }
-    if (event && showMap && event.location !== 'Online Class') {
-      return map;
-    }
-    return <Map location={event.location} />;
-  };
+  }
 
   const deleteEvent = async () => {
     destroyEvent({ event_id: event.id });
@@ -236,9 +255,16 @@ export default function EventPage() {
                     joinedEvents={joinedEvents}
                   />
                 ) : (
-                  <button style={buttonStyles}>
-                    <p className="font-bold"> Your Event </p>
-                  </button>
+                  event.location === 'Online Class' ?
+                    <div className='flex justify-center items-center text-black'> 
+                      {event && showRoom()}
+                    </div> 
+                    
+                    :
+
+                    <button style={buttonStyles}>
+                      <p className="font-bold"> Your Event </p>
+                    </button>
                 )}
 
               <div className='w-full flex justify-center items-center mt-5'>
@@ -268,7 +294,7 @@ export default function EventPage() {
         {event && showMapOrRoom()}
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

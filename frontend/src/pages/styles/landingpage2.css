@@ -7,7 +7,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    transition: opacity 12s;
+    transition: opacity 4s;
     opacity: 1;
     z-index: 20;
 }
@@ -30,7 +30,7 @@
 }
 
 .move-me-start {
-    animation: move-to-top 8s forwards;
+    animation: move-to-top 3s forwards;
 }
 
 @keyframes move-to-top {
@@ -38,7 +38,7 @@
       top: 50%; 
     }
     100% {
-      top: 12vh; 
+      top: 8vh; 
     }
 }
 

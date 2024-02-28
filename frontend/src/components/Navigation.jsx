@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
-import logo from '../pages/assets/images/Union.png';
+import logo from '../pages/assets/images/Group_1.png';
 import '../pages/styles/bar.css'
 import './styles/hoverA.css'
 
@@ -52,8 +52,8 @@ const Navigation = ({ currentUser}) => {
   
   return (
     <div className='flex flex-row'>
-        <div>
-            <img className="fixed rounded-sm z-50 left-24 top-2" src={logo} alt="Smiley face 2" width="72" height="72" />
+        <div className='w-50 h-50'>
+            <img className="fixed rounded-sm z-50 -top-5 left-20" src={logo} alt="Smiley face 2" width="140" height="140" />
         </div>
 
         <div className='navigation'>
@@ -84,6 +84,9 @@ const Navigation = ({ currentUser}) => {
                 </div>
                 <div className="link-4" onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")}>
                   <NavLink  to="/about">About</NavLink>
+                </div>
+                <div className="link-5" onMouseOver={() => showSpline("about")} onMouseOut={() => showSpline("about")}>
+                  <NavLink  to="/">Home</NavLink>
                 </div>
             </div>
             </div>

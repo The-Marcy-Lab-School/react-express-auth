@@ -223,11 +223,11 @@ export default function EventForm({ id, loadUserEvents }) {
 
           <div>
               <button
-                className="flex w-full mt-12 justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                className="flex w-full mt-12 justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                 style={{
                   borderRadius: '5px',
-                  background: 'linear-gradient(225deg, #ff3126, #c30a00)',
-                  boxShadow: '-5px 5px 10px rgba(195, 10, 0, 0.5), 5px -5px 10px rgba(255, 49, 38, 0.5)',
+                  background: 'linear-gradient(225deg, #FDBA74, #EA580C)',
+                  boxShadow: '-5px 5px 10px rgba(253, 186, 116, 0.5), 5px -5px 10px rgba(234, 88, 12, 0.5)',
                   transition: 'boxShadow 0.3s ease-in-out'
                 }}
               >
