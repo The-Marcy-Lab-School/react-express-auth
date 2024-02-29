@@ -261,9 +261,11 @@ const Guy = forwardRef((props, ref) => {
   const { partSelected, setPartSelected } = usePartStore((state) => state);
 
   const { nodes, materials } = useGLTF('/Model2222222.gltf');
+
   return (
     <>
       <group {...props} ref={ref} dispose={null} position={[0, -2, 0]}>
+        
         <mesh
           castShadow
           receiveShadow

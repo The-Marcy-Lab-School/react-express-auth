@@ -31,9 +31,9 @@ video {
 .main-videos {
   flex-grow: 1;
   background-color: black;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .main-controls {
@@ -128,7 +128,13 @@ video {
 
 .video-container {
   position: relative;
+  max-width: 28rem;
 }
+
+.video-container h1 {
+  width: 50px;
+}
+
 
 .username-text {
   font-size: 25px;

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #app, #app>div {
+  height: 100%
+}
+
 /* 
 
 body {
@@ -57,5 +61,14 @@ form {
   /* color: #EEBC32;
   font-weight: bold; */
   /* font-style: italic; */
+}
+
+
+
+
+.MuiPagination-root {
+  button {
+    color: white !important;
+ }
 }
 
