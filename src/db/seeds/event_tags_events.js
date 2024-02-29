@@ -48,6 +48,10 @@ const event_tags_events = [
     event_id: 7,
     event_tag_id: 5,
   },
+  {
+    event_id: 8,
+    event_tag_id: 1,
+  },
 ];
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
