@@ -17,8 +17,8 @@ const Room = () => {
   const socket = useSocket();
   // const socket = io('http://localhost:3000')
   const myPeer = new Peer(undefined, {
-    host: '/',
-    port: '3001',
+    host: '0.peerjs.com',
+    port: '443',
   });
   const videoGrid = useRef();
   const peers = useRef({});
@@ -51,11 +51,11 @@ const Room = () => {
           });
         });
 
-    socket.on('createMessage', (message, username) => {
-      console.log("created a msg")
-      let messageobj = {username, message}
-      setMessages((prevList) => [...prevList, messageobj]);
-    });
+      socket.on('createMessage', (message, username) => {
+        console.log('created a msg');
+        let messageobj = { username, message };
+        setMessages((prevList) => [...prevList, messageobj]);
+      });
 
       socket.on('user-disconnected', (userId) => {
         if (peers.current[userId]) peers.current[userId].close();
@@ -127,7 +127,7 @@ const Room = () => {
   };
 
   const toggleVideo = () => {
-    console.log(socket)
+    console.log(socket);
     const bool = myStream.current.getVideoTracks()[0].enabled;
     setHidden(!hidden);
     if (bool) {

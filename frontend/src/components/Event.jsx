@@ -142,7 +142,7 @@ const Event = (props) => {
           <div className="flex flex-col space-y-2">
             {tagsArray.map((tag) => (
               <div
-                className="bg-white text-center justify-center rounded-full w-20 h-7"
+                className="bg-white text-center justify-center rounded-full w-40 h-7"
                 key={tag}
               >
                 {tag}
@@ -174,48 +174,15 @@ const Event = (props) => {
           />
         )}
       {currentUser && currentUser.id === event.user_id ? (
-        <button onClick={deleteEvent}>Delete Event</button>
+        <button
+          onClick={deleteEvent}
+          style={{ color: 'red', textAlign: 'center' }}
+        >
+          Delete Event
+        </button>
       ) : (
         <p></p>
       )}
-      {/* <div className="user-details"> */}
-      {/* <img
-          className="profile-pic"
-          src={`../upload/${event.user_profile_pic || 'default.jpg'}`}
-        /> */}
-
-      {/* <h3>guy: {event.user_name}</h3>
-      </div> */}
-      {/* <h3>Title: {event.title}</h3> */}
-      {/* <h3>Location: {event.location}</h3>
-      {showMapOrRoom()} */}
-      {/* <h3>Description: {event.description}</h3> */}
-      {/* <h3>ID: {event.id}</h3> */}
-      {/* <h3>Tags: {event.tag_names}</h3> */}
-      {/* <h3>Time: {formattedStartDate}</h3> */}
-      {/* <h3>Ends: {formattedEndDate}</h3> */}
-      {/* <h3>
-        Attendents: {attendeeAmount || event.attendee_count}
-        {event.location === 'Online Class' && <span>/4</span>}
-        {event.attendee_count > 3 && event.location === 'Online Class' && (
-          <span> No open spots available</span>
-        )}
-      </h3> */}
-      {/* {currentUser &&
-        currentUser.id !== event.user_id &&
-        event.id &&
-        checkOnlineAndAttendee() && (
-          <JoinButton
-            joinEvent={joinEvent}
-            eventId={event.id}
-            joinedEvents={joinedEvents}
-          />
-        )}{' '} */}
-      {/* ill see if I need the && later */}
-      {/* {commentsinit && <Comments eventId={event.id} userId={currentUser.id} />}
-      <button onClick={toggleComments}>
-        {commentsinit ? 'Hide Comments' : 'Show Comments'}
-      </button> */}
     </div>
   );
 };

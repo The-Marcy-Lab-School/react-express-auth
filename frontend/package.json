@@ -8,6 +8,7 @@
     "test": "vitest",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "peer": "peerjs -- port 9000",
     "preview": "vite preview"
   },
   "dependencies": {
