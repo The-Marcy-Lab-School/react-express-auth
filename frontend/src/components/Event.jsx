@@ -142,7 +142,7 @@ const Event = (props) => {
           <div className="flex flex-col space-y-2">
             {tagsArray.map((tag) => (
               <div
-                className="bg-white text-center justify-center rounded-full w-20 h-7"
+                className="bg-white text-center justify-center rounded-full w-40 h-7"
                 key={tag}
               >
                 {tag}

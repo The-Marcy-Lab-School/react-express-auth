@@ -146,6 +146,7 @@ const Form = () => {
       if (error) return setErrorText(error.message);
 
       setCurrentUser(user);
+
       navigate('/about');
     };
 
