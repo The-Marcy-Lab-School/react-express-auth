@@ -17,10 +17,10 @@ const ExerciseList = (props) => {
 
   return (
     <>
-      <ul className="exercise-list">
+      <ul className="exercise-list p-2 bg-green-500 mb-5 shadow-md font-medium text-white">
         {exercises.slice(previous, page).map((exercise, index) => (
           <li
-            className={`list-item ${exerciseIndex === index ? 'active' : ''}`}
+            className={`list-item cursor-pointer ${exerciseIndex === index ? 'active' : ''}`}
             bindex={index}
             key={exercise.name + exercise.id}
             onClick={() => handleExerciseClick(index)}

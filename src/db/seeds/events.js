@@ -74,6 +74,15 @@ const events = [
     CreatedAt: '2024-02-27T10:00:00Z',
     user_id: 7,
   },
+  {
+    title: 'Yoga for a bit come join!',
+    location: 'Online Class',
+    description: `Quick yoga sesh`,
+    date: '2024-02-29T20:00:00Z',
+    end_date: '2024-02-29T21:50:00Z',
+    CreatedAt: '2024-02-27T10:00:00Z',
+    user_id: 4,
+  },
 ];
 exports.seed = async function (knex) {
   // Deletes ALL existing entries

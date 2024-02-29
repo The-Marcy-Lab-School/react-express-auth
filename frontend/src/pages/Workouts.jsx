@@ -7,7 +7,9 @@ import  Guy  from '../components/Guy';
 import FormExercisePlace from '../components/FormExercisePlace';
 import { usePartStore } from '../store/store';
 import Experience from '../components/Experience';
-import Navigation from '../components/Navigation';
+import Navigation from '../components/Navigation'
+import Spline from '@splinetool/react-spline';
+;
 
 // import './styles/root.css'
 
@@ -49,9 +51,13 @@ export default function Workouts() {
   };
   return (
     <>
+      <div className='max-h-screen'>
       {/* <h1>THIS IS THE 3D MODEL AREA</h1> */}
       {/* style={{position: 'relative'}} */}
       <Navigation currentUser={currentUser} />
+
+      <Spline className="spline absolute max-h-screen w-full " scene="https://prod.spline.design/RPzmecikJgOBc-Ij/scene.splinecode" />
+
 
       <div className='relative w-screen h-screen flex items-center justify-center'>
         {/* <h5>Part selected: {partSelected}</h5> */}
@@ -59,14 +65,14 @@ export default function Workouts() {
           {/* style={{maxWidth : "400px", height : "400px"}} */}
           <div className='max-w-full max-h-screen' >
             <div className='z-10 w-full text-white flex justify-center items-center font-semibold text-5xl'>
-              <h5 className='pt-12'  style={{position: 'absolute', zIndex: 2}}>{partSelected}</h5>
+              <h5 className='pt-12 text-gray-100 font-semibold'  style={{position: 'absolute', zIndex: 2}}>{partSelected}</h5>
 
             </div>
 
-            <Canvas  >
+            <Canvas >
             <ambientLight intensity={1.4} />
               <Suspense fallback={null}>
-                <color attach="background" args={['#101010']} />
+                {/* <color attach="background" args={['#101010']} /> */}
                 <Experience rotationX={rotationX} />
 
               </Suspense>
@@ -85,7 +91,7 @@ export default function Workouts() {
                 step={0.01}
                 value={rotationX}
                 onChange={(e) => rotateGuy(parseFloat(e.target.value))}
-                style={{   maxWidth : "200px" }}
+                style={{   maxWidth : "200px",  accentColor: '#A8BA9A' }}
               />
             </div>
             </Html>
@@ -94,6 +100,7 @@ export default function Workouts() {
           
           <FormExercisePlace />
         </div>
+      </div>
       </div>
     </>
   );
