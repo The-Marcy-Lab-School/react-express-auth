@@ -44,12 +44,14 @@ const FormExercisePlace = () => {
 
   return (
     <>
+      <div className='max-h-full'>
+
       <div className='flex flex-col'>  
         <div >
           <ExerciseList exercises={filteredExercises} />
         </div>
 
-        <div className='flex justify-center items-center rounded-sm shadow-md p-5 max-h-full text-white font-semibold bg-green-500 ' style={{ display: 'flex' }}>
+        <div className='flex justify-center items-center shadow-md p-5 max-h-full text-white font-semibold bg-green-500' style={{ display: 'flex' }}>
           <p>
             {exerciseIndex !== null &&
               filteredExercises[exerciseIndex]?.instructions}
@@ -57,10 +59,10 @@ const FormExercisePlace = () => {
         </div>
 
         {/* style={{ width: '800px' }} */}
-        <div className='w-full'>
+        <div className='w-full max-h-screen'>
           <form  className='w-full'>
             {/* <label htmlFor="equipment">Select Equipment:</label> */}
-            <select className='w-full' id="equipment" name="equipment" defaultValue={'any'} onChange={handleEquipmentChange} >
+            <select className='w-full mt-5 bg-green-500 text-white shadow-md p-2 font-medium cursor-pointer' id="equipment" name="equipment" defaultValue={'any'} onChange={handleEquipmentChange} >
               <option value="any">any</option>
               <option value="body weight">body weight</option>
               <option value="medicine ball">medicine ball</option>
@@ -74,6 +76,7 @@ const FormExercisePlace = () => {
             {/* <button>Update Exercises</button> */}
           </form>
         </div>
+      </div>
       </div>
 
       
