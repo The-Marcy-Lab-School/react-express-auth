@@ -7,6 +7,8 @@ import { FaMicrophoneSlash } from 'react-icons/fa6';
 import { IoChatbox } from 'react-icons/io5';
 import { useSocket } from '../contexts/SocketProvider';
 import CurrentUserContext from '../contexts/current-user-context';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 
 const Room = () => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -145,13 +147,18 @@ const Room = () => {
       });
     }
   }
+  const navigate = useNavigate();
+
+  const handleLeave = () => {
+    navigate('/community')
+  }
 
   return (
     <>
       <div className="main">
         <div className="main-left">
-          <div className="main-videos">
-            <div id="video-grid" ref={videoGrid}></div>
+          <div className="main-videos px-5 pt-5">
+            <div className='grid grid-cols-2' id="video-grid" ref={videoGrid}></div>
           </div>
           <div className="main-controls">
             <div className="controls-block">
@@ -191,15 +198,13 @@ const Room = () => {
             </div>
             <div className="controls-block">
               <div className="controls-button">
-                <span className="leave-meeting flex w-full justify-center rounded-md bg-red-600 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                  Leave
-                </span>
+                <span onClick={handleLeave} className="leave-meeting flex w-full justify-center rounded-md bg-red-600 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Leave</span>
               </div>
             </div>
           </div>
         </div>
         <div className="main-right">
-          <div className="header">
+          <div className="header font-bold mb-5 mt-2">
             <h6>Chat</h6>
           </div>
           <div className="chat-window">
@@ -228,7 +233,14 @@ const Room = () => {
                 type="text"
                 placeholder="Type message here..."
               ></input>
-              <button className="send">Send</button>
+              <button
+              className="send flex w-full mt-12 justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+              style={{
+                borderRadius: '5px',
+                background: '#EA580C',
+                // boxShadow: '-5px 5px 10px rgba(253, 186, 116, 0.5), 5px -5px 10px rgba(234, 88, 12, 0.5)',
+                transition: 'boxShadow 0.3s ease-in-out'
+              }}>Send</button>
             </form>
           </div>
         </div>
