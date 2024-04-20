@@ -5,60 +5,182 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 **Table of Contents**
 
 - [Setup](#setup)
-- [Understanding the Code](#understanding-the-code)
+- [Folder Structure + Package.json Files](#folder-structure--packagejson-files)
+- [Back-end](#back-end)
+  - [Migrations \& Seeds](#migrations--seeds)
+  - [Back-end API](#back-end-api)
+  - [Middleware](#middleware)
+- [Authentication \& Authorization](#authentication--authorization)
+  - [Cookies](#cookies)
+  - [Handle Cookie Sessions](#handle-cookie-sessions)
+  - [GET /api/me](#get-apime)
+  - [Check Authentication Before Patching](#check-authentication-before-patching)
+- [Front-end](#front-end)
+  - [Fetching Pattern: \[data, error\]](#fetching-pattern-data-error)
+  - [Adapters](#adapters)
+  - [Example Page Component](#example-page-component)
 - [Deploying](#deploying)
 - [Advice](#advice)
+  - [Do not trust the front end](#do-not-trust-the-front-end)
+  - [Be wary of errors](#be-wary-of-errors)
 
-# Setup
+## Setup
 
-- Make your own, non-connected copy by clicking the "code" button, and then clicking "Download ZIP"
-- Rename this new file on your computer whatever you want, and then run `git init` to start a new git history
-  - You should then push it up to your GitHub account   
-- Copy the `.env.template` and name it `.env`
-- Create a database called `react_auth_example` database (or update your new `.env` to whatever database you are using)
-- Double check that the `.env` variables are all correct (username, password, database name)
-- `npm run kickstart` (`npm run dev` or `npm start` afterwards). This will do the following commands all together:
-  - `cd front-end && npm i && cd ..` - installs front end dependencies
-  - `npm i` - installs all dependencies
-  - `npm run migrate` - runs `knex migrate:latest` which will run the provided migration file (look in the `src/db/migrations` folder)
-  - `npm run seed` - runs `knex seed:run` which will run the provided seed file (look in `src/db/seeds` folder)
-  - `npm run start` - runs `node src/index.js`, starting your server.
-- Then, open a new terminal and `cd` into `front-end`. Then run `npm run dev` to start your Vite development server.
+- First, make sure that you have a new GitHub Organization for your project.
+- Select <kbd>Use this template</kbd> and select <kbd>Create a new repository</kbd>. Rename the repo and choose your GitHub organization as the owner. 
+- Clone your repo.
+- Create a database called `react_auth_example` database (or a name of your choice)
+- In the `server/` folder, copy the `.env.template` and name it `.env`
+  - Update the `.env` variables to match your Postgres database information (username, password, database name)
+- In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run build`. This will do the following:
+  - `cd frontend && npm i && npm run build` - build frontend static assets
+  - `cd ../server && npm i && npm run migrate && npm run seed` - run migration and seeds on the backend
+- To start the server with the built static assets, run `npm start`
 
-The provided migration and seeds file will create a `users` table with `id`, `username`, and `password_hash` columns.
+During development, you can also use the following commands
+- Open a new terminal and run `npm run dev:frontend` to run the frontend development server
+- Run `npm run build:frontend` to update the static assets in the frontend.
+
+## Folder Structure + Package.json Files
+
+- `frontend/` - the front-end application code (React)
+- `server/` - the back-end server application code
+
+Each of these sub-directories has its own `package.json` file with their own dependencies and scripts.
+
+The `package.json` file in the root directory only has scripts for quickly building/running the full project.
+
+## Back-end
+
+The back-end is responsible for receiving and responding to client requests. Requests are received by the server, routed by the router, and parsed by the controller. The controller then passes along data from the request to the model to perform CRUD operations on the database before sending a response back to the client.
+
+![](/documentation/readme-img/full-stack-diagram.svg)
+
+### Migrations & Seeds
+
+The `knexfile.js` configuration file changes the location of the migration/seed files to be created in the `server/db/` directory. There, you can see the migration file for the `users` table:
+
+```js
+exports.up = (knex) => {
+  return knex.schema.createTable('users', (table) => {
+    table.increments();
+    table.string('username').notNullable().unique();
+    table.string('password_hash').notNullable();
+    table.timestamps(true, true); // adds the auto-generated created-at and updated-at columns
+  })
+};
+```
+
+The provided migration file will create a `users` table with `id`, `username`, and `password_hash` columns. It will also have auto-generated `created-at` and `updated-at` columns.
+
+The seed file will generate the following data:
+
+![](./documentation/readme-img/users-tableplus.png)
+
+Notice how the passwords have been hashed!
 
 - For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
-- If you need to update these columns, consider looking into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
-- If creating a new table, look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
+- If you need to update these columns, create a new migration file and look into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
+- If creating a new table, create a new migration file and look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
 
-# Running your application
+### Back-end API
 
-Run the `npm run dev` command from the root directory to start your Express server.
+The provided back-end exposes the following API endpoints defined across `routers/userRoutes.js` and `routers/authRoutes.js`
 
-#### Rebuilding the static assets
+| Method | Path       | Description                                        |
+| ------ | ---------- | -------------------------------------------------- |
+| GET    | /users     | Get the list of all users                          |
+| GET    | /users/:id | Get a specific user by id                          |
+| POST   | /users     | Create a new user                                  |
+| PATCH  | /users/:id | Update the username of a specific user by id       |
+| GET    | /me        | Get the current logged in user based on the cookie |
+| POST   | /login     | Log in to an existing user                         |
+| DELETE | /logout    | Log the current user out                           |
 
-The Express server is configured to serve static assets from the `public/` folder. Those static assets are the current **build** of the React front-end found in the `front-end/` folder. You can see the built version of the React front-end by going to the server's address: http://localhost:3000/
+### Middleware
 
-In order to update this built version of your React application, you will need to run the `npm run build` command _from the `front-end/` folder_.
+In `server/index.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `server/middleware/` folder
 
-#### Working with a dev server
+```js
+app.use(handleCookieSessions); // adds a session property to each request representing the cookie
+app.use(logRoutes); // print information about each incoming request
+app.use(express.json()); // parse incoming request bodies as JSON
+app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
 
-If you would like to work on the front-end without having to constantly rebuild the project, start a Vite dev server by running the `npm run dev` command _from the `front-end/` folder_.
+app.use('/api', authRouter); // all requests beginning with /api will be handled by authRouter first
+app.use('/api/users', userRouter); // all requests beginning with /api/users will be handled by userRouter
+```
 
-If you look in the `vite.config.js` file, you will see that we've already configured the dev server to proxy any requests made to `/api` to the back-end server.
+- Here, we subdivide the routing between two "sub routers". `app.use` let's us indicate the base URL that each router handles.
 
+## Authentication & Authorization
 
-# Understanding the Code
+- **authenticated** means "We have confirmed this person is who they say they are"
 
-### Folder Structure
+- **authorized** means "This person is who they say they are AND they are allowed to be here."
 
-- `front-end/` - the front-end application code (React)
-- `public/` - the front-end application's compiled static assets
-- `src/` - the back-end server application code
+So if we just want a user to be logged into the site to show content, we just check if they're _authenticated_.
 
-The `package.json` file in the root directory defines the dependencies and scripts for running the back-end server.
+However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
 
-The `front-end/package.json` file defines the dependencies and scripts for running the front-end Vite server.
+### Cookies
+
+In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
+* When a client sends an initial request to the server, it doesn't have a cookie
+* The server responds and also sends a cookie to the client.
+* The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
+* On all future client requests to the server, the cookie will be sent which will uniquely identify that user, even if the user closes the application and re-opens it later.
+
+![](./documentation/readme-img/cookies.png)
+
+### Handle Cookie Sessions
+
+In our application, we are using `handleCookieSessions` middleware which uses cookies to store the `userId` of the currently logged-in user in a `req.session` object. If the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
+
+This will allow us to implement **authentication** (confirm that the user is logged in).
+
+The flow of cookie data looks like this:
+
+![](/documentation/readme-img/cookies-session-userid-diagram.svg)
+
+1. When a request comes in for sign up/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
+2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
+3. When we get the `User` back from the model, we store the `user.id` in that cookie (`session.userId = user.id`)
+4. Now, that cookie lives with every request made by that user (`req.session`) and the client application can check if the user is logged in by hitting the `/api/me` endpoint (see below).
+
+### GET /api/me
+
+In order to keep source of truth simple, we're going to track who is logged in with that `GET /api/me` endpoint.
+
+- Each time a page is loaded, we quickly hit `GET /api/me`.
+- If there is a logged in user, we'll see that in the json.
+
+The reason this route is used instead of `GET /api/users/:id` is two fold.
+
+1. We don't know the user's `id` on load, so how could we know which `id` to provide in the URL?
+2. `GET` REST routes are supposed to be **idempotent** (eye-dem-PO-tent) which means "don't change." `GET /api/me` will change depending on the auth cookie. So, this little example app also has a `GET /api/users/:id` route because `GET /api/me` is not a replacement for it. `GET /api/users:id` isn't used in the client yet but your projects might in the future if you ever want to find a particular user by id (or username)!
+
+### Check Authentication Before Patching
+
+The `checkAuthentication` middleware verifies that the current user is logged in before processing a request. If there is no `userId` in `req.session`, any request that uses this middleware will be rejected with a 401 status code.
+
+```js
+// middleware/check-authentication.js
+const checkAuthentication = (req, res, next) => {
+  const { userId } = req.session;
+  if (!userId) return res.sendStatus(401);
+  return next();
+};
+```
+
+For example, only logged-in users should be able to edit their own user profile.
+
+Here, we specify that the `checkAuthentication` middleware should be used for only this one route. 
+
+```js
+// userRouter.js
+userRouter.patch("/users/:id", checkAuthentication, userController.update);
+```
 
 ## Front-end
 
@@ -68,7 +190,7 @@ The front-end React application's entrypoint is the `index.html` file which load
 
 ### Fetching Pattern: [data, error]
 
-All of the adapters make use of the `fetchHandler` helper function defined in the `frontend/src/utils.js` file:
+All of the adapters make use of the `fetchHandler` helper function defined in the `frontend/server/utils.js` file:
 
 ```js
 export const fetchHandler = async (url, options = {}) => {
@@ -116,7 +238,7 @@ export const getAllUsers = async () => {
 
 ### Example Page Component
 
-The `frontend/src/pages/Users.jsx` page provides a clean and simple example of how a front-end page can fetch and then render data from the backend. This page is responsible for fetching and displaying a list of all users in the database:
+The `frontend/server/pages/Users.jsx` page provides a clean and simple example of how a front-end page can fetch and then render data from the backend. This page is responsible for fetching and displaying a list of all users in the database:
 
 ```jsx
 import { useEffect, useState } from "react";
@@ -145,115 +267,7 @@ export default function UsersPage() {
 * The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
 * The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
 
-## Back-end
-
-The back-end is responsible for receiving and responding to client requests. Requests are received by the server, routed by the router, and parsed by the controller. The controller then passes along data from the request to the model to perform CRUD operations on the database before sending a response back to the client.
-
-![](/documentation/readme-img/full-stack-diagram.svg)
-
-### Back-end API
-
-The provided back-end exposes the following API endpoints defined in `src/routes.js`:
-
-| Method | Path       | Description                                        |
-| ------ | ---------- | -------------------------------------------------- |
-| GET    | /users     | Get the list of all users                          |
-| GET    | /me        | Get the current logged in user based on the cookie |
-| GET    | /users/:id | Get a specific user by id                          |
-| POST   | /users     | Create a new user                                  |
-| POST   | /login     | Log in to an existing user                         |
-| PATCH  | /users/:id | Update the username of a specific user by id       |
-| DELETE | /logout    | Log the current user out                           |
-
-### Middleware
-
-In `src/server.js` and in `src/routes.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `src/middleware/` folder
-
-**Express Middleware**
-
-```js
-app.use(express.json());
-```
-
-- We are telling Express to parse incoming data as JSON
-
-```js
-app.use(express.static(path.join(__dirname, "..", "public")));
-```
-
-- We are telling Express to serve static assets from the `public/` folder
-
-```js
-app.use("/api", routes);
-```
-
-- `routes` is the Router exported from `src/routes.js`. We are telling Express to send any requests starting with `/api` to that Router.
-
-**Custom Middleware**
-
-```js
-app.use(handleCookieSessions);
-```
-
-- `handleCookieSessions` adds a `req.session` object to every `req` coming into the server. (see `src/middleware/handle-cookie-sessions`)
-
-```js
-Router.use(addModels);
-```
-
-- `addModels` adds a `req.db` property to all incoming requests. This is an object containing the models imported from the `db/models/` folder (see `src/middleware/add-model`)
-
-```js
-Router.patch("/users/:id", checkAuthentication, userController.update);
-```
-
-- `checkAuthentication` verifies that the current user is logged in before processing the request. (see `src/middleware/check-authentication`)
-- Here, we specify middleware for a singular route. Only logged-in users should be able to hit this endpoint.
-
-## Authentication & Authorization
-
-- **authenticated** means "We have confirmed this person is who they say they are"
-
-- **authorized** means "This person is who they say they are AND they are allowed to be here."
-
-So if we just want a user to be logged into the site to show content, we just check if they're _authenticated_.
-
-However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
-
-### Cookies
-
-In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
-
-**Cookies contain information about your preferences and interactions with the website**, such as login information, shopping cart contents, or browsing history.
-
-When you visit the website again, the server retrieves the information from the cookie to personalize your experience and provide you with relevant content.
-
-### Storing User IDs on the Cookie for Authentication
-
-In our application, we are using cookies to store the `userId` of the currently logged-in user on the `req.session` object. This will allow us to implement **authentication** (confirm that the user is logged in).
-
-The flow of cookie data looks like this:
-
-![](/documentation/readme-img/cookies-session-userid-diagram.svg)
-
-1. When a request comes in for sign up/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
-2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
-3. When we get the `User` back from the model, we store the `user.id` in that cookie (`session.userId = user.id`)
-4. Now, that cookie lives with every request made by that user (`req.session`) and the client can check if it is logged in using the `/api/me` endpoint (see below).
-
-## /api/me
-
-In order to keep source of truth simple, we're going to track who is logged in with that `GET /api/me` convention.
-
-- Each time a page is loaded, we quickly hit `GET /api/me`.
-- If there is a logged in user, we'll see that in the json.
-
-The reason this route is used instead of `GET /api/users/:id` is two fold.
-
-1. We don't know the user's `id` on load, so how could we know which `id` to provide in the URL?
-2. `GET` REST routes are supposed to be **idempotent** (eye-dem-PO-tent) which means "don't change." `GET /api/me` will change depending on the auth cookie. So, this little example app also has a `GET /api/users/:id` route because `GET /api/me` is not a replacement for it. `GET /api/users:id` isn't used in the client yet but your projects might in the future if you ever want to find a particular user by id (or username)!
-
-# Deploying
+## Deploying
 
 We recommend deploying using Render.com. It offers free hosting of web servers and PostgreSQL databases with minimal limitations.
 
@@ -306,7 +320,7 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
 
 
 
-# Advice
+## Advice
 
 ### Do not trust the front end
 
