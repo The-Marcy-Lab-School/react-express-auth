@@ -5,10 +5,7 @@ const User = require('../db/models/User');
 // is valid, it adds the userId to the cookie (allowing them to stay logged in)
 // and sends back the user object.
 exports.loginUser = async (req, res) => {
-  const {
-    session, // the req.session value added by the handleCookieSessions middleware
-    body: { username, password }, // the req.body value is provided by the client
-  } = req;
+  const { username, password } = req.body // the req.body value is provided by the client
 
   const user = await User.findByUsername(username);
   if (!user) return res.sendStatus(404);
@@ -16,7 +13,7 @@ exports.loginUser = async (req, res) => {
   const isPasswordValid = await user.isValidPassword(password);
   if (!isPasswordValid) return res.sendStatus(401);
 
-  session.userId = user.id;
+  req.session.userId = user.id;
   res.send(user);
 };
 
@@ -30,10 +27,8 @@ exports.logoutUser = (req, res) => {
 // This controller returns 401 if the client is NOT logged in (doesn't have a cookie)
 // or returns the user based on the userId stored on the client's cookie
 exports.showMe = async (req, res) => {
-  // 
-  const { session } = req;
-  if (!session.userId) return res.sendStatus(401);
+  if (!req.session.userId) return res.sendStatus(401);
 
-  const user = await User.find(session.userId);
+  const user = await User.find(req.session.userId);
   res.send(user);
 };

@@ -5,11 +5,12 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 **Table of Contents**
 
 - [Setup](#setup)
-- [Folder Structure + Package.json Files](#folder-structure--packagejson-files)
+  - [Folder Structure + Package.json Files](#folder-structure--packagejson-files)
+  - [Setup Steps](#setup-steps)
 - [Back-end](#back-end)
   - [Migrations \& Seeds](#migrations--seeds)
-  - [Back-end API](#back-end-api)
   - [Middleware](#middleware)
+  - [Back-end API](#back-end-api)
 - [Authentication \& Authorization](#authentication--authorization)
   - [Cookies](#cookies)
   - [Handle Cookie Sessions](#handle-cookie-sessions)
@@ -26,6 +27,17 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 
 ## Setup
 
+### Folder Structure + Package.json Files
+
+- `frontend/` - the front-end application code (React)
+- `server/` - the back-end server application code
+
+Each of these sub-directories has its own `package.json` file with their own dependencies and scripts.
+
+The `package.json` file in the root directory only has scripts for quickly building/running the full project.
+
+### Setup Steps
+
 - First, make sure that you have a new GitHub Organization for your project.
 - Select <kbd>Use this template</kbd> and select <kbd>Create a new repository</kbd>. Rename the repo and choose your GitHub organization as the owner. 
 - Clone your repo.
@@ -36,28 +48,21 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 - In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run build`. This will build frontend static assets and run migration and seeds on the backend
 - To start the server with the built static assets, run `npm start`
 
-During development, you can also use the following commands
+During development, you can also use the following commands from the root of the project
 - Open a new terminal and run `npm run dev:frontend` to run the frontend development server
 - Run `npm run build:frontend` to update the static assets in the frontend.
 
-## Folder Structure + Package.json Files
-
-- `frontend/` - the front-end application code (React)
-- `server/` - the back-end server application code
-
-Each of these sub-directories has its own `package.json` file with their own dependencies and scripts.
-
-The `package.json` file in the root directory only has scripts for quickly building/running the full project.
-
 ## Back-end
 
-The back-end is responsible for receiving and responding to client requests. Requests are received by the server, routed by the router, and parsed by the controller. The controller then passes along data from the request to the model to perform CRUD operations on the database before sending a response back to the client.
+The back-end is responsible for receiving and responding to client requests. Requests are received by the server, routed to one of the routers, and parsed by the controller. The controller then passes along data from the request to the model to perform CRUD operations on the database before sending a response back to the client.
 
 ![](/documentation/readme-img/full-stack-diagram.svg)
 
 ### Migrations & Seeds
 
-The `knexfile.js` configuration file changes the location of the migration/seed files to be created in the `server/db/` directory. There, you can see the migration file for the `users` table:
+Migration files are stored in the `server/db/` folder. This is set by the `knexfile.js` and can be changed if you so choose.
+
+In `server/db/`, you can see the migration file for the `users` table:
 
 ```js
 exports.up = (knex) => {
@@ -82,20 +87,6 @@ Notice how the passwords have been hashed!
 - If you need to update these columns, create a new migration file and look into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
 - If creating a new table, create a new migration file and look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
 
-### Back-end API
-
-The provided back-end exposes the following API endpoints defined across `routers/userRoutes.js` and `routers/authRoutes.js`
-
-| Method | Path       | Description                                        |
-| ------ | ---------- | -------------------------------------------------- |
-| GET    | /users     | Get the list of all users                          |
-| GET    | /users/:id | Get a specific user by id                          |
-| POST   | /users     | Create a new user                                  |
-| PATCH  | /users/:id | Update the username of a specific user by id       |
-| GET    | /me        | Get the current logged in user based on the cookie |
-| POST   | /login     | Log in to an existing user                         |
-| DELETE | /logout    | Log the current user out                           |
-
 ### Middleware
 
 In `server/index.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `server/middleware/` folder
@@ -112,35 +103,72 @@ app.use('/api/users', userRouter); // all requests beginning with /api/users wil
 
 - Here, we subdivide the routing between two "sub routers". `app.use` let's us indicate the base URL that each router handles.
 
+### Back-end API
+
+The provided back-end exposes the following API endpoints to access user data in `routers/userRoutes.js` 
+
+| Method | Path           | Description                                  |
+| ------ | -------------- | -------------------------------------------- |
+| GET    | /api/users     | Get the list of all users                    |
+| GET    | /api/users/:id | Get a specific user by id                    |
+| POST   | /api/users     | Create a new user                            |
+| PATCH  | /api/users/:id | Update the username of a specific user by id |
+
+The provided back-end also exposes the following API endpoints for handling authentication/authorization logic in `routers/authRoutes.js`
+
+| Method | Path        | Description                                        |
+| ------ | ----------- | -------------------------------------------------- |
+| GET    | /api/me     | Get the current logged in user based on the cookie |
+| POST   | /api/login  | Log in to an existing user                         |
+| DELETE | /api/logout | Log the current user out                           |
+
 ## Authentication & Authorization
 
-- **authenticated** means "We have confirmed this person is who they say they are"
+- **authenticated** means "We have confirmed this person is a real user and is allowed to be here"
+  - For example, only logged in users can see the other users in this app
 
-- **authorized** means "This person is who they say they are AND they are allowed to be here."
+- **authorized** means "This person is allowed to perform this protected action"
+  - For example, users are only authorized to edit their OWN profile (they can't change someone else's profile)
 
-So if a user only needs to be logged in to see something, we just check if they're _authenticated_.
-
-However if for example they wanted to update their profile, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
-
-To achieve this, we'll use cookies.
+To implement this functionality, we'll use cookies.
 
 ### Cookies
 
-In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
+In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device. Here is how they work:
+
+![](./documentation/readme-img/cookies.png)
+
 * When a client sends an initial request to the server, it doesn't have a cookie
 * The server sends a response along with a cookie.
 * The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
 * On all future client requests to the server, the cookie will be sent with the request. Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
 
-![](./documentation/readme-img/cookies.png)
+For our purposes, our serve can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie can immediately tell us who they are. This can be used to authenticate and to authorize the user.
 
-We can use the cookie to save the `id` of the user that was logged in across sessions. If the user was logged in previously, then when we return to the site, the cookie can be checked by the server to automatically log the client in to that user.
-
-The client has NO way of editing the cookie
+> WARNING: When the server creates a cookie for the client, it has to be careful with what data is stored in the cookie because the client can manipulate that data and create its own cookies. Always make sure that data stored in a cookie is encrypted!
 
 ### Handle Cookie Sessions
 
-In our application, we are using `handleCookieSessions` middleware which uses cookies to store the `userId` of the currently logged-in user in a `req.session` object. If the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
+In our application, we are using `handleCookieSessions` middleware with our Express server to create cookies (and encrypt data stored on them) for us. We can access/manipulate those cookies by accessing the `req.session` object when handling incoming requests. 
+
+To achieve authentication/authorization, we will store the `userId` of the currently logged-in user in the `req.session` object. For example, this is the `loginUser` controller found in `controllers/authControllers`
+
+```js
+exports.loginUser = async (req, res) => {
+  const { username, password } = req.body // the req.body value is provided by the client
+
+  const user = await User.findByUsername(username);
+  if (!user) return res.sendStatus(404);
+
+  const isPasswordValid = await user.isValidPassword(password);
+  if (!isPasswordValid) return res.sendStatus(401);
+
+  req.session.userId = user.id; // here we add the userId to the cookie (req.session)
+  res.send(user);
+};
+```
+
+On future requests, if the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
 
 With this information we can:
 1. implement **authentication** (confirm that the user is logged in).
