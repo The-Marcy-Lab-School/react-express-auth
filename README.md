@@ -33,9 +33,7 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 - In the `server/` folder, copy the `.env.template` and name it `.env`
   - Update the `.env` variables to match your Postgres database information (username, password, database name)
   - Replace the `SESSION_SECRET` value with your own random string. This is used to encrypt the cookie's `userId` value.
-- In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run build`. This will do the following:
-  - `cd frontend && npm i && npm run build` - build frontend static assets
-  - `cd ../server && npm i && npm run migrate && npm run seed` - run migration and seeds on the backend
+- In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run build`. This will build frontend static assets and run migration and seeds on the backend
 - To start the server with the built static assets, run `npm start`
 
 During development, you can also use the following commands
