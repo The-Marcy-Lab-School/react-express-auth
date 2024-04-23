@@ -20,10 +20,10 @@ app.use('/api', authRouter);
 app.use('/api/users', userRouter);
 
 // Requests meant for the API will be sent along to the router.
-// For all other requests, send back the index.html file in the public folder.
+// For all other requests, send back the index.html file in the dist folder.
 app.get('*', (req, res, next) => {
   if (req.originalUrl.startsWith('/api')) return next();
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 const port = process.env.PORT || 3000;

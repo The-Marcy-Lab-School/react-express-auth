@@ -10,15 +10,14 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Migrations \& Seeds](#migrations--seeds)
   - [Back-end API](#back-end-api)
   - [Middleware](#middleware)
-- [Authentication \& Authorization](#authentication--authorization)
-  - [Cookies](#cookies)
-  - [Handle Cookie Sessions](#handle-cookie-sessions)
-  - [GET /api/me](#get-apime)
-  - [Check Authentication Before Patching](#check-authentication-before-patching)
 - [Front-end](#front-end)
   - [Fetching Pattern: \[data, error\]](#fetching-pattern-data-error)
   - [Adapters](#adapters)
   - [Example Page Component](#example-page-component)
+- [Authentication \& Authorization](#authentication--authorization)
+  - [Cookies](#cookies)
+  - [Handle Cookie Sessions](#handle-cookie-sessions)
+  - [Staying logged in with `GET /api/me`](#staying-logged-in-with-get-apime)
 - [Deploying](#deploying)
 - [Advice](#advice)
   - [Do not trust the front end](#do-not-trust-the-front-end)
@@ -113,75 +112,6 @@ app.use('/api/users', userRouter); // all requests beginning with /api/users wil
 
 - Here, we subdivide the routing between two "sub routers". `app.use` let's us indicate the base URL that each router handles.
 
-## Authentication & Authorization
-
-- **authenticated** means "We have confirmed this person is who they say they are"
-
-- **authorized** means "This person is who they say they are AND they are allowed to be here."
-
-So if we just want a user to be logged into the site to show content, we just check if they're _authenticated_.
-
-However, if they wanted to update their profile info, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
-
-### Cookies
-
-In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
-* When a client sends an initial request to the server, it doesn't have a cookie
-* The server responds and also sends a cookie to the client.
-* The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
-* On all future client requests to the server, the cookie will be sent which will uniquely identify that user, even if the user closes the application and re-opens it later.
-
-![](./documentation/readme-img/cookies.png)
-
-### Handle Cookie Sessions
-
-In our application, we are using `handleCookieSessions` middleware which uses cookies to store the `userId` of the currently logged-in user in a `req.session` object. If the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
-
-This will allow us to implement **authentication** (confirm that the user is logged in).
-
-The flow of cookie data looks like this:
-
-![](/documentation/readme-img/cookies-session-userid-diagram.svg)
-
-1. When a request comes in for sign up/login, the server creates a cookie (the `handle-cookie-sessions` middleware does this for us). That cookie is an object called `session` that is added to each request `req`.
-2. The model will store the user data in the database (or look it up for `/login`) and return back the user with it's unique `user.id`
-3. When we get the `User` back from the model, we store the `user.id` in that cookie (`session.userId = user.id`)
-4. Now, that cookie lives with every request made by that user (`req.session`) and the client application can check if the user is logged in by hitting the `/api/me` endpoint (see below).
-
-### GET /api/me
-
-In order to keep source of truth simple, we're going to track who is logged in with that `GET /api/me` endpoint.
-
-- Each time a page is loaded, we quickly hit `GET /api/me`.
-- If there is a logged in user, we'll see that in the json.
-
-The reason this route is used instead of `GET /api/users/:id` is two fold.
-
-1. We don't know the user's `id` on load, so how could we know which `id` to provide in the URL?
-2. `GET` REST routes are supposed to be **idempotent** (eye-dem-PO-tent) which means "don't change." `GET /api/me` will change depending on the auth cookie. So, this little example app also has a `GET /api/users/:id` route because `GET /api/me` is not a replacement for it. `GET /api/users:id` isn't used in the client yet but your projects might in the future if you ever want to find a particular user by id (or username)!
-
-### Check Authentication Before Patching
-
-The `checkAuthentication` middleware verifies that the current user is logged in before processing a request. If there is no `userId` in `req.session`, any request that uses this middleware will be rejected with a 401 status code.
-
-```js
-// middleware/check-authentication.js
-const checkAuthentication = (req, res, next) => {
-  const { userId } = req.session;
-  if (!userId) return res.sendStatus(401);
-  return next();
-};
-```
-
-For example, only logged-in users should be able to edit their own user profile.
-
-Here, we specify that the `checkAuthentication` middleware should be used for only this one route. 
-
-```js
-// userRouter.js
-userRouter.patch("/users/:id", checkAuthentication, userController.update);
-```
-
 ## Front-end
 
 The front-end React application's entrypoint is the `index.html` file which loads in the `main.jsx` script. This script renders the top-level `App` component which may render various `page` components. The `adapter` files manage data-fetching logic while `context` files manage global front-end state.
@@ -266,6 +196,75 @@ export default function UsersPage() {
 * The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
 * The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
 * The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
+
+## Authentication & Authorization
+
+- **authenticated** means "We have confirmed this person is who they say they are"
+
+- **authorized** means "This person is who they say they are AND they are allowed to be here."
+
+So if a user only needs to be logged in to see something, we just check if they're _authenticated_.
+
+However if for example they wanted to update their profile, we'd need to make sure they were _authorized_ to do that (e.g. the profile they're updating is their own).
+
+To achieve this, we'll use cookies.
+
+### Cookies
+
+In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device.
+* When a client sends an initial request to the server, it doesn't have a cookie
+* The server sends a response along with a cookie.
+* The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
+* On all future client requests to the server, the cookie will be sent with the request. Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
+
+![](./documentation/readme-img/cookies.png)
+
+We can use the cookie to save the `id` of the user that was logged in across sessions. If the user was logged in previously, then when we return to the site, the cookie can be checked by the server to automatically log the client in to that user.
+
+The client has NO way of editing the cookie
+
+### Handle Cookie Sessions
+
+In our application, we are using `handleCookieSessions` middleware which uses cookies to store the `userId` of the currently logged-in user in a `req.session` object. If the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
+
+With this information we can:
+1. implement **authentication** (confirm that the user is logged in).
+2. implement **authorization** (confirm that the person who is logged in can do what they have requested to do, such as edit their profile)
+
+For example, suppose that a user logs in and then wants to edit their profile. The use of cookie data could look like this:
+
+![](/documentation/readme-img/authorization-diagram.svg)
+
+The `checkAuthentication` middleware verifies that the current user is logged in before processing a request. If there is no `userId` in `req.session`, any request that uses this middleware will be rejected with a 401 status code.
+
+```js
+// middleware/check-authentication.js
+const checkAuthentication = (req, res, next) => {
+  // req.session holds the cookie sent by the client (if it had one)
+  const { userId } = req.session; 
+  if (!userId) return res.sendStatus(401);
+  return next();
+};
+```
+
+For example, only logged-in users should be able to edit their own user profile.
+
+Here, we specify that the `checkAuthentication` middleware should be used for only this one route. 
+
+```js
+// userRouter.js
+userRouter.patch("/users/:id", checkAuthentication, userController.update);
+```
+
+### Staying logged in with `GET /api/me`
+
+Cookies are a great way to authorize a user. They can also be used to authenticate a user (check to see if they are logged in).
+
+When a user logs in and gets their cookie, that cookie is stored locally across sessions (when the user closes the browser tab and re-opens it).
+
+When the user returns to the site after logging in, they will have a cookie indicating their user id. The server can immediately send back the associated user and automatically log the client in.
+
+![](./documentation/readme-img/authentication-diagram.svg)
 
 ## Deploying
 
