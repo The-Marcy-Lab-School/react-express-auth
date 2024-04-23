@@ -42,7 +42,7 @@ The `package.json` file in the root directory only has scripts for quickly build
 - Select <kbd>Use this template</kbd> and select <kbd>Create a new repository</kbd>. Rename the repo and choose your GitHub organization as the owner. 
 - Clone your repo.
 - Create a database called `react_auth_example` database (or a name of your choice)
-- In the `server/` folder, copy the `.env.template` and name it `.env`
+- In the `server/` folder, copy the `.env.template` and name it `.env`.
   - Update the `.env` variables to match your Postgres database information (username, password, database name)
   - Replace the `SESSION_SECRET` value with your own random string. This is used to encrypt the cookie's `userId` value.
 - In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run build`. This will build frontend static assets and run migration and seeds on the backend
@@ -285,14 +285,16 @@ export default function App() {
 }
 ```
 
-Any page that requires authentication or is responsible for altering authentication also uses this Context:
-* `Login`
+Any page/component that requires authentication or is responsible for altering authentication also uses this Context:
+* `components/SiteHeadingAndNav`
+  * if a user is logged in show a link to view their own profile and a link to see all users, otherwise show the login/sign up buttons in the nav
+* `pages/Login`
   * if a user is already logged in, it navigates back to the home page.
   * otherwise, this page can set the current user after a successful `POST /api/login` request
-* `SignUp`
+* `pages/SignUp`
   * if a user is already logged in, it navigates back to the home page.
   * otherwise, this page can set the current user after a successful `POST /api/users` request
-* `User`
+* `pages/User`
   * if the currently logged in user matches the current profile page, the user can edit the profile and log out
   * if the user logs out, it sets the current logged in user to `null` before navigating back home.
 
@@ -346,8 +348,6 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
 5. Future changes to your code
    - If you followed these steps, your Render server will automatically redeploy whenever the main branch is committed to. To update the deployed application, simply commit to main.
    - For front-end changes, make sure to run `npm run build` to update the contents of the `public/` folder and push those changes.
-
-
 
 ## Advice
 
