@@ -9,6 +9,8 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Setup Steps](#setup-steps)
 - [Back-end](#back-end)
   - [Migrations \& Seeds](#migrations--seeds)
+  - [Bcrypt](#bcrypt)
+  - [User Model](#user-model)
   - [Middleware](#middleware)
   - [Back-end API](#back-end-api)
 - [Authentication \& Authorization](#authentication--authorization)
@@ -86,6 +88,82 @@ Notice how the passwords have been hashed!
 - For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
 - If you need to update these columns, create a new migration file and look into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
 - If creating a new table, create a new migration file and look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
+
+### Bcrypt
+
+The `password_hash` column in the `users` table is generated using `bcrypt` whenever we create a new user. Check out the `User.create` method in the `User` model:
+
+```js
+static async create(username, password) {
+  // hash the plain-text password using bcrypt before storing it in the database
+  const passwordHash = await authUtils.hashPassword(password);
+
+  const query = `INSERT INTO users (username, password_hash)
+    VALUES (?, ?) RETURNING *`;
+  const { rows } = await knex.raw(query, [username, passwordHash]);
+  const user = rows[0];
+  return new User(user);
+}
+```
+
+The `authUtils.hashPassword` function takes care of this hashing for us.
+
+### User Model
+
+The `User` model (defined in `server/db/models/User.js`) provides static methods for performing CRUD operations with the `users` table in the database:
+* `User.list()`
+* `User.find(id)`
+* `User.findByUsername(username)`
+* `User.create(username, password)`
+* `User.update(id, username)`
+* `User.deleteAll()`
+
+It also provides a `constructor` method for creating `User` instances that hide the hashed password, and each have a `isValidPassword` method.
+
+```js
+// the constructor is used to hide the passwordHash and
+// create an object that can be safely sent to the client
+constructor({ id, username, password_hash }) {
+    this.id = id;
+    this.username = username;
+    this.#passwordHash = password_hash;
+  }
+
+// this instance method can access the private passwordHash
+isValidPassword = async (password) => (
+  authUtils.isValidPassword(password, this.#passwordHash)
+);
+
+// before returning user data to the client, we turn each
+// user into a User instance and hide the hashed password
+static async list() {
+  const query = `SELECT * FROM users`;
+  const { rows } = await knex.raw(query);
+  // use the constructor to hide each user's passwordHash
+  return rows.map((user) => new User(user));
+}
+```
+
+The `constructor` is NOT used to create new users in the database (`User.create()` is). Instead, it is used by the static methods to hide the hashed password of each user before sending that data to the client.
+
+The `loginUser` controller can then use the `user.isValidPassword` instance method to indirectly access that private hashed password and verify the login information.
+
+```js
+exports.loginUser = async (req, res) => {
+  const { username, password } = req.body
+
+  // Get a User instance (we can see the username and id but can't see the password)
+  const user = await User.findByUsername(username);
+  if (!user) return res.sendStatus(404);
+
+  // Use the instance method isValidPassword to verify the password
+  const isPasswordValid = await user.isValidPassword(password); // <---
+  if (!isPasswordValid) return res.sendStatus(401);
+
+  req.session.userId = user.id;
+  res.send(user);
+};
+```
 
 ### Middleware
 
