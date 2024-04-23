@@ -10,14 +10,15 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Migrations \& Seeds](#migrations--seeds)
   - [Back-end API](#back-end-api)
   - [Middleware](#middleware)
-- [Front-end](#front-end)
-  - [Fetching Pattern: \[data, error\]](#fetching-pattern-data-error)
-  - [Adapters](#adapters)
-  - [Example Page Component](#example-page-component)
 - [Authentication \& Authorization](#authentication--authorization)
   - [Cookies](#cookies)
   - [Handle Cookie Sessions](#handle-cookie-sessions)
+  - [Check Authentication Middleware](#check-authentication-middleware)
   - [Staying logged in with `GET /api/me`](#staying-logged-in-with-get-apime)
+- [Front-end](#front-end)
+  - [Example Page Component](#example-page-component)
+  - [Adapters](#adapters)
+  - [Current User Context](#current-user-context)
 - [Deploying](#deploying)
 - [Advice](#advice)
   - [Do not trust the front end](#do-not-trust-the-front-end)
@@ -112,91 +113,6 @@ app.use('/api/users', userRouter); // all requests beginning with /api/users wil
 
 - Here, we subdivide the routing between two "sub routers". `app.use` let's us indicate the base URL that each router handles.
 
-## Front-end
-
-The front-end React application's entrypoint is the `index.html` file which loads in the `main.jsx` script. This script renders the top-level `App` component which may render various `page` components. The `adapter` files manage data-fetching logic while `context` files manage global front-end state.
-
-![](/documentation/readme-img/front-end.svg)
-
-### Fetching Pattern: [data, error]
-
-All of the adapters make use of the `fetchHandler` helper function defined in the `frontend/server/utils.js` file:
-
-```js
-export const fetchHandler = async (url, options = {}) => {
-  try {
-    const response = await fetch(url, options);
-    const { ok, status, headers } = response;
-    if (!ok) throw new Error(`Fetch failed with status - ${status}`, { cause: status });
-
-    const isJson = (headers.get('content-type') || '').includes('application/json');
-    const responseData = await (isJson ? response.json() : response.text());
-
-    return [responseData, null];
-  } catch (error) {
-    console.warn(error);
-    return [null, error];
-  }
-};
-```
-
-This function standardizes the way that fetched data will be packaged and returned by the adapters. This function will ALWAYS return a "tuple" — an array with two values.
-* The first value is the fetched `data` (if present)
-* The second value is the `error` (if present).
-
-Only one of these two values will ever be present while the other will be `null`. This pattern gives us an easy way to access data (if present) or the error (if present).
-
-### Adapters
-
-An adapter's sole responsibility is to wrap around the `fetch` logic making it incredibly easy for front-end components to execute a particular type of fetch and utilize the returned data.
-
-Often, they will be short, like this from the `adapters/user-adapter.js` file:
-
-```js
-const baseUrl = '/api/users';
-
-export const getAllUsers = async () => {
-  const [users, error] = await fetchHandler(baseUrl);
-  if (error) console.log(error); // print the error for simplicity.
-  return users || [];
-};
-```
-* A `baseUrl` is defined for all adapters in this `user-adapter` file.
-* The `fetchHandler` will return a tuple with either the `users` data or the `error`.
-* Here, we print the `error` if it exists but in more robust applications, errors would be handled more gracefully, or they would potentially be returned.
-* If `users` exists, we'll return it, otherwise return an empty array (thus ignoring the `error`).
-
-### Example Page Component
-
-The `frontend/server/pages/Users.jsx` page provides a clean and simple example of how a front-end page can fetch and then render data from the backend. This page is responsible for fetching and displaying a list of all users in the database:
-
-```jsx
-import { useEffect, useState } from "react";
-import { getAllUsers } from "../adapters/user-adapter";
-import UserLink from "../components/UserLink";
-
-export default function UsersPage() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    getAllUsers().then(setUsers);
-  }, []);
-
-  return <>
-    <h1>Users</h1>
-    <ul>
-      {
-        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
-      }
-    </ul>
-  </>;
-}
-```
-
-* The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
-* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
-* The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
-
 ## Authentication & Authorization
 
 - **authenticated** means "We have confirmed this person is who they say they are"
@@ -235,6 +151,8 @@ For example, suppose that a user logs in and then wants to edit their profile. T
 
 ![](/documentation/readme-img/authorization-diagram.svg)
 
+### Check Authentication Middleware
+
 The `checkAuthentication` middleware verifies that the current user is logged in before processing a request. If there is no `userId` in `req.session`, any request that uses this middleware will be rejected with a 401 status code.
 
 ```js
@@ -258,13 +176,98 @@ userRouter.patch("/users/:id", checkAuthentication, userController.update);
 
 ### Staying logged in with `GET /api/me`
 
-Cookies are a great way to authorize a user. They can also be used to authenticate a user (check to see if they are logged in).
+Cookies are a great way to authorize a user. They can also be used to **authenticate** a user (check to see if they are logged in).
 
 When a user logs in and gets their cookie, that cookie is stored locally across sessions (when the user closes the browser tab and re-opens it).
 
 When the user returns to the site after logging in, they will have a cookie indicating their user id. The server can immediately send back the associated user and automatically log the client in.
 
 ![](./documentation/readme-img/authentication-diagram.svg)
+
+## Front-end
+
+The front-end React application's entrypoint is the `index.html` file which loads in the `main.jsx` script. This script renders the top-level `App` component which may render various `page` components. The `adapter` files manage data-fetching logic while `context` files manage global front-end state.
+
+![](/documentation/readme-img/front-end.svg)
+
+### Example Page Component
+
+The `frontend/server/pages/Users.jsx` page provides a clean and simple example of how a front-end page can fetch and then render data from the backend. This page is responsible for fetching and displaying a list of all users in the database:
+
+```jsx
+import { useEffect, useState } from "react";
+import { getAllUsers } from "../adapters/user-adapter";
+import UserLink from "../components/UserLink";
+
+export default function UsersPage() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getAllUsers().then(setUsers);
+  }, []);
+
+  return <>
+    <h1>Users</h1>
+    <ul>
+      {
+        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
+      }
+    </ul>
+  </>;
+}
+```
+
+* The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
+* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
+* The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
+
+### Adapters
+
+An adapter's sole responsibility is to wrap around the `fetch` logic making it incredibly easy for front-end components to execute a particular type of fetch and utilize the returned data.
+
+Often, they will be short, like this from the `adapters/user-adapter.js` file:
+
+```js
+const baseUrl = '/api/users';
+
+export const getAllUsers = async () => {
+  const [users, error] = await fetchHandler(baseUrl);
+  if (error) console.log(error); // print the error for simplicity.
+  return users || [];
+};
+```
+* A `baseUrl` is defined for all adapters in this `user-adapter` file.
+* The `fetchHandler` will return a tuple with either the `users` data or the `error`.
+* Here, we print the `error` if it exists but in more robust applications, errors would be handled more gracefully, or they would potentially be returned.
+* If `users` exists, we'll return it, otherwise return an empty array (thus ignoring the `error`).
+
+### Current User Context
+
+The frontend uses a `CurrentUserContext` to provide the entire application with the currently logged in user and a function to set the currently logged in user. 
+
+The first component to use this context is `App` which sets the current user after a successful `GET /api/me` request (the user had a cookie indicating they previously signed in). This is the first thing that happens whenever a user visits the web application.
+
+```js
+export default function App() {
+  const { setCurrentUser } = useContext(UserContext);
+  useEffect(() => {
+    checkForLoggedInUser().then(setCurrentUser);
+  }, [setCurrentUser]);
+
+  // ...
+}
+```
+
+Any page that requires authentication or is responsible for altering authentication also uses this Context:
+* `Login`
+  * if a user is already logged in, it navigates back to the home page.
+  * otherwise, this page can set the current user after a successful `POST /api/login` request
+* `SignUp`
+  * if a user is already logged in, it navigates back to the home page.
+  * otherwise, this page can set the current user after a successful `POST /api/users` request
+* `User`
+  * if the currently logged in user matches the current profile page, the user can edit the profile and log out
+  * if the user logs out, it sets the current logged in user to `null` before navigating back home.
 
 ## Deploying
 
