@@ -8,11 +8,12 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Folder Structure + Package.json Files](#folder-structure--packagejson-files)
   - [Setup Steps](#setup-steps)
 - [Back-end](#back-end)
-  - [Migrations \& Seeds](#migrations--seeds)
-  - [Bcrypt](#bcrypt)
-  - [User Model](#user-model)
-  - [Middleware](#middleware)
   - [Back-end API](#back-end-api)
+  - [Migrations \& Seeds](#migrations--seeds)
+  - [User Model](#user-model)
+  - [Storing \& Protecting Hashed Passwords](#storing--protecting-hashed-passwords)
+  - [The Login Flow](#the-login-flow)
+  - [Middleware](#middleware)
 - [Authentication \& Authorization](#authentication--authorization)
   - [Cookies](#cookies)
   - [Handle Cookie Sessions](#handle-cookie-sessions)
@@ -60,6 +61,25 @@ The back-end is responsible for receiving and responding to client requests. Req
 
 ![](/documentation/readme-img/full-stack-diagram.svg)
 
+### Back-end API
+
+The provided back-end exposes the following API endpoints to access user data in `routers/userRoutes.js` 
+
+| Method | Path           | Description                                  |
+| ------ | -------------- | -------------------------------------------- |
+| GET    | /api/users     | Get the list of all users                    |
+| GET    | /api/users/:id | Get a specific user by id                    |
+| POST   | /api/users     | Create a new user                            |
+| PATCH  | /api/users/:id | Update the username of a specific user by id |
+
+The provided back-end also exposes the following API endpoints for handling authentication/authorization logic in `routers/authRoutes.js`
+
+| Method | Path        | Description                                        |
+| ------ | ----------- | -------------------------------------------------- |
+| GET    | /api/me     | Get the current logged in user based on the cookie |
+| POST   | /api/login  | Log in to an existing user                         |
+| DELETE | /api/logout | Log the current user out                           |
+
 ### Migrations & Seeds
 
 Migration files are stored in the `server/db/` folder. This is set by the `knexfile.js` and can be changed if you so choose.
@@ -89,9 +109,25 @@ Notice how the passwords have been hashed!
 - If you need to update these columns, create a new migration file and look into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
 - If creating a new table, create a new migration file and look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
 
-### Bcrypt
+### User Model
 
-The `password_hash` column in the `users` table is generated using `bcrypt` whenever we create a new user. Check out the `User.create` method in the `User` model:
+The `User` model (defined in `server/db/models/User.js`) provides static methods for performing CRUD operations with the `users` table in the database:
+* `User.list()`
+* `User.find(id)`
+* `User.findByUsername(username)`
+* `User.create(username, password)`
+* `User.update(id, username)`
+* `User.deleteAll()`
+
+Note that there is both a `User.create()` method AND a `constructor()`. There is also an *instance* method `isValidPassword()`.
+
+Let's look at how these three functions are related.
+
+### Storing & Protecting Hashed Passwords
+
+Rather than storing plaintext passwords in the database (never do this!), we want to store hashed passwords instead.
+
+Check out the `User.create` method in the `User` model
 
 ```js
 static async create(username, password) {
@@ -106,47 +142,43 @@ static async create(username, password) {
 }
 ```
 
-The `authUtils.hashPassword` function takes care of this hashing for us.
+When we want to create a new user, we take the provided password and pass it to `authUtils.hashPassword`. This function uses `bcrypt` and returns the hassed password which we can safely store in the database.
 
-### User Model
+Notice that when we get the data back from the database, we don't return the new `user`. **We use the `new User()` constructor function** to create a `user` instance and we return that instance. In fact, all of the class methods do this before returning.
 
-The `User` model (defined in `server/db/models/User.js`) provides static methods for performing CRUD operations with the `users` table in the database:
-* `User.list()`
-* `User.find(id)`
-* `User.findByUsername(username)`
-* `User.create(username, password)`
-* `User.update(id, username)`
-* `User.deleteAll()`
+Why do this?
 
-It also provides a `constructor` method for creating `User` instances that hide the hashed password, and each have a `isValidPassword` method.
+Whenever we receive data from the database about a user, it will include the hashed password. We need to send that user's data to the frontend, but we don't want to expose the password, even if it is hashed.
+
+Using the `constructor`  is a clever trick of sorts that takes advantage of the **private instance property** feature of classes. Here is how:
+* By wrapping the `user` data from the database in a `new User()` instance, we can make the a private `#passwordHash` property
+* The `#passwordHash` property can't be accessed except by the instance itself.
+* If our controller needs to verify the password for a given `User` instance, it can do so using the instance method `isValidPassword` which DOES have access to the private `#passwordHash` property. 
+* `isValidPassword` uses the `authUtils.isValidPassword` helper function (which uses `bcrypt.compare()`) to verify provided password against the stored `#passwordHash`
 
 ```js
-// the constructor is used to hide the passwordHash and
-// create an object that can be safely sent to the client
-constructor({ id, username, password_hash }) {
+class User {
+  // the constructor is used to hide the passwordHash and
+  // create an object that can be safely sent to the client
+  constructor({ id, username, password_hash }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
   }
 
-// this instance method can access the private passwordHash
-isValidPassword = async (password) => (
-  authUtils.isValidPassword(password, this.#passwordHash)
-);
+  // this instance method can access the private passwordHash
+  isValidPassword = async (password) => (
+    authUtils.isValidPassword(password, this.#passwordHash)
+  );
 
-// before returning user data to the client, we turn each
-// user into a User instance and hide the hashed password
-static async list() {
-  const query = `SELECT * FROM users`;
-  const { rows } = await knex.raw(query);
-  // use the constructor to hide each user's passwordHash
-  return rows.map((user) => new User(user));
+  //... other methods...
 }
 ```
 
-The `constructor` is NOT used to create new users in the database (`User.create()` is). Instead, it is used by the static methods to hide the hashed password of each user before sending that data to the client.
+### The Login Flow
 
-The `loginUser` controller can then use the `user.isValidPassword` instance method to indirectly access that private hashed password and verify the login information.
+So, how are these methods used? Let's look at the login flow. Below is the `loginUser` controller which is executed for the endpoint `POST /api/login`:
+
 
 ```js
 exports.loginUser = async (req, res) => {
@@ -160,10 +192,15 @@ exports.loginUser = async (req, res) => {
   const isPasswordValid = await user.isValidPassword(password); // <---
   if (!isPasswordValid) return res.sendStatus(401);
 
-  req.session.userId = user.id;
+  req.session.userId = user.id; // <-- more on this in a moment...
   res.send(user);
 };
 ```
+
+* First, the `User.findByUsername` function searches for a user in the database with the provided `username`
+* The value returned will be a `User` instance (or `null` if not found)
+* Next, the provided `password` needs to be verified to see if it matches the password in the database. We can't look at `user.passwordHash` since it is private, but we CAN use the `user.isValidPassword` to verify for us.
+* If both the user is found and the password matches, we send the user data to the frontend.
 
 ### Middleware
 
@@ -180,25 +217,6 @@ app.use('/api/users', userRouter); // all requests beginning with /api/users wil
 ```
 
 - Here, we subdivide the routing between two "sub routers". `app.use` let's us indicate the base URL that each router handles.
-
-### Back-end API
-
-The provided back-end exposes the following API endpoints to access user data in `routers/userRoutes.js` 
-
-| Method | Path           | Description                                  |
-| ------ | -------------- | -------------------------------------------- |
-| GET    | /api/users     | Get the list of all users                    |
-| GET    | /api/users/:id | Get a specific user by id                    |
-| POST   | /api/users     | Create a new user                            |
-| PATCH  | /api/users/:id | Update the username of a specific user by id |
-
-The provided back-end also exposes the following API endpoints for handling authentication/authorization logic in `routers/authRoutes.js`
-
-| Method | Path        | Description                                        |
-| ------ | ----------- | -------------------------------------------------- |
-| GET    | /api/me     | Get the current logged in user based on the cookie |
-| POST   | /api/login  | Log in to an existing user                         |
-| DELETE | /api/logout | Log the current user out                           |
 
 ## Authentication & Authorization
 
@@ -249,7 +267,7 @@ exports.loginUser = async (req, res) => {
 On future requests, if the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
 
 With this information we can:
-1. implement **authentication** (confirm that the user is logged in).
+1. implement **authentication** (logging a user in / confirming that the user is already logged in).
 2. implement **authorization** (confirm that the person who is logged in can do what they have requested to do, such as edit their profile)
 
 For example, suppose that a user logs in and then wants to edit their profile. The use of cookie data could look like this:
