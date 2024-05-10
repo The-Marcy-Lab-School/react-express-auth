@@ -7,11 +7,14 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 - [Setup](#setup)
   - [Folder Structure + Package.json Files](#folder-structure--packagejson-files)
   - [Setup Steps](#setup-steps)
+- [Database](#database)
+  - [Migrations](#migrations)
+    - [Modifying / Adding New Migrations](#modifying--adding-new-migrations)
+  - [Seeds](#seeds)
 - [Back-end](#back-end)
-  - [Back-end API](#back-end-api)
-  - [Migrations \& Seeds](#migrations--seeds)
   - [User Model](#user-model)
   - [Storing \& Protecting Hashed Passwords](#storing--protecting-hashed-passwords)
+  - [Controllers and API endpoints](#controllers-and-api-endpoints)
   - [The Login Flow](#the-login-flow)
   - [Middleware](#middleware)
 - [Authentication \& Authorization](#authentication--authorization)
@@ -55,36 +58,21 @@ During development, you can also use the following commands from the root of the
 - Open a new terminal and run `npm run dev:frontend` to run the frontend development server
 - Run `npm run build:frontend` to update the static assets in the frontend.
 
-## Back-end
+## Database
 
-The back-end is responsible for receiving and responding to client requests. Requests are received by the server, routed to one of the routers, and parsed by the controller. The controller then passes along data from the request to the model to perform CRUD operations on the database before sending a response back to the client.
+For this project, you should use a Postgres database. Make sure to set the environment variables for connecting to this database in the `.env` file. These values are used in the `knexfile.js` file via the `dotenv` package and the line of code:
 
-![](/documentation/readme-img/full-stack-diagram.svg)
+```js
+require('dotenv').config(); // load the .env file
+```
 
-### Back-end API
+For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/8-3-2-migrations-seeds).
 
-The provided back-end exposes the following API endpoints to access user data in `routers/userRoutes.js` 
+### Migrations
 
-| Method | Path           | Description                                  |
-| ------ | -------------- | -------------------------------------------- |
-| GET    | /api/users     | Get the list of all users                    |
-| GET    | /api/users/:id | Get a specific user by id                    |
-| POST   | /api/users     | Create a new user                            |
-| PATCH  | /api/users/:id | Update the username of a specific user by id |
+Migration files are stored in the `server/db/migrations` folder. This location is defined in the `knexfile.js` and can be changed if you so choose.
 
-The provided back-end also exposes the following API endpoints for handling authentication/authorization logic in `routers/authRoutes.js`
-
-| Method | Path        | Description                                        |
-| ------ | ----------- | -------------------------------------------------- |
-| GET    | /api/me     | Get the current logged in user based on the cookie |
-| POST   | /api/login  | Log in to an existing user                         |
-| DELETE | /api/logout | Log the current user out                           |
-
-### Migrations & Seeds
-
-Migration files are stored in the `server/db/` folder. This is set by the `knexfile.js` and can be changed if you so choose.
-
-In `server/db/`, you can see the migration file for the `users` table:
+In `server/db/migrations`, you can see the migration file for the `users` table:
 
 ```js
 exports.up = (knex) => {
@@ -92,22 +80,84 @@ exports.up = (knex) => {
     table.increments();
     table.string('username').notNullable().unique();
     table.string('password_hash').notNullable();
-    table.timestamps(true, true); // adds the auto-generated created-at and updated-at columns
+    
+    // adds the auto-generated created-at and updated-at columns
+    table.timestamps(true, true); 
   })
 };
+exports.down = (knex) => knex.schema.dropTable('users');
 ```
 
-The provided migration file will create a `users` table with `id`, `username`, and `password_hash` columns. It will also have auto-generated `created-at` and `updated-at` columns.
+This migration file will create a `users` table with an auto-generated and auto-incrementing `id` column, as well as `username`, and `password_hash` columns. It will also have auto-generated `created-at` and `updated-at` columns.
 
-The seed file will generate the following data:
+#### Modifying / Adding New Migrations
+
+As you build your project, you will likely want to modify your tables. If this is the case, avoid using the `migration:rollback` and instead create a new migration that modifies the table.
+
+For example, this migration file would add a few new columns to the existing `users` table.
+
+```js
+// add_user_columns.js
+exports.up = (knex) => {
+  return knex.schema.alterTable('users', (table) => {
+    table.string('first_name').notNullable();
+    table.string('last_name').notNullable();
+    table.string('bio').notNullable();
+  })
+};
+
+// make sure to undo the changes above when making the down function
+exports.down = (knex) => {
+  return knex.schema.alterTable('users', (table) => {
+    table.dropColumn('first_name');
+    table.dropColumn('last_name');
+    table.dropColumn('bio');
+  });
+}
+```
+
+- For more information, look into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
+
+### Seeds
+
+Seed files are stored in the `server/db/seeds` folder.
+
+The provided `init.js` seed file uses the `User.create` model method to generate the following data:
 
 ![](./documentation/readme-img/users-tableplus.png)
 
-Notice how the passwords have been hashed!
+Notice how the passwords have been hashed! This is because the `User.create` method uses the bcrypt hashing functions in the `server/utils/authUtils` file. If you didn't want to use the `User` model to create these resources, you could hash the passwords manually and then insert the data into the database like so:
 
-- For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/Fall-2022-Curriculum-BMC/blob/main/se-unit-7/lesson-8-migrations-and-seeds/notes.md).
-- If you need to update these columns, create a new migration file and look into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
-- If creating a new table, create a new migration file and look at the [createTable](https://knexjs.org/guide/schema-builder.html#createtable) documentation.
+```js
+// don't forget to import the auth utils so you can hash your own passwords
+const authUtils = require('../../utils/auth-utils');
+
+exports.seed = async (knex) => {
+  // Before you have models you can always just do `await knex('table_name').del`
+  await knex('users').del();
+
+  await knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 1');
+
+  const andyPassword = authUtils.hashPassword('andy')
+  const bobPassword = authUtils.hashPassword('bob')
+  const candicePassword = authUtils.hashPassword('candice')
+
+  await knex('users').insert([
+    { username: 'andy', password: andyPassword },
+    { username: 'bob', password: bobPassword },
+    { username: 'candice', password: candicePassword }
+  ])
+};
+```
+
+- For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/8-3-2-migrations-seeds).
+
+
+## Back-end
+
+The back-end is responsible for receiving and responding to client requests. Requests are received by the server, routed to one of the routers, and parsed by the controller. The controller then passes along data from the request to the model to perform CRUD operations on the database before sending a response back to the client.
+
+![](./documentation/readme-img/full-stack-diagram.svg)
 
 ### User Model
 
@@ -174,6 +224,29 @@ class User {
   //... other methods...
 }
 ```
+
+### Controllers and API endpoints
+
+The controllers that interact with the `User` model are divided into two files: `userControllers` and `authControllers` and these controllers are utilized by two `Express.Router`s: `userRouter` and `authRouter`.
+
+In all, the following API endpoints are provided: 
+
+**`routers/userRouter.js`**:
+
+| Method | Path           | Controller                   | Model Method    | Description                                  |
+| ------ | -------------- | ---------------------------- | --------------- | -------------------------------------------- |
+| GET    | /api/users     | `userControllers.listUsers ` | `User.list()`   | Get the list of all users                    |
+| GET    | /api/users/:id | `userControllers.showUser  ` | `User.find()`   | Get a specific user by id                    |
+| POST   | /api/users     | `userControllers.createUser` | `User.create()` | Create a new user and set the cookie userId  |
+| PATCH  | /api/users/:id | `userControllers.updateUser` | `User.update()` | Update the username of a specific user by id |
+
+**`routers/authRouter.js`**:
+
+| Method | Path        | Controller                   | Model Method            | Description                                            |
+| ------ | ----------- | ---------------------------- | ----------------------- | ------------------------------------------------------ |
+| GET    | /api/me     | `authControllers.showMe`     | `User.find()`           | Get the current logged in user based on the cookie     |
+| POST   | /api/login  | `authControllers.loginUser`  | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
+| DELETE | /api/logout | `authControllers.logoutUser` | None                    | Log the current user out (delete the cookie)           |
 
 ### The Login Flow
 
