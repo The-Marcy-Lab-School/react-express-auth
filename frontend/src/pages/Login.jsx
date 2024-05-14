@@ -8,6 +8,11 @@ export default function LoginPage() {
   const [errorText, setErrorText] = useState('');
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
+  // users shouldn't be able to see the login page if they are already logged in.
+  // if the currentUser exists in the context, navigate the user to 
+  // the /users/:id page for that user, using the currentUser.id value
+  if (currentUser) return <Navigate to={`/users/${currentUser.id}`} />;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText('');
@@ -17,8 +22,6 @@ export default function LoginPage() {
     setCurrentUser(user);
     navigate(`/users/${user.id}`);
   };
-
-  if (currentUser) return <Navigate to="/" />;
 
   return <>
     <h1>Login</h1>
@@ -32,6 +35,6 @@ export default function LoginPage() {
 
       <button>Log in!</button>
     </form>
-    { !!errorText && <p>{errorText}</p> }
+    {!!errorText && <p>{errorText}</p>}
   </>;
 }
