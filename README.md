@@ -454,7 +454,17 @@ export default function App() {
 }
 ```
 
-Any page/component that requires authentication or is responsible for altering authentication also uses this Context:
+Once the `currentUser` is set in context, it can be used by any page. 
+
+For example, the `pages/Login` page redirects users away from the page if the `currentUser` value is set (we don't want signed-in users to be able to view the login page). It uses the `currentUser.id` value to redirect the user to their specific profile page.
+
+```js
+const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+
+if (currentUser) return <Navigate to={`/users/${currentUser.id}`} />;
+```
+
+Below are the pages/components that use the context:
 * `components/SiteHeadingAndNav`
   * if a user is logged in show a link to view their own profile and a link to see all users, otherwise show the login/sign up buttons in the nav
 * `pages/Login`
