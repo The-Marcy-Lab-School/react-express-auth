@@ -72,7 +72,7 @@ For an overview of migrations and seeds, [check out these notes](https://github.
 
 Migration files are stored in the `server/db/migrations` folder. This location is defined in the `knexfile.js` and can be changed if you so choose.
 
-In `server/db/migrations`, you can see the migration file for the `users` table:
+In `server/db/migrations`, you can see the migration files that generate the `users` table. The first one sets up some initial columns:
 
 ```js
 exports.up = (knex) => {
@@ -80,43 +80,38 @@ exports.up = (knex) => {
     table.increments();
     table.string('username').notNullable().unique();
     table.string('password_hash').notNullable();
-    
-    // adds the auto-generated created-at and updated-at columns
-    table.timestamps(true, true); 
   })
 };
 exports.down = (knex) => knex.schema.dropTable('users');
 ```
 
-This migration file will create a `users` table with an auto-generated and auto-incrementing `id` column, as well as `username`, and `password_hash` columns. It will also have auto-generated `created-at` and `updated-at` columns.
+This migration file will create a `users` table with an auto-generated and auto-incrementing `id` column, as well as `username` and `password_hash` columns.
 
 #### Modifying / Adding New Migrations
 
-As you build your project, you will likely want to modify your tables. If this is the case, avoid using the `migration:rollback` and instead create a new migration that modifies the table.
+As you build your project, you will likely want to modify your tables. If this is the case, AVOID using the `migration:rollback` and instead create a new migration that modifies the table.
 
-For example, this migration file would add a few new columns to the existing `users` table.
+For example, the second migration file adds some timestamp columns to the existing `users` table.
 
 ```js
-// add_user_columns.js
 exports.up = (knex) => {
   return knex.schema.alterTable('users', (table) => {
-    table.string('first_name').notNullable();
-    table.string('last_name').notNullable();
-    table.string('bio').notNullable();
+    // creates two columns: created_at and updated_at
+    table.timestamps(true, true);
   })
 };
 
-// make sure to undo the changes above when making the down function
 exports.down = (knex) => {
   return knex.schema.alterTable('users', (table) => {
-    table.dropColumn('first_name');
-    table.dropColumn('last_name');
-    table.dropColumn('bio');
-  });
-}
+    table.dropColumn('created_at');
+    table.dropColumn('updated_at');
+  })
+};
 ```
 
-- For more information, look into the [alterTable](https://knexjs.org/guide/schema-builder.html#altertable) Knex documentation.
+Note that instead of using `knex.schema.createTable`, we are using `.alterTable` since the table already exists. We also use `.alterTable` in the `.down` function to drop the two columns created by `table.timestamps`.
+
+- For more information, look into the [Knex documentation](https://knexjs.org/guide/schema-builder.html)
 
 ### Seeds
 
