@@ -8,9 +8,10 @@ class User {
   // Instead, it is used by each of the User static methods to hide the hashed
   // password of users before sending user data to the client. Since #passwordHash
   // is private, only the isValidPassword instance method can access that value.
-  constructor({ id, username, password_hash }) {
+  constructor({ id, username, password_hash, bio }) {
     this.id = id;
     this.username = username;
+    this.bio = bio;
     this.#passwordHash = password_hash;
   }
 
@@ -48,12 +49,12 @@ class User {
     const query = `INSERT INTO users (username, password_hash)
       VALUES (?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [username, passwordHash]);
-    const user = rows[0];
-    return new User(user);
+    const user = new User(rows[0]);
+    console.log(user);
+    return user;
   }
 
-  // this is an instance method that we can use to update
-  static async update(id, username) { // dynamic queries are easier if you add more properties
+  static async updateUsername(id, username) { // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
       SET username=?
@@ -61,6 +62,32 @@ class User {
       RETURNING *
     `
     const { rows } = await knex.raw(query, [username, id])
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
+  };
+
+  static async updateBio(id, bio) { // dynamic queries are easier if you add more properties
+    const query = `
+      UPDATE users
+      SET bio=?
+      WHERE id=?
+      RETURNING *
+    `
+    const { rows } = await knex.raw(query, [bio, id])
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
+  };
+
+  static async updatePassword(id, password) { // dynamic queries are easier if you add more properties
+    const passwordHash = await authUtils.hashPassword(password);
+
+    const query = `
+      UPDATE users
+      SET password_hash=?
+      WHERE id=?
+      RETURNING *
+    `
+    const { rows } = await knex.raw(query, [passwordHash, id])
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   };

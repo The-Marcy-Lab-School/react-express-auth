@@ -1,33 +1,33 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
+import { getPostsByUserId, deletePost } from "../adapters/post-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
-import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import '../styles/user.css'
+import Post from "../components/Post";
+
+
 
 export default function UserPage() {
-  const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [errorText, setErrorText] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
   useEffect(() => {
-    const loadUser = async () => {
+    (async () => {
       const [user, error] = await getUser(id);
       if (error) return setErrorText(error.message);
       setUserProfile(user);
-    };
 
-    loadUser();
+      const [fetchedPosts, getPostsError] = await getPostsByUserId(id);
+      if (getPostsError) return setErrorText(getPostsError.message);
+      setPosts(fetchedPosts);
+    })();
   }, [id]);
-
-  const handleLogout = async () => {
-    logUserOut();
-    setCurrentUser(null);
-    navigate('/');
-  };
 
   if (!userProfile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
@@ -37,14 +37,43 @@ export default function UserPage() {
   // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
-  return <>
-    <h1>{profileUsername}</h1>
-    {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
-    <p>If the user had any data, here it would be</p>
-    <p>Fake Bio or something</p>
-    {
-      !!isCurrentUserProfile
-      && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+  const DeleteButton = ({ post }) => {
+    const handleDeletePost = async (e) => {
+      const [_, error] = await deletePost(userProfile.id, post.id)
+      if (!error) {
+        e.target.closest('li.post').remove();
+      }
     }
+    return <button className='delete-post' onClick={handleDeletePost}>Delete</button>
+  }
+
+  const handleLogout = async () => {
+    logUserOut();
+    setCurrentUser(null);
+  };
+
+  return <>
+    {!!isCurrentUserProfile &&
+      <div id="settings-container" className="flex-container">
+        <Link to="/settings"><button>⚙</button></Link>
+        <Link onClick={handleLogout} to="/"><button>Log Out</button></Link>
+      </div>
+    }
+    <section id='user-profile-container' className='flex-container column centered'>
+
+      <div id="user-details" className='flex-container column centered'>
+        <h1>{profileUsername}</h1>
+        <i className='user-bio'>{userProfile.bio}</i>
+      </div>
+
+      <div className='w-100 flex-container column centered'>
+        <h2>Posts</h2>
+        <ul className='posts-list flex-container column centered'>
+          {
+            [...posts].reverse().map((post) => <Post key={post.id} post={post} DeleteButton={!!isCurrentUserProfile && DeleteButton} />)
+          }
+        </ul>
+      </div>
+    </section>
   </>;
 }

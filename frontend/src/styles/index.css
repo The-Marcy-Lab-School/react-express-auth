@@ -1,10 +1,27 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
 }
 
-input, label {
+input,
+label {
   display: block;
+}
+
+textarea {
+  width: 100%;
+  max-width: 100%;
+}
+
+button {
+  padding: .125rem;
+  min-width: 1.5rem;
 }
 
 input {
@@ -17,6 +34,8 @@ header {
   align-items: center;
   padding: 0.5rem 1rem;
   background: #000;
+  line-height: 3rem;
+  font-size: 1.5rem;
 }
 
 #logo {
@@ -39,11 +58,12 @@ nav a {
   color: #FFF;
 }
 
-form {
+main {
   padding: 1rem;
-  border: 1px solid #CCC;
-  width: 15rem;
-  margin: 1rem auto;
+}
+
+ul {
+  list-style: none;
 }
 
 /* automatically added by NavLink component */
@@ -51,4 +71,23 @@ form {
   color: #EEBC32;
   font-weight: bold;
   font-style: italic;
+}
+
+.posts-list {
+  list-style: none;
+  width: 100%;
+}
+
+.post {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: .5rem;
+  align-items: center;
+  max-width: 350px;
+  margin: auto;
+}
+
+.post img {
+  width: 300px;
+  height: 300px;
 }

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 
@@ -18,7 +18,9 @@ export default function LoginPage() {
     setErrorText('');
     const formData = new FormData(event.target);
     const [user, error] = await logUserIn(Object.fromEntries(formData));
-    if (error) return setErrorText(error.message);
+    if (error) {
+      return setErrorText(error.cause === 404 ? 'User Not Found' : 'Incorrect Password. Try Again.');
+    }
     setCurrentUser(user);
     navigate(`/users/${user.id}`);
   };
@@ -36,5 +38,6 @@ export default function LoginPage() {
       <button>Log in!</button>
     </form>
     {!!errorText && <p>{errorText}</p>}
+    <p>Don't have an account yet? <Link to="/sign-up">Sign Up!</Link></p>
   </>;
 }

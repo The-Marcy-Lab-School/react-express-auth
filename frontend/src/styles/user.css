@@ -1,0 +1,20 @@
+#settings-container {
+  width: 100%;
+  justify-content: end;
+}
+
+.user-bio {
+  color: grey;
+}
+
+.delete-post {
+  background: red;
+  color: white;
+  border-radius: 3px;
+  padding: 2px;
+  border: 1px solid black;
+}
+
+.delete-post:hover {
+  background: rgb(195, 0, 0);
+}
