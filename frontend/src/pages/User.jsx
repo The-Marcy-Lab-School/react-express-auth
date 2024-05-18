@@ -4,43 +4,68 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { getPostsByUserId } from "../adapters/post-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
+import { getFollowers, getFollows, createFollower, unFollow } from "../adapters/follow-adapter";
 import '../styles/user.css'
 import PostsGrid from "../components/PostsGrid";
 
-
-
 export default function UserPage() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-  const [userProfile, setUserProfile] = useState(null);
-  const [posts, setPosts] = useState([]);
+  const [userData, setUserData] = useState({})
+
   const [errorText, setErrorText] = useState(null);
+  const [didFollowOrUnfollow, setDidFollowOrUnfollow] = useState(false);
   const { id } = useParams();
-  const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
   useEffect(() => {
     (async () => {
-      const [user, error] = await getUser(id);
+      const [profile, error] = await getUser(id);
       if (error) return setErrorText(error.message);
-      setUserProfile(user);
 
-      const [fetchedPosts, getPostsError] = await getPostsByUserId(id);
+      const [posts, getPostsError] = await getPostsByUserId(id);
       if (getPostsError) return setErrorText(getPostsError.message);
-      setPosts(fetchedPosts);
-    })();
-  }, [id]);
 
-  if (!userProfile && !errorText) return null;
+      const [followers, getFollowersError] = await getFollowers(id);
+      if (getFollowersError) return setErrorText(getFollowersError.message);
+
+      const [follows, getFollowsError] = await getFollows(id);
+      if (getFollowsError) return setErrorText(getFollowsError.message);
+
+      const isFollowing = !!followers.find((follow) => follow.follower_user_id === currentUser?.id)
+
+      setUserData({
+        profile,
+        posts,
+        followers,
+        follows,
+        isFollowing
+      });
+    })();
+  }, [id, didFollowOrUnfollow]);
+
+  console.log('followers', userData.followers)
+  console.log('follows', userData.follows)
+  console.log(currentUser)
+
+  if (!userData.profile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
 
-  // What parts of state would change if we altered our currentUser context?
-  // Ideally, this would update if we mutated it
-  // But we also have to consider that we may NOT be on the current users page
-  const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
+  const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+  const profileUsername = isCurrentUserProfile ? currentUser.username : userData.profile.username;
 
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
   };
+
+  const handleFollow = async () => {
+    if (userData.isFollowing) {
+      unFollow(userData.profile.id)
+    } else {
+      createFollower(userData.profile.id);
+    }
+    setDidFollowOrUnfollow((didFollowOrUnfollow) => !didFollowOrUnfollow);
+  }
+
 
   return <>
     {!!isCurrentUserProfile &&
@@ -53,12 +78,20 @@ export default function UserPage() {
 
       <div id="user-details" className='flex-container column centered'>
         <h1>{profileUsername}</h1>
-        <i className='user-bio'>{userProfile.bio || 'No Bio'}</i>
+        <p>Followers: {userData.followers.length}</p>
+        <p>Following: {userData.follows.length}</p>
+        {
+          !isCurrentUserProfile &&
+          <button onClick={handleFollow}>
+            {userData.isFollowing ? "Unfollow" : "Follow"}
+          </button>
+        }
+        <i className='user-bio'>{userData.profile.bio || 'No Bio'}</i>
       </div>
 
       <div className='w-100 flex-container column centered'>
         <h2>Posts by {profileUsername}</h2>
-        <PostsGrid posts={posts} />
+        <PostsGrid posts={userData.posts} />
       </div>
     </section>
   </>;
