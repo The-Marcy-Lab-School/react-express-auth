@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
-import { getPostsByUserId, deletePost } from "../adapters/post-adapter";
+import { getPostsByUserId } from "../adapters/post-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import '../styles/user.css'
-import Post from "../components/Post";
+import PostsGrid from "../components/PostsGrid";
 
 
 
@@ -37,16 +37,6 @@ export default function UserPage() {
   // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
-  const DeleteButton = ({ post }) => {
-    const handleDeletePost = async (e) => {
-      const [_, error] = await deletePost(userProfile.id, post.id)
-      if (!error) {
-        e.target.closest('li.post').remove();
-      }
-    }
-    return <button className='delete-post' onClick={handleDeletePost}>Delete</button>
-  }
-
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
@@ -63,16 +53,12 @@ export default function UserPage() {
 
       <div id="user-details" className='flex-container column centered'>
         <h1>{profileUsername}</h1>
-        <i className='user-bio'>{userProfile.bio}</i>
+        <i className='user-bio'>{userProfile.bio || 'No Bio'}</i>
       </div>
 
       <div className='w-100 flex-container column centered'>
-        <h2>Posts</h2>
-        <ul className='posts-list flex-container column centered'>
-          {
-            [...posts].reverse().map((post) => <Post key={post.id} post={post} DeleteButton={!!isCurrentUserProfile && DeleteButton} />)
-          }
-        </ul>
+        <h2>Posts by {profileUsername}</h2>
+        <PostsGrid posts={posts} />
       </div>
     </section>
   </>;

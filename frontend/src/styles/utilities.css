@@ -19,6 +19,14 @@
   width: 100%;
 }
 
+.w-50 {
+  width: 50%;
+}
+
+.m-auto {
+  margin: auto
+}
+
 .grid {
   min-width: 500px;
   width: fit-content;

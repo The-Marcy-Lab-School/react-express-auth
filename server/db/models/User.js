@@ -50,7 +50,6 @@ class User {
       VALUES (?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [username, passwordHash]);
     const user = new User(rows[0]);
-    console.log(user);
     return user;
   }
 

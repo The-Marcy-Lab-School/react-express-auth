@@ -17,7 +17,7 @@ exports.seed = async (knex) => {
   await User.create('l33t-guy', '1234');
   await User.create('wowow', '1234');
 
-  await Post.create('i am a cat', '1');
-  await Post.create('i like milk', '1');
-  await Post.create('wow', '3');
+  await Post.create('i am a cat', 'a1rwdivwsc5i4fwxp8b0', '1');
+  await Post.create('so cozy', 'k0i0lnfzqsctbwuegffe', '1');
+  await Post.create('wow', 'qox2qmazqvgmttiktgtz', '3');
 };

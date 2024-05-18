@@ -27,7 +27,7 @@ export default function SettingsPage() {
     event.target.reset();
   };
 
-  return <form onSubmit={handleSubmit} aria-labelledby="update-heading">
+  return <form className="flex-container column w-50 m-auto" onSubmit={handleSubmit} aria-labelledby="update-heading">
     <h2 id="update-heading">Update User {currentUser.username} </h2>
     <div>
       <label htmlFor='bio-input'>New Bio</label>

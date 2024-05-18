@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { getAllPosts } from "../adapters/post-adapter";
 import { Link } from 'react-router-dom'
 import CurrentUserContext from "../contexts/current-user-context"
-import Post from "../components/Post";
+import PostsGrid from "../components/PostsGrid";
 
 export default function FeedPage() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -32,11 +32,7 @@ export default function FeedPage() {
   return <>
     <section className='flex-container column centered'>
       <h1>My Feed</h1>
-      <ul className='posts-list grid centered'>
-        {
-          [...posts].reverse().map((post) => <Post key={post.id} post={post} />)
-        }
-      </ul>
+      <PostsGrid posts={posts} />
       <p>{errorMessage}</p>
     </section>
   </>;
