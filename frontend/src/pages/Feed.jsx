@@ -14,8 +14,6 @@ export default function FeedPage() {
     (async () => {
       const [fetchedPosts, getPostsError] = await getAllPostsOfFollows(currentUser.id);
       if (getPostsError) setErrorMessage(getPostsError.message);
-
-      console.log(fetchedPosts);
       setPosts(fetchedPosts);
     })();
   }, [currentUser]);

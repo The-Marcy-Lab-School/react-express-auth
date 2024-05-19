@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../adapters/user-adapter";
-import UserLink from "../components/UserLink";
+import UsersList from "../components/UsersList";
 
-export default function UsersPage() {
+export default function DiscoverPage() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -11,10 +11,6 @@ export default function UsersPage() {
 
   return <>
     <h1>Users</h1>
-    <ul>
-      {
-        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
-      }
-    </ul>
+    <UsersList users={users} />
   </>;
 }

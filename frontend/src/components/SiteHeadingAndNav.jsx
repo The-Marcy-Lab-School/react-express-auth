@@ -1,20 +1,29 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
+import '../styles/headingAndNav.css'
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
+  const [showNavLinks, setShowNavLinks] = useState(false)
+
+  const toggleShowNavLinks = () => setShowNavLinks((showNavLinks) => !showNavLinks);
 
   return <header>
-    <a id='logo' href='/'>Home</a>
-    <nav>
+    <a id='logo' href='/'>Benstagram</a>
+    <a href="#" className="toggle-button" onClick={toggleShowNavLinks}>
+      <span className="bar"></span>
+      <span className="bar"></span>
+      <span className="bar"></span>
+    </a>
+    <nav className={`navbar-links ${showNavLinks && "active"}`}>
       <ul>
         {
           currentUser
             ? <>
               <li><NavLink to='/'>Feed</NavLink></li>
               <li><NavLink to='/new-post'>Create</NavLink></li>
-              <li><NavLink to='/users' end={true}>Discover</NavLink></li>
+              <li><NavLink to='/discover' end={true}>Discover</NavLink></li>
               <li><NavLink to={`/users/${currentUser.id}`}>Profile</NavLink></li>
             </>
             : <>

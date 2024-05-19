@@ -3,9 +3,12 @@
   justify-content: end;
 }
 
+#user-profile-container {
+  gap: 2rem;
+}
+
 .user-bio {
   color: grey;
-  margin-bottom: 2rem;
 }
 
 .delete-post {
@@ -18,4 +21,23 @@
 
 .delete-post:hover {
   background: rgb(195, 0, 0);
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 1rem;
+  height: 500px;
+  width: 300px;
+  border-radius: 10px;
+  border: 1px solid black;
+  overflow-y: auto;
 }

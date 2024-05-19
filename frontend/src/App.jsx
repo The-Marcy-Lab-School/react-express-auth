@@ -6,7 +6,7 @@ import SiteHeadingAndNav from './components/SiteHeadingAndNav';
 import NotFoundPage from './pages/NotFound';
 import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
-import UsersPage from './pages/Users';
+import DiscoverPage from './pages/DiscoverPage';
 import UserPage from './pages/User';
 import FeedPage from './pages/Feed';
 import SettingsPage from './pages/SettingsPage'
@@ -27,7 +27,7 @@ export default function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/settings' element={<SettingsPage />} />
-        <Route path='/users' element={<UsersPage />} />
+        <Route path='/discover' element={<DiscoverPage />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

@@ -46,7 +46,7 @@ export default function NewPostPage() {
 
       <div className="w-100">
         <label htmlFor="post-content-input" style={{ display: 'none' }}>What do you want to say?</label>
-        <textarea maxlength="140" id='post-content-input' className='w-100' value={postContent} onChange={(e) => setPostContent(e.target.value)} placeholder="what do you want to say?" />
+        <textarea maxLength="140" id='post-content-input' className='w-100' value={postContent} onChange={(e) => setPostContent(e.target.value)} placeholder="what do you want to say?" />
       </div>
       <button onClick={handleNewPostSubmit}>Post</button>
 

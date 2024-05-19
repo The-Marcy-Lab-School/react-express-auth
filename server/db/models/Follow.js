@@ -18,18 +18,24 @@ class Follow {
 
   static async findFollowsBy(follower_user_id) {
     const query = `
-    SELECT * 
-    FROM follows 
-    WHERE follower_user_id = ?`;
+    SELECT users.*
+      FROM follows
+      JOIN users
+        ON following_user_id = users.id
+      WHERE follower_user_id = ?
+    `
     const { rows } = await knex.raw(query, [follower_user_id]);
     return rows;
   }
 
   static async findFollowersOf(following_user_id) {
     const query = `
-    SELECT * 
-    FROM follows 
-    WHERE following_user_id = ?`;
+    SELECT users.*
+      FROM follows
+      JOIN users
+        ON follower_user_id = users.id
+      WHERE following_user_id = ?
+    `
     const { rows } = await knex.raw(query, [following_user_id]);
     return rows;
   }
