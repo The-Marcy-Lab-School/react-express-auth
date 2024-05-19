@@ -33,7 +33,10 @@ export default function UserPage() {
       const [follows, getFollowsError] = await getFollows(id);
       if (getFollowsError) return setErrorText(getFollowsError.message);
 
-      const isFollowing = !!followers.find((follow) => follow.follower_user_id === currentUser?.id)
+      const isFollowing = !!followers.find((follow) => follow.id === currentUser?.id)
+
+      console.log(currentUser)
+      console.log(follows, followers);
 
       setUserData({
         profile,
@@ -46,7 +49,7 @@ export default function UserPage() {
       setShowFollowers(false);
       setShowFollows(false);
     })();
-  }, [id, didFollowOrUnfollow]);
+  }, [currentUser, id, didFollowOrUnfollow]);
 
   if (!userData.profile && !errorText) return null;
   if (errorText) return <p>{errorText}</p>;
