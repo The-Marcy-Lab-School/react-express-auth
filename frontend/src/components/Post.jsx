@@ -18,13 +18,23 @@ export default function Post({ post }) {
     }
   }
 
+  const handleLike = async (e) => {
+    if (currentUser.id !== post.user_id) return;
+
+  }
+
   const image = cld.image(post.img_public_id);
   image.resize(fill().width(500).height(500));
+
+  const date = new Date(post.created_at).toLocaleString().split(',')[0];
 
   return (
     <li className='post flex-container column'>
       <div className='w-100 flex-container space-between'>
-        <UserLink user={{ id: post.user_id, username: post.username }} />
+        <div className="flex-container">
+          <UserLink user={{ id: post.user_id, username: post.username }} />
+          <i className="post-date">on {date}</i>
+        </div>
         {
           currentUser.id === post.user_id && <button className='delete-post' onClick={handleDeletePost}>Delete</button>
         }
@@ -32,6 +42,9 @@ export default function Post({ post }) {
       <div className="post-content flex-container column">
         <AdvancedImage cldImg={image} />
         <i>{post.content}</i>
+        <div onClick={handleLike}>
+          <span className='upvote'>♥︎</span>
+        </div>
       </div>
 
     </li>

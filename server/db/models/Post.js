@@ -14,11 +14,14 @@ class Post {
 
   static async findPostsByUserId(user_id) {
     const query = `
-    SELECT posts.* , users.username
-    FROM posts 
-    JOIN users
-      ON posts.user_id = users.id
-    WHERE user_id = ?`;
+      SELECT posts.* , users.username
+      FROM posts 
+      JOIN users
+        ON posts.user_id = users.id
+      WHERE user_id = ?
+      ORDER BY
+        posts.created_at DESC
+    `;
     const { rows } = await knex.raw(query, [user_id]);
     return rows;
   }
@@ -29,6 +32,8 @@ class Post {
       FROM posts
       JOIN users
         ON posts.user_id = users.id
+      ORDER BY
+        posts.created_at DESC
     `;
     const { rows } = await knex.raw(query);
     return rows;
@@ -43,9 +48,10 @@ class Post {
       JOIN follows
         ON follows.following_user_id = posts.user_id
       WHERE follows.follower_user_id = ?
+      ORDER BY
+        posts.created_at DESC
     `;
     const { rows } = await knex.raw(query, user_id);
-    console.log(rows);
     return rows;
   }
 

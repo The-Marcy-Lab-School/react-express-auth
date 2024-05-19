@@ -24,13 +24,13 @@ exports.seed = async (knex) => {
   await User.create('carmen', '1234', 'My name is Carmen, I work at the Marcy Lab School!');
   await User.create('zo', '1234', 'My name is Zo, I work at the Marcy Lab School!');
 
-  await Post.create('i am a cat', 'a1rwdivwsc5i4fwxp8b0', '1');
-  await Post.create('so cozy', 'k0i0lnfzqsctbwuegffe', '1');
-  await Post.create('its a nice flower', 'kka2vx0w6idu2xeoo8tj', '2');
   await Post.create('wow', 'qox2qmazqvgmttiktgtz', '3');
+  await Post.create('i am a cat', 'a1rwdivwsc5i4fwxp8b0', '1');
+  await Post.create('its a nice flower', 'kka2vx0w6idu2xeoo8tj', '2');
+  await Post.create('so cozy', 'k0i0lnfzqsctbwuegffe', '1');
   await Post.create('another wow', 'gbwjb5gj1suvsrzacsmt', '3');
-  await Post.create('the wows just keep wowing', 'xxfzpyxdgznuawudtvat', '3');
   await Post.create('ooOoOOOOooOOOO', 'gcquazwk6mxro2ymzynz', '4');
+  await Post.create('the wows just keep wowing', 'xxfzpyxdgznuawudtvat', '3');
 
   await Follow.create(1, 2)
   await Follow.create(1, 3)

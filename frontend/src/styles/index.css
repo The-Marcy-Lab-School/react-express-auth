@@ -52,13 +52,23 @@ ul {
   padding: .5rem;
   align-items: center;
   max-width: 350px;
-  height: 400px;
+  min-height: 400px;
   margin: auto;
 }
 
 .post img {
   width: 300px;
   height: 300px;
+}
+
+.post-date {
+  color: rgb(117, 117, 117)
+}
+
+.upvote,
+.downvote {
+  -webkit-text-stroke: 1px black;
+  color: white;
 }
 
 .modal {
