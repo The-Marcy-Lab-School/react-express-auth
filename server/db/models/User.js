@@ -42,13 +42,13 @@ class User {
     return user ? new User(user) : null;
   }
 
-  static async create(username, password) {
+  static async create(username, password, bio = '') {
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const { rows } = await knex.raw(query, [username, passwordHash]);
+    const query = `INSERT INTO users (username, password_hash, bio)
+      VALUES (?, ?, ?) RETURNING *`;
+    const { rows } = await knex.raw(query, [username, passwordHash, bio]);
     const user = new User(rows[0]);
     return user;
   }

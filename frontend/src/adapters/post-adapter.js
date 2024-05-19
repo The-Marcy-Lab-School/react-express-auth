@@ -18,6 +18,10 @@ export const getAllPosts = async () => {
   return fetchHandler(`${baseUrl}/posts`);
 }
 
+export const getAllPostsOfFollows = async (user_id) => {
+  return fetchHandler(`${baseUrl}/${user_id}/follows/posts`);
+}
+
 export const deletePost = async (user_id, post_id) => {
   return fetchHandler(`${baseUrl}/${user_id}/posts/${post_id}`, deleteOptions);
 }

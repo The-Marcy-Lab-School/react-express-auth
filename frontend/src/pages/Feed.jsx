@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getAllPosts } from "../adapters/post-adapter";
+import { getAllPostsOfFollows } from "../adapters/post-adapter";
 import { Link } from 'react-router-dom'
 import CurrentUserContext from "../contexts/current-user-context"
 import PostsGrid from "../components/PostsGrid";
@@ -8,17 +8,17 @@ export default function FeedPage() {
   const { currentUser } = useContext(CurrentUserContext);
   const [posts, setPosts] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
-  const [newPost, setNewPost] = useState(null)
 
   useEffect(() => {
     if (!currentUser) return;
-
     (async () => {
-      const [data, error] = await getAllPosts();
-      if (error) setErrorMessage(error.message);
-      setPosts(data);
+      const [fetchedPosts, getPostsError] = await getAllPostsOfFollows(currentUser.id);
+      if (getPostsError) setErrorMessage(getPostsError.message);
+
+      console.log(fetchedPosts);
+      setPosts(fetchedPosts);
     })();
-  }, [currentUser, newPost]);
+  }, [currentUser]);
 
   if (!currentUser) {
     return (

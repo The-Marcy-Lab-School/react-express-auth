@@ -30,6 +30,12 @@ exports.getPostsByUserId = async (req, res) => {
   res.send(posts);
 };
 
+exports.getFollowsPostsByUserId = async (req, res) => {
+  const user_id = req.params.user_id
+  const posts = await Post.getFollowsPostsByUserId(user_id);
+  res.send(posts);
+}
+
 // GET /api/users/posts
 exports.getAllPosts = async (req, res) => {
   const posts = await Post.getAllPosts();

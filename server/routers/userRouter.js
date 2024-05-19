@@ -18,6 +18,7 @@ userRouter.post('/:user_id/posts', checkAuthentication, postControllers.createPo
 userRouter.delete('/:user_id/posts/:post_id', checkAuthentication, postControllers.deletePost);
 userRouter.delete('/:user_id/posts', checkAuthentication, postControllers.deleteAllPostsByUser);
 userRouter.get('/:user_id/posts', postControllers.getPostsByUserId);
+userRouter.get('/:user_id/follows/posts', postControllers.getFollowsPostsByUserId);
 userRouter.get('/posts', postControllers.getAllPosts);
 
 // These actions require users to be logged in (authentication)

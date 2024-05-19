@@ -34,6 +34,21 @@ class Post {
     return rows;
   }
 
+  static async getFollowsPostsByUserId(user_id) {
+    const query = `
+      SELECT posts.*, users.username
+      FROM posts
+      JOIN users
+        ON posts.user_id = users.id
+      JOIN follows
+        ON follows.following_user_id = posts.user_id
+      WHERE follows.follower_user_id = ?
+    `;
+    const { rows } = await knex.raw(query, user_id);
+    console.log(rows);
+    return rows;
+  }
+
   static async deletePost(postId) {
     const query = `
       DELETE FROM posts
