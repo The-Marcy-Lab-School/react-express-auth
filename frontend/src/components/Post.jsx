@@ -5,6 +5,7 @@ import UserLink from "./UserLink";
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 import { deletePost } from "../adapters/post-adapter";
+import LikeButton from "./LikeButton";
 
 export default function Post({ post }) {
   const { cld } = useContext(CloudinaryContext);
@@ -42,9 +43,7 @@ export default function Post({ post }) {
       <div className="post-content flex-container column">
         <AdvancedImage cldImg={image} />
         <i>{post.content}</i>
-        <div onClick={handleLike}>
-          <span className='upvote'>♥︎</span>
-        </div>
+        <LikeButton onClick={handleLike} isAlreadyLiked={false} />
       </div>
 
     </li>

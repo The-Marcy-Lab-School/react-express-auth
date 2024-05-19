@@ -65,10 +65,14 @@ ul {
   color: rgb(117, 117, 117)
 }
 
-.upvote,
-.downvote {
+.like-icon {
   -webkit-text-stroke: 1px black;
   color: white;
+}
+
+.like-icon.liked {
+  -webkit-text-stroke: 1px black;
+  color: rgb(255, 0, 93);
 }
 
 .modal {
