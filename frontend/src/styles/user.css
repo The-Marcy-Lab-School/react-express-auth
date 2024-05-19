@@ -22,3 +22,21 @@
 .delete-post:hover {
   background: rgb(195, 0, 0);
 }
+
+#user-stats {
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
+.followUnfollowButton {
+  background: rgb(23, 144, 219);
+  color: white;
+  height: 1.5 rem;
+  padding: .5rem;
+  border-radius: 3px;
+  border: 0;
+}
+
+.followUnfollowButton:hover {
+  background: lightskyblue;
+}

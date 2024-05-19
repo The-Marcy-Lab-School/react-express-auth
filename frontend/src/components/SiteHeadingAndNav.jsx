@@ -11,12 +11,12 @@ export default function SiteHeadingAndNav() {
 
   return <header>
     <a id='logo' href='/'>Benstagram</a>
-    <a href="#" className="toggle-button" onClick={toggleShowNavLinks}>
-      <span className="bar"></span>
-      <span className="bar"></span>
-      <span className="bar"></span>
+    <a href="#" className={`toggle-button ${showNavLinks ? "active" : ''}`} onClick={toggleShowNavLinks}>
+      <span className="bar" id='bar-1'></span>
+      <span className="bar" id='bar-2'></span>
+      <span className="bar" id='bar-3'></span>
     </a>
-    <nav className={`navbar-links ${showNavLinks && "active"}`}>
+    <nav className={`navbar-links ${showNavLinks ? "active" : ''}`}>
       <ul>
         {
           currentUser

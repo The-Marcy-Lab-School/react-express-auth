@@ -4,8 +4,7 @@ header {
   align-items: center;
   padding: 0.5rem 1rem;
   background: #000;
-  line-height: 3rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 #logo {
@@ -56,7 +55,6 @@ header {
 
 .toggle-button {
   position: absolute;
-  top: 1.25rem;
   right: 1rem;
   display: none;
   flex-direction: column;
@@ -70,6 +68,20 @@ header {
   width: 100%;
   background-color: white;
   border-radius: 10px;
+}
+
+.toggle-button.active #bar-1 {
+  transform: rotate(45deg) translate(-1px, -4px);
+  transform-origin: top left;
+}
+
+.toggle-button.active #bar-2 {
+  display: none;
+}
+
+.toggle-button.active #bar-3 {
+  transform: rotate(-45deg);
+  transform-origin: top left;
 }
 
 /* automatically added by NavLink component */

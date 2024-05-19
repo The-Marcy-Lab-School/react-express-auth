@@ -35,9 +35,6 @@ export default function UserPage() {
 
       const isFollowing = !!followers.find((follow) => follow.id === currentUser?.id)
 
-      console.log(currentUser)
-      console.log(follows, followers);
-
       setUserData({
         profile,
         posts,
@@ -71,8 +68,6 @@ export default function UserPage() {
     setDidFollowOrUnfollow((didFollowOrUnfollow) => !didFollowOrUnfollow);
   }
 
-
-
   const toggleShowFollowers = () => setShowFollowers((showFollowers) => !showFollowers);
   const toggleShowFollows = () => setShowFollows((showFollows) => !showFollows);
 
@@ -88,19 +83,31 @@ export default function UserPage() {
     {/* Main Profile Content */}
     <section id='user-profile-container' className='flex-container column centered'>
       <div id="user-details" className='flex-container column centered'>
-        <h1>{profileUsername}</h1>
+        <div className="flex-container">
+          <h1>{profileUsername}</h1>
+          {
+            !isCurrentUserProfile &&
+            <button className="followUnfollowButton" onClick={handleFollow}>
+              {userData.isFollowing ? "Unfollow" : "Follow"}
+            </button>
+          }
+        </div>
         <i className='user-bio'>{userData.profile.bio || 'No Bio'}</i>
       </div>
 
-      <div id="user-follow-stats" className="flex-container centered">
-        <p onClick={toggleShowFollowers}>Followers: {userData.followers.length}</p>
-        <p onClick={toggleShowFollows}>Follows: {userData.follows.length}</p>
-        {
-          !isCurrentUserProfile &&
-          <button onClick={handleFollow}>
-            {userData.isFollowing ? "Unfollow" : "Follow"}
-          </button>
-        }
+      <div id="user-stats" className="flex-container centered">
+        <div className='flex-container column centered'>
+          <strong>{userData.posts.length}</strong>
+          <p>Posts</p>
+        </div>
+        <div onClick={toggleShowFollowers} className='flex-container column centered'>
+          <strong>{userData.followers.length}</strong>
+          <p>Followers</p>
+        </div>
+        <div onClick={toggleShowFollows} className='flex-container column centered'>
+          <strong>{userData.follows.length}</strong>
+          <p>Following</p>
+        </div>
       </div>
       <div className='w-100 flex-container column centered'>
         <h2>Posts by {profileUsername}</h2>
