@@ -50,7 +50,7 @@ exports.deletePost = async (req, res) => {
   if (!isAuthorized(user_id, req.session)) return res.sendStatus(403);
 
   await Post.deletePost(post_id);
-  res.sendStatus(202);
+  res.sendStatus(204);
 };
 
 // DELETE /api/users/:user_id/posts
@@ -60,5 +60,5 @@ exports.deleteAllPostsByUser = async (req, res) => {
   if (!isAuthorized(user_id, req.session)) return res.sendStatus(403);
 
   await Post.deleteAllPostsByUser(user_id);
-  res.sendStatus(202);
+  res.sendStatus(204);
 };

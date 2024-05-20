@@ -7,6 +7,12 @@ class Like {
       VALUES (?, ?) RETURNING *
     `;
     const { rows } = await knex.raw(query, [user_id, post_id]);
+
+    await knex.raw(`
+      UPDATE posts 
+      SET likes = likes + 1
+      WHERE id = ?
+    `, [post_id]);
     return rows[0]
   }
 
@@ -37,6 +43,13 @@ class Like {
         AND post_id=?
     `;
     await knex.raw(query, [user_id, post_id]);
+
+    await knex.raw(`
+      UPDATE posts 
+      SET likes = likes - 1
+      WHERE id = ?
+      AND likes > 0
+    `, [post_id]);
     return true;
   }
 
@@ -45,6 +58,12 @@ class Like {
       DELETE FROM likes
       WHERE post_id=?
     `;
+
+    await knex.raw(`
+      UPDATE posts 
+      SET likes = 0
+      WHERE id = ?
+    `, [post_id]);
     await knex.raw(query, post_id);
     return true;
   }

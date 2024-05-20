@@ -16,7 +16,7 @@ exports.unFollow = async (req, res) => {
   const follower_user_id = req.session.userId;
 
   await Follow.unFollow(follower_user_id, user_id);
-  res.sendStatus(202);
+  res.sendStatus(204);
 };
 
 // GET /api/users/:user_id/followers - get followers of user_id

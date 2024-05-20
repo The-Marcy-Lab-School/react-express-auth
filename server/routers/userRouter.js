@@ -6,12 +6,17 @@ const checkAuthentication = require('../middleware/checkAuthentication');
 
 const userRouter = express.Router();
 
+
 // Follows
 userRouter.post('/:user_id/followers', checkAuthentication, followControllers.createFollow)
 userRouter.delete('/:user_id/followers', checkAuthentication, followControllers.unFollow)
 userRouter.get('/:user_id/followers', followControllers.getFollowers)
 userRouter.get('/:user_id/follows', followControllers.getFollows)
 
+// Likes
+userRouter.post('/:user_id/posts/:post_id/likes', checkAuthentication, followControllers.createFollow)
+userRouter.delete('/:user_id/posts/:post_id/likes', checkAuthentication, followControllers.unFollow)
+userRouter.get('/:user_id/posts/:post_id/likes', followControllers.getFollows)
 
 // Posts
 userRouter.post('/:user_id/posts', checkAuthentication, postControllers.createPost);

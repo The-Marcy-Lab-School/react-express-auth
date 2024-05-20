@@ -5,6 +5,7 @@ import UserLink from "./UserLink";
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 import { deletePost } from "../adapters/post-adapter";
+import { createLike, getLikesOfPost, unLike } from "../adapters/like-adapter.js";
 import LikeButton from "./LikeButton";
 
 export default function Post({ post }) {
