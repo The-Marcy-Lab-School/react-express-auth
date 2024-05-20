@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Follow = require('../models/Follow');
+const Like = require('../models/Like');
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -9,6 +10,7 @@ exports.seed = async (knex) => {
   // Before you have models you can always just do `await knex('table_name').del`
   console.log('seeding');
   await knex('follows').del(); // follows relies on users
+  await knex('likes').del(); // likes relies on posts and users
   await knex('posts').del(); // posts relies on users
   await knex('users').del();
 
@@ -36,4 +38,15 @@ exports.seed = async (knex) => {
   await Follow.create(1, 3)
   await Follow.create(3, 1)
   await Follow.create(2, 3)
+  await Follow.create(6, 1)
+  await Follow.create(6, 2)
+  await Follow.create(6, 3)
+  await Follow.create(6, 4)
+
+  await Like.create(6, 1)
+  await Like.create(6, 2)
+  await Like.create(6, 3)
+  await Like.create(6, 5)
+  await Like.create(1, 1)
+  await Like.create(2, 1)
 };

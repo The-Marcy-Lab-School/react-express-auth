@@ -1,7 +1,5 @@
 const knex = require('../knex');
 
-// the model is the interface (set of functions) for interacting
-// with the posts database table
 class Follow {
   static async create(follower_user_id, following_user_id) {
     try {
