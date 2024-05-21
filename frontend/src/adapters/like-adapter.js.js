@@ -14,3 +14,7 @@ export const unLike = async (user_id, post_id) => {
 export const getLikesOfPost = async (user_id, post_id) => {
   return fetchHandler(`${baseUrl}/${user_id}/posts/${post_id}/likes`);
 }
+
+export const getLikesByUser = async (user_id) => {
+  return fetchHandler(`${baseUrl}/${user_id}/likes`);
+}

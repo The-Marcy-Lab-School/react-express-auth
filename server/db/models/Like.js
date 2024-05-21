@@ -2,18 +2,21 @@ const knex = require('../knex');
 
 class Like {
   static async create(user_id, post_id) {
-    const query = `
-      INSERT INTO likes (user_id, post_id)
-      VALUES (?, ?) RETURNING *
-    `;
-    const { rows } = await knex.raw(query, [user_id, post_id]);
-
-    await knex.raw(`
-      UPDATE posts 
-      SET likes = likes + 1
-      WHERE id = ?
-    `, [post_id]);
-    return rows[0]
+    try {
+      const query = `
+        INSERT INTO likes (user_id, post_id)
+        VALUES (?, ?) RETURNING *
+      `;
+      const { rows } = await knex.raw(query, [user_id, post_id]);
+      await knex.raw(`
+        UPDATE posts 
+        SET likes = likes + 1
+        WHERE id = ?
+      `, [post_id]);
+      return rows[0]
+    } catch (error) {
+      return null;
+    }
   }
 
   static async findLikesOfPost(post_id) {
@@ -23,6 +26,16 @@ class Like {
       WHERE post_id = ?
     `
     const { rows } = await knex.raw(query, [post_id]);
+    return rows;
+  }
+
+  static async findLikesByUser(user_id) {
+    const query = `
+    SELECT *
+      FROM likes
+      WHERE user_id = ?
+    `
+    const { rows } = await knex.raw(query, [user_id]);
     return rows;
   }
 

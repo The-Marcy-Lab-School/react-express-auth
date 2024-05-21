@@ -8,30 +8,35 @@ const Post = require('../db/models/Post');
 
 /* 
 What are the places we can get data from a POST request?
-1. request body
+1. request body (req.body)
 2. request URL (req.params)
 */
 
+// "flat" URL structure
+// POST /api/posts
+// body: { content: "string", img_public_id: "string", user_id: int }
+
+// "hierarchical URL structure"
 // POST /api/users/:user_id/posts
+// body: { content: "string", img_public_id: "string" }
 exports.createPost = async (req, res) => {
-  const user_id = req.params.user_id
+  const { user_id } = req.params
   const { content, img_public_id } = req.body;
 
   const newPost = await Post.create(content, img_public_id, user_id);
   res.send(newPost);
 };
 
-// GET /api/users/:user_id/posts?filter=cat
+// GET /api/users/:user_id/posts
 exports.getPostsByUserId = async (req, res) => {
-  const user_id = req.params.user_id
-  // const filter = req.query.filter;
-
+  const { user_id } = req.params
   const posts = await Post.findPostsByUserId(user_id);
   res.send(posts);
 };
 
+// GET /api/users/:user_id/follows/posts
 exports.getFollowsPostsByUserId = async (req, res) => {
-  const user_id = req.params.user_id
+  const { user_id } = req.params
   const posts = await Post.getFollowsPostsByUserId(user_id);
   res.send(posts);
 }
@@ -45,7 +50,6 @@ exports.getAllPosts = async (req, res) => {
 // DELETE /api/users/:user_id/posts/:post_id
 exports.deletePost = async (req, res) => {
   const { post_id, user_id } = req.params;
-  console.log(post_id, user_id, req.session.userId)
 
   if (!isAuthorized(user_id, req.session)) return res.sendStatus(403);
 

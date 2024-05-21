@@ -2,6 +2,7 @@ const express = require('express');
 const userControllers = require('../controllers/userControllers');
 const postControllers = require('../controllers/postControllers');
 const followControllers = require('../controllers/followControllers');
+const likeControllers = require('../controllers/likeControllers');
 const checkAuthentication = require('../middleware/checkAuthentication');
 
 const userRouter = express.Router();
@@ -14,9 +15,10 @@ userRouter.get('/:user_id/followers', followControllers.getFollowers)
 userRouter.get('/:user_id/follows', followControllers.getFollows)
 
 // Likes
-userRouter.post('/:user_id/posts/:post_id/likes', checkAuthentication, followControllers.createFollow)
-userRouter.delete('/:user_id/posts/:post_id/likes', checkAuthentication, followControllers.unFollow)
-userRouter.get('/:user_id/posts/:post_id/likes', followControllers.getFollows)
+userRouter.post('/:user_id/posts/:post_id/likes', checkAuthentication, likeControllers.createLike)
+userRouter.delete('/:user_id/posts/:post_id/likes', checkAuthentication, likeControllers.unLike)
+userRouter.get('/:user_id/posts/:post_id/likes', likeControllers.getLikesOfPost)
+userRouter.get('/:user_id/likes', likeControllers.getLikesByUser)
 
 // Posts
 userRouter.post('/:user_id/posts', checkAuthentication, postControllers.createPost);

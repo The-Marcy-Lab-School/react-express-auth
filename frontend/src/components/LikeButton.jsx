@@ -1,11 +1,12 @@
 import { useState } from "react"
 
-export default function LikeButton({ isAlreadyLiked }) {
-  const [isLiked, setIsLiked] = useState(!!isAlreadyLiked)
-  const toggleIsLiked = () => setIsLiked(isLiked => !isLiked);
+export default function LikeButton({ onClick, isLiked, likes }) {
   return (
-    <div onClick={toggleIsLiked}>
-      <span className={`like-icon ${isLiked ? 'liked' : ''}`}>♥︎</span>
+    <div onClick={onClick}>
+      <p>
+        <span className={`like-icon ${isLiked ? 'liked' : ''}`}>♥︎</span>
+        {" " + likes}
+      </p>
     </div>
   )
 }

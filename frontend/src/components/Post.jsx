@@ -2,7 +2,7 @@ import CloudinaryContext from "../contexts/CloudinaryContext";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from '@cloudinary/react';
 import UserLink from "./UserLink";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 import { deletePost } from "../adapters/post-adapter";
 import { createLike, getLikesOfPost, unLike } from "../adapters/like-adapter.js";
@@ -10,7 +10,19 @@ import LikeButton from "./LikeButton";
 
 export default function Post({ post }) {
   const { cld } = useContext(CloudinaryContext);
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, userLikes } = useContext(CurrentUserContext);
+
+  const [likesInfo, setLikesInfo] = useState({
+    likes: post.likes,
+    isLikedByMe: userLikes.some((like) => {
+      return like.user_id === currentUser.id && like.post_id === post.id
+    })
+  })
+
+  const toggleIsLiked = () => setLikesInfo(likesInfo => ({
+    likes: likesInfo.likes + (likesInfo.isLikedByMe ? -1 : 1),
+    isLikedByMe: !likesInfo.isLikedByMe
+  }));
 
   const handleDeletePost = async (e) => {
     if (currentUser.id !== post.user_id) return;
@@ -21,8 +33,10 @@ export default function Post({ post }) {
   }
 
   const handleLike = async (e) => {
-    if (currentUser.id !== post.user_id) return;
-
+    console.log('liking ', post.id)
+    if (!likesInfo.isLikedByMe) await createLike(currentUser.id, post.id);
+    else await unLike(currentUser.id, post.id);
+    toggleIsLiked()
   }
 
   const image = cld.image(post.img_public_id);
@@ -44,7 +58,7 @@ export default function Post({ post }) {
       <div className="post-content flex-container column">
         <AdvancedImage cldImg={image} />
         <i>{post.content}</i>
-        <LikeButton onClick={handleLike} isAlreadyLiked={false} />
+        <LikeButton onClick={handleLike} isLiked={likesInfo.isLikedByMe} likes={likesInfo.likes} />
       </div>
 
     </li>
