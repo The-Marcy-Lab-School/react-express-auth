@@ -28,8 +28,9 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Check Authentication Middleware](#check-authentication-middleware)
   - [Staying logged in with `GET /api/me`](#staying-logged-in-with-get-apime)
 - [Front-end](#front-end)
-  - [Example Page Component](#example-page-component)
+  - [Frontend Utils](#frontend-utils)
   - [Adapters](#adapters)
+  - [Example Page Component](#example-page-component)
   - [Current User Context](#current-user-context)
 - [Deploying](#deploying)
 - [Advice](#advice)
@@ -437,44 +438,35 @@ When the user returns to the site after logging in, they will have a cookie indi
 
 ## Front-end
 
-The front-end React application's entrypoint is the `index.html` file which loads in the `main.jsx` script. This script renders the top-level `App` component which may render various `page` components. The `adapter` files manage data-fetching logic while `context` files manage global front-end state.
+A server application can exist on its own but it becomes full-stack when paired with a front-end.
+
+The front-end is responsible for handling user interactions, sending requests to the server application, and rendering content provided by the server.
+
+While it is developed as a React application and `.jsx` files, it will ultimately be built into static assets (HTML, CSS, and JS files that can be sent directly to the browser).
+
+The frontend application is organized into a few key components (from right to left in the diagram below):
+* The "Adapters" found in `frontened/src/adapters/` — the front-end equivalent of controllers, responsible for structuring requests sent to the server and for parsing responses.
+* The "Pages" found in `frontend/src/pages/` — responsible for rendering separate pages of the front-end application. These components make use of sub-components defined in `frontend/src/components`
+* The "App" found in `frontend/src/App.jsx` — the hub of the frontend application, it is the root component that is responsible for defining frontend routes and establishing site-wide layout components (like the navigation bar)
+
+* The `frontend/main.jsx` file actually renders the `App` component and provides access to the `BrowserRouter` and the application's global Context.
+* The `index.html` file itself is the entry point of the entire application and it loads the `main.jsx` file and any additional scripts.
+
 
 ![](./documentation/readme-img/front-end.svg)
 
-### Example Page Component
+### Frontend Utils
 
-The `frontend/server/pages/Users.jsx` page provides a clean and simple example of how a front-end page can fetch and then render data from the backend. This page is responsible for fetching and displaying a list of all users in the database:
+Let's again start at the right end of the diagram and talk about fetching. Provided in the `frontend/src/utils/fetchingUtils.js` file are a series of helper functions for formatting a fetch request.
 
-```jsx
-import { useEffect, useState } from "react";
-import { getAllUsers } from "../adapters/user-adapter";
-import UserLink from "../components/UserLink";
+The `fetchHandler` function will actually send the `fetch` request, making sure that the response is valid and that the response is in JSON format before parsing. 
 
-export default function UsersPage() {
-  const [users, setUsers] = useState([]);
+If the front-end wants to make a `POST`/`PATCH`/`DELETE` request, an `options` object must be provided. Since these objects are mostly boilerplate, this `fetchingUtils` file also provides helpers for creating those `options` objects. All that you have to do is provide the `body` of the request:
 
-  useEffect(() => {
-    getAllUsers().then(setUsers);
-  }, []);
-
-  return <>
-    <h1>Users</h1>
-    <ul>
-      {
-        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
-      }
-    </ul>
-  </>;
-}
-```
-
-* The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
-* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
-* The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
 
 ### Adapters
 
-An adapter's sole responsibility is to wrap around the `fetch` logic making it incredibly easy for front-end components to execute a particular type of fetch and utilize the returned data.
+An adapter is another layer of abstraction around the fetching process. Really, they are just helper functions for fetching from a specific server endpoint.
 
 Often, they will be short, like this from the `adapters/user-adapter.js` file:
 
@@ -491,6 +483,45 @@ export const getAllUsers = async () => {
 * The `fetchHandler` will return a tuple with either the `users` data or the `error`.
 * Here, we print the `error` if it exists but in more robust applications, errors would be handled more gracefully, or they would potentially be returned.
 * If `users` exists, we'll return it, otherwise return an empty array (thus ignoring the `error`).
+
+While this code could easily be implemented within the `Users` page component that wants to perform this fetch, by separating this logic out, the `Users` page can be a little bit cleaner. This is immensely valuable as React components can easily become disorganized.
+
+Additionally, if multiple components make use of the same server endpoint, an adapter can be reused without re-writing the same logic.
+
+### Example Page Component
+
+Let's look at that `Users` page component! This page is responsible for fetching and displaying a list of all users in the database:
+
+```jsx
+import { useEffect, useState } from "react";
+import { getAllUsers } from "../adapters/user-adapter";
+import UserLink from "../components/UserLink";
+
+export default function UsersPage() {
+  const [users, setUsers] = useState([]);
+
+  // fetch all users to update the users state above
+  useEffect(() => {
+    // use the adapter which returns a promise
+    // we can avoid using async/await here with this nice one-liner
+    getAllUsers().then(setUsers);
+  }, []);
+
+  return <>
+    <h1>Users</h1>
+    <ul>
+      {
+        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
+      }
+    </ul>
+  </>;
+}
+```
+
+* The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
+* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. Notice how we can avoid using the `async`/`await` syntax by using the `.then` syntax to handle the promise. Sometimes `.then` is better! 
+* When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
+* The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
 
 ### Current User Context
 
