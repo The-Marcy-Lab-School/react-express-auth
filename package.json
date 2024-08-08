@@ -4,8 +4,10 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "build": "cd frontend && npm i && npm run build && cd ../server && npm i && npm run migrate && npm run seed",
+    "kickstart": "cd frontend && npm i && npm run build && cd ../server && npm i && npm run migrate && npm run seed",
     "build:frontend": "cd frontend && npm i && npm run build",
+    "migrate": "cd server && npm run migrate",
+    "seed": "cd server && npm run seed",
     "start": "cd server && npm start",
     "dev": "cd server && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",

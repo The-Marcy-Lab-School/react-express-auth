@@ -4,16 +4,21 @@ This repo can be used to start a React+Express project fully equipped with Auth 
 
 **Table of Contents**
 
-- [Setup](#setup)
-  - [Folder Structure + Package.json Files](#folder-structure--packagejson-files)
-  - [Setup Steps](#setup-steps)
+- [Getting Started](#getting-started)
+  - [Create your repo](#create-your-repo)
+  - [Getting to know the folder structure](#getting-to-know-the-folder-structure)
+  - [Configure your environment variables](#configure-your-environment-variables)
+  - [Kickstart the project](#kickstart-the-project)
+  - [You're all set up now. Have Fun!](#youre-all-set-up-now-have-fun)
 - [Database](#database)
   - [Migrations](#migrations)
     - [Modifying / Adding New Migrations](#modifying--adding-new-migrations)
   - [Seeds](#seeds)
-- [Back-end](#back-end)
+- [The Server Application](#the-server-application)
+  - [Interactions between components](#interactions-between-components)
   - [User Model](#user-model)
-  - [Storing \& Protecting Hashed Passwords](#storing--protecting-hashed-passwords)
+    - [`User.create()` vs. the `User` constructor](#usercreate-vs-the-user-constructor)
+    - [Validating Hashed Passwords](#validating-hashed-passwords)
   - [Controllers and API endpoints](#controllers-and-api-endpoints)
   - [The Login Flow](#the-login-flow)
   - [Middleware](#middleware)
@@ -31,46 +36,81 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Do not trust the front end](#do-not-trust-the-front-end)
   - [Be wary of errors](#be-wary-of-errors)
 
-## Setup
+## Getting Started
 
-### Folder Structure + Package.json Files
-
-- `frontend/` - the front-end application code (React)
-- `server/` - the back-end server application code
-
-Each of these sub-directories has its own `package.json` file with their own dependencies and scripts.
-
-The `package.json` file in the root directory only has scripts for quickly building/running the full project.
-
-### Setup Steps
+### Create your repo
 
 - First, make sure that you have a new GitHub Organization for your project.
 - Select <kbd>Use this template</kbd> and select <kbd>Create a new repository</kbd>. Rename the repo and choose your GitHub organization as the owner. 
 - Clone your repo.
-- Create a database called `react_auth_example` database (or a name of your choice)
+
+### Getting to know the folder structure
+
+In the root of this repository are the two directories you will be building the application in:
+
+- `frontend/` - the front-end application code (React)
+- `server/` - the back-end server application code
+
+Each of these sub-directories has its own `package.json` file with its own dependencies and scripts.
+
+The root of the project also has a `package.json` file for quickly building/running the full project.
+
+### Configure your environment variables
+
+Before you can actually start building, you need to create a database and configure your server to connect with it.
+
+- Create a database with a name of your choice
 - In the `server/` folder, copy the `.env.template` and name it `.env`.
   - Update the `.env` variables to match your Postgres database information (username, password, database name)
   - Replace the `SESSION_SECRET` value with your own random string. This is used to encrypt the cookie's `userId` value.
-- In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run build`. This will build frontend static assets and run migration and seeds on the backend
-- To start the server with the built static assets, run `npm start`
+- Your `.env` file should look something like this:
 
-During development, you can also use the following commands from the root of the project
+```sh
+# Replace these variables with your Postgres server information
+# These values are used by knexfile.js to connect to your postgres server
+PG_HOST='127.0.0.1'
+PG_PORT=5432
+PG_USER='itsamemario'
+PG_PASS='12345'
+PG_DB='my_react_express_auth_database'
+
+# Replace session secret with your own random string!
+# This is used by handleCookieSessions to encrypt your 
+SESSION_SECRET='db8c3cffebb2159b46ee38ded600f437ee080f8605510ee360758f6976866e00d603d9b3399341b0cd37dfb8e599fff3'
+PG_CONNECTION_STRING=''
+```
+
+### Kickstart the project
+
+With everything configured, you can now install dependencies in the `frontend` folder (React, etc...) and in the `server` folder (express, Knex, etc...) and run the provided migrations and seeds. Rather than doing this manually, we made some scripts to help you:
+- In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run kickstart`. This will build frontend static assets and run migration and seeds on the backend
+
+Open up your database viewer (like TablePlus) and you should see that the migrations created a `users` table and the seeds populated it with three users!
+* Check out the `server/db/seeds/init.js` file to see the users created
+
+During development, you can use the following commands from the root of the project
+- To start the server with the built static assets, run `npm start`
 - Open a new terminal and run `npm run dev:frontend` to run the frontend development server
 - Run `npm run build:frontend` to update the static assets in the frontend.
 
+
+### You're all set up now. Have Fun!
+
+Below, you will find more information about this repository and how to work with it. Enjoy!
+
 ## Database
 
-For this project, you should use a Postgres database. Make sure to set the environment variables for connecting to this database in the `.env` file. These values are used in the `knexfile.js` file via the `dotenv` package and the line of code:
+For this project, you should use a Postgres database. Make sure to set the environment variables for connecting to this database in the `.env` file. These values are loaded into the `knexfile.js` file using the `dotenv` package and the line of code:
 
 ```js
 require('dotenv').config(); // load the .env file
 ```
 
-For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/8-3-2-migrations-seeds).
-
 ### Migrations
 
-Migration files are stored in the `server/db/migrations` folder. This location is defined in the `knexfile.js` and can be changed if you so choose.
+> For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/8-3-2-migrations-seeds).
+
+Migration files are stored in the `server/db/migrations` folder (this location is defined in the `knexfile.js` and can be changed if you so choose)
 
 In `server/db/migrations`, you can see the migration files that generate the `users` table. The first one sets up some initial columns:
 
@@ -89,7 +129,7 @@ This migration file will create a `users` table with an auto-generated and auto-
 
 #### Modifying / Adding New Migrations
 
-As you build your project, you will likely want to modify your tables. If this is the case, AVOID using the `migration:rollback` and instead create a new migration that modifies the table.
+As you build your project, you will likely want to modify your tables. If this is the case, AVOID using the `migration:rollback`. Instead, *create a new migration that modifies the table*.
 
 For example, the second migration file adds some timestamp columns to the existing `users` table.
 
@@ -109,7 +149,7 @@ exports.down = (knex) => {
 };
 ```
 
-Note that instead of using `knex.schema.createTable`, we are using `.alterTable` since the table already exists. We also use `.alterTable` in the `.down` function to drop the two columns created by `table.timestamps`.
+Note that instead of using `knex.schema.createTable`, we are using `.alterTable` since the table already exists. We also use `.alterTable` in the `.down` function to drop the two columns created by `table.timestamps` if we ever did want to roll back these changes.
 
 - For more information, look into the [Knex documentation](https://knexjs.org/guide/schema-builder.html)
 
@@ -145,16 +185,34 @@ exports.seed = async (knex) => {
 };
 ```
 
-- For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/8-3-2-migrations-seeds).
+## The Server Application
 
+The server is responsible for serving static assets as well as receiving and parsing client requests, getting data from the database, and sending responses back to the client. 
 
-## Back-end
-
-The back-end is responsible for receiving and responding to client requests. Requests are received by the server, routed to one of the routers, and parsed by the controller. The controller then passes along data from the request to the model to perform CRUD operations on the database before sending a response back to the client.
+The server is organized into a few key components (from right to left in the diagram below):
+* The "Models" found in `server/models/` — responsible for interacting directly with and returning data from the database. In this application, the models will use `knex` to do this.
+* The "Controllers" found in `server/controllers/` — responsible for parsing incoming requests, performing necessary server-side logic (like interacting with models), and sending responses.
+* The "App" found in `server/index.js` — the hub of the server application, created by Express, that is responsible for defining the endpoint URLs that will be available in the application, and assigning controllers to handle each endpoint. It also configures middleware.
 
 ![](./documentation/readme-img/full-stack-diagram.svg)
 
+### Interactions between components
+
+Each one of these components handles a specific task and **together they form a pipeline where each component takes in inputs and produces outputs**. 
+
+As you build your application, seek to understand how these components interact and what each component needs from the others:
+* If a user wants to create a new user, they send a `POST` request with a username and password to a particular endpoint defined by the `app`
+* The `app` assigns a specific controller to handle this request
+* The controller parses the username and password from the request and passes them along to the `User` model.
+* The `User` model takes the username and password and executes an `INSERT` SQL statement and returns newly created `user` object back to the controller
+* The controller takes the `user` object and sends it back to the client.
+* The client now knows that the user was created successfully.
+
 ### User Model
+
+As mentioned above, a model is the right-most component of a server application. An application can have many models and each model is responsible for managing interactions with a particular table in a database.
+
+![](./documentation/readme-img/full-stack-diagram.svg)
 
 The `User` model (defined in `server/db/models/User.js`) provides static methods for performing CRUD operations with the `users` table in the database:
 * `User.list()`
@@ -164,15 +222,16 @@ The `User` model (defined in `server/db/models/User.js`) provides static methods
 * `User.update(id, username)`
 * `User.deleteAll()`
 
+The controllers that use these methods can import the entire `User` class and then invoke the function that they need.
+
+
+#### `User.create()` vs. the `User` constructor
+
 Note that there is both a `User.create()` method AND a `constructor()`. There is also an *instance* method `isValidPassword()`.
 
 Let's look at how these three functions are related.
 
-### Storing & Protecting Hashed Passwords
-
-Rather than storing plaintext passwords in the database (never do this!), we want to store hashed passwords instead.
-
-Check out the `User.create` method in the `User` model
+First, the `User` model provides the `User.create` method for creating a new user in the database.
 
 ```js
 static async create(username, password) {
@@ -181,22 +240,29 @@ static async create(username, password) {
 
   const query = `INSERT INTO users (username, password_hash)
     VALUES (?, ?) RETURNING *`;
-  const { rows } = await knex.raw(query, [username, passwordHash]);
-  const user = rows[0];
-  return new User(user);
+  const result = await knex.raw(query, [username, passwordHash]);
+  
+  // get the first returned row and convert it to a User instance
+  // to make the hashed password private
+  const rawUserData = result.rows[0];
+  return new User(rawUserData);
 }
 ```
 
-When we want to create a new user, we take the provided password and pass it to `authUtils.hashPassword`. This function uses `bcrypt` and returns the hassed password which we can safely store in the database.
+When we want to create a new user, we take the provided password and has it using `authUtils.hashPassword()` (which uses `bcrypt` under the hood). Then, we can execute an `INSERT` SQL statement to store the provided username and this hashed password in the database.
 
-Notice that when we get the data back from the database, we don't return the new `user`. **We use the `new User()` constructor function** to create a `user` instance and we return that instance. In fact, all of the class methods do this before returning.
+> Read about [dynamic queries with `knex.raw()` here](https://github.com/The-Marcy-Lab-School/8-2-2-knex?tab=readme-ov-file#dynamic-queries)
 
-Why do this?
+Notice that when we get the data back from the database, we don't return the `rawUserData`. **We use the `new User()` constructor function** to create a `User` instance using that `rawUserData` and we return that instance. In fact, all of the class methods do this before returning.
 
-Whenever we receive data from the database about a user, it will include the hashed password. We need to send that user's data to the frontend, but we don't want to expose the password, even if it is hashed.
+Why?
 
-Using the `constructor`  is a clever trick of sorts that takes advantage of the **private instance property** feature of classes. Here is how:
-* By wrapping the `user` data from the database in a `new User()` instance, we can make the a private `#passwordHash` property
+#### Validating Hashed Passwords
+
+Whenever we receive data from the database about a user, it will include the hashed password. We need to send that user's data to the frontend, but we don't want to include the password, even if it is hashed.
+
+Using the `constructor` is a clever trick of sorts that takes advantage of the **private instance property** feature of classes. Here is how:
+* By wrapping the `rawUserData` data from the database in a `new User()` instance, we can make a private `#passwordHash` property.
 * The `#passwordHash` property can't be accessed except by the instance itself.
 * If our controller needs to verify the password for a given `User` instance, it can do so using the instance method `isValidPassword` which DOES have access to the private `#passwordHash` property. 
 * `isValidPassword` uses the `authUtils.isValidPassword` helper function (which uses `bcrypt.compare()`) to verify provided password against the stored `#passwordHash`
@@ -222,11 +288,11 @@ class User {
 
 ### Controllers and API endpoints
 
-The controllers that interact with the `User` model are divided into two files: `userControllers` and `authControllers` and these controllers are utilized by two `Express.Router`s: `userRouter` and `authRouter`.
+The controllers that interact with the `User` model are divided into two files: `userControllers` and `authControllers`. These controller files each export a controller function that are assigned to a particular API endpoint the `app`.
 
 In all, the following API endpoints are provided: 
 
-**`routers/userRouter.js`**:
+**User Routes**:
 
 | Method | Path           | Controller                   | Model Method    | Description                                  |
 | ------ | -------------- | ---------------------------- | --------------- | -------------------------------------------- |
@@ -235,7 +301,7 @@ In all, the following API endpoints are provided:
 | POST   | /api/users     | `userControllers.createUser` | `User.create()` | Create a new user and set the cookie userId  |
 | PATCH  | /api/users/:id | `userControllers.updateUser` | `User.update()` | Update the username of a specific user by id |
 
-**`routers/authRouter.js`**:
+**Authentication Routes**:
 
 | Method | Path        | Controller                   | Model Method            | Description                                            |
 | ------ | ----------- | ---------------------------- | ----------------------- | ------------------------------------------------------ |
@@ -279,12 +345,7 @@ app.use(handleCookieSessions); // adds a session property to each request repres
 app.use(logRoutes); // print information about each incoming request
 app.use(express.json()); // parse incoming request bodies as JSON
 app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
-
-app.use('/api', authRouter); // all requests beginning with /api will be handled by authRouter first
-app.use('/api/users', userRouter); // all requests beginning with /api/users will be handled by userRouter
 ```
-
-- Here, we subdivide the routing between two "sub routers". `app.use` let's us indicate the base URL that each router handles.
 
 ## Authentication & Authorization
 
@@ -340,7 +401,7 @@ With this information we can:
 
 For example, suppose that a user logs in and then wants to edit their profile. The use of cookie data could look like this:
 
-![](/documentation/readme-img/authorization-diagram.svg)
+![](./documentation/readme-img/authorization-diagram.svg)
 
 ### Check Authentication Middleware
 
@@ -361,8 +422,7 @@ For example, only logged-in users should be able to edit their own user profile.
 Here, we specify that the `checkAuthentication` middleware should be used for only this one route. 
 
 ```js
-// userRouter.js
-userRouter.patch("/users/:id", checkAuthentication, userController.update);
+app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 ```
 
 ### Staying logged in with `GET /api/me`
@@ -379,7 +439,7 @@ When the user returns to the site after logging in, they will have a cookie indi
 
 The front-end React application's entrypoint is the `index.html` file which loads in the `main.jsx` script. This script renders the top-level `App` component which may render various `page` components. The `adapter` files manage data-fetching logic while `context` files manage global front-end state.
 
-![](/documentation/readme-img/front-end.svg)
+![](./documentation/readme-img/front-end.svg)
 
 ### Example Page Component
 
