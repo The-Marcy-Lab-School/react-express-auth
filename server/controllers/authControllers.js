@@ -1,4 +1,4 @@
-const User = require('../db/models/User');
+const User = require('../models/User');
 
 // This controller takes the provided username and password and finds
 // the matching user in the database. If the user is found and the password

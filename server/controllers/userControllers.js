@@ -1,5 +1,5 @@
 const { isAuthorized } = require('../utils/auth-utils');
-const User = require('../db/models/User');
+const User = require('../models/User');
 
 exports.createUser = async (req, res) => {
   const { username, password } = req.body;

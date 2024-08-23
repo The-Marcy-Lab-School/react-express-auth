@@ -1,4 +1,4 @@
-import { fetchHandler, getPostOptions, deleteOptions } from "../utils";
+import { fetchHandler, getPostOptions, deleteOptions } from "../utils/fetchingUtils";
 
 const baseUrl = '/api';
 
