@@ -364,12 +364,13 @@ In the context of computing and the internet, a **cookie** is a small text file 
 
 ![](./documentation/readme-img/cookies.png)
 
-* When a client sends an initial request to the server, it doesn't have a cookie
-* The server sends a response along with a cookie.
+* When a client sends an initial request to log in to the server, it doesn't have a cookie. It just sends over the username and password to be **authenticated**.
+* The server authenticates the user and sends a response along with a new cookie with their user information encrypted.
 * The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
-* On all future client requests to the server, the cookie will be sent with the request. Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
+* On all future client requests, if the client has a cookie it will be sent with the request to the server. This will allow the user to be **authenticated** without having to log in again and to be **authorized** to perform future actions.
+* Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
 
-For our purposes, our serve can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie can immediately tell us who they are. This can be used to authenticate and to authorize the user.
+For our purposes, our server can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie can immediately tell us who they are. This can be used to re-authenticate and to authorize the user.
 
 > WARNING: When the server creates a cookie for the client, it has to be careful with what data is stored in the cookie because the client can manipulate that data and create its own cookies. Always make sure that data stored in a cookie is encrypted!
 
