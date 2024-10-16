@@ -14,6 +14,14 @@ const checkAuthentication = require('./middleware/checkAuthentication');
 // controller imports
 const authControllers = require('./controllers/authControllers');
 const userControllers = require('./controllers/userControllers');
+// const likeControllers = require('./controllers/likeControllers')
+
+//build these out
+
+// const postControllers = require('./controllers/postControllers');
+// const likeControllers = require('./controllers/likeControllers');
+//
+
 const app = express();
 
 // middleware
@@ -47,6 +55,33 @@ app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 
 
+
+///////////////////////////////
+// Feed Routes
+///////////////////////////////
+// app.get('api/feed', ...)
+
+
+///////////////////////////////
+// Post Routes
+///////////////////////////////
+
+app.post('/api/posts', checkAuthentication, userControllers.createUser);
+
+// These actions require users to be logged in (authentication)
+// Express lets us pass a piece of middleware to run for a specific endpoint
+app.get('/api/users', userControllers.listUsers);
+app.get('/api/users/:id', userControllers.showUser);
+app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
+
+///////////////////////////////
+// Like Routes
+///////////////////////////////
+
+// app.post('/api/likes', checkAuthentication, likeControllers.addLike);
+// app.get('/api/users', checkAuthentication, likeControllers.listUsers);
+// app.get('/api/users/:id', checkAuthentication, likeControllers.showUser);
+// app.patch('/api/users/:id', checkAuthentication, likeControllers.updateUser);
 
 ///////////////////////////////
 // Fallback Route
