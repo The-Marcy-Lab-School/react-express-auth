@@ -6,7 +6,7 @@ exports.up = function(knex) {
     return knex.schema.createTable('likes', (table) => {
         table.increments();
         table.integer('user_id').references('id').inTable('users')
-        table.integer('post_id').references('id').inTable('users')
+        table.integer('post_id').references('id').inTable('posts')
         table.timestamps(true, true);
     })
 };
