@@ -1,71 +1,53 @@
-///////////////////////////////
-// Imports
-///////////////////////////////
-
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
 
-// middleware imports
+// Middleware imports
 const handleCookieSessions = require('./middleware/handleCookieSessions');
 const logRoutes = require('./middleware/logRoutes');
 const checkAuthentication = require('./middleware/checkAuthentication');
 
-// controller imports
+// Controller imports
 const authControllers = require('./controllers/authControllers');
 const userControllers = require('./controllers/userControllers');
+const likeControllers = require('./controllers/likeControllers');
+const postControllers = require('./controllers/postControllers');
+const feedControllers = require('./controllers/feedControllers');
+
 const app = express();
 
-// middleware
-app.use(handleCookieSessions); // adds a session property to each request representing the cookie
-app.use(logRoutes); // print information about each incoming request
-app.use(express.json()); // parse incoming request bodies as JSON
-app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
+// Middleware
+app.use(handleCookieSessions);
+app.use(logRoutes);
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-
-
-///////////////////////////////
-// Auth Routes
-///////////////////////////////
-
+// Auth
 app.get('/api/me', authControllers.showMe);
 app.post('/api/login', authControllers.loginUser);
 app.delete('/api/logout', authControllers.logoutUser);
 
-
-
-///////////////////////////////
-// User Routes
-///////////////////////////////
-
+// User
 app.post('/api/users', userControllers.createUser);
-
-// These actions require users to be logged in (authentication)
-// Express lets us pass a piece of middleware to run for a specific endpoint
 app.get('/api/users', checkAuthentication, userControllers.listUsers);
 app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 
+// Feed
+app.get('/api/feed', feedControllers.loadFeed)
 
+// Post
+app.post('/api/posts', checkAuthentication, postControllers.createPost);
+app.delete('/api/posts/:post_id',checkAuthentication,postControllers.deletePost)
 
-///////////////////////////////
-// Fallback Route
-///////////////////////////////
+// Like
+app.post('/api/posts/:post_id/like', checkAuthentication, likeControllers.createLike);
+app.delete('/api/posts/:post_id/like', checkAuthentication, likeControllers.removeLike);
 
-// Requests meant for the API will be sent along to the router.
-// For all other requests, send back the index.html file in the dist folder.
 app.get('*', (req, res, next) => {
   if (req.originalUrl.startsWith('/api')) return next();
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
-
-
-///////////////////////////////
-// Start Listening
-///////////////////////////////
-
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
-});
+app.listen(port, () => console.log(`Server running at http://localhost:${port}/`));
