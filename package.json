@@ -8,7 +8,7 @@
     "build:frontend": "cd frontend && npm i && npm run build",
     "migrate": "cd server && npm run migrate",
     "seed": "cd server && npm run seed",
-    "start": "cd server && npm start",
+    "start": "cd server && npm i && npm start",
     "dev": "cd server && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
     "connect": "psql -U postgres -d react_auth_example",
