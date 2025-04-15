@@ -23,7 +23,11 @@
 From within the root directory, run the following commands to install dependencies and run the project locally:
 
 ```sh
-<COMMANDS_HERE>
+# Build Command
+<COMMAND HERE>
+
+# Start Command
+<COMMAND HERE>
 ```
 
 ### Technologies Used
