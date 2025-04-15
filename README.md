@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - teamMember: **Scrum Master, Developer**
+  - teamMember: **Developer**
+  - teamMember: **Developer**
 
 ## Table of Contents
 
@@ -26,13 +26,14 @@ From within the root directory, run the following commands to install dependenci
 <COMMANDS_HERE>
 ```
 
-### Requirements
+### Technologies Used
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node
+- Express
+- Postgresql
+- React
+- Knex
+- etc...
 
 ## Project Proposal
 
