@@ -3,7 +3,12 @@ body {
   margin: 0;
 }
 
-input, label {
+main {
+  padding-inline: 1rem;
+}
+
+input,
+label {
   display: block;
 }
 
@@ -43,7 +48,6 @@ form {
   padding: 1rem;
   border: 1px solid #CCC;
   width: 15rem;
-  margin: 1rem auto;
 }
 
 /* automatically added by NavLink component */
