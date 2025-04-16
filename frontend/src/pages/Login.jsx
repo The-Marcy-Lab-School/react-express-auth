@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import { logUserIn } from "../adapters/auth-adapter";
+import { loginUser } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 
 export default function LoginPage() {
@@ -17,7 +17,7 @@ export default function LoginPage() {
     event.preventDefault();
     setErrorText('');
     const formData = new FormData(event.target);
-    const [user, error] = await logUserIn(Object.fromEntries(formData));
+    const [user, error] = await loginUser(Object.fromEntries(formData));
     if (error) return setErrorText(error.message);
     setCurrentUser(user);
     navigate(`/users/${user.id}`);

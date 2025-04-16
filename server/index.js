@@ -12,8 +12,8 @@ const logRoutes = require('./middleware/logRoutes');
 const checkAuthentication = require('./middleware/checkAuthentication');
 
 // controller imports
-const authControllers = require('./controllers/authControllers');
-const userControllers = require('./controllers/userControllers');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/users');
 const app = express();
 
 // middleware
@@ -25,32 +25,13 @@ app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve stat
 
 
 ///////////////////////////////
-// Auth Routes
+// Routes
 ///////////////////////////////
 
-app.get('/api/me', authControllers.showMe);
-app.post('/api/login', authControllers.loginUser);
-app.delete('/api/logout', authControllers.logoutUser);
+app.use('/api/auth', authRoutes);
 
-
-
-///////////////////////////////
-// User Routes
-///////////////////////////////
-
-app.post('/api/users', userControllers.createUser);
-
-// These actions require users to be logged in (authentication)
-// Express lets us pass a piece of middleware to run for a specific endpoint
-app.get('/api/users', checkAuthentication, userControllers.listUsers);
-app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
-app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
-
-
-
-///////////////////////////////
-// Fallback Route
-///////////////////////////////
+// All user actions require users to be logged in (authentication)
+app.use('/api/users', checkAuthentication, userRoutes);
 
 // Requests meant for the API will be sent along to the router.
 // For all other requests, send back the index.html file in the dist folder.
@@ -58,8 +39,6 @@ app.get('*', (req, res, next) => {
   if (req.originalUrl.startsWith('/api')) return next();
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
-
-
 
 ///////////////////////////////
 // Start Listening

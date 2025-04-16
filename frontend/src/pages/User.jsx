@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
-import { logUserOut } from "../adapters/auth-adapter";
+import { logoutUser } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
 
 export default function UserPage() {
@@ -24,7 +24,7 @@ export default function UserPage() {
   }, [id]);
 
   const handleLogout = async () => {
-    logUserOut();
+    logoutUser();
     setCurrentUser(null);
     navigate('/');
   };

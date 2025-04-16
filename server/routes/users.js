@@ -1,31 +1,26 @@
 const { isAuthorized } = require('../utils/auth-utils');
+const express = require('express');
+const router = express.Router();
 const User = require('../models/User');
 
-exports.createUser = async (req, res) => {
-  const { username, password } = req.body;
-
-  // TODO: check if username is taken, and if it is what should you return?
-  const user = await User.create(username, password);
-  req.session.userId = user.id;
-
-  res.send(user);
-};
-
-exports.listUsers = async (req, res) => {
+// Get all users
+router.get('/', async (req, res) => {
   const users = await User.list();
   res.send(users);
-};
+});
 
-exports.showUser = async (req, res) => {
+// Get one user by id
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
   const user = await User.find(id);
   if (!user) return res.sendStatus(404);
 
   res.send(user);
-};
+});
 
-exports.updateUser = async (req, res) => {
+// Update one user by id
+router.patch('/:id', async (req, res) => {
   const { username } = req.body;
   const { id } = req.params;
 
@@ -37,4 +32,6 @@ exports.updateUser = async (req, res) => {
   const updatedUser = await User.update(id, username);
   if (!updatedUser) return res.sendStatus(404)
   res.send(updatedUser);
-};
+});
+
+module.exports = router;
