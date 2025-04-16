@@ -299,16 +299,16 @@ In all, the following API endpoints are provided:
 | ------ | -------------- | ---------------------------- | --------------- | -------------------------------------------- |
 | GET    | /api/users     | `userControllers.listUsers ` | `User.list()`   | Get the list of all users                    |
 | GET    | /api/users/:id | `userControllers.showUser  ` | `User.find()`   | Get a specific user by id                    |
-| POST   | /api/users     | `userControllers.createUser` | `User.create()` | Create a new user and set the cookie userId  |
 | PATCH  | /api/users/:id | `userControllers.updateUser` | `User.update()` | Update the username of a specific user by id |
 
 **Authentication Routes**:
 
-| Method | Path        | Controller                   | Model Method            | Description                                            |
-| ------ | ----------- | ---------------------------- | ----------------------- | ------------------------------------------------------ |
-| GET    | /api/me     | `authControllers.showMe`     | `User.find()`           | Get the current logged in user based on the cookie     |
-| POST   | /api/login  | `authControllers.loginUser`  | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
-| DELETE | /api/logout | `authControllers.logoutUser` | None                    | Log the current user out (delete the cookie)           |
+| Method | Path        | Controller                     | Model Method            | Description                                            |
+| ------ | ----------- | ------------------------------ | ----------------------- | ------------------------------------------------------ |
+| POST   | /api/users  | `authControllers.registerUser` | `User.create()`         | Create a new user and set the cookie userId            |
+| POST   | /api/login  | `authControllers.loginUser`    | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
+| GET    | /api/me     | `authControllers.showMe`       | `User.find()`           | Get the current logged in user based on the cookie     |
+| DELETE | /api/logout | `authControllers.logoutUser`   | None                    | Log the current user out (delete the cookie)           |
 
 ### The Login Flow
 
