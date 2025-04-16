@@ -28,9 +28,10 @@ app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve stat
 // Auth Routes
 ///////////////////////////////
 
-app.get('/api/me', authControllers.showMe);
-app.post('/api/login', authControllers.loginUser);
-app.delete('/api/logout', authControllers.logoutUser);
+app.post('/api/auth/register', authControllers.registerUser);
+app.post('/api/auth/login', authControllers.loginUser);
+app.get('/api/auth/me', authControllers.showMe);
+app.delete('/api/auth/logout', authControllers.logoutUser);
 
 
 
@@ -38,7 +39,6 @@ app.delete('/api/logout', authControllers.logoutUser);
 // User Routes
 ///////////////////////////////
 
-app.post('/api/users', userControllers.createUser);
 
 // These actions require users to be logged in (authentication)
 // Express lets us pass a piece of middleware to run for a specific endpoint

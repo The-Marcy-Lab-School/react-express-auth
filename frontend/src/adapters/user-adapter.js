@@ -1,12 +1,8 @@
 // These functions all take in a body and return an options object
 // with the provided body and the remaining options
-import { fetchHandler, getPostOptions, getPatchOptions } from "../utils/fetchingUtils";
+import { fetchHandler, getPatchOptions } from "../utils/fetchingUtils";
 
 const baseUrl = '/api/users';
-
-export const createUser = async ({ username, password }) => {
-  return fetchHandler(baseUrl, getPostOptions({ username, password }))
-};
 
 // For this one adapter, if an error occurs, we handle it here by printing
 // the error and return an empty array
