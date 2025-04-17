@@ -9,14 +9,14 @@ export default function UserPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
-  const [errorText, setErrorText] = useState(null);
+  const [error, setError] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
   useEffect(() => {
     const loadUser = async () => {
       const [user, error] = await getUser(id);
-      if (error) return setErrorText(error.message);
+      if (error) return setError(error);
       setUserProfile(user);
     };
 
@@ -29,22 +29,24 @@ export default function UserPage() {
     navigate('/');
   };
 
-  if (!userProfile && !errorText) return null;
-  if (errorText) return <p>{errorText}</p>;
+  if (error) return <p>Sorry, there was a problem loading user. Please try again later.</p>;
 
-  // What parts of state would change if we altered our currentUser context?
-  // Ideally, this would update if we mutated it
-  // But we also have to consider that we may NOT be on the current users page
+  if (!userProfile) return null;
+
+  // When we update the username, the userProfile state won't change but the currentUser state will.
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
 
   return <>
     <h1>{profileUsername}</h1>
-    {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
     <p>If the user had any data, here it would be</p>
     <p>Fake Bio or something</p>
     {
-      !!isCurrentUserProfile
-      && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      isCurrentUserProfile ? (
+        <>
+          <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <button onClick={handleLogout}>Log Out</button>
+        </>
+      ) : ''
     }
   </>;
 }
