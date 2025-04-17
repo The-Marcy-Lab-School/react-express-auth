@@ -8,12 +8,8 @@ export const createUser = async ({ username, password }) => {
   return fetchHandler(baseUrl, getPostOptions({ username, password }))
 };
 
-// For this one adapter, if an error occurs, we handle it here by printing
-// the error and return an empty array
 export const getAllUsers = async () => {
-  const [users, error] = await fetchHandler(baseUrl);
-  if (error) console.log(error); // print the error for simplicity.
-  return users || [];
+  return await fetchHandler(baseUrl);
 };
 
 export const getUser = async (id) => {

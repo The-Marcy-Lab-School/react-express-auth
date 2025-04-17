@@ -13,7 +13,12 @@ import UserPage from './pages/User';
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
-    checkForLoggedInUser().then(setCurrentUser);
+    const loadCurrentUser = async () => {
+      // we aren't concerned about an error happening here
+      const [data] = await checkForLoggedInUser();
+      if (data) setCurrentUser(data)
+    }
+    loadCurrentUser();
   }, [setCurrentUser]);
 
   return <>

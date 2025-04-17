@@ -4,10 +4,18 @@ import UserLink from "../components/UserLink";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getAllUsers().then(setUsers);
+    const loadUsers = async () => {
+      const [data, error] = await getAllUsers();
+      if (error) setError(error);
+      else if (data) setUsers(data);
+    }
+    loadUsers();
   }, []);
+
+  if (error) return <p>Sorry, there was a problem loading users. Please try again later.</p>;
 
   return <>
     <h1>Users</h1>
