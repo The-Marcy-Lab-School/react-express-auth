@@ -23,7 +23,7 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [The Login Flow](#the-login-flow)
   - [Middleware](#middleware)
 - [Authentication \& Authorization](#authentication--authorization)
-  - [Cookies](#cookies)
+  - [Cookies \& Session Authentication](#cookies--session-authentication)
   - [Handle Cookie Sessions](#handle-cookie-sessions)
   - [Check Authentication Middleware](#check-authentication-middleware)
   - [Staying logged in with `GET /api/me`](#staying-logged-in-with-get-apime)
@@ -76,7 +76,7 @@ PG_PASS='12345'
 PG_DB='my_react_express_auth_database'
 
 # Replace session secret with your own random string!
-# This is used by handleCookieSessions to encrypt your 
+# This is used by handleCookieSessions to hash your cookie data 
 SESSION_SECRET='db8c3cffebb2159b46ee38ded600f437ee080f8605510ee360758f6976866e00d603d9b3399341b0cd37dfb8e599fff3'
 PG_CONNECTION_STRING=''
 ```
@@ -358,31 +358,39 @@ app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve stat
 
 To implement this functionality, we'll use cookies.
 
-### Cookies
+### Cookies & Session Authentication
 
-In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device. Here is how they work:
+In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device. 
+
+Cookies can be used for many things but for this application we will be using them to keep our user's logged in. This is called **session authentication**. That is, after a user logs in, we will keep them logged in until the session ends (when the cookie is cleared).
+
+Here is cookies they work:
 
 ![](./documentation/readme-img/cookies.png)
 
-* When a client sends an initial request to log in to the server, it doesn't have a cookie. It just sends over the username and password to be **authenticated**.
-* The server authenticates the user and sends a response along with a new cookie with their user information encrypted.
-* The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
-* On all future client requests, if the client has a cookie it will be sent with the request to the server. This will allow the user to be **authenticated** without having to log in again and to be **authorized** to perform future actions.
-* Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
+* *When a client sends an initial request to log in to the server*
+  * The client doesn't have a cookie yet. It just sends over the username and password to be **authenticated**.
+  * If the credentials are valid, the server creates a cookie encoded with the user's `id`
+  * The server sends the cookie along with the response.
+  * The client automatically saves the cookie and stores it on the user's computer (many client-side applications may ask you if you want to save cookies or not)
+* *On all future client requests*
+  * The cookie is automatically sent to the server with each request
+  * The existence of a cookie with a user `id` is proof that the client is already **authenticated** and doesn't need to provide their credentials again. The server can just look up the `id` in the cookie to identify the user.
 
-For our purposes, our server can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie can immediately tell us who they are. This can be used to re-authenticate and to authorize the user.
+For our purposes, our server can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie tells the server which user they are. This can be used to re-authenticate and to authorize the user.
 
-> WARNING: When the server creates a cookie for the client, it has to be careful with what data is stored in the cookie because the client can manipulate that data and create its own cookies. Always make sure that data stored in a cookie is encrypted!
+> WARNING: When the server creates a cookie for the client, it has to be careful with what data is stored in the cookie because the client can manipulate that data and create its own cookies.
 
 ### Handle Cookie Sessions
 
-In our application, we are using `handleCookieSessions` middleware with our Express server to create cookies (and encrypt data stored on them) for us. We can access/manipulate those cookies by accessing the `req.session` object when handling incoming requests. 
+So, how do we implement cookies?
 
-To achieve authentication/authorization, we will store the `userId` of the currently logged-in user in the `req.session` object. For example, this is the `loginUser` controller found in `controllers/authControllers`
+Take a look at the controller for the `POST /api/auth/login` endpoint. At the end of the controller, you will see the code `req.session.userId = user.id`:
 
 ```js
+// POST /api/auth/login
 exports.loginUser = async (req, res) => {
-  const { username, password } = req.body // the req.body value is provided by the client
+  const { username, password } = req.body
 
   const user = await User.findByUsername(username);
   if (!user) return res.sendStatus(404);
@@ -391,17 +399,62 @@ exports.loginUser = async (req, res) => {
   if (!isPasswordValid) return res.sendStatus(401);
 
   req.session.userId = user.id; // here we add the userId to the cookie (req.session)
+  res.send(user); // then send the data to the client
+};
+```
+
+Here's what's happening:
+* `req.session` is an object that holds the data for the cookie that will be automatically sent back to the client
+* We store the `user.id` value so that when the cookie comes back with future requests, we can know who sent the request by looking at `req.session`
+
+This `req.session` object is created thanks to the `cookie-session` package and our our `handleCookieSessions` middleware:
+
+```js
+const cookieSession = require('cookie-session');
+const handleCookieSessions = cookieSession({
+  name: 'session', // this creates a req.session property holding the cookie
+  secret: process.env.SESSION_SECRET, // this secret is used to encode the cookie
+});
+
+module.exports = handleCookieSessions;
+```
+
+If no cookie exists, this middleware will create a new empty object stored at `req.session`
+  * When the response is sent back, it will look at `req.session`, encode the object using the `SESSION_SECRET`, and send the cookie back to the client
+
+If a cookie DOES exist, this middleware will parse the cookie and its data will be added to `req.session`. You can see this being used by the `GET /api/auth/me` endpoint:
+
+```js
+// GET /api/auth/me
+exports.showMe = async (req, res) => {
+  if (!req.session.userId) return res.sendStatus(401);
+
+  const user = await User.find(req.session.userId);
   res.send(user);
 };
 ```
 
-On future requests, if the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
+After logging in, the client can easily get its `user` data by sending a `GET /api/auth/me` request to validate the cookie it has without needing to log in again.
 
-With this information we can:
-1. implement **authentication** (logging a user in / confirming that the user is already logged in).
-2. implement **authorization** (confirm that the person who is logged in can do what they have requested to do, such as edit their profile)
+You'll also notice this `req.session` value used in the `checkAuthentication` middleware which requires a cookie for certain endpoints to be used:
 
-For example, suppose that a user logs in and then wants to edit their profile. The use of cookie data could look like this:
+```js
+const checkAuthentication = (req, res, next) => {
+  const { userId } = req.session;
+  if (!userId) return res.sendStatus(401);
+  return next();
+};
+```
+
+It is also used by the `isAuthorized` helper to check if the current user is allowed to modify a given resource
+
+```js
+// userId represents the owner of a resource
+const isAuthorized = (userId, session) => {
+  if (!userId || !session || !session.userId) return false;
+  return Number(userId) === Number(session.userId);
+};
+```
 
 ![](./documentation/readme-img/authorization-diagram.svg)
 
@@ -453,7 +506,6 @@ The frontend application is organized into a few key components (from right to l
 * The `frontend/main.jsx` file actually renders the `App` component and provides access to the `BrowserRouter` and the application's global Context.
 * The `index.html` file itself is the entry point of the entire application and it loads the `main.jsx` file and any additional scripts.
 
-
 ![](./documentation/readme-img/front-end.svg)
 
 ### Frontend Utils
@@ -462,8 +514,22 @@ Let's again start at the right end of the diagram and talk about fetching. Provi
 
 The `fetchHandler` function will actually send the `fetch` request, making sure that the response is valid and that the response is in JSON format before parsing. 
 
-If the front-end wants to make a `POST`/`PATCH`/`DELETE` request, an `options` object must be provided. Since these objects are mostly boilerplate, this `fetchingUtils` file also provides helpers for creating those `options` objects. All that you have to do is provide the `body` of the request:
+If the front-end wants to make a `POST`/`PATCH`/`DELETE` request, an `options` object must be provided. For example, this `options` object for a `POST`:
 
+```js
+const options = {
+  method: 'POST',
+  credentials: 'include',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ someProperty: 'someValue' }),
+}
+```
+
+Since these objects are mostly boilerplate, there are helpers for creating those `options` objects. For example, the `getPostOptions` function can be used like this
+
+```js
+const options = getPostOptions({ username, password }))
+```
 
 ### Adapters
 
@@ -474,24 +540,18 @@ Often, they will be short, like this from the `adapters/user-adapter.js` file:
 ```js
 const baseUrl = '/api/users';
 
-export const getAllUsers = async () => {
-  const [users, error] = await fetchHandler(baseUrl);
-  if (error) console.log(error); // print the error for simplicity.
-  return users || [];
+export const createUser = async ({ username, password }) => {
+  return fetchHandler(baseUrl, getPostOptions({ username, password }))
 };
 ```
-* A `baseUrl` is defined for all adapters in this `user-adapter` file.
-* The `fetchHandler` will return a tuple with either the `users` data or the `error`.
-* Here, we print the `error` if it exists but in more robust applications, errors would be handled more gracefully, or they would potentially be returned.
-* If `users` exists, we'll return it, otherwise return an empty array (thus ignoring the `error`).
+* A `baseUrl` is defined for all adapters in this `user-adapter` file to simplify building URLs
+* The `fetchHandler` will return a `[data, error]` tuple which we can return, passing both values along to the component that uses it. We let the component handle the error.
 
-While this code could easily be implemented within the `Users` page component that wants to perform this fetch, by separating this logic out, the `Users` page can be a little bit cleaner. This is immensely valuable as React components can easily become disorganized.
-
-Additionally, if multiple components make use of the same server endpoint, an adapter can be reused without re-writing the same logic.
+This separation of concerns keeps our component files a bit cleaner while also allowing multiple components to fetch from the same endpoint if needed.
 
 ### Example Page Component
 
-Let's look at that `Users` page component! This page is responsible for fetching and displaying a list of all users in the database:
+Let's look at that `Users` page component! It is a great example of a page component that uses an adapter to fetch data from the server and gracefully handle the response data and error.
 
 ```jsx
 import { useEffect, useState } from "react";
@@ -500,13 +560,18 @@ import UserLink from "../components/UserLink";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
 
-  // fetch all users to update the users state above
   useEffect(() => {
-    // use the adapter which returns a promise
-    // we can avoid using async/await here with this nice one-liner
-    getAllUsers().then(setUsers);
+    const loadUsers = async () => {
+      const [data, error] = await getAllUsers();
+      if (error) setError(error);
+      else if (data) setUsers(data);
+    }
+    loadUsers();
   }, []);
+
+  if (error) return <p>Sorry, there was a problem loading users. Please try again later.</p>;
 
   return <>
     <h1>Users</h1>
@@ -519,12 +584,15 @@ export default function UsersPage() {
 }
 ```
 
-* The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
-* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. Notice how we can avoid using the `async`/`await` syntax by using the `.then` syntax to handle the promise. Sometimes `.then` is better! 
-* When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
-* The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
+Let's break down the component:
+* State is created for the `users` and `error` that we expect to get in return from the server when we fetch for users.
+* On render, the component uses the `getAllUsers` adapter to fetch the data and set either the `users` state or the `error` state, depending on what is returned.
+* The component renders an error message if the `error` state is set.
+* Otherwise, the `users` state is mapped into a list of elements and rendered.
 
 ### Current User Context
+
+This application uses [**React Context**](https://react.dev/learn/passing-data-deeply-with-context) to share the current logged-in user throughout the entire application. Many pages will need to know if a user is logged in
 
 The frontend uses a `CurrentUserContext` to provide the entire application with the currently logged in user and a function to set the currently logged in user. 
 
@@ -534,10 +602,27 @@ The first component to use this context is `App` which sets the current user aft
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
   useEffect(() => {
-    checkForLoggedInUser().then(setCurrentUser);
+    const loadCurrentUser = async () => {
+      // we aren't concerned about an error happening here
+      const [data] = await checkForLoggedInUser();
+      if (data) setCurrentUser(data)
+    }
+    loadCurrentUser();
   }, [setCurrentUser]);
 
-  // ...
+  return <>
+    <SiteHeadingAndNav />
+    <main>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/sign-up' element={<SignUpPage />} />
+        <Route path='/users' element={<UsersPage />} />
+        <Route path='/users/:id' element={<UserPage />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </main>
+  </>;
 }
 ```
 
