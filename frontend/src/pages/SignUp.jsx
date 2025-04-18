@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
-import { createUser } from "../adapters/user-adapter";
+import { registerUser } from "../adapters/auth-adapter";
 
 // Controlling the sign up form is a good idea because we want to add (eventually)
 // more validation and provide real time feedback to the user about usernames and passwords
@@ -22,7 +22,7 @@ export default function SignUpPage() {
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
 
-    const [user, error] = await createUser({ username, password });
+    const [user, error] = await registerUser({ username, password });
     if (error) return setErrorText(error.message);
 
     setCurrentUser(user);
