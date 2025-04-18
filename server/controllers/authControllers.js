@@ -1,34 +1,54 @@
 const User = require('../models/User');
 
-// This controller takes the provided username and password and finds
-// the matching user in the database. If the user is found and the password
-// is valid, it adds the userId to the cookie (allowing them to stay logged in)
-// and sends back the user object.
-exports.loginUser = async (req, res) => {
-  const { username, password } = req.body // the req.body value is provided by the client
+exports.registerUser = async (req, res) => {
+  // Request needs a body
+  if (!req.body) return res.status(400).send({ message: 'Username and password required' });
 
-  const user = await User.findByUsername(username);
-  if (!user) return res.sendStatus(404);
+  // Body needs a username and password
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).send({ message: 'Username and password required' });
 
-  const isPasswordValid = await user.isValidPassword(password);
-  if (!isPasswordValid) return res.sendStatus(401);
+  // User.create will handle hashing the password and storing in the database
+  const user = await User.create(username, password);
 
+  // Add the user id to the cookie and send the user data back
   req.session.userId = user.id;
   res.send(user);
 };
 
-// This controller sets `req.session` to null, destroying the cookie 
-// which is the thing that keeps them logged in.
-exports.logoutUser = (req, res) => {
-  req.session = null;
-  res.sendStatus(204);
+exports.loginUser = async (req, res) => {
+  // Request needs a body
+  if (!req.body) return res.status(400).send({ message: 'Username and password required' });
+
+  // Body needs a username and password
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).send({ message: 'Username and password required' });
+
+  // Username must be valid
+  const user = await User.findByUsername(username);
+  if (!user) return res.status(404).send({ message: 'User not found.' });
+
+  // Password must match
+  const isPasswordValid = await user.isValidPassword(password);
+  if (!isPasswordValid) return res.status(401).send({ message: 'Invalid credentials.' });
+
+  // Add the user id to the cookie and send the user data back
+  req.session.userId = user.id;
+  res.send(user);
 };
 
-// This controller returns 401 if the client is NOT logged in (doesn't have a cookie)
-// or returns the user based on the userId stored on the client's cookie
+
 exports.showMe = async (req, res) => {
+  // no cookie with an id => Not authenticated.
   if (!req.session.userId) return res.sendStatus(401);
 
+  // cookie with an id => here's your user info!
   const user = await User.find(req.session.userId);
   res.send(user);
+};
+
+
+exports.logoutUser = (req, res) => {
+  req.session = null; // "erase" the cookie
+  res.sendStatus(204);
 };
