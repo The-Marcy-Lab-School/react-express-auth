@@ -22,8 +22,6 @@ app.use(logRoutes); // print information about each incoming request
 app.use(express.json()); // parse incoming request bodies as JSON
 app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
 
-
-
 ///////////////////////////////
 // Auth Routes
 ///////////////////////////////
@@ -33,20 +31,15 @@ app.post('/api/auth/login', authControllers.loginUser);
 app.get('/api/auth/me', authControllers.showMe);
 app.delete('/api/auth/logout', authControllers.logoutUser);
 
-
-
 ///////////////////////////////
 // User Routes
 ///////////////////////////////
-
 
 // These actions require users to be logged in (authentication)
 // Express lets us pass a piece of middleware to run for a specific endpoint
 app.get('/api/users', checkAuthentication, userControllers.listUsers);
 app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
-
-
 
 ///////////////////////////////
 // Fallback Route
@@ -58,8 +51,6 @@ app.get('*', (req, res, next) => {
   if (req.originalUrl.startsWith('/api')) return next();
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
-
-
 
 ///////////////////////////////
 // Start Listening
