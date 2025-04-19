@@ -4,24 +4,18 @@ const authUtils = require('../utils/auth-utils');
 class User {
   #passwordHash = null; // a private property
 
-  // This constructor is NOT how a controller creates a new user in the database.
-  // Think of it more like a formatter function. It is used by each of the User 
-  // static methods to hide the hashed password of users before sending user data 
-  // to the client. Since we want to keep the #passwordHash property private, we 
-  // provide the isValidPassword instance method as a way to indirectly access it.
+  // Create a User instance with the password hidden
+  // Instances of User can be sent to clients without exposing the password
   constructor({ id, username, password_hash }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
   }
 
-  // This instance method takes in a plain-text password and returns true if it matches
-  // the User instance's hashed password. Can be used by controllers.
+  // Controllers can use this instance method to validate passwords prior to sending responses
   isValidPassword = async (password) => (
-    authUtils.isValidPassword(password, this.#passwordHash)
+    authUtils.validatePassword(password, this.#passwordHash)
   );
-
-
 
   // Fetches ALL users from the users table, uses the constructor
   // to format each user (and hide their password hash), and returns.

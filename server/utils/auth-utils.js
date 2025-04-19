@@ -14,12 +14,11 @@ const hashPassword = async (password, saltRounds = 8) => bcrypt
  * @param {string} hash Salted hash
  * @returns {Promise<true|false|undefined>} Bool of whether password matches hash
  */
-const isValidPassword = async (password, hash) => bcrypt
+const validatePassword = async (password, hash) => bcrypt
   .compare(password, hash)
   .catch((err) => console.error(err.message));
 
 module.exports = {
   hashPassword,
-  isValidPassword,
-  isAuthorized,
+  validatePassword,
 };
