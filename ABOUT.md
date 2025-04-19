@@ -28,9 +28,6 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Example Page Component](#example-page-component)
   - [Current User Context](#current-user-context)
 - [Deploying](#deploying)
-- [Advice](#advice)
-  - [Do not trust the front end](#do-not-trust-the-front-end)
-  - [Be wary of errors](#be-wary-of-errors)
 
 ## Getting Started
 
@@ -472,15 +469,22 @@ The front-end is responsible for handling user interactions, sending requests to
 
 While it is developed as a React application and `.jsx` files, it will ultimately be built into static assets (HTML, CSS, and JS files that can be sent directly to the browser).
 
-The frontend application is organized into a few key components (from right to left in the diagram below):
-* The "Adapters" found in `frontend/src/adapters/` — the front-end equivalent of controllers, responsible for structuring requests sent to the server and for parsing responses.
-* The "Pages" found in `frontend/src/pages/` — responsible for rendering separate pages of the front-end application. These components make use of sub-components defined in `frontend/src/components`
-* The "App" found in `frontend/src/App.jsx` — the hub of the frontend application, it is the root component that is responsible for defining frontend routes and establishing site-wide layout components (like the navigation bar)
-
-* The `frontend/main.jsx` file actually renders the `App` component and provides access to the `BrowserRouter` and the application's global Context.
-* The `index.html` file itself is the entry point of the entire application and it loads the `main.jsx` file and any additional scripts.
-
 ![](./documentation/readme-img/front-end.svg)
+
+The frontend application is organized into a few key components (from right to left in the diagram):
+* The "Adapters" found in `frontend/src/adapters/`
+  * Responsible for structuring requests sent to the server and for parsing responses.
+  * The front-end equivalent of controllers
+* The "Pages" found in `frontend/src/pages/`
+  * Responsible for rendering separate pages of the front-end application.  
+  * These components make use of sub-components defined in `frontend/src/components`
+* The "App" found in `frontend/src/App.jsx`
+  * The root component that is responsible for defining frontend routes and establishing site-wide layout components (like the navigation bar)
+* The `frontend/main.jsx` file
+  * Renders the `App` component
+  * Provides access to the `BrowserRouter` and the application's global Context.
+* The `index.html` file
+  * Loads the `main.jsx` file and any additional scripts.
 
 ### Frontend Utils
 
@@ -522,6 +526,8 @@ export const createUser = async ({ username, password }) => {
 * The `fetchHandler` will return a `[data, error]` tuple which we can return, passing both values along to the component that uses it. We let the component handle the error.
 
 This separation of concerns keeps our component files a bit cleaner while also allowing multiple components to fetch from the same endpoint if needed.
+
+Errors are handled in the components that use these adapters.
 
 ### Example Page Component
 
@@ -673,14 +679,3 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
 5. Future changes to your code
    - If you followed these steps, your Render server will automatically redeploy whenever the main branch is committed to. To update the deployed application, simply commit to main.
    - For front-end changes, make sure to run `npm run build` to update the contents of the `public/` folder and push those changes.
-
-## Advice
-
-### Do not trust the front end
-
-Remember, **DO NOT TRUST THE FRONT-END**. Validate everything on the server. Just because you write logic to prevent a form from submitting on the front-end doesn't mean a nefarious actor couldn't just pop open a console and make a `fetch` request there. Also, the front-end can be buggy and mistakes can happen.
-
-### Be wary of errors
-
-Given time constraints, this project is handling barely any errors. The model is very brittle right now, the server and sql errors should be handled like we've done before. We're also only handling the most basic of flows and errors on the client. Things like handling attempted recreations of users who already exist or even wrong passwords can be handled much more delicately.
-
