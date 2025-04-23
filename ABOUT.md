@@ -210,12 +210,12 @@ In all, the following API endpoints are provided:
 
 **Authentication Routes**:
 
-| Method | Path               | Controller                     | Model Method            | Description                                            |
-| ------ | ------------------ | ------------------------------ | ----------------------- | ------------------------------------------------------ |
-| POST   | `/api/auth/users`  | `authControllers.registerUser` | `User.create()`         | Create a new user and set the cookie userId            |
-| POST   | `/api/auth/login`  | `authControllers.loginUser`    | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
-| GET    | `/api/auth/me`     | `authControllers.showMe`       | `User.find()`           | Get the current logged in user based on the cookie     |
-| DELETE | `/api/auth/logout` | `authControllers.logoutUser`   | None                    | Log the current user out (delete the cookie)           |
+| Method | Path                 | Controller                     | Model Method            | Description                                            |
+| ------ | -------------------- | ------------------------------ | ----------------------- | ------------------------------------------------------ |
+| POST   | `/api/auth/register` | `authControllers.registerUser` | `User.create()`         | Create a new user and set the cookie userId            |
+| POST   | `/api/auth/login`    | `authControllers.loginUser`    | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
+| GET    | `/api/auth/me`       | `authControllers.showMe`       | `User.find()`           | Get the current logged in user based on the cookie     |
+| DELETE | `/api/auth/logout`   | `authControllers.logoutUser`   | None                    | Log the current user out (delete the cookie)           |
 
 **User Routes**:
 
