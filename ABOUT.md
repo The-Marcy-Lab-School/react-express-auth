@@ -168,7 +168,7 @@ Seed files are stored in the `server/db/seeds` folder.
 
 The provided `init.js` seed file uses the `User.create` model method to generate the following data:
 
-![](./documentation/readme-img/users-tableplus.png)
+![In TablePlus, we can see the users created by the seed file. Notice how the password_hash property stores hashed passwords.](./documentation/readme-img/users-tableplus.png)
 
 Notice how the passwords have been hashed! This is because the `User.create` method takes care of hashing passwords for us using `bcrypt` (see `server/models/User.js`).
 
@@ -189,7 +189,7 @@ Notice how the passwords have been hashed! This is because the `User.create` met
 
 The server is responsible for serving static assets as well as receiving and parsing client requests, getting data from the database, and sending responses back to the client. 
 
-![](./documentation/readme-img/full-stack-diagram.svg)
+![The server sits in between the frontend and the database, interpreting client requests and sending responses.](./documentation/readme-img/full-stack-diagram.svg)
 
 The server is organized into a few key components (from right to left in the diagram):
 * The "Models" found in `server/models/`
@@ -235,7 +235,9 @@ The server acts as the key middleman between the client / frontend application a
 
 As mentioned above, a model is the right-most component of a server application. An application can have many models and each model is responsible for managing interactions with a particular table in a database.
 
-![](./documentation/readme-img/full-stack-diagram.svg)
+In our tech stack, our models use Knex to execute SQL statements.
+
+![The model is the layer of a server application that directly communicates with the database.](./documentation/readme-img/full-stack-diagram.svg)
 
 The `User` model (defined in `server/db/models/User.js`) provides static methods for performing CRUD operations with the `users` table in the database:
 * `User.list()` (get all)
@@ -322,7 +324,7 @@ Cookies can be used for many things but for this application we will be using th
 
 Here is cookies they work:
 
-![](./documentation/readme-img/cookies.png)
+![Cookies are created by the server and given to a client. The cookie is automatically sent back to the server on future requests.](./documentation/readme-img/cookies.png)
 
 * *When a client sends an initial request to log in to the server*
   * The client doesn't have a cookie yet. It just sends over the username and password to be **authenticated**.
@@ -459,17 +461,15 @@ exports.updateUser = async (req, res) => {
 
 To paint the picture clearly, this is how the cookie is passed back and forth between client and server enabling authorization:
 
-![](./documentation/readme-img/authorization-diagram.svg)
+![When a cookie is created with a userId, it can be checked to authorize certain user requests.](./documentation/readme-img/authorization-diagram.svg)
 
 ## Front-end
-
-A server application can exist on its own but it becomes full-stack when paired with a front-end.
 
 The front-end is responsible for handling user interactions, sending requests to the server application, and rendering content provided by the server.
 
 While it is developed as a React application and `.jsx` files, it will ultimately be built into static assets (HTML, CSS, and JS files that can be sent directly to the browser).
 
-![](./documentation/readme-img/front-end.svg)
+![In a React application, there are pages, components, and adapters.](./documentation/readme-img/front-end.svg)
 
 The frontend application is organized into a few key components (from right to left in the diagram):
 * The "Adapters" found in `frontend/src/adapters/`
