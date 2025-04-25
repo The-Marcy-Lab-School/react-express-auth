@@ -1,5 +1,6 @@
 const knex = require('../db/knex');
-const authUtils = require('../utils/auth-utils');
+const bcrypt = require('bcrypt');
+const SALT_ROUNDS = 12;
 
 class User {
   #passwordHash = null; // a private property
@@ -13,9 +14,9 @@ class User {
   }
 
   // Controllers can use this instance method to validate passwords prior to sending responses
-  isValidPassword = async (password) => (
-    authUtils.validatePassword(password, this.#passwordHash)
-  );
+  isValidPassword = async (password) => {
+    return await bcrypt.compare(password, this.#passwordHash);
+  }
 
   // Fetches ALL users from the users table, uses the constructor
   // to format each user (and hide their password hash), and returns.
@@ -49,11 +50,12 @@ class User {
   // the constructor to hide the passwordHash. 
   static async create(username, password) {
     // hash the plain-text password using bcrypt before storing it in the database
-    const passwordHash = await authUtils.hashPassword(password);
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
     const query = `INSERT INTO users (username, password_hash)
       VALUES (?, ?) RETURNING *`;
     const result = await knex.raw(query, [username, passwordHash]);
+
     const rawUserData = result.rows[0];
     return new User(rawUserData);
   }

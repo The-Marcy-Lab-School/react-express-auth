@@ -8,8 +8,9 @@ const express = require('express');
 
 // middleware imports
 const handleCookieSessions = require('./middleware/handleCookieSessions');
-const logRoutes = require('./middleware/logRoutes');
 const checkAuthentication = require('./middleware/checkAuthentication');
+const logRoutes = require('./middleware/logRoutes');
+const logErrors = require('./middleware/logErrors');
 
 // controller imports
 const authControllers = require('./controllers/authControllers');
@@ -42,7 +43,7 @@ app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 
 ///////////////////////////////
-// Fallback Route
+// Fallback Routes
 ///////////////////////////////
 
 // Requests meant for the API will be sent along to the router.
@@ -51,6 +52,8 @@ app.get('*', (req, res, next) => {
   if (req.originalUrl.startsWith('/api')) return next();
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
+
+app.use(logErrors);
 
 ///////////////////////////////
 // Start Listening
