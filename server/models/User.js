@@ -18,6 +18,21 @@ class User {
     return await bcrypt.compare(password, this.#passwordHash);
   }
 
+  // Hashes the given password and then creates a new user
+  // in the users table. Returns the newly created user, using
+  // the constructor to hide the passwordHash. 
+  static async create(username, password) {
+    // hash the plain-text password using bcrypt before storing it in the database
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+
+    const query = `INSERT INTO users (username, password_hash)
+      VALUES (?, ?) RETURNING *`;
+    const result = await knex.raw(query, [username, passwordHash]);
+
+    const rawUserData = result.rows[0];
+    return new User(rawUserData);
+  }
+
   // Fetches ALL users from the users table, uses the constructor
   // to format each user (and hide their password hash), and returns.
   static async list() {
@@ -43,21 +58,6 @@ class User {
     const result = await knex.raw(query, [username]);
     const rawUserData = result.rows[0];
     return rawUserData ? new User(rawUserData) : null;
-  }
-
-  // Hashes the given password and then creates a new user
-  // in the users table. Returns the newly created user, using
-  // the constructor to hide the passwordHash. 
-  static async create(username, password) {
-    // hash the plain-text password using bcrypt before storing it in the database
-    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
-
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const result = await knex.raw(query, [username, passwordHash]);
-
-    const rawUserData = result.rows[0];
-    return new User(rawUserData);
   }
 
   // Updates the user that matches the given id with a new username.
