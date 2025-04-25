@@ -19,9 +19,9 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Controllers and API endpoints](#controllers-and-api-endpoints)
   - [User Model](#user-model)
     - [`User.create()` vs. the `User` constructor](#usercreate-vs-the-user-constructor)
-- [Authentication \& Authorization](#authentication--authorization)
-  - [Cookies \& Session Authentication](#cookies--session-authentication)
-  - [`req.session` and Handle Cookie Sessions](#reqsession-and-handle-cookie-sessions)
+  - [Authentication \& Authorization](#authentication--authorization)
+    - [Cookies \& Session Authentication](#cookies--session-authentication)
+    - [Implementing Cookies with Handle Cookie Sessions](#implementing-cookies-with-handle-cookie-sessions)
 - [Front-end](#front-end)
   - [Frontend Utils](#frontend-utils)
   - [Adapters](#adapters)
@@ -176,13 +176,12 @@ Notice how the passwords have been hashed! This is because the `User.create` met
 
 > **Chapters in this Section:**
 > - [Server Overview](#server-overview)
+> - [Controllers and API endpoints](#controllers-and-api-endpoints)
 > - [User Model](#user-model)
 >   - [`User.create()` vs. the `User` constructor](#usercreate-vs-the-user-constructor)
->   - [Validating Hashed Passwords](#validating-hashed-passwords)
-> - [Controllers and API endpoints](#controllers-and-api-endpoints)
-> - [The Login Flow](#the-login-flow)
-> - [Middleware](#middleware)
-
+> - [Authentication \& Authorization](#authentication--authorization)
+>   - [Cookies \& Session Authentication](#cookies--session-authentication)
+>   - [Implementing Cookies with Handle Cookie Sessions](#implementing-cookies-with-handle-cookie-sessions)
 ---
 
 ### Server Overview
@@ -306,40 +305,34 @@ Take a look at each `static` method of the `User` class and you'll find that thi
 2. Every user object is converted into a `User` instance to keep the `password_hash` values safely contained within the model.
 3. The user objects can then be safely returned and used by the controllers.
 
-## Authentication & Authorization
+### Authentication & Authorization
 
 - **authenticated** means "We have confirmed this person is a real user and is allowed to be here"
   - For example, only logged in users can see the other users in this app
+  - **Session authentication** means that users who have recently provided their credentials do not need to log in again.
 
 - **authorized** means "This person is allowed to perform this protected action"
   - For example, users are only authorized to edit their OWN profile (they can't change someone else's profile)
 
 To implement this functionality, we'll use cookies.
 
-### Cookies & Session Authentication
+#### Cookies & Session Authentication
 
-In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device. 
+In the context of computing and the internet, a **cookie** is a small text file that is sent by a server to a client and is automatically included in all future requests between server and client. Cookies are saved across browser sessions by default, meaning they will persist after closing the browser. 
 
-Cookies can be used for many things but for this application we will be using them to keep our user's logged in. This is called **session authentication**. That is, after a user logs in, we will keep them logged in until the session ends (when the cookie is cleared).
-
-Here is cookies they work:
+When a user logs in, the server can create a new cookie file with that user's `id` inside. Since cookies are sent back and forth on all future requests, the server can look to see if a request has a cookie with an `id` to authenticate the sender of the request.
 
 ![Cookies are created by the server and given to a client. The cookie is automatically sent back to the server on future requests.](./documentation/readme-img/cookies.png)
 
-* *When a client sends an initial request to log in to the server*
-  * The client doesn't have a cookie yet. It just sends over the username and password to be **authenticated**.
-  * If the credentials are valid, the server creates a cookie encoded with the user's `id`
-  * The server sends the cookie along with the response.
-  * The client automatically saves the cookie and stores it on the user's computer (many client-side applications may ask you if you want to save cookies or not)
-* *On all future client requests*
-  * The cookie is automatically sent to the server with each request
-  * The existence of a cookie with a user `id` is proof that the client is already **authenticated** and doesn't need to provide their credentials again. The server can just look up the `id` in the cookie to identify the user.
+If there is no cookie in the request (perhaps the user has cleared their cookies or they are a new user), then the user must provide their credentials again to get a new cookie. Otherwise, the user may not be able to access all parts of the server's resources.
 
-For our purposes, our server can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie tells the server which user they are. This can be used to re-authenticate and to authorize the user.
+> For example, a user may need to be authenticated in order to access comments on a post.
 
-> WARNING: When the server creates a cookie for the client, it has to be careful with what data is stored in the cookie because the client can manipulate that data and create its own cookies.
+Additionally, certain actions may be protected depending on the resource being requested and who made the request.
 
-### `req.session` and Handle Cookie Sessions
+> For example, if user `5` sends a request to edit the profile of user `8`, that request will be rejected with a 403 unauthorized response. Only a request sent by user `8` is authorized to edit the profile of user `8`. In this case, the sender must have a cookie with the id `8` inside.
+
+#### Implementing Cookies with Handle Cookie Sessions
 
 So, how do we implement cookies?
 
@@ -464,6 +457,12 @@ To paint the picture clearly, this is how the cookie is passed back and forth be
 ![When a cookie is created with a userId, it can be checked to authorize certain user requests.](./documentation/readme-img/authorization-diagram.svg)
 
 ## Front-end
+
+**Chapters in this Section**
+> - [Frontend Utils](#frontend-utils)
+> - [Adapters](#adapters)
+> - [Example Page Component](#example-page-component)
+> - [Current User Context](#current-user-context)
 
 The front-end is responsible for handling user interactions, sending requests to the server application, and rendering content provided by the server.
 
@@ -631,51 +630,4 @@ Below are the pages/components that use the context:
 
 ## Deploying
 
-We recommend deploying using Render.com. It offers free hosting of web servers and PostgreSQL databases with minimal limitations.
-
-Follow the steps below to create a PostgreSQL database hosted by Render and deploy a web application forked from this repository:
-
-1. Make an account on https://render.com/
-2. Create a PostgreSQL Server
-   - https://dashboard.render.com/ and click on <kbd>New +</kbd>
-   - Select PostgreSQL
-   - Fill out information for your DB
-     - **Region**: `US East (Ohio)`
-     - **Instance Type**: Free
-   - Select <kbd>Create Database</kbd>
-   - Keep the created database page open. You will need the `Internal Database URL` value from this page for step 4
-3. Deploy Your Express Server
-   - https://dashboard.render.com/ and click on <kbd>New +</kbd>
-   - Select <kbd>Web Service</kbd>
-   - Connect your GitHub account (if not connected already)
-   - Find your repository and select <kbd>Connect</kbd>
-   - Fill out the information for your Server
-     - **Name**: the name of your app
-     - **Region**: `US East (Ohio)` - the important thing is that it matches the PostgreSQL region
-     - **Branch**: `main`
-     - **Root Directory**: leave this blank
-     - **Runtime**: `Node`
-     - **Build Command**: `npm build`
-     - **Start Command**: `npm start`
-     - **Instance Type**: Free
-   - Select <kbd>Create Web Service</kbd> (Note: The first build will fail because you need to set up environment variables)
-4. Set up environment variables
-   - From the Web Service you just created, select <kbd>Environment</kbd> on the left side-menu
-   - Under Secret Files, select <kbd>Add Secret File</kbd>
-     - **Filename**: `.env`
-     - **Contents**:
-       - Look at your local `.env` file and copy over the `SESSION_SECRET` variable and value.
-       - Add a `PG_CONNECTION_STRING` variable. Its value should be the `Internal Database URL` value from your Postgres page (created in step 2)
-       - Add a `NODE_ENV` variable with the value `'production'`
-       - The contents should look like this:
-
-        ```env
-        SESSION_SECRET='AS12FD42FKJ42FIE3WOIWEUR1283'
-        PG_CONNECTION_STRING='postgresql://user:password@host/dbname'
-        NODE_ENV='production'
-        ```
-   - Click <kbd>Save Changes</kbd>
-
-5. Future changes to your code
-   - If you followed these steps, your Render server will automatically redeploy whenever the main branch is committed to. To update the deployed application, simply commit to main.
-   - For front-end changes, make sure to run `npm run build` to update the contents of the `public/` folder and push those changes.
+For instructions on deployment, check out the Marcy Lab School Docs guide on [How to Deploy On Render](https://marcylabschool.gitbook.io/marcy-lab-school-docs/how-tos/deploying-using-render) making sure to follow the instructions for deploying both a server and a database. 
