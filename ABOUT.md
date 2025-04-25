@@ -16,9 +16,9 @@ This repo can be used to start a React+Express project fully equipped with Auth 
   - [Seeds](#seeds)
 - [The Server Application](#the-server-application)
   - [Server Overview](#server-overview)
-  - [Controllers and API endpoints](#controllers-and-api-endpoints)
   - [User Model](#user-model)
     - [`User.create()` vs. the `User` constructor](#usercreate-vs-the-user-constructor)
+  - [Controllers and API endpoints](#controllers-and-api-endpoints)
   - [Authentication \& Authorization](#authentication--authorization)
     - [Cookies \& Session Authentication](#cookies--session-authentication)
     - [Implementing Cookies with Handle Cookie Sessions](#implementing-cookies-with-handle-cookie-sessions)
@@ -52,7 +52,7 @@ The root of the project also has a `package.json` file. It has no dependencies b
 
 Before you can actually start building, you need to create a database and configure your server to connect with it.
 
-- Create a database with a name of your choice
+- Create a database with a name of your choice. This will just be the name of your local database so it doesn't need to match with the other members of your team.
 - In the `server/` folder, copy the `.env.template` and name it `.env`.
 - Update the `.env` variables to match your Postgres database information (username, password, database name)
 - Replace the `SESSION_SECRET` value with your own random string. This is used to encrypt the cookie's `userId` value.
@@ -71,8 +71,50 @@ PG_DB='my_react_express_auth_database'
 # Replace session secret with your own random string!
 # This is used by handleCookieSessions to hash your cookie data 
 SESSION_SECRET='db8c3cffebb2159b46ee38ded600f437ee080f8605510ee360758f6976866e00d603d9b3399341b0cd37dfb8e599fff3'
+
+# When you deploy your database on render, this string can be used to test SQL queries to the deployed database.
+# Leave this value blank until you deploy your database.
 PG_CONNECTION_STRING=''
 ```
+
+Remember, these values are used in the Knex configuration file `server/knexfile.js`. Pay attention to how the `connection` configuration is set:
+
+```js
+module.exports = {
+  development: {
+    client: 'pg',
+    connection: process.env.PG_CONNECTION_STRING || {
+      host: process.env.PG_HOST || '127.0.0.1',
+      port: process.env.PG_PORT || 5432,
+      user: process.env.PG_USER || 'postgres',
+      password: process.env.PG_PASS || 'postgres',
+      database: process.env.PG_DB || 'postgres',
+    },
+    migrations: {
+      directory: migrationsDirectory,
+    },
+    seeds: {
+      directory: seedsDirectory,
+    },
+  },
+  production: {
+    client: 'pg',
+    connection: process.env.PG_CONNECTION_STRING,
+    migrations: {
+      directory: migrationsDirectory,
+    },
+    seeds: {
+      directory: seedsDirectory,
+    },
+  },
+};
+```
+
+The `connection` configuration determines how Knex connects to your database. If the `PG_CONNECTION_STRING` is blank, then Knex will use the configuration object with `host`, `port`, `user`, `password` and `database`.
+
+However, when you eventually deploy your database on Render, you will be given a `PG_CONNECTION_STRING` value from Render that you can add to your environment variables to connect directly to your deployed database. If a `PG_CONNECTION_STRING` value exists, Knex will use it to connect to your deployed database.
+
+The deployed database works exactly like your local database, so you are welcome to use a deployed database during testing as well. That said, the queries may take more time to execute since they are being transferred via the internet rather than between ports on your own machine. 
 
 ### Kickstart the project
 
@@ -201,35 +243,6 @@ The server is organized into a few key components (from right to left in the dia
   * Responsible for defining the endpoint URLs that will be available in the application and assigning controllers to handle each endpoint. 
   * It also configures middleware.
 
-### Controllers and API endpoints
-
-The controllers that interact with the `User` model are divided into two files: `userControllers` and `authControllers`. These controller files each export a controller function that are assigned to a particular API endpoint the `app`.
-
-In all, the following API endpoints are provided: 
-
-**Authentication Routes**:
-
-| Method | Path                 | Controller                     | Model Method            | Description                                            |
-| ------ | -------------------- | ------------------------------ | ----------------------- | ------------------------------------------------------ |
-| POST   | `/api/auth/register` | `authControllers.registerUser` | `User.create()`         | Create a new user and set the cookie userId            |
-| POST   | `/api/auth/login`    | `authControllers.loginUser`    | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
-| GET    | `/api/auth/me`       | `authControllers.showMe`       | `User.find()`           | Get the current logged in user based on the cookie     |
-| DELETE | `/api/auth/logout`   | `authControllers.logoutUser`   | None                    | Log the current user out (delete the cookie)           |
-
-**User Routes**:
-
-| Method | Path           | Controller                   | Model Method    | Description                                  |
-| ------ | -------------- | ---------------------------- | --------------- | -------------------------------------------- |
-| GET    | /api/users     | `userControllers.listUsers ` | `User.list()`   | Get the list of all users                    |
-| GET    | /api/users/:id | `userControllers.showUser  ` | `User.find()`   | Get a specific user by id                    |
-| PATCH  | /api/users/:id | `userControllers.updateUser` | `User.update()` | Update the username of a specific user by id |
-
-The server acts as the key middleman between the client / frontend application and the database. To design a server that performs these interactions consistently and predictably, ask yourself:
-* What should the server application expect from the frontend?
-* What should the server application send back to the frontend?
-* What should the database expect from the server?
-* What should the database send back to the server?
-
 ### User Model
 
 As mentioned above, a model is the right-most component of a server application. An application can have many models and each model is responsible for managing interactions with a particular table in a database.
@@ -304,6 +317,35 @@ Take a look at each `static` method of the `User` class and you'll find that thi
 1. Data is retrieved from the database (including `password_hash` values)
 2. Every user object is converted into a `User` instance to keep the `password_hash` values safely contained within the model.
 3. The user objects can then be safely returned and used by the controllers.
+
+### Controllers and API endpoints
+
+The controllers that interact with the `User` model are divided into two files: `userControllers` and `authControllers`. These controller files each export a controller function that are assigned to a particular API endpoint the `app`.
+
+In all, the following API endpoints are provided: 
+
+**Authentication Routes**:
+
+| Method | Path                 | Controller                     | Model Method            | Description                                            |
+| ------ | -------------------- | ------------------------------ | ----------------------- | ------------------------------------------------------ |
+| POST   | `/api/auth/register` | `authControllers.registerUser` | `User.create()`         | Create a new user and set the cookie userId            |
+| POST   | `/api/auth/login`    | `authControllers.loginUser`    | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
+| GET    | `/api/auth/me`       | `authControllers.showMe`       | `User.find()`           | Get the current logged in user based on the cookie     |
+| DELETE | `/api/auth/logout`   | `authControllers.logoutUser`   | None                    | Log the current user out (delete the cookie)           |
+
+**User Routes**:
+
+| Method | Path           | Controller                   | Model Method    | Description                                  |
+| ------ | -------------- | ---------------------------- | --------------- | -------------------------------------------- |
+| GET    | /api/users     | `userControllers.listUsers ` | `User.list()`   | Get the list of all users                    |
+| GET    | /api/users/:id | `userControllers.showUser  ` | `User.find()`   | Get a specific user by id                    |
+| PATCH  | /api/users/:id | `userControllers.updateUser` | `User.update()` | Update the username of a specific user by id |
+
+The server acts as the key middleman between the client / frontend application and the database. To design a server that performs these interactions consistently and predictably, ask yourself:
+* What should the server application expect from the frontend?
+* What should the server application send back to the frontend?
+* What should the database expect from the server?
+* What should the database send back to the server?
 
 ### Authentication & Authorization
 
