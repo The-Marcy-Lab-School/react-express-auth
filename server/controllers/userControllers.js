@@ -38,7 +38,7 @@ exports.updateUser = async (req, res) => {
   // e.g. User 5 sends a PATCH /api/users/5 request -> success!
   // e.g. User 5 sends a PATCH /api/users/4 request -> 403!
   const userToModify = Number(req.params.id);
-  const userRequestingChange = Number(req.session.id);
+  const userRequestingChange = Number(req.session.userId);
   if (userRequestingChange !== userToModify) {
     return res.status(403).send({ message: "Unauthorized." });
   }
