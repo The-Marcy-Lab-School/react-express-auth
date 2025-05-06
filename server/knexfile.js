@@ -1,15 +1,8 @@
 require('dotenv').config();
 const path = require('path');
 
-const migrationsDirectory = path.join(__dirname, 'db/migrations');
-const seedsDirectory = path.join(__dirname, '/db/seeds');
-
-/* 
-We'll use environment variables to set the Postgres username and password
-so we don't share that information online.
-
-When we deploy in "production", we'll provide a PG_CONNECTION_STRING
-*/
+const migrationsDirectory = path.join(__dirname, 'server/db/migrations');
+const seedsDirectory = path.join(__dirname, 'server/db/seeds');
 
 module.exports = {
   development: {
@@ -19,7 +12,7 @@ module.exports = {
       port: process.env.PG_PORT || 5432,
       user: process.env.PG_USER || 'postgres',
       password: process.env.PG_PASS || 'postgres',
-      database: process.env.PG_DB || 'postgres',
+      database: process.env.PG_DB || 'symptom_logger',
     },
     migrations: {
       directory: migrationsDirectory,
