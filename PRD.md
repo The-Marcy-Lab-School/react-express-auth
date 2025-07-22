@@ -111,7 +111,9 @@ A web-based platform that:
 - **Backend**: Node.js with Express 4.18.2
 - **Database**: PostgreSQL with Knex.js ORM
 - **Authentication**: Cookie-based sessions with bcrypt
-- **Styling**: Tailwind CSS for responsive design
+- **Styling**: Tailwind CSS v3.4.0 with shadcn/ui components
+- **Design System**: Modern, accessible UI with Inter font family
+- **Accessibility**: WCAG 2.1 AA compliant with keyboard navigation support
 
 ### 4.2 Database Schema
 
@@ -189,10 +191,12 @@ A web-based platform that:
 ## 5. User Experience Design
 
 ### 5.1 Design Principles
-- **Simplicity**: Clean, uncluttered interface
-- **Accessibility**: Easy to understand for financial beginners
-- **Responsiveness**: Works on desktop, tablet, and mobile
-- **Consistency**: Uniform design language throughout
+- **Simplicity**: Clean, uncluttered interface with modern design patterns
+- **Accessibility**: WCAG 2.1 AA compliant with comprehensive keyboard navigation
+- **Responsiveness**: Mobile-first design that works on all devices
+- **Consistency**: Uniform design language using shadcn/ui component system
+- **Modern UI**: Contemporary design with smooth animations and micro-interactions
+- **Financial Trust**: Professional appearance that builds user confidence
 
 ### 5.2 Key User Flows
 
@@ -218,10 +222,12 @@ A web-based platform that:
 4. User views updated personalized suggestions
 
 ### 5.3 Content Strategy
-- **Clear Language**: Avoid financial jargon, use plain English
-- **Visual Hierarchy**: Important information prominently displayed
-- **Progressive Disclosure**: Show essential info first, details on demand
-- **Educational Elements**: Tooltips and explanations for complex terms
+- **Clear Language**: Avoid financial jargon, use plain English with helpful tooltips
+- **Visual Hierarchy**: Important information prominently displayed with proper contrast ratios
+- **Progressive Disclosure**: Show essential info first, details on demand with smooth transitions
+- **Educational Elements**: Interactive tooltips, explanations, and guided tours for complex terms
+- **Visual Design**: Modern card-based layouts with clear typography and spacing
+- **Brand Identity**: Professional financial services appearance with trust-building elements
 
 ---
 

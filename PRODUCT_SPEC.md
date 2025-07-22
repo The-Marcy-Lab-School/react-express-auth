@@ -155,12 +155,15 @@
 - `PATCH /api/users/:id` - Update user (own profile only)
 
 ## Frontend Pages
-- **Home** (`/`) - Landing page
-- **Login** (`/login`) - User authentication
-- **Sign Up** (`/sign-up`) - User registration
-- **Users** (`/users`) - User directory
-- **User Profile** (`/users/:id`) - Individual user view
-- **404** - Not found page
+- **Home** (`/`) - Landing page with modern hero section
+- **Login** (`/login`) - User authentication with modern form design
+- **Sign Up** (`/sign-up`) - User registration with validation
+- **Users** (`/users`) - User directory with card-based layout
+- **User Profile** (`/users/:id`) - Individual user view with modern profile design
+- **404** - Not found page with helpful navigation
+- **Goals** (`/goals`) - Financial goal setup (future)
+- **Credit Cards** (`/credit-cards`) - Card browsing and search (future)
+- **Recommendations** (`/recommendations`) - Personalized recommendations (future)
 
 ## Technology Stack
 
@@ -168,7 +171,12 @@
 - React 18.2.0
 - React DOM 18.2.0
 - React Router DOM 6.11.2
-- Tailwind CSS (for styling)
+- Tailwind CSS v3.4.0 (for styling)
+- shadcn/ui components (Button, Input, Card, Label, etc.)
+- Radix UI primitives (for accessibility)
+- Lucide React (for icons)
+- Class Variance Authority (for component variants)
+- Tailwind Merge (for class merging)
 
 ### Backend Dependencies
 - Express 4.18.2
@@ -247,6 +255,10 @@ react-express-auth/
 - **Model-based Database Access**: Knex.js with custom model classes
 - **Context-based State Management**: React Context for user state
 - **Adapter Pattern**: API abstraction layer in frontend
+- **Component-based UI**: shadcn/ui components for consistency and accessibility
+- **Design System**: Tailwind CSS with custom design tokens for maintainability
+- **Accessibility First**: WCAG 2.1 AA compliance built into all components
+- **Mobile-first Design**: Responsive design patterns for all screen sizes
 
 ## Extension Opportunities
 - Email verification
@@ -256,6 +268,11 @@ react-express-auth/
 - Social media authentication
 - User profile pictures
 - Real-time features with WebSockets
+- Dark mode support
+- Advanced form validation with real-time feedback
+- Interactive credit card comparison tools
+- Accessibility improvements (screen reader optimization)
+- Performance optimizations (lazy loading, code splitting)
 
 ## Quality Assurance
 - ESLint configuration with Airbnb style guide
@@ -263,3 +280,8 @@ react-express-auth/
 - Environment-based configuration
 - Error handling middleware
 - Input validation on API endpoints
+- Accessibility testing with automated tools
+- Visual regression testing for UI components
+- Performance monitoring and optimization
+- Cross-browser compatibility testing
+- Mobile responsiveness testing

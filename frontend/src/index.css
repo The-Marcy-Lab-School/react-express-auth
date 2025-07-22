@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Minimalist pink theme inspired by Victoria Spicer design */
+    --background: 350 20% 95%; /* Muted dusty rose */
+    --foreground: 0 0% 0%; /* Black text */
+    --card: 350 20% 98%; /* Slightly lighter pink */
+    --card-foreground: 0 0% 0%;
+    --popover: 350 20% 98%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%; /* Pure black */
+    --primary-foreground: 350 20% 95%;
+    --secondary: 350 20% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 350 20% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 0%;
+    --accent-foreground: 350 20% 95%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --radius: 0rem;
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 0 0% 0%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: hsl(350 20% 95%) !important; /* Force muted pink background using CSS variables */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  /* Skip link for keyboard navigation */
+  .skip-link {
+    @apply absolute -top-10 left-6 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md transition-transform duration-200;
+  }
+
+  .skip-link:focus {
+    @apply top-6 transform-none;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --border: 0 0% 0%;
+      --input: 0 0% 0%;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .btn-destructive {
+    @apply bg-destructive text-destructive-foreground hover:bg-destructive/90;
+  }
+
+  .btn-outline {
+    @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .btn-link {
+    @apply text-primary underline-offset-4 hover:underline;
+  }
+
+  .btn-sm {
+    @apply h-9 px-3 rounded-md;
+  }
+
+  .btn-md {
+    @apply h-10 px-4 py-2;
+  }
+
+  .btn-lg {
+    @apply h-11 px-8 rounded-md;
+  }
+
+  /* Input styles */
+  .input {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Card styles */
+  .card {
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+  }
+
+  .card-header {
+    @apply flex flex-col space-y-1.5 p-6;
+  }
+
+  .card-title {
+    @apply text-2xl font-semibold leading-none tracking-tight;
+  }
+
+  .card-description {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .card-content {
+    @apply p-6 pt-0;
+  }
+
+  .card-footer {
+    @apply flex items-center p-6 pt-0;
+  }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply text-sm font-medium transition-colors hover:text-primary;
+  }
+
+  .nav-link-active {
+    @apply text-primary;
+  }
+
+  /* Form styles */
+  .form-label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+
+  .form-error {
+    @apply text-sm text-destructive;
+  }
+
+  .form-help {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* Loading states */
+  .loading {
+    @apply animate-pulse bg-muted;
+  }
+
+  /* Toast styles */
+  .toast {
+    @apply fixed top-4 right-4 z-50 rounded-lg border bg-background p-4 shadow-lg;
+  }
+
+  .toast-success {
+    @apply border-success bg-success/10 text-success-foreground;
+  }
+
+  .toast-error {
+    @apply border-destructive bg-destructive/10 text-destructive-foreground;
+  }
+
+  .toast-warning {
+    @apply border-warning bg-warning/10 text-warning-foreground;
+  }
+}
+
+@layer utilities {
+  /* Screen reader only text */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+  }
+
+  /* Focus indicator for keyboard navigation */
+  .focus-indicator {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* High contrast text */
+  .high-contrast {
+    @apply text-foreground bg-background border border-foreground;
+  }
+
+  /* Vertical text utilities */
+  .writing-mode-vertical-rl {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .writing-mode-vertical-lr {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
+
+  /* Custom vertical text for sidebar */
+  .vertical-text-container {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .vertical-link {
+    display: block;
+    padding: 0.25rem 0;
+    transition: all 0.3s ease;
+  }
+
+  .vertical-link:hover {
+    transform: translateX(-2px);
+  }
+
+  /* Enhanced backdrop blur support */
+  @supports (backdrop-filter: blur(10px)) {
+    .backdrop-blur-enhanced {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  }
+
+  /* Smooth transitions for all interactive elements */
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  /* Enhanced grid background */
+  .grid-background {
+    background-image: 
+      linear-gradient(90deg, rgba(25, 95, 53, 0.05) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(25, 95, 53, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+} 

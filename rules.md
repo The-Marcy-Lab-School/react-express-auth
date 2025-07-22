@@ -12,14 +12,17 @@
 2. [Project Structure](#project-structure)
 3. [Git Workflow](#git-workflow)
 4. [Naming Conventions](#naming-conventions)
-5. [Component Guidelines](#component-guidelines)
-6. [API Design Rules](#api-design-rules)
-7. [Database Conventions](#database-conventions)
-8. [Testing Requirements](#testing-requirements)
-9. [Security Guidelines](#security-guidelines)
-10. [Performance Standards](#performance-standards)
-11. [Documentation Requirements](#documentation-requirements)
-12. [Code Review Process](#code-review-process)
+5. [UI/UX Guidelines](#uiux-guidelines)
+6. [Component Guidelines](#component-guidelines)
+7. [API Design Rules](#api-design-rules)
+8. [Database Conventions](#database-conventions)
+9. [Testing Requirements](#testing-requirements)
+10. [Accessibility Guidelines](#accessibility-guidelines)
+11. [Security Guidelines](#security-guidelines)
+12. [Performance Standards](#performance-standards)
+13. [Documentation Requirements](#documentation-requirements)
+14. [Code Review Process](#code-review-process)
+15. [Enforcement](#enforcement)
 
 ---
 
@@ -74,18 +77,21 @@ const CreditCardList = ({ cards, onCardSelect, isLoading }) => {
 - **React Hooks Rules**: Enforce React hooks rules
 - **Import Order**: Organize imports consistently
 - **No Console Logs**: Remove console.log statements before production
+- **Accessibility Rules**: Enforce accessibility best practices
+- **Component Naming**: Ensure consistent component naming conventions
 
 ### 1.4 File Organization
 ```
 src/
 ├── components/          # Reusable UI components
-│   ├── common/         # Shared components (Button, Input, etc.)
+│   ├── ui/             # shadcn/ui components (Button, Input, Card, etc.)
+│   ├── common/         # Shared components (LoadingSpinner, ErrorBoundary, etc.)
 │   ├── forms/          # Form-specific components
 │   └── layout/         # Layout components (Header, Footer, etc.)
 ├── pages/              # Route-level components
 ├── contexts/           # React context providers
 ├── adapters/           # API communication layer
-├── utils/              # Utility functions
+├── lib/                # Utility functions and helpers
 ├── hooks/              # Custom React hooks
 └── styles/             # Global styles and CSS modules
 ```
@@ -101,9 +107,11 @@ src/
 
 ### 2.2 File Naming
 - **React Components**: PascalCase (e.g., `CreditCardList.jsx`)
+- **shadcn/ui Components**: camelCase (e.g., `button.jsx`, `input.jsx`)
 - **Utilities/Helpers**: camelCase (e.g., `formatCurrency.js`)
 - **Constants**: UPPER_SNAKE_CASE (e.g., `API_ENDPOINTS.js`)
 - **CSS Files**: kebab-case (e.g., `credit-card-styles.css`)
+- **Configuration Files**: kebab-case (e.g., `tailwind.config.js`)
 
 ### 2.3 Import Organization
 ```javascript
@@ -111,15 +119,19 @@ src/
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// 2. Internal components
+// 2. shadcn/ui components
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+
+// 3. Internal components
 import CreditCardItem from '../components/CreditCardItem';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
-// 3. Utilities and helpers
-import { formatCurrency } from '../utils/formatters';
+// 4. Utilities and helpers
+import { formatCurrency } from '../lib/utils';
 import { CREDIT_CARD_TYPES } from '../constants/cardTypes';
 
-// 4. Styles
+// 5. Styles
 import './CreditCardList.css';
 ```
 
@@ -211,9 +223,32 @@ PUT /api/goal/:id
 
 ---
 
+## UI/UX Guidelines
+
+### 5.1 Design System
+- **shadcn/ui Components**: Use shadcn/ui components for consistency
+- **Tailwind CSS**: Follow Tailwind utility-first approach
+- **Design Tokens**: Use CSS custom properties for colors, spacing, and typography
+- **Responsive Design**: Mobile-first approach with breakpoint considerations
+- **Accessibility**: WCAG 2.1 AA compliance for all components
+
+### 5.2 Color and Typography
+- **Primary Colors**: Use design system color tokens
+- **Typography**: Inter font family with proper hierarchy
+- **Contrast Ratios**: Ensure 4.5:1 minimum contrast for normal text
+- **Focus States**: Visible focus indicators for keyboard navigation
+- **High Contrast**: Support for high contrast mode preferences
+
+### 5.3 Spacing and Layout
+- **Consistent Spacing**: Use Tailwind spacing scale (4px base unit)
+- **Grid System**: Use CSS Grid and Flexbox for layouts
+- **Container Widths**: Responsive container with max-width constraints
+- **Component Spacing**: Consistent padding and margins between elements
+- **Visual Hierarchy**: Clear information architecture with proper spacing
+
 ## Component Guidelines
 
-### 5.1 Component Structure
+### 5.4 Component Structure
 ```jsx
 // ✅ GOOD: Organized component structure
 import React, { useState, useEffect } from 'react';
@@ -274,16 +309,19 @@ CreditCardRecommendation.propTypes = {
 export default CreditCardRecommendation;
 ```
 
-### 5.2 Component Naming
-- **PascalCase**: All component names must use PascalCase
+### 5.5 Component Naming
+- **PascalCase**: All React components must use PascalCase
+- **camelCase**: shadcn/ui components use camelCase (e.g., `button.jsx`)
 - **Descriptive**: Names should clearly indicate the component's purpose
 - **Consistent**: Use consistent naming patterns across similar components
 
-### 5.3 Props Guidelines
+### 5.6 Props Guidelines
 - **Destructuring**: Always destructure props in function parameters
 - **Default Values**: Provide sensible defaults for optional props
 - **PropTypes**: Always define PropTypes for component props
 - **Children**: Use children prop for component composition when appropriate
+- **Accessibility Props**: Include ARIA attributes and semantic HTML
+- **Event Handlers**: Use descriptive names for event handler props
 
 ---
 
@@ -403,21 +441,51 @@ describe('CreditCardRecommendation', () => {
 
 ---
 
+## Accessibility Guidelines
+
+### 8.1 WCAG 2.1 AA Compliance
+- **Keyboard Navigation**: All interactive elements must be keyboard accessible
+- **Screen Reader Support**: Proper ARIA labels and semantic HTML
+- **Color Contrast**: Minimum 4.5:1 contrast ratio for normal text
+- **Focus Management**: Visible focus indicators and logical tab order
+- **Alternative Text**: Descriptive alt text for images and icons
+
+### 8.2 Semantic HTML
+- **Proper Headings**: Use h1-h6 hierarchy correctly
+- **Landmark Roles**: Use semantic HTML5 elements (header, nav, main, etc.)
+- **Form Labels**: Associate labels with form controls
+- **Button vs Link**: Use appropriate elements for their purpose
+- **Skip Links**: Provide skip navigation for keyboard users
+
+### 8.3 ARIA Best Practices
+- **ARIA Labels**: Use aria-label for elements without visible text
+- **ARIA Describedby**: Associate descriptions with form controls
+- **ARIA Live Regions**: Announce dynamic content changes
+- **ARIA States**: Indicate component states (expanded, selected, etc.)
+- **ARIA Landmarks**: Use landmark roles for page structure
+
+### 8.4 Testing Accessibility
+- **Automated Testing**: Use tools like axe-core for automated testing
+- **Manual Testing**: Test with keyboard navigation and screen readers
+- **Color Blindness**: Ensure information isn't conveyed by color alone
+- **Motion Sensitivity**: Respect prefers-reduced-motion preference
+- **High Contrast**: Test in high contrast mode
+
 ## Security Guidelines
 
-### 9.1 Authentication & Authorization
+### 10.1 Authentication & Authorization
 - **Password Hashing**: Always hash passwords using bcrypt
 - **Session Management**: Use secure, encrypted session cookies
 - **Route Protection**: Protect sensitive routes with authentication middleware
 - **Input Validation**: Validate and sanitize all user inputs
 
-### 9.2 Data Protection
+### 10.2 Data Protection
 - **Sensitive Data**: Never log or expose sensitive user information
 - **Environment Variables**: Store secrets in environment variables
 - **HTTPS**: Always use HTTPS in production
 - **CORS**: Configure CORS properly for cross-origin requests
 
-### 9.3 SQL Injection Prevention
+### 10.3 SQL Injection Prevention
 - **Parameterized Queries**: Always use parameterized queries with Knex.js
 - **Input Sanitization**: Sanitize all user inputs before database queries
 - **ORM Usage**: Use Knex.js ORM methods instead of raw SQL when possible
@@ -426,19 +494,19 @@ describe('CreditCardRecommendation', () => {
 
 ## Performance Standards
 
-### 10.1 Frontend Performance
+### 11.1 Frontend Performance
 - **Bundle Size**: Keep JavaScript bundle under 500KB
 - **Lazy Loading**: Implement lazy loading for routes and components
 - **Image Optimization**: Optimize images and use appropriate formats
 - **Caching**: Implement proper caching strategies
 
-### 10.2 Backend Performance
+### 11.2 Backend Performance
 - **Database Queries**: Optimize database queries and use indexes
 - **Response Times**: API endpoints should respond within 200ms
 - **Connection Pooling**: Use connection pooling for database connections
 - **Caching**: Implement caching for frequently accessed data
 
-### 10.3 Monitoring
+### 11.3 Monitoring
 - **Error Tracking**: Monitor and track application errors
 - **Performance Metrics**: Track response times and resource usage
 - **User Analytics**: Monitor user behavior and application usage
@@ -448,7 +516,7 @@ describe('CreditCardRecommendation', () => {
 
 ## Documentation Requirements
 
-### 11.1 Code Documentation
+### 12.1 Code Documentation
 ```javascript
 /**
  * Generates personalized credit card recommendations based on user goals
@@ -463,13 +531,13 @@ const generateRecommendations = async (userGoals) => {
 };
 ```
 
-### 11.2 API Documentation
+### 12.2 API Documentation
 - **Endpoint Documentation**: Document all API endpoints with examples
 - **Request/Response Examples**: Provide clear examples of requests and responses
 - **Error Codes**: Document all possible error codes and messages
 - **Authentication**: Document authentication requirements for each endpoint
 
-### 11.3 README Files
+### 12.3 README Files
 - **Project Setup**: Clear instructions for setting up the development environment
 - **API Reference**: Link to API documentation
 - **Contributing Guidelines**: Instructions for contributing to the project
@@ -479,7 +547,7 @@ const generateRecommendations = async (userGoals) => {
 
 ## Code Review Process
 
-### 12.1 Review Checklist
+### 13.1 Review Checklist
 - [ ] Code follows established style guidelines
 - [ ] All tests pass
 - [ ] No console.log statements in production code
@@ -489,14 +557,14 @@ const generateRecommendations = async (userGoals) => {
 - [ ] Documentation updated
 - [ ] No breaking changes (or clearly documented)
 
-### 12.2 Review Guidelines
+### 13.2 Review Guidelines
 - **Constructive Feedback**: Provide constructive, actionable feedback
 - **Code Quality**: Focus on code quality, not personal preferences
 - **Security Review**: Pay special attention to security implications
 - **Performance Review**: Consider performance impact of changes
 - **Documentation**: Ensure documentation is updated with changes
 
-### 12.3 Approval Process
+### 13.3 Approval Process
 - **Minimum Reviewers**: At least 2 team members must approve
 - **Security Changes**: Security-related changes require additional review
 - **Breaking Changes**: Breaking changes require team discussion
@@ -506,19 +574,19 @@ const generateRecommendations = async (userGoals) => {
 
 ## Enforcement
 
-### 13.1 Automated Checks
+### 14.1 Automated Checks
 - **ESLint**: Automated linting on all pull requests
 - **Pre-commit Hooks**: Run tests and linting before commits
 - **CI/CD Pipeline**: Automated testing and deployment checks
 - **Code Coverage**: Enforce minimum code coverage requirements
 
-### 13.2 Manual Reviews
+### 14.2 Manual Reviews
 - **Code Reviews**: All code must be reviewed before merging
 - **Architecture Reviews**: Major architectural changes require team review
 - **Security Reviews**: Security-sensitive changes require security review
 - **Performance Reviews**: Performance-critical changes require performance review
 
-### 13.3 Continuous Improvement
+### 14.3 Continuous Improvement
 - **Regular Reviews**: Regularly review and update these rules
 - **Team Feedback**: Incorporate team feedback into rule updates
 - **Industry Standards**: Stay updated with industry best practices

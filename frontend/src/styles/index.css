@@ -1,80 +1,125 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Minimalist pink theme inspired by Victoria Spicer design */
+    --background: 350 20% 95%; /* Muted dusty rose */
+    --foreground: 0 0% 0%; /* Black text */
+    --card: 350 20% 98%; /* Slightly lighter pink */
+    --card-foreground: 0 0% 0%;
+    --popover: 350 20% 98%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%; /* Pure black */
+    --primary-foreground: 350 20% 95%;
+    --secondary: 350 20% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 350 20% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 0%;
+    --accent-foreground: 350 20% 95%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --radius: 0rem;
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 0 0% 0%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+  }
 }
 
-body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  margin: 0;
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-main {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: start;
-}
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: hsl(350 20% 95%) !important; /* Force muted pink background using CSS variables */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
 
-ul {
-  list-style: none;
-}
+  /* Skip link for accessibility */
+  .skip-link {
+    @apply absolute top-4 left-4 z-50 px-4 py-2 bg-primary text-primary-foreground rounded-md opacity-0 focus:opacity-100 transition-opacity duration-200;
+  }
 
-button {
-  padding-inline: 0.25rem;
-}
+  /* Focus styles */
+  .focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
 
-input,
-label {
-  display: block;
-}
+  /* High contrast text */
+  .high-contrast {
+    @apply text-foreground bg-background border border-foreground;
+  }
 
-input {
-  margin-bottom: 1rem;
-}
+  /* Vertical text utilities */
+  .writing-mode-vertical-rl {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background: #000;
-}
+  .writing-mode-vertical-lr {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
 
-#logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #FFF;
-}
+  /* Custom vertical text for sidebar */
+  .vertical-text-container {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-nav ul {
-  display: flex;
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-nav a {
-  display: block;
-  color: #FFF;
-}
+  .vertical-link {
+    display: block;
+    padding: 0.25rem 0;
+    transition: all 0.3s ease;
+  }
 
-form {
-  padding: 1rem;
-  border: 1px solid #CCC;
-  width: 15rem;
-}
+  .vertical-link:hover {
+    transform: translateX(-2px);
+  }
 
-form>h2 {
-  margin-bottom: 1rem;
-}
+  /* Enhanced backdrop blur support */
+  @supports (backdrop-filter: blur(10px)) {
+    .backdrop-blur-enhanced {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  }
 
-/* automatically added by NavLink component */
-.active {
-  color: #EEBC32;
-  font-weight: bold;
-  font-style: italic;
+  /* Smooth transitions for all interactive elements */
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  /* Enhanced grid background */
+  .grid-background {
+    background-image: 
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
 }

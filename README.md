@@ -1,12 +1,22 @@
-# Project Name
+# CardFinder - AI Exemplar
 
-> Project Mission Statement
+> A modern, minimalist credit card recommendation platform that helps users find the perfect credit card match for their lifestyle and financial goals.
 
 ## Team
 
-  - teamMember: **Scrum Master, Developer**
-  - teamMember: **Developer**
-  - teamMember: **Developer**
+  - **AI Assistant**: **Lead Developer, UI/UX Designer**
+  - **Human Developer**: **Project Manager, Code Reviewer**
+
+## Project Overview
+
+CardFinder is a sophisticated web application that demonstrates modern React development practices with a focus on:
+
+- **Modern UI/UX Design**: Clean, minimalist interface with smooth animations
+- **Responsive Design**: Optimized for all screen sizes
+- **Accessibility**: WCAG compliant with keyboard navigation support
+- **Performance**: No-scroll pages with modal content for better UX
+- **Code Quality**: Well-structured, maintainable React code
+- **Component Architecture**: Reusable shadcn/ui components
 
 ## Table of Contents
 - [Getting Started](#getting-started)
@@ -51,29 +61,95 @@ PG_CONNECTION_STRING=''
 From within the root directory, run the following commands to install dependencies and run the project locally:
 
 ```sh
-# Build Command — install dependencies, build the static assets, and run migrations/seeds
-cd frontend && npm i && npm run build && cd ../server && npm i && npm run migrate && npm run seed && cd ..
+# Install dependencies for both frontend and backend
+cd frontend && npm install && cd ../server && npm install
 
-# Start Command
-cd server && npm start
+# Run database migrations and seeds
+cd server && npm run migrate && npm run seed
+
+# Start both development servers
+# Terminal 1: Backend server
+cd server && npm run dev
+
+# Terminal 2: Frontend server  
+cd frontend && npm run dev
 ```
+
+### Development URLs
+- **Frontend**: http://localhost:5173/
+- **Backend API**: http://localhost:3000/
 
 ## Technologies Used
 
-- Node
+### Backend
+- Node.js
 - Express
-- Postgresql
-- React
-- Knex
-- etc...
+- PostgreSQL
+- Knex.js (ORM)
+- bcrypt (password hashing)
+- Cookie-based sessions
+
+### Frontend
+- React 18.2.0
+- React Router DOM v6.11.2
+- Tailwind CSS v3.4.0
+- shadcn/ui components (Button, Card, Input, Label, Modal)
+- Radix UI primitives (Label, Slot)
+- Lucide React icons v0.294.0
+- Vite v4.3.2 (build tool)
+- Class Variance Authority (CVA)
+- Tailwind Merge & CLSX utilities
+
+### Development Tools
+- ESLint (Airbnb style guide)
+- PostCSS
+- Autoprefixer
+
+## Key Features
+
+### 🎨 Modern Design System
+- **Two-Column Layout**: Dark left panel with benefits, light right panel with forms
+- **Soft Edges**: Rounded corners (rounded-xl) throughout the application
+- **Gradient Buttons**: Beautiful gradient backgrounds with hover effects
+- **Glass Morphism**: Subtle backdrop blur effects and transparency
+- **Responsive Typography**: Scales appropriately across all devices
+
+### 📱 User Experience
+- **No-Scroll Pages**: All content fits on screen without scrolling
+- **Modal Content**: Additional information displayed in elegant modals
+- **Smooth Animations**: CSS transitions and hover effects
+- **Loading States**: Proper error handling and loading indicators
+- **Accessibility**: Skip links, focus indicators, and semantic HTML
+
+### 🔧 Technical Architecture
+- **Component-Based**: Reusable UI components with consistent styling
+- **State Management**: React Context for user authentication
+- **Route Protection**: Automatic redirects for authenticated users
+- **Error Handling**: Graceful error states and user feedback
+- **Code Organization**: Well-structured, maintainable codebase
+
+## Project Structure
+
+```
+react-express-auth/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ui/           # shadcn/ui components
+│   │   │   ├── SiteHeadingAndNav.jsx
+│   │   │   └── UpdateUsernameForm.jsx
+│   │   ├── pages/            # Route components
+│   │   ├── contexts/         # React Context providers
+│   │   ├── adapters/         # API communication
+│   │   ├── lib/              # Utility functions
+│   │   └── styles/           # CSS files
+│   └── package.json
+└── server/                   # Express backend
+```
 
 ## Project Proposal
 
 See [PROPOSAL.md](PROPOSAL.md) for more details on the project proposal.
-
-## Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECTS_TAB).
 
 ## Contributing
 
@@ -81,4 +157,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Style Guide
 
-This project adheres to the [Airbnb Style Guide](https://github.com/airbnb/javascript).
+This project adheres to the [Airbnb Style Guide](https://github.com/airbnb/javascript) with additional React-specific conventions:
+
+- **Component Naming**: PascalCase for components, camelCase for functions
+- **File Organization**: Grouped imports by type (components, hooks, utilities)
+- **Constants**: Extract hardcoded data to constants at the top of files
+- **Component Extraction**: Create reusable components for repeated patterns
+- **Comments**: Use descriptive comments for complex logic sections
