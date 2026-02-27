@@ -11,6 +11,7 @@
 ## Table of Contents
 - [Getting Started](#getting-started)
   - [Build and Start Commands](#build-and-start-commands)
+  - [Project Structure](#project-structure)
   - [Technologies Used](#technologies-used)
 - [Project Proposal](#project-proposal)
 - [Roadmap](#roadmap)
@@ -30,7 +31,7 @@ Before you can actually start building, you need to create a database and config
 
 ```sh
 # Replace these variables with your Postgres server information
-# These values are used by knexfile.js to connect to your postgres server
+# These values are used by the pg pool to connect to your postgres server
 PG_HOST='127.0.0.1'
 PG_PORT=5432
 PG_USER='itsamemario'
@@ -51,12 +52,21 @@ PG_CONNECTION_STRING=''
 From within the root directory, run the following commands to install dependencies and run the project locally:
 
 ```sh
-# Build Command — install dependencies, build the static assets, and run migrations/seeds
-cd frontend && npm i && npm run build && cd ../server && npm i && npm run migrate && npm run seed && cd ..
+# Build Command — install dependencies, build the static assets, and initialize the database schema
+cd frontend && npm i && npm run build && cd ../server && npm i && npm run db:init && cd ..
 
 # Start Command
 cd server && npm start
 ```
+
+### Project Structure
+
+- `frontend/`: React app.
+- `server/index.js`: Express server entrypoint and route wiring.
+- `server/controllers/`: Request handlers for auth and users.
+- `server/models/`: Database-facing model classes.
+- `server/db/pool.js`: Shared `pg` connection pool.
+- `server/db/init.js`: One-time schema initialization script (`npm run db:init`).
 
 ## Technologies Used
 
@@ -64,7 +74,7 @@ cd server && npm start
 - Express
 - Postgresql
 - React
-- Knex
+- pg (node-postgres)
 - etc...
 
 ## Project Proposal

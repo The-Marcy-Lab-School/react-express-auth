@@ -1,4 +1,4 @@
-const knex = require('../db/knex');
+const pool = require('../db/pool');
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 12;
 
@@ -26,8 +26,8 @@ class User {
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
     const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const result = await knex.raw(query, [username, passwordHash]);
+      VALUES ($1, $2) RETURNING *`;
+    const result = await pool.query(query, [username, passwordHash]);
 
     const rawUserData = result.rows[0];
     return new User(rawUserData);
@@ -37,7 +37,7 @@ class User {
   // to format each user (and hide their password hash), and returns.
   static async list() {
     const query = `SELECT * FROM users`;
-    const result = await knex.raw(query);
+    const result = await pool.query(query);
     return result.rows.map((rawUserData) => new User(rawUserData));
   }
 
@@ -45,8 +45,8 @@ class User {
   // the given user id. If it finds a user, uses the constructor
   // to format the user and returns or returns null if not.
   static async find(id) {
-    const query = `SELECT * FROM users WHERE id = ?`;
-    const result = await knex.raw(query, [id]);
+    const query = `SELECT * FROM users WHERE id = $1`;
+    const result = await pool.query(query, [id]);
     const rawUserData = result.rows[0];
     return rawUserData ? new User(rawUserData) : null;
   }
@@ -54,8 +54,8 @@ class User {
 
   // Same as above but uses the username to find the user
   static async findByUsername(username) {
-    const query = `SELECT * FROM users WHERE username = ?`;
-    const result = await knex.raw(query, [username]);
+    const query = `SELECT * FROM users WHERE username = $1`;
+    const result = await pool.query(query, [username]);
     const rawUserData = result.rows[0];
     return rawUserData ? new User(rawUserData) : null;
   }
@@ -65,17 +65,17 @@ class User {
   static async update(id, username) {
     const query = `
       UPDATE users
-      SET username=?
-      WHERE id=?
+      SET username = $1
+      WHERE id = $2
       RETURNING *
-    `
-    const result = await knex.raw(query, [username, id])
+    `;
+    const result = await pool.query(query, [username, id]);
     const rawUpdatedUser = result.rows[0];
     return rawUpdatedUser ? new User(rawUpdatedUser) : null;
-  };
+  }
 
   static async deleteAll() {
-    return knex('users').del()
+    return pool.query('DELETE FROM users');
   }
 }
 
